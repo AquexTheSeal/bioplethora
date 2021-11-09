@@ -53,7 +53,7 @@ public class CrephoxlEntity extends AnimatableHostileEntity implements IAnimatab
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 45, 0.5, 0.6));
+        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 38.3, 0.5, 0.6));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
