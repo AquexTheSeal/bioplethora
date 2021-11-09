@@ -1,5 +1,8 @@
 {
   "entity.bioplethora.crephoxl": "Crephoxl",
 
+  "item.bioplethora.crephoxl_feather": "Crephoxl Feather",
+  "item.bioplethora.crephoxl_stick": "Crephoxl Stick",
+
   "itemGroup.bioplethora_item_group": "Bioplethora Items"
 }

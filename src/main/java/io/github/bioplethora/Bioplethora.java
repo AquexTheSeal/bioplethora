@@ -2,7 +2,9 @@ package io.github.bioplethora;
 
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.world.BiomeloadingSubscriber;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,6 +31,9 @@ public class Bioplethora {
 
         // add all required listeners
         bus.addListener(this::setup);
+
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        /*forgeBus.addListener(EventPriority.HIGH, BiomeloadingSubscriber::onBiomeLoadingEvent);*/
 
         GeckoLib.initialize();
 
