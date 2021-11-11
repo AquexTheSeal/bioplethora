@@ -1,0 +1,33 @@
+{
+  "group": "testmod",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "34 ",
+    " 7 "
+  ],
+  "key": {
+    "0": {
+      "item": "bioplethora:crephoxl_feather"
+    },
+    "1": {
+      "item": "bioplethora:crephoxl_feather"
+    },
+    "2": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "3": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "4": {
+      "item": "bioplethora:crephoxl_stick"
+    },
+    "7": {
+      "item": "bioplethora:crephoxl_stick"
+    }
+  },
+  "result": {
+    "item": "bioplethora:crephoxl_hammer",
+    "count": 1
+  }
+}

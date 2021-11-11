@@ -2,6 +2,7 @@ package io.github.bioplethora.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.model.CrephoxlEntityModel;
 import io.github.bioplethora.entity.CrephoxlEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -21,6 +22,11 @@ public class CrephoxlEntityRender extends GeoEntityRenderer<CrephoxlEntity> {
     @Override
     public void renderEarly(CrephoxlEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(CrephoxlEntity entity) {
+        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/crephoxl.png");
     }
 
     @Override
