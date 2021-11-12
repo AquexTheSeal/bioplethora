@@ -6,5 +6,6 @@
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
 
-  "itemGroup.bioplethora_item_group": "Bioplethora Items"
+  "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
+  "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs"
 }

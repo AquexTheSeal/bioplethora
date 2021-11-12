@@ -4,7 +4,7 @@
 		"animation.crephoxl.idle": {
 			"loop": true,
 			"animation_length": 3,
-			"blend_weight": "1",
+			"blend_weight": "0",
 			"bones": {
 				"body_mid": {
 					"rotation": {
@@ -594,7 +594,6 @@
 		"animation.crephoxl.walking": {
 			"loop": true,
 			"animation_length": 3,
-			"blend_weight": "1",
 			"bones": {
 				"body_mid": {
 					"rotation": {
@@ -1042,7 +1041,7 @@
 							"easing": "easeOutSine"
 						},
 						"3.0": {
-							"vector": [0, 0, 0],
+							"vector": [30, 0, 0],
 							"easing": "easeOutSine"
 						}
 					}
@@ -1101,6 +1100,10 @@
 							"easing": "easeOutSine"
 						},
 						"1.25": {
+							"vector": [30, 0, 0],
+							"easing": "easeOutSine"
+						},
+						"2.0": {
 							"vector": [0, 0, 0],
 							"easing": "easeOutSine"
 						}
@@ -1150,9 +1153,8 @@
 			}
 		},
 		"animation.crephoxl.attack": {
-			"animation_length": 1.5,
+			"animation_length": 1.92,
 			"override_previous_animation": true,
-			"blend_weight": "1",
 			"bones": {
 				"body_mid": {
 					"rotation": {
@@ -1166,6 +1168,10 @@
 						"1.5": {
 							"vector": [0, 180, 55],
 							"easing": "easeInElastic"
+						},
+						"1.9": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutCirc"
 						}
 					}
 				},
@@ -1177,6 +1183,14 @@
 						"1.0": {
 							"vector": [0, 0, -55],
 							"easing": "easeOutBack"
+						},
+						"1.5": {
+							"vector": [0, 0, -55],
+							"easing": "easeOutBack"
+						},
+						"1.9": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutCirc"
 						}
 					}
 				},
@@ -1188,6 +1202,14 @@
 						"1.0": {
 							"vector": [0, 0, 22.5],
 							"easing": "easeOutBack"
+						},
+						"1.5": {
+							"vector": [0, 0, 22.5],
+							"easing": "easeOutBack"
+						},
+						"1.9": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutCirc"
 						}
 					}
 				}

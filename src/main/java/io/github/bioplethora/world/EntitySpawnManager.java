@@ -22,12 +22,22 @@ public class EntitySpawnManager {
     private static class MobSpawnHandler {
 
         private static final Consumer<MobSpawnInfoBuilder> FOREST_ENTITIES = (builder) -> {
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 5, 1, 2));
+            //Crephoxl
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10, 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10, 1, 1));
         };
 
-        /*private static final Consumer<MobSpawnInfoBuilder> PLAINS_ENTITIES = (builder) -> {
-            builder.addSpawn(EntityClassification.AMBIENT, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 75, 1, 2));
-        };*/
+        private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
+            //Crephoxl
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 15, 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10, 1, 1));
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
+            //Crephoxl
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 15, 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10, 1, 1));
+        };
 
         public static void spawnMobs(BiomeLoadingEvent event) {
             MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
@@ -37,9 +47,12 @@ public class EntitySpawnManager {
                 case FOREST:
                     if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
                         FOREST_ENTITIES.accept(spawnInfoBuilder);
-                /*case PLAINS:
+                case JUNGLE:
                     if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
-                        PLAINS_ENTITIES.accept(spawnInfoBuilder);*/
+                        JUNGLE_ENTITIES.accept(spawnInfoBuilder);
+                case TAIGA:
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+                        TAIGA_ENTITIES.accept(spawnInfoBuilder);
                 case THEEND:
                 case NETHER:
                     break;
