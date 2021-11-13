@@ -1,12 +1,15 @@
 package io.github.bioplethora;
 
+import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import io.github.bioplethora.world.EntitySpawnManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -39,6 +42,8 @@ public class Bioplethora {
 
         // register this class through the Minecraft Forge Event Bus
         MinecraftForge.EVENT_BUS.register(this);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BioplethoraConfig.COMMON_SPEC);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

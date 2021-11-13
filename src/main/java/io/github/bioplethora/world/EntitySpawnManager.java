@@ -1,5 +1,6 @@
 package io.github.bioplethora.world;
 
+import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.RegistryKey;
@@ -23,20 +24,26 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> FOREST_ENTITIES = (builder) -> {
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10, 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10, 1, 1));
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
+                    , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
+                    , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 15, 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10, 1, 1));
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
+                    , 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
+                    , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 15, 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10, 1, 1));
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
+                    , 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
+                    , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         public static void spawnMobs(BiomeLoadingEvent event) {

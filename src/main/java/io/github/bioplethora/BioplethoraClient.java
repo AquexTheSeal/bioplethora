@@ -1,6 +1,8 @@
 package io.github.bioplethora;
 
+import io.github.bioplethora.client.entity.render.AlphemEntityRender;
 import io.github.bioplethora.client.entity.render.CrephoxlEntityRender;
+import io.github.bioplethora.client.entity.render.NandbriEntityRender;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,5 +17,7 @@ public class BioplethoraClient {
     @SubscribeEvent
     public static void registerRenderers(final FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), manager -> new CrephoxlEntityRender(manager));
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), manager -> new AlphemEntityRender(manager));
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.NANDBRI.get(), manager -> new NandbriEntityRender(manager));
     }
 }
