@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "bioplethora:item/nandbri_scales"
+  }
+}
