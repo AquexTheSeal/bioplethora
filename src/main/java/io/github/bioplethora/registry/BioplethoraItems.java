@@ -5,7 +5,6 @@ import io.github.bioplethora.items.BioplethoraSpawnEggItem;
 import io.github.bioplethora.items.weapons.CrephoxlHammer;
 import io.github.bioplethora.util.BioplethoraItemGroup;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.RegistryObject;

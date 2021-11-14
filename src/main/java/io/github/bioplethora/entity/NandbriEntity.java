@@ -10,11 +10,21 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.monster.SlimeEntity;
+import net.minecraft.entity.passive.GolemEntity;
+import net.minecraft.entity.passive.ParrotEntity;
+import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -34,23 +44,29 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 2 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 2)
-                .add(Attributes.ATTACK_DAMAGE, 2 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 4 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
-                .add(Attributes.MAX_HEALTH, 2 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
-                .add(Attributes.MOVEMENT_SPEED, 2 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 1D);
+                .add(Attributes.MAX_HEALTH, 30 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.4)
+                .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.FOLLOW_RANGE, 32.0D);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 40, 0.5, 0.6));
+        this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 0.5F));
+        this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+        this.goalSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 1.0, 2));
+        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 40, 0.2, 0.68));
         this.goalSelector.addGoal(1, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, RabbitEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, ParrotEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, GolemEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SlimeEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MagmaCubeEntity.class, true));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
     }
 
@@ -75,13 +91,18 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
             return PlayState.CONTINUE;
         }
 
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.nandbri.walk", true));
         return PlayState.CONTINUE;
     }
 
     public boolean doHurtTarget(Entity entity) {
         boolean flag = super.doHurtTarget(entity);
+        World world = entity.level;
         if(flag && entity instanceof LivingEntity) {
-            ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 200));
+            ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 200, 10));
+            if(!world.isClientSide()) {
+                world.playSound(null, this, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.zombie.infect")), SoundCategory.HOSTILE, 1, 1);
+            }
         }
         return flag;
     }
