@@ -3,16 +3,12 @@ package io.github.bioplethora.entity;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.AnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.AnimatableMoveToTargetGoal;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.MagmaCubeEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.SlimeEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.GolemEntity;
 import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.RabbitEntity;
@@ -21,9 +17,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -42,11 +36,11 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 2 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 2)
-                .add(Attributes.ATTACK_DAMAGE, 4 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
-                .add(Attributes.MAX_HEALTH, 30 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.4)
                 .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 32.0D);
@@ -67,7 +61,7 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, GolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SlimeEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MagmaCubeEntity.class, true));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
+        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, NandbriEntity.class)).setAlertOthers());
     }
 
     @Override
@@ -109,8 +103,9 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
 
     @Override
     protected void doPush(Entity entity) {
-        if(entity instanceof PlayerEntity) {
-            this.setTarget((PlayerEntity)entity);
+        boolean flag = entity instanceof PlayerEntity || entity instanceof VillagerEntity || ((LivingEntity)entity).getMobType() == CreatureAttribute.ILLAGER;
+        if(flag) {
+            this.setTarget((LivingEntity) entity);
         }
     }
 }

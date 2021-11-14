@@ -16,7 +16,7 @@ public class NandbriEntityRender extends GeoEntityRenderer<NandbriEntity> {
 
     public NandbriEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new NandbriEntityModel());
-        this.shadowRadius = 0.85F;
+        this.shadowRadius = 1.1F;
     }
 
     @Override
