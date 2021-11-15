@@ -52,7 +52,7 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
         this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 0.8, 5));
-        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 40, 0.2, 0.68));
+        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 20, 0.5, 0.9));
         this.goalSelector.addGoal(1, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
