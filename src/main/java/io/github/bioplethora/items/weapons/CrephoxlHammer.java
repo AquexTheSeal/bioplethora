@@ -52,7 +52,7 @@ public class CrephoxlHammer extends AxeItem {
     }
 
     /* Special Ability: Create a damaging shockwave on block right-click position, dealing 9 damage to
-    nearby entities & sending them flying into the air. 2-second cooldown.
+    nearby entities & sending them flying into the air. 3-second cooldown.
      */
     @Override
     public ActionResultType useOn(ItemUseContext context) {
@@ -66,11 +66,11 @@ public class CrephoxlHammer extends AxeItem {
                 y = pos.getY(),
                 z = pos.getZ();
         if(!entity.isInWater()) {
-            entity.getCooldowns().addCooldown(stack.getItem(), 40);
+            entity.getCooldowns().addCooldown(stack.getItem(), 60);
             if (hand != null) {
                 entity.swing(hand);
             }
-            world.playSound(entity, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dragon_fireball.explode")), SoundCategory.PLAYERS, 1, 1);
+            world.playSound(entity, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.break_block")), SoundCategory.PLAYERS, 1, 1);
             if ((!(world.isClientSide()))) {
                 ((ServerWorld)world).sendParticles(ParticleTypes.CLOUD, x, y + 1.2, z, 50, 3, 0.2, 3, 0);
                 {
