@@ -2,16 +2,19 @@
   "entity.bioplethora.crephoxl": "Crephoxl",
   "entity.bioplethora.alphem": "Alphem",
   "entity.bioplethora.nandbri": "Nandbri",
+  "entity.bioplethora.bellophgolem": "Bellophgolem",
 
   "item.bioplethora.crephoxl_spawn_egg": "Crephoxl Spawn Egg",
   "item.bioplethora.alphem_spawn_egg": "Alphem Spawn Egg",
   "item.bioplethora.nandbri_spawn_egg": "Nandbri Spawn Egg",
+  "item.bioplethora.bellophgolem": "Bellophgolem Spawn Egg",
 
   "item.bioplethora.crephoxl_feather": "Crephoxl Feather",
   "item.bioplethora.crephoxl_stick": "Crephoxl Stick",
   "item.bioplethora.nandbri_scales": "Nandbri Scales",
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
+  "item.bioplethora.bellophgolem_shield": "Bellophgolem Shield",
 
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs"
