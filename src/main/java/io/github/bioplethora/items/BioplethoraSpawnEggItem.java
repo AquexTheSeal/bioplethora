@@ -30,8 +30,8 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
         UNADDED_EGGS.add(this);
     }
 
-    public BioplethoraSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, Properties properties) {
-        super(null, 0xFFFFFF, 0xFFFFFF, properties);
+    public BioplethoraSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, int eggPrimary, int eggSecondary, Properties properties) {
+        super(null, eggPrimary, eggSecondary, properties);
         this.entityTypeSupplier = Lazy.of(entityTypeSupplier);
         UNADDED_EGGS.add(this);
     }
