@@ -19,9 +19,11 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class AlphemEntityRender extends GeoEntityRenderer<AlphemEntity> {
 
+    private Object Item;
+
     public AlphemEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new AlphemEntityModel());
-        this.shadowRadius = 0.5F;
+        this.shadowRadius = 0.85F;
     }
 
     @Override
