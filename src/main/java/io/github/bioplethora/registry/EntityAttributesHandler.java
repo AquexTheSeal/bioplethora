@@ -2,6 +2,7 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.AlphemEntity;
+import io.github.bioplethora.entity.BellophgolemEntity;
 import io.github.bioplethora.entity.CrephoxlEntity;
 import io.github.bioplethora.entity.NandbriEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -18,6 +19,7 @@ public class EntityAttributesHandler {
 
         //Fairy
         event.put(BioplethoraEntities.ALPHEM.get(), AlphemEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
 
         //Reptilia
         event.put(BioplethoraEntities.NANDBRI.get(), NandbriEntity.setCustomAttributes().build());
