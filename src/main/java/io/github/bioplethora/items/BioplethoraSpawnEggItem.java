@@ -1,6 +1,5 @@
 package io.github.bioplethora.items;
 
-import io.github.bioplethora.entity.AlphemEntity;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
@@ -12,6 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
@@ -24,14 +24,14 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
     public static final List<BioplethoraSpawnEggItem> UNADDED_EGGS = new ArrayList<>();
     private final Lazy<? extends EntityType<?>> entityTypeSupplier;
 
-    public BioplethoraSpawnEggItem(final RegistryObject<EntityType<AlphemEntity>> entityTypeSupplier, Properties properties) {
+    public BioplethoraSpawnEggItem(final NonNullSupplier<? extends EntityType<?>> entityTypeSupplier, final int eggPrimary, final int eggSecondary, Properties properties) {
         super(null, 0xFFFFFF, 0xFFFFFF, properties);
         this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);
         UNADDED_EGGS.add(this);
     }
 
     public BioplethoraSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, Properties properties) {
-        super(null, eggPrimary, eggSecondary, properties);
+        super(null, 0xFFFFFF, 0xFFFFFF, properties);
         this.entityTypeSupplier = Lazy.of(entityTypeSupplier);
         UNADDED_EGGS.add(this);
     }
