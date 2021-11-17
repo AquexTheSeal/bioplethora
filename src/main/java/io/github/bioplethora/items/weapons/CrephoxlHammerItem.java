@@ -22,9 +22,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CrephoxlHammer extends AxeItem {
+public class CrephoxlHammerItem extends AxeItem {
 
-    public CrephoxlHammer(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builder) {
+    public CrephoxlHammerItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
     }
 

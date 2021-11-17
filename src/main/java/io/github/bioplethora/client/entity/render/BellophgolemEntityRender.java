@@ -4,38 +4,35 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.model.AlphemEntityModel;
+import io.github.bioplethora.client.entity.model.BellophgolemEntityModel;
 import io.github.bioplethora.entity.AlphemEntity;
-import net.minecraft.client.Minecraft;
+import io.github.bioplethora.entity.BellophgolemEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3f;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
-public class AlphemEntityRender extends GeoEntityRenderer<AlphemEntity> {
+public class BellophgolemEntityRender extends GeoEntityRenderer<BellophgolemEntity> {
 
-    public AlphemEntityRender(EntityRendererManager renderManager) {
-        super(renderManager, new AlphemEntityModel());
-        this.shadowRadius = 0.5F;
+    public BellophgolemEntityRender(EntityRendererManager renderManager) {
+        super(renderManager, new BellophgolemEntityModel());
+        this.shadowRadius = 1F;
     }
 
     @Override
-    public void renderEarly(AlphemEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+    public void renderEarly(BellophgolemEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(AlphemEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/alphem.png");
+    public ResourceLocation getTextureLocation(BellophgolemEntity entity) {
+        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/bellophgolem.png");
     }
 
     @Override
-    public RenderType getRenderType(AlphemEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
+    public RenderType getRenderType(BellophgolemEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
         return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
@@ -45,7 +42,7 @@ public class AlphemEntityRender extends GeoEntityRenderer<AlphemEntity> {
     }
 
     @Override
-    protected float getDeathMaxRotation(AlphemEntity entity) {
+    protected float getDeathMaxRotation(BellophgolemEntity entity) {
         return 0.0F;
     }
 }
