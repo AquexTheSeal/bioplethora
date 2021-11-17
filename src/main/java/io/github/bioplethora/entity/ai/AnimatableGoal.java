@@ -36,4 +36,4 @@ public abstract class AnimatableGoal extends Goal {
 
     @Override
     abstract public boolean canUse();
-}
+}//yayyy
