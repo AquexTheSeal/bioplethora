@@ -49,18 +49,18 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 0.8, 5));
-        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 20, 0.5, 0.9));
-        this.goalSelector.addGoal(1, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(7, new SwimGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, RabbitEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, ParrotEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, GolemEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SlimeEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MagmaCubeEntity.class, true));
+        this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
+        this.goalSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 0.9, 8));
+        this.goalSelector.addGoal(1, new AnimatableMeleeGoal(this, 13.6, 0.23, 0.47));
+        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(5, new SwimGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, RabbitEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, ParrotEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, GolemEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, SlimeEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MagmaCubeEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, NandbriEntity.class)).setAlertOthers());
     }
 
