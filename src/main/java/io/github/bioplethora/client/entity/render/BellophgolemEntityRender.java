@@ -18,7 +18,7 @@ public class BellophgolemEntityRender extends GeoEntityRenderer<BellophgolemEnti
 
     public BellophgolemEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new BellophgolemEntityModel());
-        this.shadowRadius = 2.5F;
+        this.shadowRadius = 2.2F;
     }
 
     @Override
