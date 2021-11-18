@@ -23,7 +23,7 @@ public class BellophgolemShieldItem extends ShieldItem {
 
     @Override
     public int getUseDuration(ItemStack itemStack) {
-        return 5000;
+        return 125000;
     }
 
     @Override
