@@ -14,11 +14,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,15 +66,18 @@ public class CrephoxlHammerItem extends AxeItem {
 
         //Deals more damage to Entities over 50 max health.
         if (entity.getMaxHealth() >= 50) {
-            entity.hurt(DamageSource.GENERIC, getAttackDamage() * 2);
+            entity.hurt(DamageSource.mobAttack(entity), getAttackDamage() * 2);
         }
         return retval;
     }
 
     @Override
-    public void appendHoverText(ItemStack itemstack, World world, List<ITextComponent> list, ITooltipFlag flag) {
-        super.appendHoverText(itemstack, world, list, flag);
-        list.add(new StringTextComponent("\u00A77Debuffs targets. Deals more damage to mobs with more than 50 maximum health."));
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.additions.desc").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_0").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_1").withStyle(TextFormatting.GRAY));
     }
 
     /* Special Ability: Create a damaging shockwave on block right-click position, dealing 9 damage to
@@ -85,9 +91,7 @@ public class CrephoxlHammerItem extends AxeItem {
         BlockPos pos = context.getClickedPos();
         ItemStack stack = context.getItemInHand();
 
-        double x = pos.getX(),
-                y = pos.getY(),
-                z = pos.getZ();
+        double x = pos.getX(), y = pos.getY(), z = pos.getZ();
         if(!entity.isInWater()) {
             entity.getCooldowns().addCooldown(stack.getItem(), 60);
             if (hand != null) {
@@ -107,7 +111,7 @@ public class CrephoxlHammerItem extends AxeItem {
                     for (Entity entityIterator : nearEntities) {
                         if (entityIterator instanceof LivingEntity && entityIterator != entity) {
                             entityIterator.hurt(DamageSource.mobAttack(entity), 9.0F);
-                            entityIterator.setDeltaMovement((entity.getDeltaMovement().x()), 1.2, (entity.getDeltaMovement().z()));
+                            entityIterator.setDeltaMovement((entity.getDeltaMovement().x()), 1, (entity.getDeltaMovement().z()));
                         }
                     }
                 }

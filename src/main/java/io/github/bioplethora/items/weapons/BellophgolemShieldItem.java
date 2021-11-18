@@ -1,14 +1,25 @@
 package io.github.bioplethora.items.weapons;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.UseAction;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BellophgolemShieldItem extends ShieldItem {
 
@@ -35,6 +46,26 @@ public class BellophgolemShieldItem extends ShieldItem {
     public ActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
         ItemStack itemstack = playerEntity.getItemInHand(hand);
         playerEntity.startUsingItem(hand);
+        playerEntity.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 2, 1));
+        playerEntity.addEffect(new EffectInstance(Effects.REGENERATION, 2, 1));
+        if (world instanceof ServerWorld) {
+            ((ServerWorld) world).sendParticles(ParticleTypes.SOUL_FIRE_FLAME, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), (int) 10, 0.4, 0.4, 0.4, 0.1);
+        }
         return ActionResult.consume(itemstack);
+    }
+
+    public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
+        super.onUsingTick(stack, player, count);
+        player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 2, 1));
+        player.addEffect(new EffectInstance(Effects.REGENERATION, 2, 1));
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.additions.desc").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophgolem_shield.desc_0").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophgolem_shield.desc_1").withStyle(TextFormatting.GRAY));
     }
 }
