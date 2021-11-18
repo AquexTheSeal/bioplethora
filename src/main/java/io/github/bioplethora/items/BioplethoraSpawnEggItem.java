@@ -1,6 +1,5 @@
 package io.github.bioplethora.items;
 
-import io.github.bioplethora.entity.AlphemEntity;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
@@ -21,19 +20,18 @@ import java.util.List;
 import java.util.Map;
 
 public class BioplethoraSpawnEggItem extends SpawnEggItem {
-    public static final List<BioplethoraSpawnEggItem> UNADDED_EGGS = new ArrayList<>();
+    public static final List<BioplethoraSpawnEggItem> SPAWN_EGGS = new ArrayList<>();
     private final Lazy<? extends EntityType<?>> entityTypeSupplier;
 
-    public BioplethoraSpawnEggItem(final RegistryObject<EntityType<AlphemEntity>> entityTypeSupplier, Properties properties) {
-        super(null, 0xFFFFFF, 0xFFFFFF, properties);
-        this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);
-        UNADDED_EGGS.add(this);
-    }
-
-    public BioplethoraSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, Properties properties) {
+//    public BioplethoraSpawnEggItem(final NonNullSupplier<? extends EntityType<?>> entityType, int eggPrimary, int eggSecondary, Properties properties) {
+//        super(null, 0xFFFFFF, 0xFFFFFF, properties);
+//        this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);
+//        UNADDED_EGGS.add(this);
+//    }
+    public BioplethoraSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, final int eggPrimary, final int eggSecondary, Properties properties) {
         super(null, eggPrimary, eggSecondary, properties);
         this.entityTypeSupplier = Lazy.of(entityTypeSupplier);
-        UNADDED_EGGS.add(this);
+        SPAWN_EGGS.add(this);
     }
 
     public static void registerEggs() {
@@ -47,12 +45,12 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
                 return stack;
             }
         };
-        for(final SpawnEggItem egg : UNADDED_EGGS) {
+        for(final SpawnEggItem egg : SPAWN_EGGS) {
             EGGS.put(egg.getType(null), egg);
             DispenserBlock.registerBehavior(egg, dispenseBehavior);
 
         }
-        UNADDED_EGGS.clear();
+        SPAWN_EGGS.clear();
     }
 
     @Override
