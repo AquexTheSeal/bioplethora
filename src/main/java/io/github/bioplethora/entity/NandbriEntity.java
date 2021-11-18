@@ -37,9 +37,9 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
-                .add(Attributes.ATTACK_SPEED, 2)
-                .add(Attributes.ATTACK_DAMAGE, 5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
+                .add(Attributes.ATTACK_SPEED, 1.5)
+                .add(Attributes.ATTACK_DAMAGE, 3 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_KNOCKBACK, 0.3D)
                 .add(Attributes.MAX_HEALTH, 40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.4)
                 .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
@@ -51,7 +51,7 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 0.9, 8));
+        this.goalSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 0.75, 8));
         this.goalSelector.addGoal(1, new AnimatableMeleeGoal(this, 13.6, 0.23, 0.47));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
@@ -93,7 +93,7 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
         boolean flag = super.doHurtTarget(entity);
         World world = entity.level;
         if(flag && entity instanceof LivingEntity) {
-            ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 200, 10));
+            ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 200, 2));
             if(!world.isClientSide()) {
                 world.playSound(null, this, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.zombie.infect")), SoundCategory.HOSTILE, 1, 1);
             }
@@ -103,7 +103,7 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
 
     @Override
     protected void doPush(Entity entity) {
-        boolean flag = entity instanceof PlayerEntity || entity instanceof VillagerEntity || ((LivingEntity)entity).getMobType() == CreatureAttribute.ILLAGER;
+        boolean flag = !entity.isCrouching() && (entity instanceof PlayerEntity || entity instanceof VillagerEntity || ((LivingEntity)entity).getMobType() == CreatureAttribute.ILLAGER);
         if(flag) {
             this.setTarget((LivingEntity) entity);
         }
