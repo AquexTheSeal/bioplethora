@@ -1,5 +1,6 @@
 package io.github.bioplethora.items.weapons;
 
+import net.minecraft.client.audio.Sound;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -31,6 +32,28 @@ public class CrephoxlHammerItem extends AxeItem {
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity entity, LivingEntity source) {
         boolean retval = super.hurtEnemy(stack, entity, source);
+
+        World world = entity.level;
+        BlockPos pos = entity.blockPosition();
+        double x = pos.getX(),
+            y = pos.getY(),
+            z = pos.getZ();
+
+        if(!world.isClientSide() && source.isCrouching()) {
+            world.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.anvil.place")), SoundCategory.PLAYERS, 1, 1);
+            List<Entity> nearEntities = world
+                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (5 / 2d), y, z - (5 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), null)
+                    .stream().sorted(new Object() {
+                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
+                            return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
+                        }
+                    }.compareDistOf(x, y, z)).collect(Collectors.toList());
+            for (Entity entityIterator : nearEntities) {
+                if (entityIterator instanceof LivingEntity && entityIterator != entity && entityIterator != source) {
+                    entityIterator.hurt(DamageSource.mobAttack(source), 9.0F);
+                }
+            }
+        }
 
         //Adds debuffs to target after hit.
         entity.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 5, 2));
@@ -77,8 +100,8 @@ public class CrephoxlHammerItem extends AxeItem {
                     List<Entity> nearEntities = world
                             .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (7 / 2d), y - (3 / 2d), z - (7 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), null)
                             .stream().sorted(new Object() {
-                                Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
-                                    return Comparator.comparing((entCnd -> entCnd.distanceToSqr(_x, _y, _z)));
+                                Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
+                                    return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
                                 }
                             }.compareDistOf(x, y, z)).collect(Collectors.toList());
                     for (Entity entityIterator : nearEntities) {
