@@ -1,6 +1,5 @@
-package io.github.bioplethora.items.weapons;
+package io.github.bioplethora.item.weapons;
 
-import net.minecraft.client.audio.Sound;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -19,6 +18,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
@@ -37,23 +37,45 @@ public class CrephoxlHammerItem extends AxeItem {
         boolean retval = super.hurtEnemy(stack, entity, source);
 
         World world = entity.level;
-        BlockPos pos = entity.blockPosition();
-        double x = pos.getX(),
-            y = pos.getY(),
-            z = pos.getZ();
+        double x = entity.getX(),
+                y = entity.getY(),
+                z = entity.getZ();
+        BlockPos pos = new BlockPos(x, y, z);
+        PlayerEntity player = (PlayerEntity) source;
 
-        if(!world.isClientSide() && source.isCrouching()) {
+        /**Special Ability 1 of 2: Deathsweep
+         *
+         * Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within
+         * a 2-block radius. 1.5 second cooldown.
+         */
+        if(player.isCrouching() && player.getCurrentItemAttackStrengthDelay() >= 18.0F /* this'll stay until we find a better way to detect player attack cooldown. */) {
+            player.getCooldowns().addCooldown(stack.getItem(), 30);
             world.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.anvil.place")), SoundCategory.PLAYERS, 1, 1);
-            List<Entity> nearEntities = world
-                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (5 / 2d), y, z - (5 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), null)
-                    .stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
+            world.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.player.attack.sweep")), SoundCategory.PLAYERS, 1, 1);
+            if(world.isClientSide) {
+                world.addParticle(ParticleTypes.SWEEP_ATTACK, x, y, z, 0, 0, 0);
+            }
+            if(world instanceof ServerWorld) {
+                List<Entity> nearEntities = world
+                        .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (5 / 2d), y, z - (5 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), null)
+                        .stream().sorted(new Object() {
+                            Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
+                                return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
+                            }
+                        }.compareDistOf(x, y, z)).collect(Collectors.toList());
+                for (Entity entityIterator : nearEntities) {
+                    if (entityIterator instanceof LivingEntity && entityIterator != player) {
+                        // 33% chance to apply slowness 4 for 3 seconds to nearby entities.
+                        if(Math.random() < 0.33) {
+                            ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 4));
                         }
-                    }.compareDistOf(x, y, z)).collect(Collectors.toList());
-            for (Entity entityIterator : nearEntities) {
-                if (entityIterator instanceof LivingEntity && entityIterator != entity && entityIterator != source) {
-                    entityIterator.hurt(DamageSource.mobAttack(source), 9.0F);
+                        /* Hurts all nearby entities EXCEPT for the one attacked (to prevent dealing extra damage
+                        to the original entity hit)
+                        */
+                        if(entityIterator != entity) {
+                            entityIterator.hurt(DamageSource.mobAttack(player), this.getAttackDamage() * 0.8F);
+                        }
+                    }
                 }
             }
         }
@@ -80,7 +102,9 @@ public class CrephoxlHammerItem extends AxeItem {
         tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_1").withStyle(TextFormatting.GRAY));
     }
 
-    /* Special Ability: Create a damaging shockwave on block right-click position, dealing 9 damage to
+    /** Special Ability 2 of 2: Aerial Shockwave
+     *
+     * Create a damaging shockwave on block right-click position, dealing 9 damage to
     nearby entities & sending them flying into the air. 3-second cooldown.
      */
     @Override
