@@ -3,6 +3,7 @@ package io.github.bioplethora.entity;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.AnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.AnimatableMoveToTargetGoal;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +17,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -68,6 +70,11 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
             return PlayState.CONTINUE;
         }
 
+        /*if (this.getSmashing()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bellophgolem.smashing", true));
+            return PlayState.CONTINUE;
+        }*/
+
         if (this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bellophgolem.attack", true));
             return PlayState.CONTINUE;
@@ -84,7 +91,7 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "crephoxlcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "bellophgolemcontroller", 0, this::predicate));
     }
 
     @Override
@@ -94,13 +101,20 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
+        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.hurt"));
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
+        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.damage"));
     }
+
+    @Override
+    public void playStepSound(BlockPos pos, BlockState blockIn) {
+        this.playSound((net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.step")),
+                0.15f, 1);
+    }
+
 
     public boolean doHurtTarget (Entity entity) {
         boolean flag = super.doHurtTarget(entity);
@@ -111,5 +125,20 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
                     0.4, 0.1);
             }
         return flag;
+    }
+
+    @Override
+    public boolean ignoreExplosion() {
+        return true;
+    }
+
+    @Override
+    public boolean fireImmune() {
+        return true;
+    }
+
+    @Override
+    public boolean isPushedByFluid() {
+        return false;
     }
 }
