@@ -2,9 +2,9 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
-import io.github.bioplethora.item.weapons.BellophgolemShieldItem;
 import io.github.bioplethora.item.weapons.CrephoxlHammerItem;
 import io.github.bioplethora.util.BioplethoraItemGroup;
+import io.github.bioplethora.item.weapons.BellophgolemShieldItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.Rarity;
