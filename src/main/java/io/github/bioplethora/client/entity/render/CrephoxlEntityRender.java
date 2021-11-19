@@ -16,7 +16,7 @@ public class CrephoxlEntityRender extends GeoEntityRenderer<CrephoxlEntity> {
 
     public CrephoxlEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new CrephoxlEntityModel());
-        this.shadowRadius = 1F;
+        this.shadowRadius = 1.5F;
     }
 
     @Override

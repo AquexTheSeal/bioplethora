@@ -17,5 +17,15 @@
   "item.bioplethora.bellophgolem_shield": "Bellophgolem Shield",
 
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
-  "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs"
+  "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
+
+  "item.bioplethora.sacred_level.desc": "Sacred Level",
+  "item.bioplethora.additions.desc": "Additions:",
+  "item.bioplethora.special_skill.desc": "Special Skill:",
+
+  "item.bioplethora.crephoxl_hammer.desc_0": "Debuffs targets on hit, deals more damage to targets with more than 49 maximum health.",
+  "item.bioplethora.crephoxl_hammer.desc_1": "On right click on the ground - creates a shockwave and knocks up nearby targets. Cools down for 3 seconds.",
+
+  "item.bioplethora.bellophgolem_shield.desc_0": "More durability than the regular shield.",
+  "item.bioplethora.bellophgolem_shield.desc_1": "When used, gives user resistance and regeneration."
 }

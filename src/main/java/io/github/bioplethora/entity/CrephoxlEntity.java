@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
@@ -104,7 +105,7 @@ public class CrephoxlEntity extends AnimatableHostileEntity implements IAnimatab
     public boolean doHurtTarget (Entity entity) {
         boolean flag = super.doHurtTarget(entity);
         if (flag && entity instanceof LivingEntity)
-            this.getTarget().setDeltaMovement(getTarget().getDeltaMovement().x, 2,getTarget().getDeltaMovement().z);
+            this.getTarget().setDeltaMovement(getTarget().getDeltaMovement().x, 2 - getTarget().getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), getTarget().getDeltaMovement().z);
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), (int) 20, 0.4, 0.4,
                     0.4, 0.1);

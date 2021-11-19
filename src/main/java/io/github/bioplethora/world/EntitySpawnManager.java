@@ -27,23 +27,23 @@ public class EntitySpawnManager {
             builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
                     , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
             builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+                    , 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
             //Crephoxl
             builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
                     , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
+                    , 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
             //Crephoxl
             builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
                     , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
+                    , 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         public static void spawnMobs(BiomeLoadingEvent event) {
