@@ -4,6 +4,7 @@ import io.github.bioplethora.client.entity.render.AlphemEntityRender;
 import io.github.bioplethora.client.entity.render.BellophgolemEntityRender;
 import io.github.bioplethora.client.entity.render.CrephoxlEntityRender;
 import io.github.bioplethora.client.entity.render.NandbriEntityRender;
+import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.client.Minecraft;
@@ -28,6 +29,9 @@ public class BioplethoraClient {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), manager -> new AlphemEntityRender(manager));
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.NANDBRI.get(), manager -> new NandbriEntityRender(manager));
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHGOLEM.get(), manager -> new BellophgolemEntityRender(manager));
+
+        //projectiles
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), manager -> new BellophiteClusterRender(manager));
     }
 
     @OnlyIn(Dist.CLIENT)
