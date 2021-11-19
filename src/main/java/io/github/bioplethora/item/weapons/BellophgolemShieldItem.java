@@ -1,6 +1,5 @@
-package io.github.bioplethora.items.weapons;
+package io.github.bioplethora.item.weapons;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -23,7 +22,7 @@ public class BellophgolemShieldItem extends ShieldItem {
 
     @Override
     public int getUseDuration(ItemStack itemStack) {
-        return 125000;
+        return 72000;
     }
 
     @Override

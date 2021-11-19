@@ -93,12 +93,12 @@ public class CrephoxlEntity extends AnimatableHostileEntity implements IAnimatab
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
     }
 
     public boolean doHurtTarget (Entity entity) {
@@ -108,8 +108,8 @@ public class CrephoxlEntity extends AnimatableHostileEntity implements IAnimatab
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), (int) 20, 0.4, 0.4,
                     0.4, 0.1);
-            ((World) this.level).playSound(null, new BlockPos((int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ()),
-                    (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.explode")),
+            this.level.playSound(null, new BlockPos((int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ()),
+                    ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.explode")),
                     SoundCategory.NEUTRAL, (float) 1, (float) 1);
         }
         return flag;

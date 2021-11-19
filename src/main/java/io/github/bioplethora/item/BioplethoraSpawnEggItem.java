@@ -1,4 +1,4 @@
-package io.github.bioplethora.items;
+package io.github.bioplethora.item;
 
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -40,7 +39,7 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
             public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
                 Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
                 EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
-                entityType.spawn(source.getLevel(), stack, null, source.getPos().offset(Vector3i.ZERO.relative(direction, 1)), SpawnReason.DISPENSER, direction != Direction.UP, false);
+                entityType.spawn(source.getLevel(), stack, null, source.getPos().relative(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
                 stack.shrink(1);
                 return stack;
             }

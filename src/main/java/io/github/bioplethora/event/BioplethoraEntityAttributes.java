@@ -1,16 +1,17 @@
-package io.github.bioplethora.registry;
+package io.github.bioplethora.event;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.AlphemEntity;
 import io.github.bioplethora.entity.BellophgolemEntity;
 import io.github.bioplethora.entity.CrephoxlEntity;
 import io.github.bioplethora.entity.NandbriEntity;
+import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class EntityAttributesHandler {
+public class BioplethoraEntityAttributes {
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
 
