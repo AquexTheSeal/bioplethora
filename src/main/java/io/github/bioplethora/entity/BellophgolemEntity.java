@@ -3,19 +3,16 @@ package io.github.bioplethora.entity;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.AnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
+import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.SmallFireballEntity;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -23,8 +20,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -39,15 +34,15 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.EnumSet;
-
 public class BellophgolemEntity extends AnimatableHostileEntity implements IAnimatable {
 
+    private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(BellophgolemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public BellophgolemEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
+        this.xpReward = 20;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -70,7 +65,7 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
         this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 60, 0.6, 0.7));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
-        /*this.goalSelector.addGoal(4, new BellophgolemEntity.FireballAttackGoal(this));*/
+        this.goalSelector.addGoal(6, new BellophiteClusterRangedAttackGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
     }
@@ -151,5 +146,19 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
     @Override
     public boolean isPushedByFluid() {
         return false;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean isCharging() {
+        return this.entityData.get(DATA_IS_CHARGING);
+    }
+
+    public void setCharging(boolean charging) {
+        this.entityData.set(DATA_IS_CHARGING, charging);
+    }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_IS_CHARGING, false);
     }
 }

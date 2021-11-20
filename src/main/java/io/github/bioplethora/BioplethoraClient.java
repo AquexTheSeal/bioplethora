@@ -25,13 +25,13 @@ public class BioplethoraClient {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerRenderers(final FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), manager -> new CrephoxlEntityRender(manager));
-        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), manager -> new AlphemEntityRender(manager));
-        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.NANDBRI.get(), manager -> new NandbriEntityRender(manager));
-        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHGOLEM.get(), manager -> new BellophgolemEntityRender(manager));
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), AlphemEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.NANDBRI.get(), NandbriEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntityRender::new);
 
         //projectiles
-        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), manager -> new BellophiteClusterRender(manager));
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), BellophiteClusterRender::new);
     }
 
     @OnlyIn(Dist.CLIENT)

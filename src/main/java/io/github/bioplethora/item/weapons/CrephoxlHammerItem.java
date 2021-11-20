@@ -57,7 +57,7 @@ public class CrephoxlHammerItem extends AxeItem {
             }
             if(world instanceof ServerWorld) {
                 List<Entity> nearEntities = world
-                        .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (5 / 2d), y, z - (5 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), null)
+                        .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (5 / 2d), y, z - (5 / 2d), x + (5 / 2d), y + (5 / 2d), z + (5 / 2d)), null)
                         .stream().sorted(new Object() {
                             Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
                                 return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));

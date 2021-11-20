@@ -28,6 +28,6 @@ public class BioplethoraEntities {
 
     //others ---
     //Projectiles
-    public static final RegistryObject<EntityType<BellophiteClusterEntity>> BELLOPHITE_CLUSTER= ENTITIES.register("bellophite_cluster", () -> EntityType.Builder.<BellophiteClusterEntity>of(BellophiteClusterEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
+    public static final RegistryObject<EntityType<BellophiteClusterEntity>> BELLOPHITE_CLUSTER= ENTITIES.register("bellophite_cluster", () -> EntityType.Builder.<BellophiteClusterEntity>of(BellophiteClusterEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "bellophite_cluster").toString()));
 }
