@@ -52,18 +52,6 @@ public class BellophiteClusterRender extends GeoProjectilesRenderer<BellophiteCl
         super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder,
                 packedLightIn, packedOverlayIn, red, green, blue, alpha);
         float f = getY(animatable, partialTicks);
-        LivingEntity target = animatable.getTargetedEntity();
-        if (target != null) {
-            float f3 = (float) target.getX();
-            float f4 = (float) target.getY();
-            float f5 = (float) target.getZ();
-            float f6 = (float) ((double) f3 - animatable.getX());
-            float f7 = (float) ((double) f4 - animatable.getY());
-            float f8 = (float) ((double) f5 - animatable.getZ());
-            matrixStackIn.translate((double) f6, (double) f7, (double) f8);
-            renderCrystalBeams(-f6, -f7 + f, -f8, partialTicks, animatable.tickCount, matrixStackIn, renderTypeBuffer,
-                    packedLightIn);
-        }
     }
 
     @Override
@@ -76,7 +64,7 @@ public class BellophiteClusterRender extends GeoProjectilesRenderer<BellophiteCl
                 animatable.tickCount > 2 ? 1.0F : 0.0F);
     }
 
-    public static void renderCrystalBeams(float p_229059_0_, float p_229059_1_, float p_229059_2_, float p_229059_3_,
+    /*public static void renderCrystalBeams(float p_229059_0_, float p_229059_1_, float p_229059_2_, float p_229059_3_,
                                           int p_229059_4_, MatrixStack p_229059_5_, IRenderTypeBuffer p_229059_6_, int p_229059_7_) {
         float f = MathHelper.sqrt(p_229059_0_ * p_229059_0_ + p_229059_2_ * p_229059_2_);
         float f1 = MathHelper.sqrt(p_229059_0_ * p_229059_0_ + p_229059_1_ * p_229059_1_ + p_229059_2_ * p_229059_2_);
@@ -119,7 +107,7 @@ public class BellophiteClusterRender extends GeoProjectilesRenderer<BellophiteCl
         }
 
         p_229059_5_.popPose();
-    }
+    }*/
 
     public static float getY(BellophiteClusterEntity p_229051_0_, float p_229051_1_) {
         float f = (float) p_229051_0_.tickCount + p_229051_1_;

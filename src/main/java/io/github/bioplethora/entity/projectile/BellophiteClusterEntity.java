@@ -4,28 +4,22 @@ import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -34,7 +28,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,26 +37,24 @@ import java.util.stream.Collectors;
 * AzureDoom [MCDoom mod]
 */
 
-public class BellophiteClusterEntity extends AbstractArrowEntity implements IAnimatable {
+public class BellophiteClusterEntity extends DamagingProjectileEntity implements IAnimatable {
 
-    private static final DataParameter<Integer> TARGET_ENTITY = EntityDataManager.defineId(BellophiteClusterEntity.class, DataSerializers.INT);
-    private LivingEntity targetedEntity;
-    private LivingEntity user;
-    protected int timeInAir;
-    protected boolean inAir;
-    private int ticksInAir;
-    public double xPower = (Math.sin(Math.toRadians(((this.yRot) + 180))));
-    public double yPower = Math.sin(Math.toRadians((0 - (this.xRot))));
-    public double zPower = (Math.cos(Math.toRadians((this.yRot))));
+    public double xPower;
+    public double yPower;
+    public double zPower;
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public BellophiteClusterEntity(EntityType<? extends AbstractArrowEntity> type, World world) {
+    public BellophiteClusterEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
         super(type, world);
     }
 
-    public BellophiteClusterEntity(World world, LivingEntity user) {
-        super(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), user, world);
-        this.user = user;
+    @OnlyIn(Dist.CLIENT)
+    public BellophiteClusterEntity(World p_i1768_1_, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
+        super(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, p_i1768_1_);
+    }
+
+    public BellophiteClusterEntity(World p_i1769_1_, LivingEntity p_i1769_2_, double p_i1769_3_, double p_i1769_5_, double p_i1769_7_) {
+        super(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), p_i1769_2_, p_i1769_3_, p_i1769_5_, p_i1769_7_, p_i1769_1_);
     }
 
 
@@ -87,7 +78,7 @@ public class BellophiteClusterEntity extends AbstractArrowEntity implements IAni
         Entity entity = this.getOwner();
         if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.0F, Explosion.Mode.BREAK);
+                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
                 this.remove();
             }
         }
@@ -103,7 +94,7 @@ public class BellophiteClusterEntity extends AbstractArrowEntity implements IAni
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 2));
+                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                 }
             }
         }
@@ -114,13 +105,13 @@ public class BellophiteClusterEntity extends AbstractArrowEntity implements IAni
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) entityHitResult).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.0F, Explosion.Mode.BREAK);
+                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
                 this.remove();
             }
         }
         if(this.level instanceof ServerWorld) {
             List<Entity> nearEntities = this.level
-                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (5 / 2d), this.getY(), this.getZ() - (5 / 2d), this.getX() + (5 / 2d), this.getY() + (5 / 2d), this.getZ() + (5 / 2d)), null)
+                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (7 / 2d), this.getY() - (7 / 2d), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d)), null)
                     .stream().sorted(new Object() {
                         Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
                             return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
@@ -130,7 +121,7 @@ public class BellophiteClusterEntity extends AbstractArrowEntity implements IAni
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 2));
+                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                 }
             }
         }
@@ -138,66 +129,23 @@ public class BellophiteClusterEntity extends AbstractArrowEntity implements IAni
 
     @Override
     public void tick() {
-        super.tick();
-        boolean flag = this.isNoPhysics();
-        Vector3d vector3d = this.getDeltaMovement();
-
-        if ((!(this.level.isClientSide()))) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 5, 0.4, 0.4, 0.4, 0.1);
+        if (this.level instanceof ServerWorld) {
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 3, 0.4, 0.4, 0.4, 0.1);
         }
-
-        if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
-            float f = MathHelper.sqrt(getHorizontalDistanceSqr(vector3d));
-            this.yRot = (float) (MathHelper.atan2(vector3d.x, vector3d.z) * (double) (180F / (float) Math.PI));
-            this.xRot = (float) (MathHelper.atan2(vector3d.y, (double) f) * (double) (180F / (float) Math.PI));
-            this.yRotO = this.yRot;
-            this.xRotO = this.xRot;
-        }
-
-        if (this.tickCount >= 100) {
-            this.remove();
-        }
-
-        if (this.inAir && !flag) {
-            this.tickDespawn();
-
-            ++this.timeInAir;
-        } else {
-            this.timeInAir = 0;
-            Vector3d vector3d2 = this.position();
-            Vector3d vector3d3 = vector3d2.add(vector3d);
-            RayTraceResult raytraceresult = this.level.clip(new RayTraceContext(vector3d2, vector3d3,
-                    RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this));
-            if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
-                vector3d3 = raytraceresult.getLocation();
+        Entity entity = this.getOwner();
+        if (this.level.isClientSide || (entity == null || !entity.removed) && this.level.hasChunkAt(this.blockPosition())) {
+            super.tick();
+            if (this.shouldBurn()) {
+                this.setSecondsOnFire(1);
             }
-            while (this.isAlive()) {
-                EntityRayTraceResult entityraytraceresult = this.findHitEntity(vector3d2, vector3d3);
-                if (entityraytraceresult != null) {
-                    raytraceresult = entityraytraceresult;
-                }
-                if (raytraceresult != null && raytraceresult.getType() == RayTraceResult.Type.ENTITY) {
-                    Entity entity = ((EntityRayTraceResult) raytraceresult).getEntity();
-                    Entity entity1 = this.getOwner();
-                    if (entity instanceof PlayerEntity && entity1 instanceof PlayerEntity
-                            && !((PlayerEntity) entity1).canHarmPlayer((PlayerEntity) entity)) {
-                        raytraceresult = null;
-                        entityraytraceresult = null;
-                    }
-                }
-                if (raytraceresult != null && raytraceresult.getType() != RayTraceResult.Type.MISS && !flag
-                        && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
-                    this.onHit(raytraceresult);
-                    this.hasImpulse = true;
-                }
-                if (entityraytraceresult == null || this.getPierceLevel() <= 0) {
-                    break;
-                }
-                raytraceresult = null;
+
+            RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
+            if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
+                this.onHit(raytraceresult);
             }
 
             this.checkInsideBlocks();
-            vector3d = this.getDeltaMovement();
+            Vector3d vector3d = this.getDeltaMovement();
             double d0 = this.getX() + vector3d.x;
             double d1 = this.getY() + vector3d.y;
             double d2 = this.getZ() + vector3d.z;
@@ -213,12 +161,11 @@ public class BellophiteClusterEntity extends AbstractArrowEntity implements IAni
             }
 
             this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale((double)f));
+            this.level.addParticle(this.getTrailParticle(), d0, d1 + 0.5D, d2, 0.0D, 0.0D, 0.0D);
             this.setPos(d0, d1, d2);
+        } else {
+            this.remove();
         }
-    }
-
-    protected float getInertia() {
-        return 0.95F;
     }
 
     @Override
@@ -231,98 +178,18 @@ public class BellophiteClusterEntity extends AbstractArrowEntity implements IAni
         return true;
     }
 
-    public SoundEvent hitSound = this.getDefaultHitGroundSoundEvent();
-
     @Override
-    protected void onHitBlock(BlockRayTraceResult p_230299_1_) {
-        super.onHitBlock(p_230299_1_);
-        this.setSoundEvent(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.explode")));
+    public boolean shouldBurn() {
+        return false;
     }
 
     @Override
-    public void setSoundEvent(SoundEvent soundIn) {
-        this.hitSound = soundIn;
-    }
-
-    @Override
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.explode"));
+    public boolean isOnFire() {
+        return false;
     }
 
     @Override
     public boolean isPushedByFluid() {
         return false;
-    }
-
-    @Override
-    protected ItemStack getPickupItem() {
-        return new ItemStack(null);
-    }
-
-    @Override
-    public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-        super.shoot(x, y, z, velocity, inaccuracy);
-        this.ticksInAir = 0;
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundNBT compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putShort("thing", (short) this.ticksInAir);
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundNBT compound) {
-        super.readAdditionalSaveData(compound);
-        this.ticksInAir = compound.getShort("thing");
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(TARGET_ENTITY, 0);
-    }
-
-    private void setTargetedEntity(int entityId) {
-        this.entityData.set(TARGET_ENTITY, entityId);
-    }
-
-    public boolean hasTargetedEntity() {
-        return this.entityData.get(TARGET_ENTITY) != 0;
-    }
-
-    @Nullable
-    public LivingEntity getTargetedEntity() {
-        if (!this.hasTargetedEntity()) {
-            return null;
-        } else if (this.level.isClientSide) {
-            if (this.targetedEntity != null) {
-                return this.targetedEntity;
-            } else {
-                Entity entity = this.level.getEntity(this.entityData.get(TARGET_ENTITY));
-                if (!(entity instanceof ServerPlayerEntity) && entity instanceof LivingEntity) {
-                    this.targetedEntity = (LivingEntity) entity;
-                    return this.targetedEntity;
-                } else {
-                    return null;
-                }
-            }
-        } else {
-            return this.getAttackTarget();
-        }
-    }
-
-    @Override
-    public void onSyncedDataUpdated(DataParameter<?> key) {
-        super.onSyncedDataUpdated(key);
-        if (TARGET_ENTITY.equals(key)) {
-            this.targetedEntity = null;
-        }
-
-    }
-
-    @Nullable
-    public LivingEntity getAttackTarget() {
-        return this.targetedEntity;
     }
 }

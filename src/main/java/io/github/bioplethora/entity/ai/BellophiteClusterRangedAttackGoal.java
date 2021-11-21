@@ -5,8 +5,12 @@ import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class BellophiteClusterRangedAttackGoal extends Goal {
 
@@ -36,7 +40,9 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
             World world = this.bellophgolem.level;
             ++this.chargeTime;
             if (this.chargeTime == 10 && !this.bellophgolem.isSilent()) {
-                world.levelEvent((PlayerEntity)null, 1015, this.bellophgolem.blockPosition(), 0);
+                ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
+                        (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.elder_guardian.curse")),
+                        SoundCategory.NEUTRAL, (float) 1, (float) 1);
             }
 
             if (this.chargeTime == 20) {
@@ -46,10 +52,12 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
                 double d3 = livingentity.getY(0.5D) - (0.5D + this.bellophgolem.getY(0.5D));
                 double d4 = livingentity.getZ() - (this.bellophgolem.getZ() + vector3d.z * 4.0D);
                 if (!this.bellophgolem.isSilent()) {
-                    world.levelEvent((PlayerEntity)null, 1016, this.bellophgolem.blockPosition(), 0);
+                    ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
+                            (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.elder_guardian.curse")),
+                            SoundCategory.NEUTRAL, (float) 1, (float) 1);
                 }
 
-                BellophiteClusterEntity bellophiteClusterEntity = new BellophiteClusterEntity(world, this.bellophgolem);
+                BellophiteClusterEntity bellophiteClusterEntity = new BellophiteClusterEntity(world, this.bellophgolem, d2, d3, d4);
                 bellophiteClusterEntity.setPos(this.bellophgolem.getX() + vector3d.x * 4.0D, this.bellophgolem.getY(0.5D) + 0.5D, bellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
                 world.addFreshEntity(bellophiteClusterEntity);
                 this.chargeTime = -40;
@@ -58,6 +66,6 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
             --this.chargeTime;
         }
 
-        this.bellophgolem.setCharging(this.chargeTime > 20);
+        this.bellophgolem.setCharging(this.chargeTime > 10);
     }
 }
