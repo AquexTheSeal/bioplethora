@@ -10,6 +10,7 @@ import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
@@ -31,11 +32,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-/*
-* Credited author:
-* AzureDoom [MCDoom mod]
-*/
 
 public class BellophiteClusterEntity extends DamagingProjectileEntity implements IAnimatable {
 
@@ -92,6 +88,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
             for (Entity entityIterator : nearEntities) {
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
+                    entityIterator.hurt(DamageSource.MAGIC, (float) 5);
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));

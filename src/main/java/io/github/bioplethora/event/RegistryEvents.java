@@ -11,8 +11,8 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RegistryEvents {
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    /*@SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onEntitiesRegistry(RegistryEvent.Register<EntityType<?>> event) {
         BioplethoraSpawnEggItem.registerEggs();
-    }
+    }*/
 }

@@ -12,6 +12,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Objects;
+
 public class BellophiteClusterRangedAttackGoal extends Goal {
 
     private final BellophgolemEntity bellophgolem;
@@ -41,7 +43,7 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
             ++this.chargeTime;
             if (this.chargeTime == 10 && !this.bellophgolem.isSilent()) {
                 ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
-                        (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.elder_guardian.curse")),
+                        (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.beacon.activate"))),
                         SoundCategory.NEUTRAL, (float) 1, (float) 1);
             }
 
@@ -53,7 +55,7 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
                 double d4 = livingentity.getZ() - (this.bellophgolem.getZ() + vector3d.z * 4.0D);
                 if (!this.bellophgolem.isSilent()) {
                     ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
-                            (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.elder_guardian.curse")),
+                            (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
                             SoundCategory.NEUTRAL, (float) 1, (float) 1);
                 }
 
