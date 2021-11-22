@@ -11,7 +11,10 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -21,6 +24,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -31,6 +35,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class BellophiteClusterEntity extends DamagingProjectileEntity implements IAnimatable {
@@ -78,6 +83,15 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
                 this.remove();
             }
         }
+
+        if (this.level instanceof ServerWorld) {
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
+        }
+
+        this.level.playSound(null, new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ()),
+                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.glass.break"))),
+                SoundCategory.NEUTRAL, (float) 1, (float) 1);
+
         if(this.level instanceof ServerWorld) {
             List<Entity> nearEntities = this.level
                     .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (5 / 2d), this.getY(), this.getZ() - (5 / 2d), this.getX() + (5 / 2d), this.getY() + (5 / 2d), this.getZ() + (5 / 2d)), null)
@@ -106,6 +120,15 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
                 this.remove();
             }
         }
+
+        if (this.level instanceof ServerWorld) {
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
+        }
+
+        this.level.playSound(null, new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ()),
+                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.glass.break"))),
+                SoundCategory.NEUTRAL, (float) 1, (float) 1);
+
         if(this.level instanceof ServerWorld) {
             List<Entity> nearEntities = this.level
                     .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (7 / 2d), this.getY() - (7 / 2d), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d)), null)

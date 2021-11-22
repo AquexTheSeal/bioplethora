@@ -32,6 +32,9 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
             mods {
                 bioplethora {
                     source sourceSets.main
@@ -81,13 +84,21 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
+    maven {
+        url 'https://maven.blamejared.com'
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.9'
+    //Geckolib
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.43')
+    //Just Enough Items (JEI)
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    //Patchouli
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51")
 }
 
 jar {

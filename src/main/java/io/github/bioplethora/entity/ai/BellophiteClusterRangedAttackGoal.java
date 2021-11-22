@@ -44,7 +44,7 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
             if (this.chargeTime == 10 && !this.bellophgolem.isSilent()) {
                 ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
                         (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.beacon.activate"))),
-                        SoundCategory.NEUTRAL, (float) 1, (float) 1);
+                        SoundCategory.HOSTILE, (float) 1, (float) 1);
             }
 
             if (this.chargeTime == 20) {
@@ -56,7 +56,7 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
                 if (!this.bellophgolem.isSilent()) {
                     ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
                             (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
-                            SoundCategory.NEUTRAL, (float) 1, (float) 1);
+                            SoundCategory.HOSTILE, (float) 1, (float) 1);
                 }
 
                 BellophiteClusterEntity bellophiteClusterEntity = new BellophiteClusterEntity(world, this.bellophgolem, d2, d3, d4);
