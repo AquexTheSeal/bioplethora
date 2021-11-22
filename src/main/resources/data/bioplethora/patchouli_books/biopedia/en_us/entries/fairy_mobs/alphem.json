@@ -1,0 +1,17 @@
+{
+  "name": "Alphems",
+  "icon": "bioplethora:alphem_spawn_egg",
+  "category": "fairy_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()The Alphems are hostile creatures that usually swarms in groups. They could be dangerous to people with weak gear. $(br2)$(l)COUNTER AND WEAKNESS: $(br)$()It is best to get better gear to take them on as they form huge groups. Though, you can use some tactics like the usage of explosives, lava, fireworks, and more."
+    },
+    {
+      "type": "patchouli:image",
+      "border": "false",
+      "images":["bioplethora:textures/gui/patchouli/entries/fairy_mobs/alphem_entry.png"],
+      "text": "Alphems usually spawn in ---."
+    }
+  ]
+}

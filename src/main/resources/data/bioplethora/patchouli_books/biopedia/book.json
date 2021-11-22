@@ -2,5 +2,6 @@
   "name": "patchouli.bioplethora.bioplethora_guide.name",
   "landing_text": "patchouli.bioplethora.bioplethora_guide.landing_text",
   "version": 1,
+  "creative_tab": "bioplethora_item_item_group",
   "show_progress":false
 }
