@@ -29,6 +29,8 @@
   "item.bioplethora.bellophgolem_shield.desc_0": "More durability than the regular shield.",
   "item.bioplethora.bellophgolem_shield.desc_1": "When used, gives user resistance and regeneration.",
 
+  "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
+
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide for a world with many creatures and monsters."
 }

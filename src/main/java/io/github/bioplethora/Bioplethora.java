@@ -1,6 +1,7 @@
 package io.github.bioplethora;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import io.github.bioplethora.world.EntitySpawnManager;
@@ -31,6 +32,7 @@ public class Bioplethora {
         // final step of registering elements like Items, Entities, etc.
         BioplethoraItems.ITEMS.register(bus);
         BioplethoraEntities.ENTITIES.register(bus);
+        BioplethoraBlocks.BLOCKS.register(bus);
 
         bus.addListener(this::setup);
 
