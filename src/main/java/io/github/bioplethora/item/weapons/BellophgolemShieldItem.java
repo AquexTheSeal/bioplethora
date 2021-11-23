@@ -45,18 +45,15 @@ public class BellophgolemShieldItem extends ShieldItem {
     public ActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
         ItemStack itemstack = playerEntity.getItemInHand(hand);
         playerEntity.startUsingItem(hand);
-        playerEntity.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 2, 1));
-        playerEntity.addEffect(new EffectInstance(Effects.REGENERATION, 2, 1));
-        if (world instanceof ServerWorld) {
-            ((ServerWorld) world).sendParticles(ParticleTypes.SOUL_FIRE_FLAME, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), (int) 10, 0.4, 0.4, 0.4, 0.1);
-        }
+        playerEntity.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 5, 2));
+        playerEntity.addEffect(new EffectInstance(Effects.REGENERATION, 5, 1));
         return ActionResult.consume(itemstack);
     }
 
     public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
         super.onUsingTick(stack, player, count);
-        player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 2, 1));
-        player.addEffect(new EffectInstance(Effects.REGENERATION, 2, 1));
+        player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 5, 2));
+        player.addEffect(new EffectInstance(Effects.REGENERATION, 5, 1));
     }
 
     @Override

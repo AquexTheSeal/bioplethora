@@ -14,6 +14,7 @@ public abstract class AnimatableHostileEntity extends MonsterEntity implements I
 
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableHostileEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableHostileEntity.class, DataSerializers.BOOLEAN);
+    /*protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(AnimatableHostileEntity.class, DataSerializers.BOOLEAN);*/
 
     protected boolean isAnimationFinished = false;
 
@@ -36,6 +37,7 @@ public abstract class AnimatableHostileEntity extends MonsterEntity implements I
         super.defineSynchedData();
         this.entityData.define(MOVING, false);
         this.entityData.define(ATTACKING, false);
+        /*this.entityData.define(SMASHING, false);*/
     }
 
     public boolean getMoving() {
@@ -53,6 +55,14 @@ public abstract class AnimatableHostileEntity extends MonsterEntity implements I
     public void setAttacking(boolean attacking) {
         this.entityData.set(ATTACKING, attacking);
     }
+
+    /*public boolean getSmashing() {
+        return this.entityData.get(SMASHING);
+    }
+
+    /*public void setSmashing(boolean smashing) {
+        this.entityData.set(SMASHING, smashing);
+    }*/
 
     //protected abstract boolean hurt();
 }

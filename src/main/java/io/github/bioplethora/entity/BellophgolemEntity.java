@@ -3,6 +3,7 @@ package io.github.bioplethora.entity;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.AnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.BellophgolemAnimatedSmashingGoal;
 import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -65,6 +66,7 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
+        /*this.goalSelector.addGoal(1, new BellophgolemAnimatedSmashingGoal(this, 100, 1, 1.1));*/
         this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 60, 0.6, 0.7));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
