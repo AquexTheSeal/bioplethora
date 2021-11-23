@@ -18,6 +18,8 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -132,6 +134,14 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
                     0.4, 0.1);
             }
         return flag;
+    }
+
+    public void aiStep() {
+        super.aiStep();
+        if (((LivingEntity) this.getEntity()).getHealth() <= 100) {
+            ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.REGENERATION, 5, 2));
+            ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 5, 2));
+        }
     }
 
     @Override
