@@ -1,0 +1,15 @@
+{
+  "name": "Crephoxl Hammer",
+  "icon": "bioplethora:crephoxl_hammer",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)SKILLS/ABILITIES: $(br)$()You can view it when hovering to the item, but it basically makes an AoE attack on right-click on the ground. $(br2)$(l)OBTAINING: $(br)$()Get 2 Crephoxl Feathers and 2 Crephoxl Sticks. If you are lucky enough, you can get them by killing only one Crephoxl. Lastly, you need 2 netherite ingots."
+    },
+    {
+      "type": "crafting",
+      "recipe":"bioplethora:crephoxl_hammer"
+    }
+  ]
+}

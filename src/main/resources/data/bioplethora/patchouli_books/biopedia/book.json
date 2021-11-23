@@ -1,7 +1,11 @@
 {
   "name": "patchouli.bioplethora.bioplethora_guide.name",
   "landing_text": "patchouli.bioplethora.bioplethora_guide.landing_text",
+  "dont_generate_book":true,
   "version": 1,
   "creative_tab": "bioplethora_item_item_group",
-  "show_progress":false
+  "custom_book_item":"bioplethora:biopedia",
+  "book_texture": "bioplethora:textures/gui/patchouli/gui/book_biopedia.png",
+  "show_progress":false,
+  "i18n": true
 }
