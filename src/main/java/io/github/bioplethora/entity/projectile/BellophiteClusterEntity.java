@@ -79,7 +79,11 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         Entity entity = this.getOwner();
         if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
+                if (((LivingEntity) this.getOwner()).getHealth() <= 100) {
+                    this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
+                } else {
+                    this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
+                }
                 this.remove();
             }
         }
@@ -102,7 +106,11 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
             for (Entity entityIterator : nearEntities) {
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
-                    entityIterator.hurt(DamageSource.MAGIC, (float) 5);
+                    if (((LivingEntity) this.getOwner()).getHealth() <= 100) {
+                        entityIterator.hurt(DamageSource.MAGIC, (float) 10);
+                    } else {
+                        entityIterator.hurt(DamageSource.MAGIC, (float) 5);
+                    }
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));

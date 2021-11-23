@@ -10,6 +10,7 @@ import io.github.bioplethora.entity.BellophgolemEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
@@ -28,7 +29,11 @@ public class BellophgolemEntityRender extends GeoEntityRenderer<BellophgolemEnti
 
     @Override
     public ResourceLocation getTextureLocation(BellophgolemEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/bellophgolem.png");
+        if (((LivingEntity) entity).getHealth() <= 100) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/bellophgolem_cracked.png");
+        } else {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/bellophgolem.png");
+        }
     }
 
     @Override
