@@ -1,7 +1,7 @@
 {
-  "name": "Alphems",
-  "icon": "bioplethora:alphem_spawn_egg",
-  "category": "fairy_mobs",
+  "name": "Crephoxl",
+  "icon": "bioplethora:crephoxl_spawn_egg",
+  "category": "avifauna_mobs",
   "pages": [
     {
       "type": "patchouli:text",
@@ -10,8 +10,8 @@
     {
       "type": "patchouli:image",
       "border": "true",
-      "images":["bioplethora:textures/gui/patchouli/entries/fairy_mobs/alphem_entry.png"],
-      "text": "Alphems usually spawn in ---."
+      "images":["bioplethora:textures/gui/patchouli/entries/fairy_mobs/crephoxl_entry.png"],
+      "text": "Crephoxls usually spawn in Taigas, Jungles, or Forests on both daytime and nighttime. Spawns more during night time."
     }
   ]
 }
