@@ -18,6 +18,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -27,7 +28,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CrephoxlHammerItem extends AxeItem {
-
     public CrephoxlHammerItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
     }
@@ -43,16 +43,17 @@ public class CrephoxlHammerItem extends AxeItem {
         BlockPos pos = new BlockPos(x, y, z);
         PlayerEntity player = (PlayerEntity) source;
 
-        /**Special Ability 1 of 2: Deathsweep
-         *
-         * Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within
-         * a 2-block radius. 1.5 second cooldown.
+         /* Special Ability 1 of 2: Deathsweep
+
+         Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within
+         a 2-block radius. 1.5 second cooldown.
          */
-        if(player.isCrouching() && player.getCurrentItemAttackStrengthDelay() >= 18.0F /* this'll stay until we find a better way to detect player attack cooldown. */) {
+
+        if(player.isCrouching() && !player.getCooldowns().isOnCooldown(stack.getItem())) {
             player.getCooldowns().addCooldown(stack.getItem(), 30);
             world.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.anvil.place")), SoundCategory.PLAYERS, 1, 1);
             world.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.player.attack.sweep")), SoundCategory.PLAYERS, 1, 1);
-            if(world.isClientSide) {
+            if(!world.isClientSide) {
                 world.addParticle(ParticleTypes.SWEEP_ATTACK, x, y, z, 0, 0, 0);
             }
             if(world instanceof ServerWorld) {
@@ -102,7 +103,7 @@ public class CrephoxlHammerItem extends AxeItem {
         tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_1").withStyle(TextFormatting.GRAY));
     }
 
-    /** Special Ability 2 of 2: Aerial Shockwave
+    /** <h2>Special Ability 2 of 2: Aerial Shockwave</h2>
      *
      * Create a damaging shockwave on block right-click position, dealing 9 damage to
     nearby entities & sending them flying into the air. 3-second cooldown.
