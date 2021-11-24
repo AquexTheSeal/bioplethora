@@ -1,0 +1,6 @@
+{
+  "name": "Hell Mode",
+  "description": "A configurable mode for this mod to give stronger and painful mechanics to mobs to make them difficult to deal with. Doesn't apply to some mobs, especially animals and other passive creatures.",
+  "icon": "minecraft:fire_charge",
+  "sortnum":1
+}

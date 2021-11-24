@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:image",
-      "border": "true",
+      "border": "false",
       "images":["bioplethora:textures/gui/patchouli/entries/fairy_mobs/bellophgolem_entry.png"],
       "text": "Bellophgolems usually spawn in ---."
     }
