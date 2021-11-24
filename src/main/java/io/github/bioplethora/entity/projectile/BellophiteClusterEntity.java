@@ -1,5 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
+import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -79,7 +80,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         Entity entity = this.getOwner();
         if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                if (((LivingEntity) Objects.requireNonNull(this.getOwner())).getHealth() <= 100) {
+                if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 } else {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
@@ -106,10 +107,15 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
             for (Entity entityIterator : nearEntities) {
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
-                    if (((LivingEntity) Objects.requireNonNull(this.getOwner())).getHealth() <= 100) {
+                    //hell mode + berserk
+                    if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                        entityIterator.hurt(DamageSource.MAGIC, (float) 13.5);
+                        //berserk only
+                    } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
                         entityIterator.hurt(DamageSource.MAGIC, (float) 10);
+                        //default
                     } else {
-                        entityIterator.hurt(DamageSource.MAGIC, (float) 5);
+                        entityIterator.hurt(DamageSource.MAGIC, (float) 5.5);
                     }
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
@@ -124,7 +130,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) entityHitResult).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                if (((LivingEntity) Objects.requireNonNull(this.getOwner())).getHealth() <= 100) {
+                if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 } else {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
@@ -151,10 +157,15 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
             for (Entity entityIterator : nearEntities) {
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
-                    if (((LivingEntity) Objects.requireNonNull(this.getOwner())).getHealth() <= 100) {
+                    //hell mode + berserk
+                    if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                        entityIterator.hurt(DamageSource.MAGIC, (float) 13.5);
+                        //berserk only
+                    } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
                         entityIterator.hurt(DamageSource.MAGIC, (float) 10);
+                        //default
                     } else {
-                        entityIterator.hurt(DamageSource.MAGIC, (float) 5);
+                        entityIterator.hurt(DamageSource.MAGIC, (float) 5.5);
                     }
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));

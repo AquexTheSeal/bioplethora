@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()The Alphems are hostile creatures that usually swarms in groups. They could be dangerous to people with weak gear. $(br2)$(l)COUNTER AND WEAKNESS: $(br)$()It is best to get better gear to take them on as they form huge groups. Though, you can use some tactics like the usage of explosives, lava, fireworks, and more."
+      "text": "$(l)INFORMATION: $(br)$()The Alphems are hostile creatures that usually swarms in groups, they are pretty weak as a singular mob, their groupings are what made them dangerous. They could be dangerous to people with weak gear. They usually hunt animals as groups."
     },
     {
       "type": "patchouli:image",

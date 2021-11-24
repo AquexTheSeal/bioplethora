@@ -1,5 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
+import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.BellophgolemEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +11,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Objects;
@@ -47,22 +49,62 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
                         SoundCategory.HOSTILE, (float) 1, (float) 1);
             }
 
-            if (this.chargeTime == 20) {
-                double d1 = 4.0D;
-                Vector3d vector3d = this.bellophgolem.getViewVector(1.0F);
-                double d2 = livingentity.getX() - (this.bellophgolem.getX() + vector3d.x * 4.0D);
-                double d3 = livingentity.getY(0.5D) - (0.5D + this.bellophgolem.getY(0.5D));
-                double d4 = livingentity.getZ() - (this.bellophgolem.getZ() + vector3d.z * 4.0D);
-                if (!this.bellophgolem.isSilent()) {
-                    ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
-                            (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
-                            SoundCategory.HOSTILE, (float) 1, (float) 1);
+            if (!BioplethoraConfig.COMMON.hellMode.get()) {
+                if (this.chargeTime == 20) {
+                    double d1 = 4.0D;
+                    Vector3d vector3d = this.bellophgolem.getViewVector(1.0F);
+                    double d2 = livingentity.getX() - (this.bellophgolem.getX() + vector3d.x * 4.0D);
+                    double d3 = livingentity.getY(0.5D) - (0.5D + this.bellophgolem.getY(0.5D));
+                    double d4 = livingentity.getZ() - (this.bellophgolem.getZ() + vector3d.z * 4.0D);
+                    if (!this.bellophgolem.isSilent()) {
+                        ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
+                                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
+                                SoundCategory.HOSTILE, (float) 1, (float) 1);
+                    }
+
+                    BellophiteClusterEntity bellophiteClusterEntity = new BellophiteClusterEntity(world, this.bellophgolem, d2, d3, d4);
+                    bellophiteClusterEntity.setPos(this.bellophgolem.getX() + vector3d.x * 4.0D, this.bellophgolem.getY(0.5D) + 0.5D, bellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
+                    world.addFreshEntity(bellophiteClusterEntity);
+                    this.chargeTime = -40;
                 }
 
-                BellophiteClusterEntity bellophiteClusterEntity = new BellophiteClusterEntity(world, this.bellophgolem, d2, d3, d4);
-                bellophiteClusterEntity.setPos(this.bellophgolem.getX() + vector3d.x * 4.0D, this.bellophgolem.getY(0.5D) + 0.5D, bellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
-                world.addFreshEntity(bellophiteClusterEntity);
-                this.chargeTime = -40;
+                /* IF IN HELLMODE*/
+            } else if (BioplethoraConfig.COMMON.hellMode.get()) {
+                if (this.chargeTime == 20) {
+                    double d1 = 4.0D;
+                    Vector3d vector3d = this.bellophgolem.getViewVector(1.0F);
+                    double d2 = livingentity.getX() - (this.bellophgolem.getX() + vector3d.x * 4.0D);
+                    double d3 = livingentity.getY(0.5D) - (0.5D + this.bellophgolem.getY(0.5D));
+                    double d4 = livingentity.getZ() - (this.bellophgolem.getZ() + vector3d.z * 4.0D);
+                    if (!this.bellophgolem.isSilent()) {
+                        ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
+                                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
+                                SoundCategory.HOSTILE, (float) 1, (float) 1);
+                    }
+
+                    BellophiteClusterEntity bellophiteClusterEntity = new BellophiteClusterEntity(world, this.bellophgolem, d2, d3, d4);
+                    bellophiteClusterEntity.setPos(this.bellophgolem.getX() + vector3d.x * 4.0D, this.bellophgolem.getY(0.5D) + 0.5D, bellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
+                    world.addFreshEntity(bellophiteClusterEntity);
+                }
+
+                if (this.chargeTime == 30) {
+                    double d1 = 4.0D;
+                    Vector3d vector3d = this.bellophgolem.getViewVector(1.0F);
+                    double d2 = livingentity.getX() - (this.bellophgolem.getX() + vector3d.x * 4.0D);
+                    double d3 = livingentity.getY(0.5D) - (0.5D + this.bellophgolem.getY(0.5D));
+                    double d4 = livingentity.getZ() - (this.bellophgolem.getZ() + vector3d.z * 4.0D);
+                    if (!this.bellophgolem.isSilent()) {
+                        ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
+                                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
+                                SoundCategory.HOSTILE, (float) 1, (float) 1);
+                    }
+                    if (this.bellophgolem.getHealth() <= 100) {
+                        BellophiteClusterEntity bellophiteClusterEntity2 = new BellophiteClusterEntity(world, this.bellophgolem, d2, d3, d4);
+                        bellophiteClusterEntity2.setPos(this.bellophgolem.getX() + vector3d.x * 4.0D, this.bellophgolem.getY(0.5D) + 0.5D, bellophiteClusterEntity2.getZ() + vector3d.z * 4.0D);
+                        world.addFreshEntity(bellophiteClusterEntity2);
+                    }
+                    this.chargeTime = -40;
+                }
             }
         } else if (this.chargeTime > 0) {
             --this.chargeTime;

@@ -1,0 +1,17 @@
+{
+  "name": "Bellophgolem",
+  "icon": "bioplethora:bellophgolem_spawn_egg",
+  "category": "fairy_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()The Bellophgolems are one of the most dangerous monsters out there, they shoot out clusters that freezes and debuffs it's targets, and their smashes are very destructive. Heck, they can also go berserk when it has low health, making them a ton stronger and difficult to deal with."
+    },
+    {
+      "type": "patchouli:image",
+      "border": "true",
+      "images":["bioplethora:textures/gui/patchouli/entries/fairy_mobs/bellophgolem_entry.png"],
+      "text": "Bellophgolems usually spawn in ---."
+    }
+  ]
+}

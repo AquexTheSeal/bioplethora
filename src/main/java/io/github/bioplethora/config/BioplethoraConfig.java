@@ -6,6 +6,9 @@ import org.apache.commons.lang3.tuple.Pair;
 public class BioplethoraConfig {
 
     public static class Common {
+
+        public final ForgeConfigSpec.ConfigValue<Boolean> hellMode;
+
         public final ForgeConfigSpec.ConfigValue<Integer> mobHealthMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobMeeleeDamageMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobSpawnWeightMultiplier;
@@ -13,12 +16,18 @@ public class BioplethoraConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> mobMovementSpeedMultiplier;
 
         Common(ForgeConfigSpec.Builder builder) {
+
+            builder.push("Hell Mode");
+            hellMode = builder.define("Hell Mode (Adds more mechanics and buffs to mobs to make the game harder)", true);
+            builder.pop();
+
             builder.push("Mob Stat Multipliers");
             mobHealthMultiplier = builder.define("Multiplier for all Bioplethora mobs' health", 1);
             mobMeeleeDamageMultiplier = builder.define("Multiplier for all Bioplethora mobs' meelee damage", 1);
             mobSpawnWeightMultiplier = builder.define("Multiplier for all Bioplethora mobs' spawn weights", 1);
             mobArmorMultiplier = builder.define("Multiplier for all Bioplethora mobs' armor points", 1);
             mobMovementSpeedMultiplier = builder.define("Multiplier for all Bioplethora mobs' movement speed", 1);
+            builder.pop();
         }
     }
 
