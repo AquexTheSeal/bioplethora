@@ -4,6 +4,6 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.text.TextFormatting;
 
 public class CustomRarityTypes {
-    public static final Rarity GODLY = Rarity.create("godly", TextFormatting.GOLD);
-    public static final Rarity LEGENDARY = Rarity.create("legendary", TextFormatting.RED);
+    public static final Rarity SACRED = Rarity.create("sacred", TextFormatting.GOLD);
+    public static final Rarity BOSS_WEAPON = Rarity.create("boss_weapon", TextFormatting.RED);
 }

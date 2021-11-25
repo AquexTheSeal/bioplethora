@@ -44,6 +44,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
     public double xPower;
     public double yPower;
     public double zPower;
+    public double lifespan = 0;
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public BellophiteClusterEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
@@ -212,6 +213,12 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
             this.level.addParticle(this.getTrailParticle(), d0, d1 + 0.5D, d2, 0.0D, 0.0D, 0.0D);
             this.setPos(d0, d1, d2);
         } else {
+            this.remove();
+        }
+
+        lifespan = (double) lifespan + 1;
+
+        if (lifespan == 100) {
             this.remove();
         }
     }
