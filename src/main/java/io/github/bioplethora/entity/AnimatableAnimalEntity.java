@@ -3,6 +3,7 @@ package io.github.bioplethora.entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -11,7 +12,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAnimatable {
+public abstract class AnimatableAnimalEntity extends TameableEntity implements IAnimatable {
 
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableAnimalEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableAnimalEntity.class, DataSerializers.BOOLEAN);
@@ -23,7 +24,7 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
      * @param type
      * @param worldIn
      */
-    public AnimatableAnimalEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+    public AnimatableAnimalEntity(EntityType<? extends TameableEntity> type, World worldIn) {
         super(type, worldIn);
     }
 

@@ -1,10 +1,8 @@
 package io.github.bioplethora;
 
-import io.github.bioplethora.client.entity.render.AlphemEntityRender;
-import io.github.bioplethora.client.entity.render.BellophgolemEntityRender;
-import io.github.bioplethora.client.entity.render.CrephoxlEntityRender;
-import io.github.bioplethora.client.entity.render.NandbriEntityRender;
+import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
+import io.github.bioplethora.entity.PeaguinEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.client.Minecraft;
@@ -28,7 +26,7 @@ public class BioplethoraClient {
 
         //avifauna
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.PEAGUIN.get(), CrephoxlEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.PEAGUIN.get(), PeaguinEntityRender::new);
 
         //fairy
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), AlphemEntityRender::new);
