@@ -6,6 +6,7 @@ import io.github.bioplethora.item.BioplethoraSpawnEggItem;
 import io.github.bioplethora.item.weapons.CrephoxlHammerItem;
 import io.github.bioplethora.util.BioplethoraItemGroup;
 import io.github.bioplethora.item.weapons.BellophgolemShieldItem;
+import io.github.bioplethora.util.CustomRarityTypes;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
@@ -24,8 +25,8 @@ public class BioplethoraItems {
     public static final RegistryObject<Item> NANDBRI_SCALES = ITEMS.register("nandbri_scales", () -> new Item(new Item.Properties().stacksTo(64).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
 
     public static final RegistryObject<Item> CREPHOXL_HAMMER = ITEMS.register("crephoxl_hammer", () -> new CrephoxlHammerItem(ItemTier.NETHERITE, 12-5, -3.30f,
-            new Item.Properties().fireResistant().rarity(Rarity.RARE).durability(4508).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
-    public static final RegistryObject<Item> BELLOPHGOLEM_SHIELD = ITEMS.register("bellophgolem_shield", () -> new BellophgolemShieldItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).durability(5000).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
+            new Item.Properties().fireResistant().rarity(CustomRarityTypes.LEGENDARY).durability(4508).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> BELLOPHGOLEM_SHIELD = ITEMS.register("bellophgolem_shield", () -> new BellophgolemShieldItem(new Item.Properties().fireResistant().rarity(CustomRarityTypes.LEGENDARY).durability(5000).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
 
     public static final RegistryObject<Item> CREPHOXL_SPAWN_EGG = ITEMS.register("crephoxl_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.CREPHOXL, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> ALPHEM_SPAWN_EGG = ITEMS.register("alphem_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.ALPHEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
