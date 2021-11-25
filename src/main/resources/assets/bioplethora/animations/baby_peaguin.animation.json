@@ -62,6 +62,36 @@
 					}
 				}
 			}
+		},
+		"animation.peaguin.swimming": {
+			"loop": true,
+			"animation_length": 2,
+			"override_previous_animation": true,
+			"bones": {
+				"peaguin": {
+					"rotation": {
+						"vector": ["90 + math.sin(query.anim_time * 180) * 5", 0, 0]
+					},
+					"position": {
+						"vector": [0, 4, 2]
+					}
+				},
+				"Wingleft": {
+					"rotation": {
+						"vector": [0, 0, "-90 + + math.sin(query.anim_time * 360) * -10"]
+					}
+				},
+				"Wingright": {
+					"rotation": {
+						"vector": [0, 0, "90 + math.sin(query.anim_time * 360) * 10"]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [-60, 0, 0]
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2
