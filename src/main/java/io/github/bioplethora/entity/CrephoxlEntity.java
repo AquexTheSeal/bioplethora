@@ -1,13 +1,12 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.ai.AnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.MonsterAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.MonsterAnimatableMoveToTargetGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
@@ -29,7 +28,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CrephoxlEntity extends AnimatableHostileEntity implements IAnimatable {
+public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatable {
 
     private final AnimationFactory factory = new AnimationFactory(this);
 
@@ -54,8 +53,8 @@ public class CrephoxlEntity extends AnimatableHostileEntity implements IAnimatab
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 38.3, 0.5, 0.6));
+        this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 38.3, 0.5, 0.6));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));

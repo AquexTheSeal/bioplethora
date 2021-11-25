@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.ai.AnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.MonsterAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.MonsterAnimatableMoveToTargetGoal;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -27,7 +27,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class NandbriEntity extends AnimatableHostileEntity implements IAnimatable {
+public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public NandbriEntity(EntityType<? extends MonsterEntity> type, World world) {
@@ -51,8 +51,8 @@ public class NandbriEntity extends AnimatableHostileEntity implements IAnimatabl
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 0.75, 8));
-        this.goalSelector.addGoal(1, new AnimatableMeleeGoal(this, 13.6, 0.23, 0.47));
+        this.goalSelector.addGoal(1, new MonsterAnimatableMoveToTargetGoal(this, 0.75, 8));
+        this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 13.6, 0.23, 0.47));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));

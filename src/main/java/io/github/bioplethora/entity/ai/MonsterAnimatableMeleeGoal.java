@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.entity.AnimatableHostileEntity;
+import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
@@ -9,7 +9,7 @@ import net.minecraft.util.Hand;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
-public class AnimatableMeleeGoal extends AnimatableGoal {
+public class MonsterAnimatableMeleeGoal extends MonsterAnimatableGoal {
     private final double animationLength;
     private final BiFunction<Double, Double, Boolean> attackPredicate;
     private boolean hasHit;
@@ -18,14 +18,14 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
      * @param entity          Attacking entity
      * @param animationLength
      */
-    public AnimatableMeleeGoal(AnimatableHostileEntity entity, double animationLength, double attackBegin, double attackEnd) {
+    public MonsterAnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
         this.entity = entity;
         this.animationLength = animationLength;
         this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
         this.setFlags(EnumSet.of(Flag.LOOK));
     }
 
-    private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableHostileEntity attacker, LivingEntity target) {
+    private static boolean checkIfValid(MonsterAnimatableMeleeGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
@@ -33,7 +33,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
                 return false;
             }
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
+            if (distance <= MonsterAnimatableGoal.getAttackReachSq(attacker, target)) return true;
         }
         attacker.setAttacking(false);
         return false;
@@ -43,14 +43,14 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
     public boolean canUse() {
         if (Math.random() <= 0.1) return false;
 
-        return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
+        return MonsterAnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
     }
 
     @Override
     public boolean canContinueToUse() {
         if (Math.random() <= 0.1) return true;
 
-        return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
+        return MonsterAnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
     }
 
     @Override

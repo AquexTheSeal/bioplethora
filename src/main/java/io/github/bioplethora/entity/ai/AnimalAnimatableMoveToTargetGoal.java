@@ -1,24 +1,24 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.entity.AnimatableHostileEntity;
+import io.github.bioplethora.entity.AnimatableAnimalEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.EntityPredicates;
 
 import java.util.EnumSet;
 
-public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
+public class AnimalAnimatableMoveToTargetGoal extends AnimalAnimatableMovableGoal {
 
     private final double speedMultiplier;
     private final int checkRate;
 
     /**
-     * Move an AnimatableMonsterEntity to a target entity
+     * Move an AnimatableAnimalEntity to a target entity
      *
      * @param entity          AnimatableMonsterEntity instance
      * @param speedMultiplier Entity will move by base speed * this
      * @param checkRate       Check rate with formula: {@code if(RANDOM.nextInt(rate) == 0)}, so bigger = less often
      */
-    public AnimatableMoveToTargetGoal(AnimatableHostileEntity entity, double speedMultiplier, int checkRate) {
+    public AnimalAnimatableMoveToTargetGoal(AnimatableAnimalEntity entity, double speedMultiplier, int checkRate) {
         this.entity = entity;
         this.speedMultiplier = speedMultiplier;
         this.checkRate = checkRate;

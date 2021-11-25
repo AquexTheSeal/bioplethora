@@ -1,21 +1,21 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.entity.AnimatableHostileEntity;
+import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
 import java.util.Random;
 
-public abstract class AnimatableGoal extends Goal {
+public abstract class MonsterAnimatableGoal extends Goal {
 
     protected static final Random RANDOM = new Random();
-    protected AnimatableHostileEntity entity;
+    protected AnimatableMonsterEntity entity;
     protected long tickDelta;
     protected double animationProgress;
     private long lastGameTime;
     private boolean isFirsLoop = true;
 
-    protected static double getAttackReachSq(AnimatableHostileEntity attacker, LivingEntity target) {
+    protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
     }
 

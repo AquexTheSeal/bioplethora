@@ -1,9 +1,8 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.ai.AnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.bioplethora.entity.ai.BellophgolemAnimatedSmashingGoal;
+import io.github.bioplethora.entity.ai.MonsterAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -29,8 +28,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -42,7 +39,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class BellophgolemEntity extends AnimatableHostileEntity implements IAnimatable {
+public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnimatable {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(BellophgolemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -69,9 +66,9 @@ public class BellophgolemEntity extends AnimatableHostileEntity implements IAnim
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
         /*this.goalSelector.addGoal(1, new BellophgolemAnimatedSmashingGoal(this, 100, 1, 1.1));*/
-        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 60, 0.6, 0.7));
+        this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 60, 0.6, 0.7));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new BellophiteClusterRangedAttackGoal(this));

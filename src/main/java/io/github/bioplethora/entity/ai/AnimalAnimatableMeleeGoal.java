@@ -1,54 +1,62 @@
 package io.github.bioplethora.entity.ai;
 
-public class BellophgolemAnimatedSmashingGoal /*extends AnimatableGoal*/ {
-    /*private final double animationLength;
+import io.github.bioplethora.entity.AnimatableAnimalEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Hand;
+
+import java.util.EnumSet;
+import java.util.function.BiFunction;
+
+public class AnimalAnimatableMeleeGoal extends AnimalAnimatableGoal {
+    private final double animationLength;
     private final BiFunction<Double, Double, Boolean> attackPredicate;
     private boolean hasHit;
-    public static double smashingCooldown = 400;*/
 
     /**
      * @param entity          Attacking entity
      * @param animationLength
      */
-   /*public BellophgolemAnimatedSmashingGoal(AnimatableHostileEntity entity, double animationLength, double attackBegin, double attackEnd) {
+    public AnimalAnimatableMeleeGoal(AnimatableAnimalEntity entity, double animationLength, double attackBegin, double attackEnd) {
         this.entity = entity;
         this.animationLength = animationLength;
         this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
         this.setFlags(EnumSet.of(Flag.LOOK));
     }
 
-    private static boolean checkIfValid(BellophgolemAnimatedSmashingGoal goal, AnimatableHostileEntity attacker, LivingEntity target) {
-        if (smashingCooldown > 0) return false;
+    private static boolean checkIfValid(AnimalAnimatableMeleeGoal goal, AnimatableAnimalEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
-                attacker.setSmashing(false);
+                attacker.setAttacking(false);
                 return false;
             }
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
+            if (distance <= AnimalAnimatableGoal.getAttackReachSq(attacker, target)) return true;
         }
-        attacker.setSmashing(false);
+        attacker.setAttacking(false);
         return false;
     }
 
     @Override
     public boolean canUse() {
         if (Math.random() <= 0.1) return false;
-        return BellophgolemAnimatedSmashingGoal.checkIfValid(this, entity, this.entity.getTarget());
+
+        return AnimalAnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
     }
 
     @Override
     public boolean canContinueToUse() {
         if (Math.random() <= 0.1) return true;
-        return BellophgolemAnimatedSmashingGoal.checkIfValid(this, entity, this.entity.getTarget());
+
+        return AnimalAnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
     }
 
     @Override
     public void start() {
-        this.entity.setSmashing(true);
+        this.entity.setAttacking(true);
         this.entity.setAggressive(true);
-        smashingCooldown = 400;
         this.animationProgress = 0;
     }
 
@@ -58,7 +66,7 @@ public class BellophgolemAnimatedSmashingGoal /*extends AnimatableGoal*/ {
         if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             this.entity.setTarget(null);
         }
-        this.entity.setSmashing(false);
+        this.entity.setAttacking(false);
         this.entity.setAggressive(false);
         this.hasHit = false;
         this.animationProgress = 0;
@@ -80,10 +88,6 @@ public class BellophgolemAnimatedSmashingGoal /*extends AnimatableGoal*/ {
                 this.animationProgress = 0;
                 this.hasHit = false;
             }
-
-            if (smashingCooldown > 0) {
-                smashingCooldown = (double) (smashingCooldown - 1);
-            }
         }
-    }*/
+    }
 }

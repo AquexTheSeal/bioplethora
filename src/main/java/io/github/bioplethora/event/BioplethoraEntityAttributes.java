@@ -1,10 +1,7 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.AlphemEntity;
-import io.github.bioplethora.entity.BellophgolemEntity;
-import io.github.bioplethora.entity.CrephoxlEntity;
-import io.github.bioplethora.entity.NandbriEntity;
+import io.github.bioplethora.entity.*;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,6 +14,7 @@ public class BioplethoraEntityAttributes {
 
         //Avifauna
         event.put(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.PEAGUIN.get(), PeaguinEntity.setCustomAttributes().build());
 
         //Fairy
         event.put(BioplethoraEntities.ALPHEM.get(), AlphemEntity.setCustomAttributes().build());
