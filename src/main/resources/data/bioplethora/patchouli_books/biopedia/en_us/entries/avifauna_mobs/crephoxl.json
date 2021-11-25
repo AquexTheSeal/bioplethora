@@ -5,12 +5,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()The Crephoxl are giant bird-like creatures that can strike it's opponents up in the sky, killing their opponents either with fall damage or hit damage. They are tough monsters that lurks in areas with many trees."
+      "text": "$(l)INFORMATION: $(br)$()The Crephoxls are giant bird-like creatures that can strike it's opponents up in the sky, killing their opponents either with fall damage or hit damage. They are tough monsters that lurks in areas with many trees."
     },
     {
       "type": "patchouli:image",
       "border": "true",
-      "images":["bioplethora:textures/gui/patchouli/entries/fairy_mobs/crephoxl_entry.png"],
+      "images":["bioplethora:textures/gui/patchouli/entries/avifauna_mobs/crephoxl_entry.png"],
       "text": "Crephoxls usually spawn in Taigas, Jungles, or Forests. Spawns more during night time."
     }
   ]
