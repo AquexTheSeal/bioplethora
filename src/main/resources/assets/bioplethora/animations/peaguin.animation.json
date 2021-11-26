@@ -49,6 +49,57 @@
 				}
 			}
 		},
+		"animation.peaguin.sitting": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"Body": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 5", 0, 0]
+					},
+					"position": {
+						"vector": [0, -3, 0]
+					}
+				},
+				"Leftwing": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * 10", "math.sin(query.anim_time * 90) * 10", 0]
+					}
+				},
+				"Rightwing": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * 10", "math.sin(query.anim_time * 90) * 10", 0]
+					}
+				},
+				"Tailfeather": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 10", 0, 0]
+					}
+				},
+				"headfeather": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.9167": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [10, 0, 0]
+						},
+						"1.125": {
+							"vector": [0, 0, 0]
+						},
+						"1.25": {
+							"vector": [10, 0, 0]
+						},
+						"1.375": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
 		"animation.peaguin.walking": {
 			"loop": true,
 			"animation_length": 2,

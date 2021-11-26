@@ -3,6 +3,7 @@ package io.github.bioplethora.entity;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.AnimalAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.AnimalAnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -16,6 +17,7 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
@@ -42,6 +44,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.UUID;
 
 public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable, IAngerable {
@@ -92,9 +95,10 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));*/
 
         this.goalSelector.addGoal(1, new SwimGoal(this));
+        this.goalSelector.addGoal(2, new SitGoal(this));
         this.goalSelector.addGoal(4, new AnimalAnimatableMoveToTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(4, new AnimalAnimatableMeleeGoal(this, 20, 0.5, 0.75));
-        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(5, new PeaguinFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));
         this.goalSelector.addGoal(8, new PeaguinEntity.SwimGoal(this));
@@ -142,6 +146,11 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
 
         if(this.isDeadOrDying() || this.dead) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.peaguin.death", true));
+            return PlayState.CONTINUE;
+        }
+
+        if(this.isInSittingPose()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.peaguin.sitting", true));
             return PlayState.CONTINUE;
         }
 
@@ -221,6 +230,17 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                     return ActionResultType.SUCCESS;
                 }
 
+                ActionResultType actionresulttype = super.mobInteract(p_230254_1_, p_230254_2_);
+                if ((!actionresulttype.consumesAction() || this.isBaby()) && this.isOwnedBy(p_230254_1_)) {
+                    this.setOrderedToSit(!this.isOrderedToSit());
+                    this.jumping = false;
+                    this.navigation.stop();
+                    this.setTarget((LivingEntity)null);
+                    return ActionResultType.SUCCESS;
+                }
+
+                return actionresulttype;
+
             } else if (item.isEdible() && item.getFoodProperties().isMeat() && !this.isAngry()) {
                 if (!p_230254_1_.abilities.instabuild) {
                     itemstack.shrink(1);
@@ -230,6 +250,9 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                     this.tame(p_230254_1_);
                     this.navigation.stop();
                     this.setTarget((LivingEntity)null);
+
+                    this.setOrderedToSit(true);
+
                     this.level.broadcastEntityEvent(this, (byte)7);
                 } else {
                     this.level.broadcastEntityEvent(this, (byte)6);
@@ -239,6 +262,39 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
             }
 
             return super.mobInteract(p_230254_1_, p_230254_2_);
+        }
+    }
+
+    public boolean hurt(DamageSource damageSource, float p_70097_2_) {
+        if (this.isInvulnerableTo(damageSource)) {
+            return false;
+        } else {
+            Entity entity = damageSource.getEntity();
+            this.setOrderedToSit(false);
+            if (entity != null && !(entity instanceof PlayerEntity) && !(entity instanceof AbstractArrowEntity)) {
+                p_70097_2_ = (p_70097_2_ + 1.0F) / 2.0F;
+            }
+
+            return super.hurt(damageSource, p_70097_2_);
+        }
+    }
+
+    public boolean canMate(AnimalEntity p_70878_1_) {
+        if (p_70878_1_ == this) {
+            return false;
+        } else if (!this.isTame()) {
+            return false;
+        } else if (!(p_70878_1_ instanceof WolfEntity)) {
+            return false;
+        } else {
+            PeaguinEntity peaguinEntity = (PeaguinEntity)p_70878_1_;
+            if (!peaguinEntity.isTame()) {
+                return false;
+            } else if (peaguinEntity.isInSittingPose()) {
+                return false;
+            } else {
+                return this.isInLove() && peaguinEntity.isInLove();
+            }
         }
     }
 
@@ -263,17 +319,17 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
         this.persistentAngerTarget = p_230259_1_;
     }
 
-    public void addAdditionalSaveData(CompoundNBT p_213281_1_) {
-        super.addAdditionalSaveData(p_213281_1_);
+    public void addAdditionalSaveData(CompoundNBT compoundNBT) {
+        super.addAdditionalSaveData(compoundNBT);
 
-        this.addPersistentAngerSaveData(p_213281_1_);
+        this.addPersistentAngerSaveData(compoundNBT);
     }
 
-    public void readAdditionalSaveData(CompoundNBT p_70037_1_) {
-        super.readAdditionalSaveData(p_70037_1_);
+    public void readAdditionalSaveData(CompoundNBT compoundNBT) {
+        super.readAdditionalSaveData(compoundNBT);
 
         if(!level.isClientSide) //FORGE: allow this entity to be read from nbt on client. (Fixes MC-189565)
-            this.readPersistentAngerSaveData((ServerWorld)this.level, p_70037_1_);
+            this.readPersistentAngerSaveData((ServerWorld)this.level, compoundNBT);
     }
 
     public boolean canBreatheUnderwater() {

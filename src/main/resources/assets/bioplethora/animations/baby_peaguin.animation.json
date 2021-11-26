@@ -22,6 +22,32 @@
 				}
 			}
 		},
+		"animation.peaguin.sitting": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"Wingleft": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 10", 0, "math.sin(query.anim_time * 180) * 10"]
+					}
+				},
+				"Wingright": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -10", 0, "math.sin(query.anim_time * 180) * -10"]
+					}
+				},
+				"peaguin": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -5", "math.sin(query.anim_time * 180) * -5", "math.sin(query.anim_time * 180) * -5"]
+					}
+				},
+				"head": {
+					"position": {
+						"vector": [0, -2, 0]
+					}
+				}
+			}
+		},
 		"animation.peaguin.walking": {
 			"loop": true,
 			"animation_length": 2,
