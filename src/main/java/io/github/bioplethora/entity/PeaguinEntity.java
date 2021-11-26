@@ -46,7 +46,7 @@ import java.util.UUID;
 
 public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable, IAngerable {
 
-    private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(WolfEntity.class, DataSerializers.INT);
+    private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(PeaguinEntity.class, DataSerializers.INT);
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
     private UUID persistentAngerTarget;
 
@@ -92,17 +92,18 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));*/
 
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(5, new AnimalAnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(5, new AnimalAnimatableMeleeGoal(this, 20, 0.23, 0.47));
-        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
-        this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new AnimalAnimatableMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(4, new AnimalAnimatableMeleeGoal(this, 20, 0.5, 0.75));
+        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));
         this.goalSelector.addGoal(8, new PeaguinEntity.SwimGoal(this));
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(11, new LookRandomlyGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
+        this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
         this.targetSelector.addGoal(8, new ResetAngerGoal<>(this, true));
     }
 
@@ -164,7 +165,14 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
     }
 
     public PeaguinEntity getBreedOffspring(ServerWorld serverWorld, AgeableEntity ageableEntity) {
-        return BioplethoraEntities.PEAGUIN.get().create(serverWorld);
+        PeaguinEntity peaguinEntity = BioplethoraEntities.PEAGUIN.get().create(serverWorld);
+        UUID uuid = this.getOwnerUUID();
+        if (uuid != null) {
+            peaguinEntity.setOwnerUUID(uuid);
+            peaguinEntity.setTame(true);
+        }
+
+        return peaguinEntity;
     }
 
     protected float getStandingEyeHeight(Pose pose, EntitySize entitySize) {
@@ -213,7 +221,7 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                     return ActionResultType.SUCCESS;
                 }
 
-            } else if (item == ItemTags.getAllTags().getTagOrEmpty(new ResourceLocation("minecraft:fishes")) && !this.isAngry()) {
+            } else if (item.isEdible() && item.getFoodProperties().isMeat() && !this.isAngry()) {
                 if (!p_230254_1_.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
@@ -222,7 +230,6 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                     this.tame(p_230254_1_);
                     this.navigation.stop();
                     this.setTarget((LivingEntity)null);
-                    this.setOrderedToSit(true);
                     this.level.broadcastEntityEvent(this, (byte)7);
                 } else {
                     this.level.broadcastEntityEvent(this, (byte)6);
@@ -314,11 +321,11 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
         }
     }
 
-    protected PathNavigator createNavigation(World p_175447_1_) {
+    protected PathNavigator createNavigation(World world) {
         if (this.isInWater()) {
-            return new SwimmerPathNavigator(this, p_175447_1_);
+            return new SwimmerPathNavigator(this, world);
         } else {
-            return new GroundPathNavigator(this, p_175447_1_);
+            return new GroundPathNavigator(this, world);
         }
     }
 
