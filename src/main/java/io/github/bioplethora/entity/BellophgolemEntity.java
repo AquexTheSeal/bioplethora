@@ -1,15 +1,16 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import io.github.bioplethora.entity.ai.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.MonsterAnimatableMoveToTargetGoal;
-import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -20,6 +21,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.Explosion;
@@ -43,6 +45,7 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(BellophgolemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
+    private boolean hasCracked = false;
 
     public BellophgolemEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
@@ -144,6 +147,13 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
                         0.4, 0.1);
             }
         }
+        this.doEnchantDamageEffects(this, entity);
+
+        if (flag) {
+            if (this.getTarget() instanceof PlayerEntity) {
+                this.damageShieldFor(((PlayerEntity) this.getTarget()), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getBaseValue());
+            }
+        }
         return flag;
     }
 
@@ -157,6 +167,11 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
         if (((LivingEntity) this.getEntity()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
             ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 5, 2));
             ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.REGENERATION, 5, 1));
+        }
+
+        if (this.getHealth() <= 100 && !this.hasCracked) {
+            this.playSound(SoundEvents.IRON_GOLEM_DAMAGE, 1.0F, 1.0F);
+            this.hasCracked = true;
         }
     }
 

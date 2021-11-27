@@ -27,7 +27,7 @@ public class BellophgolemShieldItem extends ShieldItem {
     }
 
     @Override
-    public boolean isShield(ItemStack stack, LivingEntity entity){
+    public boolean isShield(ItemStack stack, LivingEntity entity) {
         return true;
     }
 

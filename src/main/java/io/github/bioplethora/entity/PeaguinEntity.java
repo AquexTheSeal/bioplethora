@@ -4,6 +4,8 @@ import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.AnimalAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.AnimalAnimatableMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
+import io.github.bioplethora.entity.ai.controller.WaterMoveController;
+import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -13,8 +15,11 @@ import net.minecraft.entity.ai.controller.DolphinLookController;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.AbstractSkeletonEntity;
+import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.GhastEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
+import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -34,6 +39,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -52,14 +59,18 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
     private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(PeaguinEntity.class, DataSerializers.INT);
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
     private UUID persistentAngerTarget;
+    private boolean isLandNavigator;
 
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public PeaguinEntity(EntityType<? extends AnimatableAnimalEntity> type, World world) {
-        super(type, world);
+    public PeaguinEntity(EntityType<? extends AnimatableAnimalEntity> type, World worldIn) {
+        super(type, worldIn);
+        this.setTame(false);
         this.setPathfindingMalus(PathNodeType.WATER, 0.0F);
-        this.moveControl = new PeaguinEntity.MoveHelperController(this);
+        this.setPathfindingMalus(PathNodeType.WATER_BORDER, 0.0F);
+        /*this.moveControl = new PeaguinEntity.MoveHelperController(this);*/
         this.noCulling = true;
+        switchNavigator(false);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -76,24 +87,6 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        /*this.goalSelector.addGoal(3, new PanicGoal(this, 1.2));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 2.5, 40));
-
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1, Ingredient.of(Items.SALMON), false));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1, Ingredient.of(Items.COOKED_SALMON), false));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1, Ingredient.of(Items.COD), false));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1, Ingredient.of(Items.COOKED_COD), false));
-
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1));
-        this.goalSelector.addGoal(2, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
-
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
-        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));*/
-
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new SitGoal(this));
         this.goalSelector.addGoal(4, new AnimalAnimatableMoveToTargetGoal(this, 1.6, 8));
@@ -142,29 +135,29 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                 0.15f, 1);
     }
 
-    private <E extends IAnimatable>PlayState predicate(AnimationEvent<E> event) {
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 
-        if(this.isDeadOrDying() || this.dead) {
+        if (this.isDeadOrDying() || this.dead) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.peaguin.death", true));
             return PlayState.CONTINUE;
         }
 
-        if(this.isInSittingPose()) {
+        if (this.isInSittingPose()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.peaguin.sitting", true));
             return PlayState.CONTINUE;
         }
 
-        if(this.getAttacking() && this.shouldDropLoot()) {
+        if (this.getAttacking() && this.shouldDropLoot()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.peaguin.attacking", true));
             return PlayState.CONTINUE;
         }
 
-        if(this.isSwimming() || this.isInWaterOrBubble() || this.isInWater()) {
+        if (this.isSwimming() || this.isInWaterOrBubble() || this.isInWater()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.peaguin.swimming", true));
             return PlayState.CONTINUE;
         }
 
-        if(event.isMoving()) {
+        if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.peaguin.walking", true));
             return PlayState.CONTINUE;
         }
@@ -187,21 +180,6 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
     protected float getStandingEyeHeight(Pose pose, EntitySize entitySize) {
         return this.isBaby() ? entitySize.height * 0.8F : 1.0F;
     }
-
-    /*public void aiStep() {
-        super.aiStep();
-        if (this.shouldDropLoot() && !this.isTame()) {
-            this.goalSelector.removeGoal(new PanicGoal(this, 1.2));
-            this.goalSelector.addGoal(1, new BreedGoal(this, 1));
-            this.goalSelector.addGoal(2, new AnimalAnimatableMoveToTargetGoal(this, 1.6, 8));
-            this.goalSelector.addGoal(2, new AnimalAnimatableMeleeGoal(this, 20, 0.23, 0.47));
-        } else if (this.shouldDropLoot() && this.isTame()) {
-            this.goalSelector.removeGoal(new PanicGoal(this, 1.2));
-            this.goalSelector.addGoal(1, new BreedGoal(this, 1));
-            this.goalSelector.addGoal(2, new AnimalAnimatableMoveToTargetGoal(this, 1.6, 8));
-            this.goalSelector.addGoal(2, new AnimalAnimatableMeleeGoal(this, 20, 0.23, 0.47));
-        }
-    }*/
 
     public boolean isFood(ItemStack p_70877_1_) {
         Item item = p_70877_1_.getItem();
@@ -226,7 +204,7 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                         itemstack.shrink(1);
                     }
 
-                    this.heal((float)item.getFoodProperties().getNutrition());
+                    this.heal((float) item.getFoodProperties().getNutrition());
                     return ActionResultType.SUCCESS;
                 }
 
@@ -235,7 +213,7 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                     this.setOrderedToSit(!this.isOrderedToSit());
                     this.jumping = false;
                     this.navigation.stop();
-                    this.setTarget((LivingEntity)null);
+                    this.setTarget((LivingEntity) null);
                     return ActionResultType.SUCCESS;
                 }
 
@@ -249,13 +227,11 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                 if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, p_230254_1_)) {
                     this.tame(p_230254_1_);
                     this.navigation.stop();
-                    this.setTarget((LivingEntity)null);
-
+                    this.setTarget((LivingEntity) null);
                     this.setOrderedToSit(true);
-
-                    this.level.broadcastEntityEvent(this, (byte)7);
+                    this.level.broadcastEntityEvent(this, (byte) 7);
                 } else {
-                    this.level.broadcastEntityEvent(this, (byte)6);
+                    this.level.broadcastEntityEvent(this, (byte) 6);
                 }
 
                 return ActionResultType.SUCCESS;
@@ -284,10 +260,10 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
             return false;
         } else if (!this.isTame()) {
             return false;
-        } else if (!(p_70878_1_ instanceof WolfEntity)) {
+        } else if (!(p_70878_1_ instanceof PeaguinEntity)) {
             return false;
         } else {
-            PeaguinEntity peaguinEntity = (PeaguinEntity)p_70878_1_;
+            PeaguinEntity peaguinEntity = (PeaguinEntity) p_70878_1_;
             if (!peaguinEntity.isTame()) {
                 return false;
             } else if (peaguinEntity.isInSittingPose()) {
@@ -295,6 +271,23 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
             } else {
                 return this.isInLove() && peaguinEntity.isInLove();
             }
+        }
+    }
+
+    public boolean wantsToAttack(LivingEntity p_142018_1_, LivingEntity p_142018_2_) {
+        if (!(p_142018_1_ instanceof CreeperEntity) && !(p_142018_1_ instanceof GhastEntity)) {
+            if (p_142018_1_ instanceof PeaguinEntity) {
+                PeaguinEntity peaguinEntity = (PeaguinEntity) p_142018_1_;
+                return !peaguinEntity.isTame() || peaguinEntity.getOwner() != p_142018_2_;
+            } else if (p_142018_1_ instanceof PlayerEntity && p_142018_2_ instanceof PlayerEntity && !((PlayerEntity) p_142018_2_).canHarmPlayer((PlayerEntity) p_142018_1_)) {
+                return false;
+            } else if (p_142018_1_ instanceof AbstractHorseEntity && ((AbstractHorseEntity) p_142018_1_).isTamed()) {
+                return false;
+            } else {
+                return !(p_142018_1_ instanceof TameableEntity) || !((TameableEntity) p_142018_1_).isTame();
+            }
+        } else {
+            return false;
         }
     }
 
@@ -328,8 +321,8 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
     public void readAdditionalSaveData(CompoundNBT compoundNBT) {
         super.readAdditionalSaveData(compoundNBT);
 
-        if(!level.isClientSide) //FORGE: allow this entity to be read from nbt on client. (Fixes MC-189565)
-            this.readPersistentAngerSaveData((ServerWorld)this.level, compoundNBT);
+        if (!level.isClientSide)
+            this.readPersistentAngerSaveData((ServerWorld) this.level, compoundNBT);
     }
 
     public boolean canBreatheUnderwater() {
@@ -356,8 +349,13 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
         return false;
     }
 
-    public boolean canBeLeashed(PlayerEntity playerEntity) {
-        return true;
+    public boolean canBeLeashed(PlayerEntity p_184652_1_) {
+        return !this.isAngry() && super.canBeLeashed(p_184652_1_);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public Vector3d getLeashOffset() {
+        return new Vector3d(0.0D, (double) (0.6F * this.getEyeHeight()), (double) (this.getBbWidth() * 0.4F));
     }
 
     protected boolean canRandomSwim() {
@@ -377,15 +375,61 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
         }
     }
 
-    protected PathNavigator createNavigation(World world) {
+    /*protected PathNavigator createNavigation(World world) {
         if (this.isInWater()) {
             return new SwimmerPathNavigator(this, world);
         } else {
             return new GroundPathNavigator(this, world);
         }
+    }*/
+
+    private void switchNavigator(boolean onLand) {
+        if (onLand) {
+            this.moveControl = new MovementController(this);
+            this.navigation = new GroundPathNavigator(this, level);
+            this.isLandNavigator = true;
+        } else {
+            this.moveControl = new WaterMoveController(this, 1.5F);
+            this.navigation = new WaterAndLandPathNavigator(this, level);
+            this.isLandNavigator = false;
+        }
     }
 
-    static class MoveHelperController extends MovementController {
+    public void tick() {
+        super.tick();
+        if (isInWater() && this.isLandNavigator) {
+            switchNavigator(false);
+        }
+        if (!isInWater() && !this.isLandNavigator) {
+            switchNavigator(true);
+        }
+    }
+
+    public void travel(Vector3d stuckSpeedMultiplier) {
+        /*if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(0.01F, stuckSpeedMultiplier);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+            if (this.getTarget() == null) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
+        } else {
+            super.travel(stuckSpeedMultiplier);
+        }*/
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(this.getSpeed(), stuckSpeedMultiplier);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+            if (this.getTarget() == null) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
+        } else {
+            super.travel(stuckSpeedMultiplier);
+        }
+    }
+}
+
+    /*static class MoveHelperController extends MovementController {
         private final PeaguinEntity fish;
 
         MoveHelperController(PeaguinEntity p_i48857_1_) {
@@ -398,7 +442,7 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
                 this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
             }
 
-            if (this.operation == MovementController.Action.MOVE_TO && !this.fish.getNavigation().isDone()) {
+            if (this.operation == Action.MOVE_TO && !this.fish.getNavigation().isDone()) {
                 float f = (float)(this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
                 this.fish.setSpeed(MathHelper.lerp(0.125F, this.fish.getSpeed(), f));
                 double d0 = this.wantedX - this.fish.getX();
@@ -420,4 +464,4 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
             }
         }
     }
-}
+}*/
