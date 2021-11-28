@@ -101,6 +101,7 @@ public class CrephoxlHammerItem extends AxeItem {
         tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_0").withStyle(TextFormatting.GRAY));
         tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
         tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_1").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_2").withStyle(TextFormatting.GRAY));
     }
 
     /** <h2>Special Ability 2 of 2: Aerial Shockwave</h2>

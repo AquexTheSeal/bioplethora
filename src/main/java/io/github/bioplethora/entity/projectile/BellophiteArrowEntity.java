@@ -61,8 +61,10 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
 
     public void tick() {
         super.tick();
-        if (this.level instanceof ServerWorld && !this.isOnGround()) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 2, 0.4, 0.4, 0.4, 0.1);
+        if (this.level instanceof ServerWorld) {
+            if (!this.inGround || !this.isOnGround()) {
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 2, 0.4, 0.4, 0.4, 0.1);
+            }
         }
     }
 

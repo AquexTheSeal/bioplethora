@@ -17,6 +17,7 @@
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
   "item.bioplethora.bellophgolem_shield": "Bellophgolem Shield",
+  "item.bioplethora.bellophite_arrow": "Bellophite Arrow",
 
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
@@ -27,12 +28,15 @@
 
   "item.bioplethora.crephoxl_hammer.desc_0": "Debuffs targets on hit, deals more damage to targets with more than 49 maximum health.",
   "item.bioplethora.crephoxl_hammer.desc_1": "On right click on the ground - creates a shockwave and knocks up nearby targets. Cools down for 3 seconds.",
+  "item.bioplethora.crephoxl_hammer.desc_2": "On hit while crouching - Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.",
 
-  "item.bioplethora.bellophgolem_shield.desc_0": "More durability than the regular shield.",
-  "item.bioplethora.bellophgolem_shield.desc_1": "When used, gives user resistance and regeneration.",
+  "item.bioplethora.bellophite_arrow.desc_0": "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.",
+
+  "item.bioplethora.bellophgolem_shield.desc_0": "The Bellophgolem gets more durability than the regular shield.",
+  "item.bioplethora.bellophgolem_shield.desc_1": "While using, the Bellophgolem grants a high resistance level to the user while giving the user a regeneration effect.",
 
   "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
-  "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide for a world with many creatures and monsters."
+  "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora."
 }
