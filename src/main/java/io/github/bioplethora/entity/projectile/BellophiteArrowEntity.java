@@ -152,4 +152,8 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
         super.addAdditionalSaveData(compoundNBT);
         compoundNBT.putInt("Duration", this.duration);
     }
+
+    protected float getWaterInertia() {
+        return 1F;
+    }
 }
