@@ -1,6 +1,7 @@
 package io.github.bioplethora;
 
 import io.github.bioplethora.client.entity.render.*;
+import io.github.bioplethora.client.entity.render.projectile.BellophiteArrowRender;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
 import io.github.bioplethora.entity.PeaguinEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
@@ -37,6 +38,7 @@ public class BioplethoraClient {
 
         //projectiles
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), BellophiteClusterRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_ARROW.get(), BellophiteArrowRender::new);
     }
 
     @OnlyIn(Dist.CLIENT)

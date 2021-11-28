@@ -3,6 +3,7 @@ package io.github.bioplethora.registry;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.item.BiopediaItem;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
+import io.github.bioplethora.item.weapons.BellophiteArrowItem;
 import io.github.bioplethora.item.weapons.CrephoxlHammerItem;
 import io.github.bioplethora.util.BioplethoraItemGroup;
 import io.github.bioplethora.item.weapons.BellophgolemShieldItem;
@@ -34,4 +35,6 @@ public class BioplethoraItems {
     public static final RegistryObject<Item> BELLOPHGOLEM_SPAWN_EGG = ITEMS.register("bellophgolem_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.BELLOPHGOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
 
     public static final RegistryObject<Item> NANDBRI_SCALE_BLOCK = ITEMS.register("nandbri_scale_block", () -> new BlockItem(BioplethoraBlocks.NANDBRI_SCALE_BLOCK.get(), new Item.Properties().tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
+
+    public static final RegistryObject<BellophiteArrowItem> BELLOPHITE_ARROW = ITEMS.register("bellophite_arrow", () -> new BellophiteArrowItem(new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
 }

@@ -148,12 +148,6 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
             }
         }
         this.doEnchantDamageEffects(this, entity);
-
-        if (flag) {
-            if (this.getTarget() instanceof PlayerEntity) {
-                this.damageShieldFor(((PlayerEntity) this.getTarget()), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getBaseValue());
-            }
-        }
         return flag;
     }
 

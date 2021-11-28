@@ -2,6 +2,7 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.*;
+import io.github.bioplethora.entity.projectile.BellophiteArrowEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -26,6 +27,8 @@ public class BioplethoraEntities {
 
     //others ---
     //Projectiles
-    public static final RegistryObject<EntityType<BellophiteClusterEntity>> BELLOPHITE_CLUSTER= ENTITIES.register("bellophite_cluster", () -> EntityType.Builder.<BellophiteClusterEntity>of(BellophiteClusterEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)
+    public static final RegistryObject<EntityType<BellophiteClusterEntity>> BELLOPHITE_CLUSTER = ENTITIES.register("bellophite_cluster", () -> EntityType.Builder.<BellophiteClusterEntity>of(BellophiteClusterEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "bellophite_cluster").toString()));
+    public static final RegistryObject<EntityType<BellophiteArrowEntity>> BELLOPHITE_ARROW = ENTITIES.register("bellophite_arrow", () -> EntityType.Builder.<BellophiteArrowEntity>of(BellophiteArrowEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
+            .build(new ResourceLocation(Bioplethora.MOD_ID, "textures/projectiles").toString()));
 }
