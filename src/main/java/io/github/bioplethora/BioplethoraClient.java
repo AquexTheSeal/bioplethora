@@ -3,12 +3,8 @@ package io.github.bioplethora;
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteArrowRender;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
-import io.github.bioplethora.entity.PeaguinEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Items;
-import net.minecraft.item.ShieldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -35,6 +31,9 @@ public class BioplethoraClient {
 
         //reptilia
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.NANDBRI.get(), NandbriEntityRender::new);
+
+        //maritime
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);
 
         //projectiles
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), BellophiteClusterRender::new);

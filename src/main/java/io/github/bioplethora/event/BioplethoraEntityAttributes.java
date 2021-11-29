@@ -22,5 +22,8 @@ public class BioplethoraEntityAttributes {
 
         //Reptilia
         event.put(BioplethoraEntities.NANDBRI.get(), NandbriEntity.setCustomAttributes().build());
+
+        //maritime
+        event.put(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntity.setCustomAttributes().build());
     }
 }

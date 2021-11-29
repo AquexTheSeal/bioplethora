@@ -25,6 +25,9 @@ public class BioplethoraEntities {
     //Reptilia
     public static final RegistryObject<EntityType<NandbriEntity>> NANDBRI = ENTITIES.register("nandbri", () -> EntityType.Builder.of(NandbriEntity::new, EntityClassification.MONSTER).sized(2.6f, 1.15f).build(new ResourceLocation(Bioplethora.MOD_ID, "nandbri").toString()));
 
+    //maritime
+    public static final RegistryObject<EntityType<CuttlefishEntity>> CUTTLEFISH = ENTITIES.register("cuttlefish", () -> EntityType.Builder.of(CuttlefishEntity::new, EntityClassification.WATER_CREATURE).sized(2.6f, 1.15f).build(new ResourceLocation(Bioplethora.MOD_ID, "cuttlefish").toString()));
+
     //others ---
     //Projectiles
     public static final RegistryObject<EntityType<BellophiteClusterEntity>> BELLOPHITE_CLUSTER = ENTITIES.register("bellophite_cluster", () -> EntityType.Builder.<BellophiteClusterEntity>of(BellophiteClusterEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)

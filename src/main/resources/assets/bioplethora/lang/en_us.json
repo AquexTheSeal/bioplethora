@@ -5,15 +5,23 @@
   "entity.bioplethora.alphem": "Alphem",
   "entity.bioplethora.nandbri": "Nandbri",
   "entity.bioplethora.bellophgolem": "Bellophgolem",
+  "entity.bioplethora.peaguin": "Peaguin",
+  "entity.bioplethora.cuttlefish": "Cuttlefish",
+
+  "entity.bioplethora.bellophite_cluster": "Bellophite Cluster",
+  "entity.bioplethora.bellophite_arrow": "Bellophite Arrow",
 
   "item.bioplethora.crephoxl_spawn_egg": "Crephoxl Spawn Egg",
   "item.bioplethora.alphem_spawn_egg": "Alphem Spawn Egg",
   "item.bioplethora.nandbri_spawn_egg": "Nandbri Spawn Egg",
   "item.bioplethora.bellophgolem_spawn_egg": "Bellophgolem Spawn Egg",
+  "item.bioplethora.peaguin_spawn_egg": "Peaguin Spawn Egg",
+  "item.bioplethora.cuttlefish_spawn_egg": "Cuttlefish Spawn Egg",
 
   "item.bioplethora.crephoxl_feather": "Crephoxl Feather",
   "item.bioplethora.crephoxl_stick": "Crephoxl Stick",
   "item.bioplethora.nandbri_scales": "Nandbri Scales",
+  "item.bioplethora.bellophite": "Bellophite",
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
   "item.bioplethora.bellophgolem_shield": "Bellophgolem Shield",
@@ -26,16 +34,17 @@
   "item.bioplethora.additions.desc": "Additions:",
   "item.bioplethora.special_skill.desc": "Special Skill:",
 
+  "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
+
   "item.bioplethora.crephoxl_hammer.desc_0": "Debuffs targets on hit, deals more damage to targets with more than 49 maximum health.",
   "item.bioplethora.crephoxl_hammer.desc_1": "On right click on the ground - creates a shockwave and knocks up nearby targets. Cools down for 3 seconds.",
   "item.bioplethora.crephoxl_hammer.desc_2": "On hit while crouching - Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.",
 
-  "item.bioplethora.bellophite_arrow.desc_0": "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.",
+  "item.bioplethora.bellophite_arrow.desc_0": "The Bellophgolem arrow deals more damage than the regular arrow.",
+  "item.bioplethora.bellophite_arrow.desc_1": "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.",
 
   "item.bioplethora.bellophgolem_shield.desc_0": "The Bellophgolem gets more durability than the regular shield.",
   "item.bioplethora.bellophgolem_shield.desc_1": "While using, the Bellophgolem grants a high resistance level to the user while giving the user a regeneration effect.",
-
-  "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora."

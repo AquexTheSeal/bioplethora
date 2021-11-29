@@ -24,26 +24,25 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> FOREST_ENTITIES = (builder) -> {
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get()
-                    , 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
+            //Cuttlefish
+            builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 20 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
         };
 
         public static void spawnMobs(BiomeLoadingEvent event) {
@@ -60,12 +59,13 @@ public class EntitySpawnManager {
                 case TAIGA:
                     if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
                         TAIGA_ENTITIES.accept(spawnInfoBuilder);
-                case THEEND:
-                case NETHER:
+                case OCEAN:
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
+                        WATER_ENTITIES.accept(spawnInfoBuilder);
                     break;
                 default:
                     if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
-//						OVERWORLD_MOBS.accept(spawnInfoBuilder);
+						//OVERWORLD_MOBS.accept(spawnInfoBuilder);
                         break;
             }
         }

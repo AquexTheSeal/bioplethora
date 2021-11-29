@@ -1,21 +1,14 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
-import net.minecraft.client.renderer.entity.SpectralArrowRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.SpectralArrowEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SpectralArrowItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -26,7 +19,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -39,6 +31,7 @@ import java.util.stream.Collectors;
 
 public class BellophiteArrowEntity extends AbstractArrowEntity {
 
+    private double baseDamage = 10.0D;
     private int duration = 200;
 
     public BellophiteArrowEntity(EntityType<? extends BellophiteArrowEntity> type, World worldIn) {
@@ -62,7 +55,7 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
     public void tick() {
         super.tick();
         if (this.level instanceof ServerWorld) {
-            if (!this.inGround || !this.isOnGround()) {
+            if (!this.inGround) {
                 ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 2, 0.4, 0.4, 0.4, 0.1);
             }
         }
@@ -153,7 +146,13 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
         compoundNBT.putInt("Duration", this.duration);
     }
 
+    @Override
     protected float getWaterInertia() {
         return 1F;
+    }
+
+    @Override
+    public double getBaseDamage() {
+        return this.baseDamage;
     }
 }
