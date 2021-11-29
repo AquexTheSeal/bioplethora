@@ -116,17 +116,17 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
 
     @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.ambient"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.ambient"));
     }
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.hurt"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.hurt"));
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.death"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.death"));
     }
 
     @Override
@@ -255,15 +255,15 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
         }
     }
 
-    public boolean canMate(AnimalEntity p_70878_1_) {
-        if (p_70878_1_ == this) {
+    public boolean canMate(AnimalEntity entity) {
+        if (entity == this) {
             return false;
         } else if (!this.isTame()) {
             return false;
-        } else if (!(p_70878_1_ instanceof PeaguinEntity)) {
+        } else if (!(entity instanceof PeaguinEntity)) {
             return false;
         } else {
-            PeaguinEntity peaguinEntity = (PeaguinEntity) p_70878_1_;
+            PeaguinEntity peaguinEntity = (PeaguinEntity) entity;
             if (!peaguinEntity.isTame()) {
                 return false;
             } else if (peaguinEntity.isInSittingPose()) {
