@@ -83,7 +83,7 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
             for (Entity entityIterator : nearEntities) {
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
-                    entityIterator.hurt(DamageSource.MAGIC, (float) 5.5);
+                    entityIterator.hurt(DamageSource.MAGIC, (float) 10.5);
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
@@ -114,7 +114,7 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
             for (Entity entityIterator : nearEntities) {
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
-                    entityIterator.hurt(DamageSource.MAGIC, (float) 5.5);
+                    entityIterator.hurt(DamageSource.MAGIC, (float) 10.5);
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));

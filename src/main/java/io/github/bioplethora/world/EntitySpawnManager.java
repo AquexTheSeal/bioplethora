@@ -29,6 +29,7 @@ public class EntitySpawnManager {
 
             //Alphem
             builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 5 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
@@ -60,11 +61,12 @@ public class EntitySpawnManager {
         private static final Consumer<MobSpawnInfoBuilder> SAVANNA_ENTITIES = (builder) -> {
             //Alphem
             builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 5 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
             //Cuttlefish
-            builder.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 35 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
+            builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 35 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
         };
 
         public static void spawnMobs(BiomeLoadingEvent event) {
