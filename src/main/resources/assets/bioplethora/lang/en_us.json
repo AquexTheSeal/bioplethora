@@ -1,5 +1,6 @@
 {
   "item.bioplethora.biopedia": "The Biopedia",
+  "item.bioplethora.test_item": "A Random Experimental Item",
 
   "entity.bioplethora.crephoxl": "Crephoxl",
   "entity.bioplethora.alphem": "Alphem",
@@ -31,10 +32,13 @@
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
 
   "item.bioplethora.sacred_level.desc": "Sacred Level",
+  "item.bioplethora.boss_level.desc": "Boss Level",
   "item.bioplethora.additions.desc": "Additions:",
   "item.bioplethora.special_skill.desc": "Special Skill:",
 
   "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
+
+  "item.bioplethora.test_item.desc_0": "This is just an experimental item. Mainly used for development only. Only accessible in creative mode.",
 
   "item.bioplethora.crephoxl_hammer.desc_0": "Debuffs targets on hit, deals more damage to targets with more than 49 maximum health.",
   "item.bioplethora.crephoxl_hammer.desc_1": "On right click on the ground - creates a shockwave and knocks up nearby targets. Cools down for 3 seconds.",

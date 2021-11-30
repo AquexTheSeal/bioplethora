@@ -5,6 +5,7 @@ import io.github.bioplethora.item.BiopediaItem;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
 import io.github.bioplethora.item.weapons.BellophiteArrowItem;
 import io.github.bioplethora.item.weapons.CrephoxlHammerItem;
+import io.github.bioplethora.item.weapons.ExperimentalItem;
 import io.github.bioplethora.util.BioplethoraItemGroup;
 import io.github.bioplethora.item.weapons.BellophgolemShieldItem;
 import io.github.bioplethora.util.CustomRarityTypes;
@@ -20,6 +21,7 @@ public class BioplethoraItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Bioplethora.MOD_ID);
 
     public static final RegistryObject<Item> BIOPEDIA = ITEMS.register("biopedia", () -> new BiopediaItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).stacksTo(1).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new ExperimentalItem(new Item.Properties().fireResistant().rarity(CustomRarityTypes.BOSS_WEAPON).stacksTo(1).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
 
     // Non-boss drops/items
     public static final RegistryObject<Item> CREPHOXL_FEATHER = ITEMS.register("crephoxl_feather", () -> new Item(new Item.Properties().stacksTo(64).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
