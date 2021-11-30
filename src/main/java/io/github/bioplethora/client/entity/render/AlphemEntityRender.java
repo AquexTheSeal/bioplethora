@@ -44,7 +44,7 @@ public class AlphemEntityRender extends GeoEntityRenderer<AlphemEntity> {
                 stack.pushPose();
 
                 //position / translation
-                stack.translate(0.4D, 0.25D, -0.15D);
+                stack.translate(0.45D, 0.15D, -0.15D);
 
                 //rotation
                 stack.mulPose(Vector3f.XP.rotationDegrees(-75));
@@ -64,7 +64,7 @@ public class AlphemEntityRender extends GeoEntityRenderer<AlphemEntity> {
                 stack.pushPose();
 
                 //position / translation
-                stack.translate(-0.4D, 0.25D, -0.25D);
+                stack.translate(-0.45D, 0.15D, -0.25D);
 
                 //rotation
                 stack.mulPose(Vector3f.XP.rotationDegrees(-75));

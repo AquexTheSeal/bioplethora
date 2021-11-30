@@ -26,6 +26,9 @@ public class EntitySpawnManager {
             //Crephoxl
             builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
             builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+
+            //Alphem
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
@@ -35,19 +38,38 @@ public class EntitySpawnManager {
         };
 
         private static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
+            //Bellophgolem
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.BELLOPHGOLEM.get(), 5 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+
             //Crephoxl
             builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
             builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+
+            //Peaguin
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.PEAGUIN.get(), 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 3, 6));
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> ICY_ENTITIES = (builder) -> {
+            //Bellophgolem
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.BELLOPHGOLEM.get(), 5 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+
+            //Peaguin
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.PEAGUIN.get(), 25 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 3, 6));
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> SAVANNA_ENTITIES = (builder) -> {
+            //Alphem
+            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
             //Cuttlefish
-            builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 20 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
+            builder.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 35 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
         };
 
         public static void spawnMobs(BiomeLoadingEvent event) {
             MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
-            RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "THE"));
+            RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Biome Spawning Stuff."));
 
             switch (event.getCategory()) {
                 case FOREST:
@@ -59,6 +81,12 @@ public class EntitySpawnManager {
                 case TAIGA:
                     if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
                         TAIGA_ENTITIES.accept(spawnInfoBuilder);
+                case ICY:
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+                        ICY_ENTITIES.accept(spawnInfoBuilder);
+                case SAVANNA:
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+                        SAVANNA_ENTITIES.accept(spawnInfoBuilder);
                 case OCEAN:
                     if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
                         WATER_ENTITIES.accept(spawnInfoBuilder);

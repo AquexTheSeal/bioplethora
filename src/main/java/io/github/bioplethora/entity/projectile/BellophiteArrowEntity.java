@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 public class BellophiteArrowEntity extends AbstractArrowEntity {
 
-    private double baseDamage = 10.0D;
+    /*private double baseDamage = 12.0D;*/
     private int duration = 200;
 
     public BellophiteArrowEntity(EntityType<? extends BellophiteArrowEntity> type, World worldIn) {
@@ -124,6 +124,11 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
     }
 
     @Override
+    public double getBaseDamage() {
+        return 12.0D;
+    }
+
+    @Override
     protected ItemStack getPickupItem() {
         return new ItemStack(BioplethoraItems.BELLOPHITE_ARROW.get());
     }
@@ -149,10 +154,5 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
     @Override
     protected float getWaterInertia() {
         return 1F;
-    }
-
-    @Override
-    public double getBaseDamage() {
-        return this.baseDamage;
     }
 }

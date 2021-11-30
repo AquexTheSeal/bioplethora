@@ -5,6 +5,10 @@
   "pages": [
     {
       "type": "patchouli:text",
+      "text": "$(l)CHANGES IN HELL MODE - ALPHEM: $(br)$()+ Enhanced armor, attack damage, and health. $(br)$()+ They now spawn with stronger weapons, like a diamond sword or an iron axe. $(br)$()+ There is now a little chance for them to spawn with a totem of undying in it's off-hand."
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)CHANGES IN HELL MODE - BELLOPHGOLEM: $(br)$()+ Enhanced armor, attack damage, and health. $(br)$()+ Increased berserk mode buffs. $(br)$()+ Increased berserk mode buffs. $(br)$()+ Increased projectile damage and explosion radius. $(br)$()+ Now shoots 2 projectiles on berserk mode."
     }
     ]
