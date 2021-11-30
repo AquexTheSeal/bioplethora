@@ -174,7 +174,7 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
             this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(30 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
             this.getAttribute(Attributes.ARMOR).setBaseValue(12.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(245);
+            this.setHealth(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }

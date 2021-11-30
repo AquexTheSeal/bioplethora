@@ -108,6 +108,14 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
     @Nullable
     public ILivingEntityData finalizeSpawn(IServerWorld iServerWorld, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData iLivingEntityData, @Nullable CompoundNBT compoundNBT) {
         iLivingEntityData = super.finalizeSpawn(iServerWorld, difficultyInstance, spawnReason, iLivingEntityData, compoundNBT);
+
+        if (iServerWorld instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(6.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        }
+
         if (BioplethoraConfig.COMMON.hellMode.get()) {
             if (Math.random() < 0.5) {
                 if (!this.level.isClientSide())

@@ -60,8 +60,8 @@ public class BellophgolemShieldItem extends ShieldItem {
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
         tooltip.add(new TranslationTextComponent("item.bioplethora.additions.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophgolem_shield.json.desc_0").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophgolem_shield.desc_0").withStyle(TextFormatting.GRAY));
         tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophgolem_shield.json.desc_1").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophgolem_shield.desc_1").withStyle(TextFormatting.GRAY));
     }
 }
