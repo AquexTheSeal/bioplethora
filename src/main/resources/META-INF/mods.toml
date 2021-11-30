@@ -7,7 +7,8 @@ license="All Rights Reserved"
 modId="bioplethora"
 version="${file.jarVersion}"
 displayName="Bioplethora"
-authors="AquTheSeal, Sajevius, Dylanvhs"
+authors="AquTheSeal, Sajevius, SeagullBoi, Sonic-3xn40s"
+logoFile="logo.png"
 description='''
 A minecraft mod that adds plenty of new content which mainly focuses on new creatures and terrifying beasts! Varying from small tamable partners, to colossal eldritch demons. All balanced and wonderful!
 '''
