@@ -3,6 +3,7 @@ package io.github.bioplethora.entity;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -19,6 +20,9 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -27,6 +31,8 @@ import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -42,6 +48,7 @@ import java.time.temporal.ChronoField;
 
 public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable {
 
+    private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AlphemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public AlphemEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -67,6 +74,7 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
+        this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new FollowMobGoal(this, (float) 1, 10, 5));
@@ -152,5 +160,19 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
         return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean isCharging() {
+        return this.entityData.get(DATA_IS_CHARGING);
+    }
+
+    public void setCharging(boolean charging) {
+        this.entityData.set(DATA_IS_CHARGING, charging);
+    }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_IS_CHARGING, false);
     }
 }

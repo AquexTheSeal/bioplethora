@@ -93,7 +93,7 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
                     double d2 = livingentity.getX() - (this.bellophgolem.getX() + vector3d.x * 4.0D);
                     double d3 = livingentity.getY(0.5D) - (0.5D + this.bellophgolem.getY(0.5D));
                     double d4 = livingentity.getZ() - (this.bellophgolem.getZ() + vector3d.z * 4.0D);
-                    if (!this.bellophgolem.isSilent()) {
+                    if (!this.bellophgolem.isSilent() && this.bellophgolem.getHealth() <= 100) {
                         ((World) world).playSound(null, new BlockPos((int) this.bellophgolem.getX(), (int) this.bellophgolem.getY(), (int) this.bellophgolem.getZ()),
                                 (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
                                 SoundCategory.HOSTILE, (float) 1, (float) 1);
