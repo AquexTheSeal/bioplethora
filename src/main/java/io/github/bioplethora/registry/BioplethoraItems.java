@@ -30,7 +30,7 @@ public class BioplethoraItems {
     // Non-boss Weapons
     public static final RegistryObject<Item> CREPHOXL_HAMMER = ITEMS.register("crephoxl_hammer", () -> new CrephoxlHammerItem(ItemTier.NETHERITE, 12-5, -3.30f,
             new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).durability(4508).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
-    public static final RegistryObject<Item> BELLOPHGOLEM_SHIELD = ITEMS.register("bellophgolem_shield.json", () -> new BellophgolemShieldItem(new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).durability(5000).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> BELLOPHGOLEM_SHIELD = ITEMS.register("bellophgolem_shield", () -> new BellophgolemShieldItem(new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).durability(5000).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<BellophiteArrowItem> BELLOPHITE_ARROW = ITEMS.register("bellophite_arrow", () -> new BellophiteArrowItem(new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
 
     // Spawn Eggs
