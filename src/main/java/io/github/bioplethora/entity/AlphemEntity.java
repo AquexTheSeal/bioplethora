@@ -25,7 +25,9 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -72,15 +74,17 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class, 24.0F));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, BellophgolemEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
-        this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));
+        /*this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));*/
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new FollowMobGoal(this, (float) 1, 10, 5));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(AlphemEntity.class));
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -154,12 +158,12 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
+        return SoundEvents.GENERIC_HURT;
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
+        return SoundEvents.GENERIC_DEATH;
     }
 
     @OnlyIn(Dist.CLIENT)

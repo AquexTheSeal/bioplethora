@@ -69,6 +69,7 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, AlphemEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
         /*this.goalSelector.addGoal(1, new BellophgolemAnimatedSmashingGoal(this, 100, 1, 1.1));*/
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 60, 0.6, 0.7));
@@ -76,6 +77,7 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new BellophiteClusterRangedAttackGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
     }
 

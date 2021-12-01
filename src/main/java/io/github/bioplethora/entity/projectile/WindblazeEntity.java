@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.DragonFireballRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.DragonFireballEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -55,23 +56,9 @@ public class WindblazeEntity extends DamagingProjectileEntity {
         super(BioplethoraEntities.WINDBLAZE.get(), entity, v, v1, v2, world);
     }
 
+    @Override
     public void tick() {
         super.tick();
-        if(this.level instanceof ServerWorld) {
-            List<Entity> nearEntities = this.level
-                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (3 / 2d), this.getY(), this.getZ() - (3 / 2d), this.getX() + (3 / 2d), this.getY() + (3 / 2d), this.getZ() + (3 / 2d)), null)
-                    .stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                        }
-                    }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityIterator : nearEntities) {
-                if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
-
-                    entityIterator.setDeltaMovement(entityIterator.getDeltaMovement().x, 0.5, entityIterator.getDeltaMovement().z);
-                }
-            }
-        }
 
         lifespan = (double) lifespan + 1;
 
@@ -100,10 +87,11 @@ public class WindblazeEntity extends DamagingProjectileEntity {
                     } else {
                         ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
                     }
+                    ((LivingEntity) entityIterator).setDeltaMovement(entityIterator.getDeltaMovement().x, 0.75, entityIterator.getDeltaMovement().z);
                 }
             }
         }
-        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.NEUTRAL, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
     }
 
     @Nonnull
