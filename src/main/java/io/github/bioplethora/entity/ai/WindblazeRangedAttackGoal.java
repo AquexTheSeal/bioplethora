@@ -68,7 +68,7 @@ public class WindblazeRangedAttackGoal extends Goal {
                 }
 
                 WindblazeEntity windblazeEntity = new WindblazeEntity(world, this.alphem, d2, d3, d4);
-                windblazeEntity.setPos(this.alphem.getX() + vector3d.x * 4.0D, this.alphem.getY(0.5D) + 0.2D, windblazeEntity.getZ() + vector3d.z * 4.0D);
+                windblazeEntity.setPos(this.alphem.getX() + vector3d.x * 4.0D, this.alphem.getY(0.5D) + 0.5D, windblazeEntity.getZ() + vector3d.z * 4.0D);
                 world.addFreshEntity(windblazeEntity);
                 this.chargeTime = -40;
 

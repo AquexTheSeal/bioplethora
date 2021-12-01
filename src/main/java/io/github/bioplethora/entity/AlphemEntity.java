@@ -77,7 +77,7 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(3, new LookAtGoal(this, BellophgolemEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
-        /*this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));*/
+        this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new FollowMobGoal(this, (float) 1, 10, 5));

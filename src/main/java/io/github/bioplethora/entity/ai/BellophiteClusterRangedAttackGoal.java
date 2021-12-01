@@ -87,7 +87,7 @@ public class BellophiteClusterRangedAttackGoal extends Goal {
                     world.addFreshEntity(bellophiteClusterEntity);
                 }
 
-                if (this.chargeTime == 30 && this.bellophgolem.getHealth() <= 100) {
+                if (this.chargeTime == 30) {
                     double d1 = 4.0D;
                     Vector3d vector3d = this.bellophgolem.getViewVector(1.0F);
                     double d2 = livingentity.getX() - (this.bellophgolem.getX() + vector3d.x * 4.0D);
