@@ -60,6 +60,41 @@ public class WindblazeEntity extends DamagingProjectileEntity {
     public void tick() {
         super.tick();
 
+        Entity entity = this.getOwner();
+        if (this.level.isClientSide || (entity == null || !entity.removed) && this.level.hasChunkAt(this.blockPosition())) {
+            super.tick();
+            if (this.shouldBurn()) {
+                this.setSecondsOnFire(1);
+            }
+
+            RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
+            if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
+                this.onHit(raytraceresult);
+            }
+
+            this.checkInsideBlocks();
+            Vector3d vector3d = this.getDeltaMovement();
+            double d0 = this.getX() + vector3d.x;
+            double d1 = this.getY() + vector3d.y;
+            double d2 = this.getZ() + vector3d.z;
+            ProjectileHelper.rotateTowardsMovement(this, 0.2F);
+            float f = this.getInertia();
+            if (this.isInWater()) {
+                for(int i = 0; i < 4; ++i) {
+                    float f1 = 0.25F;
+                    this.level.addParticle(ParticleTypes.BUBBLE, d0 - vector3d.x * 0.25D, d1 - vector3d.y * 0.25D, d2 - vector3d.z * 0.25D, vector3d.x, vector3d.y, vector3d.z);
+                }
+
+                f = 0.8F;
+            }
+
+            this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale((double)f));
+            this.level.addParticle(this.getTrailParticle(), d0, d1 + 0.5D, d2, 0.0D, 0.0D, 0.0D);
+            this.setPos(d0, d1, d2);
+        } else {
+            this.remove();
+        }
+
         lifespan = (double) lifespan + 1;
 
         if ((lifespan == 100)) {
