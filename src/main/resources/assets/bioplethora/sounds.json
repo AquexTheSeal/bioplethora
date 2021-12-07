@@ -1,0 +1,24 @@
+{
+  "bellophgolem_idle": {
+    "category": "entity",
+    "subtitle": "bioplethora.bellophgolem.idle",
+    "sounds": [
+      "bioplethora:bellophgolem_idle_0",
+      "bioplethora:bellophgolem_idle_1"
+    ]
+  },
+  "bellophgolem_hurt": {
+    "category": "entity",
+    "subtitle": "bioplethora.bellophgolem.hurt",
+    "sounds": [
+      "bioplethora:bellophgolem_hurt"
+    ]
+  },
+  "bellophgolem_death": {
+    "category": "entity",
+    "subtitle": "bioplethora.bellophgolem.death",
+    "sounds": [
+      "bioplethora:bellophgolem_death"
+    ]
+  }
+}

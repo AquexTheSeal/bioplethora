@@ -4,6 +4,7 @@ import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import io.github.bioplethora.entity.ai.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -21,6 +22,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
@@ -117,13 +119,18 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
     }
 
     @Override
-    public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.hurt"));
+    public SoundEvent getAmbientSound() {
+        return BioplethoraSoundEvents.BELLOPHGOLEM_IDLE.get();
     }
 
     @Override
-    public net.minecraft.util.SoundEvent getDeathSound() {
-        return (net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.death"));
+    public SoundEvent getHurtSound(DamageSource damageSource) {
+        return BioplethoraSoundEvents.BELLOPHGOLEM_HURT.get();
+    }
+
+    @Override
+    public SoundEvent getDeathSound() {
+        return BioplethoraSoundEvents.BELLOPHGOLEM_DEATH.get();
     }
 
     @Override

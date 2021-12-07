@@ -51,5 +51,9 @@
   "item.bioplethora.bellophgolem_shield.desc_1": "While using, the Bellophgolem grants a high resistance level to the user while giving the user a regeneration effect.",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
-  "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora."
+  "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora.",
+
+  "subtitles.bioplethora.bellophgolem.idle": "Bellophgolem grunts",
+  "subtitles.bioplethora.bellophgolem.hurt": "Bellophgolem hurts",
+  "subtitles.bioplethora.bellophgolem.death": "Bellophgolem Dies"
 }
