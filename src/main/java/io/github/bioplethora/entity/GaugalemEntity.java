@@ -8,7 +8,9 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.MagmaCubeEntity;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.passive.GolemEntity;
 import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.RabbitEntity;
@@ -27,10 +29,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatable {
+public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public NandbriEntity(EntityType<? extends MonsterEntity> type, World world) {
+    public GaugalemEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
     }
 
@@ -38,10 +40,10 @@ public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatabl
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 1.5)
-                .add(Attributes.ATTACK_DAMAGE, 3 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.ATTACK_KNOCKBACK, 0.3D)
+                .add(Attributes.ATTACK_DAMAGE, 10 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
                 .add(Attributes.MAX_HEALTH, 40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.4)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.1)
                 .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 32.0D);
     }
@@ -61,7 +63,7 @@ public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatabl
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, GolemEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, SlimeEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MagmaCubeEntity.class, true));
-        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, NandbriEntity.class)).setAlertOthers());
+        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, GaugalemEntity.class)).setAlertOthers());
     }
 
     @Override

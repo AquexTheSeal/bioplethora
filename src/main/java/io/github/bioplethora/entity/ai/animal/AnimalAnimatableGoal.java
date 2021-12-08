@@ -1,4 +1,4 @@
-package io.github.bioplethora.entity.ai;
+package io.github.bioplethora.entity.ai.animal;
 
 import io.github.bioplethora.entity.AnimatableAnimalEntity;
 import net.minecraft.entity.LivingEntity;

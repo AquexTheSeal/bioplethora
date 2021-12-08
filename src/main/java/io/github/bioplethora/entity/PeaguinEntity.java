@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.ai.AnimalAnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.AnimalAnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.animal.AnimalAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.animal.AnimalAnimatableMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
@@ -11,30 +11,22 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.DolphinLookController;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.AbstractSkeletonEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.GhastEntity;
 import net.minecraft.entity.passive.*;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.passive.horse.AbstractHorseEntity;
-import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.*;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.*;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -51,7 +43,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.EnumSet;
 import java.util.UUID;
 
 public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable, IAngerable {

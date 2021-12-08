@@ -2,8 +2,8 @@ package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
-import io.github.bioplethora.entity.ai.MonsterAnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -11,7 +11,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;

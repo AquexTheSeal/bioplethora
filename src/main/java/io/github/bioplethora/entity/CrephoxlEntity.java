@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.ai.MonsterAnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
