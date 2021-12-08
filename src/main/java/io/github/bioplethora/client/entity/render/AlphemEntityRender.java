@@ -29,7 +29,11 @@ public class AlphemEntityRender extends GeoEntityRenderer<AlphemEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(AlphemEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/alphem.png");
+        if (entity.isCharging()) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/alphem_charging.png");
+        } else {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/alphem.png");
+        }
     }
 
     @Override

@@ -99,7 +99,7 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
         }
 
         if (this.isCharging()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem.attack", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem.charging", true));
             return PlayState.CONTINUE;
         }
 

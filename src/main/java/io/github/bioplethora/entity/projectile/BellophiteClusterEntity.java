@@ -2,7 +2,6 @@ package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraEntities;
-import net.minecraft.client.renderer.entity.GhastRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -82,7 +81,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         Entity entity = this.getOwner();
         if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                if (((LivingEntity) Objects.requireNonNull(this.getOwner())).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 } else {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
@@ -104,28 +103,28 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
                     .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (5 / 2d), this.getY(), this.getZ() - (5 / 2d), this.getX() + (5 / 2d), this.getY() + (5 / 2d), this.getZ() + (5 / 2d)), null)
                     .stream().sorted(new Object() {
                         Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
+                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
                         }
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityIterator : nearEntities) {
-                if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
+            for (Entity entityArea : nearEntities) {
+                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
 
                     if (!(this.getOwner() == null)) {
                         //hell mode + berserk
                         if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityIterator.hurt(DamageSource.MAGIC, (float) 13.5);
+                            entityArea.hurt(DamageSource.MAGIC, (float) 13.5);
                             //berserk only
                         } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityIterator.hurt(DamageSource.MAGIC, (float) 10);
+                            entityArea.hurt(DamageSource.MAGIC, (float) 10);
                             //default
                         } else {
-                            entityIterator.hurt(DamageSource.MAGIC, (float) 5.5);
+                            entityArea.hurt(DamageSource.MAGIC, (float) 5.5);
                         }
                     }
 
-                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                 }
             }
         }
@@ -136,7 +135,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) entityHitResult).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                if (((LivingEntity) Objects.requireNonNull(this.getOwner())).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 } else {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
@@ -158,28 +157,28 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
                     .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (7 / 2d), this.getY() - (7 / 2d), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d)), null)
                     .stream().sorted(new Object() {
                         Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
+                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
                         }
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityIterator : nearEntities) {
-                if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
+            for (Entity entityArea : nearEntities) {
+                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
 
                     if (!(this.getOwner() == null)) {
                         //hell mode + berserk
                         if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityIterator.hurt(DamageSource.MAGIC, (float) 13.5);
+                            entityArea.hurt(DamageSource.MAGIC, (float) 13.5);
                             //berserk only
                         } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityIterator.hurt(DamageSource.MAGIC, (float) 10);
+                            entityArea.hurt(DamageSource.MAGIC, (float) 10);
                             //default
                         } else {
-                            entityIterator.hurt(DamageSource.MAGIC, (float) 5.5);
+                            entityArea.hurt(DamageSource.MAGIC, (float) 5.5);
                         }
                     }
 
-                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                 }
             }
         }
