@@ -25,5 +25,8 @@ public class BioplethoraEntityAttributes {
 
         //maritime
         event.put(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntity.setCustomAttributes().build());
+
+        //elite undead
+        event.put(BioplethoraEntities.GAUGALEM.get(), GaugalemEntity.setCustomAttributes().build());
     }
 }

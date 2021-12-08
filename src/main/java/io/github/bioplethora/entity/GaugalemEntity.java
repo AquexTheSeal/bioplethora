@@ -3,23 +3,36 @@ package io.github.bioplethora.entity;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.passive.GolemEntity;
+import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -29,11 +42,13 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatable {
+public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public GaugalemEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
+        this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.NETHERITE_AXE));
+        this.moveControl = new FlyingMovementController(this, 20, true);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -45,7 +60,8 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
                 .add(Attributes.MAX_HEALTH, 40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.1)
                 .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 32.0D);
+                .add(Attributes.FOLLOW_RANGE, 32.0D)
+                .add(Attributes.FLYING_SPEED, 1.5F);
     }
 
     @Override
@@ -54,21 +70,16 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new MonsterAnimatableMoveToTargetGoal(this, 0.75, 8));
-        this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 13.6, 0.23, 0.47));
+        this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, RabbitEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, ParrotEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, GolemEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, SlimeEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MagmaCubeEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, GaugalemEntity.class)).setAlertOthers());
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "nandbri_controller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "gaugalem_controller", 0, this::predicate));
     }
 
     @Override
@@ -78,16 +89,11 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
 
     private <E extends IAnimatable>PlayState predicate(AnimationEvent<E> event) {
         if(this.getAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.nandbri.attack", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gaugalem.attack", true));
             return PlayState.CONTINUE;
         }
 
-        if(event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.nandbri.walk", true));
-            return PlayState.CONTINUE;
-        }
-
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.nandbri.idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gaugalem.idle", true));
         return PlayState.CONTINUE;
     }
 
@@ -95,19 +101,91 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         boolean flag = super.doHurtTarget(entity);
         World world = entity.level;
         if(flag && entity instanceof LivingEntity) {
-            ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 200, 2));
-            if(!world.isClientSide()) {
-                world.playSound(null, this, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.zombie.infect")), SoundCategory.HOSTILE, 1, 1);
+            ((LivingEntity) entity).addEffect(new EffectInstance(Effects.WITHER, 100, 2));
+            this.addEffect(new EffectInstance(Effects.INVISIBILITY, 100, 2));
+            if (this.level instanceof ServerWorld) {
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
             }
         }
+
+        if (!this.level.isClientSide() /*&& !(damageSource.getEntity() instanceof LivingEntity) */) {
+            this.teleport();
+        }
+
         return flag;
     }
 
-    @Override
-    protected void doPush(Entity entity) {
-        boolean flag = !entity.isCrouching() && (entity instanceof PlayerEntity || entity instanceof VillagerEntity || ((LivingEntity)entity).getMobType() == CreatureAttribute.ILLAGER);
-        if(flag) {
-            this.setTarget((LivingEntity) entity);
+    public CreatureAttribute getMobType() {
+        return CreatureAttribute.UNDEAD;
+    }
+
+    public boolean causeFallDamage(float distance, float damageMultiplier) {
+        return false;
+    }
+
+    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+    }
+
+    protected PathNavigator createNavigation(World worldIn) {
+        FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, worldIn) {
+            public boolean isStableDestination(BlockPos pos) {
+                return !this.level.getBlockState(pos.below()).isAir();
+            }
+
+        };
+        return flyingpathnavigator;
+    }
+
+    protected boolean teleport() {
+        if (!this.level.isClientSide() && this.isAlive()) {
+            double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 64.0D;
+            double d1 = this.getY() + (double)(this.random.nextInt(64) - 32);
+            double d2 = this.getZ() + (this.random.nextDouble() - 0.5D) * 64.0D;
+            return this.teleport(d0, d1, d2);
+        } else {
+            return false;
+        }
+    }
+
+    private boolean teleport(double p_70825_1_, double p_70825_3_, double p_70825_5_) {
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(p_70825_1_, p_70825_3_, p_70825_5_);
+
+        while(blockpos$mutable.getY() > 0 && !this.level.getBlockState(blockpos$mutable).getMaterial().blocksMotion()) {
+            blockpos$mutable.move(Direction.DOWN);
+        }
+
+        BlockState blockstate = this.level.getBlockState(blockpos$mutable);
+        boolean flag = blockstate.getMaterial().blocksMotion();
+        boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
+        if (flag && !flag1) {
+            net.minecraftforge.event.entity.living.EntityTeleportEvent.EnderEntity event = net.minecraftforge.event.ForgeEventFactory.onEnderTeleport(this, p_70825_1_, p_70825_3_, p_70825_5_);
+            if (event.isCanceled()) return false;
+            boolean flag2 = this.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
+            if (flag2 && !this.isSilent()) {
+                this.level.playSound((PlayerEntity)null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
+                this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+            }
+
+            return flag2;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean hurt(DamageSource damageSource, float p_70097_2_) {
+        if (this.isInvulnerableTo(damageSource)) {
+            return false;
+        } else {
+            this.addEffect(new EffectInstance(Effects.INVISIBILITY, 100, 2));
+            if (this.level instanceof ServerWorld) {
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
+            }
+
+            if (!this.level.isClientSide() /*&& !(damageSource.getEntity() instanceof LivingEntity) */) {
+                this.teleport();
+            }
+
+            return super.hurt(damageSource, p_70097_2_);
         }
     }
 }
