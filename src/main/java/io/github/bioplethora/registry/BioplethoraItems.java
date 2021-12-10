@@ -3,11 +3,8 @@ package io.github.bioplethora.registry;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.item.BiopediaItem;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
-import io.github.bioplethora.item.weapons.BellophiteArrowItem;
-import io.github.bioplethora.item.weapons.CrephoxlHammerItem;
-import io.github.bioplethora.item.weapons.ExperimentalItem;
+import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.util.BioplethoraItemGroup;
-import io.github.bioplethora.item.weapons.BellophgolemShieldItem;
 import io.github.bioplethora.util.CustomRarityTypes;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -34,6 +31,8 @@ public class BioplethoraItems {
             new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).durability(4508).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> BELLOPHGOLEM_SHIELD = ITEMS.register("bellophgolem_shield", () -> new BellophgolemShieldItem(new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).durability(5000).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> BELLOPHITE_ARROW = ITEMS.register("bellophite_arrow", () -> new BellophiteArrowItem(new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> STELLAR_SCYTHE = ITEMS.register("stellar_scythe", () -> new StellarScytheItem(ItemTier.NETHERITE, 11-5, -2.5f,
+            new Item.Properties().fireResistant().rarity(CustomRarityTypes.SACRED).durability(4508).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
 
     // Spawn Eggs
     public static final RegistryObject<Item> CREPHOXL_SPAWN_EGG = ITEMS.register("crephoxl_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.CREPHOXL, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));

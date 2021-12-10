@@ -134,8 +134,7 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
 
     @Override
     public void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound((net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.step")),
-                0.15f, 1);
+        this.playSound(SoundEvents.IRON_GOLEM_STEP, 0.15f, 1);
     }
 
 

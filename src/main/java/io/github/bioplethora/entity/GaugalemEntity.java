@@ -1,25 +1,19 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.ai.GaugalemTeleportToTargetGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.merchant.villager.VillagerEntity;
-import net.minecraft.entity.monster.EndermanEntity;
-import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.SlimeEntity;
-import net.minecraft.entity.passive.GolemEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
-import net.minecraft.entity.passive.ParrotEntity;
-import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -29,11 +23,13 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -47,7 +43,7 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
 
     public GaugalemEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
-        this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.NETHERITE_AXE));
+        this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(BioplethoraItems.STELLAR_SCYTHE.get()));
         this.moveControl = new FlyingMovementController(this, 20, true);
     }
 
@@ -74,6 +70,7 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(2, new GaugalemTeleportToTargetGoal(this, null));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, GaugalemEntity.class)).setAlertOthers());
     }
 
@@ -126,6 +123,23 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
     protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
 
+    public boolean hurt(DamageSource damageSource, float p_70097_2_) {
+        if (this.isInvulnerableTo(damageSource)) {
+            return false;
+        } else {
+            this.addEffect(new EffectInstance(Effects.INVISIBILITY, 100, 2));
+            if (this.level instanceof ServerWorld) {
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
+            }
+
+            if (!this.level.isClientSide() /*&& !(damageSource.getEntity() instanceof LivingEntity) */) {
+                this.teleport();
+            }
+
+            return super.hurt(damageSource, p_70097_2_);
+        }
+    }
+
     protected PathNavigator createNavigation(World worldIn) {
         FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, worldIn) {
             public boolean isStableDestination(BlockPos pos) {
@@ -136,7 +150,7 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         return flyingpathnavigator;
     }
 
-    protected boolean teleport() {
+    public boolean teleport() {
         if (!this.level.isClientSide() && this.isAlive()) {
             double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 64.0D;
             double d1 = this.getY() + (double)(this.random.nextInt(64) - 32);
@@ -147,7 +161,7 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         }
     }
 
-    private boolean teleport(double p_70825_1_, double p_70825_3_, double p_70825_5_) {
+    public boolean teleport(double p_70825_1_, double p_70825_3_, double p_70825_5_) {
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(p_70825_1_, p_70825_3_, p_70825_5_);
 
         while(blockpos$mutable.getY() > 0 && !this.level.getBlockState(blockpos$mutable).getMaterial().blocksMotion()) {
@@ -172,20 +186,13 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         }
     }
 
-    public boolean hurt(DamageSource damageSource, float p_70097_2_) {
-        if (this.isInvulnerableTo(damageSource)) {
-            return false;
-        } else {
-            this.addEffect(new EffectInstance(Effects.INVISIBILITY, 100, 2));
-            if (this.level instanceof ServerWorld) {
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
-            }
-
-            if (!this.level.isClientSide() /*&& !(damageSource.getEntity() instanceof LivingEntity) */) {
-                this.teleport();
-            }
-
-            return super.hurt(damageSource, p_70097_2_);
-        }
+    public boolean teleportTowards(Entity p_70816_1_) {
+        Vector3d vector3d = new Vector3d(this.getX() - p_70816_1_.getX(), this.getY(0.5D) - p_70816_1_.getEyeY(), this.getZ() - p_70816_1_.getZ());
+        vector3d = vector3d.normalize();
+        double d0 = 16.0D;
+        double d1 = this.getX() + (this.random.nextDouble() - 0.5D) * 8.0D - vector3d.x * 16.0D;
+        double d2 = this.getY() + (double)(this.random.nextInt(16) - 8) - vector3d.y * 16.0D;
+        double d3 = this.getZ() + (this.random.nextDouble() - 0.5D) * 8.0D - vector3d.z * 16.0D;
+        return this.teleport(d1, d2, d3);
     }
 }

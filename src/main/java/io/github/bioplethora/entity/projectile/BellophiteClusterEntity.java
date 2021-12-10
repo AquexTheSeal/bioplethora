@@ -81,7 +81,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         Entity entity = this.getOwner();
         if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                if (((LivingEntity) Objects.requireNonNull(this.getOwner())).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 } else {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
@@ -135,7 +135,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) entityHitResult).getEntity().is(entity)) {
             if (!this.level.isClientSide) {
-                if (((LivingEntity) Objects.requireNonNull(this.getOwner())).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 } else {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
@@ -226,7 +226,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
 
         lifespan = (double) lifespan + 1;
 
-        if ((lifespan == 100)) {
+        if ((lifespan == 100) && (this.getOwner() != null)) {
             this.remove();
         }
     }

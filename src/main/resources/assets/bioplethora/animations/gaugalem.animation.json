@@ -112,11 +112,11 @@
 							"vector": [0, 0, 0]
 						},
 						"0.5": {
-							"vector": [0, 90, 75],
+							"vector": [0, 0, 75],
 							"easing": "easeInElastic"
 						},
 						"1.0": {
-							"vector": [0, 90, 75],
+							"vector": [0, 0, 75],
 							"easing": "easeInElastic"
 						},
 						"1.5": {

@@ -69,6 +69,11 @@ public class EntitySpawnManager {
             builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 35 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
         };
 
+        private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
+            //Elite Undead
+            builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.GAUGALEM.get(), 40 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 3));
+        };
+
         public static void spawnMobs(BiomeLoadingEvent event) {
             MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
             RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Biome Spawning Stuff."));
@@ -92,6 +97,9 @@ public class EntitySpawnManager {
                 case OCEAN:
                     if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
                         WATER_ENTITIES.accept(spawnInfoBuilder);
+                case THEEND:
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.END))
+                        END_ENTITIES.accept(spawnInfoBuilder);
                     break;
                 default:
                     if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))

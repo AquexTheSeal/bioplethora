@@ -109,18 +109,16 @@ public class WindblazeEntity extends DamagingProjectileEntity {
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
             for (Entity entityArea : nearEntities) {
                 if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
+
+                    entityArea.setDeltaMovement(0, 0.75, 0);
+
                     if (BioplethoraConfig.COMMON.hellMode.get()) {
                         ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
                         ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                     } else {
                         ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
                     }
-                    ((LivingEntity) entityArea).setDeltaMovement(entityArea.getDeltaMovement().x, 0.75, entityArea.getDeltaMovement().z);
                 }
-            }
-
-            if (entity instanceof PlayerEntity) {
-                ((LivingEntity) entity).setDeltaMovement(entity.getDeltaMovement().x, 0.75, entity.getDeltaMovement().z);
             }
         }
         level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.NEUTRAL, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);

@@ -41,12 +41,12 @@ public class GaugalemEntityRender extends GeoEntityRenderer<GaugalemEntity> {
 
     @Override
     public void renderRecursively(GeoBone bone, MatrixStack stack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        if (/*bone.getName().equals("handr") ||*/ bone.getName().equals("armr")) {
-            if (!bone.isHidden) {
+        if (/*bone.getName().equals("armr") ||*/ bone.getName().equals("handr")) {
+            if ((!bone.isHidden)) {
                 stack.pushPose();
 
                 //position / translation
-                stack.translate(0.45D, 0.5D, -0.15D);
+                stack.translate(0.45D, 1.5D, -0.15D);
 
                 //rotation
                 stack.mulPose(Vector3f.XP.rotationDegrees(-75));
@@ -61,12 +61,12 @@ public class GaugalemEntityRender extends GeoEntityRenderer<GaugalemEntity> {
                 bufferIn = rtb.getBuffer(RenderType.entitySmoothCutout(whTexture));
             }
         }
-        if (bone.getName().equals("left_hand") || bone.getName().equals("left_arm")) {
+        if (bone.getName().equals("arml") || bone.getName().equals("handl")) {
             if (!bone.isHidden) {
                 stack.pushPose();
 
                 //position / translation
-                stack.translate(-0.45D, 0.5D, -0.25D);
+                stack.translate(-0.45D, 1.5D, -0.25D);
 
                 //rotation
                 stack.mulPose(Vector3f.XP.rotationDegrees(-75));
