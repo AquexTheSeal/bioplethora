@@ -4,6 +4,7 @@ import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.GaugalemTeleportToTargetGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.item.weapons.StellarScytheItem;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -17,19 +18,20 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.SwordItem;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -37,6 +39,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -70,7 +76,7 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(2, new GaugalemTeleportToTargetGoal(this, null));
+        /*this.targetSelector.addGoal(2, new GaugalemTeleportToTargetGoal(this, null));*/
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, GaugalemEntity.class)).setAlertOthers());
     }
 
@@ -107,6 +113,35 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
 
         if (!this.level.isClientSide() /*&& !(damageSource.getEntity() instanceof LivingEntity) */) {
             this.teleport();
+        }
+
+        if (this.getMainHandItem().getItem() instanceof SwordItem) {
+            world.playSound(null, new BlockPos(entity.getX(), entity.getY(), entity.getZ()), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
+            if(!world.isClientSide) {
+                world.addParticle(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY() + 2, entity.getZ(), 0, 0, 0);
+            }
+
+            if (this.getMainHandItem().getItem() instanceof StellarScytheItem) {
+
+                double x = entity.getX(), y = entity.getY(), z = entity.getZ();
+
+                if(world instanceof ServerWorld) {
+                    List<Entity> nearEntities = world
+                            .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (10 / 2d), y, z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+                            .stream().sorted(new Object() {
+                                Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
+                                    return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
+                                }
+                            }.compareDistOf(x, y, z)).collect(Collectors.toList());
+                    for (Entity entityIterator : nearEntities) {
+                        if (entityIterator instanceof LivingEntity && entityIterator != this) {
+                            if (entityIterator != entity) {
+                                entityIterator.hurt(DamageSource.mobAttack(this), ((StellarScytheItem) this.getMainHandItem().getItem()).getDamage() * 0.8F);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         return flag;

@@ -71,7 +71,7 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
             //Elite Undead
-            builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.GAUGALEM.get(), 40 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 3));
+            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.GAUGALEM.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 2));
         };
 
         public static void spawnMobs(BiomeLoadingEvent event) {
