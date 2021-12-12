@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -37,7 +38,7 @@ public class AltyrusRangedAttackGoal extends Goal {
     public void tick() {
         LivingEntity livingentity = this.altyrus.getTarget();
         double d0 = 64.0D;
-        if (livingentity.distanceToSqr(this.altyrus) < 4096.0D && this.altyrus.canSee(livingentity)) {
+        if (livingentity.distanceToSqr(this.altyrus) < 1024.0D && this.altyrus.canSee(livingentity)) {
             World world = this.altyrus.level;
             double d1 = 4.0D;
 
@@ -45,72 +46,58 @@ public class AltyrusRangedAttackGoal extends Goal {
             double d2 = livingentity.getX() - (this.altyrus.getX() + vector3d.x * 4.0D);
             double d3 = livingentity.getY(0.5D) - (0.5D + this.altyrus.getY(0.5D));
             double d4 = livingentity.getZ() - (this.altyrus.getZ() + vector3d.z * 4.0D);
+            UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
+            ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
 
             ++this.chargeTime;
 
             if (this.chargeTime == 10 && !this.altyrus.isSilent()) {
                 ((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                        (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.beacon.activate"))),
-                        SoundCategory.HOSTILE, (float) 1, (float) 1);
+                        SoundEvents.GLASS_BREAK, SoundCategory.AMBIENT, (float) 1, (float) 1);
             }
 
             if (this.chargeTime == 30) {
                 if (!this.altyrus.isSilent()) {
                     ((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                            (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
-                            SoundCategory.HOSTILE, (float) 1, (float) 1);
+                            SoundEvents.GLASS_BREAK, SoundCategory.AMBIENT, (float) 1, (float) 1);
                 }
 
-                UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
-                ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
 
             if (this.chargeTime == 35) {
                 if (!this.altyrus.isSilent()) {
                     ((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                            (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
-                            SoundCategory.HOSTILE, (float) 1, (float) 1);
+                            SoundEvents.GLASS_BREAK, SoundCategory.AMBIENT, (float) 1, (float) 1);
                 }
 
-                UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
-                ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
 
             if (this.chargeTime == 40) {
                 if (!this.altyrus.isSilent()) {
                     ((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                            (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
-                            SoundCategory.HOSTILE, (float) 1, (float) 1);
+                            SoundEvents.GLASS_BREAK, SoundCategory.AMBIENT, (float) 1, (float) 1);
                 }
 
-                UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
-                ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
 
             if (this.chargeTime == 45) {
                 if (!this.altyrus.isSilent()) {
                     ((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                            (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
-                            SoundCategory.HOSTILE, (float) 1, (float) 1);
+                            SoundEvents.GLASS_BREAK, SoundCategory.AMBIENT, (float) 1, (float) 1);
                 }
 
-                UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
-                ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
 
             if (this.chargeTime == 50) {
                 if (!this.altyrus.isSilent()) {
                     ((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                            (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.shulker.shoot"))),
-                            SoundCategory.HOSTILE, (float) 1, (float) 1);
+                            SoundEvents.GLASS_BREAK, SoundCategory.AMBIENT, (float) 1, (float) 1);
                 }
 
-                UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
-                ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
                 this.chargeTime = -100;
             }

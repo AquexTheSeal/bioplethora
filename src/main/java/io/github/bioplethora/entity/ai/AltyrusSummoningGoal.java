@@ -40,14 +40,15 @@ public class AltyrusSummoningGoal extends Goal {
 
         ++this.summonTime;
 
-        if (this.summonTime == 200) {
-            BlockPos blockpos = this.altyrus.blockPosition().offset(-2 + this.altyrus.getRandom().nextInt(5), 1, -2 + this.altyrus.getRandom().nextInt(5));
+        if (this.summonTime > 200) {
+            BlockPos blockpos = this.altyrus.blockPosition();
             BellophgolemEntity bellophgolemEntity = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
             bellophgolemEntity.moveTo(blockpos, 0.0F, 0.0F);
             bellophgolemEntity.setOwner(this.altyrus);
-            bellophgolemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
-            bellophgolemEntity.setLimitedLife(40 * (30 + this.altyrus.getRandom().nextInt(90)));
+            bellophgolemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, (ILivingEntityData)null, (CompoundNBT)null);
+            bellophgolemEntity.setLimitedLife(0);
             serverworld.addFreshEntityWithPassengers(bellophgolemEntity);
+
             this.summonTime = 0;
         }
 

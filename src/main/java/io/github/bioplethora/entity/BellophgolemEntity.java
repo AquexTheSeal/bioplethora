@@ -197,6 +197,7 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
             ++limitedLifeTicks;
 
             if (this.limitedLifeTicks >= 200) {
+                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 this.remove();
             }
         }
