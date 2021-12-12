@@ -11,6 +11,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.GhastEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -66,6 +67,7 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, BellophgolemEntity.class, 24.0F));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, AltyrusEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));
@@ -75,6 +77,7 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(AlphemEntity.class));
     }
 
@@ -90,7 +93,7 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
         }
 
         if (this.isCharging()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem.charging", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem.attack", true));
             return PlayState.CONTINUE;
         }
 

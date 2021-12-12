@@ -176,13 +176,11 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
     }
 
     protected PathNavigator createNavigation(World worldIn) {
-        FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, worldIn) {
+        return new FlyingPathNavigator(GaugalemEntity.this, worldIn) {
             public boolean isStableDestination(BlockPos pos) {
                 return !this.level.getBlockState(pos.below()).isAir();
             }
-
         };
-        return flyingpathnavigator;
     }
 
     public boolean teleport() {

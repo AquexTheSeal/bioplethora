@@ -22,11 +22,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
 
-/*
-* Credited author:
-* AzureDoom [MCDoom mod]
-*/
-
 public class BellophiteClusterRender extends GeoProjectilesRenderer<BellophiteClusterEntity> {
 
     private static final RenderType BEAM = RenderType

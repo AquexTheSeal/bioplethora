@@ -19,6 +19,7 @@ public class BioplethoraEntityAttributes {
         //Fairy
         event.put(BioplethoraEntities.ALPHEM.get(), AlphemEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.ALTYRUS.get(), AltyrusEntity.setCustomAttributes().build());
 
         //Reptilia
         event.put(BioplethoraEntities.NANDBRI.get(), NandbriEntity.setCustomAttributes().build());

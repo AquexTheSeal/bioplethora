@@ -3,6 +3,7 @@ package io.github.bioplethora;
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteArrowRender;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
+import io.github.bioplethora.client.entity.render.projectile.UltimateBellophiteClusterRender;
 import io.github.bioplethora.client.entity.render.projectile.WindBlazeRender;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
@@ -29,6 +30,7 @@ public class BioplethoraClient {
         //fairy
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), AlphemEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS.get(), AltyrusEntityRender::new);
 
         //reptilia
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.NANDBRI.get(), NandbriEntityRender::new);
@@ -43,6 +45,7 @@ public class BioplethoraClient {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), BellophiteClusterRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_ARROW.get(), BellophiteArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WINDBLAZE.get(), WindBlazeRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateBellophiteClusterRender::new);
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -41,7 +41,10 @@ public class BioplethoraItems {
     public static final RegistryObject<Item> BELLOPHGOLEM_SPAWN_EGG = ITEMS.register("bellophgolem_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.BELLOPHGOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> PEAGUIN_SPAWN_EGG = ITEMS.register("peaguin_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.PEAGUIN, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> CUTTLEFISH_SPAWN_EGG = ITEMS.register("cuttlefish_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.CUTTLEFISH, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> GAUGALEM_SPAWN_EGG = ITEMS.register("gaugalem_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.GAUGALEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> ALTYRUS_SPAWN_EGG = ITEMS.register("altyrus_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.ALTYRUS, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
 
     // Block Items
     public static final RegistryObject<Item> NANDBRI_SCALE_BLOCK = ITEMS.register("nandbri_scale_block", () -> new BlockItem(BioplethoraBlocks.NANDBRI_SCALE_BLOCK.get(), new Item.Properties().tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> BELLOPHITE_BLOCK = ITEMS.register("bellophite_block", () -> new BlockItem(BioplethoraBlocks.BELLOPHITE_BLOCK.get(), new Item.Properties().tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
 }

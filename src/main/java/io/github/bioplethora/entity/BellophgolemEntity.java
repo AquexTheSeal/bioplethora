@@ -1,6 +1,7 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.ai.BellophgolemCopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
@@ -11,6 +12,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.monster.VexEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -47,8 +49,11 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(BellophgolemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
     private boolean hasCracked = false;
+    private MobEntity owner;
+    private boolean hasLimitedLife;
+    private int limitedLifeTicks;
 
-    public BellophgolemEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+    public BellophgolemEntity(EntityType<? extends BellophgolemEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
         this.xpReward = 20;
@@ -80,6 +85,7 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
+        this.targetSelector.addGoal(1, new BellophgolemCopyTargetOwnerGoal(this, this));
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -158,6 +164,18 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
         return flag;
     }
 
+    public void addAdditionalSaveData(CompoundNBT compoundNBT) {
+        super.addAdditionalSaveData(compoundNBT);
+        if (this.hasLimitedLife) {
+            compoundNBT.putInt("LifeTicks", this.limitedLifeTicks);
+        }
+    }
+
+    public void setLimitedLife(int limitedLife) {
+        this.hasLimitedLife = true;
+        this.limitedLifeTicks = limitedLife;
+    }
+
     public void aiStep() {
         super.aiStep();
         if (((LivingEntity) this.getEntity()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
@@ -174,6 +192,21 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
             this.playSound(SoundEvents.IRON_GOLEM_DAMAGE, 1.0F, 1.0F);
             this.hasCracked = true;
         }
+
+        if (this.hasLimitedLife) {
+            ++limitedLifeTicks;
+
+            if (this.limitedLifeTicks >= 200) {
+                this.remove();
+            }
+        }
+
+        if (this.getOwner() != null) {
+            if (!this.level.isClientSide && this.getOwner().isDeadOrDying()) {
+                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
+                this.kill();
+            }
+        }
     }
 
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
@@ -184,6 +217,14 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
             this.setHealth(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+    }
+
+    public MobEntity getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(MobEntity mobEntity) {
+        this.owner = mobEntity;
     }
 
     @Override
