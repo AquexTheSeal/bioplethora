@@ -81,6 +81,7 @@ public class WindblazeEntity extends DamagingProjectileEntity {
                     }
 
                     if (BioplethoraConfig.COMMON.hellMode.get()) {
+                        ((LivingEntity) entityArea).hurt(DamageSource.MAGIC, 3);
                         ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
                         ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                     } else {

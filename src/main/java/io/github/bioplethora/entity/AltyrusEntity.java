@@ -3,11 +3,11 @@ package io.github.bioplethora.entity;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummoningGoal;
+import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
@@ -16,18 +16,20 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BossInfo;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -37,6 +39,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import javax.annotation.Nullable;
 
 public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal {
 
@@ -58,7 +62,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_DAMAGE, 30 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 7D)
-                .add(Attributes.MAX_HEALTH, 500 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 450 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D)
@@ -79,6 +83,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AlphemEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 60, 0.6, 0.7));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(6, new AltyrusRangedAttackGoal(this));
         this.goalSelector.addGoal(7, new AltyrusSummoningGoal(this));
@@ -90,7 +95,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "nandbri_controller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "altyrus_controller", 0, this::predicate));
     }
 
     @Override
@@ -99,6 +104,16 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     }
 
     private <E extends IAnimatable>PlayState predicate(AnimationEvent<E> event) {
+
+        if (this.isDeadOrDying() || this.dead) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.altyrus.death", true));
+            return PlayState.CONTINUE;
+        }
+
+        if (this.getAttacking()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.altyrus.attacking", true));
+            return PlayState.CONTINUE;
+        }
 
         if (this.isCharging()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.altyrus.charging", true));
@@ -110,18 +125,29 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
             return PlayState.CONTINUE;
         }
 
-        /*if(this.getAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.altyrus.attack", true));
-            return PlayState.CONTINUE;
-        }
-
-        if(event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.altyrus.idle", true));
-            return PlayState.CONTINUE;
-        }*/
-
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.altyrus.idle", true));
         return PlayState.CONTINUE;
+    }
+
+    public boolean doHurtTarget (Entity entity) {
+        boolean flag = super.doHurtTarget(entity);
+        if (this.level instanceof ServerWorld) {
+            ((World) this.level).explode(null, (int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ(), (float) 3, Explosion.Mode.BREAK);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), (int) 40, 0.75, 0.75,
+                    0.75, 0.1);
+        }
+        this.doEnchantDamageEffects(this, entity);
+        return flag;
+    }
+
+    public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        if (worldIn instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(17.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        }
+        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
     @Override

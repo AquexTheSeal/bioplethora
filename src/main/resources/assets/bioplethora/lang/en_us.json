@@ -8,6 +8,8 @@
   "entity.bioplethora.bellophgolem": "Bellophgolem",
   "entity.bioplethora.peaguin": "Peaguin",
   "entity.bioplethora.cuttlefish": "Cuttlefish",
+  "entity.bioplethora.gaugalem": "Gaugalem",
+  "entity.bioplethora.altyrus": "Altyrus",
 
   "entity.bioplethora.bellophite_cluster": "Bellophite Cluster",
   "entity.bioplethora.bellophite_arrow": "Bellophite Arrow",
@@ -18,15 +20,19 @@
   "item.bioplethora.bellophgolem_spawn_egg": "Bellophgolem Spawn Egg",
   "item.bioplethora.peaguin_spawn_egg": "Peaguin Spawn Egg",
   "item.bioplethora.cuttlefish_spawn_egg": "Cuttlefish Spawn Egg",
+  "item.bioplethora.gaugalem": "Gaugalem Spawn Egg",
+  "item.bioplethora.altyrus_spawn_egg": "Altyrus Spawn Egg",
 
   "item.bioplethora.crephoxl_feather": "Crephoxl Feather",
   "item.bioplethora.crephoxl_stick": "Crephoxl Stick",
   "item.bioplethora.nandbri_scales": "Nandbri Scales",
   "item.bioplethora.bellophite": "Bellophite",
 
+
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
   "item.bioplethora.bellophgolem_shield": "Bellophgolem Shield",
   "item.bioplethora.bellophite_arrow": "Bellophite Arrow",
+  "item.bioplethora.stellar_scythe": "Stellar Scythe",
 
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
@@ -37,6 +43,7 @@
   "item.bioplethora.special_skill.desc": "Special Skill:",
 
   "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
+  "block.bioplethora.bellophite_block": "Bellophite Block",
 
   "item.bioplethora.test_item.desc_0": "This is just an experimental item. Mainly used for development only. Only accessible in creative mode.",
 

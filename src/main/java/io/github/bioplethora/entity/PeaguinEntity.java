@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.ai.animal.AnimalAnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.animal.AnimalAnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;

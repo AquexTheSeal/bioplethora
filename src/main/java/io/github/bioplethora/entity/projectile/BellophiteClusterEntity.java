@@ -79,8 +79,8 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
     protected void onHit(RayTraceResult result) {
         super.onHit(result);
         Entity entity = this.getOwner();
-        if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity)) {
-            if (!this.level.isClientSide) {
+        if (entity != null && (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity))) {
+            if (!this.level.isClientSide && this.getOwner() != null) {
                 if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 } else {
@@ -134,7 +134,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) entityHitResult).getEntity().is(entity)) {
-            if (!this.level.isClientSide) {
+            if (!this.level.isClientSide && this.getOwner() != null) {
                 if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
                     this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
                 } else {
