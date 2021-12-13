@@ -1,7 +1,7 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.*;
+import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

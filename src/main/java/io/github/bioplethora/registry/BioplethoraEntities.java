@@ -1,7 +1,7 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.*;
+import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.entity.projectile.BellophiteArrowEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import io.github.bioplethora.entity.projectile.UltimateBellophiteClusterEntity;

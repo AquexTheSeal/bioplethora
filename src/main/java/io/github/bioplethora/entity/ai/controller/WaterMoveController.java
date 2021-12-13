@@ -1,6 +1,5 @@
 package io.github.bioplethora.entity.ai.controller;
 
-import io.github.bioplethora.entity.PeaguinEntity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;

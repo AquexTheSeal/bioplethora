@@ -1,8 +1,7 @@
 package io.github.bioplethora.client.entity.model;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.AlphemEntity;
-import io.github.bioplethora.entity.CuttlefishEntity;
+import io.github.bioplethora.entity.creatures.CuttlefishEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

@@ -1,6 +1,7 @@
-package io.github.bioplethora.entity;
+package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummoningGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;

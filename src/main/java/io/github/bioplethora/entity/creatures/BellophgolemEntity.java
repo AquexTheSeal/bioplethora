@@ -1,7 +1,8 @@
-package io.github.bioplethora.entity;
+package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.ai.BellophgolemCopyTargetOwnerGoal;
+import io.github.bioplethora.entity.SummonableMonsterEntity;
+import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
@@ -11,8 +12,6 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.VexEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -22,7 +21,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -33,7 +31,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -44,14 +41,11 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnimatable {
+public class BellophgolemEntity extends SummonableMonsterEntity implements IAnimatable {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(BellophgolemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
     private boolean hasCracked = false;
-    private MobEntity owner;
-    private boolean hasLimitedLife;
-    private int limitedLifeTicks;
 
     public BellophgolemEntity(EntityType<? extends BellophgolemEntity> type, World worldIn) {
         super(type, worldIn);
@@ -85,7 +79,7 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
-        this.targetSelector.addGoal(1, new BellophgolemCopyTargetOwnerGoal(this, this));
+        this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this, this));
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -164,18 +158,6 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
         return flag;
     }
 
-    public void addAdditionalSaveData(CompoundNBT compoundNBT) {
-        super.addAdditionalSaveData(compoundNBT);
-        if (this.hasLimitedLife) {
-            compoundNBT.putInt("LifeTicks", this.limitedLifeTicks);
-        }
-    }
-
-    public void setLimitedLife(int limitedLife) {
-        this.hasLimitedLife = true;
-        this.limitedLifeTicks = limitedLife;
-    }
-
     public void aiStep() {
         super.aiStep();
         if (((LivingEntity) this.getEntity()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
@@ -192,22 +174,6 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
             this.playSound(SoundEvents.IRON_GOLEM_DAMAGE, 1.0F, 1.0F);
             this.hasCracked = true;
         }
-
-        if (this.hasLimitedLife) {
-            ++limitedLifeTicks;
-
-            if (this.limitedLifeTicks >= 300) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
-                this.remove();
-            }
-        }
-
-        if (this.getOwner() != null) {
-            if (!this.level.isClientSide && this.getOwner().isDeadOrDying()) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
-                this.kill();
-            }
-        }
     }
 
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
@@ -218,14 +184,6 @@ public class BellophgolemEntity extends AnimatableMonsterEntity implements IAnim
             this.setHealth(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-    }
-
-    public MobEntity getOwner() {
-        return this.owner;
-    }
-
-    public void setOwner(MobEntity mobEntity) {
-        this.owner = mobEntity;
     }
 
     @Override

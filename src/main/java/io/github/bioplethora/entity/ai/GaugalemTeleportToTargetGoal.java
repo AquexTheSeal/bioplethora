@@ -1,7 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.entity.GaugalemEntity;
-import net.minecraft.entity.EntityPredicate;
+import io.github.bioplethora.entity.creatures.GaugalemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;

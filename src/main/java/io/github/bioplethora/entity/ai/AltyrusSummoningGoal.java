@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.entity.AltyrusEntity;
-import io.github.bioplethora.entity.BellophgolemEntity;
+import io.github.bioplethora.entity.creatures.AltyrusEntity;
+import io.github.bioplethora.entity.creatures.BellophgolemEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
@@ -47,14 +47,22 @@ public class AltyrusSummoningGoal extends Goal {
             bellophgolemEntity.moveTo(blockpos, 0.0F, 0.0F);
             bellophgolemEntity.setOwner(this.altyrus);
             bellophgolemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, (ILivingEntityData)null, (CompoundNBT)null);
+
             bellophgolemEntity.setLimitedLife(0);
+            bellophgolemEntity.setExplodeOnExpiry(true);
+            bellophgolemEntity.setLifeLimitBeforeDeath(200);
+
             serverworld.addFreshEntityWithPassengers(bellophgolemEntity);
 
             BellophgolemEntity bellophgolemEntity2 = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
             bellophgolemEntity2.moveTo(blockpos, 0.0F, 0.0F);
             bellophgolemEntity2.setOwner(this.altyrus);
             bellophgolemEntity2.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, (ILivingEntityData)null, (CompoundNBT)null);
+
             bellophgolemEntity2.setLimitedLife(0);
+            bellophgolemEntity2.setExplodeOnExpiry(true);
+            bellophgolemEntity2.setLifeLimitBeforeDeath(200);
+
             serverworld.addFreshEntityWithPassengers(bellophgolemEntity2);
 
             this.summonTime = 0;

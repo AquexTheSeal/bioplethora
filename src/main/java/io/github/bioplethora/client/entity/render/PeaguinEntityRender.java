@@ -2,11 +2,8 @@ package io.github.bioplethora.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.client.entity.model.AlphemEntityModel;
 import io.github.bioplethora.client.entity.model.PeaguinEntityModel;
-import io.github.bioplethora.entity.AlphemEntity;
-import io.github.bioplethora.entity.PeaguinEntity;
+import io.github.bioplethora.entity.creatures.PeaguinEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

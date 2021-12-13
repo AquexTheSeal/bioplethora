@@ -1,15 +1,10 @@
 package io.github.bioplethora.client.entity.model;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.AlphemEntity;
-import io.github.bioplethora.entity.CrephoxlEntity;
-import io.github.bioplethora.entity.PeaguinEntity;
+import io.github.bioplethora.entity.creatures.PeaguinEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class PeaguinEntityModel extends AnimatedGeoModel<PeaguinEntity> {
 

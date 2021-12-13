@@ -1,6 +1,9 @@
-package io.github.bioplethora.entity;
+package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.SummonableMonsterEntity;
+import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
@@ -11,7 +14,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.GhastEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -40,7 +42,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable {
+public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AlphemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -74,6 +76,7 @@ public class AlphemEntity extends AnimatableMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new FollowMobGoal(this, (float) 1, 10, 5));
+        this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this, this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));

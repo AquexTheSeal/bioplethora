@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.entity.AlphemEntity;
+import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.projectile.WindblazeEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;

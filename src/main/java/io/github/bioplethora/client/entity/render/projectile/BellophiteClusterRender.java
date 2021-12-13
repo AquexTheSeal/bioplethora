@@ -4,22 +4,13 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.model.projectile.BellophiteClusterModel;
-import io.github.bioplethora.entity.AlphemEntity;
-import io.github.bioplethora.entity.BellophgolemEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Matrix3f;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.vector.Vector3f;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
 
 public class BellophiteClusterRender extends GeoProjectilesRenderer<BellophiteClusterEntity> {

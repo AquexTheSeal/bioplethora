@@ -1,4 +1,4 @@
-package io.github.bioplethora.entity;
+package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import net.minecraft.entity.EntityType;

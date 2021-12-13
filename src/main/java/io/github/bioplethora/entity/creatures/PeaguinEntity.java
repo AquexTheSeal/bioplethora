@@ -1,6 +1,7 @@
-package io.github.bioplethora.entity;
+package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.AnimatableAnimalEntity;
 import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;

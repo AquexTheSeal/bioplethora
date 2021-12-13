@@ -1,18 +1,14 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.entity.AltyrusEntity;
+import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.projectile.UltimateBellophiteClusterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Objects;
 
 public class AltyrusRangedAttackGoal extends Goal {
 

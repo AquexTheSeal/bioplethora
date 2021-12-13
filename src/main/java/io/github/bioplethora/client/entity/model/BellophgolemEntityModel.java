@@ -1,9 +1,7 @@
 package io.github.bioplethora.client.entity.model;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.AlphemEntity;
-import io.github.bioplethora.entity.BellophgolemEntity;
-import io.github.bioplethora.entity.CrephoxlEntity;
+import io.github.bioplethora.entity.creatures.BellophgolemEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;

@@ -1,17 +1,15 @@
 package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.BellophgolemEntity;
+import io.github.bioplethora.entity.creatures.BellophgolemEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Objects;
