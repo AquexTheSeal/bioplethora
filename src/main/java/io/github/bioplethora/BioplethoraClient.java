@@ -1,10 +1,12 @@
 package io.github.bioplethora;
 
 import io.github.bioplethora.client.entity.render.*;
+import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteArrowRender;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
 import io.github.bioplethora.client.entity.render.projectile.UltimateBellophiteClusterRender;
 import io.github.bioplethora.client.entity.render.projectile.WindBlazeRender;
+import io.github.bioplethora.entity.others.AltyrusSummoningEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.util.ResourceLocation;
@@ -46,13 +48,14 @@ public class BioplethoraClient {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_ARROW.get(), BellophiteArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WINDBLAZE.get(), WindBlazeRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateBellophiteClusterRender::new);
+
+        //others
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
     }
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerModels(final FMLClientSetupEvent event) {
-        register(BioplethoraItems.BELLOPHGOLEM_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> {
-            return entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F;
-        });
+        register(BioplethoraItems.BELLOPHGOLEM_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);
     }
 }

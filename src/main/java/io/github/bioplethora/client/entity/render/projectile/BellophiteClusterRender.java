@@ -15,8 +15,7 @@ import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
 
 public class BellophiteClusterRender extends GeoProjectilesRenderer<BellophiteClusterEntity> {
 
-    private static final RenderType BEAM = RenderType
-            .entitySmoothCutout(new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/projectiles/bellophite_cluster.png"));
+    private static final RenderType BEAM = RenderType.entitySmoothCutout(new ResourceLocation(Bioplethora.MOD_ID, "textures/projectiles/bellophite_cluster.png"));
 
     public BellophiteClusterRender(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new BellophiteClusterModel());
@@ -40,23 +39,4 @@ public class BellophiteClusterRender extends GeoProjectilesRenderer<BellophiteCl
     public void renderRecursively(GeoBone bone, MatrixStack stack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         super.renderRecursively(bone, stack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
-
-    /*@Override
-    public void render(GeoModel model, BellophiteClusterEntity animatable, float partialTicks, RenderType type, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        float f = getY(animatable, partialTicks);
-    }
-
-    @Override
-    public void renderEarly(BellophiteClusterEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
-        stackIn.scale(animatable.tickCount > 2 ? 1.0F : 0.0F, animatable.tickCount > 2 ? 1.0F : 0.0F, animatable.tickCount > 2 ? 1.0F : 0.0F);
-    }
-
-    public static float getY(BellophiteClusterEntity p_229051_0_, float p_229051_1_) {
-        float f = (float) p_229051_0_.tickCount + p_229051_1_;
-        float f1 = MathHelper.sin(f * 0.2F) / 2.0F + 0.5F;
-        f1 = (f1 * f1 + f1) * 0.4F;
-        return f1 - 1.4F;
-    }*/
 }

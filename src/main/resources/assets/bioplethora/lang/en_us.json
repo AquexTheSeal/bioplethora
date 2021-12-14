@@ -20,7 +20,7 @@
   "item.bioplethora.bellophgolem_spawn_egg": "Bellophgolem Spawn Egg",
   "item.bioplethora.peaguin_spawn_egg": "Peaguin Spawn Egg",
   "item.bioplethora.cuttlefish_spawn_egg": "Cuttlefish Spawn Egg",
-  "item.bioplethora.gaugalem": "Gaugalem Spawn Egg",
+  "item.bioplethora.gaugalem_spawn_egg": "Gaugalem Spawn Egg",
   "item.bioplethora.altyrus_spawn_egg": "Altyrus Spawn Egg",
 
   "item.bioplethora.crephoxl_feather": "Crephoxl Feather",
@@ -44,6 +44,7 @@
 
   "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
   "block.bioplethora.bellophite_block": "Bellophite Block",
+  "block.bioplethora.bellophite_core_block": "Bellophite Core Block",
 
   "item.bioplethora.test_item.desc_0": "This is just an experimental item. Mainly used for development only. Only accessible in creative mode.",
 

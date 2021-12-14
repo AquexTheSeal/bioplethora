@@ -18,7 +18,7 @@ import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
 
 public class UltimateBellophiteClusterRender extends GeoProjectilesRenderer<UltimateBellophiteClusterEntity> {
 
-    private static final RenderType BEAM = RenderType.entitySmoothCutout(new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/projectiles/ultimate_bellophite_cluster.png"));
+    private static final RenderType BEAM = RenderType.entitySmoothCutout(new ResourceLocation(Bioplethora.MOD_ID, "textures/projectiles/ultimate_bellophite_cluster.png"));
 
     public UltimateBellophiteClusterRender(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new UltimateBellophiteClusterModel());

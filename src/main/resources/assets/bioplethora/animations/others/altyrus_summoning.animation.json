@@ -1,0 +1,18 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.altyrus_summoning.summoning": {
+			"loop": true,
+			"animation_length": 2,
+			"override_previous_animation": true,
+			"bones": {
+				"altyrus_summoning": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 360) * 150", "math.cos(query.anim_time * 360) * 150", "math.sin(query.anim_time * 360) * 150"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

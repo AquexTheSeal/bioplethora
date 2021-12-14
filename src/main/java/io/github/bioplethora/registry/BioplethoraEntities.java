@@ -2,6 +2,7 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.*;
+import io.github.bioplethora.entity.others.AltyrusSummoningEntity;
 import io.github.bioplethora.entity.projectile.BellophiteArrowEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import io.github.bioplethora.entity.projectile.UltimateBellophiteClusterEntity;
@@ -44,4 +45,8 @@ public class BioplethoraEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "windblaze").toString()));
     public static final RegistryObject<EntityType<UltimateBellophiteClusterEntity>> ULTIMATE_BELLOPHITE_CLUSTER = ENTITIES.register("ultimate_bellophite_cluster", () -> EntityType.Builder.<UltimateBellophiteClusterEntity>of(UltimateBellophiteClusterEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "ultimate_bellophite_cluster").toString()));
+
+    //Others
+    public static final RegistryObject<EntityType<AltyrusSummoningEntity>> ALTYRUS_SUMMONING = ENTITIES.register("altyrus_summoning", () -> EntityType.Builder.of(AltyrusSummoningEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)
+            .build(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_summoning").toString()));
 }

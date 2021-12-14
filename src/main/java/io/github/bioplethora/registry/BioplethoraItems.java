@@ -47,4 +47,5 @@ public class BioplethoraItems {
     // Block Items
     public static final RegistryObject<Item> NANDBRI_SCALE_BLOCK = ITEMS.register("nandbri_scale_block", () -> new BlockItem(BioplethoraBlocks.NANDBRI_SCALE_BLOCK.get(), new Item.Properties().tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> BELLOPHITE_BLOCK = ITEMS.register("bellophite_block", () -> new BlockItem(BioplethoraBlocks.BELLOPHITE_BLOCK.get(), new Item.Properties().tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> BELLOPHITE_CORE_BLOCK = ITEMS.register("bellophite_core_block", () -> new BlockItem(BioplethoraBlocks.BELLOPHITE_CORE_BLOCK.get(), new Item.Properties().rarity(Rarity.RARE).tab(BioplethoraItemGroup.BioplethoraItemItemGroup)));
 }
