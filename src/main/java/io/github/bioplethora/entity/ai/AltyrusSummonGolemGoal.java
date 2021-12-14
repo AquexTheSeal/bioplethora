@@ -12,12 +12,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-public class AltyrusSummoningGoal extends Goal {
+public class AltyrusSummonGolemGoal extends Goal {
 
     private final AltyrusEntity altyrus;
     public int summonTime;
 
-    public AltyrusSummoningGoal(AltyrusEntity altyrusEntity) {
+    public AltyrusSummonGolemGoal(AltyrusEntity altyrusEntity) {
         this.altyrus = altyrusEntity;
     }
 

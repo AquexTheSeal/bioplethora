@@ -10,16 +10,16 @@ public class AltyrusSummoningModel extends AnimatedGeoModel<AltyrusSummoningEnti
 
     @Override
     public ResourceLocation getModelLocation(AltyrusSummoningEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "geo/altyrus_summoning.geo.json");
+        return new ResourceLocation(Bioplethora.MOD_ID, "geo/others/altyrus_summoning.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(AltyrusSummoningEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/altyrus_summoning.png");
+        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/others/altyrus_summoning.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(AltyrusSummoningEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "animations/altyrus_summoning.animation.json");
+        return new ResourceLocation(Bioplethora.MOD_ID, "animations/others/altyrus_summoning.animation.json");
     }
 }

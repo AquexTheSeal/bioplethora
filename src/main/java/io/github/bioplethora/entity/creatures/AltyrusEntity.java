@@ -3,7 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
-import io.github.bioplethora.entity.ai.AltyrusSummoningGoal;
+import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
@@ -87,7 +87,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 60, 0.6, 0.7));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(6, new AltyrusRangedAttackGoal(this));
-        this.goalSelector.addGoal(7, new AltyrusSummoningGoal(this));
+        this.goalSelector.addGoal(7, new AltyrusSummonGolemGoal(this));
         this.goalSelector.addGoal(8, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
