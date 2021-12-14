@@ -2,14 +2,14 @@ package io.github.bioplethora.entity.others;
 
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
-import net.minecraft.entity.*;
-import net.minecraft.entity.projectile.DamagingProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -56,7 +56,7 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
         ++birthTime;
 
-        this.setDeltaMovement(0, 0.05, 0);
+        this.setDeltaMovement(this.getDeltaMovement().x(), this.getDeltaMovement().y() + 0.1, this.getDeltaMovement().z());
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (this.getX()), (this.getY()), (this.getZ()), (int) 5, 1, 1, 1, 0.1);
