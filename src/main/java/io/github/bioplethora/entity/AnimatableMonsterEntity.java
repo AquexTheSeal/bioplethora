@@ -1,31 +1,14 @@
 package io.github.bioplethora.entity;
 
-import io.github.bioplethora.item.weapons.BellophgolemShieldItem;
-import io.github.bioplethora.registry.BioplethoraItems;
-import io.github.bioplethora.util.CustomRarityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.Rarity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.stats.Stats;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import static net.minecraft.item.Rarity.RARE;
 
 public abstract class AnimatableMonsterEntity extends MonsterEntity implements IAnimatable {
 

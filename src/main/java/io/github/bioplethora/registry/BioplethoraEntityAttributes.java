@@ -1,4 +1,4 @@
-package io.github.bioplethora.event;
+package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.*;
