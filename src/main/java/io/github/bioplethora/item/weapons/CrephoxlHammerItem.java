@@ -12,14 +12,10 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
@@ -124,7 +120,7 @@ public class CrephoxlHammerItem extends AxeItem {
             if (hand != null) {
                 entity.swing(hand);
             }
-            world.playSound(entity, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.break_block")), SoundCategory.PLAYERS, 1, 1);
+            world.playSound(entity, pos, SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.PLAYERS, 1, 1);
             if ((!(world.isClientSide()))) {
                 ((ServerWorld)world).sendParticles(ParticleTypes.CLOUD, x, y + 1.2, z, 50, 3, 0.2, 3, 0);
                 {

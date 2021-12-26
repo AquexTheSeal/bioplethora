@@ -23,7 +23,7 @@ public class BellophiteClusterRender extends GeoProjectilesRenderer<BellophiteCl
 
     @Override
     public RenderType getRenderType(BellophiteClusterEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityTranslucent(getTextureLocation(animatable));
+        return RenderType.eyes(getTextureLocation(animatable));
     }
 
     protected int getBlockLightLevel(BellophiteClusterEntity entityIn, BlockPos partialTicks) {

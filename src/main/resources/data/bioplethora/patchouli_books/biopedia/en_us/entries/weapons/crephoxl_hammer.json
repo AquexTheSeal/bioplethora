@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)SKILLS/ABILITIES: $(br)$()You can view it when hovering to the item, but it basically makes an AoE attack on right-click on the ground. $(br2)$(l)OBTAINING: $(br)$()Get 2 Crephoxl Feathers and 2 Crephoxl Sticks. If you are lucky enough, you can get them by killing only one Crephoxl. Lastly, you need 2 netherite ingots."
+      "text": "$(l)SKILLS/ABILITIES: $(br)$()This weapon makes an AoE attack on right-click on the ground. And it does a painful hit when you attack while crouching! You can view more by hovering to the item itself."
     },
     {
       "type": "crafting",

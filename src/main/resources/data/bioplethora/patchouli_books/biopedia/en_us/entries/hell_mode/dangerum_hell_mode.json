@@ -1,0 +1,11 @@
+{
+  "name": "Dangerum Mobs: Hell Mode",
+  "icon": "bioplethora:bellophgolem_spawn_egg",
+  "category": "hell_mode",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)CHANGES IN HELL MODE - ALPHEM: $(br)$()+ Enhanced armor, attack damage, and health. $(br)$()+ They now spawn with stronger weapons, like a diamond sword or an iron axe. $(br)$()+ There is now a little chance for them to spawn with a totem of undying in it's off-hand.$(br)$()+ Windblaze projectiles now also deal 3 damage."
+    }
+    ]
+}

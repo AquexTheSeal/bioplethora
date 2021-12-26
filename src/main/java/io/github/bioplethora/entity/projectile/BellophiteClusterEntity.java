@@ -44,7 +44,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
     public double xPower;
     public double yPower;
     public double zPower;
-    public double lifespan = 0;
+    public int lifespan = 0;
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public BellophiteClusterEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
@@ -186,14 +186,15 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
 
     @Override
     public void tick() {
-        if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 3, 0.4, 0.4, 0.4, 0.1);
-        }
         Entity entity = this.getOwner();
-        if (this.level.isClientSide || (entity == null || !entity.removed) && this.level.hasChunkAt(this.blockPosition())) {
+        if (this.level.isClientSide || (entity != null) && this.level.hasChunkAt(this.blockPosition())) {
             super.tick();
             if (this.shouldBurn()) {
                 this.setSecondsOnFire(1);
+            }
+
+            if (this.level instanceof ServerWorld) {
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 3, 0.4, 0.4, 0.4, 0.1);
             }
 
             RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
@@ -224,9 +225,9 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
             this.remove();
         }
 
-        lifespan = (double) lifespan + 1;
+        ++lifespan;
 
-        if ((lifespan == 100) && (this.getOwner() != null)) {
+        if (lifespan == 100) {
             this.remove();
         }
     }

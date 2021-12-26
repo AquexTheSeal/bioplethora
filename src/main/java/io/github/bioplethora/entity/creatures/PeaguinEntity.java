@@ -2,11 +2,11 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableAnimalEntity;
-import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
+import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -16,16 +16,19 @@ import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.GhastEntity;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.*;
+import net.minecraft.pathfinding.GroundPathNavigator;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
@@ -357,23 +360,15 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
     static class SwimGoal extends RandomSwimmingGoal {
         private final PeaguinEntity fish;
 
-        public SwimGoal(PeaguinEntity p_i48856_1_) {
-            super(p_i48856_1_, 1.0D, 40);
-            this.fish = p_i48856_1_;
+        public SwimGoal(PeaguinEntity peaguinEntity) {
+            super(peaguinEntity, 1.0D, 40);
+            this.fish = peaguinEntity;
         }
 
         public boolean canUse() {
             return this.fish.canRandomSwim() && super.canUse();
         }
     }
-
-    /*protected PathNavigator createNavigation(World world) {
-        if (this.isInWater()) {
-            return new SwimmerPathNavigator(this, world);
-        } else {
-            return new GroundPathNavigator(this, world);
-        }
-    }*/
 
     private void switchNavigator(boolean onLand) {
         if (onLand) {
@@ -398,16 +393,7 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
     }
 
     public void travel(Vector3d stuckSpeedMultiplier) {
-        /*if (this.isEffectiveAi() && this.isInWater()) {
-            this.moveRelative(0.01F, stuckSpeedMultiplier);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-            if (this.getTarget() == null) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-            }
-        } else {
-            super.travel(stuckSpeedMultiplier);
-        }*/
+
         if (this.isEffectiveAi() && this.isInWater()) {
             this.moveRelative(this.getSpeed(), stuckSpeedMultiplier);
             this.move(MoverType.SELF, this.getDeltaMovement());
@@ -420,40 +406,3 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
         }
     }
 }
-
-    /*static class MoveHelperController extends MovementController {
-        private final PeaguinEntity fish;
-
-        MoveHelperController(PeaguinEntity p_i48857_1_) {
-            super(p_i48857_1_);
-            this.fish = p_i48857_1_;
-        }
-
-        public void tick() {
-            if (this.fish.isEyeInFluid(FluidTags.WATER)) {
-                this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
-            }
-
-            if (this.operation == Action.MOVE_TO && !this.fish.getNavigation().isDone()) {
-                float f = (float)(this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                this.fish.setSpeed(MathHelper.lerp(0.125F, this.fish.getSpeed(), f));
-                double d0 = this.wantedX - this.fish.getX();
-                double d1 = this.wantedY - this.fish.getY();
-                double d2 = this.wantedZ - this.fish.getZ();
-                if (d1 != 0.0D) {
-                    double d3 = (double)MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-                    this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double)this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
-                }
-
-                if (d0 != 0.0D || d2 != 0.0D) {
-                    float f1 = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
-                    this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
-                    this.fish.yBodyRot = this.fish.yRot;
-                }
-
-            } else {
-                this.fish.setSpeed(0.0F);
-            }
-        }
-    }
-}*/

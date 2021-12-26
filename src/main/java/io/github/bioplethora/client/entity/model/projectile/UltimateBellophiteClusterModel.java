@@ -1,7 +1,6 @@
 package io.github.bioplethora.client.entity.model.projectile;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import io.github.bioplethora.entity.projectile.UltimateBellophiteClusterEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;

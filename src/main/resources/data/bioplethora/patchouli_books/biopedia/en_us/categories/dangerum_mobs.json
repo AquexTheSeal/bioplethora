@@ -1,0 +1,6 @@
+{
+  "name": "Mobs: Dangerum",
+  "description": "These creatures are completely hostile. Some of these creatures destroy anything in their ways, though, they are usually not so strong.",
+  "icon": ["bioplethora:textures/gui/patchouli/symbols/dangerum.png"],
+  "sortnum":5
+}

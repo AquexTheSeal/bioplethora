@@ -92,7 +92,7 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.9'
     //Geckolib
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.43')
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.57')
     //Just Enough Items (JEI)
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")

@@ -15,8 +15,8 @@ public abstract class SummonableMonsterEntity extends AnimatableMonsterEntity im
     private MobEntity owner;
     private boolean hasLimitedLife;
     private boolean explodeOnExpiry;
-    private int limitedLifeTicks;
     private int lifeLimitBeforeDeath;
+    private int limitedLifeTicks = 0;
 
     public SummonableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
@@ -43,9 +43,8 @@ public abstract class SummonableMonsterEntity extends AnimatableMonsterEntity im
         }
     }
 
-    public void setLimitedLife(int limitedLife) {
+    public void setHasLimitedLife(boolean hasLimitedLife) {
         this.hasLimitedLife = true;
-        this.limitedLifeTicks = limitedLife;
     }
 
     public void setExplodeOnExpiry(boolean explodeOnExpiry) {

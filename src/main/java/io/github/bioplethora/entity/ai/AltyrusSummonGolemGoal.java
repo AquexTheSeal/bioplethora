@@ -48,7 +48,7 @@ public class AltyrusSummonGolemGoal extends Goal {
             bellophgolemEntity.setOwner(this.altyrus);
             bellophgolemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, (ILivingEntityData)null, (CompoundNBT)null);
 
-            bellophgolemEntity.setLimitedLife(0);
+            bellophgolemEntity.setHasLimitedLife(true);
             bellophgolemEntity.setExplodeOnExpiry(true);
             bellophgolemEntity.setLifeLimitBeforeDeath(200);
 
@@ -59,7 +59,7 @@ public class AltyrusSummonGolemGoal extends Goal {
             bellophgolemEntity2.setOwner(this.altyrus);
             bellophgolemEntity2.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, (ILivingEntityData)null, (CompoundNBT)null);
 
-            bellophgolemEntity2.setLimitedLife(0);
+            bellophgolemEntity2.setHasLimitedLife(true);
             bellophgolemEntity2.setExplodeOnExpiry(true);
             bellophgolemEntity2.setLifeLimitBeforeDeath(200);
 

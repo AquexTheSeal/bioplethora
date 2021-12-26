@@ -1,0 +1,27 @@
+{
+  "display": {
+    "background": "minecraft:textures/block/stone.png",
+    "icon": {
+      "item": "bioplethora:crephoxl_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.crephoxl_kill.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.crephoxl_kill.desc"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "crephoxl_kill": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 1
+  },
+  "parent": "bioplethora:bioplethora_startup"
+}

@@ -1,7 +1,7 @@
 {
   "name": "Alphems",
   "icon": "bioplethora:alphem_spawn_egg",
-  "category": "fairy_mobs",
+  "category": "dangerum_mobs",
   "pages": [
     {
       "type": "patchouli:text",
@@ -11,7 +11,7 @@
       "type": "patchouli:image",
       "border": "false",
       "images":["bioplethora:textures/gui/patchouli/entries/fairy_mobs/alphem_entry.png"],
-      "text": "Alphems usually spawn in ---."
+      "text": "Alphems usually spawn in forest areas."
     }
   ]
 }

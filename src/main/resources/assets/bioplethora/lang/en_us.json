@@ -28,11 +28,16 @@
   "item.bioplethora.nandbri_scales": "Nandbri Scales",
   "item.bioplethora.bellophite": "Bellophite",
 
+  "item.bioplethora.raw_cuttlefish_meat": "Raw Cuttlefish Meat",
+  "item.bioplethora.cooked_cuttlefish_meat": "Cooked Cuttlefish Meat",
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
-  "item.bioplethora.bellophgolem_shield": "Bellophgolem Shield",
+  "item.bioplethora.bellophgolem_shield": "Bellophite Shield",
   "item.bioplethora.bellophite_arrow": "Bellophite Arrow",
   "item.bioplethora.stellar_scythe": "Stellar Scythe",
+
+  "item.bioplethora.phantom_chime": "Phantom Chime",
+  "item.bioplethora.magma_bomb": "Magma Bomb",
 
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
@@ -58,10 +63,40 @@
   "item.bioplethora.bellophgolem_shield.desc_0": "The Bellophgolem gets more durability than the regular shield.",
   "item.bioplethora.bellophgolem_shield.desc_1": "While using, the Bellophgolem grants a high resistance level to the user while giving the user a regeneration effect.",
 
+  "item.bioplethora.phantom_chime.desc_0": "On right click on the ground - casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
+  "item.bioplethora.phantom_magma_bomb_0": "Throws a projectile that explodes on impact.",
+
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora.",
 
+  "advancements.bioplethora.bioplethora_startup.title": "Welcome to Bioplethora!",
+  "advancements.bioplethora.bioplethora_startup.desc": "Thank you for installing Bioplethora! Feel free to tame, kill, and farm these creatures!",
+
+  "advancements.bioplethora.crephoxl_kill.title": "Lurking Monster of the Forests",
+  "advancements.bioplethora.crephoxl_kill.desc": "Kill a Crephoxl.",
+  "advancements.bioplethora.alphem_kill.title": "Dominating Numbers!",
+  "advancements.bioplethora.alphem_kill.desc": "Kill an Alphem.",
+  "advancements.bioplethora.bellophgolem_kill.title": "A Tough Fortress that Destroy",
+  "advancements.bioplethora.bellophgolem_kill.desc": "Kill a Bellophgolem.",
+  "advancements.bioplethora.altyrus_summoning.title": "The Rise of the Destroyer!",
+  "advancements.bioplethora.altyrus_summoning.desc": "Summon the Altyrus using the Altyrus Summoning Altar.",
+  "advancements.bioplethora.altyrus_kill.title": "The Fall of the Destroyer...",
+  "advancements.bioplethora.altyrus_kill.desc": "Kill the Altyrus boss.",
+
+  "advancements.bioplethora.crephoxl_hammer_obtain.title": "A Handy Hammer",
+  "advancements.bioplethora.crephoxl_hammer_obtain.desc": "Obtain a Crephoxl Hammer.",
+  "advancements.bioplethora.bellophgolem_shield_obtain.title": "The Better Tower",
+  "advancements.bioplethora.bellophgolem_shield_obtain.desc": "Obtain a Bellophite Shield.",
+  "advancements.bioplethora.bellophite_arrow_obtain.title": "Breakthrough!",
+  "advancements.bioplethora.bellophite_arrow_obtain.desc": "Obtain a Bellophite Arrow.",
+  "advancements.bioplethora.bellophite_block_obtain.title": "As Tough as Netherite",
+  "advancements.bioplethora.bellophite_block_obtain.desc": "Obtain a Bellophite Block.",
+  "advancements.bioplethora.bellophite_core_block_obtain.title": "The Ultimate Core",
+  "advancements.bioplethora.bellophite_core_block_obtain.desc": "Obtain a Bellophite Core Block.",
+  "advancements.bioplethora.cooked_cuttlefish_meat_obtain.title": "Tasty and Fast!",
+  "advancements.bioplethora.cooked_cuttlefish_meat_obtain.desc": "Take a Cooked Cuttlefish Meat.",
+
   "subtitles.bioplethora.bellophgolem.idle": "Bellophgolem grunts",
   "subtitles.bioplethora.bellophgolem.hurt": "Bellophgolem hurts",
-  "subtitles.bioplethora.bellophgolem.death": "Bellophgolem Dies"
+  "subtitles.bioplethora.bellophgolem.death": "Bellophgolem dies"
 }

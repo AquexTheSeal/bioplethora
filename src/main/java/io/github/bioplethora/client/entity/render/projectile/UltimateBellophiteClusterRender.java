@@ -2,10 +2,7 @@ package io.github.bioplethora.client.entity.render.projectile;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.client.entity.model.projectile.BellophiteClusterModel;
 import io.github.bioplethora.client.entity.model.projectile.UltimateBellophiteClusterModel;
-import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import io.github.bioplethora.entity.projectile.UltimateBellophiteClusterEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -18,15 +15,13 @@ import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
 
 public class UltimateBellophiteClusterRender extends GeoProjectilesRenderer<UltimateBellophiteClusterEntity> {
 
-    private static final RenderType BEAM = RenderType.entitySmoothCutout(new ResourceLocation(Bioplethora.MOD_ID, "textures/projectiles/ultimate_bellophite_cluster.png"));
-
     public UltimateBellophiteClusterRender(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new UltimateBellophiteClusterModel());
     }
 
     @Override
     public RenderType getRenderType(UltimateBellophiteClusterEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityTranslucent(getTextureLocation(animatable));
+        return RenderType.eyes(getTextureLocation(animatable));
     }
 
     protected int getBlockLightLevel(UltimateBellophiteClusterEntity entityIn, BlockPos partialTicks) {

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.model.BellophgolemEntityModel;
+import io.github.bioplethora.client.entity.render.layer.BellophgolemEntityGlowLayer;
 import io.github.bioplethora.entity.creatures.BellophgolemEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -17,6 +18,7 @@ public class BellophgolemEntityRender extends GeoEntityRenderer<BellophgolemEnti
 
     public BellophgolemEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new BellophgolemEntityModel());
+        this.addLayer(new BellophgolemEntityGlowLayer (this));
         this.shadowRadius = 2.2F;
     }
 

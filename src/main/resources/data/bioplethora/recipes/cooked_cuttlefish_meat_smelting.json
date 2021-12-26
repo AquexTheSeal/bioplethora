@@ -1,0 +1,12 @@
+{
+  "group": "bioplethora",
+  "type": "minecraft:smelting",
+  "experience": 1,
+  "cookingtime": 200,
+  "ingredient": {
+    "item": "bioplethora:raw_cuttlefish_meat"
+  },
+  "result": {
+    "item": "bioplethora:cooked_cuttlefish_meat"
+  }
+}

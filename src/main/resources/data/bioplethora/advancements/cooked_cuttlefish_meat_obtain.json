@@ -1,0 +1,38 @@
+{
+  "display": {
+    "background": "minecraft:textures/block/stone.png",
+    "icon": {
+      "item": "bioplethora:cooked_cuttlefish_meat"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.cooked_cuttlefish_meat_obtain.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.cooked_cuttlefish_meat_obtain.desc"
+    },
+    "frame": "goal",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "cooked_cuttlefish_meat_obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:cooked_cuttlefish_meat",
+            "count": {
+              "min": 1,
+              "max": 999999
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 1
+  },
+  "parent": "bioplethora:bioplethora_startup"
+}

@@ -1,0 +1,38 @@
+{
+  "display": {
+    "background": "minecraft:textures/block/stone.png",
+    "icon": {
+      "item": "bioplethora:crephoxl_hammer"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.crephoxl_hammer_obtain.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.crephoxl_hammer_obtain.desc"
+    },
+    "frame": "goal",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "crephoxl_hammer_obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:crephoxl_hammer",
+            "count": {
+              "min": 1,
+              "max": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 1
+  },
+  "parent": "bioplethora:crephoxl_kill"
+}

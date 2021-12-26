@@ -7,13 +7,14 @@ import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -25,6 +26,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +36,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -42,18 +45,19 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Iterator;
 
-public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal {
+public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IAnimationTickable {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_SUMMONING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
     private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS));
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public AltyrusEntity(EntityType<? extends MonsterEntity> type, World world) {
+    public AltyrusEntity(EntityType<? extends AnimatableMonsterEntity> type, World world) {
         super(type, world);
         this.noCulling = true;
-        this.xpReward = 100;
+        this.xpReward = 200;
         this.moveControl = new FlyingMovementController(this, 20, true);
     }
 
@@ -66,7 +70,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
                 .add(Attributes.MAX_HEALTH, 450 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 64D)
+                .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.FLYING_SPEED, 1.5F);
     }
 
@@ -84,7 +88,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AlphemEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 60, 0.6, 0.7));
+        this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(6, new AltyrusRangedAttackGoal(this));
         this.goalSelector.addGoal(7, new AltyrusSummonGolemGoal(this));
@@ -152,9 +156,30 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     }
 
     @Override
-    public void aiStep() {
-        super.aiStep();
+    public void tick() {
+        super.tick();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+
+        Entity sourceEnt = source.getEntity();
+
+        if (sourceEnt instanceof ServerPlayerEntity) {
+            Advancement adv = ((ServerPlayerEntity) sourceEnt).server.getAdvancements().getAdvancement(new ResourceLocation("bioplethora:altyrus_kill"));
+
+            assert adv != null;
+            AdvancementProgress advProg = ((ServerPlayerEntity) sourceEnt).getAdvancements().getOrStartProgress(adv);
+
+            if (!advProg.isDone()) {
+                Iterator iterator = advProg.getRemainingCriteria().iterator();
+                while (iterator.hasNext()) {
+                    ((ServerPlayerEntity) sourceEnt).getAdvancements().award(adv, (String) iterator.next());
+                }
+            }
+        }
     }
 
     @Override
@@ -228,5 +253,10 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         super.defineSynchedData();
         this.entityData.define(DATA_IS_CHARGING, false);
         this.entityData.define(DATA_IS_SUMMONING, false);
+    }
+
+    @Override
+    public int tickTimer() {
+        return tickCount;
     }
 }

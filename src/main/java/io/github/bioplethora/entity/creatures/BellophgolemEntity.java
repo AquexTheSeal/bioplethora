@@ -2,17 +2,20 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
+import io.github.bioplethora.entity.ai.BellophgolemRangedAttackGoal;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
-import io.github.bioplethora.entity.ai.BellophiteClusterRangedAttackGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -21,6 +24,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -40,6 +44,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Iterator;
 
 public class BellophgolemEntity extends SummonableMonsterEntity implements IAnimatable {
 
@@ -62,7 +67,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
                 .add(Attributes.MAX_HEALTH, 220 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.2 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 64D);
+                .add(Attributes.FOLLOW_RANGE, 32D);
     }
 
     @Override
@@ -75,7 +80,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 60, 0.6, 0.7));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
-        this.goalSelector.addGoal(6, new BellophiteClusterRangedAttackGoal(this));
+        this.goalSelector.addGoal(6, new BellophgolemRangedAttackGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
@@ -156,6 +161,27 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         }
         this.doEnchantDamageEffects(this, entity);
         return flag;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+
+        Entity sourceEnt = source.getEntity();
+
+        if (sourceEnt instanceof ServerPlayerEntity) {
+            Advancement adv = ((ServerPlayerEntity) sourceEnt).server.getAdvancements().getAdvancement(new ResourceLocation("bioplethora:bellophgolem_kill"));
+
+            assert adv != null;
+            AdvancementProgress advProg = ((ServerPlayerEntity) sourceEnt).getAdvancements().getOrStartProgress(adv);
+
+            if (!advProg.isDone()) {
+                Iterator iterator = advProg.getRemainingCriteria().iterator();
+                while (iterator.hasNext()) {
+                    ((ServerPlayerEntity) sourceEnt).getAdvancements().award(adv, (String) iterator.next());
+                }
+            }
+        }
     }
 
     public void aiStep() {

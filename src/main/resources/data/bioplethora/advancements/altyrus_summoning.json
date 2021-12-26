@@ -1,0 +1,27 @@
+{
+  "display": {
+    "background": "minecraft:textures/block/stone.png",
+    "icon": {
+      "item": "bioplethora:bellophite_core_block"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.altyrus_summoning.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.altyrus_summoning.desc"
+    },
+    "frame": "goal",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "altyrus_summoning": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 5
+  },
+  "parent": "bioplethora:bellophite_core_block_obtain"
+}

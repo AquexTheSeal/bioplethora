@@ -1,22 +1,21 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
+import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
-import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -25,6 +24,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
@@ -41,6 +41,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Iterator;
 
 public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable {
 
@@ -156,6 +157,27 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         }
 
         return iLivingEntityData;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+
+        Entity sourceEnt = source.getEntity();
+
+        if (sourceEnt instanceof ServerPlayerEntity) {
+            Advancement adv = ((ServerPlayerEntity) sourceEnt).server.getAdvancements().getAdvancement(new ResourceLocation("bioplethora:alphem_kill"));
+
+            assert adv != null;
+            AdvancementProgress advProg = ((ServerPlayerEntity) sourceEnt).getAdvancements().getOrStartProgress(adv);
+
+            if (!advProg.isDone()) {
+                Iterator iterator = advProg.getRemainingCriteria().iterator();
+                while (iterator.hasNext()) {
+                    ((ServerPlayerEntity) sourceEnt).getAdvancements().award(adv, (String) iterator.next());
+                }
+            }
+        }
     }
 
     @Override

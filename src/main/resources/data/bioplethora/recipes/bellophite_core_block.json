@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#S#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:soul_lantern"
+    },
+    "S": {
+      "item": "bioplethora:bellophite_block"
+    }
+  },
+  "result": {
+    "item": "bioplethora:bellophite_core_block",
+    "count": 1
+  }
+}

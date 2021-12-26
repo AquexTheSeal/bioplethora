@@ -1,0 +1,27 @@
+{
+  "display": {
+    "background": "minecraft:textures/block/stone.png",
+    "icon": {
+      "item": "bioplethora:alphem_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.alphem_kill.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.alphem_kill.desc"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "alphem_kill": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 1
+  },
+  "parent": "bioplethora:bioplethora_startup"
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "background": "bioplethora:textures/block/bellophite_core_block",
+    "icon": {
+      "item": "bioplethora:biopedia"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.bioplethora_startup.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.bioplethora_startup.desc"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "bioplethora_startup": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 0
+  }
+}
