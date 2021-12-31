@@ -14,7 +14,7 @@ public class DwarfMossadileEntityModel extends AnimatedGeoModel<DwarfMossadileEn
 
     @Override
     public ResourceLocation getTextureLocation(DwarfMossadileEntity entity) {
-        if (entity.isNetherVariant) {
+        if (entity.isNetherVariant()) {
             return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/dwarf_mossadile_nether.png");
         } else {
             return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/dwarf_mossadile.png");

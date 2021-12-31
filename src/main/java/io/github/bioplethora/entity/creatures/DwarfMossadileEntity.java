@@ -11,6 +11,9 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.DifficultyInstance;
@@ -28,8 +31,8 @@ import javax.annotation.Nullable;
 
 public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAnimatable {
 
+    private static final DataParameter<Boolean> DATA_IS_NETHER_VARIANT = EntityDataManager.defineId(DwarfMossadileEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
-    public boolean isNetherVariant = false;
 
     public DwarfMossadileEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
@@ -56,6 +59,7 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
         this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, NandbriEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, DwarfMossadileEntity.class)).setAlertOthers());
     }
@@ -89,7 +93,7 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
         boolean flag = super.doHurtTarget(entity);
         World world = entity.level;
         if (flag && entity instanceof LivingEntity) {
-            if (this.isNetherVariant) {
+            if (this.isNetherVariant()) {
                 entity.setSecondsOnFire(5);
             } else {
                 ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 40, 1));
@@ -100,8 +104,18 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
 
     public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 
-        if (this.level.dimension().equals(World.NETHER)) {
-            this.isNetherVariant = true;
+        if ((this.level.dimension().equals(World.NETHER) || (this.level.dimension().equals(World.NETHER)))) {
+            this.setNetherVariant(true);
+        }
+
+        if (BioplethoraConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ARMOR).setBaseValue(4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(37 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        }
+
+        if (this.isNetherVariant()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(7.5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
         }
 
         return super.finalizeSpawn(world, difficultyIn, reason, spawnDataIn, dataTag);
@@ -109,6 +123,25 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
 
     @Override
     public boolean fireImmune() {
-        return this.isNetherVariant;
+        return this.isNetherVariant();
+    }
+
+    public boolean isNetherVariant() {
+        return this.entityData.get(DATA_IS_NETHER_VARIANT);
+    }
+
+    public void setNetherVariant(boolean netherVariant) {
+        this.entityData.set(DATA_IS_NETHER_VARIANT, netherVariant);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundNBT compoundNBT) {
+        super.addAdditionalSaveData(compoundNBT);
+        compoundNBT.putBoolean("isNetherVariant", this.isNetherVariant());
+    }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_IS_NETHER_VARIANT, false);
     }
 }

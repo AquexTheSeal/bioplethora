@@ -186,14 +186,9 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
 
     public void aiStep() {
         super.aiStep();
-        if (((LivingEntity) this.getEntity()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
-            ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 5, 1));
-            ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.REGENERATION, 5, 1));
-        }
 
         if (((LivingEntity) this.getEntity()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-            ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 5, 2));
-            ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.REGENERATION, 5, 1));
+            ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 5, 1));
         }
 
         if (this.getHealth() <= 100 && !this.hasCracked) {

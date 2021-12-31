@@ -10,6 +10,7 @@
   "entity.bioplethora.cuttlefish": "Cuttlefish",
   "entity.bioplethora.gaugalem": "Gaugalem",
   "entity.bioplethora.altyrus": "Altyrus",
+  "entity.bioplethora.dwarf_mossadile": "Dwarf Mossadile",
 
   "entity.bioplethora.bellophite_cluster": "Bellophite Cluster",
   "entity.bioplethora.bellophite_arrow": "Bellophite Arrow",
@@ -22,6 +23,7 @@
   "item.bioplethora.cuttlefish_spawn_egg": "Cuttlefish Spawn Egg",
   "item.bioplethora.gaugalem_spawn_egg": "Gaugalem Spawn Egg",
   "item.bioplethora.altyrus_spawn_egg": "Altyrus Spawn Egg",
+  "item.bioplethora.dwarf_mossadile_spawn_egg": "Dwarf Mossadile Spawn Egg",
 
   "item.bioplethora.crephoxl_feather": "Crephoxl Feather",
   "item.bioplethora.crephoxl_stick": "Crephoxl Stick",
