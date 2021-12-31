@@ -1,0 +1,169 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.dwarf_mossadile.idle": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"Body": {
+					"position": {
+						"vector": [0, "math.sin(query.anim_time * 180) * -0.5", 0]
+					}
+				},
+				"leg0": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -3", 0, 0]
+					}
+				},
+				"leg1": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 3", 0, 0]
+					}
+				},
+				"leg2": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -3", 0, 0]
+					}
+				},
+				"leg3": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 3", 0, 0]
+					}
+				},
+				"Head": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 2", 0, 0]
+					}
+				},
+				"Jaws": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -2", 0, 0]
+					}
+				},
+				"Tail": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -2", 0, 0]
+					}
+				},
+				"Tail2": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -2", 0, 0]
+					}
+				}
+			}
+		},
+		"animation.dwarf_mossadile.walking": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"Body": {
+					"position": {
+						"vector": [0, "math.sin(query.anim_time * 180) * 0.5", 0]
+					}
+				},
+				"leg0": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 360) * -10", 0, 0]
+					}
+				},
+				"leg1": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 360) * 10", 0, 0]
+					}
+				},
+				"leg2": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 360) * -10", 0, 0]
+					}
+				},
+				"leg3": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 360) * 10", 0, 0]
+					}
+				},
+				"Head2": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 3", 0, 0]
+					}
+				},
+				"Jaws": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 3", 0, 0]
+					}
+				},
+				"Tail": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 180) * 5", 0]
+					}
+				},
+				"Tail2": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 180) * 5", 0]
+					}
+				},
+				"dwarf_mossadile": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 360) * 3"]
+					}
+				}
+			}
+		},
+		"animation.dwarf_mossadile.attacking": {
+			"loop": true,
+			"animation_length": 2,
+			"override_previous_animation": true,
+			"bones": {
+				"Head": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-35, 0, 0],
+							"easing": "easeInOutBack"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInElastic"
+						}
+					}
+				},
+				"Jaws": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [25, 0, 0],
+							"easing": "easeInOutBack"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInElastic"
+						}
+					}
+				},
+				"dwarf_mossadile": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 2],
+							"easing": "easeInElastic"
+						},
+						"1.0": {
+							"vector": [0, 0, -2],
+							"easing": "easeInElastic"
+						},
+						"2.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutBack"
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

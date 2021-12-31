@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai.tameable;
 
-import io.github.bioplethora.entity.AnimatableAnimalEntity;
+import io.github.bioplethora.entity.AnimatableTameableEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.EntityPredicates;
 
@@ -18,7 +18,7 @@ public class AnimalAnimatableMoveToTargetGoal extends AnimalAnimatableMovableGoa
      * @param speedMultiplier Entity will move by base speed * this
      * @param checkRate       Check rate with formula: {@code if(RANDOM.nextInt(rate) == 0)}, so bigger = less often
      */
-    public AnimalAnimatableMoveToTargetGoal(AnimatableAnimalEntity entity, double speedMultiplier, int checkRate) {
+    public AnimalAnimatableMoveToTargetGoal(AnimatableTameableEntity entity, double speedMultiplier, int checkRate) {
         this.entity = entity;
         this.speedMultiplier = speedMultiplier;
         this.checkRate = checkRate;

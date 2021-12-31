@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.entity.AnimatableAnimalEntity;
+import io.github.bioplethora.entity.AnimatableTameableEntity;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
@@ -49,7 +49,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable, IAngerable {
+public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatable, IAngerable {
 
     private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(PeaguinEntity.class, DataSerializers.INT);
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
@@ -58,7 +58,7 @@ public class PeaguinEntity extends AnimatableAnimalEntity implements IAnimatable
 
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public PeaguinEntity(EntityType<? extends AnimatableAnimalEntity> type, World worldIn) {
+    public PeaguinEntity(EntityType<? extends AnimatableTameableEntity> type, World worldIn) {
         super(type, worldIn);
         this.setTame(false);
         this.setPathfindingMalus(PathNodeType.WATER, 0.0F);

@@ -2,10 +2,15 @@ package io.github.bioplethora;
 
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
-import io.github.bioplethora.client.entity.render.projectile.*;
+import io.github.bioplethora.client.entity.render.projectile.BellophiteArrowRender;
+import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
+import io.github.bioplethora.client.entity.render.projectile.UltimateBellophiteClusterRender;
+import io.github.bioplethora.client.entity.render.projectile.WindBlazeRender;
 import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
@@ -23,6 +28,8 @@ public class BioplethoraClient {
     @SubscribeEvent
     public static void registerRenderers(final FMLClientSetupEvent event) {
 
+        Minecraft mcClient = event.getMinecraftSupplier().get();
+
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);
 
@@ -33,6 +40,7 @@ public class BioplethoraClient {
         //Dangerum
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), AlphemEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.GAUGALEM.get(), GaugalemEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntityRender::new);
 
         //Hellsent
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
@@ -46,7 +54,7 @@ public class BioplethoraClient {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_ARROW.get(), BellophiteArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WINDBLAZE.get(), WindBlazeRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateBellophiteClusterRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.MAGMA_BOMB.get(), MagmaBombRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.MAGMA_BOMB.get(), (entityRendererManager) -> new SpriteRenderer<>(entityRendererManager, mcClient.getItemRenderer()));
 
         //others
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);

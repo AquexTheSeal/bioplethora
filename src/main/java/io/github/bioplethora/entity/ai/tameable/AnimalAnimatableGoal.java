@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai.tameable;
 
-import io.github.bioplethora.entity.AnimatableAnimalEntity;
+import io.github.bioplethora.entity.AnimatableTameableEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
@@ -9,13 +9,13 @@ import java.util.Random;
 public abstract class AnimalAnimatableGoal extends Goal {
 
     protected static final Random RANDOM = new Random();
-    protected AnimatableAnimalEntity entity;
+    protected AnimatableTameableEntity entity;
     protected long tickDelta;
     protected double animationProgress;
     private long lastGameTime;
     private boolean isFirsLoop = true;
 
-    protected static double getAttackReachSq(AnimatableAnimalEntity attacker, LivingEntity target) {
+    protected static double getAttackReachSq(AnimatableTameableEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
     }
 

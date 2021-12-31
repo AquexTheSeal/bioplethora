@@ -185,7 +185,7 @@ public class ArbitraryBallistaItem extends CrossbowItem {
         });
     }
 
-    private static void shootProjectile(World level, LivingEntity entity, Hand hand, ItemStack p_220016_3_, ItemStack p_220016_4_, float p_220016_5_, boolean p_220016_6_, float p_220016_7_, float p_220016_8_, float p_220016_9_) {
+    private static void shootProjectile(World level, LivingEntity entity, Hand hand, ItemStack p_220016_3_, ItemStack p_220016_4_, float p_220016_5_, boolean b, float p_220016_7_, float p_220016_8_, float v) {
 
         double x = entity.getX(), y = entity.getY(), z = entity.getZ();
         BlockPos pos = entity.getEntity().blockPosition();
@@ -197,10 +197,8 @@ public class ArbitraryBallistaItem extends CrossbowItem {
                 projectileentity = new FireworkRocketEntity(level, p_220016_4_, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true);
             } else {
                 projectileentity = getArrow(level, entity, p_220016_3_, p_220016_4_);
-                if (p_220016_6_ || p_220016_9_ != 0.0F) {
+                if (b || v != 0.0F) {
                     ((AbstractArrowEntity)projectileentity).pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
-                    ((AbstractArrowEntity)projectileentity).isNoGravity();
-                    ((AbstractArrowEntity)projectileentity).setBaseDamage(((AbstractArrowEntity) projectileentity).getBaseDamage() + 7.5);
                 }
             }
 
@@ -212,10 +210,10 @@ public class ArbitraryBallistaItem extends CrossbowItem {
 
             if (entity instanceof ICrossbowUser) {
                 ICrossbowUser icrossbowuser = (ICrossbowUser)entity;
-                icrossbowuser.shootCrossbowProjectile(icrossbowuser.getTarget(), p_220016_3_, projectileentity, p_220016_9_);
+                icrossbowuser.shootCrossbowProjectile(icrossbowuser.getTarget(), p_220016_3_, projectileentity, v);
             } else {
                 Vector3d vector3d1 = entity.getUpVector(1.0F);
-                Quaternion quaternion = new Quaternion(new Vector3f(vector3d1), p_220016_9_, true);
+                Quaternion quaternion = new Quaternion(new Vector3f(vector3d1), v, true);
                 Vector3d vector3d = entity.getViewVector(1.0F);
                 Vector3f vector3f = new Vector3f(vector3d);
                 vector3f.transform(quaternion);
@@ -230,16 +228,18 @@ public class ArbitraryBallistaItem extends CrossbowItem {
         }
     }
 
-    private static AbstractArrowEntity getArrow(World p_220024_0_, LivingEntity p_220024_1_, ItemStack p_220024_2_, ItemStack p_220024_3_) {
-        ArrowItem arrowitem = (ArrowItem)(p_220024_3_.getItem() instanceof ArrowItem ? p_220024_3_.getItem() : Items.ARROW);
-        AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(p_220024_0_, p_220024_3_, p_220024_1_);
-        if (p_220024_1_ instanceof PlayerEntity) {
+    private static AbstractArrowEntity getArrow(World world, LivingEntity entity, ItemStack stack, ItemStack stack1) {
+        ArrowItem arrowitem = (ArrowItem)(stack1.getItem() instanceof ArrowItem ? stack1.getItem() : Items.ARROW);
+        AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(world, stack1, entity);
+        if (entity instanceof PlayerEntity) {
             abstractarrowentity.setCritArrow(true);
         }
 
         abstractarrowentity.setSoundEvent(SoundEvents.CROSSBOW_HIT);
         abstractarrowentity.setShotFromCrossbow(true);
-        int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, p_220024_2_);
+        abstractarrowentity.setNoGravity(true);
+        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + 7.5);
+        int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, stack);
         if (i > 0) {
             abstractarrowentity.setPierceLevel((byte)i);
         }

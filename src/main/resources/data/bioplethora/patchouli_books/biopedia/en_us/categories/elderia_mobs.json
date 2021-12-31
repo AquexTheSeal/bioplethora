@@ -1,6 +1,6 @@
 {
     "name": "Mobs: Elderia",
   "description": "This class of creatures are horrifying giants, lurking for bloodlust. They are the most dangerous and the most powerful creatures among all the 5 mob classes.",
-  "icon": ["bioplethora:textures/gui/patchouli/symbols/elderia.png"],
+  "icon": "bioplethora:textures/gui/patchouli/symbols/elderia.png",
   "sortnum":7
 }

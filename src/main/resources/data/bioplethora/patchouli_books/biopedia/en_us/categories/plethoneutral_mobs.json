@@ -1,6 +1,6 @@
 {
   "name": "Mobs: Plethoneutral",
   "description": "These creatures only fight back when bothered or attacked, some can be dangerous and great in terms of power.",
-  "icon": ["bioplethora:textures/gui/patchouli/symbols/plethoneutral.png"],
+  "icon": "bioplethora:textures/gui/patchouli/symbols/plethoneutral.png",
   "sortnum":4
 }

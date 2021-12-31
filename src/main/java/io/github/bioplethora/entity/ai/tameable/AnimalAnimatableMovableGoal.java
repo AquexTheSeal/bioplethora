@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai.tameable;
 
-import io.github.bioplethora.entity.AnimatableAnimalEntity;
+import io.github.bioplethora.entity.AnimatableTameableEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
@@ -12,7 +12,7 @@ public abstract class AnimalAnimatableMovableGoal extends AnimalAnimatableGoal {
     @Override
     abstract public boolean canUse();
 
-    protected boolean isExecutable(AnimalAnimatableMovableGoal goal, AnimatableAnimalEntity attacker, LivingEntity target) {
+    protected boolean isExecutable(AnimalAnimatableMovableGoal goal, AnimatableTameableEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) return false;

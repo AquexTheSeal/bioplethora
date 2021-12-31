@@ -1,6 +1,6 @@
 {
   "name": "Mobs: Hellsent",
   "description": "These creatures are similar to the Dangerum creatures, except that they are a lot stronger compared to them. Some could be powerful enough to destroy a player with weak armor in a single hit. Stay alert for them at all times...",
-  "icon": ["bioplethora:textures/gui/patchouli/symbols/hellsent.png"],
+  "icon": "bioplethora:textures/gui/patchouli/symbols/hellsent.png",
   "sortnum":6
 }

@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai.tameable;
 
-import io.github.bioplethora.entity.AnimatableAnimalEntity;
+import io.github.bioplethora.entity.AnimatableTameableEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
@@ -18,14 +18,14 @@ public class AnimalAnimatableMeleeGoal extends AnimalAnimatableGoal {
      * @param entity          Attacking entity
      * @param animationLength
      */
-    public AnimalAnimatableMeleeGoal(AnimatableAnimalEntity entity, double animationLength, double attackBegin, double attackEnd) {
+    public AnimalAnimatableMeleeGoal(AnimatableTameableEntity entity, double animationLength, double attackBegin, double attackEnd) {
         this.entity = entity;
         this.animationLength = animationLength;
         this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
         this.setFlags(EnumSet.of(Flag.LOOK));
     }
 
-    private static boolean checkIfValid(AnimalAnimatableMeleeGoal goal, AnimatableAnimalEntity attacker, LivingEntity target) {
+    private static boolean checkIfValid(AnimalAnimatableMeleeGoal goal, AnimatableTameableEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {

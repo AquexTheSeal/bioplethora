@@ -1,6 +1,6 @@
 {
   "name": "Mobs: Ecoharmless",
   "description": "These creatures are considered to be completely safe. They do not fight back to it's attackers.",
-  "icon": ["bioplethora:textures/gui/patchouli/symbols/ecoharmless.png"],
+  "icon": "bioplethora:textures/gui/patchouli/symbols/ecoharmless.png",
   "sortnum":3
 }
