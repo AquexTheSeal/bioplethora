@@ -16,7 +16,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
@@ -34,9 +33,7 @@ public class CrephoxlHammerItem extends AxeItem {
         boolean retval = super.hurtEnemy(stack, entity, source);
 
         World world = entity.level;
-        double x = entity.getX(),
-                y = entity.getY(),
-                z = entity.getZ();
+        double x = entity.getX(), y = entity.getY(), z = entity.getZ();
         BlockPos pos = new BlockPos(x, y, z);
         PlayerEntity player = (PlayerEntity) source;
 
@@ -48,8 +45,8 @@ public class CrephoxlHammerItem extends AxeItem {
 
         if(player.isCrouching() && !player.getCooldowns().isOnCooldown(stack.getItem())) {
             player.getCooldowns().addCooldown(stack.getItem(), 30);
-            world.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.anvil.place")), SoundCategory.PLAYERS, 1, 1);
-            world.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.player.attack.sweep")), SoundCategory.PLAYERS, 1, 1);
+            world.playSound(null, pos, SoundEvents.ANVIL_PLACE, SoundCategory.PLAYERS, 1, 1);
+            world.playSound(null, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
             if(!world.isClientSide) {
                 world.addParticle(ParticleTypes.SWEEP_ATTACK, x, y, z, 0, 0, 0);
             }

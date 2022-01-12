@@ -2,11 +2,13 @@ package io.github.bioplethora;
 
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
+import io.github.bioplethora.client.entity.render.others.BellophiteShieldWaveRender;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteArrowRender;
 import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
 import io.github.bioplethora.client.entity.render.projectile.UltimateBellophiteClusterRender;
 import io.github.bioplethora.client.entity.render.projectile.WindBlazeRender;
 import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
+import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.client.Minecraft;
@@ -50,21 +52,25 @@ public class BioplethoraClient {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS.get(), AltyrusEntityRender::new);
 
         //projectiles
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.MAGMA_BOMB.get(), (rendererManager) -> new SpriteRenderer<>(rendererManager, mcClient.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), BellophiteClusterRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_ARROW.get(), BellophiteArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WINDBLAZE.get(), WindBlazeRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateBellophiteClusterRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.MAGMA_BOMB.get(), (entityRendererManager) -> new SpriteRenderer<>(entityRendererManager, mcClient.getItemRenderer()));
 
         //others
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);
     }
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerModels(final FMLClientSetupEvent event) {
-        ItemModelsProperties.register(BioplethoraItems.BELLOPHGOLEM_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);
+        //Bellophite Shield
+        ItemModelsProperties.register(BioplethoraItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);
+        ItemModelsProperties.register(BioplethoraItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("charged"), (itemStack, clientWorld, entity) -> entity != null && ((BellophiteShieldItem) itemStack.getItem()).getIsCharged() ? 1.0F : 0.0F);
 
+        //Arbitrary Ballista
         ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity) -> {
             if (livingEntity == null) {
                 return 0.0F;
@@ -72,14 +78,8 @@ public class BioplethoraClient {
                 return ArbitraryBallistaItem.isCharged(itemStack) ? 0.0F : (float) (itemStack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / (float) ArbitraryBallistaItem.getChargeDuration(itemStack);
             }
         });
-        ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity) -> {
-            return livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && !ArbitraryBallistaItem.isCharged(itemStack) ? 1.0F : 0.0F;
-        });
-        ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("charged"), (itemStack, clientWorld, livingEntity) -> {
-            return livingEntity != null && ArbitraryBallistaItem.isCharged(itemStack) ? 1.0F : 0.0F;
-        });
-        ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("firework"), (itemStack, clientWorld, livingEntity) -> {
-            return livingEntity != null && ArbitraryBallistaItem.isCharged(itemStack) && ArbitraryBallistaItem.containsChargedProjectile(itemStack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
-        });
+        ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && !ArbitraryBallistaItem.isCharged(itemStack) ? 1.0F : 0.0F);
+        ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("charged"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && ArbitraryBallistaItem.isCharged(itemStack) ? 1.0F : 0.0F);
+        ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("firework"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && ArbitraryBallistaItem.isCharged(itemStack) && ArbitraryBallistaItem.containsChargedProjectile(itemStack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F);
     }
 }

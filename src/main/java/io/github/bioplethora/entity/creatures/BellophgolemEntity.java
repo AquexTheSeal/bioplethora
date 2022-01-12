@@ -1,12 +1,14 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.BellophgolemRangedAttackGoal;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.BlockState;
@@ -46,7 +48,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 
-public class BellophgolemEntity extends SummonableMonsterEntity implements IAnimatable {
+public class BellophgolemEntity extends SummonableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(BellophgolemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -56,6 +58,11 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         super(type, worldIn);
         this.noCulling = true;
         this.xpReward = 20;
+    }
+
+    @Override
+    public BioplethoraEntityClasses getBioplethoraClass() {
+        return BioplethoraEntityClasses.HELLSENT;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

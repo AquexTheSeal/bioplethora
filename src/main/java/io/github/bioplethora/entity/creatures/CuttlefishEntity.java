@@ -1,11 +1,12 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -16,7 +17,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CuttlefishEntity extends SquidEntity implements IAnimatable {
+public class CuttlefishEntity extends SquidEntity implements IAnimatable, IBioplethoraEntityClass {
 
     private final AnimationFactory factory = new AnimationFactory(this);
 
@@ -34,6 +35,11 @@ public class CuttlefishEntity extends SquidEntity implements IAnimatable {
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.4)
                 .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 32.0D);
+    }
+
+    @Override
+    public BioplethoraEntityClasses getBioplethoraClass() {
+        return BioplethoraEntityClasses.ECOHARMLESS;
     }
 
     @Override

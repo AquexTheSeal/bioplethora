@@ -3,6 +3,7 @@ package io.github.bioplethora.registry;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.entity.others.AltyrusSummoningEntity;
+import io.github.bioplethora.entity.others.BellophiteShieldWaveEntity;
 import io.github.bioplethora.entity.projectile.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -49,4 +50,6 @@ public class BioplethoraEntities {
     //Others
     public static final RegistryObject<EntityType<AltyrusSummoningEntity>> ALTYRUS_SUMMONING = ENTITIES.register("altyrus_summoning", () -> EntityType.Builder.of(AltyrusSummoningEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_summoning").toString()));
+    public static final RegistryObject<EntityType<BellophiteShieldWaveEntity>> BELLOPHITE_SHIELD_WAVE = ENTITIES.register("bellophite_shield_wave", () -> EntityType.Builder.of(BellophiteShieldWaveEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)
+            .build(new ResourceLocation(Bioplethora.MOD_ID, "bellophite_shield_wave").toString()));
 }

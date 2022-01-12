@@ -1,10 +1,7 @@
 package io.github.bioplethora;
 
 import io.github.bioplethora.config.BioplethoraConfig;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraItems;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -35,6 +32,7 @@ public class Bioplethora {
         BioplethoraEntities.ENTITIES.register(bus);
         BioplethoraBlocks.BLOCKS.register(bus);
         BioplethoraSoundEvents.SOUNDS.register(bus);
+        BioplethoraEnchantments.ENCHANTMENTS.register(bus);
 
         bus.addListener(this::setup);
 
@@ -51,8 +49,8 @@ public class Bioplethora {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        LOGGER.info("[" + MOD_NAME + "] - Yes");
-        LOGGER.info("No");
+        LOGGER.info("Setting up [" + MOD_NAME + "]!");
+        LOGGER.info("Cool");
     }
 }
 

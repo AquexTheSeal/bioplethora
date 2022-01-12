@@ -53,17 +53,7 @@ public class AltyrusSummonGolemGoal extends Goal {
             bellophgolemEntity.setLifeLimitBeforeDeath(200);
 
             serverworld.addFreshEntityWithPassengers(bellophgolemEntity);
-
-            BellophgolemEntity bellophgolemEntity2 = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
-            bellophgolemEntity2.moveTo(blockpos, 0.0F, 0.0F);
-            bellophgolemEntity2.setOwner(this.altyrus);
-            bellophgolemEntity2.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, (ILivingEntityData)null, (CompoundNBT)null);
-
-            bellophgolemEntity2.setHasLimitedLife(true);
-            bellophgolemEntity2.setExplodeOnExpiry(true);
-            bellophgolemEntity2.setLifeLimitBeforeDeath(200);
-
-            serverworld.addFreshEntityWithPassengers(bellophgolemEntity2);
+            serverworld.addFreshEntityWithPassengers(bellophgolemEntity);
 
             this.summonTime = 0;
         }

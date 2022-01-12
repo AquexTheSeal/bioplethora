@@ -2,10 +2,12 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.item.weapons.StellarScytheItem;
 import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -24,7 +26,10 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
@@ -42,7 +47,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal {
+public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioplethoraEntityClass {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public GaugalemEntity(EntityType<? extends MonsterEntity> type, World world) {
@@ -62,6 +67,11 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
                 .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
                 .add(Attributes.FLYING_SPEED, 1.5F);
+    }
+
+    @Override
+    public BioplethoraEntityClasses getBioplethoraClass() {
+        return BioplethoraEntityClasses.DANGERUM;
     }
 
     @Override

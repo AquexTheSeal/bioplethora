@@ -2,8 +2,10 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.entity.Entity;
@@ -20,6 +22,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -34,13 +37,18 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Iterator;
 
-public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatable {
+public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
 
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public CrephoxlEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
+    }
+
+    @Override
+    public BioplethoraEntityClasses getBioplethoraClass() {
+        return BioplethoraEntityClasses.HELLSENT;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -108,15 +116,16 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
     }
 
     public boolean doHurtTarget (Entity entity) {
+
+        BlockPos blockPos = new BlockPos((int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ());
+
         boolean flag = super.doHurtTarget(entity);
         if (flag && entity instanceof LivingEntity)
             this.getTarget().setDeltaMovement(getTarget().getDeltaMovement().x, 2 - getTarget().getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), getTarget().getDeltaMovement().z);
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), (int) 20, 0.4, 0.4,
                     0.4, 0.1);
-            this.level.playSound(null, new BlockPos((int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ()),
-                    ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.explode")),
-                    SoundCategory.NEUTRAL, (float) 1, (float) 1);
+            this.level.playSound(null, blockPos, SoundEvents.GENERIC_EXPLODE, SoundCategory.NEUTRAL, (float) 1, (float) 1);
         }
         return flag;
     }

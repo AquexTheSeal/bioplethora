@@ -5,6 +5,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.ICrossbowUser;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,7 +37,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class ArbitraryBallistaItem extends CrossbowItem {
+public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
 
     private boolean startSoundPlayed = false;
     private boolean midLoadSoundPlayed = false;

@@ -63,7 +63,7 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
         ++birthTime;
 
-        this.setDeltaMovement(this.getDeltaMovement().x(), this.getDeltaMovement().y() + 0.1, this.getDeltaMovement().z());
+        this.setDeltaMovement(this.getDeltaMovement().x(), 0.1, this.getDeltaMovement().z());
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (this.getX()), (this.getY()), (this.getZ()), (int) 5, 1, 1, 1, 0.1);

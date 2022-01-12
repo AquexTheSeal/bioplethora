@@ -2,8 +2,10 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -29,7 +31,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatable {
+public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public NandbriEntity(EntityType<? extends MonsterEntity> type, World world) {
@@ -46,6 +48,11 @@ public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatabl
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.4)
                 .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 32.0D);
+    }
+
+    @Override
+    public BioplethoraEntityClasses getBioplethoraClass() {
+        return BioplethoraEntityClasses.PLETHONEUTRAL;
     }
 
     @Override

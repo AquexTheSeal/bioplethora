@@ -10,14 +10,10 @@ import java.util.EnumSet;
 import java.util.function.BiFunction;
 
 public class MonsterAnimatableMeleeGoal extends MonsterAnimatableGoal {
-    private final double animationLength;
-    private final BiFunction<Double, Double, Boolean> attackPredicate;
-    private boolean hasHit;
+    public double animationLength;
+    public BiFunction<Double, Double, Boolean> attackPredicate;
+    public boolean hasHit;
 
-    /**
-     * @param entity          Attacking entity
-     * @param animationLength
-     */
     public MonsterAnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
         this.entity = entity;
         this.animationLength = animationLength;
@@ -25,7 +21,7 @@ public class MonsterAnimatableMeleeGoal extends MonsterAnimatableGoal {
         this.setFlags(EnumSet.of(Flag.LOOK));
     }
 
-    private static boolean checkIfValid(MonsterAnimatableMeleeGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
+    public static boolean checkIfValid(MonsterAnimatableMeleeGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {

@@ -194,7 +194,6 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
         }
 
         ++lifespan;
-
         if (lifespan == 100) {
             this.remove();
         }

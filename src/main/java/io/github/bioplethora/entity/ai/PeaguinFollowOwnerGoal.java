@@ -3,10 +3,11 @@ package io.github.bioplethora.entity.ai;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.FollowOwnerGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.pathfinding.*;
+import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.pathfinding.WalkNodeProcessor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
@@ -21,7 +22,7 @@ public class PeaguinFollowOwnerGoal extends Goal {
     private int timeToRecalcPath;
     private final float stopDistance;
     private final float startDistance;
-    private float oldWaterCost;
+    //private float oldWaterCost;
     private final boolean canFly;
 
     public PeaguinFollowOwnerGoal(TameableEntity p_i225711_1_, double p_i225711_2_, float p_i225711_4_, float p_i225711_5_, boolean p_i225711_6_) {
@@ -63,14 +64,14 @@ public class PeaguinFollowOwnerGoal extends Goal {
 
     public void start() {
         this.timeToRecalcPath = 0;
-        this.oldWaterCost = this.tamable.getPathfindingMalus(PathNodeType.WATER);
-        this.tamable.setPathfindingMalus(PathNodeType.WATER, 0.0F);
+        //this.oldWaterCost = this.tamable.getPathfindingMalus(PathNodeType.WATER);
+        //this.tamable.setPathfindingMalus(PathNodeType.WATER, 0.0F);
     }
 
     public void stop() {
         this.owner = null;
         this.navigation.stop();
-        this.tamable.setPathfindingMalus(PathNodeType.WATER, this.oldWaterCost);
+        //this.tamable.setPathfindingMalus(PathNodeType.WATER, this.oldWaterCost);
     }
 
     public void tick() {

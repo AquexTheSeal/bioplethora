@@ -1,0 +1,8 @@
+{
+  "parent": "bioplethora:item/bellophite_shield",
+  "texture_size": [64, 64],
+  "textures": {
+    "0": "bioplethora:item/bellophite_shield_charged",
+    "particle": "bioplethora:item/bellophite_shield_charged"
+  }
+}

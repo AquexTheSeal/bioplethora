@@ -2,12 +2,14 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableTameableEntity;
+import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
 import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -37,7 +39,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -49,7 +50,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatable, IAngerable {
+public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatable, IAngerable, IBioplethoraEntityClass {
 
     private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(PeaguinEntity.class, DataSerializers.INT);
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
@@ -63,9 +64,13 @@ public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatab
         this.setTame(false);
         this.setPathfindingMalus(PathNodeType.WATER, 0.0F);
         this.setPathfindingMalus(PathNodeType.WATER_BORDER, 0.0F);
-        /*this.moveControl = new PeaguinEntity.MoveHelperController(this);*/
         this.noCulling = true;
         switchNavigator(false);
+    }
+
+    @Override
+    public BioplethoraEntityClasses getBioplethoraClass() {
+        return BioplethoraEntityClasses.PLETHONEUTRAL;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -101,7 +106,7 @@ public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatab
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "peaguincontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "peaguin_controller", 0, this::predicate));
     }
 
     @Override
@@ -111,23 +116,26 @@ public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatab
 
     @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.ambient"));
+        if (this.isInWater()) {
+            return SoundEvents.DOLPHIN_AMBIENT_WATER;
+        } else {
+            return SoundEvents.DOLPHIN_AMBIENT;
+        }
     }
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.hurt"));
+        return SoundEvents.DOLPHIN_HURT;
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.dolphin.death"));
+        return SoundEvents.DOLPHIN_DEATH;
     }
 
     @Override
     public void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound((net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.salmon.flop")),
-                0.15f, 1);
+        this.playSound(SoundEvents.SALMON_FLOP, 0.15f, 1);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {

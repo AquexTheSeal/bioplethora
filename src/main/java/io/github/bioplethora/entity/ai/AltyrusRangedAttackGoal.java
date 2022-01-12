@@ -31,12 +31,17 @@ public class AltyrusRangedAttackGoal extends Goal {
         this.altyrus.setCharging(false);
     }
 
+    public boolean canContinueToUse() {
+        return (this.altyrus.getTarget() != null) && (!this.altyrus.isSummoning()) && (!this.altyrus.getAttacking());
+    }
+
     public void tick() {
         LivingEntity livingentity = this.altyrus.getTarget();
-        double d0 = 64.0D;
+
+        assert livingentity != null;
         if (livingentity.distanceToSqr(this.altyrus) < 1024.0D && this.altyrus.canSee(livingentity)) {
             World world = this.altyrus.level;
-            double d1 = 4.0D;
+            BlockPos pos = new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ());
 
             Vector3d vector3d = this.altyrus.getViewVector(1.0F);
             double d2 = livingentity.getX() - (this.altyrus.getX() + vector3d.x * 4.0D);
@@ -48,42 +53,23 @@ public class AltyrusRangedAttackGoal extends Goal {
             ++this.chargeTime;
 
             if (this.chargeTime == 10) {
-                ((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                        SoundEvents.ELDER_GUARDIAN_CURSE, SoundCategory.AMBIENT, (float) 1, (float) 1);
+                ((World) world).playSound(null, pos, SoundEvents.ELDER_GUARDIAN_CURSE, SoundCategory.HOSTILE, (float) 1, (float) 1);
             }
 
             if (this.chargeTime == 30) {
-                ((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                        SoundEvents.SHULKER_SHOOT, SoundCategory.AMBIENT, (float) 1, (float) 1);
-
+                ((World) world).playSound(null, pos, SoundEvents.SHULKER_SHOOT, SoundCategory.HOSTILE, (float) 1, (float) 1);
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
-
             if (this.chargeTime == 35) {
-                /*((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                        SoundEvents.SHULKER_SHOOT, SoundCategory.AMBIENT, (float) 1, (float) 1);*/
-
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
-
             if (this.chargeTime == 40) {
-                /*((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                        SoundEvents.SHULKER_SHOOT, SoundCategory.AMBIENT, (float) 1, (float) 1);*/
-
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
-
             if (this.chargeTime == 45) {
-                /*((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                        SoundEvents.SHULKER_SHOOT, SoundCategory.AMBIENT, (float) 1, (float) 1);*/
-
-                world.addFreshEntity(ultimateBellophiteClusterEntity);
+               world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
-
             if (this.chargeTime == 50) {
-                /*((World) world).playSound(null, new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ()),
-                        SoundEvents.SHULKER_SHOOT, SoundCategory.AMBIENT, (float) 1, (float) 1);*/
-
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
 
                 this.chargeTime = -100;

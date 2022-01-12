@@ -38,13 +38,28 @@ public abstract class SummonableMonsterEntity extends AnimatableMonsterEntity im
 
     public void addAdditionalSaveData(CompoundNBT compoundNBT) {
         super.addAdditionalSaveData(compoundNBT);
+        compoundNBT.putBoolean("HasLifeLimit", this.hasLimitedLife);
         if (this.hasLimitedLife) {
             compoundNBT.putInt("LifeTicks", this.limitedLifeTicks);
+            compoundNBT.putInt("LifeLimit", this.lifeLimitBeforeDeath);
+            compoundNBT.putBoolean("ExplodeOnExpiry", this.explodeOnExpiry);
         }
     }
 
+    public void readAdditionalSaveData(CompoundNBT compoundNBT) {
+        super.readAdditionalSaveData(compoundNBT);
+        this.setHasLimitedLife(compoundNBT.getBoolean("HasLifeLimit"));
+        this.setLimitedLifeTicks(compoundNBT.getInt("LifeTicks"));
+        this.setLifeLimitBeforeDeath(compoundNBT.getInt("LifeLimit"));
+        this.setExplodeOnExpiry(compoundNBT.getBoolean("ExplodeOnExpiry"));
+    }
+
+    public void setLimitedLifeTicks(int limitedLifeTicks) {
+        this.limitedLifeTicks = limitedLifeTicks;
+    }
+
     public void setHasLimitedLife(boolean hasLimitedLife) {
-        this.hasLimitedLife = true;
+        this.hasLimitedLife = hasLimitedLife;
     }
 
     public void setExplodeOnExpiry(boolean explodeOnExpiry) {

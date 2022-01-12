@@ -1,11 +1,13 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.entity.*;
@@ -43,7 +45,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 
-public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable {
+public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AlphemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -51,6 +53,11 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
     public AlphemEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
+    }
+
+    @Override
+    public BioplethoraEntityClasses getBioplethoraClass() {
+        return BioplethoraEntityClasses.DANGERUM;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

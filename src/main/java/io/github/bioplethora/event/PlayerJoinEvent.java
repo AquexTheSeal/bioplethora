@@ -15,20 +15,20 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import java.util.Iterator;
-
 @Mod.EventBusSubscriber
 public class PlayerJoinEvent {
+
+    private static boolean hasBook = false;
 
     @SubscribeEvent
     public static void onEntitySpawned(EntityJoinWorldEvent event) {
 
         Entity eventEntity = event.getEntity();
 
-        if (BioplethoraConfig.COMMON.hellMode.get()) {
+        if (BioplethoraConfig.COMMON.hellMode.get() && BioplethoraConfig.COMMON.hellModeReminder.get()) {
             if (eventEntity instanceof PlayerEntity) {
                 if (!eventEntity.level.isClientSide()) {
-                    ((PlayerEntity) event.getEntity()).displayClientMessage(new StringTextComponent("\u00A7cWelcome to the Bioplethora Hell Mode. Objective is to survive."), (false));
+                    ((PlayerEntity) event.getEntity()).displayClientMessage(new StringTextComponent("\u00A7cQuick Reminder: You are in Bioplethora Hell Mode. Most Bioplethora creatures will become stronger and more powerful."), (false));
                 }
             }
         }
@@ -42,18 +42,21 @@ public class PlayerJoinEvent {
                 AdvancementProgress advProg = ((ServerPlayerEntity) eventEntity).getAdvancements().getOrStartProgress(adv);
 
                 if (!advProg.isDone()) {
-                    Iterator iterator = advProg.getRemainingCriteria().iterator();
-                    while (iterator.hasNext()) {
-                        ((ServerPlayerEntity) eventEntity).getAdvancements().award(adv, (String) iterator.next());
+                    for (String s : advProg.getRemainingCriteria()) {
+                        ((ServerPlayerEntity) eventEntity).getAdvancements().award(adv, s);
                     }
                 }
             }
         }
 
-        if (eventEntity instanceof PlayerEntity) {
-            ItemStack stack = new ItemStack(BioplethoraItems.BIOPEDIA.get());
-            stack.setCount(1);
-            ItemHandlerHelper.giveItemToPlayer((PlayerEntity) eventEntity, stack);
+        if ((BioplethoraConfig.COMMON.startupBiopedia.get()) && (eventEntity instanceof PlayerEntity)) {
+
+            if (!hasBook) {
+                ItemStack stack = new ItemStack(BioplethoraItems.BIOPEDIA.get());
+                stack.setCount(1);
+                ItemHandlerHelper.giveItemToPlayer((PlayerEntity) eventEntity, stack);
+                hasBook = true;
+            }
         }
     }
 }

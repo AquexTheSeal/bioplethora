@@ -2,8 +2,11 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.util.BioplethoraEntityClasses;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -14,11 +17,17 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -29,13 +38,14 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAnimatable {
+public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
 
     private static final DataParameter<Boolean> DATA_IS_NETHER_VARIANT = EntityDataManager.defineId(DwarfMossadileEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public DwarfMossadileEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
+        this.xpReward = 10;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -48,6 +58,11 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 32.0D);
+    }
+
+    @Override
+    public BioplethoraEntityClasses getBioplethoraClass() {
+        return BioplethoraEntityClasses.DANGERUM;
     }
 
     @Override
@@ -89,12 +104,37 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
         return PlayState.CONTINUE;
     }
 
+    @Override
+    public net.minecraft.util.SoundEvent getAmbientSound() {
+        return SoundEvents.SHULKER_AMBIENT;
+    }
+
+    @Override
+    public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
+        return SoundEvents.SHULKER_HURT;
+    }
+
+    @Override
+    public net.minecraft.util.SoundEvent getDeathSound() {
+        return SoundEvents.SHULKER_DEATH;
+    }
+
+    @Override
+    public void playStepSound(BlockPos pos, BlockState blockIn) {
+        this.playSound(SoundEvents.SALMON_FLOP, 0.15f, 1);
+    }
+
     public boolean doHurtTarget(Entity entity) {
         boolean flag = super.doHurtTarget(entity);
+
         World world = entity.level;
+        BlockPos blockPos = new BlockPos((int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ());
+
         if (flag && entity instanceof LivingEntity) {
             if (this.isNetherVariant()) {
                 entity.setSecondsOnFire(5);
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.FLAME, getTarget().getX(), getTarget().getY(), getTarget().getZ(), 20, 0.4, 0.4, 0.4, 0.1);
+                this.level.playSound(null, blockPos, SoundEvents.BLAZE_SHOOT, SoundCategory.HOSTILE, (float) 1, (float) 1);
             } else {
                 ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 40, 1));
             }
@@ -138,6 +178,12 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
     public void addAdditionalSaveData(CompoundNBT compoundNBT) {
         super.addAdditionalSaveData(compoundNBT);
         compoundNBT.putBoolean("isNetherVariant", this.isNetherVariant());
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundNBT compoundNBT) {
+        super.readAdditionalSaveData(compoundNBT);
+        this.setNetherVariant(compoundNBT.getBoolean("isNetherVariant"));
     }
 
     protected void defineSynchedData() {
