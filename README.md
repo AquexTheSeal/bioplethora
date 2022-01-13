@@ -24,7 +24,7 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 **A:** Nope, or at least it isn't planned yet.
 
 ### Q: Is the Boplethora Project made with MCreator?
-**A:** Nope, this mod isn't made with MCreator. Though, you should not hate MCreator mods; there are actually plenty of underrated MCreator mods out there. Read https://docs.google.com/document/d/1e7tN5vZgWEmMylNshZ9h6l0kXH8Ypqw-oJHL1qu0tgY/edit (documented by Toma400)
+**A:** Nope, this mod isn't made with MCreator. Though, if you do, you should not hate MCreator mods; there are actually plenty of underrated MCreator mods out there. Read https://docs.google.com/document/d/1e7tN5vZgWEmMylNshZ9h6l0kXH8Ypqw-oJHL1qu0tgY/edit (documented by Toma400)
 
 # Credits / The Development Team
 **Lead Developer/s:** Sajevius, Aqu.
