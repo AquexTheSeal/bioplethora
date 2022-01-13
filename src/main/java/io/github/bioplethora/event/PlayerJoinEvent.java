@@ -2,13 +2,11 @@ package io.github.bioplethora.event;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraItems;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
+import io.github.bioplethora.util.BioplethoraAdvancementHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,7 +16,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 @Mod.EventBusSubscriber
 public class PlayerJoinEvent {
 
-    private static boolean hasBook = false;
+    public static boolean hasBook = false;
 
     @SubscribeEvent
     public static void onEntitySpawned(EntityJoinWorldEvent event) {
@@ -34,29 +32,27 @@ public class PlayerJoinEvent {
         }
 
         if (((event.getEntity() instanceof PlayerEntity) || (event.getEntity() instanceof ServerPlayerEntity))) {
-            if (event.getEntity() instanceof PlayerEntity && !event.getEntity().level.isClientSide()) {
-
-                Advancement adv = ((ServerPlayerEntity) eventEntity).server.getAdvancements().getAdvancement(new ResourceLocation("bioplethora:bioplethora_startup"));
-
-                assert adv != null;
-                AdvancementProgress advProg = ((ServerPlayerEntity) eventEntity).getAdvancements().getOrStartProgress(adv);
-
-                if (!advProg.isDone()) {
-                    for (String s : advProg.getRemainingCriteria()) {
-                        ((ServerPlayerEntity) eventEntity).getAdvancements().award(adv, s);
-                    }
-                }
+            if (!event.getEntity().level.isClientSide()) {
+                BioplethoraAdvancementHelper.grantBioAdvancement(eventEntity, "bioplethora:bioplethora_startup");
             }
         }
 
         if ((BioplethoraConfig.COMMON.startupBiopedia.get()) && (eventEntity instanceof PlayerEntity)) {
 
-            if (!hasBook) {
+            if (!getHasBook()) {
                 ItemStack stack = new ItemStack(BioplethoraItems.BIOPEDIA.get());
                 stack.setCount(1);
+                setHasBook(true);
                 ItemHandlerHelper.giveItemToPlayer((PlayerEntity) eventEntity, stack);
-                hasBook = true;
             }
         }
+    }
+
+    public static boolean getHasBook() {
+        return hasBook;
+    }
+
+    public static void setHasBook(boolean value) {
+        hasBook = value;
     }
 }

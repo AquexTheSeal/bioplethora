@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)SKILLS/ABILITIES: $(br)$()This weapon makes an AoE attack on right-click on the ground. And it does a painful hit when you attack while crouching! You can view more by hovering to the item itself."
+      "text": "$(l)DESCRIPTION: $(br)$()This weapon was made with the silky feather of the Crephoxls and the rigid and tough stick of the Crephoxls. This weapon is known to smash their enemies into bits with it's sort-of destructive ability."
     },
     {
       "type": "crafting",

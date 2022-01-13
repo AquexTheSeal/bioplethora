@@ -1,16 +1,6 @@
 package io.github.bioplethora.mixin;
 
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
-import io.github.bioplethora.registry.BioplethoraEnchantments;
-import io.github.bioplethora.util.BioplethoraEntityClasses;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.StringTextComponent;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //@Mixin(SwordItem.class)
 public abstract class SwordItemMixin {
@@ -18,7 +8,7 @@ public abstract class SwordItemMixin {
     public Item item;
 
     //@Inject(at = @At("HEAD"), method = "hurtEnemy")
-    public void hurtEnemy(ItemStack stack, LivingEntity entity, LivingEntity source, CallbackInfoReturnable<Boolean> cir) {
+    /*public void hurtEnemy(ItemStack stack, LivingEntity entity, LivingEntity source, CallbackInfoReturnable<Boolean> cir) {
 
         if ((EnchantmentHelper.getEnchantmentLevel(BioplethoraEnchantments.ECOHARMLESS.get(), source) != 0) && (entity instanceof IBioplethoraEntityClass)) {
             this.EnchEcoharmless(stack, entity, source);
@@ -80,5 +70,5 @@ public abstract class SwordItemMixin {
             ((PlayerEntity) source).displayClientMessage(new StringTextComponent("Antibio-Elderia Level: "
                     + EnchantmentHelper.getEnchantmentLevel(BioplethoraEnchantments.ELDERIA.get(), source)), (false));
         }
-    }
+    }*/
 }

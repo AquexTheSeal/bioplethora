@@ -1,5 +1,8 @@
 package io.github.bioplethora.item.weapons;
 
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,17 +10,18 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +43,7 @@ public class StellarScytheItem extends SwordItem {
 
         if (!player.getCooldowns().isOnCooldown(stack.getItem())) {
             player.getCooldowns().addCooldown(stack.getItem(), 20);
-            world.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.player.attack.sweep")), SoundCategory.PLAYERS, 1, 1);
+            world.playSound(null, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
             if(!world.isClientSide) {
                 world.addParticle(ParticleTypes.SWEEP_ATTACK, x, y + 2, z, 0, 0, 0);
             }
@@ -54,12 +58,19 @@ public class StellarScytheItem extends SwordItem {
                 for (Entity entityIterator : nearEntities) {
                     if (entityIterator instanceof LivingEntity && entityIterator != player) {
                         if(entityIterator != entity) {
-                            entityIterator.hurt(DamageSource.mobAttack(player), this.getDamage() * 0.8F);
+                            entityIterator.hurt(DamageSource.mobAttack(player), (this.getDamage() * 0.8F) * EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, source));
                         }
                     }
                 }
             }
         }
         return retval;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.stellar_scythe.desc_0").withStyle(TextFormatting.GRAY));
     }
 }

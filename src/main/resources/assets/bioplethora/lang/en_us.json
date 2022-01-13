@@ -15,6 +15,9 @@
   "entity.bioplethora.bellophite_cluster": "Bellophite Cluster",
   "entity.bioplethora.bellophite_arrow": "Bellophite Arrow",
 
+  "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
+  "entity.bioplethora.bellophite_shield_wave": "Bellophite Shield Wave",
+
   "item.bioplethora.crephoxl_spawn_egg": "Crephoxl Spawn Egg",
   "item.bioplethora.alphem_spawn_egg": "Alphem Spawn Egg",
   "item.bioplethora.nandbri_spawn_egg": "Nandbri Spawn Egg",
@@ -37,6 +40,7 @@
   "item.bioplethora.bellophite_shield": "Bellophite Shield",
   "item.bioplethora.bellophite_arrow": "Bellophite Arrow",
   "item.bioplethora.stellar_scythe": "Stellar Scythe",
+  "item.bioplethora.arbitrary_ballista": "Arbitrary Ballista",
 
   "item.bioplethora.phantom_chime": "Phantom Chime",
   "item.bioplethora.magma_bomb": "Magma Bomb",
@@ -62,11 +66,16 @@
   "item.bioplethora.bellophite_arrow.desc_0": "The Bellophgolem arrow deals more damage than the regular arrow.",
   "item.bioplethora.bellophite_arrow.desc_1": "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.",
 
-  "item.bioplethora.bellophite_shield.desc_0": "The Bellophgolem gets more durability than the regular shield.",
-  "item.bioplethora.bellophite_shield.desc_1": "While using, the Bellophgolem grants a high resistance level to the user while giving the user a regeneration effect.",
+  "item.bioplethora.bellophite_shield.desc_0": "The Bellophite shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.",
+  "item.bioplethora.bellophite_shield.desc_1": "This shield stacks core points every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.",
+
+  "item.bioplethora.arbitrary_ballista.desc_0": "This giant crossbow greatly enhances the shooting projectile's speed and power.",
+
+  "item.bioplethora.stellar_scythe.desc_0": "This weapon could slash through an large area of enemies, the wide slashing ability cools down for 1 second only.",
 
   "item.bioplethora.phantom_chime.desc_0": "On right click on the ground - casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
-  "item.bioplethora.phantom_magma_bomb_0": "Throws a projectile that explodes on impact.",
+
+  "item.bioplethora.magma_bomb.desc_0": "Throws a projectile that explodes on impact.",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora.",
@@ -87,8 +96,8 @@
 
   "advancements.bioplethora.crephoxl_hammer_obtain.title": "A Handy Hammer",
   "advancements.bioplethora.crephoxl_hammer_obtain.desc": "Obtain a Crephoxl Hammer.",
-  "advancements.bioplethora.bellophgolem_shield_obtain.title": "The Better Tower",
-  "advancements.bioplethora.bellophgolem_shield_obtain.desc": "Obtain a Bellophite Shield.",
+  "advancements.bioplethora.bellophite_shield_obtain.title": "The Better Tower",
+  "advancements.bioplethora.bellophite_shield_obtain.desc": "Obtain a Bellophite Shield.",
   "advancements.bioplethora.bellophite_arrow_obtain.title": "Breakthrough!",
   "advancements.bioplethora.bellophite_arrow_obtain.desc": "Obtain a Bellophite Arrow.",
   "advancements.bioplethora.bellophite_block_obtain.title": "As Tough as Netherite",
@@ -98,7 +107,7 @@
   "advancements.bioplethora.cooked_cuttlefish_meat_obtain.title": "Tasty and Fast!",
   "advancements.bioplethora.cooked_cuttlefish_meat_obtain.desc": "Take a Cooked Cuttlefish Meat.",
 
-  "bioplethora.bellophgolem.idle": "Bellophgolem grunts",
-  "bioplethora.bellophgolem.hurt": "Bellophgolem hurts",
-  "bioplethora.bellophgolem.death": "Bellophgolem dies"
+  "subtitles.bioplethora.bellophgolem.idle": "Bellophgolem grunts",
+  "subtitles.bioplethora.bellophgolem.hurt": "Bellophgolem hurts",
+  "subtitles.bioplethora.bellophgolem.death": "Bellophgolem dies"
 }

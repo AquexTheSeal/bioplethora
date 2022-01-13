@@ -8,16 +8,14 @@ import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.util.BioplethoraAdvancementHelper;
 import io.github.bioplethora.util.BioplethoraEntityClasses;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -26,7 +24,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -46,7 +43,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
 
 public class BellophgolemEntity extends SummonableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
 
@@ -74,7 +70,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
                 .add(Attributes.MAX_HEALTH, 220 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.2 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 32D);
+                .add(Attributes.FOLLOW_RANGE, 64D);
     }
 
     @Override
@@ -173,22 +169,9 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
     @Override
     public void die(DamageSource source) {
         super.die(source);
-
         Entity sourceEnt = source.getEntity();
 
-        if (sourceEnt instanceof ServerPlayerEntity) {
-            Advancement adv = ((ServerPlayerEntity) sourceEnt).server.getAdvancements().getAdvancement(new ResourceLocation("bioplethora:bellophgolem_kill"));
-
-            assert adv != null;
-            AdvancementProgress advProg = ((ServerPlayerEntity) sourceEnt).getAdvancements().getOrStartProgress(adv);
-
-            if (!advProg.isDone()) {
-                Iterator iterator = advProg.getRemainingCriteria().iterator();
-                while (iterator.hasNext()) {
-                    ((ServerPlayerEntity) sourceEnt).getAdvancements().award(adv, (String) iterator.next());
-                }
-            }
-        }
+        BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:bellophgolem_kill");
     }
 
     public void aiStep() {

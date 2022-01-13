@@ -8,9 +8,8 @@ import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.util.BioplethoraAdvancementHelper;
 import io.github.bioplethora.util.BioplethoraEntityClasses;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -28,7 +27,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -38,7 +36,6 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -47,9 +44,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
 
-public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IAnimationTickable, IBioplethoraEntityClass {
+public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioplethoraEntityClass {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_SUMMONING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
@@ -77,7 +73,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
                 .add(Attributes.MAX_HEALTH, 450 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 32D)
+                .add(Attributes.FOLLOW_RANGE, 64D)
                 .add(Attributes.FLYING_SPEED, 1.5F);
     }
 
@@ -177,19 +173,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
 
         Entity sourceEnt = source.getEntity();
 
-        if (sourceEnt instanceof ServerPlayerEntity) {
-            Advancement adv = ((ServerPlayerEntity) sourceEnt).server.getAdvancements().getAdvancement(new ResourceLocation("bioplethora:altyrus_kill"));
-
-            assert adv != null;
-            AdvancementProgress advProg = ((ServerPlayerEntity) sourceEnt).getAdvancements().getOrStartProgress(adv);
-
-            if (!advProg.isDone()) {
-                Iterator iterator = advProg.getRemainingCriteria().iterator();
-                while (iterator.hasNext()) {
-                    ((ServerPlayerEntity) sourceEnt).getAdvancements().award(adv, (String) iterator.next());
-                }
-            }
-        }
+        BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:altyrus_kill");
     }
 
     @Override
@@ -263,10 +247,5 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         super.defineSynchedData();
         this.entityData.define(DATA_IS_CHARGING, false);
         this.entityData.define(DATA_IS_SUMMONING, false);
-    }
-
-    @Override
-    public int tickTimer() {
-        return tickCount;
     }
 }

@@ -30,11 +30,6 @@ public class AltyrusEntityRender extends GeoEntityRenderer<AltyrusEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(AltyrusEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/altyrus.png");
-    }
-
-    @Override
     public RenderType getRenderType(AltyrusEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
         return RenderType.entityTranslucent(getTextureLocation(animatable));
     }

@@ -2,13 +2,13 @@
   "display": {
     "background": "minecraft:textures/block/stone.png",
     "icon": {
-      "item": "bioplethora:bellophgolem_shield"
+      "item": "bioplethora:bellophite_shield"
     },
     "title": {
-      "translate": "advancements.bioplethora.bellophgolem_shield_obtain.title"
+      "translate": "advancements.bioplethora.bellophite_shield_obtain.title"
     },
     "description": {
-      "translate": "advancements.bioplethora.bellophgolem_shield_obtain.desc"
+      "translate": "advancements.bioplethora.bellophite_shield_obtain.desc"
     },
     "frame": "goal",
     "show_toast": false,
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "bioplethora:bellophgolem_shield",
+            "item": "bioplethora:bellophite_shield",
             "count": {
               "min": 1,
               "max": 1

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  P",
+    " SP",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:end_rod"
+    },
+    "P": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "result": {
+    "item": "bioplethora:phantom_chime",
+    "count": 1
+  }
+}

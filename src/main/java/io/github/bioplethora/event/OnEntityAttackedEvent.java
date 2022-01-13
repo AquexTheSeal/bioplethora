@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class BellophiteShieldHelperEvent {
+public class OnEntityAttackedEvent {
 
     @SubscribeEvent
     public static void onEntityAttacked(LivingAttackEvent event) {

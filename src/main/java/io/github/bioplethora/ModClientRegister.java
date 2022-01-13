@@ -24,9 +24,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(bus =  Mod.EventBusSubscriber.Bus.MOD)
-public class BioplethoraClient {
+public class ModClientRegister {
 
-    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerRenderers(final FMLClientSetupEvent event) {
 

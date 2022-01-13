@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F#C",
+    "SR#",
+    "CSF"
+  ],
+  "key": {
+    "#": {
+      "item": "bioplethora:bellophite"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "C": {
+      "item": "bioplethora:crephoxl_stick"
+    },
+    "R": {
+      "item": "minecraft:crossbow"
+    },
+    "F": {
+      "item": "bioplethora:crephoxl_feather"
+    }
+  },
+  "result": {
+    "item": "bioplethora:arbitrary_ballista",
+    "count": 1
+  }
+}

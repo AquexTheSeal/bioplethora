@@ -5,10 +5,10 @@ import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class AltyrusEntityModel extends AnimatedTickingGeoModel<AltyrusEntity> {
+public class AltyrusEntityModel extends AnimatedGeoModel<AltyrusEntity> {
 
     @Override
     public ResourceLocation getModelLocation(AltyrusEntity entity) {

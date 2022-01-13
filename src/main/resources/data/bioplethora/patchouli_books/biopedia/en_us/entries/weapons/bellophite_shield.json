@@ -1,0 +1,15 @@
+{
+  "name": "Bellophite Shield",
+  "icon": "bioplethora:bellophite_shield",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)DESCRIPTION: $(br)$()This shield is the ultimate weapon used against huge crowds, as it can eradicate them slowly with the core's power from the core attached to this shield. It is also known to be tough in terms of durability!"
+    },
+    {
+      "type": "crafting",
+      "recipe":"bioplethora:bellophite_shield"
+    }
+  ]
+}

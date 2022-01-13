@@ -1,0 +1,15 @@
+{
+  "name": "Magma Bomb",
+  "icon": "bioplethora:magma_bomb",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)DESCRIPTION: $(br)$()This throwable hot ball acts like a grenade, which explodes on impact. These throwable hot explosive balls are heard to be made with magma cream and fire charges!"
+    },
+    {
+      "type": "crafting",
+      "recipe":"bioplethora:magma_bomb"
+    }
+  ]
+}

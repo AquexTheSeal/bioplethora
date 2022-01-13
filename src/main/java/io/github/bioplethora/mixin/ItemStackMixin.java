@@ -1,15 +1,10 @@
 package io.github.bioplethora.mixin;
 
 import com.google.common.collect.Lists;
-import io.github.bioplethora.registry.BioplethoraEnchantments;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ToolItem;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -24,7 +19,7 @@ public abstract class ItemStackMixin {
 
         List<ITextComponent> listMX = Lists.newArrayList();
 
-        if ((getItem() instanceof ToolItem) && (player != null)) {
+        /*if ((getItem() instanceof ToolItem) && (player != null)) {
             if (EnchantmentHelper.getEnchantmentLevel(BioplethoraEnchantments.ECOHARMLESS.get(), player) != 0) {
                 listMX.add(new TranslationTextComponent("+" + (EnchantmentHelper.getEnchantmentLevel(BioplethoraEnchantments.ECOHARMLESS.get(), player) != 0)
                         + " " + "tooltip.bioplethora.enchantment_ecoharmless_bonus.text").withStyle(TextFormatting.YELLOW));
@@ -45,6 +40,6 @@ public abstract class ItemStackMixin {
                 listMX.add(new TranslationTextComponent("+" + (EnchantmentHelper.getEnchantmentLevel(BioplethoraEnchantments.ELDERIA.get(), player) != 0)
                         + " " + "tooltip.bioplethora.enchantment_elderia_bonus.text").withStyle(TextFormatting.YELLOW));
             }
-        }
+        }*/
     }
 }

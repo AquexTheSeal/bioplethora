@@ -367,10 +367,8 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
             }
         }
         tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.additions.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.desc_0").withStyle(TextFormatting.GRAY));
         tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.desc_1").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.desc_0").withStyle(TextFormatting.GRAY));
     }
 
     private static float getShootingPower(ItemStack p_220013_0_) {
