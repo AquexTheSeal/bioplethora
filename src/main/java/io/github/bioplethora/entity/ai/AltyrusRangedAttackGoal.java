@@ -20,7 +20,7 @@ public class AltyrusRangedAttackGoal extends Goal {
     }
 
     public boolean canUse() {
-        return this.altyrus.getTarget() != null;
+        return (this.altyrus.getTarget() != null) && (this.altyrus.canSee(this.altyrus.getTarget()));
     }
 
     public void start() {
@@ -32,14 +32,17 @@ public class AltyrusRangedAttackGoal extends Goal {
     }
 
     public boolean canContinueToUse() {
-        return (this.altyrus.getTarget() != null) && (!this.altyrus.isSummoning()) && (!this.altyrus.getAttacking());
+        return (this.altyrus.getTarget() != null) && (this.altyrus.canSee(this.altyrus.getTarget())) && (!this.altyrus.isSummoning()) && (!this.altyrus.getAttacking());
     }
 
     public void tick() {
         LivingEntity livingentity = this.altyrus.getTarget();
 
         assert livingentity != null;
-        if (livingentity.distanceToSqr(this.altyrus) < 1024.0D && this.altyrus.canSee(livingentity)) {
+        if (livingentity.distanceToSqr(this.altyrus) < 4096.0D && this.altyrus.canSee(livingentity)) {
+
+            ++this.chargeTime;
+
             World world = this.altyrus.level;
             BlockPos pos = new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ());
 
@@ -49,8 +52,6 @@ public class AltyrusRangedAttackGoal extends Goal {
             double d4 = livingentity.getZ() - (this.altyrus.getZ() + vector3d.z * 4.0D);
             UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
             ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
-
-            ++this.chargeTime;
 
             if (this.chargeTime == 10) {
                 ((World) world).playSound(null, pos, SoundEvents.ELDER_GUARDIAN_CURSE, SoundCategory.HOSTILE, (float) 1, (float) 1);

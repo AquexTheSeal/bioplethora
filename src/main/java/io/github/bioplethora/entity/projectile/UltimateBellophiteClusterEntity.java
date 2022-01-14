@@ -11,8 +11,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
@@ -24,7 +24,6 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -35,7 +34,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity implements IAnimatable {
@@ -51,12 +49,12 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
     }
 
     @OnlyIn(Dist.CLIENT)
-    public UltimateBellophiteClusterEntity(World world, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
-        super(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
+    public UltimateBellophiteClusterEntity(World world, double v, double v1, double v2, double v3, double v4, double v5) {
+        super(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), v, v1, v2, v3, v4, v5, world);
     }
 
-    public UltimateBellophiteClusterEntity(World world, LivingEntity p_i1769_2_, double p_i1769_3_, double p_i1769_5_, double p_i1769_7_) {
-        super(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), p_i1769_2_, p_i1769_3_, p_i1769_5_, p_i1769_7_, world);
+    public UltimateBellophiteClusterEntity(World world, LivingEntity entity, double v, double v1, double v2) {
+        super(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), entity, v, v1, v2, world);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -66,7 +64,7 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "ultimatebellophiteclustercontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "ultimate_bellophite_cluster_controller", 0, this::predicate));
     }
 
     @Override
@@ -76,80 +74,21 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
 
     @Override
     protected void onHit(RayTraceResult result) {
+
+        Entity owner = this.getOwner();
         super.onHit(result);
-        Entity entity = this.getOwner();
-        if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity)) {
-            if (!this.level.isClientSide) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
-                this.remove();
-            }
-        }
 
-        if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 40, 0.6, 0.6, 0.6, 0.1);
-        }
-
-        this.level.playSound(null, new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ()),
-                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.glass.break"))),
-                SoundCategory.NEUTRAL, (float) 1, (float) 1);
-
-        if(this.level instanceof ServerWorld) {
-            List<Entity> nearEntities = this.level
-                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (7 / 2d), this.getY(), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d)), null)
-                    .stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
-                        }
-                    }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityArea : nearEntities) {
-                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
-
-                    entityArea.hurt(DamageSource.MAGIC, (float) 15);
-
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 3));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 100, 2));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 100, 1));
-                }
-            }
+        if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(owner)) {
+            this.hitAndExplode();
         }
     }
 
     @Override
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
-        if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) entityHitResult).getEntity().is(entity)) {
-            if (!this.level.isClientSide) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
-                this.remove();
-            }
-        }
 
-        if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 40, 0.6, 0.6, 0.6, 0.1);
-        }
-
-        this.level.playSound(null, new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ()),
-                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.glass.break"))),
-                SoundCategory.NEUTRAL, (float) 1, (float) 1);
-
-        if (this.level instanceof ServerWorld) {
-            List<Entity> nearEntities = this.level
-                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (7 / 2d), this.getY(), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d)), null)
-                    .stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
-                        }
-                    }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityArea : nearEntities) {
-                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
-
-                    entityArea.hurt(DamageSource.MAGIC, (float) 15);
-
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 3));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 100, 2));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 100, 1));
-                }
-            }
+        if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !entityHitResult.getEntity().is(entity)) {
+            this.hitAndExplode();
         }
     }
 
@@ -162,7 +101,7 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
             }
 
             if (this.level instanceof ServerWorld) {
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 3, 0.4, 0.4, 0.4, 0.1);
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 3, 0.4, 0.4, 0.4, 0.1);
             }
 
             RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
@@ -195,6 +134,43 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
 
         ++lifespan;
         if (lifespan == 100) {
+            this.remove();
+        }
+    }
+
+    public void hitAndExplode() {
+        double x = this.getX(), y = this.getY(), z = this.getZ();
+        BlockPos blockPos = new BlockPos(x, y, z);
+        AxisAlignedBB area = new AxisAlignedBB(x - (7 / 2d), y, z - (7 / 2d), x + (7 / 2d), y + (7 / 2d), z + (7 / 2d));
+
+        if (this.level instanceof ServerWorld) {
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 40, 0.6, 0.6, 0.6, 0.1);
+        }
+
+        this.level.playSound(null, blockPos, SoundEvents.GLASS_BREAK, SoundCategory.NEUTRAL, (float) 1, (float) 1);
+
+        if (this.level instanceof ServerWorld) {
+            List<Entity> nearEntities = this.level
+                    .getEntitiesOfClass(Entity.class, area, null)
+                    .stream().sorted(new Object() {
+                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
+                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
+                        }
+                    }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
+            for (Entity entityArea : nearEntities) {
+                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
+
+                    entityArea.hurt(DamageSource.MAGIC, (float) 15);
+
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 3));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 100, 2));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 100, 1));
+                }
+            }
+        }
+
+        if (!this.level.isClientSide) {
+            this.level.explode(this, x, this.getY(0.0625D), z, 3F, Explosion.Mode.BREAK);
             this.remove();
         }
     }

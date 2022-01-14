@@ -22,88 +22,104 @@ public class EntitySpawnManager {
 
     private static class MobSpawnHandler {
 
+        static Integer spawnMultiplier = BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get();
+        static EntityClassification creature = EntityClassification.CREATURE;
+        static EntityClassification monster = EntityClassification.MONSTER;
+        static EntityClassification waterCreature = EntityClassification.WATER_CREATURE;
+        static EntityClassification waterAmbient = EntityClassification.WATER_AMBIENT;
+
         private static final Consumer<MobSpawnInfoBuilder> FOREST_ENTITIES = (builder) -> {
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
 
             //Alphem
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 5 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
+            builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * spawnMultiplier, 4, 10));
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 5 * spawnMultiplier, 4, 10));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
             //Bellophgolem
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.BELLOPHGOLEM.get(), 5 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
 
             //Crephoxl
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
 
             //Peaguin
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.PEAGUIN.get(), 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 3, 6));
+            builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.PEAGUIN.get(), 15 * spawnMultiplier, 3, 6));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> ICY_ENTITIES = (builder) -> {
             //Bellophgolem
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.BELLOPHGOLEM.get(), 5 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
 
             //Peaguin
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.PEAGUIN.get(), 25 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 3, 6));
+            builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.PEAGUIN.get(), 25 * spawnMultiplier, 3, 6));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> SAVANNA_ENTITIES = (builder) -> {
             //Alphem
-            builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 5 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 10));
+            builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * spawnMultiplier, 4, 10));
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 5 * spawnMultiplier, 4, 10));
+            //Dwarf Mossadile
+            builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.DWARF_MOSSADILE.get(), 30 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 5));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
             //Cuttlefish
-            builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 35 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
+            builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 70 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> NETHER_ENTITIES = (builder) -> {
+            //Dwarf Mossadile
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.DWARF_MOSSADILE.get(), 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 6));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
-            //Elite Undead
-            builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BioplethoraEntities.GAUGALEM.get(), 10 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 2));
+            //Gaugalem
+            builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.GAUGALEM.get(), 2 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         public static void spawnMobs(BiomeLoadingEvent event) {
             MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
             RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Biome Spawning Stuff."));
+            boolean hasOverworldType = BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD);
 
             switch (event.getCategory()) {
                 case FOREST:
-                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+                    if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST))
                         FOREST_ENTITIES.accept(spawnInfoBuilder);
                 case JUNGLE:
-                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+                    if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE))
                         JUNGLE_ENTITIES.accept(spawnInfoBuilder);
                 case TAIGA:
-                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+                    if (hasOverworldType && (BiomeDictionary.hasType(biome, BiomeDictionary.Type.CONIFEROUS) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.COLD)))
                         TAIGA_ENTITIES.accept(spawnInfoBuilder);
                 case ICY:
-                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+                    if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.COLD))
                         ICY_ENTITIES.accept(spawnInfoBuilder);
                 case SAVANNA:
-                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+                    if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA))
                         SAVANNA_ENTITIES.accept(spawnInfoBuilder);
                 case OCEAN:
-                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
+                    if (hasOverworldType || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
                         WATER_ENTITIES.accept(spawnInfoBuilder);
+                case NETHER:
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER))
+                        NETHER_ENTITIES.accept(spawnInfoBuilder);
                 case THEEND:
                     if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.END))
                         END_ENTITIES.accept(spawnInfoBuilder);
                     break;
                 default:
                     if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
-						//OVERWORLD_MOBS.accept(spawnInfoBuilder);
                         break;
             }
         }

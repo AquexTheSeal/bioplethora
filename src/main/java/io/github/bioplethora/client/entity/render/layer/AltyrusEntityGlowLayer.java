@@ -23,6 +23,7 @@ public class AltyrusEntityGlowLayer extends GeoLayerRenderer<AltyrusEntity> {
 
     @Override
     public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, AltyrusEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+
         if(!entityLivingBaseIn.isDeadOrDying()) {
 
             if (entityLivingBaseIn.getAttacking() || entityLivingBaseIn.isCharging()) {

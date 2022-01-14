@@ -33,8 +33,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -54,9 +52,9 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
 
     public AltyrusEntity(EntityType<? extends AnimatableMonsterEntity> type, World world) {
         super(type, world);
+        this.moveControl = new FlyingMovementController(this, 20, true);
         this.noCulling = true;
         this.xpReward = 200;
-        this.moveControl = new FlyingMovementController(this, 20, true);
     }
 
     @Override
@@ -90,14 +88,14 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         super.registerGoals();
         this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(1, new LookAtGoal(this, AlphemEntity.class, 24.0F));
-        this.goalSelector.addGoal(3, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(3, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
+        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(4, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(4, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
         this.goalSelector.addGoal(5, new AltyrusRangedAttackGoal(this));
-        this.goalSelector.addGoal(2, new AltyrusSummonGolemGoal(this));
-        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(6, new AltyrusSummonGolemGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
     }
 
@@ -144,10 +142,9 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         double z = entity.getZ();
 
         if (this.level instanceof ServerWorld) {
-            ((World) this.level).explode(null, (int) x, (int) y, (int) z, (float) 3, Explosion.Mode.BREAK);
+            this.level.explode(null, (int) x, (int) y, (int) z, (float) 3, Explosion.Mode.BREAK);
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, x, y, z, 40, 0.75, 0.75, 0.75, 0.1);
         }
-        this.doEnchantDamageEffects(this, entity);
         return flag;
     }
 
@@ -162,8 +159,8 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void aiStep() {
+        super.aiStep();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
@@ -203,6 +200,28 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         return BioplethoraSoundEvents.BELLOPHGOLEM_DEATH.get();
     }
 
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_IS_CHARGING, false);
+        this.entityData.define(DATA_IS_SUMMONING, false);
+    }
+
+    public boolean isCharging() {
+        return this.entityData.get(DATA_IS_CHARGING);
+    }
+
+    public void setCharging(boolean charging) {
+        this.entityData.set(DATA_IS_CHARGING, charging);
+    }
+
+    public boolean isSummoning() {
+        return this.entityData.get(DATA_IS_SUMMONING);
+    }
+
+    public void setSummoning(boolean summoning) {
+        this.entityData.set(DATA_IS_SUMMONING, summoning);
+    }
+
     public boolean causeFallDamage(float distance, float damageMultiplier) {
         return false;
     }
@@ -223,29 +242,5 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     @Override
     public boolean isPushedByFluid() {
         return false;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public boolean isCharging() {
-        return this.entityData.get(DATA_IS_CHARGING);
-    }
-
-    public void setCharging(boolean charging) {
-        this.entityData.set(DATA_IS_CHARGING, charging);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public boolean isSummoning() {
-        return this.entityData.get(DATA_IS_SUMMONING);
-    }
-
-    public void setSummoning(boolean summoning) {
-        this.entityData.set(DATA_IS_SUMMONING, summoning);
-    }
-
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_IS_CHARGING, false);
-        this.entityData.define(DATA_IS_SUMMONING, false);
     }
 }

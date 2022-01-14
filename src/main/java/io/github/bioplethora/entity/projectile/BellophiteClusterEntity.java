@@ -12,8 +12,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
@@ -25,7 +25,6 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -36,7 +35,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class BellophiteClusterEntity extends DamagingProjectileEntity implements IAnimatable {
@@ -80,107 +78,15 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         super.onHit(result);
         Entity entity = this.getOwner();
         if (entity != null && (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(entity))) {
-            if (!this.level.isClientSide && this.getOwner() != null) {
-                if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-                    this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
-                } else {
-                    this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
-                }
-                this.remove();
-            }
-        }
-
-        if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
-        }
-
-        this.level.playSound(null, new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ()),
-                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.glass.break"))),
-                SoundCategory.NEUTRAL, (float) 1, (float) 1);
-
-        if(this.level instanceof ServerWorld) {
-            List<Entity> nearEntities = this.level
-                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (5 / 2d), this.getY(), this.getZ() - (5 / 2d), this.getX() + (5 / 2d), this.getY() + (5 / 2d), this.getZ() + (5 / 2d)), null)
-                    .stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
-                        }
-                    }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityArea : nearEntities) {
-                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
-
-                    if (!(this.getOwner() == null)) {
-                        //hell mode + berserk
-                        if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 13.5);
-                            //berserk only
-                        } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 10);
-                            //default
-                        } else {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 5.5);
-                        }
-                    }
-
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
-                }
-            }
+            this.hitAndExplode();
         }
     }
 
     @Override
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
-        if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) entityHitResult).getEntity().is(entity)) {
-            if (!this.level.isClientSide && this.getOwner() != null) {
-                if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-                    this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
-                } else {
-                    this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
-                }
-                this.remove();
-            }
-        }
-
-        if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
-        }
-
-        this.level.playSound(null, new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ()),
-                (net.minecraft.util.SoundEvent) Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.glass.break"))),
-                SoundCategory.NEUTRAL, (float) 1, (float) 1);
-
-        if(this.level instanceof ServerWorld && !(this.getOwner() == null)) {
-            List<Entity> nearEntities = this.level
-                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (7 / 2d), this.getY() - (7 / 2d), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d)), null)
-                    .stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
-                        }
-                    }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityArea : nearEntities) {
-                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
-
-                    if (!(this.getOwner() == null)) {
-                        //hell mode + berserk
-                        if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 13.5);
-                            //berserk only
-                        } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 10);
-                            //default
-                        } else {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 5.5);
-                        }
-                    }
-
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
-                }
-            }
+        if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !entityHitResult.getEntity().is(entity)) {
+            this.hitAndExplode();
         }
     }
 
@@ -228,6 +134,57 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         ++lifespan;
 
         if (lifespan == 100) {
+            this.remove();
+        }
+    }
+
+    public void hitAndExplode() {
+        double x = this.getX(), y = this.getY(), z = this.getZ();
+        BlockPos blockpos = new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ());
+        AxisAlignedBB area = new AxisAlignedBB(this.getX() - (7 / 2d), this.getY() - (7 / 2d), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d));
+
+        if (this.level instanceof ServerWorld) {
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 20, 0.4, 0.4, 0.4, 0.1);
+        }
+
+        this.level.playSound(null, blockpos, SoundEvents.GLASS_BREAK, SoundCategory.NEUTRAL, (float) 1, (float) 1);
+
+        if(this.level instanceof ServerWorld && !(this.getOwner() == null)) {
+            List<Entity> nearEntities = this.level
+                    .getEntitiesOfClass(Entity.class, area, null).stream().sorted(new Object() {
+                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
+                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
+                        }
+                    }.compareDistOf(x, y, z)).collect(Collectors.toList());
+            for (Entity entityArea : nearEntities) {
+                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
+
+                    if (!(this.getOwner() == null)) {
+                        //hell mode + berserk
+                        if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                            entityArea.hurt(DamageSource.MAGIC, (float) 13.5);
+                            //berserk only
+                        } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
+                            entityArea.hurt(DamageSource.MAGIC, (float) 10);
+                            //default
+                        } else {
+                            entityArea.hurt(DamageSource.MAGIC, (float) 5.5);
+                        }
+                    }
+
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
+                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
+                }
+            }
+        }
+
+        if (!this.level.isClientSide && this.getOwner() != null) {
+            if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
+            } else {
+                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
+            }
             this.remove();
         }
     }
