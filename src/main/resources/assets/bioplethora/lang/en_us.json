@@ -109,5 +109,9 @@
 
   "subtitles.bioplethora.bellophgolem.idle": "Bellophgolem grunts",
   "subtitles.bioplethora.bellophgolem.hurt": "Bellophgolem hurts",
-  "subtitles.bioplethora.bellophgolem.death": "Bellophgolem dies"
+  "subtitles.bioplethora.bellophgolem.death": "Bellophgolem dies",
+
+  "death.attack.indirectCastration.attacker_0": "%s was castrated into shreds by %s",
+  "death.attack.indirectCastration.attacker_1": "%s was brutally obliterated by %s",
+  "death.attack.indirectCastration.attacker_2": "%s was painfully blasted out by %s"
 }

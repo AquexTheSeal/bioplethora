@@ -12,6 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -92,29 +94,34 @@ public class ServerWorldEvents {
             boolean targetIsAltyrus = ((EntityRayTraceResult) result).getEntity() instanceof AltyrusEntity;
 
             if (!event.getEntity().level.isClientSide && targetIsAltyrus) {
-
                 AltyrusEntity altyrus = ((AltyrusEntity) ((EntityRayTraceResult) result).getEntity());
+                int shouldDodge = altyrus.getRandom().nextInt(3);
 
-                Vector3d projectilePos = event.getEntity().position();
-                Vector3d rVec = altyrus.getLookAngle().yRot(0.5F * (float) Math.PI).add(altyrus.position());
-                Vector3d lVec = altyrus.getLookAngle().yRot(-0.5F * (float) Math.PI).add(altyrus.position());
+                if ((shouldDodge == 1) || (shouldDodge == 2)) {
 
-                boolean rDir;
+                    Vector3d projectilePos = event.getEntity().position();
+                    Vector3d rVec = altyrus.getLookAngle().yRot(0.5F * (float) Math.PI).add(altyrus.position());
+                    Vector3d lVec = altyrus.getLookAngle().yRot(-0.5F * (float) Math.PI).add(altyrus.position());
+                    BlockPos pos = new BlockPos((int) altyrus.getX(), (int) altyrus.getY(), (int) altyrus.getZ());
 
-                if (projectilePos.distanceTo(rVec) < projectilePos.distanceTo(lVec)) {
-                    rDir = true;
-                } else if (projectilePos.distanceTo(rVec) > projectilePos.distanceTo(lVec)) {
-                    rDir = false;
-                } else {
-                    rDir = altyrus.getRandom().nextBoolean();
+                    boolean rDir;
+
+                    if (projectilePos.distanceTo(rVec) < projectilePos.distanceTo(lVec)) {
+                        rDir = true;
+                    } else if (projectilePos.distanceTo(rVec) > projectilePos.distanceTo(lVec)) {
+                        rDir = false;
+                    } else {
+                        rDir = altyrus.getRandom().nextBoolean();
+                    }
+
+                    Vector3d vectorThingy = event.getEntity().getDeltaMovement().yRot((float) ((rDir ? 0.5F : -0.5F) * Math.PI)).normalize();
+
+                    altyrus.setDodging(true);
+                    altyrus.level.playSound(null, pos, altyrus.getDodgeSound(), SoundCategory.HOSTILE, (float) 1, (float) 1);
+                    altyrus.setDeltaMovement(altyrus.getDeltaMovement().add(vectorThingy.x() * 1F, 0, vectorThingy.z() * 1F));
+
+                    event.setCanceled(true);
                 }
-
-                Vector3d vectorThingy = event.getEntity().getDeltaMovement().yRot((float) ((rDir ? 0.5F : -0.5F) * Math.PI)).normalize();
-
-                altyrus.setDodging(true);
-                altyrus.setDeltaMovement(altyrus.getDeltaMovement().add(vectorThingy.x() * 1F, 0, vectorThingy.z() * 1F));
-
-                event.setCanceled(true);
             }
         }
     }

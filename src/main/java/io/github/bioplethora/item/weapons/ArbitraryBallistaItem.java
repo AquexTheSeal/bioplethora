@@ -8,6 +8,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.ICrossbowUser;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -20,6 +21,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
@@ -59,6 +61,8 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         if (isCharged(itemstack)) {
             performShooting(world, entity, hand, itemstack, getShootingPower(itemstack), 1.0F);
             setCharged(itemstack, false);
+
+            this.crossbowRecoil(entity, 0.5F, (double) MathHelper.sin(entity.yRot * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(entity.yRot * ((float)Math.PI / 180F))));
 
             return ActionResult.consume(itemstack);
         } else if (!entity.getProjectile(itemstack).isEmpty()) {
@@ -265,6 +269,21 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         }
 
         onCrossbowShot(world, entity, stack);
+    }
+
+    public void crossbowRecoil(PlayerEntity entity, float p_233627_1_, double p_233627_2_, double p_233627_4_) {
+        net.minecraftforge.event.entity.living.LivingKnockBackEvent event = net.minecraftforge.common.ForgeHooks.onLivingKnockBack(entity, p_233627_1_, p_233627_2_, p_233627_4_);
+        if(event.isCanceled()) return;
+        p_233627_1_ = event.getStrength();
+        p_233627_2_ = event.getRatioX();
+        p_233627_4_ = event.getRatioZ();
+        p_233627_1_ = (float)((double)p_233627_1_ * (1.0D - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE)));
+        if (!(p_233627_1_ <= 0.0F)) {
+            entity.hasImpulse = true;
+            Vector3d vector3d = entity.getDeltaMovement();
+            Vector3d vector3d1 = (new Vector3d(p_233627_2_, 0.0D, p_233627_4_)).normalize().scale((double)p_233627_1_);
+            entity.setDeltaMovement(vector3d.x / 2.0D - vector3d1.x, entity.getDeltaMovement().y(), vector3d.z / 2.0D - vector3d1.z);
+        }
     }
 
     private static float[] getShotPitches(Random p_220028_0_) {

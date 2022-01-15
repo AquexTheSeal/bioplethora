@@ -88,17 +88,18 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(1, new LookAtGoal(this, AlphemEntity.class, 24.0F));
-        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(4, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(4, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
-        this.goalSelector.addGoal(5, new AltyrusRangedAttackGoal(this));
+        this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+        this.goalSelector.addGoal(5, new LookAtGoal(this, AlphemEntity.class, 24.0F));
+        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(3, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(3, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.6));
+        this.goalSelector.addGoal(7, new AltyrusRangedAttackGoal(this));
         this.goalSelector.addGoal(6, new AltyrusSummonGolemGoal(this));
-        this.goalSelector.addGoal(7, new SwimGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
+        this.goalSelector.addGoal(8, new SwimGoal(this));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
     }
 
     @Override
@@ -137,6 +138,10 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         return PlayState.CONTINUE;
     }
 
+    public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
+        return worldIn.getBlockState(pos).isAir() ? 10.0F : 0.0F;
+    }
+
     public boolean doHurtTarget (Entity entity) {
         boolean flag = super.doHurtTarget(entity);
         double x = entity.getX();
@@ -157,6 +162,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
             this.setHealth(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
         }
+        this.setNoGravity(true);
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -209,6 +215,10 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         return BioplethoraSoundEvents.BELLOPHGOLEM_DEATH.get();
     }
 
+    public SoundEvent getDodgeSound() {
+        return SoundEvents.SHULKER_SHOOT;
+    }
+
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_IS_CHARGING, false);
@@ -239,6 +249,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     public void setDodging(boolean dodging) {
         this.entityData.set(DATA_IS_DODGING, dodging);
     }
+
 
     public boolean causeFallDamage(float distance, float damageMultiplier) {
         return false;

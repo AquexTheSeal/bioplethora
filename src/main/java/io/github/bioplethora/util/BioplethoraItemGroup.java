@@ -1,6 +1,5 @@
 package io.github.bioplethora.util;
 
-import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -10,7 +9,7 @@ public class BioplethoraItemGroup {
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(BioplethoraItems.CREPHOXL_FEATHER.get());
+            return new ItemStack(BioplethoraItems.NANDBRI_SCALES.get());
         }
     };
 
@@ -18,7 +17,7 @@ public class BioplethoraItemGroup {
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(BioplethoraItems.CREPHOXL_SPAWN_EGG.get());
+            return new ItemStack(BioplethoraItems.NANDBRI_SPAWN_EGG.get());
         }
     };
 }

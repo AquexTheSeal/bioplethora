@@ -1,17 +1,17 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.IBioplethoraEntityClass;
-import io.github.bioplethora.entity.projectile.WindblazeEntity;
+import io.github.bioplethora.util.BioplethoraDamageSources;
 import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -35,18 +35,8 @@ public class ExperimentalItem extends Item {
         if (!(worldIn instanceof ServerWorld))
             return new ActionResult<>(ActionResultType.PASS, itemInHand);
 
-        float AngleX = -MathHelper.sin(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
-        float AngleY = -MathHelper.sin(playerIn.xRot * ((float) Math.PI / 180F));
-        float AngleZ = MathHelper.cos(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
+        playerIn.hurt(BioplethoraDamageSources.indirectCastration(playerIn, playerIn), 5);
 
-        WindblazeEntity windblazeEntity = new WindblazeEntity(worldIn, playerIn, AngleX, AngleY, AngleZ);
-        windblazeEntity.setPos(playerIn.getX(), playerIn.getY() + 1.5, playerIn.getZ());
-        windblazeEntity.shootFromRotation(windblazeEntity, playerIn.xRot, playerIn.yHeadRot, 0, 1F, 0);
-
-        worldIn.addFreshEntity(windblazeEntity);
-        worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.SHULKER_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
-
-        playerIn.awardStat(Stats.ITEM_USED.get(this));
         return new ActionResult<>(ActionResultType.SUCCESS, itemInHand);
     }
 
