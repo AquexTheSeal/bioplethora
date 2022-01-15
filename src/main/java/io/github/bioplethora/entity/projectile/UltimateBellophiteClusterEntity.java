@@ -1,6 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.util.BioplethoraDamageSources;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -142,6 +143,7 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
         double x = this.getX(), y = this.getY(), z = this.getZ();
         BlockPos blockPos = new BlockPos(x, y, z);
         AxisAlignedBB area = new AxisAlignedBB(x - (7 / 2d), y, z - (7 / 2d), x + (7 / 2d), y + (7 / 2d), z + (7 / 2d));
+        DamageSource castration = BioplethoraDamageSources.indirectCastration(this.getOwner(), this.getOwner());
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 40, 0.6, 0.6, 0.6, 0.1);
@@ -160,7 +162,7 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
             for (Entity entityArea : nearEntities) {
                 if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
 
-                    entityArea.hurt(DamageSource.MAGIC, (float) 15);
+                    entityArea.hurt(castration, (float) 15);
 
                     ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 3));
                     ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 100, 2));

@@ -47,8 +47,10 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_SUMMONING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DATA_IS_DODGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
     private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS));
     private final AnimationFactory factory = new AnimationFactory(this);
+    public int dodgeTimer;
 
     public AltyrusEntity(EntityType<? extends AnimatableMonsterEntity> type, World world) {
         super(type, world);
@@ -162,6 +164,13 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     public void aiStep() {
         super.aiStep();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+
+        if (this.isDodging()) {
+            ++dodgeTimer;
+            if (dodgeTimer == 20) {
+                this.setDodging(false);
+            }
+        }
     }
 
     @Override
@@ -204,6 +213,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         super.defineSynchedData();
         this.entityData.define(DATA_IS_CHARGING, false);
         this.entityData.define(DATA_IS_SUMMONING, false);
+        this.entityData.define(DATA_IS_DODGING, false);
     }
 
     public boolean isCharging() {
@@ -220,6 +230,14 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
 
     public void setSummoning(boolean summoning) {
         this.entityData.set(DATA_IS_SUMMONING, summoning);
+    }
+
+    public boolean isDodging() {
+        return this.entityData.get(DATA_IS_DODGING);
+    }
+
+    public void setDodging(boolean dodging) {
+        this.entityData.set(DATA_IS_DODGING, dodging);
     }
 
     public boolean causeFallDamage(float distance, float damageMultiplier) {

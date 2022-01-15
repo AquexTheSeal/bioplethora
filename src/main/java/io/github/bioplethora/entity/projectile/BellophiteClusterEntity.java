@@ -2,6 +2,7 @@ package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.util.BioplethoraDamageSources;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -142,6 +143,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         double x = this.getX(), y = this.getY(), z = this.getZ();
         BlockPos blockpos = new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ());
         AxisAlignedBB area = new AxisAlignedBB(this.getX() - (7 / 2d), this.getY() - (7 / 2d), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d));
+        DamageSource castration = BioplethoraDamageSources.indirectCastration(this.getOwner(), this.getOwner());
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 20, 0.4, 0.4, 0.4, 0.1);
@@ -159,16 +161,16 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
             for (Entity entityArea : nearEntities) {
                 if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
 
-                    if (!(this.getOwner() == null)) {
+                    if (this.getOwner() != null) {
                         //hell mode + berserk
                         if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 13.5);
+                            entityArea.hurt(castration, (float) 13.5);
                             //berserk only
                         } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 10);
+                            entityArea.hurt(castration, (float) 10);
                             //default
                         } else {
-                            entityArea.hurt(DamageSource.MAGIC, (float) 5.5);
+                            entityArea.hurt(castration, (float) 5.5);
                         }
                     }
 
