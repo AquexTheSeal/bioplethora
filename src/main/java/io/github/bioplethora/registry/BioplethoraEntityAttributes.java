@@ -11,23 +11,25 @@ public class BioplethoraEntityAttributes {
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
 
-        //Avifauna
+        //Ecoharmless
         event.put(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.PEAGUIN.get(), PeaguinEntity.setCustomAttributes().build());
 
-        //Dangerum
+        //Plethoneutral
         event.put(BioplethoraEntities.ALPHEM.get(), AlphemEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.ALTYRUS.get(), AltyrusEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntity.setCustomAttributes().build());
 
-        //Reptilia
+        //Dangerum
         event.put(BioplethoraEntities.NANDBRI.get(), NandbriEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.HELIOBLADE.get(), HeliobladeEntity.setCustomAttributes().build());
 
-        //maritime
+        //Hellsent
         event.put(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntity.setCustomAttributes().build());
 
-        //elite undead
+        //Elderia
         event.put(BioplethoraEntities.GAUGALEM.get(), GaugalemEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.MYLIOTHAN.get(), MyliothanEntity.setCustomAttributes().build());
     }
 }

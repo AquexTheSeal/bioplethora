@@ -11,9 +11,12 @@
   "entity.bioplethora.gaugalem": "Gaugalem",
   "entity.bioplethora.altyrus": "Altyrus",
   "entity.bioplethora.dwarf_mossadile": "Dwarf Mossadile",
+  "entity.bioplethora.myliothan": "Myliothan",
+  "entity.bioplethora.helioblade": "Helioblade",
 
   "entity.bioplethora.bellophite_cluster": "Bellophite Cluster",
   "entity.bioplethora.bellophite_arrow": "Bellophite Arrow",
+  "entity.bioplethora.ultimate_bellophite_cluster": "Ultimate Bellophite Cluster",
 
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.bellophite_shield_wave": "Bellophite Shield Wave",
@@ -27,6 +30,8 @@
   "item.bioplethora.gaugalem_spawn_egg": "Gaugalem Spawn Egg",
   "item.bioplethora.altyrus_spawn_egg": "Altyrus Spawn Egg",
   "item.bioplethora.dwarf_mossadile_spawn_egg": "Dwarf Mossadile Spawn Egg",
+  "item.bioplethora.myliothan_spawn_egg": "Myliothan Spawn Egg",
+  "item.bioplethora.helioblade_spawn_egg": "Helioblade Spawn Egg",
 
   "item.bioplethora.crephoxl_feather": "Crephoxl Feather",
   "item.bioplethora.crephoxl_stick": "Crephoxl Stick",
@@ -41,6 +46,7 @@
   "item.bioplethora.bellophite_arrow": "Bellophite Arrow",
   "item.bioplethora.stellar_scythe": "Stellar Scythe",
   "item.bioplethora.arbitrary_ballista": "Arbitrary Ballista",
+  "item.bioplethora.vermilion_blade": "Vermilion Blade",
 
   "item.bioplethora.phantom_chime": "Phantom Chime",
   "item.bioplethora.magma_bomb": "Magma Bomb",
@@ -111,7 +117,17 @@
   "subtitles.bioplethora.bellophgolem.hurt": "Bellophgolem hurts",
   "subtitles.bioplethora.bellophgolem.death": "Bellophgolem dies",
 
-  "death.attack.indirectCastration.attacker_0": "%s was castrated into shreds by %s",
-  "death.attack.indirectCastration.attacker_1": "%s was brutally obliterated by %s",
-  "death.attack.indirectCastration.attacker_2": "%s was painfully blasted out by %s"
+  "subtitles.bioplethora.myliothan.idle": "Myliothan Cries",
+
+  "subtitles.bioplethora.helioblade.idle": "Helioblade grunts",
+  "subtitles.bioplethora.helioblade.hurt": "Helioblade hurts",
+  "subtitles.bioplethora.helioblade.death": "Helioblade dies",
+
+  "death.attack.indirectCastration.indirect_0": "%s was castrated into shreds by %s",
+  "death.attack.indirectCastration.indirect_1": "%s was brutally obliterated by %s",
+  "death.attack.indirectCastration.indirect_2": "%s was blasted out by %s",
+
+  "death.attack.helioSlashed.indirect_0": "%s was sliced up by %s",
+  "death.attack.helioSlashed.indirect_1": "%s was fatally slashed by %s",
+  "death.attack.helioSlashed.indirect_2": "%s was cut into pieces by %s"
 }

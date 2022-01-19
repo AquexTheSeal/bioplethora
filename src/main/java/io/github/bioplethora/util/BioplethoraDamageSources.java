@@ -12,13 +12,19 @@ import javax.annotation.Nullable;
 public class BioplethoraDamageSources {
 
     public static DamageSource indirectCastration(Entity p_76354_0_, @Nullable Entity p_76354_1_) {
-        return (new BioplethoraIndirectDamageSource("indirectCastration", p_76354_0_, p_76354_1_)).bypassArmor().setMagic();
+        return (new BioplethoraIndirectDamageSource("indirectCastration", p_76354_0_, p_76354_1_)).bypassArmor().setMagic().setExplosion();
+    }
+
+    public static DamageSource helioSlashed(Entity p_76354_0_, @Nullable Entity p_76354_1_) {
+        return (new BioplethoraIndirectDamageSource("helioSlashed", p_76354_0_, p_76354_1_)).bypassArmor().setMagic();
     }
 
     static class BioplethoraIndirectDamageSource extends EntityDamageSource {
 
+        Entity indirectOwner;
         public BioplethoraIndirectDamageSource(String p_i1568_1_, Entity p_i1568_2_, @Nullable Entity p_i1568_3_) {
             super(p_i1568_1_, p_i1568_2_);
+            indirectOwner = p_i1568_2_;
         }
 
         @Nullable
@@ -27,11 +33,11 @@ public class BioplethoraDamageSources {
         }
 
         public ITextComponent getLocalizedDeathMessage(LivingEntity livingEntity) {
-            LivingEntity killCredit = (LivingEntity) this.getDirectEntity();
+            LivingEntity killCredit = (LivingEntity) indirectOwner;
             String s = "death.attack." + this.msgId;
             int variant = livingEntity.getRandom().nextInt(2);
             String s1 = s + "." + variant;
-            String s2 = s + ".attacker_" + variant;
+            String s2 = s + ".indirect_" + variant;
             return killCredit != null ? new TranslationTextComponent(s2, livingEntity.getDisplayName(), killCredit.getDisplayName()) : new TranslationTextComponent(s1, livingEntity.getDisplayName());
         }
     }

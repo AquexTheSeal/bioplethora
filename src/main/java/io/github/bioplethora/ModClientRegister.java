@@ -3,10 +3,7 @@ package io.github.bioplethora;
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
 import io.github.bioplethora.client.entity.render.others.BellophiteShieldWaveRender;
-import io.github.bioplethora.client.entity.render.projectile.BellophiteArrowRender;
-import io.github.bioplethora.client.entity.render.projectile.BellophiteClusterRender;
-import io.github.bioplethora.client.entity.render.projectile.UltimateBellophiteClusterRender;
-import io.github.bioplethora.client.entity.render.projectile.WindBlazeRender;
+import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.registry.BioplethoraEntities;
@@ -46,9 +43,11 @@ public class ModClientRegister {
         //Hellsent
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.HELIOBLADE.get(), HeliobladeEntityRender::new);
 
         //Elderia
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS.get(), AltyrusEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.MYLIOTHAN.get(), MyliothanEntityRender::new);
 
         //projectiles
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.MAGMA_BOMB.get(), (rendererManager) -> new SpriteRenderer<>(rendererManager, mcClient.getItemRenderer()));
@@ -56,6 +55,7 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_ARROW.get(), BellophiteArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WINDBLAZE.get(), WindBlazeRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateBellophiteClusterRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.VERMILION_BLADE_PROJECTILE.get(), VermilionBladeProjectileRender::new);
 
         //others
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);

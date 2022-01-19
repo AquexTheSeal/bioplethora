@@ -7,9 +7,8 @@ import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.util.BioplethoraAdvancementHelper;
 import io.github.bioplethora.util.BioplethoraEntityClasses;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -17,7 +16,6 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -26,7 +24,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
@@ -43,7 +40,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
 
 public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
 
@@ -78,17 +74,19 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, BellophgolemEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AltyrusEntity.class, 24.0F));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, HeliobladeEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new FollowMobGoal(this, (float) 1, 10, 5));
-        this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this, this));
+        this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, HeliobladeEntity.class, true));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(AlphemEntity.class));
     }
 
@@ -169,22 +167,8 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
     @Override
     public void die(DamageSource source) {
         super.die(source);
-
         Entity sourceEnt = source.getEntity();
-
-        if (sourceEnt instanceof ServerPlayerEntity) {
-            Advancement adv = ((ServerPlayerEntity) sourceEnt).server.getAdvancements().getAdvancement(new ResourceLocation("bioplethora:alphem_kill"));
-
-            assert adv != null;
-            AdvancementProgress advProg = ((ServerPlayerEntity) sourceEnt).getAdvancements().getOrStartProgress(adv);
-
-            if (!advProg.isDone()) {
-                Iterator iterator = advProg.getRemainingCriteria().iterator();
-                while (iterator.hasNext()) {
-                    ((ServerPlayerEntity) sourceEnt).getAdvancements().award(adv, (String) iterator.next());
-                }
-            }
-        }
+        BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:alphem_kill");
     }
 
     @Override

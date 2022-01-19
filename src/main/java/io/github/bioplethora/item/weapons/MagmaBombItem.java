@@ -26,7 +26,7 @@ public class MagmaBombItem extends Item {
 
     public ActionResult<ItemStack> use(World world, PlayerEntity entity, Hand hand) {
         ItemStack itemstack = entity.getItemInHand(hand);
-        world.playSound((PlayerEntity)null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.BLAZE_SHOOT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+        world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.BLAZE_SHOOT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
         if (!world.isClientSide) {
             MagmaBombEntity magmaBombEntity = new MagmaBombEntity(world, entity);
             magmaBombEntity.setItem(itemstack);

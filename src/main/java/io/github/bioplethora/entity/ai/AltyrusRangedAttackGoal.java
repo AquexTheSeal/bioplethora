@@ -20,7 +20,7 @@ public class AltyrusRangedAttackGoal extends Goal {
     }
 
     public boolean canUse() {
-        return (this.altyrus.getTarget() != null) && (this.altyrus.canSee(this.altyrus.getTarget()));
+        return (this.altyrus.getTarget() != null);
     }
 
     public void start() {
@@ -32,14 +32,13 @@ public class AltyrusRangedAttackGoal extends Goal {
     }
 
     public boolean canContinueToUse() {
-        return (this.altyrus.getTarget() != null) && (this.altyrus.canSee(this.altyrus.getTarget())) && (!this.altyrus.isSummoning()) && (!this.altyrus.getAttacking());
+        return (this.altyrus.getTarget() != null) && (!this.altyrus.isSummoning()) && (!this.altyrus.getAttacking());
     }
 
     public void tick() {
-        LivingEntity livingentity = this.altyrus.getTarget();
+        LivingEntity target = this.altyrus.getTarget();
 
-        assert livingentity != null;
-        if (livingentity.distanceToSqr(this.altyrus) < 4096.0D && this.altyrus.canSee(livingentity)) {
+        if (target != null && target.distanceToSqr(this.altyrus) < 4096.0D && this.altyrus.canSee(target)) {
 
             ++this.chargeTime;
 
@@ -47,18 +46,18 @@ public class AltyrusRangedAttackGoal extends Goal {
             BlockPos pos = new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ());
 
             Vector3d vector3d = this.altyrus.getViewVector(1.0F);
-            double d2 = livingentity.getX() - (this.altyrus.getX() + vector3d.x * 4.0D);
-            double d3 = livingentity.getY(0.5D) - (0.5D + this.altyrus.getY(0.5D));
-            double d4 = livingentity.getZ() - (this.altyrus.getZ() + vector3d.z * 4.0D);
+            double d2 = target.getX() - (this.altyrus.getX() + vector3d.x * 4.0D);
+            double d3 = target.getY(0.5D) - (0.5D + this.altyrus.getY(0.5D));
+            double d4 = target.getZ() - (this.altyrus.getZ() + vector3d.z * 4.0D);
             UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
             ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
 
             if (this.chargeTime == 10) {
-                ((World) world).playSound(null, pos, SoundEvents.ELDER_GUARDIAN_CURSE, SoundCategory.HOSTILE, (float) 1, (float) 1);
+                world.playSound(null, pos, SoundEvents.ELDER_GUARDIAN_CURSE, SoundCategory.HOSTILE, (float) 1, (float) 1);
             }
 
             if (this.chargeTime == 30) {
-                ((World) world).playSound(null, pos, SoundEvents.SHULKER_SHOOT, SoundCategory.HOSTILE, (float) 1, (float) 1);
+                world.playSound(null, pos, SoundEvents.SHULKER_SHOOT, SoundCategory.HOSTILE, (float) 1, (float) 1);
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
             if (this.chargeTime == 35) {
@@ -68,19 +67,17 @@ public class AltyrusRangedAttackGoal extends Goal {
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
             if (this.chargeTime == 45) {
-               world.addFreshEntity(ultimateBellophiteClusterEntity);
+                world.addFreshEntity(ultimateBellophiteClusterEntity);
             }
             if (this.chargeTime == 50) {
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
 
                 this.chargeTime = -100;
             }
+        } else {
+            this.chargeTime = 0;
         }
 
         this.altyrus.setCharging(this.chargeTime > 10);
-
-        if (this.altyrus.isSummoning() && this.altyrus.getAttacking()) {
-            this.stop();
-        }
     }
 }

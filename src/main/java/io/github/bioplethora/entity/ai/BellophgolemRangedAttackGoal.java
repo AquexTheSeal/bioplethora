@@ -79,8 +79,8 @@ public class BellophgolemRangedAttackGoal extends Goal {
                     this.chargeTime = -40;
                 }
             }
-        } else if (this.chargeTime > 0) {
-            --this.chargeTime;
+        } else {
+            this.chargeTime = 0;
         }
 
         this.bellophgolem.setCharging(this.chargeTime > 10);

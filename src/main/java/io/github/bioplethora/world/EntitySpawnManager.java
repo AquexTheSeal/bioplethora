@@ -75,6 +75,8 @@ public class EntitySpawnManager {
         private static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
             //Cuttlefish
             builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 70 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
+            //Myliothan
+            builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BioplethoraEntities.MYLIOTHAN.get(), BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
         private static final Consumer<MobSpawnInfoBuilder> NETHER_ENTITIES = (builder) -> {

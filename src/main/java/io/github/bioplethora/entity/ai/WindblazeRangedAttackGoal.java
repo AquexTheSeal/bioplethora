@@ -51,12 +51,12 @@ public class WindblazeRangedAttackGoal extends Goal {
                 }
 
                 WindblazeEntity windblazeEntity = new WindblazeEntity(world, this.alphem, d1, d2, d3);
-                windblazeEntity.setPos(this.alphem.getX() + vector3d.x * 4.0D, this.alphem.getY(0.5D) + 0.5D, windblazeEntity.getZ() + vector3d.z * 2.0D);
+                windblazeEntity.setPos(this.alphem.getX(), this.alphem.getY(0.5D) + 0.5D, windblazeEntity.getZ());
                 world.addFreshEntity(windblazeEntity);
                 this.chargeTime = -40;
             }
-        } else if (this.chargeTime > 0) {
-            --this.chargeTime;
+        } else {
+            this.chargeTime = 0;
         }
         this.alphem.setCharging(this.chargeTime > 10);
     }

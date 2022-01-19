@@ -6,6 +6,7 @@ import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
@@ -32,7 +33,7 @@ public class WindblazeEntity extends DamagingProjectileEntity {
 
     public double lifespan = 0;
 
-    public WindblazeEntity(EntityType<? extends WindblazeEntity> entityType, World world) {
+    public WindblazeEntity(EntityType<? extends DamagingProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -49,7 +50,7 @@ public class WindblazeEntity extends DamagingProjectileEntity {
     public void tick() {
         super.tick();
 
-        lifespan = (double) lifespan + 1;
+        ++lifespan;
 
         if ((lifespan == 100)) {
             this.remove();
@@ -59,24 +60,23 @@ public class WindblazeEntity extends DamagingProjectileEntity {
     @Override
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
+        AxisAlignedBB entArea = new AxisAlignedBB(this.getX() - (3 / 2d), this.getY() - (3 / 2d), this.getZ() - (3 / 2d), this.getX() + (3 / 2d), this.getY() + (3 / 2d), this.getZ() + (3 / 2d));
 
-        if (this.level instanceof ServerWorld) {
-            List<Entity> nearEntities = this.level
-                    .getEntitiesOfClass(Entity.class, new AxisAlignedBB(this.getX() - (3 / 2d), this.getY() - (3 / 2d), this.getZ() - (3 / 2d), this.getX() + (3 / 2d), this.getY() + (3 / 2d), this.getZ() + (3 / 2d)), null)
-                    .stream().sorted(new Object() {
+        if (this.level instanceof ServerWorld && this.getOwner() instanceof MobEntity && ((MobEntity) this.getOwner()).getTarget() != null) {
+            List<Entity> nearEntities = this.level.getEntitiesOfClass(Entity.class, entArea, null).stream().sorted(new Object() {
                         Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
                             return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
                         }
                     }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
             for (Entity entityArea : nearEntities) {
-                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
+                if (entityArea instanceof LivingEntity && (entityArea == ((MobEntity) this.getOwner()).getTarget() || ((MobEntity) entityArea).getTarget() == this.getEntity())) {
 
                     if (!(entityArea instanceof AltyrusEntity)) {
                         entityArea.setDeltaMovement(0, 0.75, 0);
                     }
 
                     if (BioplethoraConfig.COMMON.hellMode.get()) {
-                        ((LivingEntity) entityArea).hurt(DamageSource.MAGIC, 3);
+                        entityArea.hurt(DamageSource.MAGIC, 3);
                         ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
                         ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                     } else {
@@ -85,7 +85,7 @@ public class WindblazeEntity extends DamagingProjectileEntity {
                 }
             }
         }
-        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.NEUTRAL, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.HOSTILE, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
     }
 
     @Nonnull

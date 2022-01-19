@@ -1,0 +1,17 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.vermilion_blade_projectile.idle": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"vermilion_blade": {
+					"rotation": {
+						"vector": [90, "math.sin(query.anim_time * 720) * 360", 90]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

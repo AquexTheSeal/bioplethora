@@ -5,9 +5,13 @@ import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.SquidEntity;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -66,5 +70,18 @@ public class CuttlefishEntity extends SquidEntity implements IAnimatable, IBiopl
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "nandbri_controller", 0, this::predicate));
+    }
+
+    @Override
+    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
+        return super.checkSpawnRules(world, reason) && CuttlefishEntity.checkCuttlefishSpawnRules(level, blockPosition());
+    }
+
+    public static boolean checkCuttlefishSpawnRules(IWorld world, BlockPos pos) {
+        if (pos.getY() > 45 && pos.getY() < world.getSeaLevel()) {
+            return world.getFluidState(pos).is(FluidTags.WATER);
+        } else {
+            return false;
+        }
     }
 }

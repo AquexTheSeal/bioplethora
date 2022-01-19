@@ -1,6 +1,5 @@
 {
   "bellophgolem_idle": {
-    "category": "entity",
     "subtitle": "subtitles.bioplethora.bellophgolem.idle",
     "sounds": [
       "bioplethora:bellophgolem_idle_0",
@@ -8,17 +7,39 @@
     ]
   },
   "bellophgolem_hurt": {
-    "category": "entity",
     "subtitle": "subtitles.bioplethora.bellophgolem.hurt",
     "sounds": [
       "bioplethora:bellophgolem_hurt"
     ]
   },
   "bellophgolem_death": {
-    "category": "entity",
     "subtitle": "subtitles.bioplethora.bellophgolem.death",
     "sounds": [
       "bioplethora:bellophgolem_death"
+    ]
+  },
+  "myliothan_idle": {
+    "subtitle": "subtitles.bioplethora.myliothan.idle",
+    "sounds": [
+      "bioplethora:myliothan_idle"
+    ]
+  },
+  "helioblade_idle": {
+    "subtitle": "subtitles.bioplethora.helioblade.idle",
+    "sounds": [
+      "bioplethora:helioblade_idle"
+    ]
+  },
+  "helioblade_hurt": {
+    "subtitle": "subtitles.bioplethora.helioblade.hurt",
+    "sounds": [
+      "bioplethora:helioblade_hurt"
+    ]
+  },
+  "helioblade_death": {
+    "subtitle": "subtitles.bioplethora.helioblade.death",
+    "sounds": [
+      "bioplethora:helioblade_death"
     ]
   }
 }

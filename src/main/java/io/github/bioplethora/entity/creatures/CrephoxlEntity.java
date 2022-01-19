@@ -5,9 +5,8 @@ import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.util.BioplethoraAdvancementHelper;
 import io.github.bioplethora.util.BioplethoraEntityClasses;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +16,6 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -34,8 +32,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import java.util.Iterator;
 
 public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
 
@@ -135,19 +131,6 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
         super.die(source);
 
         Entity sourceEnt = source.getEntity();
-
-        if (sourceEnt instanceof ServerPlayerEntity) {
-            Advancement adv = ((ServerPlayerEntity) sourceEnt).server.getAdvancements().getAdvancement(new ResourceLocation("bioplethora:crephoxl_kill"));
-
-            assert adv != null;
-            AdvancementProgress advProg = ((ServerPlayerEntity) sourceEnt).getAdvancements().getOrStartProgress(adv);
-
-            if (!advProg.isDone()) {
-                Iterator iterator = advProg.getRemainingCriteria().iterator();
-                while (iterator.hasNext()) {
-                    ((ServerPlayerEntity) sourceEnt).getAdvancements().award(adv, (String) iterator.next());
-                }
-            }
-        }
+        BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:crephoxl_kill");
     }
 }

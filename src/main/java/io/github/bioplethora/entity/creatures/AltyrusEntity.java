@@ -134,6 +134,11 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
             return PlayState.CONTINUE;
         }
 
+        if (this.isDodging()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.altyrus.dodging", true));
+            return PlayState.CONTINUE;
+        }
+
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.altyrus.idle", true));
         return PlayState.CONTINUE;
     }
@@ -175,6 +180,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
             ++dodgeTimer;
             if (dodgeTimer == 20) {
                 this.setDodging(false);
+                this.dodgeTimer = 0;
             }
         }
     }
