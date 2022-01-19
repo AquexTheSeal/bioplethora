@@ -20,7 +20,7 @@ public class HeliobladeEntityRender extends GeoEntityRenderer<HeliobladeEntity> 
     public HeliobladeEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new HeliobladeEntityModel());
         this.addLayer(new HeliobladeEntityGlowLayer(this));
-        this.shadowRadius = 0.5F;
+        this.shadowRadius = 0.8F;
     }
 
     @Override

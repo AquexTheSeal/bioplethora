@@ -1,6 +1,6 @@
 package io.github.bioplethora.event;
 
-import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;

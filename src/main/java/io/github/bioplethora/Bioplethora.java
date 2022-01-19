@@ -1,9 +1,7 @@
 package io.github.bioplethora;
 
-import io.github.bioplethora.config.BioplethoraConfig;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
-import net.minecraft.entity.EntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,7 +37,6 @@ public class Bioplethora {
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(EventPriority.HIGH, EntitySpawnManager::onBiomeLoadingEvent);
-        forgeBus.addGenericListener(EntityType.class, ModCommonRegister::registerEggs);
         forgeBus.register(this);
 
         GeckoLib.initialize();

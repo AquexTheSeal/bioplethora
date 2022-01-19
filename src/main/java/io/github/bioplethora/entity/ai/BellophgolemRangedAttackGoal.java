@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.BellophgolemEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import net.minecraft.entity.LivingEntity;

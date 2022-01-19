@@ -1,4 +1,4 @@
-package io.github.bioplethora;
+package io.github.bioplethora.client;
 
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(bus =  Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModClientRegister {
 
     @SubscribeEvent

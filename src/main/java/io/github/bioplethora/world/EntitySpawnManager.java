@@ -1,6 +1,6 @@
 package io.github.bioplethora.world;
 
-import io.github.bioplethora.config.BioplethoraConfig;
+import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.RegistryKey;

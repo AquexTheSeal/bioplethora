@@ -21,9 +21,9 @@ public class HeliobladeEntityGlowLayer extends GeoLayerRenderer<HeliobladeEntity
 
     @Override
     public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, HeliobladeEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        RenderType cameo =  RenderType.eyes(GLOW);
+        RenderType eyesRender =  RenderType.eyes(GLOW);
         if(!entityLivingBaseIn.isDeadOrDying()) {
-            this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, cameo, matrixStackIn, bufferIn, bufferIn.getBuffer(cameo), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
+            this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, eyesRender, matrixStackIn, bufferIn, bufferIn.getBuffer(eyesRender), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
         }
     }
 }

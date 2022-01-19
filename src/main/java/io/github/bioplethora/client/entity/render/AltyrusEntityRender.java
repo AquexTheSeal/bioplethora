@@ -2,7 +2,6 @@ package io.github.bioplethora.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.model.AltyrusEntityModel;
 import io.github.bioplethora.client.entity.render.layer.AltyrusEntityGlowLayer;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
@@ -14,9 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class AltyrusEntityRender extends GeoEntityRenderer<AltyrusEntity> {
-
-    private static final ResourceLocation GLOW = new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/layers/altyrus_glow_layer.png");
-    private static final ResourceLocation MODEL = new ResourceLocation(Bioplethora.MOD_ID, "geo/altyrus.geo.json");
 
     public AltyrusEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new AltyrusEntityModel());
