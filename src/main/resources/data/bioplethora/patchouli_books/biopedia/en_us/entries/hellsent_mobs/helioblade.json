@@ -1,0 +1,16 @@
+{
+  "name": "Helioblade",
+  "icon": "bioplethora:helioblade_spawn_egg",
+  "category": "hellsent_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()---"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:helioblade",
+      "text": "---"
+    }
+  ]
+}

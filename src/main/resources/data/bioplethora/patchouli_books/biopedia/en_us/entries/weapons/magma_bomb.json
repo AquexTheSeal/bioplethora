@@ -4,7 +4,8 @@
   "category": "weapons",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:magma_bomb",
       "text": "$(l)DESCRIPTION: $(br)$()This throwable hot ball acts like a grenade, which explodes on impact. These throwable hot explosive balls are heard to be made with magma cream and fire charges!"
     },
     {

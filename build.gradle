@@ -99,6 +99,10 @@ mixin {
 
 repositories {
     maven {
+        name = "CurseForge"
+        url = "https://www.cursemaven.com"
+    }
+    maven {
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
     maven {
@@ -117,6 +121,8 @@ dependencies {
     //Just Enough Items (JEI)
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    //Just Enough Resources (JER)
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
     //Patchouli
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51")

@@ -4,7 +4,8 @@
   "category": "weapons",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:stellar_scythe",
       "text": "$(l)DESCRIPTION: $(br)$()The Stellar Reaper's lethal scythe can slice through it's holder's enemies. This painful reaper is created with pure magic, casted by only the Gaugalems, who are the Stellar Reapers."
     },
     {

@@ -4,7 +4,8 @@
   "category": "weapons",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:phantom_chime",
       "text": "$(l)DESCRIPTION: $(br)$()This fluffy weapon can knock up it's opponents! This weapon is made with the phantom membrane dropped by the Phantoms, who are known to be annoying creatures, flying throughout the night."
     },
     {

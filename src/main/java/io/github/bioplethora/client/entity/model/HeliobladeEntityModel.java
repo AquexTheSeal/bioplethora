@@ -17,7 +17,11 @@ public class HeliobladeEntityModel extends AnimatedGeoModel<HeliobladeEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(HeliobladeEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/helioblade.png");
+        if (entity.isClone()) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/helioblade_clone.png");
+        } else {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/helioblade.png");
+        }
     }
 
     @Override

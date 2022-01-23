@@ -1,8 +1,10 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.SummonableMonsterEntity;
+import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
+import io.github.bioplethora.entity.ai.HeliobladeCloningGoal;
 import io.github.bioplethora.entity.ai.HeliobladeQuickShootingGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
@@ -46,11 +48,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HeliobladeEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
+public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
     private static final DataParameter<Boolean> DATA_IS_QUICKSHOOTING = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DATA_IS_CLONE = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
-    public int tpParticleAmount = 30;
-    public double tpParticleRadius = 0.3;
+    protected int tpParticleAmount = 30;
+    protected double tpParticleRadius = 0.3;
     public int tpTimer;
 
     public HeliobladeEntity(EntityType<? extends MonsterEntity> type, World world) {
@@ -84,11 +87,13 @@ public class HeliobladeEntity extends AnimatableMonsterEntity implements IAnimat
         this.goalSelector.addGoal(1, new MonsterAnimatableMoveToTargetGoal(this, 0.75, 8));
         this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 20, 0.2, 0.3));
         this.goalSelector.addGoal(2, new HeliobladeQuickShootingGoal(this));
+        this.goalSelector.addGoal(3, new HeliobladeCloningGoal(this));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
-        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, HeliobladeEntity.class)).setAlertOthers());
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
+        this.targetSelector.addGoal(2, (new HurtByTargetGoal(this, HeliobladeEntity.class)).setAlertOthers());
+        this.targetSelector.addGoal(1, (new CopyTargetOwnerGoal(this)));
     }
 
     @Override
@@ -177,6 +182,7 @@ public class HeliobladeEntity extends AnimatableMonsterEntity implements IAnimat
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_IS_QUICKSHOOTING, false);
+        this.entityData.define(DATA_IS_CLONE, false);
     }
 
     public boolean isQuickShooting() {
@@ -185,6 +191,14 @@ public class HeliobladeEntity extends AnimatableMonsterEntity implements IAnimat
 
     public void setQuickShooting(boolean quickShooting) {
         this.entityData.set(DATA_IS_QUICKSHOOTING, quickShooting);
+    }
+
+    public boolean isClone() {
+        return this.entityData.get(DATA_IS_CLONE);
+    }
+
+    public void setClone(boolean clone) {
+        this.entityData.set(DATA_IS_CLONE, clone);
     }
 
     public void teleportRandomly() {
@@ -236,11 +250,13 @@ public class HeliobladeEntity extends AnimatableMonsterEntity implements IAnimat
     @Override
     public void addAdditionalSaveData(CompoundNBT compoundNBT) {
         super.addAdditionalSaveData(compoundNBT);
+        compoundNBT.putBoolean("isClone", entityData.get(DATA_IS_CLONE));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundNBT compoundNBT) {
         super.readAdditionalSaveData(compoundNBT);
+        this.setClone(compoundNBT.getBoolean("isClone"));
     }
 
     @Override

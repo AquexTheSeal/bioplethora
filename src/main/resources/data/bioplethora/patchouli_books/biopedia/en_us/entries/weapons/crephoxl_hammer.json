@@ -4,7 +4,8 @@
   "category": "weapons",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:crephoxl_hammer",
       "text": "$(l)DESCRIPTION: $(br)$()This weapon was made with the silky feather of the Crephoxls and the rigid and tough stick of the Crephoxls. This weapon is known to smash their enemies into bits with it's sort-of destructive ability."
     },
     {

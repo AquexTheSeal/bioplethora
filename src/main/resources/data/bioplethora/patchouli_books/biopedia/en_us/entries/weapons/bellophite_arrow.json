@@ -4,7 +4,8 @@
   "category": "weapons",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:bellophite_arrow",
       "text": "$(l)DESCRIPTION: $(br)$()This arrow can destroy the target's enemies due to it's enormous damage and freezing area attack. This weapon is known to be crafted with the extremely rigid Bellophite."
     },
     {

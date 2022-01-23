@@ -78,8 +78,9 @@ public class ServerWorldEvents {
             boolean notFireDS = (event.getSource() != DamageSource.IN_FIRE);
             boolean notLavaDS = (event.getSource() != DamageSource.LAVA);
             boolean notCactusDS = (event.getSource() != DamageSource.CACTUS);
+            boolean notVoidDS = (event.getSource() != DamageSource.OUT_OF_WORLD);
 
-            if (notFireDS && notLavaDS && notCactusDS) {
+            if (notFireDS && notLavaDS && notCactusDS && notVoidDS) {
                 if ((getItem == bellophiteShield) && (getItem instanceof BellophiteShieldItem)) {
                     ((BellophiteShieldItem) getItem).executeSkill(getUseItem, (LivingEntity) defendantEnt, defendantEnt.level);
                 }

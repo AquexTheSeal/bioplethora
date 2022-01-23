@@ -2,6 +2,7 @@ package io.github.bioplethora.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.model.HeliobladeEntityModel;
 import io.github.bioplethora.client.entity.render.layer.HeliobladeEntityGlowLayer;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
@@ -31,6 +32,15 @@ public class HeliobladeEntityRender extends GeoEntityRenderer<HeliobladeEntity> 
     @Override
     public RenderType getRenderType(HeliobladeEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
         return RenderType.entityTranslucent(getTextureLocation(animatable));
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(HeliobladeEntity entity) {
+        if (entity.isClone()) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/helioblade_clone.png");
+        } else {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/helioblade.png");
+        }
     }
 
     @Override

@@ -117,7 +117,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "alphemcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "alphem_controller", 0, this::predicate));
     }
 
     @Override
@@ -144,7 +144,6 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
                     }
                     this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
             } else {
-
                 if (!this.level.isClientSide())
                     if (Math.random() < 0.5) {
                         this.setItemSlot(EquipmentSlotType.OFFHAND, new ItemStack(Items.TOTEM_OF_UNDYING));
@@ -154,7 +153,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         } else {
             if (Math.random() < 0.5) {
                 if (!this.level.isClientSide())
-                    this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.WOODEN_SWORD));
+                    this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.STONE_SWORD));
             } else {
                 if (!this.level.isClientSide())
                     this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.WOODEN_AXE));

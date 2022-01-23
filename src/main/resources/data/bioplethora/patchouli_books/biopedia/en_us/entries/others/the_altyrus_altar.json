@@ -1,0 +1,35 @@
+{
+  "name": "The Altyrus Altar",
+  "icon": "bioplethora:bellophite_core_block",
+  "category": "others",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()This is the Altyrus' Altar. This altar is used to summon the ultimate boss, which is the Altyrus. Building this altar requires a moderate amount of grinding with the Bellophgolems."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name":"Altar Structure",
+      "multiblock": {
+        "pattern": [
+          [ "   B   ", "   X   ", "   X   ", "BZZBZZB", "   X   ", "   X   ", "   B   " ],
+          [ "   Y   ", "       ", "       ", "Y  A  Y", "       ", "       ", "   Y   " ],
+          [ "   B   ", "       ", "       ", "B  0  B", "       ", "       ", "   B   " ]
+        ],
+        "mapping": {
+          " ": "ANY",
+          "0": "bioplethora:bellophite_block",
+          "B": "bioplethora:bellophite_block",
+          "A": "bioplethora:bellophite_core_block",
+          "X": "minecraft:chain[axis=x]",
+          "Y": "minecraft:chain[axis=y]",
+          "Z": "minecraft:chain[axis=z]"
+        },
+        "symmetrical": true,
+        "offset"     : [0, 0, 0],
+        "view_offset": [0, 0, 0]
+      },
+      "text": "$(l)Requirements: $(br)$()x10 Bellophite Blocks, x1 Bellophite Core, x12 chains, x1 Bellophite (activator)"
+    }
+  ]
+}

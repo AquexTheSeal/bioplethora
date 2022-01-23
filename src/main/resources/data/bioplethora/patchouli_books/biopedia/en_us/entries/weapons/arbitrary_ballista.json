@@ -4,7 +4,8 @@
   "category": "weapons",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:arbitrary_ballista",
       "text": "$(l)DESCRIPTION: $(br)$()The ultimate Arbitrary Ballista is made with the parts of the Crephoxl, combined with the parts of the Bellophgolem. This weapon can cause massive destruction especially when used properly. This crossbow gives extra power to every arrow it shoots!"
     },
     {

@@ -8,9 +8,8 @@
       "text": "$(l)INFORMATION: $(br)$()The Alphems are hostile creatures that usually swarms in groups, they are pretty weak as a singular mob, their groupings are what made them dangerous. They usually spawn with wooden weapons. They usually hunt animals as groups."
     },
     {
-      "type": "patchouli:image",
-      "border": "false",
-      "images":["bioplethora:textures/gui/patchouli/entries/fairy_mobs/alphem_entry.png"],
+      "type": "patchouli:entity",
+      "entity":"bioplethora:alphem",
       "text": "Alphems usually spawn in forest areas."
     }
   ]
