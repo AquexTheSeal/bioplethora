@@ -1,6 +1,6 @@
 {
   "display": {
-    "background": "bioplethora:textures/block/bellophite_core_block",
+    "background": "bioplethora:block/bellophite_core_block",
     "icon": {
       "item": "bioplethora:biopedia"
     },

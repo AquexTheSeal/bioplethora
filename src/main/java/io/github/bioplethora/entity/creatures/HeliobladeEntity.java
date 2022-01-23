@@ -19,6 +19,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -31,9 +32,12 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -51,9 +55,15 @@ import java.util.stream.Collectors;
 public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
     private static final DataParameter<Boolean> DATA_IS_QUICKSHOOTING = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_CLONE = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
+
+    private final TranslationTextComponent cloneProgText = new TranslationTextComponent("bossbar.bioplethora.helioblade.clone_progress");
+
+    private final ServerBossInfo bossInfo = new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
+    private final ServerBossInfo cloneProgress = new ServerBossInfo(cloneProgText, BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
     private final AnimationFactory factory = new AnimationFactory(this);
     protected int tpParticleAmount = 30;
     protected double tpParticleRadius = 0.3;
+    public int cloneChargeTime;
     public int tpTimer;
 
     public HeliobladeEntity(EntityType<? extends MonsterEntity> type, World world) {
@@ -142,6 +152,11 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
     public void aiStep() {
         super.aiStep();
 
+        if (!this.isClone()) {
+            this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+            this.cloneProgress.setPercent((float) this.cloneChargeTime / 300f);
+        }
+
         if (this.getTarget() != null) {
             int areaint = 3;
             double x = this.getX(), y = this.getY(), z = this.getZ();
@@ -155,7 +170,7 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
             }.compareDistOf(x, y, z)).collect(Collectors.toList());
             for (Entity entityIterator : nearEntities) {
                 if (entityIterator == this.getTarget()) {
-                    entityIterator.hurt(BioplethoraDamageSources.helioSlashed(this, this), 3.5F);
+                    entityIterator.hurt(BioplethoraDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
                     ++this.tpTimer;
                     if (this.tpTimer == 40) {
                         this.teleportRandomly();
@@ -164,10 +179,28 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
                 }
                 if ((entityIterator instanceof MobEntity)) {
                     if (((MobEntity) entityIterator).getTarget() == this) {
-                        entityIterator.hurt(BioplethoraDamageSources.helioSlashed(this, this), 3.5F);
+                        entityIterator.hurt(BioplethoraDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayerEntity player) {
+        super.startSeenByPlayer(player);
+        if (!this.isClone()) {
+            this.bossInfo.addPlayer(player);
+            this.cloneProgress.addPlayer(player);
+        }
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayerEntity player) {
+        super.stopSeenByPlayer(player);
+        if (!this.isClone()) {
+            this.bossInfo.removePlayer(player);
+            this.cloneProgress.removePlayer(player);
         }
     }
 

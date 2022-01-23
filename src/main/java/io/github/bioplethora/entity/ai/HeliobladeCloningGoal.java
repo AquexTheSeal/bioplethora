@@ -13,7 +13,6 @@ import net.minecraft.world.server.ServerWorld;
 public class HeliobladeCloningGoal extends Goal {
 
     private final HeliobladeEntity helioblade;
-    public int chargeTime;
 
     public HeliobladeCloningGoal(HeliobladeEntity heliobladeEntity) {
         this.helioblade = heliobladeEntity;
@@ -24,7 +23,7 @@ public class HeliobladeCloningGoal extends Goal {
     }
 
     public void start() {
-        this.chargeTime = 0;
+        this.helioblade.cloneChargeTime = 0;
     }
 
     public void stop() {
@@ -38,8 +37,8 @@ public class HeliobladeCloningGoal extends Goal {
             this.helioblade.getLookControl().setLookAt(target, 30.0F, 30.0F);
             BlockPos blockpos = this.helioblade.blockPosition();
 
-            ++this.chargeTime;
-            if (this.chargeTime == 300) {
+            ++this.helioblade.cloneChargeTime;
+            if (this.helioblade.cloneChargeTime == 300) {
 
                 if (this.helioblade.level instanceof ServerWorld) {
                     ((ServerWorld) this.helioblade.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.helioblade.getX(), this.helioblade.getY(), this.helioblade.getZ(), 75, 0.3, 0.2, 0.2, 0.1);
@@ -77,7 +76,7 @@ public class HeliobladeCloningGoal extends Goal {
                 clone2.teleportRandomly();
                 this.helioblade.level.addFreshEntity(clone2);
 
-                this.chargeTime = 0;
+                this.helioblade.cloneChargeTime = 0;
             }
         }
     }
