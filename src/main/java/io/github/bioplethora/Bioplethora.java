@@ -2,6 +2,7 @@ package io.github.bioplethora;
 
 import io.github.bioplethora.datagen.BioBlockModelProvider;
 import io.github.bioplethora.datagen.BioBlockstateProvider;
+import io.github.bioplethora.datagen.BioItemModelProvider;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
 import net.minecraft.data.DataGenerator;
@@ -26,7 +27,7 @@ public class Bioplethora {
 
     public static final String MOD_ID = "bioplethora";
     public static final String MOD_NAME = "Bioplethora";
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public Bioplethora() {
         instance = this;
@@ -34,6 +35,7 @@ public class Bioplethora {
 
         /* final step of registering elements like Items, Entities, etc. */
         BioplethoraItems.ITEMS.register(bus);
+        BioplethoraBlocks.BLOCK_ITEMS.register(bus);
         BioplethoraEntities.ENTITIES.register(bus);
         BioplethoraBlocks.BLOCKS.register(bus);
         BioplethoraSoundEvents.SOUNDS.register(bus);
@@ -68,6 +70,7 @@ public class Bioplethora {
         if (event.includeServer()) {
             dataGenerator.addProvider(new BioBlockModelProvider(dataGenerator, MOD_ID, efh));
             dataGenerator.addProvider(new BioBlockstateProvider(dataGenerator, MOD_ID, efh));
+            dataGenerator.addProvider(new BioItemModelProvider(dataGenerator, efh));
         }
     }
 }

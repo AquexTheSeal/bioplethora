@@ -71,7 +71,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'bioplethora', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'bioplethora', '--all', '--output', file('src/main/generated/'), '--existing', file('src/main/generated/')
 
             mods {
                 bioplethora {
@@ -82,8 +82,8 @@ minecraft {
     }
 }
 
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
+sourceSets {
+    main.resources.srcDirs += 'src/main/generated'
 }
 
 mixin {
