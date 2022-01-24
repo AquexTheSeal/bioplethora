@@ -48,9 +48,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
     private static final DataParameter<Boolean> DATA_IS_QUICKSHOOTING = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
@@ -143,7 +140,6 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
 
         if (!this.level.isClientSide()) {
             this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(BioplethoraItems.VERMILION_BLADE.get()));
-            //this.setItemSlot(EquipmentSlotType.OFFHAND, new ItemStack(BioplethoraItems.VERMILION_BLADE.get()));
         }
 
         return iLivingEntityData;
@@ -163,12 +159,8 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
             AxisAlignedBB area = new AxisAlignedBB(x - (areaint / 2d), y, z - (areaint / 2d), x + (areaint / 2d), y + (areaint / 2d), z + (areaint / 2d));
             World world = this.level;
 
-            List<Entity> nearEntities = world.getEntitiesOfClass(Entity.class, area, null).stream().sorted(new Object() {
-                Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                    return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                }
-            }.compareDistOf(x, y, z)).collect(Collectors.toList());
-            for (Entity entityIterator : nearEntities) {
+            for (LivingEntity entityIterator : world.getEntitiesOfClass(LivingEntity.class, area)) {
+
                 if (entityIterator == this.getTarget()) {
                     entityIterator.hurt(BioplethoraDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
                     ++this.tpTimer;

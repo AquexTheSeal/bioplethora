@@ -1,89 +1,57 @@
 package io.github.bioplethora.entity.ai;
 
-public class BellophgolemAnimatedSmashingGoal /*extends AnimatableGoal*/ {
-    /*private final double animationLength;
-    private final BiFunction<Double, Double, Boolean> attackPredicate;
-    private boolean hasHit;
-    public static double smashingCooldown = 400;*/
+import io.github.bioplethora.entity.creatures.BellophgolemEntity;
+import net.minecraft.entity.ai.goal.Goal;
 
-    /**
-     * @param entity          Attacking entity
-     * @param animationLength
-     */
-   /*public BellophgolemAnimatedSmashingGoal(AnimatableHostileEntity entity, double animationLength, double attackBegin, double attackEnd) {
-        this.entity = entity;
-        this.animationLength = animationLength;
-        this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
-        this.setFlags(EnumSet.of(Flag.LOOK));
+public class BellophgolemAnimatedSmashingGoal extends Goal {
+
+    private final BellophgolemEntity helioblade;
+    public int chargeTime;
+
+    public BellophgolemAnimatedSmashingGoal(BellophgolemEntity heliobladeEntity) {
+        this.helioblade = heliobladeEntity;
     }
 
-    private static boolean checkIfValid(BellophgolemAnimatedSmashingGoal goal, AnimatableHostileEntity attacker, LivingEntity target) {
-        if (smashingCooldown > 0) return false;
-        if (target == null) return false;
-        if (target.isAlive() && !target.isSpectator()) {
-            if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
-                attacker.setSmashing(false);
-                return false;
-            }
-            double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
-        }
-        attacker.setSmashing(false);
-        return false;
-    }
-
-    @Override
     public boolean canUse() {
-        if (Math.random() <= 0.1) return false;
-        return BellophgolemAnimatedSmashingGoal.checkIfValid(this, entity, this.entity.getTarget());
+        return this.helioblade.getTarget() != null;
     }
 
-    @Override
-    public boolean canContinueToUse() {
-        if (Math.random() <= 0.1) return true;
-        return BellophgolemAnimatedSmashingGoal.checkIfValid(this, entity, this.entity.getTarget());
-    }
-
-    @Override
     public void start() {
-        this.entity.setSmashing(true);
-        this.entity.setAggressive(true);
-        smashingCooldown = 400;
-        this.animationProgress = 0;
+        this.chargeTime = 0;
     }
 
-    @Override
     public void stop() {
-        LivingEntity target = this.entity.getTarget();
-        if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-            this.entity.setTarget(null);
-        }
-        this.entity.setSmashing(false);
-        this.entity.setAggressive(false);
-        this.hasHit = false;
-        this.animationProgress = 0;
+        this.helioblade.setNoGravity(false);
     }
 
-    @Override
-    public void tick() {
-        this.baseTick();
-        LivingEntity target = this.entity.getTarget();
-        if (target != null) {
-            if (this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
-                this.entity.lookAt(target, 30.0F, 30.0F);
-                this.entity.swing(Hand.MAIN_HAND);
-                this.entity.doHurtTarget(target);
-                this.hasHit = true;
-            }
+    /*public void tick() {
+        LivingEntity target = this.helioblade.getTarget();
 
-            if (this.animationProgress > this.animationLength) {
-                this.animationProgress = 0;
-                this.hasHit = false;
-            }
+        if (target.distanceToSqr(this.helioblade) < 4096.0D && this.helioblade.canSee(target)) {
 
-            if (smashingCooldown > 0) {
-                smashingCooldown = (double) (smashingCooldown - 1);
+            this.helioblade.getLookControl().setLookAt(target, 30.0F, 30.0F);
+
+            ++this.chargeTime;
+            if (this.chargeTime == 160) {
+                this.helioblade.teleportWithEffect(this.helioblade.getX(), this.helioblade.getY() + 5, this.helioblade.getZ());
+                this.helioblade.setNoGravity(true);
             }
+            if (this.chargeTime == 200) {
+
+                BlockPos blockpos = new BlockPos(this.helioblade.getX(), this.helioblade.getY() - 3, this.helioblade.getZ());
+
+                if (!this.helioblade.level.getBlockState(blockpos).getMaterial().blocksMotion()) {
+                    this.helioblade.teleportWithEffect(this.helioblade.getX(), this.helioblade.getY() - 3, this.helioblade.getZ());
+                } else {
+                    this.helioblade.setDeltaMovement(0, -3, 0);
+                }
+
+                this.helioblade.setNoGravity(false);
+                this.chargeTime = 0;
+            }
+        } else {
+            this.chargeTime = 0;
         }
+        this.helioblade.setQuickShooting(this.chargeTime > 160);
     }*/
 }
