@@ -38,6 +38,7 @@
   "item.bioplethora.crephoxl_stick": "Crephoxl Stick",
   "item.bioplethora.nandbri_scales": "Nandbri Scales",
   "item.bioplethora.bellophite": "Bellophite",
+  "item.bioplethora.peaguin_scales": "Peaguin Scales",
 
   "item.bioplethora.raw_cuttlefish_meat": "Raw Cuttlefish Meat",
   "item.bioplethora.cooked_cuttlefish_meat": "Cooked Cuttlefish Meat",
@@ -49,8 +50,14 @@
   "item.bioplethora.arbitrary_ballista": "Arbitrary Ballista",
   "item.bioplethora.vermilion_blade": "Vermilion Blade",
 
+  "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
+
   "item.bioplethora.phantom_chime": "Phantom Chime",
   "item.bioplethora.magma_bomb": "Magma Bomb",
+
+  "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
+  "block.bioplethora.bellophite_block": "Bellophite Block",
+  "block.bioplethora.bellophite_core_block": "Bellophite Core Block",
 
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
@@ -60,9 +67,11 @@
   "item.bioplethora.additions.desc": "Additions:",
   "item.bioplethora.special_skill.desc": "Special Skill:",
 
-  "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
-  "block.bioplethora.bellophite_block": "Bellophite Block",
-  "block.bioplethora.bellophite_core_block": "Bellophite Core Block",
+  "item.bioplethora.ecoharmless_spawn_egg.desc": "ECOHARMLESS",
+  "item.bioplethora.plethoneutral_spawn_egg.desc": "PLETHONEUTRAL",
+  "item.bioplethora.dangerum_spawn_egg.desc": "DANGERUM",
+  "item.bioplethora.hellsent_spawn_egg.desc": "HELLSENT",
+  "item.bioplethora.elderia_spawn_egg.desc": "ELDERIA",
 
   "item.bioplethora.test_item.desc_0": "This is just an experimental item. Mainly used for development only. Only accessible in creative mode.",
 
@@ -79,6 +88,8 @@
   "item.bioplethora.arbitrary_ballista.desc_0": "This giant crossbow greatly enhances the shooting projectile's speed and power.",
 
   "item.bioplethora.stellar_scythe.desc_0": "This weapon could slash through an large area of enemies, the wide slashing ability cools down for 1 second only.",
+
+  "item.bioplethora.peaguin_scale_armor.desc_0": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
 
   "item.bioplethora.phantom_chime.desc_0": "On right click on the ground - casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
 

@@ -8,7 +8,7 @@ public class BioplethoraItemGroup {
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(BioplethoraItems.NANDBRI_SCALES.get());
+            return new ItemStack(BioplethoraItems.ARBITRARY_BALLISTA.get());
         }
     };
 
@@ -16,7 +16,7 @@ public class BioplethoraItemGroup {
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(BioplethoraItems.NANDBRI_SPAWN_EGG.get());
+            return new ItemStack(BioplethoraItems.PEAGUIN_SPAWN_EGG.get());
         }
     };
 }

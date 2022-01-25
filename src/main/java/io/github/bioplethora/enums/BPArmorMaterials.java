@@ -1,9 +1,9 @@
 package io.github.bioplethora.enums;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 public enum BPArmorMaterials implements IArmorMaterial {
 
     PEAGUIN_SCALES("peaguin_scales", 17, new int[]{2, 5, 6, 2}, 15, SoundEvents.ARMOR_EQUIP_TURTLE, 0.0F, 0.0F, () -> {
-        return Ingredient.of(Items.IRON_INGOT);
+        return Ingredient.of(BioplethoraItems.PEAGUIN_SCALES.get());
     });
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };

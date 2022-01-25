@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#S#",
+    "   "
+  ],
+  "key": {
+    "#": {
+      "item": "bioplethora:peaguin_scales"
+    },
+    "S": {
+      "item": "minecraft:iron_helmet"
+    }
+  },
+  "result": {
+    "item": "bioplethora:peaguin_scale_helmet",
+    "count": 1
+  }
+}
