@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
@@ -26,7 +26,7 @@ java {
 }
 
 minecraft {
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'official', version: "${project.minecraftVersion}"
 
     runs {
         client {
@@ -115,7 +115,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.9'
+    minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
     //Geckolib
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.57')
     //Just Enough Items (JEI)

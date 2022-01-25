@@ -1,6 +1,9 @@
 package io.github.bioplethora.event;
 
-//@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+import io.github.bioplethora.Bioplethora;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModCommonRegister {
 
     /*@SubscribeEvent

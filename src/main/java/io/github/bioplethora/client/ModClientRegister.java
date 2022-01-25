@@ -1,26 +1,30 @@
 package io.github.bioplethora.client;
 
+import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
 import io.github.bioplethora.client.entity.render.others.BellophiteShieldWaveRender;
 import io.github.bioplethora.client.entity.render.projectile.*;
+import io.github.bioplethora.item.BioplethoraSpawnEggItem;
 import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModClientRegister {
 
     @SubscribeEvent
@@ -80,5 +84,10 @@ public class ModClientRegister {
         ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && !ArbitraryBallistaItem.isCharged(itemStack) ? 1.0F : 0.0F);
         ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("charged"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && ArbitraryBallistaItem.isCharged(itemStack) ? 1.0F : 0.0F);
         ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("firework"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && ArbitraryBallistaItem.isCharged(itemStack) && ArbitraryBallistaItem.containsChargedProjectile(itemStack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
+        BioplethoraSpawnEggItem.initUnaddedEggs();
     }
 }

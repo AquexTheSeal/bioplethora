@@ -1,51 +1,67 @@
 package io.github.bioplethora.item;
 
-import com.google.common.collect.Maps;
 import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class BioplethoraSpawnEggItem extends SpawnEggItem {
 
-    private static final Map<EntityType<?>, SpawnEggItem> BY_ID = Maps.newIdentityHashMap();
-    protected final Supplier<? extends EntityType<?>> typeGetter;
+    protected static final List<BioplethoraSpawnEggItem> UNADDED_EGGS = new ArrayList<>();
+    private final Lazy<? extends EntityType<?>> entityTypeSupplier;
     private final BioplethoraEntityClasses entityClass;
-    private final boolean isBossEgg;
 
-    public BioplethoraSpawnEggItem(Supplier<? extends EntityType<?>> typeIn, BioplethoraEntityClasses entityClass, Properties properties, boolean isBossEgg) {
+    public BioplethoraSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, BioplethoraEntityClasses entityClass, Properties properties) {
         super(null, 0xFFFFFFF, 0xFFFFFFF, properties);
-        this.typeGetter = typeIn;
+        this.entityTypeSupplier = Lazy.of(entityTypeSupplier);
         this.entityClass = entityClass;
-        this.isBossEgg = isBossEgg;
+        UNADDED_EGGS.add(this);
     }
 
-    public BioplethoraSpawnEggItem(Supplier<? extends EntityType<?>> typeIn, BioplethoraEntityClasses entityClass, Properties properties) {
-        this(typeIn, entityClass, properties, false);
+    public static void initUnaddedEggs() {
+        final Map<EntityType<?>, SpawnEggItem> EGGS = ObfuscationReflectionHelper.getPrivateValue(SpawnEggItem.class,
+                null, "field_195987_b");
+        DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior() {
+
+            @Override
+            public ItemStack execute(IBlockSource source, ItemStack stack) {
+                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
+                EntityType<?> entitytype = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
+                entitytype.spawn(source.getLevel(), stack, null, source.getPos().relative(direction),
+                        SpawnReason.DISPENSER, direction != Direction.UP, false);
+                stack.shrink(1);
+                return stack;
+            }
+        };
+        for (final SpawnEggItem egg : UNADDED_EGGS) {
+            EGGS.put(egg.getType(null), egg);
+            DispenserBlock.registerBehavior(egg, defaultDispenseItemBehavior);
+        }
+        UNADDED_EGGS.clear();
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-        BY_ID.put(this.getType(null), this);
-        super.fillItemCategory(group, items);
-    }
-
-    @Override
-    public EntityType<?> getType(@Nullable CompoundNBT p_208076_1_) {
-        return typeGetter.get();
+    public EntityType<?> getType(@Nullable final CompoundNBT p_208076_1_) {
+        return entityTypeSupplier.get();
     }
 
     @Override
@@ -83,10 +99,5 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
         } else {
             return TextFormatting.WHITE;
         }
-    }
-
-    //unused for now
-    public boolean isBossEgg(ItemStack stack) {
-        return this.isBossEgg;
     }
 }

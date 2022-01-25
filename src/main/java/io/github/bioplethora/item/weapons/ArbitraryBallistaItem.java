@@ -62,7 +62,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
             performShooting(world, entity, hand, itemstack, getShootingPower(itemstack), 1.0F);
             setCharged(itemstack, false);
 
-            this.crossbowRecoil(entity, 0.5F, (double) MathHelper.sin(entity.yRot * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(entity.yRot * ((float)Math.PI / 180F))));
+            this.crossbowRecoil(entity, 0.5F, MathHelper.sin(entity.yRot * ((float)Math.PI / 180F)), -MathHelper.cos(entity.yRot * ((float)Math.PI / 180F)));
 
             return ActionResult.consume(itemstack);
         } else if (!entity.getProjectile(itemstack).isEmpty()) {
@@ -84,7 +84,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         if (f >= 1.0F && !isCharged(p_77615_1_) && tryLoadProjectiles(p_77615_3_, p_77615_1_)) {
             setCharged(p_77615_1_, true);
             SoundCategory soundcategory = p_77615_3_ instanceof PlayerEntity ? SoundCategory.PLAYERS : SoundCategory.HOSTILE;
-            p_77615_2_.playSound((PlayerEntity)null, p_77615_3_.getX(), p_77615_3_.getY(), p_77615_3_.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
+            p_77615_2_.playSound(null, p_77615_3_.getX(), p_77615_3_.getY(), p_77615_3_.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
         }
     }
 
@@ -211,7 +211,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
                 ((ServerWorld) level).sendParticles(ParticleTypes.CLOUD, x, y + 1.2, z, 25, 0.75, 0.75, 0.75, 0);
             }
 
-            level.playSound((PlayerEntity)null, x, y, z, SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.PLAYERS, 1, 1);
+            level.playSound(null, x, y, z, SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.PLAYERS, 1, 1);
 
             if (entity instanceof ICrossbowUser) {
                 ICrossbowUser icrossbowuser = (ICrossbowUser)entity;
@@ -222,14 +222,14 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
                 Vector3d vector3d = entity.getViewVector(1.0F);
                 Vector3f vector3f = new Vector3f(vector3d);
                 vector3f.transform(quaternion);
-                projectileentity.shoot((double)vector3f.x(), (double)vector3f.y(), (double)vector3f.z(), p_220016_7_, p_220016_8_);
+                projectileentity.shoot(vector3f.x(), vector3f.y(), vector3f.z(), p_220016_7_, p_220016_8_);
             }
 
             p_220016_3_.hurtAndBreak(flag ? 3 : 1, entity, (p_220017_1_) -> {
                 p_220017_1_.broadcastBreakEvent(hand);
             });
             level.addFreshEntity(projectileentity);
-            level.playSound((PlayerEntity)null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, p_220016_5_);
+            level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, p_220016_5_);
         }
     }
 
@@ -281,7 +281,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         if (!(p_233627_1_ <= 0.0F)) {
             entity.hasImpulse = true;
             Vector3d vector3d = entity.getDeltaMovement();
-            Vector3d vector3d1 = (new Vector3d(p_233627_2_, 0.0D, p_233627_4_)).normalize().scale((double)p_233627_1_);
+            Vector3d vector3d1 = (new Vector3d(p_233627_2_, 0.0D, p_233627_4_)).normalize().scale(p_233627_1_);
             entity.setDeltaMovement(vector3d.x / 2.0D - vector3d1.x, entity.getDeltaMovement().y(), vector3d.z / 2.0D - vector3d1.z);
         }
     }
@@ -322,12 +322,12 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
 
             if (f >= 0.2F && !this.startSoundPlayed) {
                 this.startSoundPlayed = true;
-                world.playSound((PlayerEntity)null, entity.getX(), entity.getY(), entity.getZ(), soundevent, SoundCategory.PLAYERS, 0.5F, 1.0F);
+                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), soundevent, SoundCategory.PLAYERS, 0.5F, 1.0F);
             }
 
             if (f >= 0.5F && soundevent1 != null && !this.midLoadSoundPlayed) {
                 this.midLoadSoundPlayed = true;
-                world.playSound((PlayerEntity)null, entity.getX(), entity.getY(), entity.getZ(), soundevent1, SoundCategory.PLAYERS, 0.5F, 1.0F);
+                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), soundevent1, SoundCategory.PLAYERS, 0.5F, 1.0F);
             }
         }
     }
