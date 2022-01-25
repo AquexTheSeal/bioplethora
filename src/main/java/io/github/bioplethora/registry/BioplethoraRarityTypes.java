@@ -1,4 +1,4 @@
-package io.github.bioplethora.util;
+package io.github.bioplethora.registry;
 
 import net.minecraft.item.Rarity;
 import net.minecraft.util.text.TextFormatting;

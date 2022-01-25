@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
+import io.github.bioplethora.registry.BioplethoraDamageSources;
 import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.util.BioplethoraDamageSources;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

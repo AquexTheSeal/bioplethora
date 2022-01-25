@@ -1,7 +1,7 @@
 package io.github.bioplethora.mixin;
 
 import io.github.bioplethora.entity.IBioplethoraEntityClass;
-import io.github.bioplethora.util.BioplethoraEntityClasses;
+import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 

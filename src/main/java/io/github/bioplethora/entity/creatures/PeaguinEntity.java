@@ -9,7 +9,7 @@ import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
 import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.util.BioplethoraEntityClasses;
+import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;

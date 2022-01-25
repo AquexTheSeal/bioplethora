@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.IBioplethoraEntityClass;
-import io.github.bioplethora.util.BioplethoraEntityClasses;
+import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;

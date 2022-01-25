@@ -47,12 +47,9 @@ public class MyliothanChargeAttackGoal extends Goal {
                     }
                     this.myliothan.doHurtTarget(target);
                     world.explode(this.myliothan, target.getX(), target.getY(), target.getZ(), 3F, Explosion.Mode.BREAK);
-
-                    this.chargeTime = 0;
                 }
-            } else if (this.chargeTime > 0) {
-                --this.chargeTime;
             }
+
             if (this.chargeTime == 400) {
                 this.chargeTime = 0;
             }

@@ -1,4 +1,4 @@
-package io.github.bioplethora.util;
+package io.github.bioplethora.registry;
 
 public class BioplethoraEntityClasses {
     public static final BioplethoraEntityClasses NONE = new BioplethoraEntityClasses();

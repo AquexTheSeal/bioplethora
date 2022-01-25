@@ -1,8 +1,8 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.IBioplethoraEntityClass;
-import io.github.bioplethora.util.BioplethoraDamageSources;
-import io.github.bioplethora.util.BioplethoraEntityClasses;
+import io.github.bioplethora.registry.BioplethoraDamageSources;
+import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

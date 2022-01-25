@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity.others;
 
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
+import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
 import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.util.BioplethoraAdvancementHelper;
 import net.minecraft.entity.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;

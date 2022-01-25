@@ -3,8 +3,8 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.IBioplethoraEntityClass;
 import io.github.bioplethora.entity.ai.MyliothanChargeAttackGoal;
+import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
-import io.github.bioplethora.util.BioplethoraEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
@@ -179,7 +179,6 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
             }
 
             if (this.myliothan.isCharging()) {
-
                 float f = (float) (this.myliothan.moveTargetPoint.x - this.myliothan.getX());
                 float f1 = (float) (this.myliothan.moveTargetPoint.y - this.myliothan.getY());
                 float f2 = (float) (this.myliothan.moveTargetPoint.z - this.myliothan.getZ());
@@ -201,7 +200,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                     this.speed = MathHelper.approach(this.speed, 0.2F, 0.025F);
                 }
 
-                float f7 = (float) (-(MathHelper.atan2((double) (-f1), d0) * (double) (180F / (float) Math.PI)));
+                float f7 = (float) (-(MathHelper.atan2(-f1, d0) * (double) (180F / (float) Math.PI)));
                 this.myliothan.xRot = f7;
                 float f8 = this.myliothan.yRot + 90.0F;
                 double d3 = (double) (this.speed * MathHelper.cos(f8 * ((float) Math.PI / 180F))) * Math.abs((double) f / d2);
@@ -209,8 +208,9 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                 double d5 = (double) (this.speed * MathHelper.sin(f7 * ((float) Math.PI / 180F))) * Math.abs((double) f1 / d2);
                 Vector3d vector3d = this.myliothan.getDeltaMovement();
                 this.myliothan.setDeltaMovement(vector3d.add((new Vector3d(d3, d5, d4)).subtract(vector3d).scale(0.2D)));
+            }
 
-            } else if (this.operation == MovementController.Action.MOVE_TO && !this.myliothan.getNavigation().isDone()) {
+            if (this.operation == MovementController.Action.MOVE_TO && !this.myliothan.getNavigation().isDone()) {
                 double d0 = this.wantedX - this.myliothan.getX();
                 double d1 = this.wantedY - this.myliothan.getY();
                 double d2 = this.wantedZ - this.myliothan.getZ();
@@ -235,7 +235,6 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                     } else {
                         this.myliothan.setSpeed(f1 * 0.1F);
                     }
-
                 }
             } else {
                 this.myliothan.setSpeed(0.0F);

@@ -1,6 +1,5 @@
-package io.github.bioplethora.util;
+package io.github.bioplethora.registry;
 
-import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 

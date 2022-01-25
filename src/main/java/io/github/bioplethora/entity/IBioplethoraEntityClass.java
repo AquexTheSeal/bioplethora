@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity;
 
-import io.github.bioplethora.util.BioplethoraEntityClasses;
+import io.github.bioplethora.registry.BioplethoraEntityClasses;
 
 public interface IBioplethoraEntityClass {
 

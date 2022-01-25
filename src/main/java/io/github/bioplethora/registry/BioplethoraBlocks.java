@@ -2,7 +2,6 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.BellophiteCoreBlock;
-import io.github.bioplethora.util.BioplethoraItemGroup;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
