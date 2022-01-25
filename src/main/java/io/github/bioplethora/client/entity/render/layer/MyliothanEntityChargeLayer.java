@@ -12,7 +12,7 @@ import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 public class MyliothanEntityChargeLayer extends GeoLayerRenderer<MyliothanEntity> {
 
-    private static final ResourceLocation MODEL = new ResourceLocation(Bioplethora.MOD_ID, "geo/helioblade.geo.json");
+    private static final ResourceLocation MODEL = new ResourceLocation(Bioplethora.MOD_ID, "geo/myliothan.geo.json");
 
     public MyliothanEntityChargeLayer(IGeoRenderer<MyliothanEntity> entityRendererIn) {
         super(entityRendererIn);
@@ -21,7 +21,7 @@ public class MyliothanEntityChargeLayer extends GeoLayerRenderer<MyliothanEntity
     @Override
     public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, MyliothanEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         RenderType glintRender =  RenderType.entityGlint();
-        if(!entityLivingBaseIn.isCharging()) {
+        if(entityLivingBaseIn.isCharging()) {
             this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, glintRender, matrixStackIn, bufferIn, bufferIn.getBuffer(glintRender), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
         }
     }

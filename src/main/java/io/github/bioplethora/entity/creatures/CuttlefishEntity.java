@@ -69,7 +69,7 @@ public class CuttlefishEntity extends SquidEntity implements IAnimatable, IBiopl
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "nandbri_controller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "cuttlefish_controller", 0, this::predicate));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class CuttlefishEntity extends SquidEntity implements IAnimatable, IBiopl
     }
 
     public static boolean checkCuttlefishSpawnRules(IWorld world, BlockPos pos) {
-        if (pos.getY() > 45 && pos.getY() < world.getSeaLevel()) {
+        if (pos.getY() < world.getSeaLevel()) {
             return world.getFluidState(pos).is(FluidTags.WATER);
         } else {
             return false;
