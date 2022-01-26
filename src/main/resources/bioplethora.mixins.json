@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "bioplethora.mixin-refmap.json",
   "mixins": [
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "QuickChargeEnchantmentMixin"
   ],
   "injectors": {
     "defaultRequire": 1

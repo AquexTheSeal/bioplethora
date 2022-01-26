@@ -27,6 +27,7 @@ public class VermilionBladeProjectileEntity extends DamagingProjectileEntity imp
 
     private final AnimationFactory factory = new AnimationFactory(this);
     public double lifespan = 0;
+    public int bladeSize = 1;
 
     public VermilionBladeProjectileEntity(EntityType<? extends DamagingProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -63,7 +64,7 @@ public class VermilionBladeProjectileEntity extends DamagingProjectileEntity imp
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
 
-        entity.hurt(BioplethoraDamageSources.helioSlashed(this.getOwner(), this.getOwner()), 5);
+        entity.hurt(BioplethoraDamageSources.helioSlashed(this.getOwner(), this.getOwner()), 5 * ((float) this.bladeSize * 0.75F));
         this.remove();
     }
 
@@ -74,9 +75,13 @@ public class VermilionBladeProjectileEntity extends DamagingProjectileEntity imp
         super.onHit(result);
 
         if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(owner)) {
-            this.level.explode(this, x, y, z, 1.5F, Explosion.Mode.BREAK);
+            this.level.explode(this, x, y, z, 1.5F * ((float) this.bladeSize * 0.5F), Explosion.Mode.BREAK);
             this.remove();
         }
+    }
+
+    public void setBladeSize(int value) {
+        this.bladeSize = value;
     }
 
     @Override

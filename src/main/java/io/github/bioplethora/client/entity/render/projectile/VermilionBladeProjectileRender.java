@@ -32,6 +32,9 @@ public class VermilionBladeProjectileRender extends GeoProjectilesRenderer<Vermi
 
     @Override
     public void renderEarly(VermilionBladeProjectileEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+        float f = 1;
+        f = f * (float) animatable.bladeSize;
+        stackIn.scale(f, f, f);
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

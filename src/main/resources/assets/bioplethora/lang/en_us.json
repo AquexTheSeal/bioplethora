@@ -78,21 +78,18 @@
   "item.bioplethora.crephoxl_hammer.desc_0": "Debuffs targets on hit, deals more damage to targets with more than 49 maximum health.",
   "item.bioplethora.crephoxl_hammer.desc_1": "On right click on the ground - creates a shockwave and knocks up nearby targets. Cools down for 3 seconds.",
   "item.bioplethora.crephoxl_hammer.desc_2": "On hit while crouching - Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.",
-
   "item.bioplethora.bellophite_arrow.desc_0": "The Bellophgolem arrow deals more damage than the regular arrow.",
   "item.bioplethora.bellophite_arrow.desc_1": "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.",
-
   "item.bioplethora.bellophite_shield.desc_0": "The Bellophite shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.",
   "item.bioplethora.bellophite_shield.desc_1": "This shield stacks core points every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.",
-
   "item.bioplethora.arbitrary_ballista.desc_0": "This giant crossbow greatly enhances the shooting projectile's speed and power.",
-
   "item.bioplethora.stellar_scythe.desc_0": "This weapon could slash through an large area of enemies, the wide slashing ability cools down for 1 second only.",
+  "item.bioplethora.vermilion_blade.desc_0": "On hit with sword, this sword damages mobs surrounding the target mob. The Sweeping Edge enchantment can increase the attack radius.",
+  "item.bioplethora.vermilion_blade.desc_1": "On using, this sword shoots Vermilion Blade Projectiles endlessly. The blade's explosion size and damage increases every shot, then resets to default eventually. The fire rate can be faster when enchanted with the Quick Charge enchantment.",
 
   "item.bioplethora.peaguin_scale_armor.desc_0": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
 
   "item.bioplethora.phantom_chime.desc_0": "On right click on the ground - casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
-
   "item.bioplethora.magma_bomb.desc_0": "Throws a projectile that explodes on impact.",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",

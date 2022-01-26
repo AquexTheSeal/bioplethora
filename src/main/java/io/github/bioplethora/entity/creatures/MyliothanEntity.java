@@ -87,6 +87,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
+    // TODO: 26/01/2022 - Better Myliothan charging animation.
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 
         if (this.isCharging()) {
