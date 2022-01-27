@@ -19,6 +19,10 @@ public class BioplethoraDamageSources {
         return (new BioplethoraIndirectDamageSource("helioSlashed", p_76354_0_, p_76354_1_)).bypassArmor().setMagic();
     }
 
+    public static DamageSource antibio(Entity p_76354_0_, @Nullable Entity p_76354_1_) {
+        return (new BioplethoraIndirectDamageSource("antibio", p_76354_0_, p_76354_1_)).bypassArmor();
+    }
+
     static class BioplethoraIndirectDamageSource extends EntityDamageSource {
 
         Entity indirectOwner;
