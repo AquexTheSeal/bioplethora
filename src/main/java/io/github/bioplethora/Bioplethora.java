@@ -3,6 +3,7 @@ package io.github.bioplethora;
 import io.github.bioplethora.datagen.BioBlockModelProvider;
 import io.github.bioplethora.datagen.BioBlockstateProvider;
 import io.github.bioplethora.datagen.BioItemModelProvider;
+import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
 import net.minecraft.data.DataGenerator;
@@ -16,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,11 +43,9 @@ public class Bioplethora {
         BioplethoraSoundEvents.SOUNDS.register(bus);
         BioplethoraEnchantments.ENCHANTMENTS.register(bus);
 
-        ModList modList = ModList.get();
-        //if (modList.isLoaded("jeresources")) BioplethoraJER.init();
-
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);
+        bus.addListener(this::onInterModEnqueueEvent);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(EventPriority.HIGH, EntitySpawnManager::onBiomeLoadingEvent);
@@ -57,6 +57,11 @@ public class Bioplethora {
         MinecraftForge.EVENT_BUS.register(this);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BioplethoraConfig.COMMON_SPEC);
+    }
+
+    private void onInterModEnqueueEvent(final InterModEnqueueEvent event) {
+        if (ModList.get().isLoaded("theoneprobe")) BPCompatTOP.register();
+        //if (ModList.get().isLoaded("jeresources")) BPCompatJER.register();
     }
 
     private void setup(final FMLCommonSetupEvent event) {

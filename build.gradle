@@ -103,6 +103,7 @@ repositories {
         url = "https://www.cursemaven.com"
     }
     maven {
+        name = "GeckoLib"
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
     maven {
@@ -111,6 +112,10 @@ repositories {
     }
     maven {
         url 'https://maven.blamejared.com'
+    }
+    maven {
+        name = "CurseForge"
+        url = "https://www.cursemaven.com"
     }
 }
 
@@ -126,6 +131,8 @@ dependencies {
     //Patchouli
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51")
+    //The One Probe
+    implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
     //Mixin
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
