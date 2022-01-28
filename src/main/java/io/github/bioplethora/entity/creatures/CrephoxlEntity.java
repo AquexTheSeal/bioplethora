@@ -3,6 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.ai.CrephoxlChargingGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
@@ -16,15 +17,16 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -35,6 +37,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
 
+    private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(CrephoxlEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public CrephoxlEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -64,7 +67,8 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 38.3, 0.5, 0.6));
+        this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
+        this.goalSelector.addGoal(3, new CrephoxlChargingGoal(this));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
@@ -74,6 +78,11 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (this.dead) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crephoxl.death", true));
+            return PlayState.CONTINUE;
+        }
+
+        if (this.isCharging()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crephoxl.charging", true));
             return PlayState.CONTINUE;
         }
 
@@ -93,7 +102,7 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "crephoxlcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "crephoxl_controller", 0, this::predicate));
     }
 
     @Override
@@ -102,24 +111,29 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
     }
 
     @Override
+    public net.minecraft.util.SoundEvent getAmbientSound() {
+        return SoundEvents.RAVAGER_AMBIENT;
+    }
+
+    @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
+        return SoundEvents.RAVAGER_HURT;
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
+        return SoundEvents.RAVAGER_DEATH;
     }
 
-    public boolean doHurtTarget (Entity entity) {
-
+    public boolean doHurtTarget(Entity entity) {
         BlockPos blockPos = new BlockPos((int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ());
 
         boolean flag = super.doHurtTarget(entity);
-        if (flag && entity instanceof LivingEntity)
+        if (flag && entity instanceof LivingEntity) {
             this.getTarget().setDeltaMovement(getTarget().getDeltaMovement().x, 2 - getTarget().getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), getTarget().getDeltaMovement().z);
+        }
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), (int) 20, 0.4, 0.4,
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), 20, 0.4, 0.4,
                     0.4, 0.1);
             this.level.playSound(null, blockPos, SoundEvents.GENERIC_EXPLODE, SoundCategory.NEUTRAL, (float) 1, (float) 1);
         }
@@ -132,5 +146,18 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
 
         Entity sourceEnt = source.getEntity();
         BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:crephoxl_kill");
+    }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_IS_CHARGING, false);
+    }
+
+    public boolean isCharging() {
+        return this.entityData.get(DATA_IS_CHARGING);
+    }
+
+    public void setCharging(boolean charging) {
+        this.entityData.set(DATA_IS_CHARGING, charging);
     }
 }

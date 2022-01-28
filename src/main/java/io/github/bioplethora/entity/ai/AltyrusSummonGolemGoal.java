@@ -33,38 +33,40 @@ public class AltyrusSummonGolemGoal extends Goal {
 
     public void tick() {
         LivingEntity target = this.altyrus.getTarget();
-        ServerWorld serverworld = (ServerWorld)this.altyrus.level;
+        ServerWorld serverworld = (ServerWorld) this.altyrus.level;
         World world = this.altyrus.level;
 
-        ++this.summonTime;
+        if (target != null && target.distanceToSqr(this.altyrus) < 4096.0D && this.altyrus.canSee(target)) {
+            ++this.summonTime;
 
-        if (this.summonTime > 400) {
-            BlockPos blockpos = this.altyrus.blockPosition();
+            if (this.summonTime == 400) {
+                BlockPos blockpos = this.altyrus.blockPosition();
 
-            BellophgolemEntity bellophgolemEntity = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
-            bellophgolemEntity.moveTo(blockpos, 0.0F, 0.0F);
-            bellophgolemEntity.setOwner(this.altyrus);
-            bellophgolemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
+                BellophgolemEntity bellophgolemEntity = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
+                bellophgolemEntity.moveTo(blockpos, 0.0F, 0.0F);
+                bellophgolemEntity.setOwner(this.altyrus);
+                bellophgolemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
 
-            bellophgolemEntity.setHasLimitedLife(true);
-            bellophgolemEntity.setExplodeOnExpiry(true);
-            bellophgolemEntity.setLifeLimitBeforeDeath(200);
+                bellophgolemEntity.setHasLimitedLife(true);
+                bellophgolemEntity.setExplodeOnExpiry(true);
+                bellophgolemEntity.setLifeLimitBeforeDeath(200);
 
-            serverworld.addFreshEntity(bellophgolemEntity);
+                serverworld.addFreshEntity(bellophgolemEntity);
 
-            BellophgolemEntity bellophgolemEntity2 = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
-            bellophgolemEntity2.moveTo(blockpos, 0.0F, 0.0F);
-            bellophgolemEntity2.setOwner(this.altyrus);
-            bellophgolemEntity2.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
+                BellophgolemEntity bellophgolemEntity2 = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
+                bellophgolemEntity2.moveTo(blockpos, 0.0F, 0.0F);
+                bellophgolemEntity2.setOwner(this.altyrus);
+                bellophgolemEntity2.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
 
-            bellophgolemEntity2.setHasLimitedLife(true);
-            bellophgolemEntity2.setExplodeOnExpiry(true);
-            bellophgolemEntity2.setLifeLimitBeforeDeath(200);
-            serverworld.addFreshEntity(bellophgolemEntity2);
+                bellophgolemEntity2.setHasLimitedLife(true);
+                bellophgolemEntity2.setExplodeOnExpiry(true);
+                bellophgolemEntity2.setLifeLimitBeforeDeath(200);
+                serverworld.addFreshEntity(bellophgolemEntity2);
 
-            this.summonTime = 0;
+                this.summonTime = 0;
+            }
+
+            this.altyrus.setSummoning(this.summonTime > 360);
         }
-
-        this.altyrus.setSummoning(this.summonTime > 360);
     }
 }

@@ -74,8 +74,6 @@ public class AltyrusRangedAttackGoal extends Goal {
 
                 this.chargeTime = -100;
             }
-        } else {
-            this.chargeTime = 0;
         }
 
         this.altyrus.setCharging(this.chargeTime > 10);
