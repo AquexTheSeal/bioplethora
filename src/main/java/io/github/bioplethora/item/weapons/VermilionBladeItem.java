@@ -1,6 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.projectile.VermilionBladeProjectileEntity;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -71,10 +72,17 @@ public class VermilionBladeItem extends SwordItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.desc_0").withStyle(TextFormatting.GRAY));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.desc_1").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.blade_master.skill").withStyle(TextFormatting.GOLD));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.blade_master.desc").withStyle(TextFormatting.GRAY));
+        }
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.pure_energy_concentration.skill").withStyle(TextFormatting.GOLD));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.pure_energy_concentration.desc").withStyle(TextFormatting.GRAY));
+        }
     }
 
     public void shootBlade(ItemStack stack, LivingEntity entity, World world) {

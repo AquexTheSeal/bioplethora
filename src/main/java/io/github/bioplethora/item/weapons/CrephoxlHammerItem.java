@@ -1,5 +1,6 @@
 package io.github.bioplethora.item.weapons;
 
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -91,11 +92,22 @@ public class CrephoxlHammerItem extends AxeItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.additions.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_0").withStyle(TextFormatting.GRAY));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_1").withStyle(TextFormatting.GRAY));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.desc_2").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.dysfunction.skill").withStyle(TextFormatting.GOLD));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.dysfunction.desc").withStyle(TextFormatting.GRAY));
+        }
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.deathsweep.skill").withStyle(TextFormatting.GOLD));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.deathsweep.desc").withStyle(TextFormatting.GRAY));
+        }
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.aerial_shockwave.skill").withStyle(TextFormatting.GOLD));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.aerial_shockwave.desc").withStyle(TextFormatting.GRAY));
+        }
     }
 
     /** <h2>Special Ability 2 of 2: Aerial Shockwave</h2>

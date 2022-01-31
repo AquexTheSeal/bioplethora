@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "bioplethora:item/stellar_scythe"
+    "layer0": "bioplethora:item/abyssal_blade"
   },
   "display": {
     "thirdperson_righthand": {

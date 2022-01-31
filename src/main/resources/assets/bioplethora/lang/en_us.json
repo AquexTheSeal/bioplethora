@@ -62,38 +62,59 @@
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
 
-  "item.bioplethora.sacred_level.desc": "Sacred Level",
-  "item.bioplethora.boss_level.desc": "Boss Level",
-  "item.bioplethora.additions.desc": "Additions:",
-  "item.bioplethora.special_skill.desc": "Special Skill:",
-
   "item.bioplethora.ecoharmless_spawn_egg.desc": "ECOHARMLESS",
   "item.bioplethora.plethoneutral_spawn_egg.desc": "PLETHONEUTRAL",
   "item.bioplethora.dangerum_spawn_egg.desc": "DANGERUM",
   "item.bioplethora.hellsent_spawn_egg.desc": "HELLSENT",
   "item.bioplethora.elderia_spawn_egg.desc": "ELDERIA",
 
-  "item.bioplethora.test_item.desc_0": "This is just an experimental item. Mainly used for development only. Only accessible in creative mode.",
+  "item.bioplethora.sacred_level.desc": "Sacred Level",
+  "item.bioplethora.boss_level.desc": "Boss Level",
+  "item.bioplethora.shift_reminder.desc": "Press [Shift] or [Ctrl] to view ability descriptions.",
 
-  "item.bioplethora.crephoxl_hammer.desc_0": "Debuffs targets on hit, deals more damage to targets with more than 49 maximum health.",
-  "item.bioplethora.crephoxl_hammer.desc_1": "On right click on the ground - creates a shockwave and knocks up nearby targets. Cools down for 3 seconds.",
-  "item.bioplethora.crephoxl_hammer.desc_2": "On hit while crouching - Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.",
-  "item.bioplethora.bellophite_arrow.desc_0": "The Bellophgolem arrow deals more damage than the regular arrow.",
-  "item.bioplethora.bellophite_arrow.desc_1": "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.",
-  "item.bioplethora.bellophite_shield.desc_0": "The Bellophite shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.",
-  "item.bioplethora.bellophite_shield.desc_1": "This shield stacks core points every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.",
-  "item.bioplethora.arbitrary_ballista.desc_0": "This giant crossbow greatly enhances the shooting projectile's speed and power.",
-  "item.bioplethora.stellar_scythe.desc_0": "This weapon could slash through an large area of enemies, the wide slashing ability cools down for 1 second only.",
-  "item.bioplethora.vermilion_blade.desc_0": "On hit with sword, this sword damages mobs surrounding the target mob. The Sweeping Edge enchantment can increase the attack radius.",
-  "item.bioplethora.vermilion_blade.desc_1": "On using, this sword shoots Vermilion Blade Projectiles endlessly. The blade's explosion size and damage increases every shot, then resets to default eventually. The fire rate can be faster when enchanted with the Quick Charge enchantment.",
+  "item.bioplethora.test_item.desc": "This is just an experimental item. Mainly used for development only. Only accessible in creative mode.",
 
-  "item.bioplethora.peaguin_scale_armor.desc_0": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
+  "item.bioplethora.crephoxl_hammer.dysfunction.skill": "Dysfunction",
+  "item.bioplethora.crephoxl_hammer.dysfunction.desc": "Increased damage for enemies with 50 or more health. Enemies attacked with this weapon gets debuffs for a very short duration.",
+  "item.bioplethora.crephoxl_hammer.deathsweep.skill": "Deathsweep",
+  "item.bioplethora.crephoxl_hammer.deathsweep.desc": "Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.",
+  "item.bioplethora.crephoxl_hammer.aerial_shockwave.skill": "Aerial Shockwave",
+  "item.bioplethora.crephoxl_hammer.aerial_shockwave.desc": "On right click on the ground, this weapon creates a damaging shockwave on block right-click position, dealing 9 damage to nearby entities & sending them flying into the air. 3-second cooldown.",
 
-  "item.bioplethora.phantom_chime.desc_0": "On right click on the ground - casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
-  "item.bioplethora.magma_bomb.desc_0": "Throws a projectile that explodes on impact.",
+  "item.bioplethora.bellophite_arrow.sharper_tip.skill": "Sharper Tip",
+  "item.bioplethora.bellophite_arrow.sharper_tip.desc": "The Bellophgolem arrow deals more damage than the regular arrow.",
+  "item.bioplethora.bellophite_arrow.core_energy.skill": "Core Energy",
+  "item.bioplethora.bellophite_arrow.core_energy.desc": "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.",
+
+  "item.bioplethora.bellophite_shield.recovery_bulwark.skill": "Recovery Bulwark",
+  "item.bioplethora.bellophite_shield.recovery_bulwark.desc": "The Bellophite shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.",
+  "item.bioplethora.bellophite_shield.core_impulse.skill": "Core Impulse",
+  "item.bioplethora.bellophite_shield.core_impulse.desc": "This shield stacks core points every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.",
+
+  "item.bioplethora.arbitrary_ballista.heavy_duty_ballista.skill": "Heavy-Duty Ballista",
+  "item.bioplethora.arbitrary_ballista.heavy_duty_ballista.desc": "This giant crossbow greatly enhances the shooting projectile's speed and power. When shooting, the crossbow recoils the player forward.",
+
+  "item.bioplethora.stellar_scythe.radius_slash.skill": "Radius Slash",
+  "item.bioplethora.stellar_scythe.radius_slash.desc": "This weapon could slash through an large area of enemies, the wide slashing ability cools down for 1 second only.",
+
+  "item.bioplethora.vermilion_blade.blade_master.skill": "Blade Master",
+  "item.bioplethora.vermilion_blade.blade_master.desc": "On hit with sword, this sword damages mobs surrounding the target mob. The Sweeping Edge enchantment can increase the attack radius.",
+  "item.bioplethora.vermilion_blade.pure_energy_concentration.skill": "Pure Energy Concentration",
+  "item.bioplethora.vermilion_blade.pure_energy_concentration.desc": "On using, this sword shoots Vermilion Blade Projectiles endlessly. The blade's explosion size and damage increases every shot, then resets to default eventually. The fire rate can be faster when enchanted with the Quick Charge enchantment.",
+
+  "item.bioplethora.abyssal_blade.tridented_blade.skill": "Tridented Blade",
+  "item.bioplethora.abyssal_blade.tridented_blade.desc": "Like a trident, this blade propels you forward, but with this item, you don't need to be in rain nor in water, but this item has a 1 second cooldown.",
+
+  "item.bioplethora.peaguin_scale_armor.grace_embrace.skill":"Grace Embrace",
+  "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
+
+  "item.bioplethora.phantom_chime.flapping_up.skill": "Flapping Up",
+  "item.bioplethora.phantom_chime.flapping_up.desc": "On right click on the ground, this chime casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
+  "item.bioplethora.magma_bomb.bombardment.skill": "Bombardment",
+  "item.bioplethora.magma_bomb.bombardment.desc": "Throws a projectile that explodes on impact.",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
-  "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora.",
+  "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora. There is a hell mode option in the configs that enhances and strengthens most creatures, you can check it out!",
 
   "advancements.bioplethora.bioplethora_startup.title": "Welcome to Bioplethora!",
   "advancements.bioplethora.bioplethora_startup.desc": "Thank you for installing Bioplethora! Feel free to tame, kill, and farm these creatures!",

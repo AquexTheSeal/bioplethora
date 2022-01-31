@@ -64,7 +64,7 @@ public class ServerWorldEvents {
     }
 
     @SubscribeEvent
-    public static void bellophiteShieldSkillTrigger(LivingAttackEvent event) {
+    public static void onLivingAttack(LivingAttackEvent event) {
 
         Entity defendantEnt = event.getEntity();
         Entity attackerEnt = event.getSource().getEntity();
@@ -89,7 +89,7 @@ public class ServerWorldEvents {
     }
 
     @SubscribeEvent
-    public static void entityEvadeAttackSkill(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingHurtEvent event) {
 
         boolean dsFire = (event.getSource() == DamageSource.IN_FIRE);
         boolean dsVoid = (event.getSource() == DamageSource.OUT_OF_WORLD);
@@ -110,7 +110,7 @@ public class ServerWorldEvents {
     }
 
     @SubscribeEvent
-    public static void entityDodgeProjectileSkill(ProjectileImpactEvent event) {
+    public static void onProjectileHit(ProjectileImpactEvent event) {
 
         Entity projectile = event.getEntity();
         RayTraceResult result = event.getRayTraceResult();

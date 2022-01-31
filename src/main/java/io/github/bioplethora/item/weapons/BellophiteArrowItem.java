@@ -1,10 +1,10 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.projectile.BellophiteArrowEntity;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.SpectralArrowEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,9 +29,16 @@ public class BellophiteArrowItem extends ArrowItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_arrow.desc_0").withStyle(TextFormatting.GRAY));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_arrow.desc_1").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_arrow.sharper_tip.skill").withStyle(TextFormatting.GOLD));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_arrow.sharper_tip.desc").withStyle(TextFormatting.GRAY));
+        }
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_arrow.core_energy.skill").withStyle(TextFormatting.GOLD));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_arrow.core_energy.desc").withStyle(TextFormatting.GRAY));
+        }
     }
 }

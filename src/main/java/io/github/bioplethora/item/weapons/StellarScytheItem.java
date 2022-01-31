@@ -1,5 +1,6 @@
 package io.github.bioplethora.item.weapons;
 
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -70,7 +71,11 @@ public class StellarScytheItem extends SwordItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.special_skill.desc").withStyle(TextFormatting.GOLD));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.stellar_scythe.desc_0").withStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.stellar_scythe.radius_slash.skill").withStyle(TextFormatting.GOLD));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.stellar_scythe.radius_slash.desc").withStyle(TextFormatting.GRAY));
+        }
     }
 }
