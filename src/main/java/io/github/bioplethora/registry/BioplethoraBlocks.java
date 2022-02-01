@@ -22,9 +22,12 @@ public class BioplethoraBlocks {
     public static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Bioplethora.MOD_ID);
 
     public static final RegistryObject<Block> NANDBRI_SCALE_BLOCK = registerBlock("nandbri_scale_block", () -> new Block(AbstractBlock.Properties.of(Material.WOOL, MaterialColor.COLOR_LIGHT_GRAY).strength(0.8F, 0.8F).harvestTool(ToolType.AXE).sound(SoundType.BONE_BLOCK)), BioplethoraItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<Block> BELLOPHITE_BLOCK = registerBlock("bellophite_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_YELLOW).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHERITE_BLOCK)), BioplethoraItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<Block> BELLOPHITE_CORE_BLOCK = registerBlock("bellophite_core_block", () -> new BellophiteCoreBlock(AbstractBlock.Properties.of(Material.GLASS).strength(0.3F).sound(SoundType.GLASS).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> BELLOPHITE_BLOCK = registerFireResBlock("bellophite_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_YELLOW).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHERITE_BLOCK)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> BELLOPHITE_CORE_BLOCK =  registerFireResBlock("bellophite_core_block", () -> new BellophiteCoreBlock(AbstractBlock.Properties.of(Material.GLASS).strength(0.3F).sound(SoundType.GLASS).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
+    //=================================================================================
+    //                       REGULAR BLOCK CONSTRUCTORS
+    //=================================================================================
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
         return registerBlock(name, supplier, itemGroup, true);
     }
@@ -37,6 +40,24 @@ public class BioplethoraBlocks {
         RegistryObject<B> block = BioplethoraBlocks.BLOCKS.register(name, supplier);
         if (generateItem)
             BLOCK_ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(itemGroup).stacksTo(stackSize)));
+        return block;
+    }
+
+    //=================================================================================
+    //                      FIRE RESISTANT BLOCK CONSTRUCTORS
+    //=================================================================================
+    public static <B extends Block> RegistryObject<B> registerFireResBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
+        return registerFireResBlock(name, supplier, itemGroup, true);
+    }
+
+    public static <B extends Block> RegistryObject<B> registerFireResBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, boolean generateItem) {
+        return registerFireResBlock(name, supplier, itemGroup, 64, generateItem);
+    }
+
+    public static <B extends Block> RegistryObject<B> registerFireResBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, int stackSize, boolean generateItem) {
+        RegistryObject<B> block = BioplethoraBlocks.BLOCKS.register(name, supplier);
+        if (generateItem)
+            BLOCK_ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(itemGroup).stacksTo(stackSize).fireResistant()));
         return block;
     }
 }

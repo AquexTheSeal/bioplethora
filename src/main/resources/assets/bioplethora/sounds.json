@@ -1,4 +1,22 @@
 {
+  "crephoxl_idle": {
+    "subtitle": "subtitles.bioplethora.crephoxl.idle",
+    "sounds": [
+      "bioplethora:crephoxl_idle"
+    ]
+  },
+  "crephoxl_hurt": {
+    "subtitle": "subtitles.bioplethora.crephoxl.hurt",
+    "sounds": [
+      "bioplethora:crephoxl_hurt"
+    ]
+  },
+  "crephoxl_death": {
+    "subtitle": "subtitles.bioplethora.crephoxl.death",
+    "sounds": [
+      "bioplethora:crephoxl_death"
+    ]
+  },
   "bellophgolem_idle": {
     "subtitle": "subtitles.bioplethora.bellophgolem.idle",
     "sounds": [

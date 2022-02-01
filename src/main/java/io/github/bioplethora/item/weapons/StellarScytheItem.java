@@ -14,8 +14,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -23,9 +23,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StellarScytheItem extends SwordItem {
 
@@ -46,17 +44,12 @@ public class StellarScytheItem extends SwordItem {
             player.getCooldowns().addCooldown(stack.getItem(), 20);
             world.playSound(null, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
             if(!world.isClientSide) {
-                world.addParticle(ParticleTypes.SWEEP_ATTACK, x, y + 2, z, 0, 0, 0);
+                double d0 = -MathHelper.sin(player.yRot * ((float)Math.PI / 180F));
+                double d1 = MathHelper.cos(player.yRot * ((float)Math.PI / 180F));
+                ((ServerWorld)world).sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5D), player.getZ() + d1, 0, d0, 0.0D, d1, 0.0D);
             }
             if(world instanceof ServerWorld) {
-                List<Entity> nearEntities = world
-                        .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (10 / 2d), y, z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
-                        .stream().sorted(new Object() {
-                            Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                                return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                            }
-                        }.compareDistOf(x, y, z)).collect(Collectors.toList());
-                for (Entity entityIterator : nearEntities) {
+                for (Entity entityIterator : world.getEntitiesOfClass(Entity.class, player.getBoundingBox().inflate(2D, 1D, 2D))) {
                     if (entityIterator instanceof LivingEntity && entityIterator != player) {
                         if(entityIterator != entity) {
                             entityIterator.hurt(DamageSource.mobAttack(player), (this.getDamage() * 0.8F) * EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, source));
@@ -67,6 +60,8 @@ public class StellarScytheItem extends SwordItem {
         }
         return retval;
     }
+
+
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {

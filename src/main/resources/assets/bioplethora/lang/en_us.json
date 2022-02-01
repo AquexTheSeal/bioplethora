@@ -40,6 +40,7 @@
   "item.bioplethora.bellophite": "Bellophite",
   "item.bioplethora.peaguin_scales": "Peaguin Scales",
   "item.bioplethora.abyssal_scales": "Abyssal Scales",
+  "item.bioplethora.bellophite_core_fragment": "Bellophite Core Fragment",
 
   "item.bioplethora.raw_cuttlefish_meat": "Raw Cuttlefish Meat",
   "item.bioplethora.cooked_cuttlefish_meat": "Cooked Cuttlefish Meat",
@@ -146,6 +147,10 @@
   "advancements.bioplethora.cooked_cuttlefish_meat_obtain.desc": "Take a Cooked Cuttlefish Meat.",
 
   "bossbar.bioplethora.helioblade.clone_progress": "Time before next Helioblade cloning",
+
+  "subtitles.bioplethora.crephoxl.idle": "Crephoxl grunts",
+  "subtitles.bioplethora.crephoxl.hurt": "Crephoxl hurts",
+  "subtitles.bioplethora.crephoxl.death": "Crephoxl dies",
 
   "subtitles.bioplethora.bellophgolem.idle": "Bellophgolem grunts",
   "subtitles.bioplethora.bellophgolem.hurt": "Bellophgolem hurts",

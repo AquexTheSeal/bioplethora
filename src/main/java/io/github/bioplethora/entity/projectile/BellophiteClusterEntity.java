@@ -34,10 +34,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class BellophiteClusterEntity extends DamagingProjectileEntity implements IAnimatable {
 
     public double xPower;
@@ -152,13 +148,8 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         this.level.playSound(null, blockpos, SoundEvents.GLASS_BREAK, SoundCategory.NEUTRAL, (float) 1, (float) 1);
 
         if(this.level instanceof ServerWorld && !(this.getOwner() == null)) {
-            List<Entity> nearEntities = this.level
-                    .getEntitiesOfClass(Entity.class, area, null).stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
-                        }
-                    }.compareDistOf(x, y, z)).collect(Collectors.toList());
-            for (Entity entityArea : nearEntities) {
+
+            for (Entity entityArea : this.level.getEntitiesOfClass(Entity.class, area, null)) {
                 if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
 
                     if (this.getOwner() != null) {

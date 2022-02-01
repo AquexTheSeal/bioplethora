@@ -17,6 +17,7 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -50,6 +51,14 @@ public class MagmaBombEntity extends ProjectileItemEntity {
         this.explosionPower = explosionPower;
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.level instanceof ServerWorld) {
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 15, 0.4, 0.4, 0.4, 0);
+        }
+    }
+
     @OnlyIn(Dist.CLIENT)
     private IParticleData getParticle() {
         ItemStack itemstack = this.getItemRaw();
@@ -81,5 +90,9 @@ public class MagmaBombEntity extends ProjectileItemEntity {
             this.level.broadcastEntityEvent(this, (byte)3);
             this.remove();
         }
+    }
+
+    public boolean isOnFire() {
+        return true;
     }
 }

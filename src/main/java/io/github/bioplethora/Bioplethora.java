@@ -3,6 +3,7 @@ package io.github.bioplethora;
 import io.github.bioplethora.datagen.BioBlockModelProvider;
 import io.github.bioplethora.datagen.BioBlockstateProvider;
 import io.github.bioplethora.datagen.BioItemModelProvider;
+import io.github.bioplethora.datagen.BioLootTablesProvider;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
@@ -76,6 +77,7 @@ public class Bioplethora {
             dataGenerator.addProvider(new BioBlockModelProvider(dataGenerator, MOD_ID, efh));
             dataGenerator.addProvider(new BioBlockstateProvider(dataGenerator, MOD_ID, efh));
             dataGenerator.addProvider(new BioItemModelProvider(dataGenerator, efh));
+            dataGenerator.addProvider(new BioLootTablesProvider(dataGenerator));
         }
     }
 }

@@ -8,6 +8,8 @@ import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
 import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -112,17 +114,22 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
 
     @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return SoundEvents.RAVAGER_AMBIENT;
+        return BioplethoraSoundEvents.CREPHOXL_IDLE.get();
     }
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.RAVAGER_HURT;
+        return BioplethoraSoundEvents.CREPHOXL_HURT.get();
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return SoundEvents.RAVAGER_DEATH;
+        return BioplethoraSoundEvents.CREPHOXL_DEATH.get();
+    }
+
+    @Override
+    public void playStepSound(BlockPos pos, BlockState blockIn) {
+        this.playSound(SoundEvents.RAVAGER_STEP, 0.15f, 1);
     }
 
     public boolean doHurtTarget(Entity entity) {

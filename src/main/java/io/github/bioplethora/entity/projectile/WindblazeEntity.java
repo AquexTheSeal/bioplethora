@@ -20,14 +20,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class WindblazeEntity extends DamagingProjectileEntity {
 
@@ -35,11 +30,6 @@ public class WindblazeEntity extends DamagingProjectileEntity {
 
     public WindblazeEntity(EntityType<? extends DamagingProjectileEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public WindblazeEntity(World world, double v, double v1, double v2, double v3, double v4, double v5) {
-        super(BioplethoraEntities.WINDBLAZE.get(), v, v1, v2, v3, v4, v5, world);
     }
 
     public WindblazeEntity(World world, LivingEntity entity, double v, double v1, double v2) {
@@ -51,7 +41,6 @@ public class WindblazeEntity extends DamagingProjectileEntity {
         super.tick();
 
         ++lifespan;
-
         if ((lifespan == 100)) {
             this.remove();
         }
@@ -63,13 +52,8 @@ public class WindblazeEntity extends DamagingProjectileEntity {
         AxisAlignedBB entArea = new AxisAlignedBB(this.getX() - (3 / 2d), this.getY() - (3 / 2d), this.getZ() - (3 / 2d), this.getX() + (3 / 2d), this.getY() + (3 / 2d), this.getZ() + (3 / 2d));
 
         if (this.level instanceof ServerWorld && this.getOwner() instanceof MobEntity && ((MobEntity) this.getOwner()).getTarget() != null) {
-            List<Entity> nearEntities = this.level.getEntitiesOfClass(Entity.class, entArea, null).stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((getEnt -> getEnt.distanceToSqr(dx, dy, dz)));
-                        }
-                    }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityArea : nearEntities) {
-                if (entityArea instanceof LivingEntity && (entityArea == ((MobEntity) this.getOwner()).getTarget() || ((MobEntity) entityArea).getTarget() == this.getEntity())) {
+            for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, entArea)) {
+                if (entityArea != null && (entityArea == ((MobEntity) this.getOwner()).getTarget() || ((MobEntity) entityArea).getTarget() == this.getEntity())) {
 
                     if (!(entityArea instanceof AltyrusEntity)) {
                         entityArea.setDeltaMovement(0, 0.75, 0);
@@ -77,10 +61,10 @@ public class WindblazeEntity extends DamagingProjectileEntity {
 
                     if (BioplethoraConfig.COMMON.hellMode.get()) {
                         entityArea.hurt(DamageSource.MAGIC, 3);
-                        ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
-                        ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
+                        entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
+                        entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                     } else {
-                        ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
+                        entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
                     }
                 }
             }

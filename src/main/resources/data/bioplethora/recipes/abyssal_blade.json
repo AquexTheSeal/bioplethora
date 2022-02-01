@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ATA",
+    "ADA"
+  ],
+  "key": {
+    "A": {
+      "item": "bioplethora:abyssal_scales"
+    },
+    "T": {
+      "item": "minecraft:trident"
+    },
+    "D": {
+      "item": "bioplethora:diamond_sword"
+    }
+  },
+  "result": {
+    "item": "bioplethora:abyssal_blade",
+    "count": 1
+  }
+}

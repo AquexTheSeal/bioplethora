@@ -43,10 +43,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioplethoraEntityClass {
     private final AnimationFactory factory = new AnimationFactory(this);
 
@@ -126,7 +122,7 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         if (this.getMainHandItem().getItem() instanceof SwordItem) {
             world.playSound(null, new BlockPos(entity.getX(), entity.getY(), entity.getZ()), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
             if(!world.isClientSide) {
-                world.addParticle(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY() + 2, entity.getZ(), 0, 0, 0);
+                world.addParticle(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY() + 2, entity.getZ(), 1, 1, 0.1);
             }
 
             if (this.getMainHandItem().getItem() instanceof StellarScytheItem) {
@@ -134,14 +130,7 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
                 double x = entity.getX(), y = entity.getY(), z = entity.getZ();
 
                 if(world instanceof ServerWorld) {
-                    List<Entity> nearEntities = world
-                            .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (10 / 2d), y, z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
-                            .stream().sorted(new Object() {
-                                Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                                    return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                                }
-                            }.compareDistOf(x, y, z)).collect(Collectors.toList());
-                    for (Entity entityIterator : nearEntities) {
+                    for (Entity entityIterator : world.getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (10 / 2d), y, z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)) {
                         if (entityIterator instanceof LivingEntity && entityIterator != this) {
                             if (entityIterator != entity) {
                                 entityIterator.hurt(DamageSource.mobAttack(this), ((StellarScytheItem) this.getMainHandItem().getItem()).getDamage() * 0.8F);
@@ -153,6 +142,10 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         }
 
         return flag;
+    }
+
+    public int getMaxSpawnClusterSize() {
+        return 2;
     }
 
     public CreatureAttribute getMobType() {

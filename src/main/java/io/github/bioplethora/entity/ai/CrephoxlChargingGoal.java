@@ -37,7 +37,7 @@ public class CrephoxlChargingGoal extends Goal {
         
         if (target.distanceToSqr(this.crephoxl) < 4096.0D && this.crephoxl.canSee(target)) {
 
-            this.crephoxl.getLookControl().setLookAt(target, 30.0F, 30.0F);
+            this.crephoxl.getLookControl().setLookAt(target, 10.0F, 10.0F);
             BlockPos blockpos = this.crephoxl.blockPosition();
 
             ++this.chargeTime;
@@ -65,6 +65,7 @@ public class CrephoxlChargingGoal extends Goal {
                 double dirY = Math.sin(Math.toRadians(0 - this.crephoxl.xRot));
                 double dirZ = Math.cos(Math.toRadians(this.crephoxl.yRot));
 
+                this.crephoxl.lookAt(target, 10.0F, 10.0F);
                 this.crephoxl.setDeltaMovement(dirX, dirY, dirZ);
 
                 if (this.crephoxl.getBoundingBox().inflate(2F).intersects(target.getBoundingBox())) {

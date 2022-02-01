@@ -21,10 +21,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -59,7 +55,7 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
         ++birthTime;
 
-        this.setDeltaMovement(this.getDeltaMovement().x(), 0.5, this.getDeltaMovement().z());
+        this.setDeltaMovement(0, this.getDeltaMovement().y() + 0.5, 0);
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (this.getX()), (this.getY()), (this.getZ()), (int) 5, 1, 1, 1, 0.1);
@@ -108,16 +104,9 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
         AxisAlignedBB area = new AxisAlignedBB(x - (radius / 2d), y, z - (radius / 2d), x + (radius / 2d), y + (radius / 2d), z + (radius / 2d));
 
         //Grant Advancement to all nearby players
-        if(world instanceof ServerWorld) {
-            List<Entity> nearEntities = world.getEntitiesOfClass(Entity.class, area, null).stream().sorted(new Object() {
-                Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                    return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                }
-            }.compareDistOf(x, y, z)).collect(Collectors.toList());
-            for (Entity entityIterator : nearEntities) {
-                if (entityIterator instanceof LivingEntity) {
-                    BioplethoraAdvancementHelper.grantBioAdvancement(entityIterator, "bioplethora:altyrus_summoning");
-                }
+        for (LivingEntity entityIterator : world.getEntitiesOfClass(LivingEntity.class, area)) {
+            if (entityIterator != null) {
+                BioplethoraAdvancementHelper.grantBioAdvancement(entityIterator, "bioplethora:altyrus_summoning");
             }
         }
     }

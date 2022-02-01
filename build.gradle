@@ -22,7 +22,7 @@ version = '1.16.5-1.0.0-beta-v3'
 
 java {
     archivesBaseName = 'bioplethora'
-    toolchain.languageVersion = JavaLanguageVersion.of(11)
+    toolchain.languageVersion = JavaLanguageVersion.of(8)
 }
 
 minecraft {

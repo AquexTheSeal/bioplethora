@@ -27,15 +27,10 @@ public class MagmaBombItem extends Item {
         super(properties);
     }
 
-    public ActionResult<ItemStack> use(World world, PlayerEntity entity, Hand hand) {
-        ItemStack itemstack = entity.getItemInHand(hand);
-
-        if (itemstack.getDamageValue() >= itemstack.getMaxDamage() - 1) {
-            return ActionResult.fail(itemstack);
-        } else {
-            entity.startUsingItem(hand);
-            return ActionResult.consume(itemstack);
-        }
+    public ActionResult<ItemStack> use(World world, PlayerEntity entity, Hand handIn) {
+        ItemStack itemstack = entity.getItemInHand(handIn);
+        entity.startUsingItem(handIn);
+        return ActionResult.consume(itemstack);
     }
 
     public UseAction getUseAnimation(ItemStack p_77661_1_) {
@@ -50,21 +45,24 @@ public class MagmaBombItem extends Item {
     public void releaseUsing(ItemStack stack, World world, LivingEntity entity, int value) {
         super.releaseUsing(stack, world, entity, value);
 
-        world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.BLAZE_SHOOT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-        if (!world.isClientSide) {
-            MagmaBombEntity magmaBombEntity = new MagmaBombEntity(world, entity);
-            magmaBombEntity.setItem(stack);
-            magmaBombEntity.setExplosionPower(3F);
-            magmaBombEntity.shootFromRotation(entity, entity.xRot, entity.yRot, 0.0F, 1.5F, 1.0F);
-            world.addFreshEntity(magmaBombEntity);
-        }
+        int i = this.getUseDuration(stack) - value;
+        if (i >= 10) {
+            world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.BLAZE_SHOOT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+            if (!world.isClientSide) {
+                MagmaBombEntity magmaBombEntity = new MagmaBombEntity(world, entity);
+                magmaBombEntity.setItem(stack);
+                magmaBombEntity.setExplosionPower(3F);
+                magmaBombEntity.shootFromRotation(entity, entity.xRot, entity.yRot, 0.0F, 1.5F, 1.0F);
+                world.addFreshEntity(magmaBombEntity);
+            }
 
-        if (entity instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity) entity;
+            if (entity instanceof PlayerEntity) {
+                PlayerEntity playerentity = (PlayerEntity) entity;
 
-            playerentity.awardStat(Stats.ITEM_USED.get(this));
-            if (!playerentity.abilities.instabuild) {
-                stack.shrink(1);
+                playerentity.awardStat(Stats.ITEM_USED.get(this));
+                if (!playerentity.abilities.instabuild) {
+                    stack.shrink(1);
+                }
             }
         }
     }
