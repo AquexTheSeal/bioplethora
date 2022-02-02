@@ -2,6 +2,7 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.*;
+import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,5 +32,8 @@ public class BioplethoraEntityAttributes {
         //Elderia
         event.put(BioplethoraEntities.GAUGALEM.get(), GaugalemEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.MYLIOTHAN.get(), MyliothanEntity.setCustomAttributes().build());
+
+        //Others
+        event.put(BioplethoraEntities.PRIMORDIAL_RING.get(), PrimordialRingEntity.setCustomAttributes().build());
     }
 }

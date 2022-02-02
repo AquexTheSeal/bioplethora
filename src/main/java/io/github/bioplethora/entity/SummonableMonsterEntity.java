@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.Explosion;
@@ -12,7 +12,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public abstract class SummonableMonsterEntity extends AnimatableMonsterEntity implements IAnimatable {
 
-    private MobEntity owner;
+    private LivingEntity owner;
     private boolean hasLimitedLife;
     private boolean explodeOnExpiry;
     private int lifeLimitBeforeDeath;
@@ -28,11 +28,11 @@ public abstract class SummonableMonsterEntity extends AnimatableMonsterEntity im
     @Override
     abstract public AnimationFactory getFactory();
 
-    public MobEntity getOwner() {
+    public LivingEntity getOwner() {
         return this.owner;
     }
 
-    public void setOwner(MobEntity mobEntity) {
+    public void setOwner(LivingEntity mobEntity) {
         this.owner = mobEntity;
     }
 

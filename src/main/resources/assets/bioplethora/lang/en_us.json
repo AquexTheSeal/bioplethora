@@ -18,6 +18,7 @@
   "entity.bioplethora.bellophite_arrow": "Bellophite Arrow",
   "entity.bioplethora.ultimate_bellophite_cluster": "Ultimate Bellophite Cluster",
   "entity.bioplethora.vermilion_blade_projectile": "Vermilion Blade Projectile",
+  "entity.bioplethora.primordial_ring": "Primordial Ring",
 
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.bellophite_shield_wave": "Bellophite Shield Wave",
@@ -41,6 +42,7 @@
   "item.bioplethora.peaguin_scales": "Peaguin Scales",
   "item.bioplethora.abyssal_scales": "Abyssal Scales",
   "item.bioplethora.bellophite_core_fragment": "Bellophite Core Fragment",
+  "item.bioplethora.primordial_fragment": "Primordial Fragment",
 
   "item.bioplethora.raw_cuttlefish_meat": "Raw Cuttlefish Meat",
   "item.bioplethora.cooked_cuttlefish_meat": "Cooked Cuttlefish Meat",
@@ -52,6 +54,8 @@
   "item.bioplethora.arbitrary_ballista": "Arbitrary Ballista",
   "item.bioplethora.vermilion_blade": "Vermilion Blade",
   "item.bioplethora.abyssal_blade": "Abyssal Blade",
+  "item.bioplethora.primordial_staff": "Primordial Staff",
+  "item.bioplethora.totem_of_swerving": "Totem of Swerving",
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
@@ -107,6 +111,12 @@
 
   "item.bioplethora.abyssal_blade.tridented_blade.skill": "Tridented Blade",
   "item.bioplethora.abyssal_blade.tridented_blade.desc": "Like a trident, this blade propels you forward, but with this item, you don't need to be in rain nor in water, but this item has a 1 second cooldown.",
+
+  "item.bioplethora.primordial_staff.cores_aid.skill": "Core's Aid",
+  "item.bioplethora.primordial_staff.cores_aid.desc": "Summons 2 floating Primordial Rings to fight alongside you.",
+
+  "item.bioplethora.totem_of_swerving.blessed_instinct.skill": "Blessed Instinct",
+  "item.bioplethora.totem_of_swerving.blessed_instinct.desc": "When on offhand or mainhand. The user has a 1/3 chance of dodging any projectile.",
 
   "item.bioplethora.peaguin_scale_armor.grace_embrace.skill":"Grace Embrace",
   "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",

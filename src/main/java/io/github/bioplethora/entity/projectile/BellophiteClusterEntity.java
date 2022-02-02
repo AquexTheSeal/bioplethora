@@ -1,6 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.registry.BioplethoraDamageSources;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
@@ -83,7 +84,12 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !entityHitResult.getEntity().is(entity)) {
-            this.hitAndExplode();
+
+            if (this.getOwner() instanceof SummonableMonsterEntity && ((SummonableMonsterEntity) this.getOwner()).getOwner() != null) {
+                if (entity != ((SummonableMonsterEntity) this.getOwner()).getOwner()) {
+                    this.hitAndExplode();
+                }
+            }
         }
     }
 
@@ -97,7 +103,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
             }
 
             if (this.level instanceof ServerWorld) {
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 3, 0.4, 0.4, 0.4, 0.1);
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 3, 0.4, 0.4, 0.4, 0.1);
             }
 
             RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);

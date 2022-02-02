@@ -3,7 +3,9 @@ package io.github.bioplethora.event;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
+import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
+import io.github.bioplethora.item.weapons.SwervingTotemItem;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.entity.Entity;
@@ -13,13 +15,16 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -121,6 +126,65 @@ public class ServerWorldEvents {
 
         if (result instanceof EntityRayTraceResult) {
 
+            //=================================================
+            //          Totem of Swerving Skill
+            //=================================================
+            boolean targetIsEntity = ((EntityRayTraceResult) result).getEntity() instanceof LivingEntity;
+
+            if (!projectile.level.isClientSide && targetIsEntity) {
+                LivingEntity user = ((LivingEntity) ((EntityRayTraceResult) result).getEntity());
+
+                int shouldDodge = user.getRandom().nextInt(3);
+
+                if ((shouldDodge == 1) && ((user.getOffhandItem().getItem() instanceof SwervingTotemItem) || (user.getMainHandItem().getItem() instanceof SwervingTotemItem))) {
+                    Vector3d projectilePos = event.getEntity().position();
+                    Vector3d rVec = user.getLookAngle().yRot(0.5F + (float) Math.PI).add(user.position());
+                    Vector3d lVec = user.getLookAngle().yRot(0.5F + (float) Math.PI).add(user.position());
+
+                    boolean rDir;
+
+                    if (projectilePos.distanceTo(rVec) < projectilePos.distanceTo(lVec)) {
+                        rDir = true;
+                    } else if (projectilePos.distanceTo(rVec) > projectilePos.distanceTo(lVec)) {
+                        rDir = false;
+                    } else {
+                        rDir = user.getRandom().nextBoolean();
+                    }
+
+                    Vector3d vectorThingy = event.getEntity().getDeltaMovement().yRot((float) ((rDir ? 0.5F : -0.5F) * Math.PI)).normalize();
+
+                    user.level.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.GHAST_SHOOT, SoundCategory.PLAYERS, 1, 1);
+                    if (user.level instanceof ServerWorld) {
+                        ((ServerWorld) user.level).sendParticles(ParticleTypes.POOF, user.getX(), user.getY(), user.getZ(), 50, 0.65, 0.65, 0.65, 0.01);
+                    }
+
+                    if (user instanceof PlayerEntity) {
+
+                        boolean isNegVal = user.getRandom().nextBoolean();
+                        int tpLoc;
+                        if (isNegVal) {
+                            tpLoc = -(user.getRandom().nextInt(5));
+                        } else {
+                            tpLoc = user.getRandom().nextInt(5);
+                        }
+
+                        BlockPos blockpos = new BlockPos(user.getX() + tpLoc, user.getY(), user.getZ() + tpLoc);
+
+                        if (!user.level.getBlockState(blockpos).getMaterial().blocksMotion()) {
+                            user.moveTo(blockpos, 0.0F, 0.0F);
+                        }
+
+                    } else {
+                        user.setDeltaMovement(user.getDeltaMovement().add(vectorThingy.x() * 0.5F, 0, vectorThingy.z() * 0.5F));
+                    }
+
+                    event.setCanceled(true);
+                }
+            }
+
+            //=================================================
+            //            Mob Special Skills
+            //=================================================
             boolean targetIsAltyrus = ((EntityRayTraceResult) result).getEntity() instanceof AltyrusEntity;
 
             if (!projectile.level.isClientSide && targetIsAltyrus) {
@@ -183,6 +247,32 @@ public class ServerWorldEvents {
 
                     event.setCanceled(true);
                 }
+            }
+
+            boolean targetIsPrimordialRing = ((EntityRayTraceResult) result).getEntity() instanceof PrimordialRingEntity;
+
+            if (!projectile.level.isClientSide && targetIsPrimordialRing) {
+                PrimordialRingEntity primordialRing = ((PrimordialRingEntity) ((EntityRayTraceResult) result).getEntity());
+
+                Vector3d projectilePos = event.getEntity().position();
+                Vector3d rVec = primordialRing.getLookAngle().yRot(0.5F + (float) Math.PI).add(primordialRing.position());
+                Vector3d lVec = primordialRing.getLookAngle().yRot(0.5F + (float) Math.PI).add(primordialRing.position());
+
+                boolean rDir;
+
+                if (projectilePos.distanceTo(rVec) < projectilePos.distanceTo(lVec)) {
+                    rDir = true;
+                } else if (projectilePos.distanceTo(rVec) > projectilePos.distanceTo(lVec)) {
+                    rDir = false;
+                } else {
+                    rDir = primordialRing.getRandom().nextBoolean();
+                }
+
+                Vector3d vectorThingy = event.getEntity().getDeltaMovement().yRot((float) ((rDir ? 0.5F : -0.5F) * Math.PI)).normalize();
+
+                primordialRing.setDeltaMovement(primordialRing.getDeltaMovement().add(vectorThingy.x() * 1F, 0, vectorThingy.z() * 1F));
+
+                event.setCanceled(true);
             }
         }
     }

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CB",
+    "FCC",
+    "FF "
+  ],
+  "key": {
+    "B": {
+      "item": "bioplethora:bellophite_core_block"
+    },
+    "C": {
+      "item": "bioplethora:bellophite_core_fragment"
+    },
+    "F": {
+      "item": "bioplethora:primordial_fragment"
+    }
+  },
+  "result": {
+    "item": "bioplethora:primordial_staff",
+    "count": 1
+  }
+}

@@ -4,6 +4,7 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
 import io.github.bioplethora.client.entity.render.others.BellophiteShieldWaveRender;
+import io.github.bioplethora.client.entity.render.others.PrimordialRingEntityRender;
 import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
 import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
@@ -62,6 +63,7 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.VERMILION_BLADE_PROJECTILE.get(), VermilionBladeProjectileRender::new);
 
         //others
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);
     }

@@ -4,6 +4,7 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.entity.others.AltyrusSummoningEntity;
 import io.github.bioplethora.entity.others.BellophiteShieldWaveEntity;
+import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.entity.projectile.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -53,6 +54,7 @@ public class BioplethoraEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "vermilion_blade_projectile").toString()));
 
     //Others
+    public static final RegistryObject<EntityType<PrimordialRingEntity>> PRIMORDIAL_RING = ENTITIES.register("primordial_ring", () -> EntityType.Builder.of(PrimordialRingEntity::new, EntityClassification.MONSTER).sized(3.5f, 2f).build(new ResourceLocation(Bioplethora.MOD_ID, "primordial_ring").toString()));
     public static final RegistryObject<EntityType<AltyrusSummoningEntity>> ALTYRUS_SUMMONING = ENTITIES.register("altyrus_summoning", () -> EntityType.Builder.of(AltyrusSummoningEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4).updateInterval(20)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_summoning").toString()));
     public static final RegistryObject<EntityType<BellophiteShieldWaveEntity>> BELLOPHITE_SHIELD_WAVE = ENTITIES.register("bellophite_shield_wave", () -> EntityType.Builder.of(BellophiteShieldWaveEntity::new, EntityClassification.MISC).clientTrackingRange(4).updateInterval(20)

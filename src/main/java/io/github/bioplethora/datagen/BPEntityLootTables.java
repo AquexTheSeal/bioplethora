@@ -71,6 +71,12 @@ public class BPEntityLootTables extends EntityLootTables {
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 4F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1F)))
                         ))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.PRIMORDIAL_FRAGMENT.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(5F, 9F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 2F)))
+                        ))
         );
 
         // Cuttlefish

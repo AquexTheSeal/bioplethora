@@ -3,6 +3,7 @@ package io.github.bioplethora.integration;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.DwarfMossadileEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
+import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,6 +33,7 @@ public class BPCompatTOP {
                 public void addProbeEntityInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, Entity entity, IProbeHitEntityData iProbeHitEntityData) {
 
                     String var = "Variant: ";
+                    String ownerString = "Owner: ";
 
                     if (entity instanceof DwarfMossadileEntity) {
                         boolean netherVariant = ((DwarfMossadileEntity) entity).isNetherVariant();
@@ -46,6 +48,13 @@ public class BPCompatTOP {
                         boolean isClone = ((HeliobladeEntity) entity).isClone();
                         if (isClone) {
                             iProbeInfo.text(CompoundText.createLabelInfo(var, "Clone"));
+                        }
+                    }
+
+                    if (entity instanceof PrimordialRingEntity) {
+                        boolean hasOwner = ((PrimordialRingEntity) entity).getOwner() != null;
+                        if (hasOwner) {
+                            iProbeInfo.text(CompoundText.createLabelInfo(ownerString, ((PrimordialRingEntity) entity).getOwner().getDisplayName()));
                         }
                     }
                 }

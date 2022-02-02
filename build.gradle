@@ -18,7 +18,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 group = 'bioplethora'
-version = '1.16.5-1.0.0-beta-v3'
+version = "${project.minecraftVersion}-1.0.0-beta-v3"
 
 java {
     archivesBaseName = 'bioplethora'
@@ -118,7 +118,7 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
     //Geckolib
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.57')
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${mc_version}:3.0.57")
     //Just Enough Items (JEI)
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
