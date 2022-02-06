@@ -14,11 +14,19 @@
   "entity.bioplethora.myliothan": "Myliothan",
   "entity.bioplethora.helioblade": "Helioblade",
 
+  "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
+  "entity.bioplethora.stone_grylynen": "Stone Grylynen",
+  "entity.bioplethora.golden_grylynen": "Golden Grylynen",
+  "entity.bioplethora.iron_grylynen": "Iron Grylynen",
+  "entity.bioplethora.diamond_grylynen": "Diamond Grylynen",
+  "entity.bioplethora.netherite_grylynen": "Netherite Grylynen",
+
   "entity.bioplethora.bellophite_cluster": "Bellophite Cluster",
   "entity.bioplethora.bellophite_arrow": "Bellophite Arrow",
   "entity.bioplethora.ultimate_bellophite_cluster": "Ultimate Bellophite Cluster",
   "entity.bioplethora.vermilion_blade_projectile": "Vermilion Blade Projectile",
   "entity.bioplethora.primordial_ring": "Primordial Ring",
+  "entity.bioplethora.wind_arrow": "Wind Arrow",
 
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.bellophite_shield_wave": "Bellophite Shield Wave",
@@ -35,6 +43,13 @@
   "item.bioplethora.myliothan_spawn_egg": "Myliothan Spawn Egg",
   "item.bioplethora.helioblade_spawn_egg": "Helioblade Spawn Egg",
 
+  "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
+  "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",
+  "item.bioplethora.golden_grylynen_spawn_egg": "Golden Grylynen Spawn Egg",
+  "item.bioplethora.iron_grylynen_spawn_egg": "Iron Grylynen Spawn Egg",
+  "item.bioplethora.diamond_grylynen_spawn_egg": "Diamond Grylynen Spawn Egg",
+  "item.bioplethora.netherite_grylynen_spawn_egg": "Netherite Grylynen Spawn Egg",
+
   "item.bioplethora.crephoxl_feather": "Crephoxl Feather",
   "item.bioplethora.crephoxl_stick": "Crephoxl Stick",
   "item.bioplethora.nandbri_scales": "Nandbri Scales",
@@ -43,6 +58,12 @@
   "item.bioplethora.abyssal_scales": "Abyssal Scales",
   "item.bioplethora.bellophite_core_fragment": "Bellophite Core Fragment",
   "item.bioplethora.primordial_fragment": "Primordial Fragment",
+  "item.bioplethora.windpiece": "Windpiece",
+  "item.bioplethora.windy_essence": "Windy Essence",
+
+  "item.bioplethora.green_grylynen_crystal": "Green Grylynen Crystal",
+  "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
+  "item.bioplethora.red_grylynen_crystal": "Red Grylynen Crystal",
 
   "item.bioplethora.raw_cuttlefish_meat": "Raw Cuttlefish Meat",
   "item.bioplethora.cooked_cuttlefish_meat": "Cooked Cuttlefish Meat",
@@ -56,6 +77,7 @@
   "item.bioplethora.abyssal_blade": "Abyssal Blade",
   "item.bioplethora.primordial_staff": "Primordial Staff",
   "item.bioplethora.totem_of_swerving": "Totem of Swerving",
+  "item.bioplethora.wind_arrow": "Wind Arrow",
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
@@ -65,6 +87,10 @@
   "block.bioplethora.nandbri_scale_block": "Nandbri Scale Block",
   "block.bioplethora.bellophite_block": "Bellophite Block",
   "block.bioplethora.bellophite_core_block": "Bellophite Core Block",
+
+  "block.bioplethora.green_grylynen_crystal_block": "Green Grylynen Crystal Block",
+  "block.bioplethora.yellow_grylynen_crystal_block": "Yellow Grylynen Crystal Block",
+  "block.bioplethora.red_grylynen_crystal_block": "Red Grylynen Crystal Block",
 
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
@@ -117,6 +143,9 @@
 
   "item.bioplethora.totem_of_swerving.blessed_instinct.skill": "Blessed Instinct",
   "item.bioplethora.totem_of_swerving.blessed_instinct.desc": "When on offhand or mainhand. The user has a 1/3 chance of dodging any projectile.",
+
+  "item.bioplethora.wind_arrow.windy_essence.skill": "Windy Essence",
+  "item.bioplethora.wind_arrow.windy_essence.desc": "This arrow homes on to the nearest entity, and it slows all nearby entities on impact.",
 
   "item.bioplethora.peaguin_scale_armor.grace_embrace.skill":"Grace Embrace",
   "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",

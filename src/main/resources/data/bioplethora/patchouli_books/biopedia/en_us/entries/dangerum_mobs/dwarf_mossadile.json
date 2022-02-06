@@ -10,7 +10,7 @@
     {
       "type": "patchouli:entity",
       "entity":"bioplethora:dwarf_mossadile",
-      "text": "---"
+      "text": "Dwarf Mossadiles spawn Savannas and Nether biomes."
     }
   ]
 }

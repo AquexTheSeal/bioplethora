@@ -1,0 +1,16 @@
+{
+  "name": "Abyssal Blade",
+  "icon": "bioplethora:abyssal_blade",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:abyssal_blade",
+      "text": "$(l)DESCRIPTION: $(br)$()The Abyssal Blade is a sabre made with the scales of the horrifyingly giant Myliothan. It's ability is similar to the trident, but it's not dependent on water."
+    },
+    {
+      "type": "crafting",
+      "recipe":"bioplethora:abyssal_blade"
+    }
+  ]
+}

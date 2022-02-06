@@ -18,6 +18,10 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BioplethoraBlocks.BELLOPHITE_BLOCK.get());
         this.simpleBlock(BioplethoraBlocks.BELLOPHITE_CORE_BLOCK.get());
         this.simpleBlock(BioplethoraBlocks.NANDBRI_SCALE_BLOCK.get());
+
+        this.simpleBlock(BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get());
+        this.simpleBlock(BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
+        this.simpleBlock(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
     }
 
     private ResourceLocation bioResLoc(String texture) {

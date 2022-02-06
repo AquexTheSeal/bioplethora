@@ -1,0 +1,16 @@
+{
+  "name": "Totem of Swerving",
+  "icon": "bioplethora:totem_of_swerving",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:totem_of_swerving",
+      "text": "$(l)DESCRIPTION: $(br)$()The Swerving Totem is a very special totem used by the Helioblade to enhance their reflexes- helping them to have a quicker reaction time, and to dodge projectiles easily."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)OBTAINING: $(br)$()This weapon is uncraftable as you don't have the experience of [REDACTED], though, you can obtain it by killing the Helioblade."
+    }
+  ]
+}

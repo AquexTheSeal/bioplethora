@@ -13,24 +13,29 @@ public class BioplethoraEntityAttributes {
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
 
         //Ecoharmless
-        event.put(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());
-        event.put(BioplethoraEntities.PEAGUIN.get(), PeaguinEntity.setCustomAttributes().build());
-
-        //Plethoneutral
-        event.put(BioplethoraEntities.ALPHEM.get(), AlphemEntity.setCustomAttributes().build());
-        event.put(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
-        event.put(BioplethoraEntities.ALTYRUS.get(), AltyrusEntity.setCustomAttributes().build());
-        event.put(BioplethoraEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntity.setCustomAttributes().build());
-
-        //Dangerum
-        event.put(BioplethoraEntities.NANDBRI.get(), NandbriEntity.setCustomAttributes().build());
-        event.put(BioplethoraEntities.HELIOBLADE.get(), HeliobladeEntity.setCustomAttributes().build());
-
-        //Hellsent
         event.put(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntity.setCustomAttributes().build());
 
-        //Elderia
+        //Plethoneutral
+        event.put(BioplethoraEntities.PEAGUIN.get(), PeaguinEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.NANDBRI.get(), NandbriEntity.setCustomAttributes().build());
+
+        //Dangerum
+        event.put(BioplethoraEntities.ALPHEM.get(), AlphemEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.GAUGALEM.get(), GaugalemEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntity.setCustomAttributes().build());
+
+        event.put(BioplethoraEntities.WOODEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.STONE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.GOLDEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.IRON_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
+
+        //Hellsent
+        event.put(BioplethoraEntities.HELIOBLADE.get(), HeliobladeEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
+
+        //Elderia
+        event.put(BioplethoraEntities.ALTYRUS.get(), AltyrusEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.MYLIOTHAN.get(), MyliothanEntity.setCustomAttributes().build());
 
         //Others

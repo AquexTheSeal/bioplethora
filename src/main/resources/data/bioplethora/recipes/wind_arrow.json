@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "item": "bioplethora:windy_essence"
+    }
+  ],
+  "result": {
+    "item": "bioplethora:wind_arrow",
+    "count": 3
+  }
+}

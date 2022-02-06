@@ -25,6 +25,10 @@ public class BioplethoraBlocks {
     public static final RegistryObject<Block> BELLOPHITE_BLOCK = registerFireResBlock("bellophite_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_YELLOW).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHERITE_BLOCK)), BioplethoraItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> BELLOPHITE_CORE_BLOCK =  registerFireResBlock("bellophite_core_block", () -> new BellophiteCoreBlock(AbstractBlock.Properties.of(Material.GLASS).strength(0.3F).sound(SoundType.GLASS).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
+    public static final RegistryObject<Block> GREEN_GRYLYNEN_CRYSTAL_BLOCK =  registerFireResBlock("green_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS).strength(0.3F).sound(SoundType.GLASS).noOcclusion().lightLevel((level) -> 7)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> YELLOW_GRYLYNEN_CRYSTAL_BLOCK =  registerFireResBlock("yellow_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS).strength(0.4F).sound(SoundType.GLASS).noOcclusion().lightLevel((level) -> 9)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> RED_GRYLYNEN_CRYSTAL_BLOCK =  registerFireResBlock("red_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS).strength(0.5F).sound(SoundType.GLASS).noOcclusion().lightLevel((level) -> 12)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+
     //=================================================================================
     //                       REGULAR BLOCK CONSTRUCTORS
     //=================================================================================

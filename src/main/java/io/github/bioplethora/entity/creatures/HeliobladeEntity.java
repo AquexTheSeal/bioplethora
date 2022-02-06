@@ -98,9 +98,8 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
-        this.targetSelector.addGoal(2, (new HurtByTargetGoal(this, HeliobladeEntity.class)).setAlertOthers());
-        this.targetSelector.addGoal(1, (new CopyTargetOwnerGoal(this)));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this, HeliobladeEntity.class).setAlertOthers());
+        this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this));
     }
 
     @Override

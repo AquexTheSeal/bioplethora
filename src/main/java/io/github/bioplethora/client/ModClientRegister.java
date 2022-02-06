@@ -45,6 +45,11 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.GAUGALEM.get(), GaugalemEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntityRender::new);
 
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WOODEN_GRYLYNEN.get(), GrylynenEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.STONE_GRYLYNEN.get(), GrylynenEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.GOLDEN_GRYLYNEN.get(), GrylynenEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.IRON_GRYLYNEN.get(), GrylynenEntityRender::new);
+
         //Hellsent
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntityRender::new);
@@ -61,6 +66,7 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WINDBLAZE.get(), WindBlazeRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateBellophiteClusterRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.VERMILION_BLADE_PROJECTILE.get(), VermilionBladeProjectileRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WIND_ARROW.get(), WindArrowRender::new);
 
         //others
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);
@@ -73,7 +79,7 @@ public class ModClientRegister {
     public static void registerModels(final FMLClientSetupEvent event) {
         //Bellophite Shield
         ItemModelsProperties.register(BioplethoraItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);
-        ItemModelsProperties.register(BioplethoraItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("charged"), (itemStack, clientWorld, entity) -> entity != null && ((BellophiteShieldItem) itemStack.getItem()).getIsCharged() ? 1.0F : 0.0F);
+        ItemModelsProperties.register(BioplethoraItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("charged"), (itemStack, clientWorld, entity) -> entity != null && ((BellophiteShieldItem) itemStack.getItem()).isCharged ? 1.0F : 0.0F);
 
         //Arbitrary Ballista
         ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity) -> {

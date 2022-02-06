@@ -17,10 +17,10 @@ import java.util.function.Consumer;
 public class EntitySpawnManager {
 
     public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
-        MobSpawnHandler.spawnMobs(event);
+        BioplethoraMobSpawns.acceptMobSpawns(event);
     }
 
-    private static class MobSpawnHandler {
+    private static class BioplethoraMobSpawns {
 
         static Integer spawnMultiplier = BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get();
         static EntityClassification creature = EntityClassification.CREATURE;
@@ -89,9 +89,9 @@ public class EntitySpawnManager {
             builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.GAUGALEM.get(), 2 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
         };
 
-        public static void spawnMobs(BiomeLoadingEvent event) {
+        public static void acceptMobSpawns(BiomeLoadingEvent event) {
             MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
-            RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Biome Spawning Stuff."));
+            RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Bioplethora Mob Spawning"));
             boolean hasOverworldType = BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD);
 
             switch (event.getCategory()) {

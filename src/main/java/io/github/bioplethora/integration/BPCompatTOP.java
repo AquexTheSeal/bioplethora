@@ -2,6 +2,7 @@ package io.github.bioplethora.integration;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.DwarfMossadileEntity;
+import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import mcjty.theoneprobe.api.*;
@@ -56,6 +57,10 @@ public class BPCompatTOP {
                         if (hasOwner) {
                             iProbeInfo.text(CompoundText.createLabelInfo(ownerString, ((PrimordialRingEntity) entity).getOwner().getDisplayName()));
                         }
+                    }
+
+                    if (entity instanceof GrylynenEntity) {
+                        iProbeInfo.text(CompoundText.createLabelInfo(ownerString, ((GrylynenEntity) entity).getGrylynenTier().getTierName()));
                     }
                 }
             });

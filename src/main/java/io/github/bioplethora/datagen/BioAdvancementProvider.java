@@ -43,18 +43,22 @@ public class BioAdvancementProvider extends AdvancementProvider {
                 PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"))))).save(t, id("bioplethora_startup"));
 
         // ENTITIES
-        Advancement bellophgolemKill = registerAdvancement("bellophgolem_kill", FrameType.GOAL, BioplethoraItems.BELLOPHGOLEM_SPAWN_EGG.get()).parent(bioStartup).addCriterion("bellophgolem",
-                KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(BioplethoraEntities.BELLOPHGOLEM.getId()))).save(t, id("bellophgolem_kill"));
+        Advancement bellophgolemKill = registerAdvancement("bellophgolem_kill", FrameType.GOAL, BioplethoraItems.BELLOPHGOLEM_SPAWN_EGG.get())
+                .parent(bioStartup).addCriterion("bellophgolem", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity()
+                        .of(BioplethoraEntities.BELLOPHGOLEM.getId()))).save(t, id("bellophgolem_kill"));
 
-        Advancement alphemKill = registerAdvancement("alphem_kill", FrameType.GOAL, BioplethoraItems.BELLOPHGOLEM_SPAWN_EGG.get()).parent(bioStartup).addCriterion("alphem",
-                KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(BioplethoraEntities.BELLOPHGOLEM.getId()))).save(t, id("alphem_kill"));
+        Advancement alphemKill = registerAdvancement("alphem_kill", FrameType.GOAL, BioplethoraItems.ALPHEM_SPAWN_EGG.get())
+                .parent(bioStartup).addCriterion("alphem", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity()
+                        .of(BioplethoraEntities.ALPHEM.getId()))).save(t, id("alphem_kill"));
 
 
         // ITEMS
-        Advancement bellophiteObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BioplethoraItems.BELLOPHITE.get()).parent(bellophgolemKill).addCriterion("bellophite",
+        Advancement bellophiteObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BioplethoraItems.BELLOPHITE.get())
+                .parent(bellophgolemKill).addCriterion("bellophite",
                 InventoryChangeTrigger.Instance.hasItems(BioplethoraItems.BELLOPHITE.get())).save(t, id("bellophgolem_obtain"));
 
-        Advancement bellophiteArrowObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BioplethoraItems.BELLOPHITE.get()).parent(bellophgolemKill).addCriterion("bellophite",
+        Advancement bellophiteArrowObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BioplethoraItems.BELLOPHITE.get())
+                .parent(bellophgolemKill).addCriterion("bellophite",
                 InventoryChangeTrigger.Instance.hasItems(BioplethoraItems.BELLOPHITE.get())).save(t, id("bellophgolem_obtain"));
     }
 

@@ -142,6 +142,10 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
         return flag;
     }
 
+    public int getMaxSpawnClusterSize() {
+        return 4;
+    }
+
     public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 
         if ((this.level.dimension().equals(World.NETHER) || (this.level.dimension().equals(World.NETHER)))) {
@@ -151,7 +155,7 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
         if (BioplethoraConfig.COMMON.hellMode.get()) {
             this.getAttribute(Attributes.ARMOR).setBaseValue(4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(37 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(37 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
         }
 
         if (this.isNetherVariant()) {

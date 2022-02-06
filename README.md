@@ -23,8 +23,8 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 ### Q: Will this mod be ported to Fabric?
 **A:** Nope, or at least it isn't planned yet.
 
-### Q: Is the Boplethora Project made with MCreator?
-**A:** Nope, this mod isn't made with MCreator. Though, if you do, you should not hate MCreator mods; there are actually plenty of underrated MCreator mods out there. Read https://docs.google.com/document/d/1e7tN5vZgWEmMylNshZ9h6l0kXH8Ypqw-oJHL1qu0tgY/edit (documented by Toma400)
+### Q: Is the Bioplethora Project made with MCreator?
+**A:** This mod is not made with the MCreator program. If you dislike the program in general, I suggest you read https://docs.google.com/document/d/1e7tN5vZgWEmMylNshZ9h6l0kXH8Ypqw-oJHL1qu0tgY/edit (documented by Toma400)
 
 # Credits / The Development Team
 **Lead Developer/s:** Sajevius, Aqu.
@@ -33,4 +33,13 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 
 **Texturers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi
 
-**Modellers:** Sajevius, Aqu., Sonic-3xn40s
+**Modellers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi
+
+# Links
+**Download [CurseForge]:** (Not Available yet)
+
+**GitHub:** https://github.com/AquexTheSeal/bioplethora
+
+**Discord:** https://discord.gg/kr5kSzpJMW
+
+

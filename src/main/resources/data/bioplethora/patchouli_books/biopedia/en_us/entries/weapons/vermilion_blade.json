@@ -1,0 +1,16 @@
+{
+  "name": "Vermilion Blade",
+  "icon": "bioplethora:vermilion_blade",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:vermilion_blade",
+      "text": "$(l)DESCRIPTION: $(br)$()This blade is used by the Helioblade to slice through their opponents during battle. It can also be used as a ranged weapon to blast enemies from afar with destruction."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)OBTAINING: $(br)$()This weapon is uncraftable as you don't have the experience of [REDACTED], though, you can obtain it by killing the Helioblade."
+    }
+  ]
+}

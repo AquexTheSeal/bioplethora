@@ -43,6 +43,7 @@ public class Bioplethora {
         BioplethoraBlocks.BLOCKS.register(bus);
         BioplethoraSoundEvents.SOUNDS.register(bus);
         BioplethoraEnchantments.ENCHANTMENTS.register(bus);
+        BioplethoraParticles.PARTICLES.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);

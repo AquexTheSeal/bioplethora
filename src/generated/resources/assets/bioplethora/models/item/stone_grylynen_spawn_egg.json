@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:item/stone_grylynen_spawn_egg"
+  }
+}

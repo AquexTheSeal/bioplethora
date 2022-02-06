@@ -2,6 +2,7 @@ package io.github.bioplethora.event;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
+import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
@@ -110,6 +111,15 @@ public class ServerWorldEvents {
                     helioblade.teleportRandomly();
                     event.setCanceled(true);
                 }
+            }
+        }
+
+        if (event.getEntity() instanceof GrylynenEntity) {
+
+            GrylynenEntity grylynen = (GrylynenEntity) event.getEntity();
+
+            if (!dsVoid) {
+                event.setAmount(1);
             }
         }
     }
