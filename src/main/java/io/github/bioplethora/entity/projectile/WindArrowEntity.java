@@ -31,17 +31,14 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
-* @credits ProjectE - https://www.curseforge.com/minecraft/mc-mods/projecte
+ * @credits
+ * Copyright (c) 2020 Sin Tachikawa
+ * ProjectE - https://www.curseforge.com/minecraft/mc-mods/projecte
  */
 public class WindArrowEntity extends AbstractArrowEntity {
 
-    /** @ProjectE **/
     private static final DataParameter<Integer> DW_TARGET_ID = EntityDataManager.defineId(WindArrowEntity.class, DataSerializers.INT);
-
-    /** @ProjectE **/
     private static final int NO_TARGET = -1;
-
-    /** @ProjectE **/
     private int newTargetCooldown = 0;
 
     private int duration = 200;
@@ -63,14 +60,12 @@ public class WindArrowEntity extends AbstractArrowEntity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    /** @ProjectE **/
     @Override
     protected void doPostHurtEffects(@Nonnull LivingEntity living) {
         super.doPostHurtEffects(living);
         living.invulnerableTime = 0;
     }
 
-    /** @ProjectE **/
     public void tick() {
         super.tick();
 
@@ -122,7 +117,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
     }
 
-    /** @ProjectE **/
     private void findNewTarget() {
         List<MobEntity> candidates = level.getEntitiesOfClass(MobEntity.class, this.getBoundingBox().inflate(8, 8, 8));
 
@@ -134,7 +128,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
         newTargetCooldown = 5;
     }
 
-    /** @ProjectE **/
     @Override
     public void defineSynchedData() {
         super.defineSynchedData();
@@ -142,12 +135,10 @@ public class WindArrowEntity extends AbstractArrowEntity {
     }
 
 
-    /** @ProjectE **/
     private MobEntity getTarget() {
         return (MobEntity) level.getEntity(entityData.get(DW_TARGET_ID));
     }
 
-    /** @ProjectE **/
     private boolean hasTarget() {
         return getTarget() != null;
     }
@@ -220,7 +211,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
         return 1F;
     }
 
-    /** @ProjectE **/
     private Vector3d transform(Vector3d axis, double angle, Vector3d normal) {
 
         double m00 = 1;
@@ -266,7 +256,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
                 m20 * normal.x + m21 * normal.y + m22 * normal.z);
     }
 
-    /** @ProjectE **/
     private double angleBetween(Vector3d v1, Vector3d v2) {
         double vDot = v1.dot(v2) / (v1.length() * v2.length());
         if (vDot < -1.0) {
@@ -278,7 +267,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
         return Math.acos(vDot);
     }
 
-    /** @ProjectE **/
     private double wrap180Radian(double radian) {
         radian %= 2 * Math.PI;
         while (radian >= Math.PI) {
@@ -290,7 +278,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
         return radian;
     }
 
-    /** @ProjectE **/
     private double clampAbs(double param, double maxMagnitude) {
         if (Math.abs(param) > maxMagnitude) {
 
