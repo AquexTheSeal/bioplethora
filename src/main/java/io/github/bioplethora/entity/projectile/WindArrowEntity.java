@@ -95,9 +95,9 @@ public class WindArrowEntity extends AbstractArrowEntity {
         }
 
         if (tickCount > 3 && hasTarget() && !this.inGround) {
-            double mX = getDeltaMovement().x();
-            double mY = getDeltaMovement().y();
-            double mZ = getDeltaMovement().z();
+            double deltaX = getDeltaMovement().x();
+            double deltaY = getDeltaMovement().y();
+            double deltaZ = getDeltaMovement().z();
             Entity target = getTarget();
 
             Vector3d arrowLoc = new Vector3d(getX(), getY(), getZ());
@@ -105,7 +105,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
             Vector3d lookVec = targetLoc.subtract(arrowLoc);
 
-            Vector3d arrowMotion = new Vector3d(mX, mY, mZ);
+            Vector3d arrowMotion = new Vector3d(deltaX, deltaY, deltaZ);
 
             double theta = wrap180Radian(angleBetween(arrowMotion, lookVec));
             theta = clampAbs(theta, Math.PI / 2);
@@ -118,7 +118,8 @@ public class WindArrowEntity extends AbstractArrowEntity {
     }
 
     private void findNewTarget() {
-        List<MobEntity> candidates = level.getEntitiesOfClass(MobEntity.class, this.getBoundingBox().inflate(8, 8, 8));
+        int targetRadius = 10;
+        List<MobEntity> candidates = level.getEntitiesOfClass(MobEntity.class, this.getBoundingBox().inflate(targetRadius, targetRadius, targetRadius));
 
         if (!candidates.isEmpty()) {
             candidates.sort(Comparator.comparing(WindArrowEntity.this::distanceToSqr, Double::compare));
