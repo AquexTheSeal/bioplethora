@@ -214,12 +214,12 @@ public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatab
          * @param hellTierHP - Grylynen Tier HP on Hellmode Config
          */
 
-        WOODEN("wooden", "green", ItemTier.WOOD, 4, 1, 2),
-        STONE("stone", "green", ItemTier.STONE, 5, 2, 3),
-        GOLDEN("golden", "yellow", ItemTier.GOLD, 5, 2, 4),
-        IRON("iron", "yellow", ItemTier.IRON, 7, 3, 5),
-        DIAMOND("diamond", "red", ItemTier.DIAMOND, 10, 5, 7),
-        NETHERITE("netherite", "red", ItemTier.NETHERITE, 14, 7, 10);
+        WOODEN("wooden", "green", ItemTier.WOOD, 5, 3, 4),
+        STONE("stone", "green", ItemTier.STONE, 6, 4, 6),
+        GOLDEN("golden", "yellow", ItemTier.GOLD, 6, 4, 6),
+        IRON("iron", "yellow", ItemTier.IRON, 8, 6, 8),
+        DIAMOND("diamond", "red", ItemTier.DIAMOND, 10, 8, 10),
+        NETHERITE("netherite", "red", ItemTier.NETHERITE, 14, 10, 13);
 
         private final String name;
         private final String crystalColor;
