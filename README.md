@@ -36,6 +36,10 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 **Modellers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi
 
 # Links
+
+[![Discord](https://img.shields.io/badge/Discord-Join%20our%20server!-7289da.svg?longCache=true&style=for-the-badge)](https://discord.gg/kr5kSzpJMW)
+[![Curseforge](https://img.shields.io/badge/Curseforge-Project%20page!-A54C2D.svg?longCache=true&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/off-hand-combat)
+
 **Download [CurseForge]:** (Not Available yet)
 
 **GitHub:** https://github.com/AquexTheSeal/bioplethora
