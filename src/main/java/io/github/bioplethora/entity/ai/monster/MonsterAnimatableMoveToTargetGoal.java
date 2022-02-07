@@ -11,13 +11,6 @@ public class MonsterAnimatableMoveToTargetGoal extends MonsterAnimatableMovableG
     private final double speedMultiplier;
     private final int checkRate;
 
-    /**
-     * Move an AnimatableMonsterEntity to a target entity
-     *
-     * @param entity          AnimatableMonsterEntity instance
-     * @param speedMultiplier Entity will move by base speed * this
-     * @param checkRate       Check rate with formula: {@code if(RANDOM.nextInt(rate) == 0)}, so bigger = less often
-     */
     public MonsterAnimatableMoveToTargetGoal(AnimatableMonsterEntity entity, double speedMultiplier, int checkRate) {
         this.entity = entity;
         this.speedMultiplier = speedMultiplier;

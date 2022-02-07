@@ -71,7 +71,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
         if (this.level instanceof ServerWorld) {
             if (!this.inGround) {
-                ((ServerWorld) this.level).sendParticles(BioplethoraParticles.WIND_POOF.get(), this.getX(), this.getY(), this.getZ(), 1, 0.1, 0.1, 0.1, 0);
+                ((ServerWorld) this.level).sendParticles(BioplethoraParticles.WIND_POOF.get(), this.getX(), this.getY(), this.getZ(), 1, 0.1, 0.1, 0.1, 0.01);
             }
         }
 

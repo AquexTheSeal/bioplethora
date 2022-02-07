@@ -32,13 +32,13 @@ public class AltyrusRangedAttackGoal extends Goal {
     }
 
     public boolean canContinueToUse() {
-        return (this.altyrus.getTarget() != null) && (!this.altyrus.isSummoning()) && (!this.altyrus.getAttacking());
+        return this.altyrus.getTarget() != null;
     }
 
     public void tick() {
         LivingEntity target = this.altyrus.getTarget();
 
-        if (target != null && target.distanceToSqr(this.altyrus) < 4096.0D && this.altyrus.canSee(target)) {
+        if (target != null && target.distanceToSqr(this.altyrus) < 4096.0D /*&& this.altyrus.canSee(target)*/) {
 
             ++this.chargeTime;
 

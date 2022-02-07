@@ -152,7 +152,7 @@ public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatab
             this.getTarget().setDeltaMovement(getTarget().getDeltaMovement().x, 2 - getTarget().getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), getTarget().getDeltaMovement().z);
         }
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), 20, 0.4, 0.4,
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, getTarget().getX(), getTarget().getY(), getTarget().getZ(), 20, 0.4, 0.4,
                     0.4, 0.1);
             this.level.playSound(null, blockPos, SoundEvents.GENERIC_EXPLODE, SoundCategory.NEUTRAL, (float) 1, (float) 1);
         }

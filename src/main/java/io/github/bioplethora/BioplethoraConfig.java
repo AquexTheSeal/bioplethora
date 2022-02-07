@@ -80,12 +80,12 @@ public class BioplethoraConfig {
             spawnDwarfMossadile = builder.define("Enable spawning Dwarf Mossadiles", true);
             builder.pop();
             //Hellsent
-            builder.push("Dangerum Mobs");
+            builder.push("Hellsent Mobs");
             spawnCrephoxl = builder.define("Enable spawning Crephoxls", true);
             spawnBellophgolem = builder.define("Enable spawning Bellophgolems", true);
             builder.pop();
             //Elderia
-            builder.push("Dangerum Mobs");
+            builder.push("Elderia Mobs");
             spawnMyliothan = builder.define("Enable spawning Myliothans", true);
             builder.pop();
             builder.pop();

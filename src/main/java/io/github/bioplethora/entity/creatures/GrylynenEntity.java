@@ -75,7 +75,7 @@ public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatab
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new MonsterAnimatableMoveToTargetGoal(this, 1.2, 8));
-        this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 30, 0.6, 0.7));
+        this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 40, 0.6, 0.7));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
@@ -162,7 +162,7 @@ public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatab
         } else if (this.getGrylynenTier() == Tier.NETHERITE) {
             return SoundEvents.NETHERITE_BLOCK_BREAK;
         } else {
-            return SoundEvents.GENERIC_HURT;
+            throw new IllegalArgumentException("Invalid Grylynen variant- such Grylynen variant does not exist.");
         }
     }
 

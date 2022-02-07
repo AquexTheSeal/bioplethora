@@ -1,0 +1,16 @@
+{
+  "name": "Grylynen",
+  "icon": "bioplethora:wooden_grylynen_spawn_egg",
+  "category": "dangerum_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()These creatures roam around the wide world, attacking those who bother them. These creatures are blessed with a very special type of immunity, with variants that correspond to it's own block. These creatures vary in many ways, it's strength and power vary for each variant."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:wooden_grylynen",
+      "text": "---"
+    }
+  ]
+}

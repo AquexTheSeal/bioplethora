@@ -60,7 +60,7 @@ public class BPCompatTOP {
                     }
 
                     if (entity instanceof GrylynenEntity) {
-                        iProbeInfo.text(CompoundText.createLabelInfo(ownerString, ((GrylynenEntity) entity).getGrylynenTier().getTierName()));
+                        iProbeInfo.text(CompoundText.createLabelInfo(var, ((GrylynenEntity) entity).getGrylynenTier().getTierName()));
                     }
                 }
             });

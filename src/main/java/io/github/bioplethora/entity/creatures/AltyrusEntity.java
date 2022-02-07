@@ -72,9 +72,9 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
                 .add(Attributes.ATTACK_KNOCKBACK, 7D)
                 .add(Attributes.MAX_HEALTH, 450 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 64D)
-                .add(Attributes.FLYING_SPEED, 1.5F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get());
+                .add(Attributes.MOVEMENT_SPEED, 1.5F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.FLYING_SPEED, 1.5F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.FOLLOW_RANGE, 64D);
     }
 
     protected PathNavigator createNavigation(World worldIn) {
@@ -88,17 +88,17 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, AlphemEntity.class, 24.0F));
-        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(3, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
+        this.goalSelector.addGoal(3, new MonsterAnimatableMoveToTargetGoal(this, 1.2, 8));
         this.goalSelector.addGoal(3, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.6));
-        this.goalSelector.addGoal(7, new AltyrusRangedAttackGoal(this));
-        this.goalSelector.addGoal(6, new AltyrusSummonGolemGoal(this));
+        this.goalSelector.addGoal(4, new AltyrusRangedAttackGoal(this));
+        this.goalSelector.addGoal(5, new AltyrusSummonGolemGoal(this));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, AlphemEntity.class, 24.0F));
+        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(8, new SwimGoal(this));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, false));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
     }
 
@@ -153,8 +153,8 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         double y = entity.getY();
         double z = entity.getZ();
 
+        this.level.explode(null, (int) x, (int) y, (int) z, (float) 3, Explosion.Mode.BREAK);
         if (this.level instanceof ServerWorld) {
-            this.level.explode(null, (int) x, (int) y, (int) z, (float) 3, Explosion.Mode.BREAK);
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, x, y, z, 40, 0.75, 0.75, 0.75, 0.1);
         }
         return flag;
@@ -167,7 +167,6 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
             this.setHealth(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
         }
-        this.setNoGravity(true);
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -183,6 +182,10 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
                 this.dodgeTimer = 0;
             }
         }
+    }
+
+    public boolean isNoGravity() {
+        return true;
     }
 
     @Override

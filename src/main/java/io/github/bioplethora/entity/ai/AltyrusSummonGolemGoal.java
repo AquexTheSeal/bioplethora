@@ -36,7 +36,7 @@ public class AltyrusSummonGolemGoal extends Goal {
         ServerWorld serverworld = (ServerWorld) this.altyrus.level;
         World world = this.altyrus.level;
 
-        if (target != null && target.distanceToSqr(this.altyrus) < 4096.0D && this.altyrus.canSee(target)) {
+        if (target != null && target.distanceToSqr(this.altyrus) < 4096.0D /*&& this.altyrus.canSee(target)*/) {
             ++this.summonTime;
 
             if (this.summonTime == 400) {
