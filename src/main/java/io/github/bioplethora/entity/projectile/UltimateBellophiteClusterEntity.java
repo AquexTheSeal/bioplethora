@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
@@ -18,7 +17,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -94,44 +92,7 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
     }
 
     public void tick() {
-        Entity entity = this.getOwner();
-        if (this.level.isClientSide || (entity != null) && this.level.hasChunkAt(this.blockPosition())) {
-            super.tick();
-            if (this.shouldBurn()) {
-                this.setSecondsOnFire(1);
-            }
-
-            if (this.level instanceof ServerWorld) {
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 3, 0.4, 0.4, 0.4, 0.1);
-            }
-
-            RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
-            if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
-                this.onHit(raytraceresult);
-            }
-
-            this.checkInsideBlocks();
-            Vector3d vector3d = this.getDeltaMovement();
-            double d0 = this.getX() + vector3d.x;
-            double d1 = this.getY() + vector3d.y;
-            double d2 = this.getZ() + vector3d.z;
-            ProjectileHelper.rotateTowardsMovement(this, 0.2F);
-            float f = this.getInertia();
-            if (this.isInWater()) {
-                for(int i = 0; i < 4; ++i) {
-                    float f1 = 0.25F;
-                    this.level.addParticle(ParticleTypes.BUBBLE, d0 - vector3d.x * 0.25D, d1 - vector3d.y * 0.25D, d2 - vector3d.z * 0.25D, vector3d.x, vector3d.y, vector3d.z);
-                }
-
-                f = 0.8F;
-            }
-
-            this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale((double)f));
-            this.level.addParticle(this.getTrailParticle(), d0, d1 + 0.5D, d2, 0.0D, 0.0D, 0.0D);
-            this.setPos(d0, d1, d2);
-        } else {
-            this.remove();
-        }
+        super.tick();
 
         ++lifespan;
         if (lifespan == 100) {

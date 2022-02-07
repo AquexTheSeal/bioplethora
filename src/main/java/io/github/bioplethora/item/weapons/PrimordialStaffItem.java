@@ -1,5 +1,6 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.client.gui.screen.Screen;
@@ -28,6 +29,7 @@ import java.util.List;
 
 public class PrimordialStaffItem extends Item {
 
+    public boolean hellConfig = BioplethoraConfig.COMMON.hellMode.get();
     public int charge = 0;
 
     public PrimordialStaffItem(Properties properties) {
@@ -96,7 +98,7 @@ public class PrimordialStaffItem extends Item {
                     ring.finalizeSpawn((IServerWorld) worldIn, worldIn.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
 
                     ring.setHasLimitedLife(true);
-                    ring.setLifeLimitBeforeDeath(1000 + playerIn.getRandom().nextInt(200));
+                    ring.setLifeLimitBeforeDeath(hellConfig ? 1000 : 850 + playerIn.getRandom().nextInt(200));
 
                     worldIn.addFreshEntity(ring);
 
@@ -106,7 +108,7 @@ public class PrimordialStaffItem extends Item {
                     ring2.finalizeSpawn((IServerWorld) worldIn, worldIn.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
 
                     ring2.setHasLimitedLife(true);
-                    ring2.setLifeLimitBeforeDeath(1000 + playerIn.getRandom().nextInt(200));
+                    ring2.setLifeLimitBeforeDeath(hellConfig ? 1000 : 850 + playerIn.getRandom().nextInt(200));
 
                     worldIn.addFreshEntity(ring2);
                 }
@@ -117,7 +119,7 @@ public class PrimordialStaffItem extends Item {
                 }
 
                 if (!playerIn.isCreative()) {
-                    playerIn.getCooldowns().addCooldown(stack.getItem(), 500 + playerIn.getRandom().nextInt(200));
+                    playerIn.getCooldowns().addCooldown(stack.getItem(), hellConfig ? 500 : 450 + playerIn.getRandom().nextInt(200));
                 }
             }
         }

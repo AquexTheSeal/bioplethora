@@ -19,9 +19,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CrephoxlHammerItem extends AxeItem {
 
@@ -52,14 +50,8 @@ public class CrephoxlHammerItem extends AxeItem {
                 world.addParticle(ParticleTypes.SWEEP_ATTACK, x, y, z, 0, 0, 0);
             }
             if(world instanceof ServerWorld) {
-                List<Entity> nearEntities = world
-                        .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (5 / 2d), y, z - (5 / 2d), x + (5 / 2d), y + (5 / 2d), z + (5 / 2d)), null)
-                        .stream().sorted(new Object() {
-                            Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                                return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                            }
-                        }.compareDistOf(x, y, z)).collect(Collectors.toList());
-                for (Entity entityIterator : nearEntities) {
+
+                for (Entity entityIterator : world.getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (5 / 2d), y, z - (5 / 2d), x + (5 / 2d), y + (5 / 2d), z + (5 / 2d)))) {
                     if (entityIterator instanceof LivingEntity && entityIterator != player) {
                         // 33% chance to apply slowness 4 for 3 seconds to nearby entities.
                         if(Math.random() < 0.33) {
@@ -126,28 +118,20 @@ public class CrephoxlHammerItem extends AxeItem {
         double x = pos.getX(), y = pos.getY(), z = pos.getZ();
         if(!entity.isInWater()) {
             entity.getCooldowns().addCooldown(stack.getItem(), 60);
-            if (hand != null) {
-                entity.swing(hand);
-            }
             world.playSound(entity, pos, SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.PLAYERS, 1, 1);
-            if ((!(world.isClientSide()))) {
+            entity.swing(hand);
+
+            if (!world.isClientSide()) {
                 ((ServerWorld)world).sendParticles(ParticleTypes.CLOUD, x, y + 1.2, z, 50, 3, 0.2, 3, 0);
-                {
-                    List<Entity> nearEntities = world
-                            .getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (7 / 2d), y - (3 / 2d), z - (7 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), null)
-                            .stream().sorted(new Object() {
-                                Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                                    return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                                }
-                            }.compareDistOf(x, y, z)).collect(Collectors.toList());
-                    for (Entity entityIterator : nearEntities) {
-                        if (entityIterator instanceof LivingEntity && entityIterator != entity) {
-                            entityIterator.hurt(DamageSource.mobAttack(entity), 9.0F);
-                            entityIterator.setDeltaMovement((entity.getDeltaMovement().x()), 1, (entity.getDeltaMovement().z()));
-                        }
-                    }
+            }
+
+            for (Entity entityIterator : world.getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (7 / 2d), y - (3 / 2d), z - (7 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), null)) {
+                if (entityIterator instanceof LivingEntity && entityIterator != entity) {
+                    entityIterator.hurt(DamageSource.mobAttack(entity), 9.0F);
+                    entityIterator.setDeltaMovement((entity.getDeltaMovement().x()), 1, (entity.getDeltaMovement().z()));
                 }
             }
+
             return ActionResultType.SUCCESS;
         } else {
             return ActionResultType.FAIL;
