@@ -130,16 +130,16 @@ public class ServerWorldEvents {
         Entity projectile = event.getEntity();
         RayTraceResult result = event.getRayTraceResult();
 
-        if (projectile instanceof AbstractArrowEntity) {
-            ((AbstractArrowEntity) projectile).setPierceLevel((byte) 0);
-        }
-
         if (result instanceof EntityRayTraceResult) {
 
             //=================================================
             //          Totem of Swerving Skill
             //=================================================
             boolean targetIsEntity = ((EntityRayTraceResult) result).getEntity() instanceof LivingEntity;
+
+            if (projectile instanceof AbstractArrowEntity) {
+                ((AbstractArrowEntity) projectile).setPierceLevel((byte) 0);
+            }
 
             if (!projectile.level.isClientSide && targetIsEntity) {
                 LivingEntity user = ((LivingEntity) ((EntityRayTraceResult) result).getEntity());
@@ -197,6 +197,10 @@ public class ServerWorldEvents {
             //=================================================
             boolean targetIsAltyrus = ((EntityRayTraceResult) result).getEntity() instanceof AltyrusEntity;
 
+            if (projectile instanceof AbstractArrowEntity) {
+                ((AbstractArrowEntity) projectile).setPierceLevel((byte) 0);
+            }
+
             if (!projectile.level.isClientSide && targetIsAltyrus) {
                 AltyrusEntity altyrus = ((AltyrusEntity) ((EntityRayTraceResult) result).getEntity());
                 int shouldDodge = altyrus.getRandom().nextInt(3);
@@ -234,6 +238,10 @@ public class ServerWorldEvents {
                 HeliobladeEntity helioblade = ((HeliobladeEntity) ((EntityRayTraceResult) result).getEntity());
                 int shouldDodge = helioblade.getRandom().nextInt(3);
 
+                if (projectile instanceof AbstractArrowEntity) {
+                    ((AbstractArrowEntity) projectile).setPierceLevel((byte) 0);
+                }
+
                 if ((shouldDodge == 1) || (shouldDodge == 2)) {
 
                     Vector3d projectilePos = event.getEntity().position();
@@ -263,6 +271,10 @@ public class ServerWorldEvents {
 
             if (!projectile.level.isClientSide && targetIsPrimordialRing) {
                 PrimordialRingEntity primordialRing = ((PrimordialRingEntity) ((EntityRayTraceResult) result).getEntity());
+
+                if (projectile instanceof AbstractArrowEntity) {
+                    ((AbstractArrowEntity) projectile).setPierceLevel((byte) 0);
+                }
 
                 Vector3d projectilePos = event.getEntity().position();
                 Vector3d rVec = primordialRing.getLookAngle().yRot(0.5F + (float) Math.PI).add(primordialRing.position());

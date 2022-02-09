@@ -1,6 +1,7 @@
 package io.github.bioplethora.world.biomes;
 
 import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BioplethoraParticles;
 import net.minecraft.client.audio.BackgroundMusicTracks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SoundEvents;
@@ -22,6 +23,10 @@ public class RockyWoodlandBiome {
 
         spawnInfo.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 50, 2, 6));
+        spawnInfo.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(BioplethoraEntities.WOODEN_GRYLYNEN.get(), 60, 1, 4));
+        spawnInfo.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(BioplethoraEntities.STONE_GRYLYNEN.get(), 5, 1, 2));
 
         BiomeGenerationSettings.Builder biomeGenSettings = (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
 
@@ -63,7 +68,7 @@ public class RockyWoodlandBiome {
                         .foliageColorOverride(-13266085)
                         .grassColorOverride(-9923462)
                         //.skyColor(getSkyColorWithTemperatureModifier(0.8F))
-                        //.ambientParticle(new ParticleEffectAmbience(ParticleTypes.ITEM_SNOWBALL, 0.003f))
+                        .ambientParticle(new ParticleEffectAmbience(BioplethoraParticles.NIGHT_GAZE.get(), 0.003f))
                         .ambientLoopSound(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0D))
                         .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111D))

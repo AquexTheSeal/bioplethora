@@ -66,7 +66,7 @@ public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatab
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FLYING_SPEED, 0.45 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
-                .add(Attributes.FOLLOW_RANGE, 64D);
+                .add(Attributes.FOLLOW_RANGE, 32D);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatab
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new MonsterAnimatableMoveToTargetGoal(this, 1.2, 8));
-        this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 40, 0.6, 0.7));
+        this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 20, 0.7, 0.8));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
@@ -106,6 +106,10 @@ public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatab
         data.addAnimationController(new AnimationController<>(this, "grylynen_controller", 0, this::predicate));
     }
 
+    public int getMaxSpawnClusterSize() {
+        return 3;
+    }
+
     public void tick() {
         super.tick();
 
@@ -114,7 +118,7 @@ public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatab
         double z = this.getZ();
 
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CRIT, x, y, z, 10, 0.65, 0.65, 0.65, 0.01);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CRIT, x, y, z, 5, 0.65, 0.65, 0.65, 0.01);
         }
     }
 

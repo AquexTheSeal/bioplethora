@@ -18,5 +18,6 @@ public class BPParticleUtil {
         ParticleManager engine = Minecraft.getInstance().particleEngine;
 
         engine.register(BioplethoraParticles.WIND_POOF.get(), WindPoofParticle.Factory::new);
+        engine.register(BioplethoraParticles.NIGHT_GAZE.get(), NightGazeParticle.Factory::new);
     }
 }

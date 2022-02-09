@@ -19,6 +19,8 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("bellophite_core_block", bioResLoc("bellophite_core_block"));
         this.cubeAll("nandbri_scale_block", bioResLoc("nandbri_scale_block"));
 
+        this.cubeAll("mirestone", bioResLoc("mirestone"));
+
         this.cubeAll("green_grylynen_crystal_block", bioResLoc("green_grylynen_crystal_block"));
         this.cubeAll("yellow_grylynen_crystal_block", bioResLoc("yellow_grylynen_crystal_block"));
         this.cubeAll("red_grylynen_crystal_block", bioResLoc("red_grylynen_crystal_block"));
