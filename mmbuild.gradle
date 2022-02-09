@@ -4,12 +4,10 @@ buildscript {
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = 'https://repo.spongepowered.org/maven' }
-        maven { url = 'https://maven.parchmentmc.org' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1+', changing: true
-        classpath 'org.parchmentmc:librarian:1.+'
         classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
@@ -18,7 +16,6 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: "eclipse"
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 group = 'bioplethora'
 version = "${project.minecraftVersion}-1.0.0-beta-v5"
@@ -29,7 +26,7 @@ java {
 }
 
 minecraft {
-    mappings channel: 'parchment', version: "2021.10.17-${project.minecraftVersion}"
+    mappings channel: 'official', version: "${project.minecraftVersion}"
 
     runs {
         client {

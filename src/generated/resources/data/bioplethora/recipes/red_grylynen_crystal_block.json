@@ -7,11 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "bioplethora:bellophite"
+      "item": "bioplethora:red_grylynen_crystal"
     }
   },
   "result": {
-    "item": "bioplethora:bellophite_block",
-    "count": 1
+    "item": "bioplethora:red_grylynen_crystal_block"
   }
 }

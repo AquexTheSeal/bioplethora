@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraEntityClasses;
@@ -65,18 +65,18 @@ public class ExperimentalItem extends Item {
 
         boolean retval = super.hurtEnemy(stack, entity, source);
 
-        if (entity instanceof IBioplethoraEntityClass) {
-            if (((IBioplethoraEntityClass) entity).getBioplethoraClass() == BioplethoraEntityClasses.NONE) {
+        if (entity instanceof IBioClassification) {
+            if (((IBioClassification) entity).getBioplethoraClass() == BioplethoraEntityClasses.NONE) {
                 player.displayClientMessage(new StringTextComponent("Entity Class: None"), (false));
-            } else if (((IBioplethoraEntityClass) entity).getBioplethoraClass() == BioplethoraEntityClasses.ECOHARMLESS) {
+            } else if (((IBioClassification) entity).getBioplethoraClass() == BioplethoraEntityClasses.ECOHARMLESS) {
                 player.displayClientMessage(new StringTextComponent("Entity Class: Ecoharmless"), (false));
-            } else if (((IBioplethoraEntityClass) entity).getBioplethoraClass() == BioplethoraEntityClasses.PLETHONEUTRAL) {
+            } else if (((IBioClassification) entity).getBioplethoraClass() == BioplethoraEntityClasses.PLETHONEUTRAL) {
                 player.displayClientMessage(new StringTextComponent("Entity Class: Plethoneutral"), (false));
-            } else if (((IBioplethoraEntityClass) entity).getBioplethoraClass() == BioplethoraEntityClasses.DANGERUM) {
+            } else if (((IBioClassification) entity).getBioplethoraClass() == BioplethoraEntityClasses.DANGERUM) {
                 player.displayClientMessage(new StringTextComponent("Entity Class: Dangerum"), (false));
-            } else if (((IBioplethoraEntityClass) entity).getBioplethoraClass() == BioplethoraEntityClasses.HELLSENT) {
+            } else if (((IBioClassification) entity).getBioplethoraClass() == BioplethoraEntityClasses.HELLSENT) {
                 player.displayClientMessage(new StringTextComponent("\u00A7cEntity Class: Hellsent"), (false));
-            } else if (((IBioplethoraEntityClass) entity).getBioplethoraClass() == BioplethoraEntityClasses.ELDERIA) {
+            } else if (((IBioClassification) entity).getBioplethoraClass() == BioplethoraEntityClasses.ELDERIA) {
                 player.displayClientMessage(new StringTextComponent("\u00A7cEntity Class: Elderia"), (false));
             }
         }

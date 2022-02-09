@@ -2,10 +2,12 @@ package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.pathfinding.*;
+import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.pathfinding.GroundPathNavigator;
+import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
@@ -23,16 +25,16 @@ public class PrimordialRingFollowOwnerGoal extends Goal {
     private float oldWaterCost;
     private final boolean canFly;
 
-    public PrimordialRingFollowOwnerGoal(SummonableMonsterEntity p_i225711_1_, double p_i225711_2_, float p_i225711_4_, float p_i225711_5_, boolean p_i225711_6_) {
-        this.tamable = p_i225711_1_;
-        this.level = p_i225711_1_.level;
-        this.speedModifier = p_i225711_2_;
-        this.navigation = p_i225711_1_.getNavigation();
-        this.startDistance = p_i225711_4_;
-        this.stopDistance = p_i225711_5_;
-        this.canFly = p_i225711_6_;
+    public PrimordialRingFollowOwnerGoal(SummonableMonsterEntity host, double speedModifier, float startDist, float stopDist, boolean canFly) {
+        this.tamable = host;
+        this.level = host.level;
+        this.speedModifier = speedModifier;
+        this.navigation = host.getNavigation();
+        this.startDistance = startDist;
+        this.stopDistance = stopDist;
+        this.canFly = canFly;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
-        if (!(p_i225711_1_.getNavigation() instanceof GroundPathNavigator) && !(p_i225711_1_.getNavigation() instanceof FlyingPathNavigator)) {
+        if (!(host.getNavigation() instanceof GroundPathNavigator) && !(host.getNavigation() instanceof FlyingPathNavigator)) {
             throw new IllegalArgumentException("Unsupported mob type for FollowOwnerGoal");
         }
     }
@@ -101,31 +103,33 @@ public class PrimordialRingFollowOwnerGoal extends Goal {
 
     }
 
-    private boolean maybeTeleportTo(int p_226328_1_, int p_226328_2_, int p_226328_3_) {
-        if (Math.abs((double)p_226328_1_ - this.owner.getX()) < 2.0D && Math.abs((double)p_226328_3_ - this.owner.getZ()) < 2.0D) {
+    private boolean maybeTeleportTo(int tpx, int tpy, int tpz) {
+        if (Math.abs((double) tpx - this.owner.getX()) < 2.0D && Math.abs((double) tpz - this.owner.getZ()) < 2.0D) {
             return false;
-        } else if (!this.canTeleportTo(new BlockPos(p_226328_1_, p_226328_2_, p_226328_3_))) {
+        } else if (!this.canTeleportTo(new BlockPos(tpx, tpy, tpz))) {
             return false;
         } else {
-            this.tamable.moveTo((double)p_226328_1_ + 0.5D, (double)p_226328_2_, (double)p_226328_3_ + 0.5D, this.tamable.yRot, this.tamable.xRot);
+            this.tamable.moveTo((double) tpx + 0.5D, tpy, (double) tpz + 0.5D, this.tamable.yRot, this.tamable.xRot);
             this.navigation.stop();
             return true;
         }
     }
 
-    private boolean canTeleportTo(BlockPos p_226329_1_) {
-        PathNodeType pathnodetype = WalkNodeProcessor.getBlockPathTypeStatic(this.level, p_226329_1_.mutable());
+    private boolean canTeleportTo(BlockPos blockPos) {
+        /*PathNodeType pathnodetype = WalkNodeProcessor.getBlockPathTypeStatic(this.level, blockPos.mutable());
         if (pathnodetype != PathNodeType.WALKABLE) {
             return false;
         } else {
-            BlockState blockstate = this.level.getBlockState(p_226329_1_.below());
+            BlockState blockstate = this.level.getBlockState(blockPos.below());
             if (!this.canFly && blockstate.getBlock() instanceof LeavesBlock) {
                 return false;
             } else {
-                BlockPos blockpos = p_226329_1_.subtract(this.tamable.blockPosition());
+                BlockPos blockpos = blockPos.subtract(this.tamable.blockPosition());
                 return this.level.noCollision(this.tamable, this.tamable.getBoundingBox().move(blockpos));
             }
-        }
+        }*/
+        BlockState blockState = this.tamable.getCommandSenderWorld().getBlockState(blockPos.below());
+        return blockState.isValidSpawn(this.tamable.getCommandSenderWorld(), blockPos.below(), this.tamable.getType()) && this.tamable.getCommandSenderWorld().isEmptyBlock(blockPos) && this.tamable.getCommandSenderWorld().isEmptyBlock(blockPos.above());
     }
 
     private int randomIntInclusive(int p_226327_1_, int p_226327_2_) {

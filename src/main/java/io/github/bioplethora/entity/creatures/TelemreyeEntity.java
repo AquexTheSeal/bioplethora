@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -26,7 +26,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 
-public class TelemreyeEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass, IFlyingAnimal {
+public class TelemreyeEntity extends AnimatableMonsterEntity implements IAnimatable, IBioClassification, IFlyingAnimal {
 
     private final AnimationFactory factory = new AnimationFactory(this);
 

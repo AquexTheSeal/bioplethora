@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bioplethora:red_grylynen_crystal_block"
+    }
+  ],
+  "result": {
+    "item": "bioplethora:red_grylynen_crystal",
+    "count": 9
+  }
+}

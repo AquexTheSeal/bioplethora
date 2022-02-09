@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.MyliothanChargeAttackGoal;
 import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
@@ -44,7 +44,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.Objects;
 import java.util.Optional;
 
-public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBioplethoraEntityClass {
+public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBioClassification {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(MyliothanEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);

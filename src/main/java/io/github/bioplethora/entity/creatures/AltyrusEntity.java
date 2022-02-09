@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
@@ -43,7 +43,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioplethoraEntityClass {
+public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_SUMMONING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);

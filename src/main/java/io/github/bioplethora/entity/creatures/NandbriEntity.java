@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraEntityClasses;
@@ -31,7 +31,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
+public class NandbriEntity extends AnimatableMonsterEntity implements IAnimatable, IBioClassification {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public NandbriEntity(EntityType<? extends MonsterEntity> type, World world) {

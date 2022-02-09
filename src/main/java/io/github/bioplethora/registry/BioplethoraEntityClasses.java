@@ -1,7 +1,28 @@
 package io.github.bioplethora.registry;
 
-public class BioplethoraEntityClasses {
+public enum BioplethoraEntityClasses {
 
+    NONE("none"),
+    ECOHARMLESS("ecoharmless"),
+    PLETHONEUTRAL("plethoneutral"),
+    DANGERUM("dangerum"),
+    HELLSENT("hellsent"),
+    ELDERIA("elderia");
+
+    private final String name;
+
+    BioplethoraEntityClasses(String name) {
+        this.name = name;
+    }
+
+    public String getTierName() {
+        return this.name;
+    }
+}
+
+
+
+/*
     // For regular mobs, the default mob class
     public static final BioplethoraEntityClasses NONE = new BioplethoraEntityClasses();
 
@@ -19,4 +40,4 @@ public class BioplethoraEntityClasses {
 
     // For eldritch powered/sized mobs
     public static final BioplethoraEntityClasses ELDERIA = new BioplethoraEntityClasses();
-}
+*/

@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.CrephoxlChargingGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
@@ -39,7 +39,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
+public class CrephoxlEntity extends AnimatableMonsterEntity implements IAnimatable, IBioClassification {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(CrephoxlEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);

@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraEntityClasses;
@@ -42,7 +42,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioplethoraEntityClass {
+public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
 
     private final AnimationFactory factory = new AnimationFactory(this);
     private final Tier grylynenTier;

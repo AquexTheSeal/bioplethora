@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableTameableEntity;
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
@@ -50,7 +50,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatable, IAngerable, IBioplethoraEntityClass {
+public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatable, IAngerable, IBioClassification {
 
     private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(PeaguinEntity.class, DataSerializers.INT);
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);

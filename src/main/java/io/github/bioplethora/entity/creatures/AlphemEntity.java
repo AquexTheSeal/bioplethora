@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.IBioplethoraEntityClass;
+import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
@@ -41,7 +41,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable, IBioplethoraEntityClass {
+public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable, IBioClassification {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AlphemEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -168,6 +168,11 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         super.die(source);
         Entity sourceEnt = source.getEntity();
         BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:alphem_kill");
+    }
+
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 4 + this.level.getRandom().nextInt(4);
     }
 
     @Override

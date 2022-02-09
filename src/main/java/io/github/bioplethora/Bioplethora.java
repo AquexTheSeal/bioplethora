@@ -1,12 +1,10 @@
 package io.github.bioplethora;
 
-import io.github.bioplethora.datagen.BioBlockModelProvider;
-import io.github.bioplethora.datagen.BioBlockstateProvider;
-import io.github.bioplethora.datagen.BioItemModelProvider;
-import io.github.bioplethora.datagen.BioLootTablesProvider;
+import io.github.bioplethora.datagen.*;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
+import io.github.bioplethora.world.biome_helpers.BPBiomeGeneration;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -26,6 +24,7 @@ import software.bernie.geckolib3.GeckoLib;
 
 @Mod(Bioplethora.MOD_ID)
 public class Bioplethora {
+
     public static Bioplethora instance;
 
     public static final String MOD_ID = "bioplethora";
@@ -44,6 +43,7 @@ public class Bioplethora {
         BioplethoraSoundEvents.SOUNDS.register(bus);
         BioplethoraEnchantments.ENCHANTMENTS.register(bus);
         BioplethoraParticles.PARTICLES.register(bus);
+        BioplethoraBiomes.BIOMES.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);
@@ -68,6 +68,7 @@ public class Bioplethora {
 
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("Setting up [" + MOD_NAME + "], thank you for using this mod!");
+        BPBiomeGeneration.generateBiomes();
     }
 
     private void gatherData(final GatherDataEvent event) {
@@ -78,8 +79,8 @@ public class Bioplethora {
             dataGenerator.addProvider(new BioBlockModelProvider(dataGenerator, MOD_ID, efh));
             dataGenerator.addProvider(new BioBlockstateProvider(dataGenerator, MOD_ID, efh));
             dataGenerator.addProvider(new BioItemModelProvider(dataGenerator, efh));
+            dataGenerator.addProvider(new BioRecipeProvider(dataGenerator));
             dataGenerator.addProvider(new BioLootTablesProvider(dataGenerator));
         }
     }
 }
-

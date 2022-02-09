@@ -1,7 +1,6 @@
 package io.github.bioplethora.client.entity.model.others;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.others.AltyrusSummoningEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
