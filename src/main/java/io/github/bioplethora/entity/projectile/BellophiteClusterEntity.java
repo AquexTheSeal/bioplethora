@@ -62,7 +62,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "bellophiteclustercontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "bellophite_cluster_controller", 0, this::predicate));
     }
 
     @Override
