@@ -101,6 +101,9 @@ public class PrimordialRingEntity extends SummonableMonsterEntity implements IAn
         } else {
             this.kill();
         }
+        if (this.getTarget() == this.getOwner()) {
+            this.setTarget(null);
+        }
     }
 
     @Override

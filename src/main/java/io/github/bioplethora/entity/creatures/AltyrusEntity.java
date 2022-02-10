@@ -406,7 +406,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
             }
 
             for(int i = 0; i < 3; ++i) {
-                BlockPos blockpos1 = blockpos.offset(AltyrusEntity.this.random.nextInt(15) + 7, AltyrusEntity.this.random.nextInt(11) - 3, AltyrusEntity.this.random.nextInt(15) + 7);
+                BlockPos blockpos1 = blockpos.offset(AltyrusEntity.this.random.nextInt(15) - 7, AltyrusEntity.this.random.nextInt(11) - 3, AltyrusEntity.this.random.nextInt(15) - 7);
                 if (AltyrusEntity.this.level.isEmptyBlock(blockpos1)) {
                     AltyrusEntity.this.moveControl.setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
                     if (AltyrusEntity.this.getTarget() == null) {
