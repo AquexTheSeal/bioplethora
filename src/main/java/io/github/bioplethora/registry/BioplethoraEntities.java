@@ -36,6 +36,10 @@ public class BioplethoraEntities {
             new GrylynenEntity(type, world, GrylynenEntity.Tier.GOLDEN), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "golden_grylynen").toString()));
     public static final RegistryObject<EntityType<GrylynenEntity>> IRON_GRYLYNEN = ENTITIES.register("iron_grylynen", () -> EntityType.Builder.of((EntityType.IFactory<GrylynenEntity>) (type, world) ->
             new GrylynenEntity(type, world, GrylynenEntity.Tier.IRON), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "iron_grylynen").toString()));
+    public static final RegistryObject<EntityType<GrylynenEntity>> DIAMOND_GRYLYNEN = ENTITIES.register("diamond_grylynen", () -> EntityType.Builder.of((EntityType.IFactory<GrylynenEntity>) (type, world) ->
+            new GrylynenEntity(type, world, GrylynenEntity.Tier.DIAMOND), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "diamond_grylynen").toString()));
+    public static final RegistryObject<EntityType<GrylynenEntity>> NETHERITE_GRYLYNEN = ENTITIES.register("netherite_grylynen", () -> EntityType.Builder.of((EntityType.IFactory<GrylynenEntity>) (type, world) ->
+            new GrylynenEntity(type, world, GrylynenEntity.Tier.NETHERITE), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "netherite_grylynen").toString()));
 
     //Hellsent
     public static final RegistryObject<EntityType<CrephoxlEntity>> CREPHOXL = ENTITIES.register("crephoxl", () -> EntityType.Builder.of(CrephoxlEntity::new, EntityClassification.MONSTER).sized(3.5f, 5f).build(new ResourceLocation(Bioplethora.MOD_ID, "crephoxl").toString()));

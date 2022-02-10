@@ -86,7 +86,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         this.goalSelector.addGoal(6, new BellophgolemRangedAttackGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this, BellophgolemEntity.class, AltyrusEntity.class).setAlertOthers(this.getClass()));
         this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this));
     }
 

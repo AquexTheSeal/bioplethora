@@ -101,32 +101,17 @@ public class BellophiteCoreBlock extends Block {
                     world.playSound(null, new BlockPos(x, y, z), SoundEvents.END_PORTAL_FRAME_FILL, SoundCategory.NEUTRAL, (float) 1, (float) 1);
                     world.playSound(null, new BlockPos(x, y, z), SoundEvents.ELDER_GUARDIAN_CURSE, SoundCategory.NEUTRAL, (float) 1, (float) 1);
                     //main center
-                    world.destroyBlock(new BlockPos(x, y, z), false);
-                    world.destroyBlock(c1, false);
-                    world.destroyBlock(c2, false);
+                    bDesBl(world, new BlockPos(x, y, z));
+                    bDesBl(world, c1);bDesBl(world, c2);
                     //top layer
-                    world.destroyBlock(t1, false);
-                    world.destroyBlock(t2, false);
-                    world.destroyBlock(t3, false);
-                    world.destroyBlock(t4, false);
-                    world.destroyBlock(t5, false);
-                    world.destroyBlock(t6, false);
-                    world.destroyBlock(t7, false);
-                    world.destroyBlock(t8, false);
-                    world.destroyBlock(t9, false);
-                    world.destroyBlock(t10, false);
-                    world.destroyBlock(t11, false);
-                    world.destroyBlock(t12, false);
+                    bDesBl(world, t1);bDesBl(world, t2);bDesBl(world, t3);
+                    bDesBl(world, t4);bDesBl(world, t5);bDesBl(world, t6);
+                    bDesBl(world, t7);bDesBl(world, t8);bDesBl(world, t9);
+                    bDesBl(world, t10);bDesBl(world, t11);bDesBl(world, t12);
                     //mid layer
-                    world.destroyBlock(m1, false);
-                    world.destroyBlock(m2, false);
-                    world.destroyBlock(m3, false);
-                    world.destroyBlock(m4, false);
+                    bDesBl(world, m1);bDesBl(world, m2);bDesBl(world, m3);bDesBl(world, m4);
                     //bottom layer
-                    world.destroyBlock(b1, false);
-                    world.destroyBlock(b2, false);
-                    world.destroyBlock(b3, false);
-                    world.destroyBlock(b4, false);
+                    bDesBl(world, b1);bDesBl(world, b2);bDesBl(world, b3);bDesBl(world, b4);
 
                     ((ServerWorld) world).sendParticles(ParticleTypes.POOF, x, y, z, 40, 0.4, 0.4, 0.4, 0.1);
                     ServerWorld serverworld = (ServerWorld) world;
@@ -151,5 +136,13 @@ public class BellophiteCoreBlock extends Block {
         }
 
         return ActionResultType.SUCCESS;
+    }
+    
+    public void bDesBl(World world, BlockPos pos) {
+        world.destroyBlock(pos, false);
+    }
+    
+    public Block getBlockAt(World world, BlockPos pos) {
+        return world.getBlockState(pos).getBlock();
     }
 }

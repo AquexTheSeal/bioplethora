@@ -28,6 +28,8 @@ public class BioplethoraEntityAttributes {
         event.put(BioplethoraEntities.STONE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.GOLDEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.IRON_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.DIAMOND_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.NETHERITE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
 
         //Hellsent
         event.put(BioplethoraEntities.HELIOBLADE.get(), HeliobladeEntity.setCustomAttributes().build());

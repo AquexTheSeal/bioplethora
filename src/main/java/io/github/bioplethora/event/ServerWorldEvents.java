@@ -146,49 +146,26 @@ public class ServerWorldEvents {
 
                 int shouldDodge = user.getRandom().nextInt(3);
 
-                if ((shouldDodge == 1) && ((user.getOffhandItem().getItem() instanceof SwervingTotemItem) || (user.getMainHandItem().getItem() instanceof SwervingTotemItem))) {
-                    Vector3d projectilePos = event.getEntity().position();
-                    Vector3d rVec = user.getLookAngle().yRot(0.5F + (float) Math.PI).add(user.position());
-                    Vector3d lVec = user.getLookAngle().yRot(0.5F + (float) Math.PI).add(user.position());
+                if ((user.getOffhandItem().getItem() instanceof SwervingTotemItem) || (user.getMainHandItem().getItem() instanceof SwervingTotemItem)) {
 
-                    boolean rDir;
-
-                    if (projectilePos.distanceTo(rVec) < projectilePos.distanceTo(lVec)) {
-                        rDir = true;
-                    } else if (projectilePos.distanceTo(rVec) > projectilePos.distanceTo(lVec)) {
-                        rDir = false;
-                    } else {
-                        rDir = user.getRandom().nextBoolean();
-                    }
-
-                    Vector3d vectorThingy = event.getEntity().getDeltaMovement().yRot((float) ((rDir ? 0.5F : -0.5F) * Math.PI)).normalize();
-
-                    user.level.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.GHAST_SHOOT, SoundCategory.PLAYERS, 1, 1);
-                    if (user.level instanceof ServerWorld) {
-                        ((ServerWorld) user.level).sendParticles(ParticleTypes.POOF, user.getX(), user.getY(), user.getZ(), 50, 0.65, 0.65, 0.65, 0.01);
-                    }
-
-                    if (user instanceof PlayerEntity) {
+                    if (shouldDodge == 1) {
 
                         boolean isNegVal = user.getRandom().nextBoolean();
-                        int tpLoc;
-                        if (isNegVal) {
-                            tpLoc = -(user.getRandom().nextInt(5));
-                        } else {
-                            tpLoc = user.getRandom().nextInt(5);
+                        int tpLoc = 1 + user.getRandom().nextInt(2);
+
+                        user.level.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.GHAST_SHOOT, SoundCategory.PLAYERS, 1, 1);
+                        if (user.level instanceof ServerWorld) {
+                            ((ServerWorld) user.level).sendParticles(ParticleTypes.POOF, user.getX(), user.getY(), user.getZ(), 50, 0.65, 0.65, 0.65, 0.01);
                         }
 
-                        BlockPos blockpos = new BlockPos(user.getX() + tpLoc, user.getY(), user.getZ() + tpLoc);
+                        BlockPos blockpos = new BlockPos(user.getX() + (isNegVal ? tpLoc : -tpLoc), user.getY(), user.getZ() + (isNegVal ? tpLoc : -tpLoc));
 
                         if (!user.level.getBlockState(blockpos).getMaterial().blocksMotion()) {
-                            user.moveTo(blockpos, 0.0F, 0.0F);
+                            user.teleportTo(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+
+                            event.setCanceled(true);
                         }
-
-                    } else {
-                        user.setDeltaMovement(user.getDeltaMovement().add(vectorThingy.x() * 0.5F, 0, vectorThingy.z() * 0.5F));
                     }
-
-                    event.setCanceled(true);
                 }
             }
 
@@ -201,7 +178,7 @@ public class ServerWorldEvents {
                 ((AbstractArrowEntity) projectile).setPierceLevel((byte) 0);
             }
 
-            if (!projectile.level.isClientSide && targetIsAltyrus) {
+            if (!projectile.level.isClientSide() && targetIsAltyrus) {
                 AltyrusEntity altyrus = ((AltyrusEntity) ((EntityRayTraceResult) result).getEntity());
                 int shouldDodge = altyrus.getRandom().nextInt(3);
 

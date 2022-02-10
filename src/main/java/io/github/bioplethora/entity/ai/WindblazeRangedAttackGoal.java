@@ -5,7 +5,6 @@ import io.github.bioplethora.entity.projectile.WindblazeEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public class WindblazeRangedAttackGoal extends Goal {
@@ -42,7 +41,6 @@ public class WindblazeRangedAttackGoal extends Goal {
             }
             if (this.chargeTime == 20) {
 
-                Vector3d vector3d = this.alphem.getViewVector(1.0F);
                 double d1 = livingentity.getX() - this.alphem.getX();
                 double d2 = livingentity.getY(0.5D) - this.alphem.getY(0.5D);
                 double d3 = livingentity.getZ() - this.alphem.getZ();

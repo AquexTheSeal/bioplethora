@@ -49,6 +49,8 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.STONE_GRYLYNEN.get(), GrylynenEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.GOLDEN_GRYLYNEN.get(), GrylynenEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.IRON_GRYLYNEN.get(), GrylynenEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.DIAMOND_GRYLYNEN.get(), GrylynenEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.NETHERITE_GRYLYNEN.get(), GrylynenEntityRender::new);
 
         //Hellsent
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
@@ -79,7 +81,7 @@ public class ModClientRegister {
     public static void registerModels(final FMLClientSetupEvent event) {
         //Bellophite Shield
         ItemModelsProperties.register(BioplethoraItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);
-        ItemModelsProperties.register(BioplethoraItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("charged"), (itemStack, clientWorld, entity) -> entity != null && ((BellophiteShieldItem) itemStack.getItem()).isCharged ? 1.0F : 0.0F);
+        ItemModelsProperties.register(BioplethoraItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("charged"), (itemStack, clientWorld, entity) -> entity != null && ((BellophiteShieldItem) itemStack.getItem()).getCorePoints() == 3 ? 1.0F : 0.0F);
 
         //Arbitrary Ballista
         ItemModelsProperties.register(BioplethoraItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity) -> {

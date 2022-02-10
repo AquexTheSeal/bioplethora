@@ -14,6 +14,8 @@ public class BioplethoraConfig {
         COMMON = commonSpecPair.getLeft();
     }
 
+    public static final boolean getHellMode = BioplethoraConfig.COMMON.hellMode.get();
+
     public static class Common {
 
         public final ForgeConfigSpec.ConfigValue<Boolean> hellMode;

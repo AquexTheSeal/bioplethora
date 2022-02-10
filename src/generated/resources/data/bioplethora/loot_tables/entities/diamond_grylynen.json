@@ -15,20 +15,20 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 5.0,
+                "min": 1.0,
+                "max": 3.0,
                 "type": "minecraft:uniform"
               }
             },
             {
               "function": "minecraft:looting_enchant",
               "count": {
-                "min": 0.5,
-                "max": 1.5
+                "min": 0.2,
+                "max": 1.2
               }
             }
           ],
-          "name": "minecraft:iron_ingot"
+          "name": "minecraft:diamond"
         }
       ]
     },
@@ -46,8 +46,8 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1.0,
-                "max": 3.0,
+                "min": 0.0,
+                "max": 2.0,
                 "type": "minecraft:uniform"
               }
             },
@@ -59,7 +59,7 @@
               }
             }
           ],
-          "name": "bioplethora:yellow_grylynen_crystal"
+          "name": "bioplethora:red_grylynen_crystal"
         }
       ]
     }

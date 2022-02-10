@@ -77,6 +77,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(3, new LookAtGoal(this, HeliobladeEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new MonsterAnimatableMoveToTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(2, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
+        this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 1.2));
         this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
@@ -175,14 +176,18 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         return 4 + this.level.getRandom().nextInt(4);
     }
 
+    public net.minecraft.util.SoundEvent getAmbientSound() {
+        return SoundEvents.VEX_CHARGE;
+    }
+
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.GENERIC_HURT;
+        return SoundEvents.RABBIT_HURT;
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return SoundEvents.GENERIC_DEATH;
+        return SoundEvents.RABBIT_DEATH;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -197,5 +202,15 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_IS_CHARGING, false);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundNBT compoundNBT) {
+        super.addAdditionalSaveData(compoundNBT);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundNBT compoundNBT) {
+        super.readAdditionalSaveData(compoundNBT);
     }
 }

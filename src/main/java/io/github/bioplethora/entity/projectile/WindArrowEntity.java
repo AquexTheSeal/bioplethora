@@ -1,5 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
+import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import io.github.bioplethora.registry.BioplethoraParticles;
@@ -118,7 +119,8 @@ public class WindArrowEntity extends AbstractArrowEntity {
     }
 
     private void findNewTarget() {
-        int targetRadius = 10;
+        double targetRadius = BioplethoraConfig.COMMON.hellMode.get() ? 13.0D : 10.0D;
+        //List<LivingEntity> candidates = level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(targetRadius, targetRadius, targetRadius));
         List<MobEntity> candidates = level.getEntitiesOfClass(MobEntity.class, this.getBoundingBox().inflate(targetRadius, targetRadius, targetRadius));
 
         if (!candidates.isEmpty()) {
@@ -127,6 +129,15 @@ public class WindArrowEntity extends AbstractArrowEntity {
         }
 
         newTargetCooldown = 5;
+
+        /*if (!candidates.isEmpty() && !(candidates.get(0).getId() == this.getOwner().getId())) {
+            candidates.sort(Comparator.comparing(WindArrowEntity.this::distanceToSqr, Double::compare));
+            entityData.set(DW_TARGET_ID, candidates.get(0).getId());
+        }
+
+        if (!(candidates.get(0).getId() == this.getOwner().getId())) {
+            newTargetCooldown = 5;
+        }*/
     }
 
     @Override
@@ -135,10 +146,13 @@ public class WindArrowEntity extends AbstractArrowEntity {
         entityData.define(DW_TARGET_ID, NO_TARGET);
     }
 
-
     private MobEntity getTarget() {
         return (MobEntity) level.getEntity(entityData.get(DW_TARGET_ID));
     }
+
+    /*private LivingEntity getTarget() {
+        return (LivingEntity) level.getEntity(entityData.get(DW_TARGET_ID));
+    }*/
 
     private boolean hasTarget() {
         return getTarget() != null;
@@ -174,12 +188,12 @@ public class WindArrowEntity extends AbstractArrowEntity {
                 if (eI != null && eI != this.getOwner()) {
 
                     if (this.getOwner() != null) {
-                        eI.hurt(DamageSource.indirectMobAttack(this.getOwner(), (LivingEntity) this.getOwner()), 3);
+                        eI.hurt(DamageSource.indirectMobAttack(this.getOwner(), (LivingEntity) this.getOwner()), BioplethoraConfig.getHellMode ? 3 : 5);
                     }
 
                     eI.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
                     eI.invulnerableTime = 0;
-                    ((ServerWorld) this.level).sendParticles(ParticleTypes.SWEEP_ATTACK, eI.getX(), eI.getY() + 1.0, eI.getZ(), 1, 0.1, 0.1, 0.1, 0);
+                    ((ServerWorld) this.level).sendParticles(ParticleTypes.SWEEP_ATTACK, eI.getX(), eI.getY() + 1.5, eI.getZ(), 1, 0.1, 0.1, 0.1, 0);
                 }
             }
         }

@@ -6,6 +6,7 @@ import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
 import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
@@ -13,7 +14,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.MovementController;
+import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,12 +24,12 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
@@ -41,22 +42,21 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.EnumSet;
 
-public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
+/** Recovery code for Altyrus experimentation. on recovery, replace <AltyrusEntity> with <AnimatableMonsterEntity>**/
+public class btAltyrus extends AltyrusEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
 
-    private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DATA_IS_SUMMONING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DATA_IS_DODGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(btAltyrus.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DATA_IS_SUMMONING = EntityDataManager.defineId(btAltyrus.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DATA_IS_DODGING = EntityDataManager.defineId(btAltyrus.class, DataSerializers.BOOLEAN);
     private final ServerBossInfo bossInfo = new ServerBossInfo(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
     private final AnimationFactory factory = new AnimationFactory(this);
-    public BlockPos boundOrigin;
     public int dodgeTimer;
 
-    public AltyrusEntity(EntityType<? extends AnimatableMonsterEntity> type, World world) {
+    public btAltyrus(EntityType<? extends AnimatableMonsterEntity> type, World world) {
         super(type, world);
+        this.moveControl = new FlyingMovementController(this, 20, true);
         this.noCulling = true;
-        this.moveControl = new AltyrusEntity.MoveHelperController(this);
         this.xpReward = 200;
     }
 
@@ -78,13 +78,20 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }
 
+    protected PathNavigator createNavigation(World worldIn) {
+        return new FlyingPathNavigator(btAltyrus.this, worldIn) {
+            public boolean isStableDestination(BlockPos pos) {
+                return !this.level.getBlockState(pos.below()).isAir();
+            }
+        };
+    }
+
     @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
-        this.goalSelector.addGoal(3, new AltyrusEntity.ChargeAttackGoal());
+        this.goalSelector.addGoal(3, new MonsterAnimatableMoveToTargetGoal(this, 1.2, 8));
         this.goalSelector.addGoal(3, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
-        this.goalSelector.addGoal(4, new AltyrusEntity.MoveRandomGoal());
         this.goalSelector.addGoal(4, new AltyrusRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new AltyrusSummonGolemGoal(this));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 24.0F));
@@ -274,148 +281,5 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     @Override
     public boolean isPushedByFluid() {
         return false;
-    }
-
-    public void readAdditionalSaveData(CompoundNBT pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        if (pCompound.contains("BoundX")) {
-            this.boundOrigin = new BlockPos(pCompound.getInt("BoundX"), pCompound.getInt("BoundY"), pCompound.getInt("BoundZ"));
-        }
-    }
-
-    public void addAdditionalSaveData(CompoundNBT pCompound) {
-        super.addAdditionalSaveData(pCompound);
-        if (this.boundOrigin != null) {
-            pCompound.putInt("BoundX", this.boundOrigin.getX());
-            pCompound.putInt("BoundY", this.boundOrigin.getY());
-            pCompound.putInt("BoundZ", this.boundOrigin.getZ());
-        }
-    }
-
-    public void setBoundOrigin(@Nullable BlockPos pBoundOrigin) {
-        this.boundOrigin = pBoundOrigin;
-    }
-
-    @Nullable
-    public BlockPos getBoundOrigin() {
-        return this.boundOrigin;
-    }
-
-    class ChargeAttackGoal extends Goal {
-        public ChargeAttackGoal() {
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
-        }
-        
-        public boolean canUse() {
-            if (AltyrusEntity.this.getTarget() != null &&
-                    !AltyrusEntity.this.getMoveControl().hasWanted() &&
-                    AltyrusEntity.this.random.nextInt(3) == 0) {
-
-                return AltyrusEntity.this.distanceToSqr(AltyrusEntity.this.getTarget()) > 2.0D;
-            } else {
-                return false;
-            }
-        }
-        
-        public boolean canContinueToUse() {
-            return AltyrusEntity.this.getMoveControl().hasWanted() &&
-                    AltyrusEntity.this.getTarget() != null &&
-                    AltyrusEntity.this.getTarget().isAlive();
-        }
-        
-        public void start() {
-            LivingEntity livingentity = AltyrusEntity.this.getTarget();
-            Vector3d vector3d = livingentity.getEyePosition(1.0F);
-            AltyrusEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
-            AltyrusEntity.this.playSound(SoundEvents.VEX_CHARGE, 1.0F, 1.0F);
-        }
-        
-        public void stop() {
-        }
-        
-        public void tick() {
-            LivingEntity livingentity = AltyrusEntity.this.getTarget();
-
-            if (!AltyrusEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                double d0 = AltyrusEntity.this.distanceToSqr(livingentity);
-                if (d0 < 9.0D) {
-                    Vector3d vector3d = livingentity.getEyePosition(1.0F);
-                    AltyrusEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
-                }
-            }
-
-            /*if (AltyrusEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                AltyrusEntity.this.doHurtTarget(livingentity);
-            } else {
-                double d0 = AltyrusEntity.this.distanceToSqr(livingentity);
-                if (d0 < 9.0D) {
-                    Vector3d vector3d = livingentity.getEyePosition(1.0F);
-                    AltyrusEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
-                }
-            }*/
-        }
-    }
-
-    class MoveHelperController extends MovementController {
-        public MoveHelperController(AltyrusEntity altyrus) {
-            super(altyrus);
-        }
-
-        public void tick() {
-            if (this.operation == MovementController.Action.MOVE_TO) {
-                Vector3d vector3d = new Vector3d(this.wantedX - AltyrusEntity.this.getX(), this.wantedY - AltyrusEntity.this.getY(), this.wantedZ - AltyrusEntity.this.getZ());
-                double d0 = vector3d.length();
-                if (d0 < AltyrusEntity.this.getBoundingBox().getSize()) {
-                    this.operation = MovementController.Action.WAIT;
-                    AltyrusEntity.this.setDeltaMovement(AltyrusEntity.this.getDeltaMovement().scale(0.5D));
-                } else {
-                    AltyrusEntity.this.setDeltaMovement(AltyrusEntity.this.getDeltaMovement().add(vector3d.scale(this.speedModifier * 0.05D / d0)));
-                    if (AltyrusEntity.this.getTarget() == null) {
-                        Vector3d vector3d1 = AltyrusEntity.this.getDeltaMovement();
-                        AltyrusEntity.this.yRot = -((float) MathHelper.atan2(vector3d1.x, vector3d1.z)) * (180F / (float)Math.PI);
-                        AltyrusEntity.this.yBodyRot = AltyrusEntity.this.yRot;
-                    } else {
-                        double d2 = AltyrusEntity.this.getTarget().getX() - AltyrusEntity.this.getX();
-                        double d1 = AltyrusEntity.this.getTarget().getZ() - AltyrusEntity.this.getZ();
-                        AltyrusEntity.this.yRot = -((float)MathHelper.atan2(d2, d1)) * (180F / (float)Math.PI);
-                        AltyrusEntity.this.yBodyRot = AltyrusEntity.this.yRot;
-                    }
-                }
-
-            }
-        }
-    }
-
-    class MoveRandomGoal extends Goal {
-        public MoveRandomGoal() {
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
-        }
-
-        public boolean canUse() {
-            return !AltyrusEntity.this.getMoveControl().hasWanted() && AltyrusEntity.this.random.nextInt(7) == 0;
-        }
-
-        public boolean canContinueToUse() {
-            return false;
-        }
-
-        public void tick() {
-            BlockPos blockpos = AltyrusEntity.this.getBoundOrigin();
-            if (blockpos == null) {
-                blockpos = AltyrusEntity.this.blockPosition();
-            }
-
-            for(int i = 0; i < 3; ++i) {
-                BlockPos blockpos1 = blockpos.offset(AltyrusEntity.this.random.nextInt(15) + 7, AltyrusEntity.this.random.nextInt(11) - 3, AltyrusEntity.this.random.nextInt(15) + 7);
-                if (AltyrusEntity.this.level.isEmptyBlock(blockpos1)) {
-                    AltyrusEntity.this.moveControl.setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
-                    if (AltyrusEntity.this.getTarget() == null) {
-                        AltyrusEntity.this.getLookControl().setLookAt((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
-                    }
-                    break;
-                }
-            }
-
-        }
     }
 }

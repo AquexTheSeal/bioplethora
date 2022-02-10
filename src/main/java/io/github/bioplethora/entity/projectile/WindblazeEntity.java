@@ -2,6 +2,7 @@ package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
+import io.github.bioplethora.entity.creatures.BellophgolemEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -51,25 +52,43 @@ public class WindblazeEntity extends DamagingProjectileEntity {
         Entity entity = entityHitResult.getEntity();
         AxisAlignedBB entArea = new AxisAlignedBB(this.getX() - (3 / 2d), this.getY() - (3 / 2d), this.getZ() - (3 / 2d), this.getX() + (3 / 2d), this.getY() + (3 / 2d), this.getZ() + (3 / 2d));
 
-        if (this.level instanceof ServerWorld && this.getOwner() instanceof MobEntity && ((MobEntity) this.getOwner()).getTarget() != null) {
-            for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, entArea)) {
-                if (entityArea != null && (entityArea == ((MobEntity) this.getOwner()).getTarget() || ((MobEntity) entityArea).getTarget() == this.getEntity())) {
+        if (Math.random() <= 0.2) {
+            entity.invulnerableTime = 0;
+        }
 
-                    if (!(entityArea instanceof AltyrusEntity)) {
-                        entityArea.setDeltaMovement(0, 0.75, 0);
+        if (this.level instanceof ServerWorld && this.getOwner() instanceof MobEntity) {
+            if (((MobEntity) this.getOwner()).getTarget() != null) {
+
+                for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, entArea)) {
+
+                    if ((entityArea == ((MobEntity) this.getOwner()).getTarget())) {
+                        hurtEntityArea(entityArea);
                     }
 
-                    if (BioplethoraConfig.COMMON.hellMode.get()) {
-                        entityArea.hurt(DamageSource.MAGIC, 3);
-                        entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
-                        entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
-                    } else {
-                        entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
+                    if (entityArea instanceof MobEntity) {
+                        if (((MobEntity) entityArea).getTarget() == this.getOwner()) {
+                            hurtEntityArea(entityArea);
+                        }
                     }
                 }
             }
         }
         level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.HOSTILE, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+    }
+
+    public void hurtEntityArea(LivingEntity entityArea) {
+
+        if (!(entityArea instanceof AltyrusEntity) && !(entityArea instanceof BellophgolemEntity)) {
+            entityArea.setDeltaMovement(entityArea.getDeltaMovement().add(0, 0.75, 0));
+        }
+
+        if (BioplethoraConfig.COMMON.hellMode.get() && (this.getOwner() != null)) {
+            entityArea.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), 3);
+            entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
+            entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
+        } else {
+            entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
+        }
     }
 
     @Nonnull

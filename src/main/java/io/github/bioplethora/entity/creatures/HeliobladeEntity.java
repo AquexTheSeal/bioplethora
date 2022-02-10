@@ -100,6 +100,9 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this, HeliobladeEntity.class).setAlertOthers());
         this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this));
+
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
     }
 
     @Override
@@ -227,20 +230,15 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
 
     public void teleportRandomly() {
         boolean isNegVal = this.getRandom().nextBoolean();
-        int tpLoc;
-        if (isNegVal) {
-            tpLoc = -(this.getRandom().nextInt(15));
-        } else {
-            tpLoc = this.getRandom().nextInt(15);
-        }
+        int tpLoc = this.getRandom().nextInt(15);
 
         this.level.playSound(null, this.getX(), this.getY(), this.getZ(), this.getTeleportSound(), SoundCategory.HOSTILE, (float) 1, (float) 1);
 
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getX(), this.getY(), this.getZ(), this.tpParticleAmount, this.tpParticleRadius, this.tpParticleRadius, this.tpParticleRadius, 0.1);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getX(), this.getY(), this.getZ(), this.tpParticleAmount, this.tpParticleRadius, this.tpParticleRadius, this.tpParticleRadius, 0.01);
         }
 
-        BlockPos blockpos = new BlockPos(this.getX() + tpLoc, this.getY(), this.getZ() + tpLoc);
+        BlockPos blockpos = new BlockPos(this.getX() + (isNegVal ? tpLoc : -tpLoc), this.getY(), this.getZ() + (isNegVal ? tpLoc : -tpLoc));
 
         if (!this.level.getBlockState(blockpos).getMaterial().blocksMotion()) {
             this.moveTo(blockpos, 0.0F, 0.0F);

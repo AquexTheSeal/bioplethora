@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 public class AltyrusRangedAttackGoal extends Goal {
 
     private final AltyrusEntity altyrus;
+    public boolean goingUp;
     public int chargeTime;
 
     public AltyrusRangedAttackGoal(AltyrusEntity altyrusEntity) {
@@ -29,6 +30,7 @@ public class AltyrusRangedAttackGoal extends Goal {
 
     public void stop() {
         this.altyrus.setCharging(false);
+        this.goingUp = false;
     }
 
     public boolean canContinueToUse() {
@@ -42,6 +44,10 @@ public class AltyrusRangedAttackGoal extends Goal {
 
             ++this.chargeTime;
 
+            if (this.goingUp) {
+                this.altyrus.setDeltaMovement(this.altyrus.getDeltaMovement().add(0, 0.005, 0));
+            }
+
             World world = this.altyrus.level;
             BlockPos pos = new BlockPos((int) this.altyrus.getX(), (int) this.altyrus.getY(), (int) this.altyrus.getZ());
 
@@ -54,6 +60,7 @@ public class AltyrusRangedAttackGoal extends Goal {
 
             if (this.chargeTime == 10) {
                 world.playSound(null, pos, SoundEvents.ELDER_GUARDIAN_CURSE, SoundCategory.HOSTILE, (float) 1, (float) 1);
+                this.goingUp = true;
             }
 
             if (this.chargeTime == 30) {
@@ -65,6 +72,7 @@ public class AltyrusRangedAttackGoal extends Goal {
             }
             if (this.chargeTime == 40) {
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
+                this.goingUp = false;
             }
             if (this.chargeTime == 45) {
                 world.addFreshEntity(ultimateBellophiteClusterEntity);
