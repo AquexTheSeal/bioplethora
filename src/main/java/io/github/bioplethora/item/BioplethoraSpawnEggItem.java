@@ -1,6 +1,6 @@
 package io.github.bioplethora.item;
 
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
@@ -28,9 +28,9 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
 
     protected static final List<BioplethoraSpawnEggItem> UNADDED_EGGS = new ArrayList<>();
     private final Lazy<? extends EntityType<?>> entityTypeSupplier;
-    private final BioplethoraEntityClasses entityClass;
+    private final BPEntityClasses entityClass;
 
-    public BioplethoraSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, BioplethoraEntityClasses entityClass, Properties properties) {
+    public BioplethoraSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, BPEntityClasses entityClass, Properties properties) {
         super(null, 0xFFFFFFF, 0xFFFFFFF, properties);
         this.entityTypeSupplier = Lazy.of(entityTypeSupplier);
         this.entityClass = entityClass;
@@ -70,15 +70,15 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
     }
 
     public String bpEntityClass() {
-        if (this.entityClass == BioplethoraEntityClasses.ECOHARMLESS) {
+        if (this.entityClass == BPEntityClasses.ECOHARMLESS) {
             return "ecoharmless";
-        } else if (this.entityClass == BioplethoraEntityClasses.PLETHONEUTRAL) {
+        } else if (this.entityClass == BPEntityClasses.PLETHONEUTRAL) {
             return "plethoneutral";
-        } else if (this.entityClass == BioplethoraEntityClasses.DANGERUM) {
+        } else if (this.entityClass == BPEntityClasses.DANGERUM) {
             return "dangerum";
-        } else if (this.entityClass == BioplethoraEntityClasses.HELLSENT) {
+        } else if (this.entityClass == BPEntityClasses.HELLSENT) {
             return "hellsent";
-        } else if (this.entityClass == BioplethoraEntityClasses.ELDERIA) {
+        } else if (this.entityClass == BPEntityClasses.ELDERIA) {
             return "elderia";
         } else {
             return "none";
@@ -86,15 +86,15 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
     }
 
     public TextFormatting bpClassColor() {
-        if (this.entityClass == BioplethoraEntityClasses.ECOHARMLESS) {
+        if (this.entityClass == BPEntityClasses.ECOHARMLESS) {
             return TextFormatting.GREEN;
-        } else if (this.entityClass == BioplethoraEntityClasses.PLETHONEUTRAL) {
+        } else if (this.entityClass == BPEntityClasses.PLETHONEUTRAL) {
             return TextFormatting.YELLOW;
-        } else if (this.entityClass == BioplethoraEntityClasses.DANGERUM) {
+        } else if (this.entityClass == BPEntityClasses.DANGERUM) {
             return TextFormatting.RED;
-        } else if (this.entityClass == BioplethoraEntityClasses.HELLSENT) {
+        } else if (this.entityClass == BPEntityClasses.HELLSENT) {
             return TextFormatting.LIGHT_PURPLE;
-        } else if (this.entityClass == BioplethoraEntityClasses.ELDERIA) {
+        } else if (this.entityClass == BPEntityClasses.ELDERIA) {
             return TextFormatting.AQUA;
         } else {
             return TextFormatting.WHITE;

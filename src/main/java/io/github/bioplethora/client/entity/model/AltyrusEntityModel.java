@@ -29,14 +29,14 @@ public class AltyrusEntityModel extends AnimatedGeoModel<AltyrusEntity> {
     public void setLivingAnimations(AltyrusEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
         super.setLivingAnimations(entity, uniqueID, customPredicate);
 
+        IBone head = this.getAnimationProcessor().getBone("head");
+        IBone altyrus = this.getAnimationProcessor().getBone("altyrus");
+        EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
+
         if (entity.isCharging()) {
-            IBone head = this.getAnimationProcessor().getBone("altyrus");
-            EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
-            head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
-            head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
+            altyrus.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
+            altyrus.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
         } else {
-            IBone head = this.getAnimationProcessor().getBone("head");
-            EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
             head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
             head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
         }

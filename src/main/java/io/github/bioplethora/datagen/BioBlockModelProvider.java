@@ -13,6 +13,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
         super(gen, modid, exFileHelper);
     }
 
+    /**
+     * List every Block that needs data generating here.
+     */
     @Override
     protected void registerModels() {
         this.cubeAll("bellophite_block", bioResLoc("bellophite_block"));

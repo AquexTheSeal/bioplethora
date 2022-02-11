@@ -5,7 +5,7 @@ import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -61,8 +61,8 @@ public class DwarfMossadileEntity extends AnimatableMonsterEntity implements IAn
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.DANGERUM;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.DANGERUM;
     }
 
     @Override

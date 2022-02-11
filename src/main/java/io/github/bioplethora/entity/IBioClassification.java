@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity;
 
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.enums.BPEntityClasses;
 
 public interface IBioClassification {
 
-    BioplethoraEntityClasses getBioplethoraClass();
+    BPEntityClasses getBioplethoraClass();
 }

@@ -55,7 +55,7 @@ public class BPCompatTOP {
                     if (entity instanceof PrimordialRingEntity) {
                         boolean hasOwner = ((PrimordialRingEntity) entity).getOwner() != null;
                         if (hasOwner) {
-                            iProbeInfo.text(CompoundText.createLabelInfo(ownerString, ((PrimordialRingEntity) entity).getOwner().getDisplayName()));
+                            iProbeInfo.text(CompoundText.createLabelInfo(ownerString, ((PrimordialRingEntity) entity).getOwner()));
                         }
                     }
 

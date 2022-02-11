@@ -3,7 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -36,8 +36,8 @@ public class TelemreyeEntity extends AnimatableMonsterEntity implements IAnimata
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.HELLSENT;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.HELLSENT;
     }
 
     protected BodyController createBodyControl() {

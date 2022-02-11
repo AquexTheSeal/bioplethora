@@ -11,6 +11,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
         super(gen, modid, exFileHelper);
     }
 
+    /**
+     * Add blockstates for blocks that needs data generating.
+     */
     @Override
     protected void registerStatesAndModels() {
         this.simpleBlock(BioplethoraBlocks.BELLOPHITE_BLOCK.get());

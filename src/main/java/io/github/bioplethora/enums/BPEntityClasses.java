@@ -1,6 +1,6 @@
-package io.github.bioplethora.registry;
+package io.github.bioplethora.enums;
 
-public enum BioplethoraEntityClasses {
+public enum BPEntityClasses {
 
     NONE("none"),
     ECOHARMLESS("ecoharmless"),
@@ -11,7 +11,7 @@ public enum BioplethoraEntityClasses {
 
     private final String name;
 
-    BioplethoraEntityClasses(String name) {
+    BPEntityClasses(String name) {
         this.name = name;
     }
 

@@ -37,6 +37,9 @@ public class BioAdvancementProvider extends AdvancementProvider {
         this.datagen = generatorIn;
     }
 
+    /**
+     * List every advancements here.
+     */
     public void register(Consumer<Advancement> t) {
         // STARTUP
         Advancement bioStartup = registerAdvancement("bioplethora_startup", FrameType.TASK, BioplethoraItems.BIOPEDIA.get()).addCriterion("startup",

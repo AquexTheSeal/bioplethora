@@ -7,8 +7,8 @@ import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -52,8 +52,8 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.DANGERUM;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.DANGERUM;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

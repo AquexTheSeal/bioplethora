@@ -3,7 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.MyliothanChargeAttackGoal;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -59,8 +59,8 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.ELDERIA;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.ELDERIA;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

@@ -1,7 +1,7 @@
 package io.github.bioplethora.mixin;
 
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class LivingEntityMixin implements IBioClassification {
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.NONE;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.NONE;
     }
 }

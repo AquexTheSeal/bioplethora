@@ -22,6 +22,9 @@ public class BioLootTablesProvider extends LootTableProvider {
         super(dataGeneratorIn);
     }
 
+    /**
+    * List every loot table data generators here.
+    */
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
         return ImmutableList.of(

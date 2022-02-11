@@ -8,8 +8,8 @@ import io.github.bioplethora.entity.ai.HeliobladeCloningGoal;
 import io.github.bioplethora.entity.ai.HeliobladeQuickShootingGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraDamageSources;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import io.github.bioplethora.registry.BioplethoraItems;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.block.BlockState;
@@ -82,8 +82,8 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.HELLSENT;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.HELLSENT;
     }
 
     @Override

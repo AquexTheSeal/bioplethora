@@ -6,8 +6,8 @@ import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
+import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -61,8 +61,8 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.ELDERIA;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.ELDERIA;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

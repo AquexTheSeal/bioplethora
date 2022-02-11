@@ -7,8 +7,8 @@ import io.github.bioplethora.entity.ai.BellophgolemRangedAttackGoal;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -57,8 +57,8 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.HELLSENT;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.HELLSENT;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

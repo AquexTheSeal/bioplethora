@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
@@ -42,8 +42,8 @@ public class CuttlefishEntity extends SquidEntity implements IAnimatable, IBioCl
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.ECOHARMLESS;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.ECOHARMLESS;
     }
 
     @Override

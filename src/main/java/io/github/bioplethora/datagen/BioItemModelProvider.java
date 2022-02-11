@@ -22,9 +22,12 @@ public class BioItemModelProvider extends ItemModelProvider {
         super(generator, Bioplethora.MOD_ID, existingFileHelper);
     }
 
+    /**
+     * Automatically generates item and block item models without existing model files.
+     */
     @Override
     protected void registerModels() {
-        generate(BioplethoraItems.ITEMS.getEntries());
+        generateItems(BioplethoraItems.ITEMS.getEntries());
         generateBlockItems(BioplethoraBlocks.BLOCK_ITEMS.getEntries());
     }
 
@@ -34,15 +37,12 @@ public class BioItemModelProvider extends ItemModelProvider {
         return Bioplethora.MOD_NAME + " Item models";
     }
 
-    private void generate(final Collection<RegistryObject<Item>> items) {
+    private void generateItems(final Collection<RegistryObject<Item>> items) {
         final ModelFile parentGenerated = getExistingFile(mcLoc("item/generated"));
         final ModelFile.ExistingModelFile parentHandheld = getExistingFile(mcLoc("item/handheld"));
 
         for (RegistryObject<Item> item : items) {
             String name = item.getId().getPath();
-
-            if (name.startsWith("enchanted"))
-                name = name.substring(name.indexOf("_") + 1);
 
             if (!existingFileHelper.exists(new ResourceLocation(Bioplethora.MOD_ID, "item/" + name), TEXTURE) || existingFileHelper.exists(new ResourceLocation(Bioplethora.MOD_ID, "item/" + name), MODEL))
                 continue;

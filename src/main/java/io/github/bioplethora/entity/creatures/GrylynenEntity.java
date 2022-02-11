@@ -5,7 +5,7 @@ import io.github.bioplethora.entity.AnimatableMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
-import io.github.bioplethora.registry.BioplethoraEntityClasses;
+import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -83,8 +83,8 @@ public class GrylynenEntity extends AnimatableMonsterEntity implements IAnimatab
     }
 
     @Override
-    public BioplethoraEntityClasses getBioplethoraClass() {
-        return BioplethoraEntityClasses.DANGERUM;
+    public BPEntityClasses getBioplethoraClass() {
+        return BPEntityClasses.DANGERUM;
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
