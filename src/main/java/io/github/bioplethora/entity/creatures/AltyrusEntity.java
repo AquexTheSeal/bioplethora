@@ -167,6 +167,9 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     @Override
     public void aiStep() {
         super.aiStep();
+
+        World world = this.level;
+
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 
         if (this.isDodging()) {
@@ -176,7 +179,41 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
                 this.dodgeTimer = 0;
             }
         }
+
+        if (world instanceof ServerWorld) {
+            ServerWorld serverWorld = ((ServerWorld) world);
+
+            serverWorld.sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 10, 1.2, 1.2, 1.2, 0.01);
+
+            //this.summonParticleBarrier(serverWorld);
+        }
     }
+
+    public void summonParticleBarrier(ServerWorld serverWorld) {
+
+        int loop = 0; int particleAmount = 10; int xRad = 10; int zRad = 10;
+
+        serverWorld.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                (this.getX() + 0.5) + Math.cos(((Math.PI * 2) / particleAmount) * loop) * xRad,
+                this.getY(),
+                (this.getZ() + 0.5) + Math.sin(((Math.PI * 2) / particleAmount) * loop) * zRad,
+                5, 0.5, 1.5, 0.5, 0.01);
+        ++loop;
+    }
+
+    /*public void summonParticleBarrier(ServerWorld serverWorld) {
+
+        int loop = 0; int particleAmount = 10; int xRad = 3; int zRad = 3;
+
+        while (loop < particleAmount) {
+            serverWorld.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                    this.getX() + 0.5 + Math.cos(((Math.PI * 2) / particleAmount) * loop) * xRad,
+                    this.getY(),
+                    this.getZ() + 0.5 + Math.sin(((Math.PI * 2) / particleAmount) * loop) * zRad,
+                    0.0, 1.0, 0.0);
+            ++loop;
+        }
+    }*/
 
     public boolean isNoGravity() {
         return true;

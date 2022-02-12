@@ -55,10 +55,11 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
         ++birthTime;
 
-        this.setDeltaMovement(0, this.getDeltaMovement().y() + 0.5, 0);
+        this.setDeltaMovement(this.getDeltaMovement().add(0, 0.5, 0));
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (this.getX()), (this.getY()), (this.getZ()), (int) 5, 1, 1, 1, 0.1);
+            //this.summonParticleBarrier((ServerWorld) this.level);
         }
 
         if (this.birthTime >= 100) {
@@ -79,6 +80,20 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
                 this.remove();
             }
+        }
+    }
+
+    public void summonParticleBarrier(ServerWorld serverWorld) {
+
+        int loop = 0; int particleAmount = 10; int xRad = 3; int zRad = 3;
+
+        if (loop < particleAmount) {
+            serverWorld.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                    this.getX() + 0.5 + Math.cos(((Math.PI * 2) / particleAmount) * loop) * xRad,
+                    this.getY(),
+                    this.getZ() + 0.5 + Math.sin(((Math.PI * 2) / particleAmount) * loop) * zRad,
+                    0.0, 1.0, 0.0);
+            ++loop;
         }
     }
 

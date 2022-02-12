@@ -56,6 +56,7 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.HELIOBLADE.get(), HeliobladeEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.TELEMREYE.get(), TelemreyeEntityRender::new);
 
         //Elderia
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS.get(), AltyrusEntityRender::new);

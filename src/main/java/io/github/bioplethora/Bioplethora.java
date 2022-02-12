@@ -1,6 +1,6 @@
 package io.github.bioplethora;
 
-import io.github.bioplethora.datagen.*;
+import io.github.bioplethora.generators.*;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;

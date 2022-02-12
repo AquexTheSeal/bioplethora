@@ -35,6 +35,7 @@ public class BioplethoraEntityAttributes {
         event.put(BioplethoraEntities.HELIOBLADE.get(), HeliobladeEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.TELEMREYE.get(), TelemreyeEntity.setCustomAttributes().build());
 
         //Elderia
         event.put(BioplethoraEntities.ALTYRUS.get(), AltyrusEntity.setCustomAttributes().build());

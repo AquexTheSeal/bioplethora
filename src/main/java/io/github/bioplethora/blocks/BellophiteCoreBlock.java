@@ -113,6 +113,9 @@ public class BellophiteCoreBlock extends Block {
                     //bottom layer
                     bDesBl(world, b1);bDesBl(world, b2);bDesBl(world, b3);bDesBl(world, b4);
 
+                    long time = world.getLevelData().getDayTime();
+                    ((ServerWorld) world).setWeatherParameters(0, (int) time, true, true);
+
                     ((ServerWorld) world).sendParticles(ParticleTypes.POOF, x, y, z, 40, 0.4, 0.4, 0.4, 0.1);
                     ServerWorld serverworld = (ServerWorld) world;
                     BlockPos blockpos = (new BlockPos(x, y, z));

@@ -1,4 +1,4 @@
-package io.github.bioplethora.datagen;
+package io.github.bioplethora.generators;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;

@@ -1,4 +1,4 @@
-package io.github.bioplethora.datagen;
+package io.github.bioplethora.generators;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BioplethoraBlocks;
@@ -52,14 +52,13 @@ public class BioItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private void generateBlockItems(final Collection<RegistryObject<Item>> itemBlocks) {
-        for (RegistryObject<Item> item : itemBlocks) {
+    private void generateBlockItems(final Collection<RegistryObject<Item>> blockItems) {
+        for (RegistryObject<Item> item : blockItems) {
             String name = item.getId().getPath();
             if (!existingFileHelper.exists(new ResourceLocation(Bioplethora.MOD_ID, "block/" + name), MODEL) || existingFileHelper.exists(new ResourceLocation(Bioplethora.MOD_ID, "item/" + name), MODEL))
                 continue;
             Bioplethora.LOGGER.info(item.getId());
             withExistingParent(name, new ResourceLocation(Bioplethora.MOD_ID, "block/" + name));
-
         }
     }
 }
