@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.block.BlockState;
@@ -41,14 +41,14 @@ import java.util.EnumSet;
 import java.util.List;
 
 
-public class TelemreyeEntity extends AnimatableMonsterEntity implements IAnimatable, IBioClassification, IFlyingAnimal {
+public class TelemreyeEntity extends BPMonsterEntity implements IAnimatable, IBioClassification, IFlyingAnimal {
     
     private final AnimationFactory factory = new AnimationFactory(this);
     private TelemreyeEntity.AttackPhase attackPhase = TelemreyeEntity.AttackPhase.CIRCLE;
     private Vector3d moveTargetPoint = Vector3d.ZERO;
     private BlockPos anchorPoint = BlockPos.ZERO;
 
-    public TelemreyeEntity(EntityType<? extends AnimatableMonsterEntity> type, World worldIn) {
+    public TelemreyeEntity(EntityType<? extends BPMonsterEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
         this.moveControl = new TelemreyeEntity.MoveHelperController(this);

@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -10,10 +10,10 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public abstract class AnimatableTameableEntity extends TameableEntity implements IAnimatable {
+public abstract class BPMonsterEntity extends MonsterEntity implements IAnimatable {
 
-    protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableTameableEntity.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableTameableEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
     /*protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(AnimatableHostileEntity.class, DataSerializers.BOOLEAN);*/
 
     protected boolean isAnimationFinished = false;
@@ -22,7 +22,7 @@ public abstract class AnimatableTameableEntity extends TameableEntity implements
      * @param type
      * @param worldIn
      */
-    public AnimatableTameableEntity(EntityType<? extends TameableEntity> type, World worldIn) {
+    public BPMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
     }
 

@@ -1,18 +1,18 @@
-package io.github.bioplethora.entity.ai.monster;
+package io.github.bioplethora.entity.ai.tameable;
 
-import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.BPAnimalEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
 
-public abstract class MonsterAnimatableMovableGoal extends MonsterAnimatableGoal {
+public abstract class BPAnimalMovableGoal extends BPAnimalGoal {
 
     protected Path path;
 
     @Override
     abstract public boolean canUse();
 
-    protected boolean isExecutable(MonsterAnimatableMovableGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
+    protected boolean isExecutable(BPAnimalMovableGoal goal, BPAnimalEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) return false;
@@ -20,7 +20,7 @@ public abstract class MonsterAnimatableMovableGoal extends MonsterAnimatableGoal
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
             goal.path = attacker.getNavigation().createPath(target, 0);
 
-            return attacker.getSensing().canSee(target) && distance >= MonsterAnimatableGoal.getAttackReachSq(attacker, target);
+            return attacker.getSensing().canSee(target) && distance >= BPAnimalGoal.getAttackReachSq(attacker, target);
         }
         return false;
     }

@@ -1,10 +1,10 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
+import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.item.weapons.StellarScytheItem;
 import io.github.bioplethora.registry.BioplethoraItems;
@@ -48,7 +48,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
+public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public GaugalemEntity(EntityType<? extends MonsterEntity> type, World world) {
@@ -80,8 +80,8 @@ public class GaugalemEntity extends AnimatableMonsterEntity implements IAnimatab
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new MonsterAnimatableMoveToTargetGoal(this, 0.75, 8));
-        this.goalSelector.addGoal(1, new MonsterAnimatableMeleeGoal(this, 40, 0.5, 0.6));
+        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 0.75, 8));
+        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));

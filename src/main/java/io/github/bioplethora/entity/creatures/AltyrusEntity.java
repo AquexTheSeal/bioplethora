@@ -1,11 +1,11 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.AnimatableMonsterEntity;
+import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
-import io.github.bioplethora.entity.ai.monster.MonsterAnimatableMeleeGoal;
+import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
@@ -43,7 +43,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
+public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_SUMMONING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
@@ -53,7 +53,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
     public BlockPos boundOrigin;
     public int dodgeTimer;
 
-    public AltyrusEntity(EntityType<? extends AnimatableMonsterEntity> type, World world) {
+    public AltyrusEntity(EntityType<? extends BPMonsterEntity> type, World world) {
         super(type, world);
         this.noCulling = true;
         this.moveControl = new AltyrusEntity.MoveHelperController(this);
@@ -83,7 +83,7 @@ public class AltyrusEntity extends AnimatableMonsterEntity implements IAnimatabl
         super.registerGoals();
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
         this.goalSelector.addGoal(3, new AltyrusEntity.ChargeAttackGoal());
-        this.goalSelector.addGoal(3, new MonsterAnimatableMeleeGoal(this, 60, 0.5, 0.6));
+        this.goalSelector.addGoal(3, new BPMonsterMeleeGoal(this, 60, 0.5, 0.6));
         this.goalSelector.addGoal(4, new AltyrusEntity.MoveRandomGoal());
         this.goalSelector.addGoal(4, new AltyrusRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new AltyrusSummonGolemGoal(this));

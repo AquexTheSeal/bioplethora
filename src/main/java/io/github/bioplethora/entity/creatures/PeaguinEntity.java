@@ -1,13 +1,13 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.AnimatableTameableEntity;
+import io.github.bioplethora.entity.BPAnimalEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
-import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMeleeGoal;
-import io.github.bioplethora.entity.ai.tameable.AnimalAnimatableMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
+import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.block.BlockState;
@@ -50,7 +50,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatable, IAngerable, IBioClassification {
+public class PeaguinEntity extends BPAnimalEntity implements IAnimatable, IAngerable, IBioClassification {
 
     private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(PeaguinEntity.class, DataSerializers.INT);
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
@@ -59,7 +59,7 @@ public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatab
 
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public PeaguinEntity(EntityType<? extends AnimatableTameableEntity> type, World worldIn) {
+    public PeaguinEntity(EntityType<? extends BPAnimalEntity> type, World worldIn) {
         super(type, worldIn);
         this.setTame(false);
         this.setPathfindingMalus(PathNodeType.WATER, 0.0F);
@@ -89,8 +89,8 @@ public class PeaguinEntity extends AnimatableTameableEntity implements IAnimatab
         super.registerGoals();
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new SitGoal(this));
-        this.goalSelector.addGoal(4, new AnimalAnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(4, new AnimalAnimatableMeleeGoal(this, 20, 0.5, 0.75));
+        this.goalSelector.addGoal(4, new BPAnimalMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(4, new BPAnimalMeleeGoal(this, 20, 0.5, 0.75));
         this.goalSelector.addGoal(5, new PeaguinFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));

@@ -10,7 +10,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public abstract class SummonableMonsterEntity extends AnimatableMonsterEntity implements IAnimatable {
+public abstract class SummonableMonsterEntity extends BPMonsterEntity implements IAnimatable {
 
     private LivingEntity owner;
     private boolean hasLimitedLife;

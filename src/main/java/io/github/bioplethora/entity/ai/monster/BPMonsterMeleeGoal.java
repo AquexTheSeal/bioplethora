@@ -1,6 +1,6 @@
-package io.github.bioplethora.entity.ai.tameable;
+package io.github.bioplethora.entity.ai.monster;
 
-import io.github.bioplethora.entity.AnimatableTameableEntity;
+import io.github.bioplethora.entity.BPMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
@@ -9,23 +9,19 @@ import net.minecraft.util.Hand;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
-public class AnimalAnimatableMeleeGoal extends AnimalAnimatableGoal {
-    private final double animationLength;
-    private final BiFunction<Double, Double, Boolean> attackPredicate;
-    private boolean hasHit;
+public class BPMonsterMeleeGoal extends BPMonsterGoal {
+    public double animationLength;
+    public BiFunction<Double, Double, Boolean> attackPredicate;
+    public boolean hasHit;
 
-    /**
-     * @param entity          Attacking entity
-     * @param animationLength
-     */
-    public AnimalAnimatableMeleeGoal(AnimatableTameableEntity entity, double animationLength, double attackBegin, double attackEnd) {
+    public BPMonsterMeleeGoal(BPMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
         this.entity = entity;
         this.animationLength = animationLength;
         this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
         this.setFlags(EnumSet.of(Flag.LOOK));
     }
 
-    private static boolean checkIfValid(AnimalAnimatableMeleeGoal goal, AnimatableTameableEntity attacker, LivingEntity target) {
+    public static boolean checkIfValid(BPMonsterMeleeGoal goal, BPMonsterEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
@@ -33,7 +29,7 @@ public class AnimalAnimatableMeleeGoal extends AnimalAnimatableGoal {
                 return false;
             }
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= AnimalAnimatableGoal.getAttackReachSq(attacker, target)) return true;
+            if (distance <= BPMonsterGoal.getAttackReachSq(attacker, target)) return true;
         }
         attacker.setAttacking(false);
         return false;
@@ -43,14 +39,14 @@ public class AnimalAnimatableMeleeGoal extends AnimalAnimatableGoal {
     public boolean canUse() {
         if (Math.random() <= 0.1) return false;
 
-        return AnimalAnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
+        return BPMonsterMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
     }
 
     @Override
     public boolean canContinueToUse() {
         if (Math.random() <= 0.1) return true;
 
-        return AnimalAnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
+        return BPMonsterMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
     }
 
     @Override
