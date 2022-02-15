@@ -205,6 +205,13 @@
   "subtitles.bioplethora.helioblade.hurt": "Helioblade hurts",
   "subtitles.bioplethora.helioblade.death": "Helioblade dies",
 
+  "subtitles.bioplethora.altyrus.idle": "Altyrus groans",
+  "subtitles.bioplethora.altyrus.charge": "Altyrus charges",
+
+  "subtitles.bioplethora.alphem.step": "Alphem Walks",
+
+  "subtitles.bioplethora.alphem_king.roar": "Alphem King Roars",
+
   "death.attack.indirectCastration.indirect_0": "%s was castrated into shreds by %s",
   "death.attack.indirectCastration.indirect_1": "%s was brutally obliterated by %s",
   "death.attack.indirectCastration.indirect_2": "%s was blasted out by %s",

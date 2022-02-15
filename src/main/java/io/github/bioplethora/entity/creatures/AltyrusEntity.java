@@ -93,6 +93,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
         this.goalSelector.addGoal(8, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, false));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemKingEntity.class, false));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
     }
 
@@ -242,7 +243,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundEvents.BLAZE_AMBIENT;
+        return BioplethoraSoundEvents.ALTYRUS_IDLE.get();
     }
 
     @Override
@@ -364,7 +365,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
             LivingEntity livingentity = AltyrusEntity.this.getTarget();
             Vector3d vector3d = livingentity.getEyePosition(1.0F);
             AltyrusEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
-            AltyrusEntity.this.playSound(SoundEvents.VEX_CHARGE, 1.0F, 1.0F);
+            AltyrusEntity.this.playSound(BioplethoraSoundEvents.ALTYRUS_CHARGE.get(), 1.0F, 1.0F);
         }
         
         public void stop() {

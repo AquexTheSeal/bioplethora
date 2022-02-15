@@ -3,9 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.ai.AlphemKingMeeleeGoal;
-import io.github.bioplethora.entity.ai.AlphemKingSecondMeeleeGoal;
-import io.github.bioplethora.entity.ai.AlphemKingSmashingGoal;
+import io.github.bioplethora.entity.ai.*;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
@@ -44,9 +42,10 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IBioClassification {
 
-    protected static final DataParameter<Boolean> ATTACKING2 = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> ROARING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> ATTACKING2 = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> ROARING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CHARGING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
     public boolean explodedOnDeath = false;
     public int attackPhase;
@@ -81,9 +80,12 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(1, new AlphemKingMeeleeGoal(this, 80, 0.5, 0.6));
         this.goalSelector.addGoal(1, new AlphemKingSecondMeeleeGoal(this, 80, 0.5, 0.6));
         this.goalSelector.addGoal(1, new AlphemKingSmashingGoal(this, 120, 0.8, 0.9));
+        this.goalSelector.addGoal(2, new AlphemKingRangedAttackGoal(this));
+        this.goalSelector.addGoal(3, new AlphemKingRoarGoal(this));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, AlphemKingEntity.class)).setAlertOthers());
     }
 
@@ -101,6 +103,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         if (this.isDeadOrDying()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.death", true));
+            return PlayState.CONTINUE;
+        }
+
+        if (this.getRoaring()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.roar", true));
             return PlayState.CONTINUE;
         }
 
@@ -256,12 +263,17 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.playSound(SoundEvents.IRON_GOLEM_STEP, 0.15f, 1);
     }
 
+    public SoundEvent getRoarSound() {
+        return BioplethoraSoundEvents.ALPHEM_KING_ROAR.get();
+    }
+
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ATTACKING2, false);
         this.entityData.define(SMASHING, false);
         this.entityData.define(ROARING, false);
+        this.entityData.define(CHARGING, false);
     }
 
     public boolean getAttacking2() {
@@ -287,4 +299,13 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public void setRoaring(boolean smashing) {
         this.entityData.set(ROARING, smashing);
     }
+
+    public boolean isCharging() {
+        return this.entityData.get(CHARGING);
+    }
+
+    public void setCharging(boolean charging) {
+        this.entityData.set(CHARGING, charging);
+    }
+
 }

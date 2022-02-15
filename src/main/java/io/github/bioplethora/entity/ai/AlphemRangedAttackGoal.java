@@ -7,12 +7,12 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-public class WindblazeRangedAttackGoal extends Goal {
+public class AlphemRangedAttackGoal extends Goal {
 
     private final AlphemEntity alphem;
     public int chargeTime;
 
-    public WindblazeRangedAttackGoal(AlphemEntity alphemEntity) {
+    public AlphemRangedAttackGoal(AlphemEntity alphemEntity) {
         this.alphem = alphemEntity;
     }
 

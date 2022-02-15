@@ -42,6 +42,18 @@
       "bioplethora:myliothan_idle"
     ]
   },
+  "altyrus_idle": {
+    "subtitle": "subtitles.bioplethora.altyrus.idle",
+    "sounds": [
+      "bioplethora:altyrus_idle"
+    ]
+  },
+  "altyrus_charge": {
+    "subtitle": "subtitles.bioplethora.altyrus.charge",
+    "sounds": [
+      "bioplethora:altyrus_charge"
+    ]
+  },
   "helioblade_idle": {
     "subtitle": "subtitles.bioplethora.helioblade.idle",
     "sounds": [
@@ -58,6 +70,18 @@
     "subtitle": "subtitles.bioplethora.helioblade.death",
     "sounds": [
       "bioplethora:helioblade_death"
+    ]
+  },
+  "alphem_step": {
+    "subtitle": "subtitles.bioplethora.alphem.step",
+    "sounds": [
+      "bioplethora:alphem_step"
+    ]
+  },
+  "alphem_king_roar": {
+    "subtitle": "subtitles.bioplethora.alphem_king.roar",
+    "sounds": [
+      "bioplethora:alphem_king_roar"
     ]
   }
 }

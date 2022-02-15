@@ -24,4 +24,10 @@ public class BioplethoraSoundEvents {
     public static final RegistryObject<SoundEvent> HELIOBLADE_HURT = SOUNDS.register("helioblade_hurt", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "helioblade_hurt")));
     public static final RegistryObject<SoundEvent> HELIOBLADE_DEATH = SOUNDS.register("helioblade_death", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "helioblade_death")));
 
+    public static final RegistryObject<SoundEvent> ALTYRUS_IDLE = SOUNDS.register("altyrus_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_idle")));
+    public static final RegistryObject<SoundEvent> ALTYRUS_CHARGE = SOUNDS.register("altyrus_charge", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_charge")));
+
+    public static final RegistryObject<SoundEvent> ALPHEM_STEP = SOUNDS.register("alphem_step", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "alphem_step")));
+
+    public static final RegistryObject<SoundEvent> ALPHEM_KING_ROAR = SOUNDS.register("alphem_king_roar", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "alphem_king_roar")));
 }
