@@ -61,6 +61,7 @@ public class ModClientRegister {
         //Elderia
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS.get(), AltyrusEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.MYLIOTHAN.get(), MyliothanEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM_KING.get(), AlphemKingEntityRender::new);
 
         //projectiles
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.MAGMA_BOMB.get(), (rendererManager) -> new SpriteRenderer<>(rendererManager, mcClient.getItemRenderer()));

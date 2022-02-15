@@ -13,6 +13,7 @@
   "entity.bioplethora.dwarf_mossadile": "Dwarf Mossadile",
   "entity.bioplethora.myliothan": "Myliothan",
   "entity.bioplethora.helioblade": "Helioblade",
+  "entity.bioplethora.alphem_king": "Alphem King",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -42,6 +43,7 @@
   "item.bioplethora.dwarf_mossadile_spawn_egg": "Dwarf Mossadile Spawn Egg",
   "item.bioplethora.myliothan_spawn_egg": "Myliothan Spawn Egg",
   "item.bioplethora.helioblade_spawn_egg": "Helioblade Spawn Egg",
+  "item.bioplethora.alphem_king_spawn_egg": "Helioblade Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",

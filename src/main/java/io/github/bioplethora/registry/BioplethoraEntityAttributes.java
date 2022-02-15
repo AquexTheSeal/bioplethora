@@ -40,6 +40,7 @@ public class BioplethoraEntityAttributes {
         //Elderia
         event.put(BioplethoraEntities.ALTYRUS.get(), AltyrusEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.MYLIOTHAN.get(), MyliothanEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.ALPHEM_KING.get(), AlphemKingEntity.setCustomAttributes().build());
 
         //Others
         event.put(BioplethoraEntities.PRIMORDIAL_RING.get(), PrimordialRingEntity.setCustomAttributes().build());

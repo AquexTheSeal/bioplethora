@@ -9,7 +9,7 @@ import java.util.Random;
 public abstract class BPMonsterGoal extends Goal {
 
     protected static final Random RANDOM = new Random();
-    protected BPMonsterEntity entity;
+    public BPMonsterEntity entity;
     protected long tickDelta;
     protected double animationProgress;
     private long lastGameTime;

@@ -50,6 +50,7 @@ public class BioplethoraEntities {
     //Elderia
     public static final RegistryObject<EntityType<AltyrusEntity>> ALTYRUS = ENTITIES.register("altyrus", () -> EntityType.Builder.of(AltyrusEntity::new, EntityClassification.MONSTER).sized(3.5f, 4.75f).build(new ResourceLocation(Bioplethora.MOD_ID, "altyrus").toString()));
     public static final RegistryObject<EntityType<MyliothanEntity>> MYLIOTHAN = ENTITIES.register("myliothan", () -> EntityType.Builder.of(MyliothanEntity::new, EntityClassification.MONSTER).sized(25.5f, 6f).build(new ResourceLocation(Bioplethora.MOD_ID, "myliothan").toString()));
+    public static final RegistryObject<EntityType<AlphemKingEntity>> ALPHEM_KING = ENTITIES.register("alphem_king", () -> EntityType.Builder.of(AlphemKingEntity::new, EntityClassification.MONSTER).sized(3.5f, 4.75f).build(new ResourceLocation(Bioplethora.MOD_ID, "alphem_king").toString()));
 
     //others ---
     //Projectiles
