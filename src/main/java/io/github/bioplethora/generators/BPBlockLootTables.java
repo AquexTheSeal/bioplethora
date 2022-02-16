@@ -25,6 +25,19 @@ public class BPBlockLootTables extends BlockLootTables {
                 -> createSingleItemTableWithSilkTouch(sTouch,  BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get()));
         add(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
                 -> createSingleItemTableWithSilkTouch(sTouch,  BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
+
+        // Petrawood woodset
+        dropSelf(BioplethoraBlocks.PETRAWOOD_LOG.get());
+        dropSelf(BioplethoraBlocks.PETRAWOOD_WOOD.get());
+        dropSelf(BioplethoraBlocks.PETRAWOOD_PLANKS.get());
+        add(BioplethoraBlocks.PETRAWOOD_LEAVES.get(), createShearsOnlyDrop(BioplethoraBlocks.PETRAWOOD_LEAVES.get()));
+
+        dropSelf(BioplethoraBlocks.PETRAWOOD_FENCE.get());
+        dropSelf(BioplethoraBlocks.PETRAWOOD_FENCE_GATE.get());
+        dropSelf(BioplethoraBlocks.PETRAWOOD_SLAB.get());
+        dropSelf(BioplethoraBlocks.PETRAWOOD_PRESSURE_PLATE.get());
+        dropSelf(BioplethoraBlocks.PETRAWOOD_STAIRS.get());
+        dropSelf(BioplethoraBlocks.PETRAWOOD_BUTTON.get());
     }
 
     @Override

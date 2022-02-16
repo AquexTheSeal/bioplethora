@@ -129,9 +129,9 @@ public class ServerWorldEvents {
             AlphemKingEntity king = (AlphemKingEntity) event.getEntity();
 
             if (king.isBarriered()) {
-                event.setCanceled(true);
                 king.playSound(SoundEvents.GLASS_BREAK, 1.5F, 1.0F);
                 king.setBarriered(false);
+                event.setCanceled(true);
             }
         }
     }

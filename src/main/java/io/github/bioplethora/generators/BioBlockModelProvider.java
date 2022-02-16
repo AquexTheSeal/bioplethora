@@ -3,7 +3,6 @@ package io.github.bioplethora.generators;
 import io.github.bioplethora.Bioplethora;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -27,14 +26,53 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("green_grylynen_crystal_block", bioResLoc("green_grylynen_crystal_block"));
         this.cubeAll("yellow_grylynen_crystal_block", bioResLoc("yellow_grylynen_crystal_block"));
         this.cubeAll("red_grylynen_crystal_block", bioResLoc("red_grylynen_crystal_block"));
+
+        // Petrawood woodset
+        this.cubeColumnHorizontal("petrawood_log", bioResLoc("petrawood_log_side"), bioResLoc("petrawood_log_top"));
+        this.cubeAll("petrawood_wood", bioResLoc("petrawood_log_side"));
+        this.cubeAll("petrawood_planks", bioResLoc("petrawood_planks"));
+        this.cubeAll("petrawood_leaves", bioResLoc("petrawood_leaves"));
+
+        this.fencePost("petrawood_fence", bioResLoc("petrawood_planks"));
+        this.fenceInventory("petrawood_fence", bioResLoc("petrawood_planks"));
+        this.fenceSide("petrawood_fence", bioResLoc("petrawood_planks"));
+        this.fenceGateWall("petrawood_fence_gate", bioResLoc("petrawood_planks"));
+        this.fenceGateWallOpen("petrawood_fence_gate", bioResLoc("petrawood_planks"));
+        this.fenceGate("petrawood_fence_gate", bioResLoc("petrawood_planks"));
+        this.fenceGateOpen("petrawood_fence_gate", bioResLoc("petrawood_planks"));
+        this.slab("petrawood_slab", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
+        this.slabTop("petrawood_slab", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
+        this.pressurePlateUp("petrawood_pressure_plate", bioResLoc("petrawood_planks"));
+        this.pressurePlateDown("petrawood_pressure_plate", bioResLoc("petrawood_planks"));
+        this.stairs("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
+        this.stairsInner("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
+        this.stairsOuter("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
+        this.button("petrawood_button", bioResLoc("petrawood_planks"));
+        this.buttonPressed("petrawood_button", bioResLoc("petrawood_planks"));
+        this.buttonInventory("petrawood_button", bioResLoc("petrawood_planks"));
     }
 
     private ResourceLocation bioResLoc(String texture) {
         return new ResourceLocation(Bioplethora.MOD_ID, BLOCK_FOLDER + "/" + texture);
     }
 
-    @Override
-    public BlockModelBuilder cubeAll(String name, ResourceLocation texture) {
-        return singleTexture(name, mcLoc(BLOCK_FOLDER + "/cube_all"), "all", texture);
+    public void pressurePlateUp(String name, ResourceLocation all) {
+        singleTexture(name, new ResourceLocation("minecraft", BLOCK_FOLDER + "/pressure_plate_up"), all);
+    }
+
+    public void pressurePlateDown(String name, ResourceLocation all) {
+        singleTexture(name, new ResourceLocation("minecraft", BLOCK_FOLDER + "/pressure_plate_down"), all);
+    }
+
+    public void button(String name, ResourceLocation texture) {
+        singleTexture(name, mcLoc(BLOCK_FOLDER + "/button"), texture);
+    }
+
+    public void buttonPressed(String name, ResourceLocation texture) {
+        singleTexture(name, mcLoc(BLOCK_FOLDER + "/button_pressed"), texture);
+    }
+
+    public void buttonInventory(String name, ResourceLocation texture) {
+        singleTexture(name, mcLoc(BLOCK_FOLDER + "/button_inventory"), texture);
     }
 }

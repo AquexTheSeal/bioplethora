@@ -2,9 +2,7 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.BellophiteCoreBlock;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
@@ -38,14 +36,22 @@ public class BioplethoraBlocks {
     public static final RegistryObject<Block> RED_GRYLYNEN_CRYSTAL_BLOCK = registerFireResBlock("red_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS)
             .strength(0.5F).sound(SoundType.NETHER_GOLD_ORE).noOcclusion().lightLevel((level) -> 12)), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
-    /* todo: Petrawood set for Rocky Woodlands biome
-    public static final RegistryObject<Block> PETRAWOOD_LOG = registerBlock("petrawood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE)
+    // todo: Petrawood set for Rocky Woodlands biome
+    public static final RegistryObject<RotatedPillarBlock> PETRAWOOD_LOG = registerBlock("petrawood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE)
+            .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> PETRAWOOD_WOOD = registerBlock("petrawood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE)
             .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> PETRAWOOD_PLANKS = registerBlock("petrawood_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS)
             .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<Block> PETRAWOOD_LEAVES = registerBlock("petrawood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)
+    public static final RegistryObject<LeavesBlock> PETRAWOOD_LEAVES = registerBlock("petrawood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)
             .strength(2.4F).sound(SoundType.GRASS).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
-     */
+
+    public static final RegistryObject<FenceBlock> PETRAWOOD_FENCE = registerBlock("petrawood_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.PETRAWOOD_PLANKS.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<FenceGateBlock> PETRAWOOD_FENCE_GATE = registerBlock("petrawood_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.PETRAWOOD_PLANKS.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SlabBlock> PETRAWOOD_SLAB = registerBlock("petrawood_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.PETRAWOOD_PLANKS.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<PressurePlateBlock> PETRAWOOD_PRESSURE_PLATE = registerBlock("petrawood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, AbstractBlock.Properties.copy(BioplethoraBlocks.PETRAWOOD_PLANKS.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<StairsBlock> PETRAWOOD_STAIRS = registerBlock("petrawood_stairs", () -> new StairsBlock(BioplethoraBlocks.PETRAWOOD_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(BioplethoraBlocks.PETRAWOOD_PLANKS.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<WoodButtonBlock> PETRAWOOD_BUTTON = registerBlock("petrawood_button", () -> new WoodButtonBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.PETRAWOOD_PLANKS.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
     //=================================================================================
     //                       REGULAR BLOCK CONSTRUCTORS

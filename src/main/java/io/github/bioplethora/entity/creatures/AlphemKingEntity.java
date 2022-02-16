@@ -89,9 +89,14 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 1.0F, 8));
+
+        // 1st phase meelee
         this.goalSelector.addGoal(1, new AlphemKingMeeleeGoal(this, 80, 0.5, 0.6));
+        // 2nd phase meelee
         this.goalSelector.addGoal(1, new AlphemKingSecondMeeleeGoal(this, 80, 0.5, 0.6));
+        // 3rd phase meelee
         this.goalSelector.addGoal(1, new AlphemKingSmashingGoal(this, 120, 0.8, 0.9));
+
         this.goalSelector.addGoal(2, new AlphemKingRangedAttackGoal(this));
         this.goalSelector.addGoal(3, new AlphemKingRoarGoal(this));
         this.goalSelector.addGoal(4, new AlphemKingJumpGoal(this));
@@ -167,8 +172,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         if (!this.isBarriered()) {
             ++barrierTimer;
              if (barrierTimer == 100 + this.getRandom().nextInt(100)) {
-                 this.setBarriered(true);
                  barrierTimer = 0;
+                 this.setBarriered(true);
              }
         }
 
