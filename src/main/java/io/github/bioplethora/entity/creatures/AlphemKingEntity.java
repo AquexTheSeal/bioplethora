@@ -8,15 +8,13 @@ import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -29,7 +27,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -40,15 +40,27 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
 public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IBioClassification {
 
     protected static final DataParameter<Boolean> ATTACKING2 = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    // TODO: 16/02/2022 Give a summoning effect to the Alphems.
     protected static final DataParameter<Boolean> ROARING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CHARGING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    // TODO: 16/02/2022 Add an animation for shooting/charging. Add a new and stronger projectile to replace the Windblaze projectile.
+    protected static final DataParameter<Boolean> CHARGING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    // TODO: 16/02/2022 Add a jumping animation and a jumping AI goal.
+    protected static final DataParameter<Boolean> JUMPING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    // TODO: 16/02/2022 Add a ramming animation and a ramming AI goal.
+    protected static final DataParameter<Boolean> RAMMING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BARRIERED = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BERSERKED = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
     public boolean explodedOnDeath = false;
+    public double healthRegenTimer = 0;
     public int attackPhase;
+    public int barrierTimer;
 
     public AlphemKingEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
@@ -58,9 +70,9 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 15 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10.5)
-                .add(Attributes.ATTACK_DAMAGE, 15 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 30 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 8.0D)
-                .add(Attributes.MAX_HEALTH, 270 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 320 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.20F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64.0D);
@@ -82,6 +94,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(1, new AlphemKingSmashingGoal(this, 120, 0.8, 0.9));
         this.goalSelector.addGoal(2, new AlphemKingRangedAttackGoal(this));
         this.goalSelector.addGoal(3, new AlphemKingRoarGoal(this));
+        this.goalSelector.addGoal(4, new AlphemKingJumpGoal(this));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
@@ -105,34 +118,92 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.death", true));
             return PlayState.CONTINUE;
         }
-
+        if (this.isJumping()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.jump", true));
+            return PlayState.CONTINUE;
+        }
         if (this.getRoaring()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.roar", true));
             return PlayState.CONTINUE;
         }
-
         if (this.getSmashing()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.attack_2", true));
             return PlayState.CONTINUE;
         }
-
         if (this.getAttacking2()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.attack_1", true));
             return PlayState.CONTINUE;
         }
-
         if (this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.attack_0", true));
             return PlayState.CONTINUE;
         }
-
-        if (event.isMoving()) {
+        if (event.isMoving() && this.isBerserked()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.walk_berserk", true));
+            return PlayState.CONTINUE;
+        }
+        if (event.isMoving() && !this.isBerserked()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.walk", true));
             return PlayState.CONTINUE;
         }
-
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.idle", true));
         return PlayState.CONTINUE;
+    }
+
+    public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        if (worldIn instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(17.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(380 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(380 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        }
+        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+    }
+
+    public void aiStep() {
+        super.aiStep();
+        World world = this.level;
+
+        if (!this.isBarriered()) {
+            ++barrierTimer;
+             if (barrierTimer == 100 + this.getRandom().nextInt(100)) {
+                 this.setBarriered(true);
+                 barrierTimer = 0;
+             }
+        }
+
+        this.setBerserked(this.getHealth() <= this.getMaxHealth() / 2);
+
+        if (this.isBerserked()) {
+            double d0 = this.random.nextGaussian() * 0.02D;
+            double d1 = this.random.nextGaussian() * 0.02D;
+            double d2 = this.random.nextGaussian() * 0.02D;
+            world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
+            world.addParticle(ParticleTypes.POOF, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
+
+            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.35F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get());
+            if (!BioplethoraConfig.getHellMode) {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(37.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            } else {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(45.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            }
+
+            if (!(this.getHealth() <= 5)) {
+                ++healthRegenTimer;
+                if (healthRegenTimer == 10) {
+                    this.setHealth(this.getHealth() + 1 + this.getRandom().nextInt(2));
+                    healthRegenTimer = 0;
+                }
+            }
+
+        } else {
+            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.20F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get());
+            if (!BioplethoraConfig.getHellMode) {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(30.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            } else {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            }
+        }
     }
 
     public void phaseAttack(LivingEntity entity, World world) {
@@ -227,6 +298,9 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         World world = entity.level;
 
         if (entity instanceof LivingEntity) {
+
+            entity.invulnerableTime = 0;
+
             if (this.attackPhase == 0) {
                 this.phaseAttack((LivingEntity) entity, world);
             }
@@ -274,6 +348,10 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.entityData.define(SMASHING, false);
         this.entityData.define(ROARING, false);
         this.entityData.define(CHARGING, false);
+        this.entityData.define(JUMPING, false);
+        this.entityData.define(RAMMING, false);
+        this.entityData.define(BARRIERED, false);
+        this.entityData.define(BERSERKED, false);
     }
 
     public boolean getAttacking2() {
@@ -306,6 +384,38 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public void setCharging(boolean charging) {
         this.entityData.set(CHARGING, charging);
+    }
+
+    public boolean isJumping() {
+        return this.entityData.get(JUMPING);
+    }
+
+    public void setJumping(boolean jumping) {
+        this.entityData.set(JUMPING, jumping);
+    }
+
+    public boolean isRamming() {
+        return this.entityData.get(RAMMING);
+    }
+
+    public void setRamming(boolean ramming) {
+        this.entityData.set(RAMMING, ramming);
+    }
+
+    public boolean isBarriered() {
+        return this.entityData.get(BARRIERED);
+    }
+
+    public void setBarriered(boolean barriered) {
+        this.entityData.set(BARRIERED, barriered);
+    }
+
+    public boolean isBerserked() {
+        return this.entityData.get(BERSERKED);
+    }
+
+    public void setBerserked(boolean berserked) {
+        this.entityData.set(BERSERKED, berserked);
     }
 
 }

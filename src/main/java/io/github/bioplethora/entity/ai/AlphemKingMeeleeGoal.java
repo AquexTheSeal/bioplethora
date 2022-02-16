@@ -28,6 +28,10 @@ public class AlphemKingMeeleeGoal extends BPMonsterMeleeGoal {
             if (attacker.attackPhase != 0) {
                 return false;
             }
+
+            if (attacker.getRoaring()) {
+                return false;
+            }
             
             double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
             if (distance <= AlphemKingMeeleeGoal.getAttackReachSq(attacker, target)) return true;

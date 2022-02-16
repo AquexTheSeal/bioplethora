@@ -244,7 +244,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         abstractarrowentity.setSoundEvent(SoundEvents.CROSSBOW_HIT);
         abstractarrowentity.setShotFromCrossbow(true);
         abstractarrowentity.setNoGravity(true);
-        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + 7.5);
+        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + 3);
         int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, stack);
         if (i > 0) {
             abstractarrowentity.setPierceLevel((byte)i);

@@ -1,10 +1,12 @@
 package io.github.bioplethora.entity.ai;
 
+import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
@@ -54,15 +56,17 @@ public class AlphemKingRoarGoal extends Goal {
             }
 
             if (this.roarTime >= 320) {
-                for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, this.king.getBoundingBox().inflate(20, 0.5, 20))) {
+                for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, this.king.getBoundingBox().inflate(15, 1.5, 15))) {
 
                     if (areaEnt != this.king) {
-                        areaEnt.knockback((float) 0.5D * 0.5F, MathHelper.sin(this.king.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.king.yRot * ((float) Math.PI / 180F)));
+                        areaEnt.knockback((float) areaEnt.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE) * 0.5F,
+                                MathHelper.sin(this.king.yRot * ((float) Math.PI / 180F)),
+                                -MathHelper.cos(this.king.yRot * ((float) Math.PI / 180F)));
                     }
                 }
 
                 if (world instanceof ServerWorld) {
-                    ((ServerWorld) world).sendParticles(ParticleTypes.CLOUD, this.king.getX(), this.king.getY(), this.king.getZ(), 15, 2, 2, 2, 0.001);
+                    ((ServerWorld) world).sendParticles(ParticleTypes.CLOUD, this.king.getX(), this.king.getY(), this.king.getZ(), 30, 5, 2, 5, 0.01);
                 }
             }
 
@@ -87,6 +91,28 @@ public class AlphemKingRoarGoal extends Goal {
                 AlphemEntity alphem4 = BioplethoraEntities.ALPHEM.get().create(world);
                 this.summonAlphem(alphem4, aPos4, world);
 
+                if (BioplethoraConfig.getHellMode) {
+
+                    BlockPos aPos5 = new BlockPos((int) this.king.getX(), (int) this.king.getY(), (int) this.king.getZ() + 4);
+                    BlockPos aPos6 = new BlockPos((int) this.king.getX() + 4, (int) this.king.getY(), (int) this.king.getZ());
+                    BlockPos aPos7 = new BlockPos((int) this.king.getX() - 4, (int) this.king.getY(), (int) this.king.getZ());
+                    BlockPos aPos8 = new BlockPos((int) this.king.getX(), (int) this.king.getY(), (int) this.king.getZ() - 4);
+
+                    this.explodeOnBlockPos(aPos5, world);
+                    this.explodeOnBlockPos(aPos6, world);
+                    this.explodeOnBlockPos(aPos7, world);
+                    this.explodeOnBlockPos(aPos8, world);
+
+                    AlphemEntity alphem5 = BioplethoraEntities.ALPHEM.get().create(world);
+                    this.summonAlphem(alphem5, aPos5, world);
+                    AlphemEntity alphem6 = BioplethoraEntities.ALPHEM.get().create(world);
+                    this.summonAlphem(alphem6, aPos6, world);
+                    AlphemEntity alphem7 = BioplethoraEntities.ALPHEM.get().create(world);
+                    this.summonAlphem(alphem7, aPos7, world);
+                    AlphemEntity alphem8 = BioplethoraEntities.ALPHEM.get().create(world);
+                    this.summonAlphem(alphem8, aPos8, world);
+                }
+
                 this.roarTime = this.king.getRandom().nextInt(40);
             }
         }
@@ -96,6 +122,16 @@ public class AlphemKingRoarGoal extends Goal {
 
     public void explodeOnBlockPos(BlockPos pos, World world) {
         world.explode(null, DamageSource.indirectMagic(this.king, this.king), null, pos.getX(), pos.getY(), pos.getZ(), 1.5F, false, Explosion.Mode.NONE);
+
+        if (world instanceof ServerWorld) {
+
+            double d0 = this.king.getRandom().nextGaussian() * 0.02D;
+            double d1 = this.king.getRandom().nextGaussian() * 0.02D;
+            double d2 = this.king.getRandom().nextGaussian() * 0.02D;
+
+            world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.getX(), pos.getY(), pos.getZ(), d0, d1, d2);
+            world.addParticle(ParticleTypes.POOF, pos.getX(), pos.getY(), pos.getZ(), d0, d1, d2);
+        }
     }
 
     public void summonAlphem(AlphemEntity alphem, BlockPos pos, World world) {

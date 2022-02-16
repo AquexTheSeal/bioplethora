@@ -1,6 +1,7 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
@@ -120,6 +121,17 @@ public class ServerWorldEvents {
 
             if (!dsVoid) {
                 event.setAmount(1);
+            }
+        }
+
+        if (event.getEntity() instanceof AlphemKingEntity) {
+
+            AlphemKingEntity king = (AlphemKingEntity) event.getEntity();
+
+            if (king.isBarriered()) {
+                event.setCanceled(true);
+                king.playSound(SoundEvents.GLASS_BREAK, 1.5F, 1.0F);
+                king.setBarriered(false);
             }
         }
     }
