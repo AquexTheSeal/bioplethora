@@ -20,15 +20,17 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BioplethoraBlocks.MIRESTONE.get());
 
         add(BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch,  BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get()));
+                -> createSingleItemTableWithSilkTouch(sTouch, BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get()));
         add(BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch,  BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get()));
+                -> createSingleItemTableWithSilkTouch(sTouch, BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get()));
         add(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch,  BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
+                -> createSingleItemTableWithSilkTouch(sTouch, BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
 
         // Petrawood woodset
         dropSelf(BioplethoraBlocks.PETRAWOOD_LOG.get());
         dropSelf(BioplethoraBlocks.PETRAWOOD_WOOD.get());
+        dropSelf(BioplethoraBlocks.STRIPPED_PETRAWOOD_LOG.get());
+        dropSelf(BioplethoraBlocks.STRIPPED_PETRAWOOD_WOOD.get());
         dropSelf(BioplethoraBlocks.PETRAWOOD_PLANKS.get());
         add(BioplethoraBlocks.PETRAWOOD_LEAVES.get(), createShearsOnlyDrop(BioplethoraBlocks.PETRAWOOD_LEAVES.get()));
 
@@ -42,8 +44,6 @@ public class BPBlockLootTables extends BlockLootTables {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return ForgeRegistries.BLOCKS.getValues().stream().filter(b ->
-                Objects.requireNonNull(b.getRegistryName()).getNamespace()
-                        .equals(Bioplethora.MOD_ID)).collect(Collectors.toList());
+        return ForgeRegistries.BLOCKS.getValues().stream().filter(b -> Objects.requireNonNull(b.getRegistryName()).getNamespace().equals(Bioplethora.MOD_ID)).collect(Collectors.toList());
     }
 }

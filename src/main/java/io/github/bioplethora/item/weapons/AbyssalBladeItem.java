@@ -41,6 +41,15 @@ public class AbyssalBladeItem extends SwordItem {
         if ((living.getMainHandItem().getItem() == stack.getItem()) || (living.getOffhandItem().getItem() == stack.getItem())) {
             living.addEffect(new EffectInstance(Effects.WATER_BREATHING, 5));
         }
+
+        // Wastelands of Baedoor Integration
+        if (!stack.getOrCreateTag().getBoolean("is_NBT_set")) {
+            stack.getOrCreateTag().putBoolean("is_NBT_set", true);
+
+            stack.getOrCreateTag().putDouble("sabre_defence", 10);
+            stack.getOrCreateTag().putDouble("sabre_cooldown", 15);
+            stack.getOrCreateTag().putDouble("sabre_harm", 1);
+        }
     }
 
     public int getUseDuration(ItemStack p_77626_1_) {

@@ -39,6 +39,8 @@ public class BioBlockstateProvider extends BlockStateProvider {
         // Petrawood woodset
         this.fixedLogBlock(BioplethoraBlocks.PETRAWOOD_LOG.get());
         this.woodBlock(BioplethoraBlocks.PETRAWOOD_WOOD.get(), bioResLoc("petrawood_log_side"));
+        this.fixedLogBlock(BioplethoraBlocks.STRIPPED_PETRAWOOD_LOG.get());
+        this.woodBlock(BioplethoraBlocks.STRIPPED_PETRAWOOD_WOOD.get(), bioResLoc("stripped_petrawood_log_side"));
         this.simpleBlock(BioplethoraBlocks.PETRAWOOD_PLANKS.get());
         this.simpleBlock(BioplethoraBlocks.PETRAWOOD_LEAVES.get());
 

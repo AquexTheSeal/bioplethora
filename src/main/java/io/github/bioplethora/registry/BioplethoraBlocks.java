@@ -41,6 +41,10 @@ public class BioplethoraBlocks {
             .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> PETRAWOOD_WOOD = registerBlock("petrawood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE)
             .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_PETRAWOOD_LOG = registerBlock("stripped_petrawood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.PETRAWOOD_LOG.get())
+            .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_PETRAWOOD_WOOD = registerBlock("stripped_petrawood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.PETRAWOOD_WOOD.get())
+            .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> PETRAWOOD_PLANKS = registerBlock("petrawood_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS)
             .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<LeavesBlock> PETRAWOOD_LEAVES = registerBlock("petrawood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)

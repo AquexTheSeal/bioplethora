@@ -6,6 +6,7 @@ import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
+import io.github.bioplethora.event.helper.GrylynenSpawnHelper;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.SwervingTotemItem;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
@@ -31,6 +32,7 @@ import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -68,6 +70,11 @@ public class ServerWorldEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onBlockBreak(BlockEvent.BreakEvent event) {
+        GrylynenSpawnHelper.onBlockBreak(event);
     }
 
     @SubscribeEvent

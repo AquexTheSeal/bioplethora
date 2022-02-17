@@ -38,6 +38,8 @@ public class BioBlockModelProvider extends BlockModelProvider {
         // Petrawood woodset
         this.cubeColumnHorizontal("petrawood_log", bioResLoc("petrawood_log_side"), bioResLoc("petrawood_log_top"));
         this.cubeAll("petrawood_wood", bioResLoc("petrawood_log_side"));
+        this.cubeColumnHorizontal("stripped_petrawood_log", bioResLoc("stripped_petrawood_log_side"), bioResLoc("stripped_petrawood_log_top"));
+        this.cubeAll("stripped_petrawood_wood", bioResLoc("stripped_petrawood_log_side"));
         this.cubeAll("petrawood_planks", bioResLoc("petrawood_planks"));
         this.cubeAll("petrawood_leaves", bioResLoc("petrawood_leaves"));
 
