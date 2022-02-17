@@ -46,4 +46,20 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 
 **Discord:** https://discord.gg/kr5kSzpJMW
 
+# Bioplethora Integrations List
+
+### REQUIRED DEPENDENCY
+
+- GeckoLib: https://www.curseforge.com/minecraft/mc-mods/geckolib
+- Patchouli: https://www.curseforge.com/minecraft/mc-mods/patchouli
+
+### FINISHED / CURRENT
+
+- The One Probe: https://www.curseforge.com/minecraft/mc-mods/the-one-probe
+- Wastelands of Baedoor: https://www.curseforge.com/minecraft/mc-mods/wastelands-of-baedoor
+
+### PLANNED
+
+- Dynamic Trees: https://www.curseforge.com/minecraft/mc-mods/dynamictrees
+
 
