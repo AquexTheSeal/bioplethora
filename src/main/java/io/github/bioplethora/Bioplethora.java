@@ -81,6 +81,9 @@ public class Bioplethora {
             dataGenerator.addProvider(new BioItemModelProvider(dataGenerator, efh));
             dataGenerator.addProvider(new BioRecipeProvider(dataGenerator));
             dataGenerator.addProvider(new BioLootTablesProvider(dataGenerator));
+
+            dataGenerator.addProvider(new BioBlockTagsProvider(dataGenerator, efh));
+            dataGenerator.addProvider(new BioEntityTagsProvider(dataGenerator, efh));
         }
     }
 }

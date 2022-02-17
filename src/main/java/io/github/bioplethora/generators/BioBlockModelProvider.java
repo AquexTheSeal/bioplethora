@@ -6,10 +6,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import javax.annotation.Nonnull;
+
 public class BioBlockModelProvider extends BlockModelProvider {
 
     public BioBlockModelProvider(DataGenerator gen, String modid, ExistingFileHelper exFileHelper) {
         super(gen, modid, exFileHelper);
+    }
+
+    @Nonnull
+    @Override
+    public String getName() {
+        return Bioplethora.MOD_ID + " Block Models";
     }
 
     /**
@@ -56,23 +64,27 @@ public class BioBlockModelProvider extends BlockModelProvider {
         return new ResourceLocation(Bioplethora.MOD_ID, BLOCK_FOLDER + "/" + texture);
     }
 
+    private ResourceLocation mcResLoc(String texture) {
+        return new ResourceLocation("minecraft", BLOCK_FOLDER + "/" + texture);
+    }
+
     public void pressurePlateUp(String name, ResourceLocation all) {
-        singleTexture(name, new ResourceLocation("minecraft", BLOCK_FOLDER + "/pressure_plate_up"), all);
+        singleTexture(name, mcResLoc("pressure_plate_up"), all);
     }
 
     public void pressurePlateDown(String name, ResourceLocation all) {
-        singleTexture(name, new ResourceLocation("minecraft", BLOCK_FOLDER + "/pressure_plate_down"), all);
+        singleTexture(name, mcResLoc("pressure_plate_down"), all);
     }
 
-    public void button(String name, ResourceLocation texture) {
-        singleTexture(name, mcLoc(BLOCK_FOLDER + "/button"), texture);
+    public void button(String name, ResourceLocation all) {
+        singleTexture(name, mcResLoc("button"), all);
     }
 
-    public void buttonPressed(String name, ResourceLocation texture) {
-        singleTexture(name, mcLoc(BLOCK_FOLDER + "/button_pressed"), texture);
+    public void buttonPressed(String name, ResourceLocation all) {
+        singleTexture(name + "_pressed", mcResLoc("button_pressed"), all);
     }
 
-    public void buttonInventory(String name, ResourceLocation texture) {
-        singleTexture(name, mcLoc(BLOCK_FOLDER + "/button_inventory"), texture);
+    public void buttonInventory(String name, ResourceLocation all) {
+        singleTexture(name + "_inventory", mcResLoc("button_inventory"), all);
     }
 }
