@@ -1,4 +1,4 @@
-package io.github.bioplethora.generators;
+package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BioplethoraBlocks;
@@ -23,7 +23,7 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
         tag(BioplethoraTags.Blocks.GRYLYNEN_UNBREAKABLE)
                 .add(BioplethoraBlocks.BELLOPHITE_BLOCK.get())
                 .add(BioplethoraBlocks.BELLOPHITE_CORE_BLOCK.get())
-                .add(Blocks.BEACON).add(Blocks.OBSIDIAN)
+                .add(Blocks.BEACON).add(Blocks.OBSIDIAN).add(Blocks.CRYING_OBSIDIAN)
                 .addTag(BlockTags.WITHER_IMMUNE)
         ;
 

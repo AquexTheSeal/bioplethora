@@ -6,15 +6,6 @@ import net.minecraft.util.SoundEvents;
 
 public enum BPGrylynenTier implements IGrylynenTier {
 
-    /**
-     * @param name - Name of the type
-     * @param crystalColor - Color of the Crystal under the Grylynen (Only allowed: green, yellow, red)
-     * @param tier - Corresponding Item Tier
-     * @param tierDmg - Grylynen Tier Base Attack Damage
-     * @param tierHP - Grylynen Tier HP on Default
-     * @param hellTierHP - Grylynen Tier HP on Hellmode Config
-     */
-
     WOODEN("wooden", "green", 5, 3, 4, SoundEvents.WOOD_BREAK),
     STONE("stone", "green", 6, 4, 6, SoundEvents.STONE_BREAK),
     GOLDEN("golden", "yellow", 6, 4, 6, SoundEvents.NETHER_GOLD_ORE_BREAK),

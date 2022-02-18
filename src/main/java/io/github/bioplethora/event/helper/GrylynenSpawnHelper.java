@@ -2,6 +2,7 @@ package io.github.bioplethora.event.helper;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
+import io.github.bioplethora.registry.BioplethoraEffects;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraTags;
 import net.minecraft.entity.SpawnReason;
@@ -19,7 +20,7 @@ public class GrylynenSpawnHelper {
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
 
         IWorld IWorld = event.getWorld();
-        if (IWorld instanceof World) {
+        if ((IWorld instanceof World) && !(event.getPlayer().hasEffect(BioplethoraEffects.SPIRIT_FISSION.get()))) {
 
             World world = (World) event.getWorld();
             double x = event.getPos().getX(), y = event.getPos().getY(), z = event.getPos().getZ();

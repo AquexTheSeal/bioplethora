@@ -80,6 +80,7 @@
   "item.bioplethora.primordial_staff": "Primordial Staff",
   "item.bioplethora.totem_of_swerving": "Totem of Swerving",
   "item.bioplethora.wind_arrow": "Wind Arrow",
+  "item.bioplethora.spirit_fission_charm": "Spirit Fission Charm",
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
@@ -151,6 +152,9 @@
   "item.bioplethora.wind_arrow.windy_essence.skill": "Windy Essence",
   "item.bioplethora.wind_arrow.windy_essence.desc": "This arrow homes on to the nearest entity, and it slows all nearby entities on impact.",
 
+  "item.bioplethora.spirit_fission_charm.spirit_fission.skill": "Spirit Fission",
+  "item.bioplethora.spirit_fission_charm.spirit_fission.desc": "This charm gives the Spirit Fission effect while it's in the player's inventory. Grylynens don't spawn when the player who destroyed the block has the Spirit Fission effect.",
+
   "item.bioplethora.peaguin_scale_armor.grace_embrace.skill":"Grace Embrace",
   "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
 
@@ -158,6 +162,8 @@
   "item.bioplethora.phantom_chime.flapping_up.desc": "On right click on the ground, this chime casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
   "item.bioplethora.magma_bomb.bombardment.skill": "Bombardment",
   "item.bioplethora.magma_bomb.bombardment.desc": "Throws a projectile that explodes on impact.",
+
+  "effect.bioplethora.spirit_fission": "Spirit Fission",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora. There is a hell mode option in the configs that enhances and strengthens most creatures, you can check it out!",

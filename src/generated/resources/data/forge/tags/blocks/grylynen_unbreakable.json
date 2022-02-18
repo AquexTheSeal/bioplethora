@@ -5,6 +5,7 @@
     "bioplethora:bellophite_core_block",
     "minecraft:beacon",
     "minecraft:obsidian",
+    "minecraft:crying_obsidian",
     "#minecraft:wither_immune"
   ]
 }

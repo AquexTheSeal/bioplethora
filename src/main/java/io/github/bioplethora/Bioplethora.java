@@ -1,6 +1,6 @@
 package io.github.bioplethora;
 
-import io.github.bioplethora.generators.*;
+import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
@@ -44,6 +44,7 @@ public class Bioplethora {
         BioplethoraEnchantments.ENCHANTMENTS.register(bus);
         BioplethoraParticles.PARTICLES.register(bus);
         BioplethoraBiomes.BIOMES.register(bus);
+        BioplethoraEffects.EFFECTS.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);

@@ -138,10 +138,6 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
         return PlayState.CONTINUE;
     }
 
-    public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
-        return worldIn.getBlockState(pos).isAir() ? 10.0F : 0.0F;
-    }
-
     public boolean doHurtTarget (Entity entity) {
         boolean flag = super.doHurtTarget(entity);
         double x = entity.getX();

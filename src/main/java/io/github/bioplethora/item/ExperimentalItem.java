@@ -1,4 +1,4 @@
-package io.github.bioplethora.item.weapons;
+package io.github.bioplethora.item;
 
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;

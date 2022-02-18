@@ -1,4 +1,4 @@
-package io.github.bioplethora.generators;
+package io.github.bioplethora.data;
 
 import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraItems;

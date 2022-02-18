@@ -1,4 +1,4 @@
-package io.github.bioplethora.item.weapons;
+package io.github.bioplethora.item.functionals;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
