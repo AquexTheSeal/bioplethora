@@ -5,12 +5,6 @@
     "bioplethora:bellophite_core_block",
     "minecraft:beacon",
     "minecraft:obsidian",
-    "minecraft:bedrock",
-    "minecraft:barrier",
-    "minecraft:diamond_block",
-    "minecraft:netherite_block",
-    "minecraft:ancient_debris",
-    "minecraft:beacon",
     "#minecraft:wither_immune"
   ]
 }

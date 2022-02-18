@@ -3,6 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
+import io.github.bioplethora.entity.IGrylynenTier;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
@@ -18,8 +19,6 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemTier;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.FlyingPathNavigator;
@@ -45,15 +44,15 @@ import javax.annotation.Nullable;
 public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
 
     private final AnimationFactory factory = new AnimationFactory(this);
-    private final Tier grylynenTier;
+    private final IGrylynenTier tier;
     public int col;
 
-    public GrylynenEntity(EntityType<? extends MonsterEntity> type, World worldIn, Tier tier) {
+    public GrylynenEntity(EntityType<? extends MonsterEntity> type, World worldIn, IGrylynenTier IGrylynenTier) {
         super(type, worldIn);
         this.moveControl = new FlyingMovementController(this, 20, true);
         this.noCulling = true;
         this.xpReward = 15;
-        this.grylynenTier = tier;
+        this.tier = IGrylynenTier;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -135,8 +134,8 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
 
         if (iServerWorld instanceof ServerWorld && !config.hellMode.get()) {
             // If not Hellmode
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.getGrylynenTier().getTierHeath());
-            this.setHealth(this.getGrylynenTier().getTierHeath());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.getGrylynenTier().getTierHealth());
+            this.setHealth(this.getGrylynenTier().getTierHealth());
 
         } else if (iServerWorld instanceof ServerWorld && config.hellMode.get()) {
             // If in Hellmode
@@ -153,21 +152,7 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        if (this.getGrylynenTier() == Tier.WOODEN) {
-            return SoundEvents.WOOD_BREAK;
-        } else if (this.getGrylynenTier() == Tier.STONE) {
-            return SoundEvents.STONE_BREAK;
-        } else if (this.getGrylynenTier() == Tier.GOLDEN) {
-            return SoundEvents.NETHER_GOLD_ORE_BREAK;
-        } else if (this.getGrylynenTier() == Tier.IRON) {
-            return SoundEvents.BONE_BLOCK_BREAK;
-        } else if (this.getGrylynenTier() == Tier.DIAMOND) {
-            return SoundEvents.IRON_GOLEM_DAMAGE;
-        } else if (this.getGrylynenTier() == Tier.NETHERITE) {
-            return SoundEvents.NETHERITE_BLOCK_BREAK;
-        } else {
-            throw new IllegalArgumentException("Invalid Grylynen variant- such Grylynen variant does not exist.");
-        }
+        return this.getGrylynenTier().getHurtSound();
     }
 
     @Override
@@ -203,66 +188,7 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
     protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
 
-    public GrylynenEntity.Tier getGrylynenTier() {
-        return grylynenTier;
-    }
-
-    public enum Tier {
-
-        /**
-         * @param name - Name of the type
-         * @param crystalColor - Color of the Crystal under the Grylynen (Only allowed: green, yellow, red)
-         * @param tier - Corresponding Item Tier
-         * @param tierDmg - Grylynen Tier Base Attack Damage
-         * @param tierHP - Grylynen Tier HP on Default
-         * @param hellTierHP - Grylynen Tier HP on Hellmode Config
-         */
-
-        WOODEN("wooden", "green", ItemTier.WOOD, 5, 3, 4),
-        STONE("stone", "green", ItemTier.STONE, 6, 4, 6),
-        GOLDEN("golden", "yellow", ItemTier.GOLD, 6, 4, 6),
-        IRON("iron", "yellow", ItemTier.IRON, 8, 6, 8),
-        DIAMOND("diamond", "red", ItemTier.DIAMOND, 10, 8, 10),
-        NETHERITE("netherite", "red", ItemTier.NETHERITE, 14, 10, 13);
-
-        private final String name;
-        private final String crystalColor;
-        private final IItemTier tier;
-        private final int tierDmg;
-        private final int tierHP;
-        private final int hellTierHP;
-
-        Tier(String name, String crystalColor, IItemTier tier, int tierDmg, int tierHP, int hellTierHP) {
-            this.name = name;
-            this.crystalColor = crystalColor;
-            this.tier = tier;
-            this.tierDmg = tierDmg;
-            this.tierHP = tierHP;
-            this.hellTierHP = hellTierHP;
-        }
-
-        public String getTierName() {
-            return this.name;
-        }
-
-        public String getCrystalColor() {
-            return this.crystalColor;
-        }
-
-        public IItemTier getTierType() {
-            return this.tier;
-        }
-
-        public int getTierDamage() {
-            return this.tierDmg;
-        }
-
-        public int getTierHeath() {
-            return this.tierHP;
-        }
-
-        public int getHellTierHP() {
-            return this.hellTierHP;
-        }
+    public IGrylynenTier getGrylynenTier() {
+        return tier;
     }
 }
