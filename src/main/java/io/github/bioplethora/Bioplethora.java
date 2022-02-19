@@ -41,10 +41,10 @@ public class Bioplethora {
         BioplethoraEntities.ENTITIES.register(bus);
         BioplethoraBlocks.BLOCKS.register(bus);
         BioplethoraSoundEvents.SOUNDS.register(bus);
-        BioplethoraEnchantments.ENCHANTMENTS.register(bus);
         BioplethoraParticles.PARTICLES.register(bus);
         BioplethoraBiomes.BIOMES.register(bus);
         BioplethoraEffects.EFFECTS.register(bus);
+        BioplethoraEnchantments.ENCHANTMENTS.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);
@@ -69,6 +69,7 @@ public class Bioplethora {
 
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("Setting up [" + MOD_NAME + "], thank you for using this mod!");
+
         BPBiomeGeneration.generateBiomes();
     }
 

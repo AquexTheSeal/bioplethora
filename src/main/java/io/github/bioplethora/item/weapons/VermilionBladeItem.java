@@ -1,6 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.projectile.VermilionBladeProjectileEntity;
+import io.github.bioplethora.item.ItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,7 +18,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -71,17 +71,17 @@ public class VermilionBladeItem extends SwordItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.blade_master.skill").withStyle(TextFormatting.GOLD));
+        ItemSettings.bossLevelText(tooltip);
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.blade_master.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.blade_master.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.blade_master.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.pure_energy_concentration.skill").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.pure_energy_concentration.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.pure_energy_concentration.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.pure_energy_concentration.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
     }
 

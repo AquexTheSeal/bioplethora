@@ -210,9 +210,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
     }
 
     public static boolean containsChargedProjectile(ItemStack itemStack, Item item) {
-        return getChargedProjectiles(itemStack).stream().anyMatch((p_220010_1_) -> {
-            return p_220010_1_.getItem() == item;
-        });
+        return getChargedProjectiles(itemStack).stream().anyMatch((stack) -> stack.getItem() == item);
     }
 
     private static void shootProjectile(World level, LivingEntity entity, Hand hand, ItemStack stack, ItemStack itemStack, float p_220016_5_, boolean b, float p_220016_7_, float p_220016_8_, float v) {
@@ -251,9 +249,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
                 projectileentity.shoot(vector3f.x(), vector3f.y(), vector3f.z(), p_220016_7_, p_220016_8_);
             }
 
-            stack.hurtAndBreak(flag ? 3 : 1, entity, (p_220017_1_) -> {
-                p_220017_1_.broadcastBreakEvent(hand);
-            });
+            stack.hurtAndBreak(flag ? 3 : 1, entity, (living) -> living.broadcastBreakEvent(hand));
             level.addFreshEntity(projectileentity);
             level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, p_220016_5_);
         }

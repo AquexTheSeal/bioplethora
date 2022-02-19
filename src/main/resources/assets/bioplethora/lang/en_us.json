@@ -32,6 +32,12 @@
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.bellophite_shield_wave": "Bellophite Shield Wave",
 
+  "enchantment.bioplethora.antibio_ecoharmless": "Antibio: Ecoharmless",
+  "enchantment.bioplethora.antibio_plethoneutral": "Antibio: Plethoneutral",
+  "enchantment.bioplethora.antibio_dangerum": "Antibio: Dangerum",
+  "enchantment.bioplethora.antibio_hellsent": "Antibio: Hellsent",
+  "enchantment.bioplethora.antibio_elderia": "Antibio: Elderia",
+
   "item.bioplethora.crephoxl_spawn_egg": "Crephoxl Spawn Egg",
   "item.bioplethora.alphem_spawn_egg": "Alphem Spawn Egg",
   "item.bioplethora.nandbri_spawn_egg": "Nandbri Spawn Egg",
@@ -224,5 +230,11 @@
 
   "death.attack.helioSlashed.indirect_0": "%s was sliced up by %s",
   "death.attack.helioSlashed.indirect_1": "%s was fatally slashed by %s",
-  "death.attack.helioSlashed.indirect_2": "%s was cut into pieces by %s"
+  "death.attack.helioSlashed.indirect_2": "%s was cut into pieces by %s",
+
+  "enchantment.bioplethora.antibio_ecoharmless.desc": "Deals more damage against entities classified as Ecoharmless.",
+  "enchantment.bioplethora.antibio_plethoneutral.desc": "Deals more damage against entities classified as Plethoneutral.",
+  "enchantment.bioplethora.antibio_dangerum.desc": "Deals more damage against entities classified as Dangerum.",
+  "enchantment.bioplethora.antibio_hellsent.desc": "Deals more damage against entities classified as Hellsent.",
+  "enchantment.bioplethora.antibio_elderia.desc": "Deals more damage against entities classified as Elderia."
 }

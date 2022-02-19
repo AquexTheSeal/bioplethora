@@ -1,6 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.projectile.MagmaBombEntity;
+import io.github.bioplethora.item.ItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -14,7 +15,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
@@ -69,12 +69,12 @@ public class MagmaBombItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.magma_bomb.bombardment.skill").withStyle(TextFormatting.GOLD));
+        ItemSettings.sacredLevelText(tooltip);
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.magma_bomb.bombardment.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.magma_bomb.bombardment.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.magma_bomb.bombardment.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
     }
 }
