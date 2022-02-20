@@ -135,9 +135,9 @@ dependencies {
     //Mixin
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //Enchantment Descriptions
-    implementation fg.deobf("curse.maven:enchantment-descriptions-250419:3566132")
+    //implementation fg.deobf("curse.maven:enchantment-descriptions-250419:3566132")
     //Bookshelf (for EnchDesc)
-    implementation fg.deobf("net.darkhax.bookshelf:Bookshelf-1.16.5:10.0.1")
+    //implementation fg.deobf("net.darkhax.bookshelf:Bookshelf-1.16.5:10.0.1")
     //Off-Hand Combat
     implementation fg.deobf("curse.maven:off-hand-combat-417112:3203449")
 }

@@ -74,7 +74,7 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
             legr.setPositionZ(2F * hurtEasingAnim(i));
         }
 
-        if (entity.hurtTime <= 9) {
+        if (entity.hurtTime <= 9 && entity.hurtTime >= 5) {
             head.setPositionZ(2F * hurtEasingAnim(i));
             bodytop.setPositionZ(-2F * hurtEasingAnim(i));
             bodymid.setPositionZ(2F * hurtEasingAnim(i));

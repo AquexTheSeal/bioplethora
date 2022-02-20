@@ -20,6 +20,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
@@ -32,9 +34,15 @@ public class WindblazeEntity extends DamagingProjectileEntity {
         super(entityType, world);
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public WindblazeEntity(World world, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
+        super(BioplethoraEntities.WINDBLAZE.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
+    }
+
     public WindblazeEntity(World world, LivingEntity entity, double v, double v1, double v2) {
         super(BioplethoraEntities.WINDBLAZE.get(), entity, v, v1, v2, world);
     }
+
 
     @Override
     public void tick() {
