@@ -65,7 +65,7 @@ public class PrimordialStaffItem extends Item {
             if (charge == 20) {
                 worldIn.playSound(null, blockpos, SoundEvents.BEACON_ACTIVATE, SoundCategory.PLAYERS, 1, 1);
                 if (worldIn instanceof ServerWorld) {
-                    ((ServerWorld) worldIn).sendParticles(ParticleTypes.CRIT, (player.getX()), (player.getY()), (player.getZ()), 50, 0.65, 0.65, 0.65, 0.01);
+                    ((ServerWorld) worldIn).sendParticles(ParticleTypes.CRIT, player.getX(), player.getY(), player.getZ(), 50, 0.65, 0.65, 0.65, 0.01);
                 }
 
                 charge = 0;

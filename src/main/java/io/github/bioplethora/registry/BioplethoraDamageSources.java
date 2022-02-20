@@ -20,7 +20,7 @@ public class BioplethoraDamageSources {
     }
 
     public static DamageSource antibio(Entity entity, @Nullable Entity source) {
-        return (new BioplethoraIndirectDamageSource("antibio", entity, source)).bypassArmor().setMagic();
+        return (new BioplethoraIndirectDamageSource("antibio", entity, source)).setMagic();
     }
 
     static class BioplethoraIndirectDamageSource extends EntityDamageSource {
