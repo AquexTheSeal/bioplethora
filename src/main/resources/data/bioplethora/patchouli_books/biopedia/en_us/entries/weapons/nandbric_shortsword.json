@@ -1,0 +1,16 @@
+{
+  "name": "Nandbric Shortsword",
+  "icon": "bioplethora:nandbric_shortsword",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:nandbric_shortsword",
+      "text": "$(l)DESCRIPTION: $(br)$()This shortsword was created with the prized scales and the rare fang of the ruthless Nandbri. Legends say that this weapon brings about bloodlust, vehemence taking over the wielder's mind and dictating the next prey to mutilate."
+    },
+    {
+      "type": "crafting",
+      "recipe":"bioplethora:nandbric_shortsword"
+    }
+  ]
+}

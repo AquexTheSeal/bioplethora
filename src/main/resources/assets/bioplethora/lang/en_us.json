@@ -141,7 +141,7 @@
   "item.bioplethora.arbitrary_ballista.heavy_duty_ballista.desc": "This giant crossbow greatly enhances the shooting projectile's speed and power. When shooting, the crossbow recoils the player forward.",
 
   "item.bioplethora.nandbric_shortsword.toxin_rush.skill": "Toxin Rush",
-  "item.bioplethora.nandbric_shortsword.toxin_rush.desc": "Upon right-clicking at a mob that the crosshair is pointing at, the shortsword takes control over the player's mind, causing the player to rush toward the target and strike it with force upon impact.",
+  "item.bioplethora.nandbric_shortsword.toxin_rush.desc": "Upon right-clicking at a mob that the crosshair is pointing at, the shortsword takes control over the player's mind, causing the player to rush toward the target and strike it with force upon impact. Best used by holding down right-click.",
 
   "item.bioplethora.stellar_scythe.radius_slash.skill": "Radius Slash",
   "item.bioplethora.stellar_scythe.radius_slash.desc": "This weapon could slash through an large area of enemies, the wide slashing ability cools down for 1 second only.",
