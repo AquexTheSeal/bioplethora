@@ -42,17 +42,19 @@ public class AntibioEnchantment extends Enchantment {
     @Override
     public void doPostAttack(LivingEntity pUser, Entity pTarget, int pLevel) {
         super.doPostAttack(pUser, pTarget, pLevel);
-        if (((IBioClassification) pTarget).getBioplethoraClass() == classTarget) {
+        if (pTarget instanceof IBioClassification) {
+            if (((IBioClassification) pTarget).getBioplethoraClass() == classTarget) {
 
-            if (pTarget.level instanceof ServerWorld) {
-                ((ServerWorld) pTarget.level).sendParticles(BioplethoraParticles.ANTIBIO_SPELL.get(),
-                        pTarget.getX(), pTarget.getY() + 1.0, pTarget.getZ(),
-                        10, 0.4, 1, 0.4, 0.05);
+                if (pTarget.level instanceof ServerWorld) {
+                    ((ServerWorld) pTarget.level).sendParticles(BioplethoraParticles.ANTIBIO_SPELL.get(),
+                            pTarget.getX(), pTarget.getY() + 1.0, pTarget.getZ(),
+                            10, 0.4, 1, 0.4, 0.05);
+                }
+                pUser.playSound(SoundEvents.ZOMBIE_INFECT, 1.0F, 1.0F);
+
+                pTarget.invulnerableTime = 0;
+                pTarget.hurt(BioplethoraDamageSources.antibio(pUser, pUser), EnchantmentHelper.getEnchantmentLevel(this, pUser));
             }
-            pUser.playSound(SoundEvents.ZOMBIE_INFECT, 1.0F, 1.0F);
-
-            pTarget.invulnerableTime = 0;
-            pTarget.hurt(BioplethoraDamageSources.antibio(pUser, pUser), EnchantmentHelper.getEnchantmentLevel(this, pUser));
         }
     }
 }
