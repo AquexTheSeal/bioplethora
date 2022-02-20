@@ -36,6 +36,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.ParticleKeyFrameEvent;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -103,13 +104,19 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, AlphemKingEntity.class)).setAlertOthers());
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "alphem_king_controller", 0, this::predicate));
+        AnimationController controller = new AnimationController<>(this, "alphem_king_controller", 0, this::predicate);
+        controller.registerParticleListener(this::particleListener);
+        data.addAnimationController(controller);
+    }
+
+    private <ENTITY extends IAnimatable> void particleListener(ParticleKeyFrameEvent<ENTITY> event) {
     }
 
     @Override
@@ -196,7 +203,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             if (!(this.getHealth() <= 5)) {
                 ++healthRegenTimer;
                 if (healthRegenTimer == 10) {
-                    this.setHealth(this.getHealth() + 1 + this.getRandom().nextInt(2));
+                    this.setHealth(this.getHealth() + 2 + this.getRandom().nextInt(4));
                     healthRegenTimer = 0;
                 }
             }
@@ -207,6 +214,14 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
                 this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(30.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
             } else {
                 this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            }
+
+            if (!(this.getHealth() <= 5)) {
+                ++healthRegenTimer;
+                if (healthRegenTimer == 10) {
+                    this.setHealth(this.getHealth() + 1 + this.getRandom().nextInt(2));
+                    healthRegenTimer = 0;
+                }
             }
         }
     }
@@ -344,6 +359,21 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public SoundEvent getRoarSound() {
         return BioplethoraSoundEvents.ALPHEM_KING_ROAR.get();
+    }
+
+    @Override
+    public boolean ignoreExplosion() {
+        return true;
+    }
+
+    @Override
+    public boolean fireImmune() {
+        return true;
+    }
+
+    @Override
+    public boolean isPushedByFluid() {
+        return false;
     }
 
     @Override

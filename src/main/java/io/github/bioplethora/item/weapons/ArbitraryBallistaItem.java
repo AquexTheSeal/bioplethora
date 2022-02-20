@@ -1,6 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import com.google.common.collect.Lists;
+import io.github.bioplethora.item.ItemSettings;
 import io.github.bioplethora.registry.BioplethoraEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screen.Screen;
@@ -392,12 +393,11 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
                 }
             }
         }
-        tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
+        ItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.skill").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
     }
 

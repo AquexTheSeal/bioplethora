@@ -85,11 +85,11 @@ public class AbyssalBladeItem extends SwordItem {
                     f1 = f1 * (f5 / f4);
                     f2 = f2 * (f5 / f4);
                     f3 = f3 * (f5 / f4);
-                    playerentity.push((double) f1, (double) f2, (double) f3);
+                    playerentity.push(f1, f2, f3);
                     playerentity.startAutoSpinAttack(20);
                     if (playerentity.isOnGround()) {
                         float f6 = 1.1999999F;
-                        playerentity.move(MoverType.SELF, new Vector3d(0.0D, (double) f6, 0.0D));
+                        playerentity.move(MoverType.SELF, new Vector3d(0.0D, f6, 0.0D));
                     }
                     playerentity.awardStat(Stats.ITEM_USED.get(this));
 

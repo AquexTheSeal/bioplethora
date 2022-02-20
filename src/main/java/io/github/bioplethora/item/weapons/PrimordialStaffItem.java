@@ -78,7 +78,7 @@ public class PrimordialStaffItem extends Item {
 
         if (entity instanceof PlayerEntity) {
             PlayerEntity playerIn = (PlayerEntity) entity;
-            BlockPos blockpos = playerIn.blockPosition().offset(worldIn.getRandom().nextBoolean() ? 2 : -2, 0, worldIn.getRandom().nextBoolean() ? 2 : -2);
+            BlockPos blockpos = playerIn.blockPosition().offset(worldIn.getRandom().nextBoolean() ? -2 : 2, 0, worldIn.getRandom().nextBoolean() ? 2 : -2);
 
             int i = this.getUseDuration(stack) - value;
             if (i >= 10) {
