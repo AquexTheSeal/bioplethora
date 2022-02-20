@@ -3,6 +3,7 @@ package io.github.bioplethora.client.entity.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.bioplethora.client.entity.model.AlphemKingEntityModel;
+import io.github.bioplethora.client.entity.render.layer.AlphemKingEntityBarrierLayer;
 import io.github.bioplethora.client.entity.render.layer.AlphemKingEntityGlowLayer;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -17,6 +18,7 @@ public class AlphemKingEntityRender extends GeoEntityRenderer<AlphemKingEntity> 
     public AlphemKingEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new AlphemKingEntityModel());
         this.addLayer(new AlphemKingEntityGlowLayer(this));
+        this.addLayer(new AlphemKingEntityBarrierLayer(this));
         this.shadowRadius = 1.5F;
     }
 

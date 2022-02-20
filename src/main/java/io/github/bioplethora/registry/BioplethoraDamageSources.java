@@ -11,24 +11,24 @@ import javax.annotation.Nullable;
 
 public class BioplethoraDamageSources {
 
-    public static DamageSource indirectCastration(Entity p_76354_0_, @Nullable Entity p_76354_1_) {
-        return (new BioplethoraIndirectDamageSource("indirectCastration", p_76354_0_, p_76354_1_)).bypassArmor().setMagic().setExplosion();
+    public static DamageSource indirectCastration(Entity entity, @Nullable Entity source) {
+        return (new BioplethoraIndirectDamageSource("indirectCastration", entity, source)).bypassArmor().setMagic().setExplosion();
     }
 
-    public static DamageSource helioSlashed(Entity p_76354_0_, @Nullable Entity p_76354_1_) {
-        return (new BioplethoraIndirectDamageSource("helioSlashed", p_76354_0_, p_76354_1_)).bypassArmor().setMagic();
+    public static DamageSource helioSlashed(Entity entity, @Nullable Entity source) {
+        return (new BioplethoraIndirectDamageSource("helioSlashed", entity, source)).bypassArmor().setMagic();
     }
 
-    public static DamageSource antibio(Entity p_76354_0_, @Nullable Entity p_76354_1_) {
-        return (new BioplethoraIndirectDamageSource("antibio", p_76354_0_, p_76354_1_)).bypassArmor();
+    public static DamageSource antibio(Entity entity, @Nullable Entity source) {
+        return (new BioplethoraIndirectDamageSource("antibio", entity, source)).setMagic();
     }
 
     static class BioplethoraIndirectDamageSource extends EntityDamageSource {
 
         Entity indirectOwner;
-        public BioplethoraIndirectDamageSource(String p_i1568_1_, Entity p_i1568_2_, @Nullable Entity p_i1568_3_) {
-            super(p_i1568_1_, p_i1568_2_);
-            indirectOwner = p_i1568_2_;
+        public BioplethoraIndirectDamageSource(String name, Entity entity, @Nullable Entity source) {
+            super(name, entity);
+            indirectOwner = entity;
         }
 
         @Nullable

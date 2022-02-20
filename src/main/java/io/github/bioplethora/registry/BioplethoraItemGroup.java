@@ -1,6 +1,8 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.enchantments.BPEnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +28,8 @@ public class BioplethoraItemGroup {
         public ResourceLocation getBackgroundImage() {
             return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bp_creative_tab.png");
         }
-    };
+
+    }.setEnchantmentCategories(new EnchantmentType[]{BPEnchantmentHelper.BP_WEAPON_AND_AXE});
 
     public static ItemGroup BioplethoraSpawnEggsItemGroup = new ItemGroup("bioplethora_spawn_eggs_item_group") {
 

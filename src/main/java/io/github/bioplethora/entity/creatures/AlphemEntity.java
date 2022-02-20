@@ -3,12 +3,14 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
+import io.github.bioplethora.entity.ai.AlphemRangedAttackGoal;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
-import io.github.bioplethora.entity.ai.WindblazeRangedAttackGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
+import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -25,6 +27,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -78,7 +81,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(2, new BPMonsterMoveToTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(2, new BPMonsterMeleeGoal(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 1.2));
-        this.goalSelector.addGoal(3, new WindblazeRangedAttackGoal(this));
+        this.goalSelector.addGoal(3, new AlphemRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new FollowMobGoal(this, (float) 1, 10, 5));
@@ -88,7 +91,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, HeliobladeEntity.class, true));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(AlphemEntity.class));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, AlphemKingEntity.class).setAlertOthers(AlphemEntity.class));
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -188,6 +191,11 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
         return SoundEvents.RABBIT_DEATH;
+    }
+
+    @Override
+    public void playStepSound(BlockPos pos, BlockState blockIn) {
+        this.playSound(BioplethoraSoundEvents.ALPHEM_STEP.get(), 0.15f, 1);
     }
 
     @OnlyIn(Dist.CLIENT)

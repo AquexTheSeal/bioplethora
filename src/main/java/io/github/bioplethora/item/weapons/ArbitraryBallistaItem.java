@@ -1,15 +1,16 @@
 package io.github.bioplethora.item.weapons;
 
 import com.google.common.collect.Lists;
+import io.github.bioplethora.registry.BioplethoraEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ICrossbowUser;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -19,10 +20,11 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
@@ -50,11 +52,11 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
     }
 
     public Predicate<ItemStack> getSupportedHeldProjectiles() {
-        return ARROW_OR_FIREWORK;
+        return super.getSupportedHeldProjectiles();
     }
 
     public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return ARROW_ONLY;
+        return super.getAllSupportedProjectiles();
     }
 
     public ActionResult<ItemStack> use(World world, PlayerEntity entity, Hand hand) {
@@ -63,7 +65,14 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
             performShooting(world, entity, hand, itemstack, getShootingPower(itemstack), 1.0F);
             setCharged(itemstack, false);
 
-            this.crossbowRecoil(entity, 0.5F, MathHelper.sin(entity.yRot * ((float)Math.PI / 180F)), -MathHelper.cos(entity.yRot * ((float)Math.PI / 180F)));
+            for (LivingEntity area : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(1))) {
+                if (area != entity) {
+                    area.hurt(DamageSource.explosion(entity), 5);
+                }
+                if (area == entity) {
+                    area.hurt(DamageSource.explosion(entity), 1);
+                }
+            }
 
             return ActionResult.consume(itemstack);
         } else if (!entity.getProjectile(itemstack).isEmpty()) {
@@ -79,21 +88,36 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         }
     }
 
-    public void releaseUsing(ItemStack p_77615_1_, World p_77615_2_, LivingEntity p_77615_3_, int p_77615_4_) {
-        int i = this.getUseDuration(p_77615_1_) - p_77615_4_;
-        float f = getPowerForTime(i, p_77615_1_);
-        if (f >= 1.0F && !isCharged(p_77615_1_) && tryLoadProjectiles(p_77615_3_, p_77615_1_)) {
-            setCharged(p_77615_1_, true);
-            SoundCategory soundcategory = p_77615_3_ instanceof PlayerEntity ? SoundCategory.PLAYERS : SoundCategory.HOSTILE;
-            p_77615_2_.playSound(null, p_77615_3_.getX(), p_77615_3_.getY(), p_77615_3_.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
+    @Override
+    public void inventoryTick(ItemStack pStack, World pLevel, Entity pEntity, int pItemSlot, boolean pIsSelected) {
+        super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
+
+        if (pEntity instanceof LivingEntity) {
+            if (((LivingEntity) pEntity).getMainHandItem() == pStack || ((LivingEntity) pEntity).getOffhandItem() == pStack) {
+                if (!((LivingEntity) pEntity).hasEffect(BioplethoraEffects.SPIRIT_FISSION.get())) {
+                    ((LivingEntity) pEntity).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 5));
+                    ((LivingEntity) pEntity).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 5));
+                    ((LivingEntity) pEntity).addEffect(new EffectInstance(Effects.WEAKNESS, 5));
+                }
+            }
         }
     }
 
-    private static boolean tryLoadProjectiles(LivingEntity p_220021_0_, ItemStack p_220021_1_) {
-        int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, p_220021_1_);
+    public void releaseUsing(ItemStack pStack, World pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
+        int i = this.getUseDuration(pStack) - pTimeLeft;
+        float f = getPowerForTime(i, pStack);
+        if (f >= 1.0F && !isCharged(pStack) && tryLoadProjectiles(pEntityLiving, pStack)) {
+            setCharged(pStack, true);
+            SoundCategory soundcategory = pEntityLiving instanceof PlayerEntity ? SoundCategory.PLAYERS : SoundCategory.HOSTILE;
+            pLevel.playSound(null, pEntityLiving.getX(), pEntityLiving.getY(), pEntityLiving.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
+        }
+    }
+
+    private static boolean tryLoadProjectiles(LivingEntity entity, ItemStack itemStack) {
+        int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, itemStack);
         int j = i == 0 ? 1 : 3;
-        boolean flag = p_220021_0_ instanceof PlayerEntity && ((PlayerEntity)p_220021_0_).abilities.instabuild;
-        ItemStack itemstack = p_220021_0_.getProjectile(p_220021_1_);
+        boolean flag = entity instanceof PlayerEntity && ((PlayerEntity)entity).abilities.instabuild;
+        ItemStack itemstack = entity.getProjectile(itemStack);
         ItemStack itemstack1 = itemstack.copy();
 
         for(int k = 0; k < j; ++k) {
@@ -106,7 +130,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
                 itemstack1 = itemstack.copy();
             }
 
-            if (!loadProjectile(p_220021_0_, p_220021_1_, itemstack, k > 0, flag)) {
+            if (!loadProjectile(entity, itemStack, itemstack, k > 0, flag)) {
                 return false;
             }
         }
@@ -114,38 +138,38 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         return true;
     }
 
-    private static boolean loadProjectile(LivingEntity p_220023_0_, ItemStack p_220023_1_, ItemStack p_220023_2_, boolean p_220023_3_, boolean p_220023_4_) {
-        if (p_220023_2_.isEmpty()) {
+    private static boolean loadProjectile(LivingEntity entity, ItemStack itemStack, ItemStack itemStack1, boolean p_220023_3_, boolean p_220023_4_) {
+        if (itemStack1.isEmpty()) {
             return false;
         } else {
-            boolean flag = p_220023_4_ && p_220023_2_.getItem() instanceof ArrowItem;
+            boolean flag = p_220023_4_ && itemStack1.getItem() instanceof ArrowItem;
             ItemStack itemstack;
             if (!flag && !p_220023_4_ && !p_220023_3_) {
-                itemstack = p_220023_2_.split(1);
-                if (p_220023_2_.isEmpty() && p_220023_0_ instanceof PlayerEntity) {
-                    ((PlayerEntity)p_220023_0_).inventory.removeItem(p_220023_2_);
+                itemstack = itemStack1.split(1);
+                if (itemStack1.isEmpty() && entity instanceof PlayerEntity) {
+                    ((PlayerEntity)entity).inventory.removeItem(itemStack1);
                 }
             } else {
-                itemstack = p_220023_2_.copy();
+                itemstack = itemStack1.copy();
             }
 
-            addChargedProjectile(p_220023_1_, itemstack);
+            addChargedProjectile(itemStack, itemstack);
             return true;
         }
     }
 
-    public static boolean isCharged(ItemStack p_220012_0_) {
-        CompoundNBT compoundnbt = p_220012_0_.getTag();
+    public static boolean isCharged(ItemStack itemStack) {
+        CompoundNBT compoundnbt = itemStack.getTag();
         return compoundnbt != null && compoundnbt.getBoolean("Charged");
     }
 
-    public static void setCharged(ItemStack p_220011_0_, boolean p_220011_1_) {
-        CompoundNBT compoundnbt = p_220011_0_.getOrCreateTag();
+    public static void setCharged(ItemStack itemStack, boolean p_220011_1_) {
+        CompoundNBT compoundnbt = itemStack.getOrCreateTag();
         compoundnbt.putBoolean("Charged", p_220011_1_);
     }
 
-    private static void addChargedProjectile(ItemStack p_220029_0_, ItemStack p_220029_1_) {
-        CompoundNBT compoundnbt = p_220029_0_.getOrCreateTag();
+    private static void addChargedProjectile(ItemStack itemStack, ItemStack itemStack1) {
+        CompoundNBT compoundnbt = itemStack.getOrCreateTag();
         ListNBT listnbt;
         if (compoundnbt.contains("ChargedProjectiles", 9)) {
             listnbt = compoundnbt.getList("ChargedProjectiles", 10);
@@ -154,7 +178,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         }
 
         CompoundNBT compoundnbt1 = new CompoundNBT();
-        p_220029_1_.save(compoundnbt1);
+        itemStack1.save(compoundnbt1);
         listnbt.add(compoundnbt1);
         compoundnbt.put("ChargedProjectiles", listnbt);
     }
@@ -175,8 +199,8 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         return list;
     }
 
-    private static void clearChargedProjectiles(ItemStack p_220027_0_) {
-        CompoundNBT compoundnbt = p_220027_0_.getTag();
+    private static void clearChargedProjectiles(ItemStack itemStack) {
+        CompoundNBT compoundnbt = itemStack.getTag();
         if (compoundnbt != null) {
             ListNBT listnbt = compoundnbt.getList("ChargedProjectiles", 9);
             listnbt.clear();
@@ -185,38 +209,37 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
 
     }
 
-    public static boolean containsChargedProjectile(ItemStack p_220019_0_, Item p_220019_1_) {
-        return getChargedProjectiles(p_220019_0_).stream().anyMatch((p_220010_1_) -> {
-            return p_220010_1_.getItem() == p_220019_1_;
-        });
+    public static boolean containsChargedProjectile(ItemStack itemStack, Item item) {
+        return getChargedProjectiles(itemStack).stream().anyMatch((stack) -> stack.getItem() == item);
     }
 
-    private static void shootProjectile(World level, LivingEntity entity, Hand hand, ItemStack p_220016_3_, ItemStack p_220016_4_, float p_220016_5_, boolean b, float p_220016_7_, float p_220016_8_, float v) {
+    private static void shootProjectile(World level, LivingEntity entity, Hand hand, ItemStack stack, ItemStack itemStack, float p_220016_5_, boolean b, float p_220016_7_, float p_220016_8_, float v) {
 
         double x = entity.getX(), y = entity.getY(), z = entity.getZ();
         BlockPos pos = entity.getEntity().blockPosition();
 
         if (!level.isClientSide) {
-            boolean flag = p_220016_4_.getItem() == Items.FIREWORK_ROCKET;
+            boolean flag = itemStack.getItem() == Items.FIREWORK_ROCKET;
             ProjectileEntity projectileentity;
             if (flag) {
-                projectileentity = new FireworkRocketEntity(level, p_220016_4_, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true);
+                projectileentity = new FireworkRocketEntity(level, itemStack, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true);
             } else {
-                projectileentity = getArrow(level, entity, p_220016_3_, p_220016_4_);
+                projectileentity = getArrow(level, entity, stack, itemStack);
                 if (b || v != 0.0F) {
                     ((AbstractArrowEntity)projectileentity).pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
                 }
             }
 
             if ((!(level.isClientSide()))) {
-                ((ServerWorld) level).sendParticles(ParticleTypes.CLOUD, x, y + 1.2, z, 25, 0.75, 0.75, 0.75, 0);
+                ((ServerWorld) level).sendParticles(ParticleTypes.CLOUD, x, y + 1.2, z, 25, 0.75, 0.75, 0.75, 0.01);
+                ((ServerWorld) level).sendParticles(ParticleTypes.EXPLOSION, x, y + 1.2, z, 25, 0.75, 0.75, 0.75, 0);
             }
 
-            level.playSound(null, x, y, z, SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.PLAYERS, 1, 1);
+            level.playSound(null, x, y, z, SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1, 1);
 
             if (entity instanceof ICrossbowUser) {
                 ICrossbowUser icrossbowuser = (ICrossbowUser)entity;
-                icrossbowuser.shootCrossbowProjectile(icrossbowuser.getTarget(), p_220016_3_, projectileentity, v);
+                icrossbowuser.shootCrossbowProjectile(icrossbowuser.getTarget(), stack, projectileentity, v);
             } else {
                 Vector3d vector3d1 = entity.getUpVector(1.0F);
                 Quaternion quaternion = new Quaternion(new Vector3f(vector3d1), v, true);
@@ -226,9 +249,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
                 projectileentity.shoot(vector3f.x(), vector3f.y(), vector3f.z(), p_220016_7_, p_220016_8_);
             }
 
-            p_220016_3_.hurtAndBreak(flag ? 3 : 1, entity, (p_220017_1_) -> {
-                p_220017_1_.broadcastBreakEvent(hand);
-            });
+            stack.hurtAndBreak(flag ? 3 : 1, entity, (living) -> living.broadcastBreakEvent(hand));
             level.addFreshEntity(projectileentity);
             level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, p_220016_5_);
         }
@@ -244,7 +265,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         abstractarrowentity.setSoundEvent(SoundEvents.CROSSBOW_HIT);
         abstractarrowentity.setShotFromCrossbow(true);
         abstractarrowentity.setNoGravity(true);
-        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + 7.5);
+        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + 3);
         int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, stack);
         if (i > 0) {
             abstractarrowentity.setPierceLevel((byte)i);
@@ -270,21 +291,6 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         }
 
         onCrossbowShot(world, entity, stack);
-    }
-
-    public void crossbowRecoil(PlayerEntity entity, float p_233627_1_, double p_233627_2_, double p_233627_4_) {
-        net.minecraftforge.event.entity.living.LivingKnockBackEvent event = net.minecraftforge.common.ForgeHooks.onLivingKnockBack(entity, p_233627_1_, p_233627_2_, p_233627_4_);
-        if(event.isCanceled()) return;
-        p_233627_1_ = event.getStrength();
-        p_233627_2_ = event.getRatioX();
-        p_233627_4_ = event.getRatioZ();
-        p_233627_1_ = (float)((double)p_233627_1_ * (1.0D - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE)));
-        if (!(p_233627_1_ <= 0.0F)) {
-            entity.hasImpulse = true;
-            Vector3d vector3d = entity.getDeltaMovement();
-            Vector3d vector3d1 = (new Vector3d(p_233627_2_, 0.0D, p_233627_4_)).normalize().scale(p_233627_1_);
-            entity.setDeltaMovement(vector3d.x / 2.0D - vector3d1.x, entity.getDeltaMovement().y(), vector3d.z / 2.0D - vector3d1.z);
-        }
     }
 
     private static float[] getShotPitches(Random p_220028_0_) {

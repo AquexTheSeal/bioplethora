@@ -14,7 +14,11 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(AlphemKingEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/alphem_king.png");
+        if (!entity.isBerserked()) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/alphem_king.png");
+        } else {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/alphem_king_berserked.png");
+        }
     }
 
     @Override

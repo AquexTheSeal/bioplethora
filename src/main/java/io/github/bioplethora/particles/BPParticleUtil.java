@@ -19,5 +19,6 @@ public class BPParticleUtil {
 
         engine.register(BioplethoraParticles.WIND_POOF.get(), WindPoofParticle.Factory::new);
         engine.register(BioplethoraParticles.NIGHT_GAZE.get(), NightGazeParticle.Factory::new);
+        engine.register(BioplethoraParticles.ANTIBIO_SPELL.get(), AntibioSpellParticle.Factory::new);
     }
 }

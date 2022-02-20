@@ -25,6 +25,10 @@ public class AlphemKingSecondMeeleeGoal extends AlphemKingMeeleeGoal {
                 return false;
             }
 
+            if (attacker.getRoaring()) {
+                return false;
+            }
+
             double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
             if (distance <= AlphemKingSecondMeeleeGoal.getAttackReachSq(attacker, target)) return true;
         }

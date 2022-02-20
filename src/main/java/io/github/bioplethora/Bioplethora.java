@@ -1,6 +1,6 @@
 package io.github.bioplethora;
 
-import io.github.bioplethora.generators.*;
+import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
@@ -41,9 +41,10 @@ public class Bioplethora {
         BioplethoraEntities.ENTITIES.register(bus);
         BioplethoraBlocks.BLOCKS.register(bus);
         BioplethoraSoundEvents.SOUNDS.register(bus);
-        BioplethoraEnchantments.ENCHANTMENTS.register(bus);
         BioplethoraParticles.PARTICLES.register(bus);
         BioplethoraBiomes.BIOMES.register(bus);
+        BioplethoraEffects.EFFECTS.register(bus);
+        BioplethoraEnchantments.ENCHANTMENTS.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);
@@ -68,6 +69,7 @@ public class Bioplethora {
 
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("Setting up [" + MOD_NAME + "], thank you for using this mod!");
+
         BPBiomeGeneration.generateBiomes();
     }
 
@@ -81,6 +83,10 @@ public class Bioplethora {
             dataGenerator.addProvider(new BioItemModelProvider(dataGenerator, efh));
             dataGenerator.addProvider(new BioRecipeProvider(dataGenerator));
             dataGenerator.addProvider(new BioLootTablesProvider(dataGenerator));
+
+            dataGenerator.addProvider(new BioBlockTagsProvider(dataGenerator, efh));
+            dataGenerator.addProvider(new BioEntityTagsProvider(dataGenerator, efh));
+            dataGenerator.addProvider(new BioItemTagsProvider(dataGenerator, new BioBlockTagsProvider(dataGenerator, efh), efh));
         }
     }
 }

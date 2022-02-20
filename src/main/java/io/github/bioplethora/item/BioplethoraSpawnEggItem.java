@@ -38,8 +38,7 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
     }
 
     public static void initUnaddedEggs() {
-        final Map<EntityType<?>, SpawnEggItem> EGGS = ObfuscationReflectionHelper.getPrivateValue(SpawnEggItem.class,
-                null, "field_195987_b");
+        final Map<EntityType<?>, SpawnEggItem> EGGS = ObfuscationReflectionHelper.getPrivateValue(SpawnEggItem.class, null, "field_195987_b");
         DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior() {
 
             @Override
@@ -70,15 +69,15 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
     }
 
     public String bpEntityClass() {
-        if (this.entityClass == BPEntityClasses.ECOHARMLESS) {
+        if (getEntityClass(BPEntityClasses.ECOHARMLESS)) {
             return "ecoharmless";
-        } else if (this.entityClass == BPEntityClasses.PLETHONEUTRAL) {
+        } else if (getEntityClass(BPEntityClasses.PLETHONEUTRAL)) {
             return "plethoneutral";
-        } else if (this.entityClass == BPEntityClasses.DANGERUM) {
+        } else if (getEntityClass(BPEntityClasses.DANGERUM)) {
             return "dangerum";
-        } else if (this.entityClass == BPEntityClasses.HELLSENT) {
+        } else if (getEntityClass(BPEntityClasses.HELLSENT)) {
             return "hellsent";
-        } else if (this.entityClass == BPEntityClasses.ELDERIA) {
+        } else if (getEntityClass(BPEntityClasses.ELDERIA)) {
             return "elderia";
         } else {
             return "none";
@@ -86,18 +85,22 @@ public class BioplethoraSpawnEggItem extends SpawnEggItem {
     }
 
     public TextFormatting bpClassColor() {
-        if (this.entityClass == BPEntityClasses.ECOHARMLESS) {
+        if (getEntityClass(BPEntityClasses.ECOHARMLESS)) {
             return TextFormatting.GREEN;
-        } else if (this.entityClass == BPEntityClasses.PLETHONEUTRAL) {
+        } else if (getEntityClass(BPEntityClasses.PLETHONEUTRAL)) {
             return TextFormatting.YELLOW;
-        } else if (this.entityClass == BPEntityClasses.DANGERUM) {
+        } else if (getEntityClass(BPEntityClasses.DANGERUM)) {
             return TextFormatting.RED;
-        } else if (this.entityClass == BPEntityClasses.HELLSENT) {
+        } else if (getEntityClass(BPEntityClasses.HELLSENT)) {
             return TextFormatting.LIGHT_PURPLE;
-        } else if (this.entityClass == BPEntityClasses.ELDERIA) {
+        } else if (getEntityClass(BPEntityClasses.ELDERIA)) {
             return TextFormatting.AQUA;
         } else {
             return TextFormatting.WHITE;
         }
+    }
+
+    public boolean getEntityClass(BPEntityClasses entityClass) {
+        return this.entityClass == entityClass;
     }
 }

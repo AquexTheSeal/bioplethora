@@ -28,17 +28,29 @@ public class BioplethoraConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> mobArmorMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobMovementSpeedMultiplier;
 
+        //Ecoharmless
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnCuttlefish;
 
+        //Plethoneutral
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnPeaguin;
 
+        //Dangerum
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnAlphem;
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnGaugalem;
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnDwarfMossadile;
 
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnWoodenGrylynen;
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnStoneGrylynen;
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnGoldenGrylynen;
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnIronGrylynen;
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnDiamondGrylynen;
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnNetheriteGrylynen;
+
+        //Hellsent
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnCrephoxl;
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnBellophgolem;
 
+        //Elderia
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnMyliothan;
 
         Common(ForgeConfigSpec.Builder builder) {
@@ -80,6 +92,13 @@ public class BioplethoraConfig {
             spawnAlphem = builder.define("Enable spawning Alphems", true);
             spawnGaugalem = builder.define("Enable spawning Gaugalems", true);
             spawnDwarfMossadile = builder.define("Enable spawning Dwarf Mossadiles", true);
+
+            spawnWoodenGrylynen = builder.define("Enable spawning Wooden Grylynens", true);
+            spawnStoneGrylynen = builder.define("Enable spawning Stone Grylynens", true);
+            spawnGoldenGrylynen = builder.define("Enable spawning Golden Grylynens", true);
+            spawnIronGrylynen = builder.define("Enable spawning Iron Grylynens", true);
+            spawnDiamondGrylynen = builder.define("Enable spawning Diamond Grylynens", true);
+            spawnNetheriteGrylynen = builder.define("Enable spawning Netherite Grylynens", true);
             builder.pop();
             //Hellsent
             builder.push("Hellsent Mobs");

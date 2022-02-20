@@ -1,6 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.others.BellophiteShieldWaveEntity;
+import io.github.bioplethora.item.ItemSettings;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -17,7 +18,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -103,17 +103,17 @@ public class BellophiteShieldItem extends ShieldItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.recovery_bulwark.skill").withStyle(TextFormatting.GOLD));
+        ItemSettings.sacredLevelText(tooltip);
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.recovery_bulwark.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.recovery_bulwark.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.recovery_bulwark.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.core_impulse.skill").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.core_impulse.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.core_impulse.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.core_impulse.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
     }
 

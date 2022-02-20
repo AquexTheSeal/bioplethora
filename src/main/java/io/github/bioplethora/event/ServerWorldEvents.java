@@ -1,12 +1,14 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
+import io.github.bioplethora.event.helper.GrylynenSpawnHelper;
+import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
-import io.github.bioplethora.item.weapons.SwervingTotemItem;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.entity.Entity;
@@ -30,6 +32,7 @@ import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -67,6 +70,11 @@ public class ServerWorldEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onBlockBreak(BlockEvent.BreakEvent event) {
+        GrylynenSpawnHelper.onBlockBreak(event);
     }
 
     @SubscribeEvent
@@ -120,6 +128,17 @@ public class ServerWorldEvents {
 
             if (!dsVoid) {
                 event.setAmount(1);
+            }
+        }
+
+        if (event.getEntity() instanceof AlphemKingEntity) {
+
+            AlphemKingEntity king = (AlphemKingEntity) event.getEntity();
+
+            if (king.isBarriered()) {
+                king.playSound(SoundEvents.GLASS_BREAK, 1.5F, 1.0F);
+                king.setBarriered(false);
+                event.setCanceled(true);
             }
         }
     }

@@ -25,6 +25,10 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
                 return false;
             }
 
+            if (attacker.getRoaring()) {
+                return false;
+            }
+
             double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
             if (distance <= AlphemKingSmashingGoal.getAttackReachSq(attacker, target)) return true;
         }
@@ -32,7 +36,7 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
         return false;
     }
 
-    protected static double getAttackReachSq(BPMonsterEntity attacker, LivingEntity target) {
+    public static double getAttackReachSq(BPMonsterEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 3F * attacker.getBbWidth() * 3F + target.getBbWidth();
     }
 

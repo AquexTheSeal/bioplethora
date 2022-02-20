@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "side": "bioplethora:block/petrawood_planks",
+    "bottom": "bioplethora:block/petrawood_planks",
+    "top": "bioplethora:block/petrawood_planks"
+  }
+}

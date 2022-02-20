@@ -1,5 +1,6 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.item.ItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -13,7 +14,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -83,22 +83,22 @@ public class CrephoxlHammerItem extends AxeItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("item.bioplethora.sacred_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.dysfunction.skill").withStyle(TextFormatting.GOLD));
+        ItemSettings.sacredLevelText(tooltip);
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.dysfunction.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.dysfunction.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.dysfunction.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.deathsweep.skill").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.deathsweep.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.deathsweep.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.deathsweep.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.aerial_shockwave.skill").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.aerial_shockwave.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.aerial_shockwave.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.crephoxl_hammer.aerial_shockwave.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
     }
 

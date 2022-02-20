@@ -1,13 +1,12 @@
 package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.creatures.AltyrusEntity;
-import io.github.bioplethora.entity.creatures.BellophgolemEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
@@ -42,7 +41,7 @@ public class WindblazeEntity extends DamagingProjectileEntity {
         super.tick();
 
         ++lifespan;
-        if ((lifespan == 100)) {
+        if (lifespan == 100) {
             this.remove();
         }
     }
@@ -51,10 +50,6 @@ public class WindblazeEntity extends DamagingProjectileEntity {
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         AxisAlignedBB entArea = new AxisAlignedBB(this.getX() - (3 / 2d), this.getY() - (3 / 2d), this.getZ() - (3 / 2d), this.getX() + (3 / 2d), this.getY() + (3 / 2d), this.getZ() + (3 / 2d));
-
-        if (Math.random() <= 0.2) {
-            entity.invulnerableTime = 0;
-        }
 
         if (this.level instanceof ServerWorld && this.getOwner() instanceof MobEntity) {
             if (((MobEntity) this.getOwner()).getTarget() != null) {
@@ -78,9 +73,7 @@ public class WindblazeEntity extends DamagingProjectileEntity {
 
     public void hurtEntityArea(LivingEntity entityArea) {
 
-        if (!(entityArea instanceof AltyrusEntity) && !(entityArea instanceof BellophgolemEntity)) {
-            entityArea.setDeltaMovement(entityArea.getDeltaMovement().add(0, 0.75, 0));
-        }
+        entityArea.setDeltaMovement(entityArea.getDeltaMovement().add(0, 0.75 - entityArea.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
 
         if (BioplethoraConfig.COMMON.hellMode.get() && (this.getOwner() != null)) {
             entityArea.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), 3);

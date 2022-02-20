@@ -2,6 +2,7 @@ package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
+import io.github.bioplethora.item.ItemSettings;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -18,7 +19,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -65,16 +65,8 @@ public class PrimordialStaffItem extends Item {
             if (charge == 20) {
                 worldIn.playSound(null, blockpos, SoundEvents.BEACON_ACTIVATE, SoundCategory.PLAYERS, 1, 1);
                 if (worldIn instanceof ServerWorld) {
-                    ((ServerWorld) worldIn).sendParticles(ParticleTypes.CRIT, (player.getX()), (player.getY()), (player.getZ()), 50, 0.65, 0.65, 0.65, 0.01);
+                    ((ServerWorld) worldIn).sendParticles(ParticleTypes.CRIT, player.getX(), player.getY(), player.getZ(), 50, 0.65, 0.65, 0.65, 0.01);
                 }
-
-                /*worldIn.playSound(null, blockpos, SoundEvents.BEACON_ACTIVATE, SoundCategory.PLAYERS, 1, 1);
-
-                BellophiteShieldWaveEntity shieldWave = BioplethoraEntities.BELLOPHITE_SHIELD_WAVE.get().create(worldIn);
-                shieldWave.setOwner(player);
-                shieldWave.moveTo(blockpos, 0.0F, 0.0F);
-
-                worldIn.addFreshEntity(shieldWave);*/
 
                 charge = 0;
             }
@@ -86,7 +78,7 @@ public class PrimordialStaffItem extends Item {
 
         if (entity instanceof PlayerEntity) {
             PlayerEntity playerIn = (PlayerEntity) entity;
-            BlockPos blockpos = playerIn.blockPosition();
+            BlockPos blockpos = playerIn.blockPosition().offset(worldIn.getRandom().nextBoolean() ? 2 : -2, 0, worldIn.getRandom().nextBoolean() ? 2 : -2);
 
             int i = this.getUseDuration(stack) - value;
             if (i >= 10) {
@@ -127,12 +119,12 @@ public class PrimordialStaffItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("item.bioplethora.boss_level.desc").withStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("item.bioplethora.shift_reminder.desc").withStyle(TextFormatting.GRAY));
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.primordial_staff.cores_aid.skill").withStyle(TextFormatting.GOLD));
+        ItemSettings.bossLevelText(tooltip);
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.primordial_staff.cores_aid.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.primordial_staff.cores_aid.desc").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.primordial_staff.cores_aid.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
     }
 }
