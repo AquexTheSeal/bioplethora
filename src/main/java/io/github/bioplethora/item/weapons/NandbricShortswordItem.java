@@ -72,29 +72,31 @@ public class NandbricShortswordItem extends SwordItem {
         }, distance);
 
         if(result != null) {
-            LivingEntity target = (LivingEntity)result.getEntity();
+            if (result.getEntity() instanceof LivingEntity) {
+                LivingEntity target = (LivingEntity) result.getEntity();
 
-            double distToTarget = target.distanceToSqr(player.getX(), player.getY(), player.getZ());
-            double attackReachSqr = (player.getBbWidth() * 1.6F * player.getBbWidth() * 1.6F + target.getBbWidth());
+                double distToTarget = target.distanceToSqr(player.getX(), player.getY(), player.getZ());
+                double attackReachSqr = (player.getBbWidth() * 1.6F * player.getBbWidth() * 1.6F + target.getBbWidth());
 
-            double vecX = target.getX() - player.getX();
-            double vecY = player.getDeltaMovement().y;
-            double vecZ = target.getZ() - player.getZ();
-            double vecM = Math.sqrt((Math.pow(vecX, 2)) + Math.pow(vecY, 2) + Math.pow(vecZ, 2));
-            float speedModifier = 2f;
+                double vecX = target.getX() - player.getX();
+                double vecY = player.getDeltaMovement().y;
+                double vecZ = target.getZ() - player.getZ();
+                double vecM = Math.sqrt((Math.pow(vecX, 2)) + Math.pow(vecY, 2) + Math.pow(vecZ, 2));
+                float speedModifier = 2f;
 
-            vecX = (vecX / vecM) * speedModifier;
-            vecY = (vecY / vecM) * speedModifier;
-            vecZ = (vecZ / vecM) * speedModifier;
+                vecX = (vecX / vecM) * speedModifier;
+                vecY = (vecY / vecM) * speedModifier;
+                vecZ = (vecZ / vecM) * speedModifier;
 
-            player.setDeltaMovement(vecX, vecY, vecZ);
+                player.setDeltaMovement(vecX, vecY, vecZ);
 
-            if (distToTarget <= attackReachSqr) {
-                target.hurt(DamageSource.mobAttack(player), 7.0F);
-                ((PlayerEntity) player).getCooldowns().addCooldown(stack.getItem(), 25);
-                Hand hand = player.getUsedItemHand();
-                player.swing(hand);
-                player.stopUsingItem();
+                if (distToTarget <= attackReachSqr) {
+                    target.hurt(DamageSource.mobAttack(player), 7.0F);
+                    ((PlayerEntity) player).getCooldowns().addCooldown(stack.getItem(), 25);
+                    Hand hand = player.getUsedItemHand();
+                    player.swing(hand);
+                    player.stopUsingItem();
+                }
             }
         }
     }
