@@ -151,6 +151,12 @@ public class BPEntityLootTables extends EntityLootTables {
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1F)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.NANDBRI_FANG.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(1F, 1F)))
+                                .when(KilledByPlayer.killedByPlayer())
+                        ))
         );
 
         // Myliothan
