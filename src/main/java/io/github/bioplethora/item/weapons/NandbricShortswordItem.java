@@ -89,7 +89,7 @@ public class NandbricShortswordItem extends SwordItem {
             return !filter.isSpectator() && filter.isPickable();
         }, distance);
 
-        if(result.getEntity() instanceof LivingEntity) {
+        if(result != null && result.getEntity() instanceof LivingEntity) {
             LivingEntity target = (LivingEntity)result.getEntity();
 
             double distToTarget = target.distanceToSqr(player.getX(), player.getY(), player.getZ());
