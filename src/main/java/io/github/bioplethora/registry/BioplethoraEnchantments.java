@@ -6,9 +6,11 @@ import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+@Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BioplethoraEnchantments {
 
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, Bioplethora.MOD_ID);
@@ -25,4 +27,5 @@ public class BioplethoraEnchantments {
             new AntibioEnchantment(Enchantment.Rarity.VERY_RARE, BPEntityClasses.ELDERIA, EquipmentSlotType.MAINHAND));
 
     //public static final RegistryObject<Enchantment> HONED = ENCHANTMENTS.register("honed", () -> new HonedEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlotType.MAINHAND));
+
 }
