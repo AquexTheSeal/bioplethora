@@ -154,8 +154,9 @@ public class BPEntityLootTables extends EntityLootTables {
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(BioplethoraItems.NANDBRI_FANG.get())
-                                .apply(SetCount.setCount(RandomValueRange.between(1F, 1F)))
+                                .apply(SetCount.setCount(RandomValueRange.between(0F, 1F)))
                                 .when(KilledByPlayer.killedByPlayer())
+                                .when(RandomChance.randomChance(0.2F))
                         ))
         );
 
