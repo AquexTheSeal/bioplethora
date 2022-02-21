@@ -34,6 +34,11 @@ public class AbyssalBladeItem extends SwordItem {
         return UseAction.SPEAR;
     }
 
+    @Override
+    public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+        return super.hurtEnemy(pStack, pTarget, pAttacker);
+    }
+
     public void inventoryTick(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
         super.inventoryTick(stack, world, entity, p_77663_4_, p_77663_5_);
 

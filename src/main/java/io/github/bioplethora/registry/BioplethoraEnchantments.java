@@ -23,4 +23,6 @@ public class BioplethoraEnchantments {
             new AntibioEnchantment(Enchantment.Rarity.RARE, BPEntityClasses.HELLSENT, EquipmentSlotType.MAINHAND));
     public static final RegistryObject<Enchantment> ANTIBIO_ELDERIA = ENCHANTMENTS.register("antibio_elderia", () ->
             new AntibioEnchantment(Enchantment.Rarity.VERY_RARE, BPEntityClasses.ELDERIA, EquipmentSlotType.MAINHAND));
+
+    //public static final RegistryObject<Enchantment> HONED = ENCHANTMENTS.register("honed", () -> new HonedEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlotType.MAINHAND));
 }

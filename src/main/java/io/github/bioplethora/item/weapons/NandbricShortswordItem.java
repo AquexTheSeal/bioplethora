@@ -50,7 +50,7 @@ public class NandbricShortswordItem extends SwordItem {
         BlockPos pos = new BlockPos(x, y, z);
 
         entity.addEffect(new EffectInstance(Effects.POISON, 5, 5));
-        entity.hurtTime = 2;
+        entity.invulnerableTime = 5;
 
         world.playSound(null, pos, SoundEvents.ZOMBIE_INFECT, SoundCategory.HOSTILE, 1, 1);
 
@@ -87,9 +87,7 @@ public class NandbricShortswordItem extends SwordItem {
         Vector3d finalVec = vec.add(vec1.x * range, vec1.y * range, vec1.z * range);
 
         AxisAlignedBB aabb = player.getBoundingBox().expandTowards(vec1.scale(range)).inflate(4.0D, 4.0D, 4.0D);
-        EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(player, vec, finalVec, aabb, (filter) -> {
-            return !filter.isSpectator() && filter.isPickable();
-        }, distance);
+        EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(player, vec, finalVec, aabb, (filter) -> !filter.isSpectator() && filter.isPickable(), distance);
 
         if(result != null && result.getEntity() instanceof LivingEntity && result.getEntity() != player) {
             LivingEntity target = (LivingEntity)result.getEntity();
