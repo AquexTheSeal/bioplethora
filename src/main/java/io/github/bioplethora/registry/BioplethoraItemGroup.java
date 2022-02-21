@@ -1,6 +1,7 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.BioplethoraConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.EnchantedBookItem;
@@ -23,23 +24,31 @@ public class BioplethoraItemGroup {
         @OnlyIn(Dist.CLIENT)
         @Override
         public ResourceLocation getTabsImage() {
-            return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bpitem_tabs.png");
+            if (BioplethoraConfig.COMMON.replaceCreativeTabBackground.get()) {
+                return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bpitem_tabs.png");
+            } else {
+                return super.getTabsImage();
+            }
         }
 
         @OnlyIn(Dist.CLIENT)
         @Override
         public ResourceLocation getBackgroundImage() {
-            return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bp_creative_tab.png");
+            if (BioplethoraConfig.COMMON.replaceCreativeTabBackground.get()) {
+                return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bp_creative_tab.png");
+            } else {
+                return super.getBackgroundImage();
+            }
         }
 
-        @OnlyIn(Dist.CLIENT)
+        @Override
         public void fillItemList(NonNullList<ItemStack> items) {
             super.fillItemList(items);
 
             for (RegistryObject<Enchantment> enchants : BioplethoraEnchantments.ENCHANTMENTS.getEntries()) {
                 Enchantment enchantment = enchants.get();
 
-                if(enchantment.isAllowedOnBooks()) {
+                if (enchantment.isAllowedOnBooks()) {
                     items.add(EnchantedBookItem.createForEnchantment(new EnchantmentData(enchantment, enchantment.getMaxLevel())));
                 }
             }

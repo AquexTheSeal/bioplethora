@@ -28,6 +28,7 @@ public class BioplethoraConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> mobArmorMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobMovementSpeedMultiplier;
 
+        public final ForgeConfigSpec.ConfigValue<Boolean> replaceCreativeTabBackground;
         public final ForgeConfigSpec.ConfigValue<Boolean> antibioCompatibility;
 
         //Ecoharmless
@@ -78,6 +79,7 @@ public class BioplethoraConfig {
             builder.pop();
 
             builder.push("Other Mechanics");
+            replaceCreativeTabBackground = builder.define("Replace the Bioplethora's creative tabs' background images with a custom one?", true);
             antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used together?", true);
             builder.pop();
 

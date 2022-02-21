@@ -168,3 +168,5 @@ f99c2e896e5159d422b74bcc680760fd0e2082e0 data/minecraft/tags/blocks/wooden_butto
 38754daa6bb53d3ac05a4a6629b05afa58e5a9ba data/minecraft/tags/blocks/wooden_pressure_plates.json
 facebcc935d832021c46d5c283512e18c3c18953 data/minecraft/tags/blocks/wooden_slabs.json
 99acef3d5049cd735f6870035f2af412787a0ecf data/minecraft/tags/blocks/wooden_stairs.json
+5766446cb2e7c73268619176876a2f5665b6dbf1 data/minecraft/tags/entity_types/arrows.json
+5766446cb2e7c73268619176876a2f5665b6dbf1 data/minecraft/tags/items/arrows.json
