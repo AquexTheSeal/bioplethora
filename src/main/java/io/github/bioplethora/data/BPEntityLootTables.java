@@ -156,7 +156,7 @@ public class BPEntityLootTables extends EntityLootTables {
                         .add(ItemLootEntry.lootTableItem(BioplethoraItems.NANDBRI_FANG.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 1F)))
                                 .when(KilledByPlayer.killedByPlayer())
-                                .when(RandomChance.randomChance(0.2F))
+                                .when(RandomChance.randomChance(0.12F))
                         ))
         );
 
