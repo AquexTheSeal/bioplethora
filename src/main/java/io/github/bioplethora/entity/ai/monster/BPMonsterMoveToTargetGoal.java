@@ -6,6 +6,9 @@ import net.minecraft.util.EntityPredicates;
 
 import java.util.EnumSet;
 
+/**
+ * Credits: WeirdNerd (Permission Granted)
+ */
 public class BPMonsterMoveToTargetGoal extends BPMonsterMovableGoal {
 
     private final double speedMultiplier;

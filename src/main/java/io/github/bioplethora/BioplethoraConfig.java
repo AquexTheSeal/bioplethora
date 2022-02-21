@@ -28,6 +28,8 @@ public class BioplethoraConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> mobArmorMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobMovementSpeedMultiplier;
 
+        public final ForgeConfigSpec.ConfigValue<Boolean> antibioCompatibility;
+
         //Ecoharmless
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnCuttlefish;
 
@@ -73,6 +75,10 @@ public class BioplethoraConfig {
             mobSpawnWeightMultiplier = builder.define("Multiplier for all Bioplethora mobs' spawn weights", 1);
             mobArmorMultiplier = builder.define("Multiplier for all Bioplethora mobs' armor points", 1);
             mobMovementSpeedMultiplier = builder.define("Multiplier for all Bioplethora mobs' movement speed", 1);
+            builder.pop();
+
+            builder.push("Other Mechanics");
+            antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used together?", true);
             builder.pop();
 
             //===================================

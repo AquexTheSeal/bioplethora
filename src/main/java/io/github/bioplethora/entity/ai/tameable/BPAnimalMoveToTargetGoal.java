@@ -6,18 +6,14 @@ import net.minecraft.util.EntityPredicates;
 
 import java.util.EnumSet;
 
+/**
+ * Credits: WeirdNerd (Permission Granted)
+ */
 public class BPAnimalMoveToTargetGoal extends BPAnimalMovableGoal {
 
     private final double speedMultiplier;
     private final int checkRate;
 
-    /**
-     * Move an AnimatableAnimalEntity to a target entity
-     *
-     * @param entity          AnimatableMonsterEntity instance
-     * @param speedMultiplier Entity will move by base speed * this
-     * @param checkRate       Check rate with formula: {@code if(RANDOM.nextInt(rate) == 0)}, so bigger = less often
-     */
     public BPAnimalMoveToTargetGoal(BPAnimalEntity entity, double speedMultiplier, int checkRate) {
         this.entity = entity;
         this.speedMultiplier = speedMultiplier;

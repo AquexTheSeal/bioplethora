@@ -1,8 +1,10 @@
 package io.github.bioplethora.enchantments;
 
+import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraDamageSources;
+import io.github.bioplethora.registry.BioplethoraEnchantments;
 import io.github.bioplethora.registry.BioplethoraParticles;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -37,6 +39,33 @@ public class AntibioEnchantment extends Enchantment {
 
     public boolean canEnchant(ItemStack stack) {
         return stack.getItem() instanceof AxeItem || super.canEnchant(stack);
+    }
+
+    public boolean checkCompatibility(Enchantment pEnch) {
+
+        Enchantment eco = BioplethoraEnchantments.ANTIBIO_ECOHARMLESS.get();
+        Enchantment ple = BioplethoraEnchantments.ANTIBIO_PLETHONEUTRAL.get();
+        Enchantment dan = BioplethoraEnchantments.ANTIBIO_DANGERUM.get();
+        Enchantment hel = BioplethoraEnchantments.ANTIBIO_HELLSENT.get();
+        Enchantment eld = BioplethoraEnchantments.ANTIBIO_ELDERIA.get();
+
+        if (!BioplethoraConfig.COMMON.antibioCompatibility.get()) {
+            if (this == eco) {
+                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, eco);
+            } else if (this == ple) {
+                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, ple);
+            } else if (this == dan) {
+                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, dan);
+            } else if (this == hel) {
+                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, hel);
+            } else if (this == eld) {
+                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, eld);
+            }
+        } return super.checkCompatibility(pEnch);
+    }
+
+    public boolean getCompatHelper(Enchantment pEnch, Enchantment whitelisted) {
+        return !(pEnch instanceof AntibioEnchantment) && (pEnch != whitelisted);
     }
 
     @Override

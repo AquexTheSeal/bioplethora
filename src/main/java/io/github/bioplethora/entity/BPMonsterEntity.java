@@ -10,6 +10,9 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+/**
+ * Credits: WeirdNerd (Permission Granted)
+ */
 public abstract class BPMonsterEntity extends MonsterEntity implements IAnimatable {
 
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
@@ -18,10 +21,6 @@ public abstract class BPMonsterEntity extends MonsterEntity implements IAnimatab
 
     protected boolean isAnimationFinished = false;
 
-    /**
-     * @param type
-     * @param worldIn
-     */
     public BPMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
     }
