@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class NandbricShortswordItem extends SwordItem {
-    LivingEntity target;
+    private LivingEntity target;
 
     public NandbricShortswordItem(IItemTier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
@@ -81,7 +81,7 @@ public class NandbricShortswordItem extends SwordItem {
             EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, vec, finalVec, aabb, (filter) -> !filter.isSpectator() && filter.isPickable(), distance);
 
             if(result != null) {
-                target = (LivingEntity) result.getEntity();
+                target = result.getEntity() instanceof LivingEntity ? (LivingEntity) result.getEntity() : null;
                 entity.startUsingItem(hand);
                 return ActionResult.success(itemstack);
             }
@@ -107,7 +107,7 @@ public class NandbricShortswordItem extends SwordItem {
 
             player.setDeltaMovement(vecX, vecY, vecZ);
 
-            AxisAlignedBB hitrange = player.getBoundingBox().inflate(2.8D, 2.8D, 2.8D);
+            AxisAlignedBB hitrange = player.getBoundingBox().inflate(2.2D, 2.2D, 2.2D);
 
             if (hitrange.intersects(target.getBoundingBox())) {
                 double x = target.getX(), y = target.getY(), z = target.getZ();
