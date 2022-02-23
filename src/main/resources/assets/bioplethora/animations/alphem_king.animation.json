@@ -452,6 +452,7 @@
 		"animation.alphem_king.roar": {
 			"loop": true,
 			"animation_length": 6,
+			"override_previous_animation": true,
 			"bones": {
 				"bodymid": {
 					"rotation": {
@@ -546,7 +547,9 @@
 			}
 		},
 		"animation.alphem_king.jump": {
+			"loop": true,
 			"animation_length": 3,
+			"override_previous_animation": true,
 			"bones": {
 				"bodymid": {
 					"rotation": {

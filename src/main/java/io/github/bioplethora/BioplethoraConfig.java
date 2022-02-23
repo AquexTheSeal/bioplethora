@@ -36,6 +36,7 @@ public class BioplethoraConfig {
 
         //Plethoneutral
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnPeaguin;
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnCavernFleignar;
 
         //Dangerum
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnAlphem;
@@ -94,6 +95,7 @@ public class BioplethoraConfig {
             //Plethoneutral
             builder.push("Plethoneutral Mobs");
             spawnPeaguin = builder.define("Enable spawning Peaguins", true);
+            spawnCavernFleignar = builder.define("Enable spawning Cavern Fleignars", true);
             builder.pop();
             //Dangerum
             builder.push("Dangerum Mobs");

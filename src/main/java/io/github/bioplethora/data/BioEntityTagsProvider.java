@@ -5,6 +5,7 @@ import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.EntityTypeTagsProvider;
+import net.minecraft.entity.EntityType;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -19,6 +20,14 @@ public class BioEntityTagsProvider extends EntityTypeTagsProvider {
         tag(EntityTypeTags.ARROWS)
                 .add(BioplethoraEntities.BELLOPHITE_ARROW.get())
                 .add(BioplethoraEntities.WIND_ARROW.get())
+        ;
+
+        tag(BioplethoraTags.Entities.FLEIGNAR_TARGETS)
+                .add(EntityType.ZOMBIE)
+                .add(EntityType.SPIDER)
+                .add(EntityType.CAVE_SPIDER)
+                .addTag(EntityTypeTags.SKELETONS)
+                .addTag(EntityTypeTags.RAIDERS)
         ;
 
         // Wastelands of Baedoor Integration

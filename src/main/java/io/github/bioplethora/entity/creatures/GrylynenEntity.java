@@ -19,8 +19,6 @@ import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.FlyingPathNavigator;
-import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -28,7 +26,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -74,16 +71,17 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 1.2, 8));
         this.goalSelector.addGoal(3, new GrylynenEntity.ChargeAttackGoal());
-        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 20, 0.7, 0.8));
+        this.goalSelector.addGoal(3, new BPMonsterMeleeGoal(this, 20, 0.7, 0.8));
         this.goalSelector.addGoal(4, new GrylynenEntity.MoveRandomGoal());
-        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
+
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+        
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, GrylynenEntity.class).setAlertOthers());
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
     }
 
     @Override
@@ -170,18 +168,6 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
         return SoundEvents.BLAZE_DEATH;
     }
 
-    protected PathNavigator createNavigation(World worldIn) {
-        return new FlyingPathNavigator(GrylynenEntity.this, worldIn) {
-            public boolean isStableDestination(BlockPos pos) {
-                return !this.level.getBlockState(pos.below()).isAir();
-            }
-        };
-    }
-
-    public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
-        return worldIn.getBlockState(pos).isAir() ? 10.0F : 0.0F;
-    }
-
     public boolean isNoGravity() {
         return true;
     }
@@ -263,12 +249,22 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
                     GrylynenEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
                 }
             }
+
+            /*if (AltyrusEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
+                AltyrusEntity.this.doHurtTarget(livingentity);
+            } else {
+                double d0 = AltyrusEntity.this.distanceToSqr(livingentity);
+                if (d0 < 9.0D) {
+                    Vector3d vector3d = livingentity.getEyePosition(1.0F);
+                    AltyrusEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
+                }
+            }*/
         }
     }
 
     class MoveHelperController extends MovementController {
-        public MoveHelperController(GrylynenEntity altyrus) {
-            super(altyrus);
+        public MoveHelperController(GrylynenEntity grylynen) {
+            super(grylynen);
         }
 
         public void tick() {
@@ -291,7 +287,6 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
                         GrylynenEntity.this.yBodyRot = GrylynenEntity.this.yRot;
                     }
                 }
-
             }
         }
     }
@@ -316,7 +311,7 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
             }
 
             for(int i = 0; i < 3; ++i) {
-                BlockPos blockpos1 = blockpos.offset(GrylynenEntity.this.random.nextInt(15) - 7, GrylynenEntity.this.random.nextInt(11) - 5, GrylynenEntity.this.random.nextInt(15) - 7);
+                BlockPos blockpos1 = blockpos.offset(GrylynenEntity.this.random.nextInt(15) - 7, GrylynenEntity.this.random.nextInt(11) - 3, GrylynenEntity.this.random.nextInt(15) - 7);
                 if (GrylynenEntity.this.level.isEmptyBlock(blockpos1)) {
                     GrylynenEntity.this.moveControl.setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
                     if (GrylynenEntity.this.getTarget() == null) {

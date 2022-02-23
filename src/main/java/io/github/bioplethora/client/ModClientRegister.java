@@ -39,6 +39,7 @@ public class ModClientRegister {
         //Plethoneutral
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.PEAGUIN.get(), PeaguinEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.NANDBRI.get(), NandbriEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CAVERN_FLEIGNAR.get(), CavernFleignarEntityRender::new);
 
         //Dangerum
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), AlphemEntityRender::new);

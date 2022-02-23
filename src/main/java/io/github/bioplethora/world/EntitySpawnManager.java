@@ -25,8 +25,16 @@ public class EntitySpawnManager {
         static Integer spawnMultiplier = BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get();
         static EntityClassification creature = EntityClassification.CREATURE;
         static EntityClassification monster = EntityClassification.MONSTER;
+        static EntityClassification ambient = EntityClassification.AMBIENT;
         static EntityClassification waterCreature = EntityClassification.WATER_CREATURE;
         static EntityClassification waterAmbient = EntityClassification.WATER_AMBIENT;
+
+        private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_ENTITIES = (builder) -> {
+
+            if (BioplethoraConfig.COMMON.spawnCavernFleignar.get()) {
+                builder.addSpawn(ambient, new MobSpawnInfo.Spawners(BioplethoraEntities.CAVERN_FLEIGNAR.get(), 20 * spawnMultiplier, 2, 6));
+            }
+        };
 
         private static final Consumer<MobSpawnInfoBuilder> FOREST_ENTITIES = (builder) -> {
             //Crephoxl
@@ -123,6 +131,10 @@ public class EntitySpawnManager {
             MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
             RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Bioplethora Mob Spawning"));
             boolean hasOverworldType = BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD);
+
+            if (hasOverworldType) {
+                OVERWORLD_ENTITIES.accept(spawnInfoBuilder);
+            }
 
             switch (event.getCategory()) {
                 case FOREST:

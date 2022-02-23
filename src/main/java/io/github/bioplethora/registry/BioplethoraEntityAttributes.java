@@ -18,6 +18,7 @@ public class BioplethoraEntityAttributes {
         //Plethoneutral
         event.put(BioplethoraEntities.PEAGUIN.get(), PeaguinEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.NANDBRI.get(), NandbriEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.CAVERN_FLEIGNAR.get(), CavernFleignarEntity.setCustomAttributes().build());
 
         //Dangerum
         event.put(BioplethoraEntities.ALPHEM.get(), AlphemEntity.setCustomAttributes().build());

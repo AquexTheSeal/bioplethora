@@ -68,6 +68,8 @@ public class BioplethoraTags {
 
     public static final class Entities {
 
+        public static final ITag.INamedTag<EntityType<?>> FLEIGNAR_TARGETS = forgeLoc("cavern_fleignar_targets");
+
         // Wastelands of Baedoor Integration
         public static final ITag.INamedTag<EntityType<?>> AVOIDER_KILLABLE = forgeLoc("avoider_killable");
         public static final ITag.INamedTag<EntityType<?>> AUTOMATON_TYPE = forgeLoc("automaton_type");

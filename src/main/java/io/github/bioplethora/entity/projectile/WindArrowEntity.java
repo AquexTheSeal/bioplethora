@@ -64,7 +64,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
     @Override
     protected void doPostHurtEffects(@Nonnull LivingEntity living) {
         super.doPostHurtEffects(living);
-        living.invulnerableTime = 0;
     }
 
     public void tick() {

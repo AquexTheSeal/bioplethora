@@ -62,6 +62,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public double healthRegenTimer = 0;
     public int attackPhase;
     public int barrierTimer;
+    public float vecOfTarget;
 
     public AlphemKingEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
@@ -75,7 +76,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
                 .add(Attributes.ATTACK_KNOCKBACK, 8.0D)
                 .add(Attributes.MAX_HEALTH, 320 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
-                .add(Attributes.MOVEMENT_SPEED, 0.20F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.25F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64.0D);
     }
 
@@ -99,8 +100,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(1, new AlphemKingSmashingGoal(this, 120, 0.8, 0.9));
 
         this.goalSelector.addGoal(2, new AlphemKingRangedAttackGoal(this));
-        this.goalSelector.addGoal(3, new AlphemKingRoarGoal(this));
-        this.goalSelector.addGoal(4, new AlphemKingJumpGoal(this));
+        this.goalSelector.addGoal(3, new AlphemKingJumpGoal(this));
+        this.goalSelector.addGoal(4, new AlphemKingRoarGoal(this));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
@@ -112,8 +113,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     @Override
     public void registerControllers(AnimationData data) {
         AnimationController controller = new AnimationController<>(this, "alphem_king_controller", 0, this::predicate);
-        controller.registerParticleListener(this::particleListener);
         data.addAnimationController(controller);
+        controller.registerParticleListener(this::particleListener);
     }
 
     private <ENTITY extends IAnimatable> void particleListener(ParticleKeyFrameEvent<ENTITY> event) {
@@ -130,34 +131,42 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.death", true));
             return PlayState.CONTINUE;
         }
+
         if (this.isJumping()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.jump", true));
             return PlayState.CONTINUE;
         }
+
         if (this.getRoaring()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.roar", true));
             return PlayState.CONTINUE;
         }
+
         if (this.getSmashing()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.attack_2", true));
             return PlayState.CONTINUE;
         }
+
         if (this.getAttacking2()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.attack_1", true));
             return PlayState.CONTINUE;
         }
+
         if (this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.attack_0", true));
             return PlayState.CONTINUE;
         }
+
         if (event.isMoving() && this.isBerserked()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.walk_berserk", true));
             return PlayState.CONTINUE;
         }
+
         if (event.isMoving() && !this.isBerserked()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.walk", true));
             return PlayState.CONTINUE;
         }
+
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.idle", true));
         return PlayState.CONTINUE;
     }
@@ -178,10 +187,14 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         if (!this.isBarriered()) {
             ++barrierTimer;
-             if (barrierTimer == 100 + this.getRandom().nextInt(100)) {
+             if (barrierTimer == 150 + this.getRandom().nextInt(25)) {
                  barrierTimer = 0;
                  this.setBarriered(true);
              }
+
+            if (getTarget() != null) {
+                vecOfTarget = (float) (Math.atan2(getTarget().getZ() - getZ(), getTarget().getX() - getX()) * (180 / Math.PI) + 90);
+            }
         }
 
         this.setBerserked(this.getHealth() <= this.getMaxHealth() / 2);
@@ -290,7 +303,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         ++this.deathTime;
 
-        if (this.deathTime == 60) {
+        if (this.deathTime == 40) {
             this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ANVIL_PLACE, SoundCategory.HOSTILE, 1.0F, 1.0F);
         }
 

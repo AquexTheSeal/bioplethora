@@ -139,6 +139,11 @@ public class ServerWorldEvents {
                 king.playSound(SoundEvents.GLASS_BREAK, 1.5F, 1.0F);
                 king.setBarriered(false);
                 event.setCanceled(true);
+
+                if (!king.level.isClientSide()) {
+                    ((ServerWorld) king.level).sendParticles(ParticleTypes.BARRIER, king.getX(), king.getY(), king.getZ(),
+                            30, 0.75, 0.75, 0.75, 0.01);
+                }
             }
         }
     }

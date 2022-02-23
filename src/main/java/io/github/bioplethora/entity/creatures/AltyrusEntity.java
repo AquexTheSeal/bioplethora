@@ -158,6 +158,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
             this.setHealth(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
         }
+
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 

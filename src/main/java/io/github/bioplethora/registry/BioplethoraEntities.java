@@ -23,6 +23,7 @@ public class BioplethoraEntities {
     //Plethoneutral
     public static final RegistryObject<EntityType<PeaguinEntity>> PEAGUIN = ENTITIES.register("peaguin", () -> EntityType.Builder.of(PeaguinEntity::new, EntityClassification.WATER_CREATURE).sized(1.2f, 1.4f).build(new ResourceLocation(Bioplethora.MOD_ID, "peaguin").toString()));
     public static final RegistryObject<EntityType<NandbriEntity>> NANDBRI = ENTITIES.register("nandbri", () -> EntityType.Builder.of(NandbriEntity::new, EntityClassification.MONSTER).sized(2.6f, 1.15f).build(new ResourceLocation(Bioplethora.MOD_ID, "nandbri").toString()));
+    public static final RegistryObject<EntityType<CavernFleignarEntity>> CAVERN_FLEIGNAR = ENTITIES.register("cavern_fleignar", () -> EntityType.Builder.of(CavernFleignarEntity::new, EntityClassification.MONSTER).sized(0.8f, 4.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "cavern_fleignar").toString()));
 
     //Dangerum
     public static final RegistryObject<EntityType<AlphemEntity>> ALPHEM = ENTITIES.register("alphem", () -> EntityType.Builder.of(AlphemEntity::new, EntityClassification.MONSTER).sized(1.2f, 1.4f).build(new ResourceLocation(Bioplethora.MOD_ID, "alphem").toString()));

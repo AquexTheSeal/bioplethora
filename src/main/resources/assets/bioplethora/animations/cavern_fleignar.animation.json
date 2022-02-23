@@ -1,0 +1,125 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.cavern_fleignar.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"bottom": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 3", 0, "math.sin(query.anim_time * 90) * 3"]
+					}
+				},
+				"mid": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 3", 0, "math.sin(query.anim_time * 90) * 3"]
+					}
+				},
+				"top": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 3", 0, "math.sin(query.anim_time * 90) * 3"]
+					}
+				}
+			}
+		},
+		"animation.cavern_fleignar.attack": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"bottom": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [-75, 0, 0],
+							"easing": "easeOutCirc"
+						},
+						"0.5": {
+							"vector": [37.5, 0, 0],
+							"easing": "easeInOutCirc"
+						},
+						"0.75": {
+							"vector": [-97.5, 0, 0],
+							"easing": "easeInOutCirc"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutElastic",
+							"easingArgs": [1]
+						}
+					}
+				},
+				"mid": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [37.5, 0, 0],
+							"easing": "easeInOutCirc"
+						},
+						"0.75": {
+							"vector": [5, 0, 0],
+							"easing": "easeInOutCirc"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutElastic",
+							"easingArgs": [1]
+						}
+					}
+				},
+				"top": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [37.5, 0, 0],
+							"easing": "easeInOutCirc"
+						},
+						"0.75": {
+							"vector": [5, 0, 0],
+							"easing": "easeInOutCirc"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutElastic",
+							"easingArgs": [1]
+						}
+					}
+				}
+			}
+		},
+		"animation.cavern_fleignar.death": {
+			"loop": true,
+			"animation_length": 2,
+			"override_previous_animation": true,
+			"bones": {
+				"bottom": {
+					"rotation": {
+						"0.0": {
+							"vector": ["math.sin(query.anim_time * 180) * -10", "math.sin(query.anim_time * 180) * -10", "math.sin(query.anim_time * 180) * -10"]
+						},
+						"1.0": {
+							"vector": ["math.sin(query.anim_time * 180) * -10", "math.sin(query.anim_time * 180) * -10", "math.sin(query.anim_time * 180) * -10"]
+						},
+						"2.0": {
+							"vector": [0, 0, -90],
+							"easing": "easeInBounce",
+							"easingArgs": [0.2]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

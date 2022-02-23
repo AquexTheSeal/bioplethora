@@ -36,6 +36,7 @@ public class AlphemKingRangedAttackGoal extends Goal {
             this.king.getLookControl().setLookAt(king.getTarget(), 30.0F, 30.0F);
 
             ++this.chargeTime;
+
             if (this.chargeTime == 100 && !this.king.isSilent()) {
                 this.king.level.playSound(null, this.king.getX(), this.king.getY(), this.king.getZ(), SoundEvents.BEACON_ACTIVATE, this.king.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
             }

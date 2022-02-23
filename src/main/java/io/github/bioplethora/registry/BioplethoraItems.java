@@ -83,6 +83,7 @@ public class BioplethoraItems {
     /** @PLETHONEUTRAL **/
     public static final RegistryObject<Item> NANDBRI_SPAWN_EGG = ITEMS.register("nandbri_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.NANDBRI, BPEntityClasses.PLETHONEUTRAL, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> PEAGUIN_SPAWN_EGG = ITEMS.register("peaguin_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.PEAGUIN, BPEntityClasses.PLETHONEUTRAL, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> CAVERN_FLEIGNAR_SPAWN_EGG = ITEMS.register("cavern_fleignar_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.CAVERN_FLEIGNAR, BPEntityClasses.PLETHONEUTRAL, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));
 
     /** @DANGERUM **/
     public static final RegistryObject<Item> ALPHEM_SPAWN_EGG = ITEMS.register("alphem_spawn_egg", () -> new BioplethoraSpawnEggItem(BioplethoraEntities.ALPHEM, BPEntityClasses.DANGERUM, new Item.Properties().tab(BioplethoraItemGroup.BioplethoraSpawnEggsItemGroup)));

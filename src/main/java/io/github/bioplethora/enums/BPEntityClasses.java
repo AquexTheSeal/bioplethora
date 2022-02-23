@@ -2,11 +2,17 @@ package io.github.bioplethora.enums;
 
 public enum BPEntityClasses {
 
+    /** For regular mobs, the default mob class **/
     NONE("none"),
+    /** For harmless Bioplethora mobs **/
     ECOHARMLESS("ecoharmless"),
+    /** For mobs that only attack when bothered or hurt **/
     PLETHONEUTRAL("plethoneutral"),
+    /** For completely hostile mobs **/
     DANGERUM("dangerum"),
+    /** For stronger versions of the dangerum class **/
     HELLSENT("hellsent"),
+    /** For eldritch powered/sized mobs **/
     ELDERIA("elderia");
 
     private final String name;
