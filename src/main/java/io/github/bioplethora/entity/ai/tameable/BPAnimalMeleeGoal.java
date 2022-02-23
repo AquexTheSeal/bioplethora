@@ -9,15 +9,14 @@ import net.minecraft.util.Hand;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
+/**
+ * Credits: WeirdNerd (Permission Granted)
+ */
 public class BPAnimalMeleeGoal extends BPAnimalGoal {
     private final double animationLength;
     private final BiFunction<Double, Double, Boolean> attackPredicate;
     private boolean hasHit;
 
-    /**
-     * @param entity          Attacking entity
-     * @param animationLength
-     */
     public BPAnimalMeleeGoal(BPAnimalEntity entity, double animationLength, double attackBegin, double attackEnd) {
         this.entity = entity;
         this.animationLength = animationLength;

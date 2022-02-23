@@ -9,6 +9,9 @@ import net.minecraft.util.Hand;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
+/**
+ * Credits: WeirdNerd (Permission Granted)
+ */
 public class BPMonsterMeleeGoal extends BPMonsterGoal {
     public double animationLength;
     public BiFunction<Double, Double, Boolean> attackPredicate;

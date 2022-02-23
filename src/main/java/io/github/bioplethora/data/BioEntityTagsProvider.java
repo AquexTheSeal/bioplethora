@@ -5,6 +5,7 @@ import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.EntityTypeTagsProvider;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class BioEntityTagsProvider extends EntityTypeTagsProvider {
@@ -15,6 +16,10 @@ public class BioEntityTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags() {
+        tag(EntityTypeTags.ARROWS)
+                .add(BioplethoraEntities.BELLOPHITE_ARROW.get())
+                .add(BioplethoraEntities.WIND_ARROW.get())
+        ;
 
         // Wastelands of Baedoor Integration
         tag(BioplethoraTags.Entities.AVOIDER_KILLABLE)

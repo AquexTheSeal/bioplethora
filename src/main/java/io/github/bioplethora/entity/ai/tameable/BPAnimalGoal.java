@@ -6,6 +6,9 @@ import net.minecraft.entity.ai.goal.Goal;
 
 import java.util.Random;
 
+/**
+ * Credits: WeirdNerd (Permission Granted)
+ */
 public abstract class BPAnimalGoal extends Goal {
 
     protected static final Random RANDOM = new Random();

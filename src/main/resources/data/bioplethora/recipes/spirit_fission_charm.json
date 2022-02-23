@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP ",
+    "SP ",
+    "   "
+  ],
+  "key": {
+    "S": {
+      "tag": "minecraft:base_stone_overworld"
+    },
+    "P": {
+      "item": "bioplethora:green_grylynen_crystal"
+    }
+  },
+  "result": {
+    "item": "bioplethora:spirit_fission_charm",
+    "count": 1
+  }
+}

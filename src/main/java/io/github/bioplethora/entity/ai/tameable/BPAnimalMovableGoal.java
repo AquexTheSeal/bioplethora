@@ -5,6 +5,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
 
+/**
+ * Credits: WeirdNerd (Permission Granted)
+ */
 public abstract class BPAnimalMovableGoal extends BPAnimalGoal {
 
     protected Path path;

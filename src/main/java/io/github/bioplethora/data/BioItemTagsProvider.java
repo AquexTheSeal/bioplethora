@@ -6,6 +6,7 @@ import io.github.bioplethora.registry.BioplethoraTags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class BioItemTagsProvider extends ItemTagsProvider {
@@ -16,6 +17,12 @@ public class BioItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
+
+        tag(ItemTags.ARROWS)
+                .add(BioplethoraItems.BELLOPHITE_ARROW.get())
+                .add(BioplethoraItems.WIND_ARROW.get())
+        ;
+
         // Wastelands of Baedoor Integration
         tag(BioplethoraTags.Items.WOBR_SABRE)
                 .add(BioplethoraItems.ABYSSAL_BLADE.get())

@@ -1,0 +1,16 @@
+{
+  "name": "Spirit Fission Charm",
+  "icon": "bioplethora:spirit_fission_charm",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:spirit_fission_charm",
+      "text": "$(l)DESCRIPTION: $(br)$()The Spirit Fission Charm is a compelling charm that dispels every single Grylynens away. This charm is crafted and made with the beginner-tier Grylynen crystals with a portion of some hard crumbled stone."
+    },
+    {
+      "type": "crafting",
+      "recipe":"bioplethora:spirit_fission_charm"
+    }
+  ]
+}

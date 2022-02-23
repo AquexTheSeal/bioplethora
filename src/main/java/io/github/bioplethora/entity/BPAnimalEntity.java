@@ -10,6 +10,9 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+/**
+ * Credits: WeirdNerd (Permission Granted)
+ */
 public abstract class BPAnimalEntity extends TameableEntity implements IAnimatable {
 
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPAnimalEntity.class, DataSerializers.BOOLEAN);
