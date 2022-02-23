@@ -41,7 +41,7 @@ public class BioItemModelProvider extends ItemModelProvider {
         return getExistingFile(mcLoc(mcModel));
     }
 
-    private void addItems(final Collection<RegistryObject<Item>> items) {
+    private void addItems(Collection<RegistryObject<Item>> items) {
         ModelFile.ExistingModelFile generated = getMcLoc("item/generated");
         ModelFile.ExistingModelFile handheld = getMcLoc("item/handheld");
 
@@ -63,7 +63,7 @@ public class BioItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private void addBlockItems(final Collection<RegistryObject<Item>> blockItems) {
+    private void addBlockItems(Collection<RegistryObject<Item>> blockItems) {
         for (RegistryObject<Item> item : blockItems) {
             String name = item.getId().getPath();
 
