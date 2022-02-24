@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "bioplethora:raw_flentair"
+  },
+  "result": "bioplethora:cooked_flentair",
+  "experience": 0.35,
+  "cookingtime": 300
+}

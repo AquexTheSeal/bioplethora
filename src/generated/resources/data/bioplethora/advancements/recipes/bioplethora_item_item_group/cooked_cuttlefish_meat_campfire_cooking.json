@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bioplethora:cooked_cuttlefish_meat_campfire_cooking"
+    ]
+  },
+  "criteria": {
+    "has_raw_cuttlefish_meat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:raw_cuttlefish_meat"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bioplethora:cooked_cuttlefish_meat_campfire_cooking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_cuttlefish_meat",
+      "has_the_recipe"
+    ]
+  ]
+}

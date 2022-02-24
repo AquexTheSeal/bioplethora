@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "bioplethora:raw_cuttlefish_meat"
+  },
+  "result": "bioplethora:cooked_cuttlefish_meat",
+  "experience": 0.3,
+  "cookingtime": 600
+}

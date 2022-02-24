@@ -70,6 +70,7 @@
   "item.bioplethora.primordial_fragment": "Primordial Fragment",
   "item.bioplethora.windpiece": "Windpiece",
   "item.bioplethora.windy_essence": "Windy Essence",
+  "item.bioplethora.fleignarite_scales": "Fleignarite Scales",
 
   "item.bioplethora.green_grylynen_crystal": "Green Grylynen Crystal",
   "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
@@ -77,6 +78,8 @@
 
   "item.bioplethora.raw_cuttlefish_meat": "Raw Cuttlefish Meat",
   "item.bioplethora.cooked_cuttlefish_meat": "Cooked Cuttlefish Meat",
+  "item.bioplethora.raw_flentair": "Raw Flentair",
+  "item.bioplethora.cooked_flentair": "Cooked Flentair",
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
   "item.bioplethora.bellophite_shield": "Bellophite Shield",
@@ -91,6 +94,7 @@
   "item.bioplethora.totem_of_swerving": "Totem of Swerving",
   "item.bioplethora.wind_arrow": "Wind Arrow",
   "item.bioplethora.spirit_fission_charm": "Spirit Fission Charm",
+  "item.bioplethora.spirit_manipulation_charm": "Spirit Manipulation Charm",
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
@@ -150,6 +154,7 @@
 
   "item.bioplethora.vermilion_blade.blade_master.skill": "Blade Master",
   "item.bioplethora.vermilion_blade.blade_master.desc": "On hit with sword, this sword damages mobs surrounding the target mob. The Sweeping Edge enchantment can increase the attack radius.",
+
   "item.bioplethora.vermilion_blade.pure_energy_concentration.skill": "Pure Energy Concentration",
   "item.bioplethora.vermilion_blade.pure_energy_concentration.desc": "On using, this sword shoots Vermilion Blade Projectiles endlessly. The blade's explosion size and damage increases every shot, then resets to default eventually. The fire rate can be faster when enchanted with the Quick Charge enchantment.",
 
@@ -166,17 +171,22 @@
   "item.bioplethora.wind_arrow.windy_essence.desc": "This arrow homes on to the nearest entity, and it slows all nearby entities on impact.",
 
   "item.bioplethora.spirit_fission_charm.spirit_fission.skill": "Spirit Fission",
-  "item.bioplethora.spirit_fission_charm.spirit_fission.desc": "This charm gives the Spirit Fission effect while it's in the player's inventory. Grylynens don't spawn when the player who destroyed the block has the Spirit Fission effect.",
+  "item.bioplethora.spirit_fission_charm.spirit_fission.desc": "This charm gives the Spirit Fission effect while it's in the player's inventory. Grylynens don't spawn when the player who destroyed the block has the Spirit Fission effect, because their souls would be torn apart before they could even awaken.",
 
+  "item.bioplethora.spirit_manipulation_charm.spirit_manipulation.skill": "Spirit Manipulation",
+  "item.bioplethora.spirit_manipulation_charm.spirit_manipulation.desc": "This charm gives the Spirit manipulation effect while it's in the player's inventory. Cavern Fleignars do not aggravate to the player when the player has the Spirit Manipulation effect, because the effect conceals the player from these creatures by controlling their mind and senses.",
+  
   "item.bioplethora.peaguin_scale_armor.grace_embrace.skill":"Grace Embrace",
   "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
 
   "item.bioplethora.phantom_chime.flapping_up.skill": "Flapping Up",
   "item.bioplethora.phantom_chime.flapping_up.desc": "On right click on the ground, this chime casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
+
   "item.bioplethora.magma_bomb.bombardment.skill": "Bombardment",
   "item.bioplethora.magma_bomb.bombardment.desc": "Throws a projectile that explodes on impact.",
 
   "effect.bioplethora.spirit_fission": "Spirit Fission",
+  "effect.bioplethora.spirit_manipulation": "Spirit Manipulation",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora. There is a hell mode option in the configs that enhances and strengthens most creatures, you can check it out!",

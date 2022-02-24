@@ -125,6 +125,14 @@ public class GrylynenEntity extends BPMonsterEntity implements IAnimatable, IFly
     }
 
     @Override
+    public boolean doHurtTarget(Entity pEntity) {
+
+
+
+        return super.doHurtTarget(pEntity);
+    }
+
+    @Override
     public AnimationFactory getFactory() {
         return this.factory;
     }

@@ -3,10 +3,9 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
+import io.github.bioplethora.entity.ai.CavernFleignarMeleeGoal;
 import io.github.bioplethora.entity.ai.CavernFleignarTargetGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -20,6 +19,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
@@ -62,14 +62,14 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
                 .add(Attributes.MAX_HEALTH, 40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10)
                 .add(Attributes.MOVEMENT_SPEED, 0.1 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 8D);
+                .add(Attributes.FOLLOW_RANGE, 24D);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(2, new BPMonsterMeleeGoal(this, 20, 0.8, 0.9));
+        this.goalSelector.addGoal(2, new CavernFleignarMeleeGoal(this, 20, 0.8, 0.9));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
         this.targetSelector.addGoal(2, new CavernFleignarTargetGoal(this, true));
@@ -114,33 +114,32 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     }
 
     @Override
-    public EntitySize getDimensions(Pose pPose) {
-        return super.getDimensions(pPose);
-    }
-
-    @Override
     public float getScale() {
         return this.isHuge ? 1.5F : 1.0F;
     }
 
     @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return BioplethoraSoundEvents.CREPHOXL_IDLE.get();
+        return SoundEvents.SQUID_AMBIENT;
     }
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return BioplethoraSoundEvents.CREPHOXL_HURT.get();
+        return SoundEvents.SQUID_HURT;
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return BioplethoraSoundEvents.CREPHOXL_DEATH.get();
+        return SoundEvents.SQUID_DEATH;
     }
 
     @Override
     public void tick() {
         super.tick();
+
+        if (this.hasEffect(Effects.POISON)) {
+            this.removeEffect(Effects.POISON);
+        }
 
         if (!finalize) {
             if (Math.random() <= 0.5) {
@@ -161,14 +160,16 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
                 int poisonAmplification = BioplethoraConfig.getHellMode ? 0 : 1;
 
                 if (this.level instanceof ServerWorld) {
-                    ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, entity.getX(), entity.getY(), entity.getZ(), 30, 1.2, 0.4, 1.2, 0.01);
+                    ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, entity.getX(), entity.getY(), entity.getZ(), 15, 1.2, 0.2, 1.2, 0.01);
                 }
 
                 targetArea.knockback(knockbackValue * 0.5F, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
-                targetArea.addEffect(new EffectInstance(Effects.POISON, poisonDuration, poisonAmplification));
+                targetArea.hurt(DamageSource.mobAttack(this), (float) (this.getAttributeValue(Attributes.ATTACK_KNOCKBACK) * 0.75));
+                if (targetArea instanceof CavernFleignarEntity) {
+                    targetArea.addEffect(new EffectInstance(Effects.POISON, poisonDuration, poisonAmplification));
+                }
             }
         }
-
         return flag;
     }
 

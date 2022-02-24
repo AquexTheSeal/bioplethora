@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bioplethora:nandbri_scale_block"
+    }
+  ],
+  "result": {
+    "item": "bioplethora:nandbri_scales",
+    "count": 9
+  }
+}

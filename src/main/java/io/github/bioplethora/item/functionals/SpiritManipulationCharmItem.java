@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SpiritFissionCharmItem extends ActivatableItem {
+public class SpiritManipulationCharmItem extends ActivatableItem {
 
-    public SpiritFissionCharmItem(Properties properties) {
+    public SpiritManipulationCharmItem(Properties properties) {
         super(properties);
     }
 
@@ -26,7 +26,7 @@ public class SpiritFissionCharmItem extends ActivatableItem {
         super.activatedTick(pStack, pLevel, pEntity);
 
         if (pEntity instanceof PlayerEntity) {
-            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BioplethoraEffects.SPIRIT_FISSION.get(), 10, 0));
+            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BioplethoraEffects.SPIRIT_MANIPULATION.get(), 10, 0));
         }
     }
 
@@ -35,9 +35,9 @@ public class SpiritFissionCharmItem extends ActivatableItem {
 
         ItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_fission_charm.spirit_fission.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_manipulation_charm.spirit_manipulation.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_fission_charm.spirit_fission.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_manipulation_charm.spirit_manipulation.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

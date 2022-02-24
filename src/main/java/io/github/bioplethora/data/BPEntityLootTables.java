@@ -6,10 +6,12 @@ import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
+import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
+import net.minecraft.loot.functions.Smelt;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -294,6 +296,25 @@ public class BPEntityLootTables extends EntityLootTables {
                         .add(ItemLootEntry.lootTableItem(BioplethoraItems.RED_GRYLYNEN_CRYSTAL.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.3F)))
+                                .when(KilledByPlayer.killedByPlayer())
+                        ))
+        );
+
+        // Cavern Fleignar
+        add(BioplethoraEntities.CAVERN_FLEIGNAR.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.FLEIGNARITE_SCALES.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
+                                .when(KilledByPlayer.killedByPlayer())
+                        ))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.RAW_FLENTAIR.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
+                                .apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
         );

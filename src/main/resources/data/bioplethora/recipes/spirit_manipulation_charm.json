@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " PP",
+    "SSP",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "bioplethora:yellow_grylynen_crystal"
+    }
+  },
+  "result": {
+    "item": "bioplethora:spirit_manipulation_charm",
+    "count": 1
+  }
+}
