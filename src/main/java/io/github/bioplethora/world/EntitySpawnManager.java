@@ -11,7 +11,6 @@ import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public class EntitySpawnManager {
@@ -129,7 +128,7 @@ public class EntitySpawnManager {
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {
             MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
-            RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Bioplethora Mob Spawning"));
+            RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, event.getName());
             boolean hasOverworldType = BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD);
 
             if (hasOverworldType) {

@@ -4,9 +4,9 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.TieredItem;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -26,9 +26,9 @@ public class BioItemModelProvider extends ItemModelProvider {
      * Automatically generates item and block item models without existing model files.
      */
     @Override
-    protected void registerModels() {
-        addItems(BioplethoraItems.ITEMS.getEntries());
-        addBlockItems(BioplethoraBlocks.BLOCK_ITEMS.getEntries());
+    public void registerModels() {
+        this.defaultItem(BioplethoraItems.ITEMS.getEntries());
+        this.defaultBlock(BioplethoraBlocks.BLOCK_ITEMS.getEntries());
     }
 
     @Nonnull
@@ -41,40 +41,39 @@ public class BioItemModelProvider extends ItemModelProvider {
         return getExistingFile(mcLoc(mcModel));
     }
 
-    private void addItems(Collection<RegistryObject<Item>> items) {
-        ModelFile.ExistingModelFile generated = getMcLoc("item/generated");
-        ModelFile.ExistingModelFile handheld = getMcLoc("item/handheld");
+    /**
+     * If Item is ToolItem or SwordItem, minecraft/handheld model will be generated for that item.
+     * Otherwise, minecraft/generated model will be generated for that item.
+     */
+    public void defaultItem(Collection<RegistryObject<Item>> items) {
 
         for (RegistryObject<Item> item : items) {
             String name = item.getId().getPath();
+            Item getItem = item.get();
+            ResourceLocation datagenLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
 
-            // Checks if item texture exist and model texture doesn't exist
-            if (!existingFileHelper.exists(new ResourceLocation(Bioplethora.MOD_ID, "item/" + name), TEXTURE)
-                    || existingFileHelper.exists(new ResourceLocation(Bioplethora.MOD_ID, "item/" + name), MODEL))
+            ModelFile.ExistingModelFile modelType = getItem instanceof ToolItem || getItem instanceof SwordItem ?
+                    getMcLoc("item/handheld") : getMcLoc("item/generated");
+
+            if (!existingFileHelper.exists(datagenLoc, TEXTURE) || existingFileHelper.exists(datagenLoc, MODEL))
                 continue;
 
-            Bioplethora.LOGGER.info(item.getId());
-
-            getBuilder(item.getId().getPath()).parent(
-                    //If Item is TieredItem and if item is NOT ArmorItem, minecraft/handheld model will be generated for that item.
-                            // Otherwise, minecraft/generated model will be generated for that item.
-                    (item.get() instanceof TieredItem) && !(item.get() instanceof ArmorItem) ? handheld : generated)
-                    .texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
+            this.getBuilder(name).parent(modelType).texture("layer0", ITEM_FOLDER + "/" + name);
+            Bioplethora.LOGGER.info("Generate Item Successful: " + item.getId());
         }
     }
 
-    private void addBlockItems(Collection<RegistryObject<Item>> blockItems) {
-        for (RegistryObject<Item> item : blockItems) {
-            String name = item.getId().getPath();
+    public void defaultBlock(Collection<RegistryObject<Item>> blockItems) {
+        for (RegistryObject<Item> blockItem : blockItems) {
+            String name = blockItem.getId().getPath();
+            ResourceLocation itemLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
+            ResourceLocation blockLoc = new ResourceLocation(Bioplethora.MOD_ID, "block/" + name);
 
-            // Checks if item texture exist and model texture doesn't exist
-            if (!existingFileHelper.exists(new ResourceLocation(Bioplethora.MOD_ID, "block/" + name), MODEL)
-                    || existingFileHelper.exists(new ResourceLocation(Bioplethora.MOD_ID, "item/" + name), MODEL))
+            if (!existingFileHelper.exists(blockLoc, MODEL) || existingFileHelper.exists(itemLoc, MODEL))
                 continue;
 
-            Bioplethora.LOGGER.info(item.getId());
-
-            withExistingParent(name, new ResourceLocation(Bioplethora.MOD_ID, "block/" + name));
+            this.withExistingParent(name, blockLoc);
+            Bioplethora.LOGGER.info("Generate Block Item Successful: " + blockItem.getId());
         }
     }
 }

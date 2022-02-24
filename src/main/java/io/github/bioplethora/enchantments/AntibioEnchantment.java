@@ -51,21 +51,21 @@ public class AntibioEnchantment extends Enchantment {
 
         if (!BioplethoraConfig.COMMON.antibioCompatibility.get()) {
             if (this == eco) {
-                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, eco);
+                return getCompatHelper(pEnch, eco);
             } else if (this == ple) {
-                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, ple);
+                return getCompatHelper(pEnch, ple);
             } else if (this == dan) {
-                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, dan);
+                return getCompatHelper(pEnch, dan);
             } else if (this == hel) {
-                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, hel);
+                return getCompatHelper(pEnch, hel);
             } else if (this == eld) {
-                return super.checkCompatibility(pEnch) && getCompatHelper(pEnch, eld);
+                return getCompatHelper(pEnch, eld);
             }
         } return super.checkCompatibility(pEnch);
     }
 
     public boolean getCompatHelper(Enchantment pEnch, Enchantment whitelisted) {
-        return !(pEnch instanceof AntibioEnchantment) && (pEnch != whitelisted);
+        return super.checkCompatibility(pEnch) && !(pEnch instanceof AntibioEnchantment) && (pEnch != whitelisted);
     }
 
     @Override
