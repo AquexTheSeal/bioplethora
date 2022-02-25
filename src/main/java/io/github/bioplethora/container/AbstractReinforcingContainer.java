@@ -1,6 +1,7 @@
 package io.github.bioplethora.container;
 
 
+import io.github.bioplethora.registry.BioplethoraBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -85,8 +86,7 @@ public abstract class AbstractReinforcingContainer extends Container {
     }
 
     public boolean stillValid(PlayerEntity pPlayer) {
-        return this.access.evaluate((p_234646_2_, p_234646_3_) ->
-                this.isValidBlock(p_234646_2_.getBlockState(p_234646_3_)) && pPlayer.distanceToSqr((double) p_234646_3_.getX() + 0.5D, (double) p_234646_3_.getY() + 0.5D, (double) p_234646_3_.getZ() + 0.5D) <= 64.0D, true);
+        return stillValid(access, player, BioplethoraBlocks.REINFORCING_TABLE.get());
     }
 
     // must assign a slot number to each of the slots used by the GUI.

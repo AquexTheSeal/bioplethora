@@ -79,10 +79,6 @@ public class ReinforcingTableContainer extends AbstractReinforcingContainer {
         });
     }
 
-    /**
-     * Called to determine if the current slot is valid for the stack merging (double-click) code. The stack passed in is
-     * null for the initial slot that was double-clicked.
-     */
     public boolean canTakeItemForPickAll(ItemStack pStack, Slot pSlot) {
         return pSlot.container != this.resultSlots && super.canTakeItemForPickAll(pStack, pSlot);
     }
