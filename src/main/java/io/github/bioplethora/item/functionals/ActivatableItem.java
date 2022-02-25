@@ -15,6 +15,7 @@ public class ActivatableItem extends Item {
 
     public ActivatableItem(Properties pProperties) {
         super(pProperties);
+        this.isActivated = false;
     }
 
     @Override

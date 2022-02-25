@@ -27,6 +27,11 @@ public class CrephoxlHammerItem extends AxeItem {
         super(tier, attackDamageIn, attackSpeedIn, builder);
     }
 
+    /** <h2>Special Ability 1 of 2: Deathsweep</h2>
+     *
+     * Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within
+     a 2-block radius. 1.5 second cooldown.
+     */
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity entity, LivingEntity source) {
         boolean retval = super.hurtEnemy(stack, entity, source);
@@ -35,12 +40,6 @@ public class CrephoxlHammerItem extends AxeItem {
         double x = entity.getX(), y = entity.getY(), z = entity.getZ();
         BlockPos pos = new BlockPos(x, y, z);
         PlayerEntity player = (PlayerEntity) source;
-
-         /* Special Ability 1 of 2: Deathsweep
-
-         Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within
-         a 2-block radius. 1.5 second cooldown.
-         */
 
         if(player.isCrouching() && !player.getCooldowns().isOnCooldown(stack.getItem())) {
             player.getCooldowns().addCooldown(stack.getItem(), 30);

@@ -46,6 +46,10 @@ public class Bioplethora {
         BioplethoraEffects.EFFECTS.register(bus);
         BioplethoraEnchantments.ENCHANTMENTS.register(bus);
 
+        BioplethoraTileEntities.TILE_ENTITIES.register(bus);
+        BioplethoraContainerTypes.CONTAINERS.register(bus);
+        BioplethoraRecipes.RECIPE_SERIALIZERS.register(bus);
+
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);
         bus.addListener(this::onInterModEnqueueEvent);

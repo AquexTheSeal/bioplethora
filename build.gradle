@@ -134,12 +134,17 @@ dependencies {
     implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
     //Mixin
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    //Enchantment Descriptions
-    //implementation fg.deobf("curse.maven:enchantment-descriptions-250419:3358861")
-    //Bookshelf (for EnchDesc)
-    //implementation fg.deobf("net.darkhax.bookshelf:Bookshelf-1.16.5:10.0.1")
     //Off-Hand Combat
     implementation fg.deobf("curse.maven:off-hand-combat-417112:3203449")
+    //Tetra
+    implementation fg.deobf("curse.maven:tetra-289712:3585032")
+    //Mutil (For Tetra)
+    implementation fg.deobf("curse.maven:mutil-351914:3456505")
+
+    //Enchantment Descriptions
+    /*implementation fg.deobf("curse.maven:enchantment-descriptions-250419:3358861")*/
+    //Bookshelf (for EnchDesc)
+    /*implementation fg.deobf("net.darkhax.bookshelf:Bookshelf-1.16.5:10.0.1")*/
 }
 
 jar {

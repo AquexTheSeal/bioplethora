@@ -9,9 +9,12 @@ import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
 import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
+import io.github.bioplethora.registry.BioplethoraContainerTypes;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.screen.ReinforcingTableScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemModelsProperties;
@@ -77,6 +80,8 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);
+
+        ScreenManager.register(BioplethoraContainerTypes.REINFORCING_TABLE_CONTAINER.get(), ReinforcingTableScreen::new);
     }
 
     @OnlyIn(Dist.CLIENT)
