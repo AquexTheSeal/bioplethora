@@ -1,8 +1,8 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.container.AbstractReinforcingContainer;
-import io.github.bioplethora.container.ReinforcingTableContainer;
+import io.github.bioplethora.gui.container.AbstractReinforcingContainer;
+import io.github.bioplethora.gui.container.ReinforcingTableContainer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;

@@ -1,7 +1,7 @@
 package io.github.bioplethora.blocks.tile_entities;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.container.ReinforcingTableContainer;
+import io.github.bioplethora.gui.container.ReinforcingTableContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CraftingTableBlock;
 import net.minecraft.entity.player.PlayerEntity;

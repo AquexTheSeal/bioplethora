@@ -1,4 +1,4 @@
-package io.github.bioplethora.recipe;
+package io.github.bioplethora.gui.recipe;
 
 import com.google.gson.JsonObject;
 import io.github.bioplethora.Bioplethora;
@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -17,8 +18,6 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import javax.annotation.Nullable;
 
 public class ReinforcingRecipe implements IRecipe<IInventory> {
-
-    public static ResourceLocation TYPE_ID = new ResourceLocation(Bioplethora.MOD_ID, "reinforcing");
 
     protected final ResourceLocation recipeId;
     protected final Ingredient topIngredient, midIngredient, botIngredient;
@@ -49,6 +48,17 @@ public class ReinforcingRecipe implements IRecipe<IInventory> {
         }
 
         return itemstack;
+    }
+
+    public ItemStack[] addIngredient(int slotToPlace) {
+
+        NonNullList<Ingredient> totalIngredients = NonNullList.create();
+        totalIngredients.add(topIngredient);
+        totalIngredients.add(midIngredient);
+        totalIngredients.add(botIngredient);
+
+        Ingredient ing = totalIngredients.get(slotToPlace);
+        return ing.getItems();
     }
 
     public ItemStack getIcon() {
@@ -85,10 +95,12 @@ public class ReinforcingRecipe implements IRecipe<IInventory> {
         return BioplethoraRecipes.REINFORCING;
     }
 
+
     public static class ReinforcingRecipeType implements IRecipeType<ReinforcingRecipe> {
+
         @Override
-        public String toString() {
-            return ReinforcingRecipe.TYPE_ID.toString();
+        public String toString () {
+            return new ResourceLocation(Bioplethora.MOD_ID, "reinforcing").toString();
         }
     }
 

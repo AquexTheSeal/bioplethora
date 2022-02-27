@@ -1,7 +1,7 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.recipe.ReinforcingRecipeBuilder;
+import io.github.bioplethora.gui.recipe.ReinforcingRecipeBuilder;
 import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.data.*;

@@ -1,4 +1,4 @@
-package io.github.bioplethora.recipe;
+package io.github.bioplethora.gui.recipe;
 
 import com.google.gson.JsonObject;
 import io.github.bioplethora.registry.BioplethoraRecipes;

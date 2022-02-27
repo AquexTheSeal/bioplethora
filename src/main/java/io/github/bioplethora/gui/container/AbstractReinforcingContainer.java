@@ -1,4 +1,4 @@
-package io.github.bioplethora.container;
+package io.github.bioplethora.gui.container;
 
 
 import io.github.bioplethora.registry.BioplethoraBlocks;

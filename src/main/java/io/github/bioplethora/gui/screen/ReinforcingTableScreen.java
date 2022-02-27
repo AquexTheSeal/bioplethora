@@ -1,9 +1,9 @@
-package io.github.bioplethora.screen;
+package io.github.bioplethora.gui.screen;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.container.AbstractReinforcingContainer;
+import io.github.bioplethora.gui.container.AbstractReinforcingContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;

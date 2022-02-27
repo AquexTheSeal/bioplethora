@@ -1,6 +1,6 @@
-package io.github.bioplethora.container;
+package io.github.bioplethora.gui.container;
 
-import io.github.bioplethora.recipe.ReinforcingRecipe;
+import io.github.bioplethora.gui.recipe.ReinforcingRecipe;
 import io.github.bioplethora.registry.BioplethoraContainerTypes;
 import io.github.bioplethora.registry.BioplethoraRecipes;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,7 +1,7 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.recipe.ReinforcingRecipe;
+import io.github.bioplethora.gui.recipe.ReinforcingRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.registry.Registry;
@@ -21,6 +21,6 @@ public class BioplethoraRecipes {
 
     public static void registerRecipes(IEventBus eventBus) {
         RECIPE_SERIALIZERS.register(eventBus);
-        Registry.register(Registry.RECIPE_TYPE, ReinforcingRecipe.TYPE_ID, REINFORCING);
+        Registry.register(Registry.RECIPE_TYPE, "reinforcing", REINFORCING);
     }
 }

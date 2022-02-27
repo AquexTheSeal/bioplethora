@@ -1,6 +1,6 @@
 package io.github.bioplethora.blocks.tile_entities;
 
-import io.github.bioplethora.recipe.ReinforcingRecipe;
+import io.github.bioplethora.gui.recipe.ReinforcingRecipe;
 import io.github.bioplethora.registry.BioplethoraItems;
 import io.github.bioplethora.registry.BioplethoraTileEntities;
 import net.minecraft.block.BlockState;
