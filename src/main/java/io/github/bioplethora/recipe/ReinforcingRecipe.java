@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 public class ReinforcingRecipe implements IRecipe<IInventory> {
 
-    public static ResourceLocation TYPE_ID = new ResourceLocation(Bioplethora.MOD_ID, "lightning");
+    public static ResourceLocation TYPE_ID = new ResourceLocation(Bioplethora.MOD_ID, "reinforcing");
 
     protected final ResourceLocation recipeId;
     protected final Ingredient topIngredient, midIngredient, botIngredient;
