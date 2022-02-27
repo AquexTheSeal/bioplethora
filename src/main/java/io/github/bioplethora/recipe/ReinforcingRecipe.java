@@ -1,6 +1,7 @@
 package io.github.bioplethora.recipe;
 
 import com.google.gson.JsonObject;
+import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraRecipes;
 import net.minecraft.inventory.IInventory;
@@ -15,21 +16,21 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 
-public class ReinforcingTableRecipe implements IRecipe<IInventory> {
+public class ReinforcingRecipe implements IRecipe<IInventory> {
+
+    public static ResourceLocation TYPE_ID = new ResourceLocation(Bioplethora.MOD_ID, "lightning");
 
     protected final ResourceLocation recipeId;
     protected final Ingredient topIngredient, midIngredient, botIngredient;
     protected final ItemStack resultItem;
-    protected final float experience;
 
-    public ReinforcingTableRecipe(ResourceLocation recipeId, Ingredient topIngredient, Ingredient midIngredient, Ingredient botIngredient, 
-                                  ItemStack resultItem, float experience) {
+    public ReinforcingRecipe(ResourceLocation recipeId, Ingredient topIngredient, Ingredient midIngredient, Ingredient botIngredient,
+                             ItemStack resultItem) {
         this.recipeId = recipeId;
         this.topIngredient = topIngredient;
         this.midIngredient = midIngredient;
         this.botIngredient = botIngredient;
         this.resultItem = resultItem;
-        this.experience = experience;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ReinforcingTableRecipe implements IRecipe<IInventory> {
     @Override
     public ItemStack assemble(IInventory pInv) {
         ItemStack itemstack = this.resultItem.copy();
-        CompoundNBT compoundnbt = pInv.getItem(0).getTag();
+        CompoundNBT compoundnbt = pInv.getItem(2).getTag();
         if (compoundnbt != null) {
             itemstack.setTag(compoundnbt.copy());
         }
@@ -66,6 +67,10 @@ public class ReinforcingTableRecipe implements IRecipe<IInventory> {
         return this.resultItem;
     }
 
+    public ItemStack getToastSymbol() {
+        return new ItemStack(BioplethoraBlocks.REINFORCING_TABLE.get());
+    }
+
     @Override
     public ResourceLocation getId() {
         return recipeId;
@@ -73,44 +78,48 @@ public class ReinforcingTableRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return BioplethoraRecipes.REINFORCING_TABLE_RECIPE_SERIALIZER.get();
+        return BioplethoraRecipes.REINFORCING_SERIALIZER.get();
     }
 
     public IRecipeType<?> getType() {
-        return BioplethoraRecipes.REINFORCING_TABLE_RECIPE;
+        return BioplethoraRecipes.REINFORCING;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ReinforcingTableRecipe> {
+    public static class ReinforcingRecipeType implements IRecipeType<ReinforcingRecipe> {
+        @Override
+        public String toString() {
+            return ReinforcingRecipe.TYPE_ID.toString();
+        }
+    }
+
+    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ReinforcingRecipe> {
 
         @Override
-        public ReinforcingTableRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+        public ReinforcingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
 
-            Ingredient hammer = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "hammer"));
+            Ingredient core = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "core"));
             Ingredient material = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "material"));
             Ingredient weapon = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "weapon"));
 
             ItemStack result = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"));
-            float experience = JSONUtils.getAsFloat(json, "experience", 0);
 
-            return new ReinforcingTableRecipe(recipeId, hammer, material, weapon, result, experience);
+            return new ReinforcingRecipe(recipeId, core, material, weapon, result);
         }
 
         @Nullable
         @Override
-        public ReinforcingTableRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
-            Ingredient hammer = Ingredient.fromNetwork(buffer);
+        public ReinforcingRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+            Ingredient core = Ingredient.fromNetwork(buffer);
             Ingredient material = Ingredient.fromNetwork(buffer);
             Ingredient weapon = Ingredient.fromNetwork(buffer);
 
             ItemStack result = buffer.readItem();
-            float experience = buffer.readFloat();
 
-            ItemStack output = buffer.readItem();
-            return new ReinforcingTableRecipe(recipeId, hammer, material, weapon, result, experience);
+            return new ReinforcingRecipe(recipeId, core, material, weapon, result);
         }
 
         @Override
-        public void toNetwork(PacketBuffer buffer, ReinforcingTableRecipe recipe) {
+        public void toNetwork(PacketBuffer buffer, ReinforcingRecipe recipe) {
             buffer.writeInt(recipe.getIngredients().size());
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buffer);

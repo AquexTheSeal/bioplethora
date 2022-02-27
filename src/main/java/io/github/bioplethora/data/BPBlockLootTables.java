@@ -40,6 +40,8 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BioplethoraBlocks.PETRAWOOD_PRESSURE_PLATE.get());
         dropSelf(BioplethoraBlocks.PETRAWOOD_STAIRS.get());
         dropSelf(BioplethoraBlocks.PETRAWOOD_BUTTON.get());
+
+        dropSelf(BioplethoraBlocks.REINFORCING_TABLE.get());
     }
 
     @Override

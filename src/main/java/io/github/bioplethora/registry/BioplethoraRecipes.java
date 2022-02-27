@@ -1,9 +1,11 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.recipe.ReinforcingTableRecipe;
+import io.github.bioplethora.recipe.ReinforcingRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.registry.Registry;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -11,8 +13,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BioplethoraRecipes {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Bioplethora.MOD_ID);
 
-    public static final IRecipeType<ReinforcingTableRecipe> REINFORCING_TABLE_RECIPE = IRecipeType.register(Bioplethora.MOD_ID + "_reinforcing");
+    public static final IRecipeType<ReinforcingRecipe> REINFORCING = new ReinforcingRecipe.ReinforcingRecipeType();
+    //public static final IRecipeType<ReinforcingTableRecipe> REINFORCING = IRecipeType.register(Bioplethora.MOD_ID + "_reinforcing");
 
-    public static final RegistryObject<IRecipeSerializer<?>> REINFORCING_TABLE_RECIPE_SERIALIZER =
-            RECIPE_SERIALIZERS.register("reinforcing", ReinforcingTableRecipe.Serializer::new);
+    public static final RegistryObject<IRecipeSerializer<?>> REINFORCING_SERIALIZER =
+            RECIPE_SERIALIZERS.register("reinforcing", ReinforcingRecipe.Serializer::new);
+
+    public static void registerRecipes(IEventBus eventBus) {
+        RECIPE_SERIALIZERS.register(eventBus);
+        Registry.register(Registry.RECIPE_TYPE, ReinforcingRecipe.TYPE_ID, REINFORCING);
+    }
 }

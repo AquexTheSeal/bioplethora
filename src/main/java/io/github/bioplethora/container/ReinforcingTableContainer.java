@@ -1,14 +1,12 @@
 package io.github.bioplethora.container;
 
+import io.github.bioplethora.recipe.ReinforcingRecipe;
 import io.github.bioplethora.registry.BioplethoraContainerTypes;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import io.github.bioplethora.registry.BioplethoraRecipes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.SmithingRecipe;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.world.World;
 
@@ -19,8 +17,7 @@ public class ReinforcingTableContainer extends AbstractReinforcingContainer {
 
     private final World level;
     @Nullable
-    private SmithingRecipe selectedRecipe;
-    private final List<SmithingRecipe> recipes;
+    private ReinforcingRecipe selectedRecipe;
 
     public ReinforcingTableContainer(int pContainerId, PlayerInventory pPlayerInventory) {
         this(pContainerId, pPlayerInventory, IWorldPosCallable.NULL);
@@ -29,11 +26,6 @@ public class ReinforcingTableContainer extends AbstractReinforcingContainer {
     public ReinforcingTableContainer(int pContainerId, PlayerInventory pPlayerInventory, IWorldPosCallable pAccess) {
         super(BioplethoraContainerTypes.REINFORCING_TABLE_CONTAINER.get(), pContainerId, pPlayerInventory, pAccess);
         this.level = pPlayerInventory.player.level;
-        this.recipes = this.level.getRecipeManager().getAllRecipesFor(IRecipeType.SMITHING);
-    }
-
-    protected boolean isValidBlock(BlockState pState) {
-        return pState.is(Blocks.SMITHING_TABLE);
     }
 
     protected boolean mayPickup(PlayerEntity pPlayer, boolean pHasStack) {
@@ -45,9 +37,8 @@ public class ReinforcingTableContainer extends AbstractReinforcingContainer {
         this.resultSlots.awardUsedRecipes(pPlayer);
         this.shrinkStackInSlot(0);
         this.shrinkStackInSlot(1);
-        this.access.execute((p_234653_0_, p_234653_1_) -> {
-            p_234653_0_.levelEvent(1044, p_234653_1_, 0);
-        });
+        this.shrinkStackInSlot(2);
+        this.access.execute((world, pos) -> world.levelEvent(1044, pos, 0));
         return pInputItem;
     }
 
@@ -57,26 +48,16 @@ public class ReinforcingTableContainer extends AbstractReinforcingContainer {
         this.inputSlots.setItem(pIndex, itemstack);
     }
 
-    /**
-     * called when the Anvil Input Slot changes, calculates the new result and puts it in the output slot
-     */
     public void createResult() {
-        List<SmithingRecipe> list = this.level.getRecipeManager().getRecipesFor(IRecipeType.SMITHING, this.inputSlots, this.level);
+        List<ReinforcingRecipe> list = this.level.getRecipeManager().getRecipesFor(BioplethoraRecipes.REINFORCING, this.inputSlots, this.level);
         if (list.isEmpty()) {
-            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            this.resultSlots.setItem(3, ItemStack.EMPTY);
         } else {
             this.selectedRecipe = list.get(0);
             ItemStack itemstack = this.selectedRecipe.assemble(this.inputSlots);
             this.resultSlots.setRecipeUsed(this.selectedRecipe);
-            this.resultSlots.setItem(0, itemstack);
+            this.resultSlots.setItem(3, itemstack);
         }
-
-    }
-
-    protected boolean shouldQuickMoveToAdditionalSlot(ItemStack pStack) {
-        return this.recipes.stream().anyMatch((p_241444_1_) -> {
-            return p_241444_1_.isAdditionIngredient(pStack);
-        });
     }
 
     public boolean canTakeItemForPickAll(ItemStack pStack, Slot pSlot) {

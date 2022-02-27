@@ -1,11 +1,14 @@
 package io.github.bioplethora.blocks.tile_entities;
 
+import io.github.bioplethora.recipe.ReinforcingRecipe;
 import io.github.bioplethora.registry.BioplethoraItems;
 import io.github.bioplethora.registry.BioplethoraTileEntities;
 import net.minecraft.block.BlockState;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -18,7 +21,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ReinforcingTableTileEntity extends TileEntity {
+public class ReinforcingTableTileEntity extends TileEntity implements ITickableTileEntity {
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
@@ -43,6 +46,13 @@ public class ReinforcingTableTileEntity extends TileEntity {
         return super.save(compound);
     }
 
+    private ItemStack getResult(@Nullable ReinforcingRecipe recipe) {
+        if (recipe != null) {
+            return recipe.assemble((IInventory) this);
+        }
+        return ItemStack.EMPTY;
+    }
+
     private ItemStackHandler createHandler() {
         return new ItemStackHandler(2) {
             @Override
@@ -54,8 +64,8 @@ public class ReinforcingTableTileEntity extends TileEntity {
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 switch (slot) {
                     case 0: return stack.getItem() == Items.GLASS_PANE;
-                    case 1: return stack.getItem() == BioplethoraItems.BELLOPHITE.get() ||
-                            stack.getItem() == BioplethoraItems.BELLOPHITE.get();
+                    case 1: return stack.getItem() == BioplethoraItems.BELLOPHITE.get() || stack.getItem() == BioplethoraItems.BELLOPHITE.get();
+                    case 2: return stack.getItem() == BioplethoraItems.BELLOPHITE.get();
                     default:
                         return false;
                 }
@@ -63,7 +73,7 @@ public class ReinforcingTableTileEntity extends TileEntity {
 
             @Override
             public int getSlotLimit(int slot) {
-                return 1;
+                return 2;
             }
 
             @Nonnull
@@ -86,5 +96,10 @@ public class ReinforcingTableTileEntity extends TileEntity {
         }
 
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public void tick() {
+
     }
 }

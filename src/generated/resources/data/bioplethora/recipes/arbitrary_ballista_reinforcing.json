@@ -1,0 +1,15 @@
+{
+  "type": "bioplethora:reinforcing",
+  "topIngredient": {
+    "item": "bioplethora:red_grylynen_crystal"
+  },
+  "midIngredient": {
+    "item": "bioplethora:bellophite"
+  },
+  "botIngredient": {
+    "item": "minecraft:crossbow"
+  },
+  "result": {
+    "item": "bioplethora:arbitrary_ballista"
+  }
+}

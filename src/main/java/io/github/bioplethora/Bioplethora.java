@@ -48,7 +48,8 @@ public class Bioplethora {
 
         BioplethoraTileEntities.TILE_ENTITIES.register(bus);
         BioplethoraContainerTypes.CONTAINERS.register(bus);
-        BioplethoraRecipes.RECIPE_SERIALIZERS.register(bus);
+
+        BioplethoraRecipes.registerRecipes(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);

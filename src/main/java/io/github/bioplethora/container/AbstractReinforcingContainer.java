@@ -2,7 +2,6 @@ package io.github.bioplethora.container;
 
 
 import io.github.bioplethora.registry.BioplethoraBlocks;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftResultInventory;
@@ -32,18 +31,17 @@ public abstract class AbstractReinforcingContainer extends Container {
 
     protected abstract ItemStack onTake(PlayerEntity pPlayer, ItemStack pInputItem);
 
-    protected abstract boolean isValidBlock(BlockState pState);
-
     public AbstractReinforcingContainer(@Nullable ContainerType<?> pType, int pContainerId, PlayerInventory pPlayerInventory, IWorldPosCallable pAccess) {
         super(pType, pContainerId);
         this.access = pAccess;
         this.player = pPlayerInventory.player;
 
-        addSlot(new Slot(this.inputSlots, 0, 27, 47));
-        addSlot(new Slot(this.inputSlots, 1, 76, 47));
-        addSlot(new Slot(this.inputSlots, 2, 134, 47));
+        addSlot(new Slot(this.inputSlots, 0, 44, 85 - 32));
+        addSlot(new Slot(this.inputSlots, 1, 44, 67 - 32));
 
-        addSlot(new Slot(this.resultSlots, 2, 175, 47) {
+        addSlot(new Slot(this.inputSlots, 2, 44, 49 - 32));
+
+        addSlot(new Slot(this.resultSlots, 3, 127, 37) {
             public boolean mayPlace(ItemStack pStack) {
                 return false;
             }
@@ -57,14 +55,14 @@ public abstract class AbstractReinforcingContainer extends Container {
             }
         });
 
-        for(int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(pPlayerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+        for(int row = 0; row < 3; ++row) {
+            for(int col = 0; col < 9; ++col) {
+                this.addSlot(new Slot(pPlayerInventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
             }
         }
 
-        for(int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(pPlayerInventory, k, 8 + k * 18, 142));
+        for(int col = 0; col < 9; ++col) {
+            this.addSlot(new Slot(pPlayerInventory, col, 8 + col * 18, 142));
         }
     }
 
@@ -80,58 +78,55 @@ public abstract class AbstractReinforcingContainer extends Container {
 
     public void removed(PlayerEntity pPlayer) {
         super.removed(pPlayer);
-        this.access.execute((p_234647_2_, p_234647_3_) -> {
-            this.clearContainer(pPlayer, p_234647_2_, this.inputSlots);
-        });
+        this.access.execute((world, pos) -> this.clearContainer(pPlayer, world, this.inputSlots));
     }
 
     public boolean stillValid(PlayerEntity pPlayer) {
         return stillValid(access, player, BioplethoraBlocks.REINFORCING_TABLE.get());
     }
 
-    // must assign a slot number to each of the slots used by the GUI.
-    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
-    // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
-    //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
-    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
-    //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
-    private static final int hotbar_slots = 9;
-    private static final int player_inventory_rows = 3;
-    private static final int player_inventory_columns = 9;
-    private static final int player_inventory_slots = player_inventory_columns * player_inventory_rows;
-    private static final int total_player_slots = hotbar_slots + player_inventory_slots;
-    private static final int first_slot_index = 0;
-    private static final int tile_entity_first_slot_index = first_slot_index + total_player_slots;
-
-    private static final int tile_entity_inventory_slots = 3;
+    protected boolean shouldQuickMoveToAdditionalSlot(ItemStack pStack) {
+        return false;
+    }
 
     @Override
     public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+        ItemStack itemstack = ItemStack.EMPTY;
         Slot sourceSlot = slots.get(index);
-        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;
-        ItemStack sourceStack = sourceSlot.getItem();
-        ItemStack copyOfSourceStack = sourceStack.copy();
 
-        if (index < first_slot_index + total_player_slots) {
-            if (!moveItemStackTo(sourceStack, tile_entity_first_slot_index, tile_entity_first_slot_index
-                    + tile_entity_inventory_slots, false)) {
+        if (sourceSlot != null && sourceSlot.hasItem()) {
+            ItemStack itemstack1 = sourceSlot.getItem();
+            itemstack = itemstack1.copy();
+            if (index == 3) {
+                if (!this.moveItemStackTo(itemstack1, 4, 39, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                sourceSlot.onQuickCraft(itemstack1, itemstack);
+            } else if (index != 0 && index != 1 && index != 2) {
+                if (index >= 4 && index < 39) {
+                    int i = this.shouldQuickMoveToAdditionalSlot(itemstack) ? 1 : 0;
+                    if (!this.moveItemStackTo(itemstack1, i, 3, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            } else if (!this.moveItemStackTo(itemstack1, 4, 39, false)) {
                 return ItemStack.EMPTY;
             }
-        } else if (index < tile_entity_first_slot_index + tile_entity_inventory_slots) {
-            if (!moveItemStackTo(sourceStack, first_slot_index, first_slot_index + total_player_slots, false)) {
+
+            if (itemstack1.isEmpty()) {
+                sourceSlot.set(ItemStack.EMPTY);
+            } else {
+                sourceSlot.setChanged();
+            }
+
+            if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }
-        } else {
-            System.out.println("Invalid slotIndex:" + index);
-            return ItemStack.EMPTY;
+
+            sourceSlot.onTake(player, itemstack1);
         }
 
-        if (sourceStack.getCount() == 0) {
-            sourceSlot.set(ItemStack.EMPTY);
-        } else {
-            sourceSlot.setChanged();
-        }
-        sourceSlot.onTake(player, sourceStack);
-        return copyOfSourceStack;
+        return itemstack;
     }
 }

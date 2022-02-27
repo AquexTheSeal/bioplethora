@@ -1,10 +1,12 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.recipe.ReinforcingRecipeBuilder;
 import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
@@ -37,6 +39,9 @@ public class BioRecipeProvider extends RecipeProvider {
         foodCooking(consumer, BioplethoraItems.RAW_CUTTLEFISH_MEAT.get(), BioplethoraItems.COOKED_CUTTLEFISH_MEAT.get(), 0.30F, 200);
         foodCooking(consumer, BioplethoraItems.RAW_FLENTAIR.get(), BioplethoraItems.COOKED_FLENTAIR.get(), 0.35F, 300);
 
+        reinforcing(consumer, BioplethoraItems.ARBITRARY_BALLISTA.get(), BioplethoraItems.RED_GRYLYNEN_CRYSTAL.get(),
+                BioplethoraItems.BELLOPHITE.get(), Items.CROSSBOW);
+
     }
 
     public String getName() {
@@ -53,15 +58,19 @@ public class BioRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(requiredItem)).save(consumer);
     }
 
-    private void foodCooking(Consumer<IFinishedRecipe> consumer, Item input, Item output, float exp, int duration) {
+    private static void reinforcing(Consumer<IFinishedRecipe> consumer, Item providedItem, IItemProvider top, IItemProvider mid, IItemProvider bot) {
+        ReinforcingRecipeBuilder.reinforcing(Ingredient.of(top), Ingredient.of(mid), Ingredient.of(bot), providedItem).unlocks("has_item", has(bot)).save(consumer, new ResourceLocation(Bioplethora.MOD_ID, providedItem.getRegistryName().getPath() + "_reinforcing"));
+    }
+
+    private void foodCooking(Consumer<IFinishedRecipe> consumer, Item input, Item output, float exp, int defaultTime) {
         String inputItemString = input.getRegistryName().getPath();
         
-        CookingRecipeBuilder.smelting(Ingredient.of(input), output, exp, duration).unlockedBy("has_" + input.getRegistryName().getPath(), has(input)).save(consumer);
+        CookingRecipeBuilder.smelting(Ingredient.of(input), output, exp, defaultTime).unlockedBy("has_" + input.getRegistryName().getPath(), has(input)).save(consumer);
         
-        CookingRecipeBuilder.cooking(Ingredient.of(input), output, exp, duration / 2, IRecipeSerializer.SMOKING_RECIPE).unlockedBy("has_" + inputItemString, has(input))
+        CookingRecipeBuilder.cooking(Ingredient.of(input), output, exp, defaultTime / 2, IRecipeSerializer.SMOKING_RECIPE).unlockedBy("has_" + inputItemString, has(input))
                 .save(consumer, new ResourceLocation(Bioplethora.MOD_ID, output.getRegistryName().getPath() + "_smoking"));
         
-        CookingRecipeBuilder.cooking(Ingredient.of(input), output, exp, duration * 3, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE).unlockedBy("has_" + inputItemString, has(input))
+        CookingRecipeBuilder.cooking(Ingredient.of(input), output, exp, defaultTime * 3, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE).unlockedBy("has_" + inputItemString, has(input))
                 .save(consumer, new ResourceLocation(Bioplethora.MOD_ID, output.getRegistryName().getPath() + "_campfire_cooking"));
     }
 

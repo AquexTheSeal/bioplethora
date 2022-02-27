@@ -13,5 +13,6 @@ public class BioplethoraContainerTypes {
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Bioplethora.MOD_ID);
 
     public static final RegistryObject<ContainerType<AbstractReinforcingContainer>> REINFORCING_TABLE_CONTAINER
-            = CONTAINERS.register("reinforcing", () -> IForgeContainerType.create((windowId, inv, data) -> new ReinforcingTableContainer(windowId, inv)));
+            = CONTAINERS.register("reinforcing", () -> IForgeContainerType.create((windowId, inv, data) ->
+            new ReinforcingTableContainer(windowId, inv)));
 }
