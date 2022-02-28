@@ -7,8 +7,6 @@ import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.TargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.math.AxisAlignedBB;
 
@@ -55,19 +53,6 @@ public class CavernFleignarTargetGoal extends TargetGoal {
                         fleignar.setTarget(targetCandidate);
                     }
                 }
-            }
-        }
-
-        if (target != null) {
-            fleignar.getTarget().addEffect(new EffectInstance(Effects.GLOWING, 5, 0));
-
-            double distance = this.fleignar.distanceToSqr(target);
-            if (distance >= 4D) {
-                fleignar.setTarget(null);
-            }
-
-            if (!validCheck(target)) {
-                fleignar.setTarget(null);
             }
         }
     }

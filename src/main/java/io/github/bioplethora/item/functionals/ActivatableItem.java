@@ -4,10 +4,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 public class ActivatableItem extends Item {
@@ -35,14 +33,48 @@ public class ActivatableItem extends Item {
 
     @Override
     public ActionResult<ItemStack> use(World pLevel, PlayerEntity pPlayer, Hand pHand) {
-        if (!this.isActivated) {
-            this.isActivated = true;
-            pPlayer.playSound(getActivationSound(), 1.0F, 1.0F);
+        ItemStack stack = pPlayer.getItemInHand(pHand);
+
+        if (pPlayer.isCrouching()) {
+            activate(pLevel, pPlayer, stack);
+            return ActionResult.success(stack);
         } else {
-            this.isActivated = false;
-            pPlayer.playSound(getDeactivationSound(), 1.0F, 1.0F);
+            return ActionResult.fail(stack);
         }
-        return super.use(pLevel, pPlayer, pHand);
+    }
+
+    @Override
+    public ActionResultType useOn(ItemUseContext pContext) {
+
+        if (pContext.getPlayer().isCrouching()) {
+            activate(pContext.getLevel(), pContext.getPlayer(), pContext.getItemInHand());
+            return ActionResultType.SUCCESS;
+        } else {
+            return ActionResultType.FAIL;
+        }
+    }
+
+    public void activate(World pLevel, PlayerEntity pPlayer, ItemStack stack) {
+
+        pPlayer.getCooldowns().addCooldown(stack.getItem(), 60);
+
+        if (!pPlayer.getCooldowns().isOnCooldown(stack.getItem())) {
+            if (!getActivated()) {
+                setActivated(true);
+                pPlayer.playSound(getActivationSound(), 1.0F, 1.0F);
+            } else {
+                setActivated(false);
+                pPlayer.playSound(getDeactivationSound(), 1.0F, 1.0F);
+            }
+        }
+    }
+
+    public boolean getActivated() {
+        return isActivated;
+    }
+
+    public void setActivated(boolean activated) {
+        isActivated = activated;
     }
 
     public SoundEvent getActivationSound() {

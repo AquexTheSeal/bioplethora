@@ -29,11 +29,11 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 # Credits / The Development Team
 **Lead Developer/s:** Sajevius, Aqu.
 
-**Coders** Sajevius, Aqu.
+**Coders** Sajevius, Aqu., CrimsonSteve
 
-**Texturers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi
+**Texturers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi, Dylanvhs, Lyof
 
-**Modellers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi
+**Modellers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi, Dylanvhs, Lyof
 
 # Links
 
@@ -61,6 +61,7 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 
 ### PLANNED
 
-- Dynamic Trees: https://www.curseforge.com/minecraft/mc-mods/dynamictrees
+- Tetra: https://www.curseforge.com/minecraft/mc-mods/tetra
+- Cloth Config: https://www.curseforge.com/minecraft/mc-mods/cloth-config-forge
 
 

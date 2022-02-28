@@ -22,9 +22,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PhantomChimeItem extends Item {
 
@@ -46,11 +44,7 @@ public class PhantomChimeItem extends Item {
         entity.swing(hand);
         world.playSound(entity, pos, SoundEvents.PHANTOM_FLAP, SoundCategory.PLAYERS, 1, 1);
 
-        List<Entity> nearEntities = world.getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (7 / 2d), y - (7 / 2d), z - (7 / 2d), x + (7 / 2d), y + (7 / 2d), z + (7 / 2d)), null).stream().sorted(new Object() {
-                    Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                        return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                    }
-                }.compareDistOf(x, y, z)).collect(Collectors.toList());
+        List<Entity> nearEntities = world.getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (7 / 2d), y - (7 / 2d), z - (7 / 2d), x + (7 / 2d), y + (7 / 2d), z + (7 / 2d)), null);
         for (Entity entityIterator : nearEntities) {
             if (entityIterator instanceof LivingEntity && entityIterator != entity) {
                 ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));

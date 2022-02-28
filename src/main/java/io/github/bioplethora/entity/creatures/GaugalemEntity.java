@@ -1,10 +1,9 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.BPMonsterEntity;
+import io.github.bioplethora.entity.FloatingMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.item.weapons.StellarScytheItem;
 import io.github.bioplethora.registry.BioplethoraItems;
@@ -12,7 +11,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
@@ -22,8 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.FlyingPathNavigator;
-import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
@@ -36,6 +32,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -48,13 +45,13 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
+public class GaugalemEntity extends FloatingMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public GaugalemEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
         this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(BioplethoraItems.STELLAR_SCYTHE.get()));
-        this.moveControl = new FlyingMovementController(this, 20, true);
+        this.moveControl = new GaugalemEntity.MoveHelperController(this);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -79,8 +76,9 @@ public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFly
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 0.75, 8));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
+        this.goalSelector.addGoal(3, new GaugalemEntity.ChargeAttackGoal());
+        this.goalSelector.addGoal(4, new GaugalemEntity.MoveRandomGoal());
         this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
@@ -119,6 +117,15 @@ public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFly
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
+    @Override
+    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
+        return super.checkSpawnRules(world, reason) && checkGaugalemSpawnRules(level, blockPosition());
+    }
+
+    public static boolean checkGaugalemSpawnRules(IWorld world, BlockPos pos) {
+        return pos.getY() > 40;
+    }
+
     public boolean doHurtTarget(Entity entity) {
         boolean flag = super.doHurtTarget(entity);
         World world = entity.level;
@@ -126,7 +133,7 @@ public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFly
             ((LivingEntity) entity).addEffect(new EffectInstance(Effects.WITHER, 100, 2));
             this.addEffect(new EffectInstance(Effects.INVISIBILITY, 100, 2));
             if (this.level instanceof ServerWorld) {
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 20, 0.4, 0.4, 0.4, 0.1);
             }
         }
 
@@ -160,18 +167,11 @@ public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFly
     }
 
     public int getMaxSpawnClusterSize() {
-        return 2;
+        return 1;
     }
 
     public CreatureAttribute getMobType() {
         return CreatureAttribute.UNDEAD;
-    }
-
-    public boolean causeFallDamage(float distance, float damageMultiplier) {
-        return false;
-    }
-
-    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
 
     public boolean hurt(DamageSource damageSource, float p_70097_2_) {
@@ -180,7 +180,7 @@ public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFly
         } else {
             this.addEffect(new EffectInstance(Effects.INVISIBILITY, 100, 2));
             if (this.level instanceof ServerWorld) {
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), (int) 20, 0.4, 0.4, 0.4, 0.1);
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 20, 0.4, 0.4, 0.4, 0.1);
             }
 
             if (!this.level.isClientSide() /*&& !(damageSource.getEntity() instanceof LivingEntity) */) {
@@ -189,14 +189,6 @@ public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFly
 
             return super.hurt(damageSource, p_70097_2_);
         }
-    }
-
-    protected PathNavigator createNavigation(World worldIn) {
-        return new FlyingPathNavigator(GaugalemEntity.this, worldIn) {
-            public boolean isStableDestination(BlockPos pos) {
-                return !this.level.getBlockState(pos.below()).isAir();
-            }
-        };
     }
 
     public boolean teleport() {
@@ -211,13 +203,13 @@ public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFly
     }
 
     public boolean teleport(double p_70825_1_, double p_70825_3_, double p_70825_5_) {
-        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(p_70825_1_, p_70825_3_, p_70825_5_);
+        BlockPos.Mutable mutable = new BlockPos.Mutable(p_70825_1_, p_70825_3_, p_70825_5_);
 
-        while(blockpos$mutable.getY() > 0 && !this.level.getBlockState(blockpos$mutable).getMaterial().blocksMotion()) {
-            blockpos$mutable.move(Direction.DOWN);
+        while(mutable.getY() > 0 && !this.level.getBlockState(mutable).getMaterial().blocksMotion()) {
+            mutable.move(Direction.DOWN);
         }
 
-        BlockState blockstate = this.level.getBlockState(blockpos$mutable);
+        BlockState blockstate = this.level.getBlockState(mutable);
         boolean flag = blockstate.getMaterial().blocksMotion();
         boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
         if (flag && !flag1) {
@@ -225,7 +217,7 @@ public class GaugalemEntity extends BPMonsterEntity implements IAnimatable, IFly
             if (event.isCanceled()) return false;
             boolean flag2 = this.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
             if (flag2 && !this.isSilent()) {
-                this.level.playSound((PlayerEntity)null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
+                this.level.playSound(null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
                 this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
             }
 
