@@ -11,8 +11,8 @@ import java.util.EnumSet;
  */
 public class BPMonsterMoveToTargetGoal extends BPMonsterMovableGoal {
 
-    private final double speedMultiplier;
-    private final int checkRate;
+    public final double speedMultiplier;
+    public final int checkRate;
 
     public BPMonsterMoveToTargetGoal(BPMonsterEntity entity, double speedMultiplier, int checkRate) {
         this.entity = entity;

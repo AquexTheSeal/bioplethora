@@ -1,6 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
@@ -69,7 +70,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 15 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
-                .add(Attributes.ATTACK_DAMAGE, 30 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 35 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 7D)
                 .add(Attributes.MAX_HEALTH, 450 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10.0)
@@ -140,20 +141,19 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
     public boolean doHurtTarget (Entity entity) {
         boolean flag = super.doHurtTarget(entity);
-        double x = entity.getX();
-        double y = entity.getY();
-        double z = entity.getZ();
+        double x = entity.getX(), y = entity.getY(), z = entity.getZ();
 
         this.level.explode(null, (int) x, (int) y, (int) z, (float) 3, Explosion.Mode.BREAK);
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, x, y, z, 40, 0.75, 0.75, 0.75, 0.1);
         }
+        BlockUtils.knockUpRandomNearbyBlocks(this.level, 0.5D, entity.blockPosition().below(), 5, 2, 5, false, true);
         return flag;
     }
 
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
         if (worldIn instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(42 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
             this.getAttribute(Attributes.ARMOR).setBaseValue(17.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
             this.setHealth(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());

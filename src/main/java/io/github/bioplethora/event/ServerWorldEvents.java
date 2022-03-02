@@ -1,20 +1,26 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.GrylynenSpawnHelper;
+import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
+import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
 import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
 import io.github.bioplethora.registry.BioplethoraItems;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -27,11 +33,13 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -85,7 +93,6 @@ public class ServerWorldEvents {
 
         if (defendantEnt instanceof PlayerEntity) {
 
-            Item bellophiteShield = BioplethoraItems.BELLOPHITE_SHIELD.get();
             ItemStack getUseItem = ((PlayerEntity) defendantEnt).getUseItem();
             Item getItem = getUseItem.getItem();
 
@@ -95,8 +102,22 @@ public class ServerWorldEvents {
             boolean notVoidDS = (event.getSource() != DamageSource.OUT_OF_WORLD);
 
             if (notFireDS && notLavaDS && notCactusDS && notVoidDS) {
-                if ((getItem == bellophiteShield) && (getItem instanceof BellophiteShieldItem)) {
+                if (getItem instanceof BellophiteShieldItem) {
                     ((BellophiteShieldItem) getItem).executeSkill(getUseItem, (LivingEntity) defendantEnt, defendantEnt.level);
+                }
+
+                if (getItem instanceof GrylynenShieldBaseItem) {
+                    int recoveryAmount = ((GrylynenShieldBaseItem) getItem).getArmorBonus();
+                    LivingEntity defendantLiving = (LivingEntity) defendantEnt;
+
+                    defendantLiving.getItemBySlot(EquipmentSlotType.HEAD)
+                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.HEAD).getDamageValue() + recoveryAmount);
+                    defendantLiving.getItemBySlot(EquipmentSlotType.CHEST)
+                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.CHEST).getDamageValue() + recoveryAmount);
+                    defendantLiving.getItemBySlot(EquipmentSlotType.LEGS)
+                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.LEGS).getDamageValue() + recoveryAmount);
+                    defendantLiving.getItemBySlot(EquipmentSlotType.FEET)
+                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.FEET).getDamageValue() + recoveryAmount);
                 }
             }
         }
@@ -141,7 +162,7 @@ public class ServerWorldEvents {
                 event.setCanceled(true);
 
                 if (!king.level.isClientSide()) {
-                    ((ServerWorld) king.level).sendParticles(ParticleTypes.BARRIER, king.getX(), king.getY(), king.getZ(),
+                    ((ServerWorld) king.level).sendParticles(ParticleTypes.ASH, king.getX(), king.getY(), king.getZ(),
                             30, 0.75, 0.75, 0.75, 0.01);
                 }
             }
@@ -297,6 +318,32 @@ public class ServerWorldEvents {
 
                 event.setCanceled(true);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        BlockPos pos = event.getPos();
+        World world = event.getWorld();
+        BlockState blockState = world.getBlockState(pos);
+        Block block = blockState.getBlock();
+        PlayerEntity player = event.getPlayer();
+
+        if (player.getMainHandItem().getItem() instanceof ExperimentalItem) {
+            /*
+            if (blockState.getMaterial().isSolid()) {
+                player.playSound(blockState.getSoundType().getBreakSound(), 1.0F, 1.0F);
+                FallingBlockEntity blockEntity = new FallingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, blockState);
+                blockEntity.setDeltaMovement(blockEntity.getDeltaMovement().add(0, 1, 0));
+                world.addFreshEntity(blockEntity);
+
+                if (world instanceof ServerWorld) {
+                    ((ServerWorld) world).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, blockState), pos.getX(), pos.getY() + 1, pos.getZ(),
+                            30, 0.6, 0.8, 0.6, 0.1);
+                }
+            }*/
+
+            BlockUtils.knockUpRandomNearbyBlocks(world, 0.5D, pos, 4, 2, 4, false, true);
         }
     }
 }

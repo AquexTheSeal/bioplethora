@@ -166,6 +166,15 @@ public class GaugalemEntity extends FloatingMonsterEntity implements IAnimatable
         return flag;
     }
 
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        if (this.level instanceof ServerWorld) {
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 5, 0.4, 0.4, 0.4, 0.1);
+        }
+    }
+
     public int getMaxSpawnClusterSize() {
         return 1;
     }

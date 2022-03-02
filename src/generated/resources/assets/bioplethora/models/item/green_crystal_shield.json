@@ -1,0 +1,14 @@
+{
+  "parent": "bioplethora:item/grylynen_shield_base",
+  "textures": {
+    "layer0": "bioplethora:item/green_crystal_shield"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "minecraft:blocking": 1.0
+      },
+      "model": "bioplethora:item/green_crystal_shield_blocking"
+    }
+  ]
+}

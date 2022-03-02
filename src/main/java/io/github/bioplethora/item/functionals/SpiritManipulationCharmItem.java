@@ -30,6 +30,10 @@ public class SpiritManipulationCharmItem extends ActivatableItem {
         }
     }
 
+    public String getItemName() {
+        return "spirit_manipulation";
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 

@@ -1,6 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.*;
@@ -70,7 +71,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 15 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 13 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10.5)
                 .add(Attributes.ATTACK_DAMAGE, 30 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 8.0D)
@@ -90,7 +91,29 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 1.0F, 8));
+        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 1.0F, 8) {
+            @Override
+            public boolean canUse() {
+                if (RANDOM.nextInt(this.checkRate) == 0) return false;
+
+                if (((AlphemKingEntity) entity).getRoaring()) {
+                    return this.isExecutable(this, this.entity, this.entity.getTarget());
+                } else {
+                    return false;
+                }
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                if (RANDOM.nextInt(this.checkRate) == 0) return true;
+
+                if (((AlphemKingEntity) entity).getRoaring()) {
+                    return this.isExecutable(this, this.entity, this.entity.getTarget());
+                } else {
+                    return false;
+                }
+            }
+        });
 
         // 1st phase meelee
         this.goalSelector.addGoal(1, new AlphemKingMeeleeGoal(this, 80, 0.5, 0.6));
@@ -187,7 +210,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         if (!this.isBarriered()) {
             ++barrierTimer;
-             if (barrierTimer == 150 + this.getRandom().nextInt(25)) {
+             if (barrierTimer == 150) {
                  barrierTimer = 0;
                  this.setBarriered(true);
              }
@@ -252,6 +275,9 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             }
         }
 
+        this.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
+        BlockUtils.knockUpRandomNearbyBlocks(world, 0.3D, entity.blockPosition().below(), 3, 1, 3, false, true);
+
         if (world instanceof ServerWorld) {
             ((ServerWorld) world).sendParticles(ParticleTypes.POOF, entity.getX(), entity.getY(), entity.getZ(),
                     25, 0.45, 0.45, 0.45, 0.01);
@@ -291,6 +317,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         }
 
         world.explode(this, entity.getX(), entity.getY(), entity.getZ(), 3.0F, Explosion.Mode.NONE);
+        this.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
+        BlockUtils.knockUpRandomNearbyBlocks(world, 0.5D, entity.blockPosition().below(), 6, 2, 6, false, true);
 
         if (world instanceof ServerWorld) {
             ((ServerWorld) world).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, entity.getX(), entity.getY(), entity.getZ(),
@@ -303,7 +331,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         ++this.deathTime;
 
-        if (this.deathTime == 40) {
+        if (this.deathTime == 50) {
             this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ANVIL_PLACE, SoundCategory.HOSTILE, 1.0F, 1.0F);
         }
 

@@ -15,8 +15,6 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Objects;
-
 @JeiPlugin
 public class BPCompatJEI implements IModPlugin {
     public static final ResourceLocation pluginId = new ResourceLocation(Bioplethora.MOD_ID, "jei");
@@ -38,7 +36,7 @@ public class BPCompatJEI implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
         @SuppressWarnings("resource")
-        ClientWorld world = Objects.requireNonNull(Minecraft.getInstance().level);
+        ClientWorld world = Minecraft.getInstance().level;
         registry.addRecipes(world.getRecipeManager().getAllRecipesFor(BioplethoraRecipes.REINFORCING), ReinforcingTableCategory.CATEGORY_ID);
         addDescription(registry, new ItemStack(BioplethoraBlocks.REINFORCING_TABLE.get()));
     }

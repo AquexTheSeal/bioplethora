@@ -1,12 +1,8 @@
 package io.github.bioplethora.item;
 
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.others.PrimordialRingEntity;
-import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +14,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -38,20 +33,6 @@ public class ExperimentalItem extends Item {
         if (!(worldIn instanceof ServerWorld))
             return new ActionResult<>(ActionResultType.PASS, itemInHand);
 
-        if (playerIn.isCrouching()) {
-            BlockPos blockpos = playerIn.blockPosition();
-
-            PrimordialRingEntity bellophgolemEntity = BioplethoraEntities.PRIMORDIAL_RING.get().create(worldIn);
-            bellophgolemEntity.moveTo(blockpos, 0.0F, 0.0F);
-            bellophgolemEntity.setOwner(playerIn);
-            bellophgolemEntity.finalizeSpawn((IServerWorld) worldIn, worldIn.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
-
-            bellophgolemEntity.setHasLimitedLife(true);
-            bellophgolemEntity.setLifeLimitBeforeDeath(1000 + playerIn.getRandom().nextInt(300));
-
-            worldIn.addFreshEntity(bellophgolemEntity);
-        }
-
         return new ActionResult<>(ActionResultType.SUCCESS, itemInHand);
     }
 
@@ -66,18 +47,13 @@ public class ExperimentalItem extends Item {
         boolean retval = super.hurtEnemy(stack, entity, source);
 
         if (entity instanceof IBioClassification) {
-            if (((IBioClassification) entity).getBioplethoraClass() == BPEntityClasses.NONE) {
-                player.displayClientMessage(new StringTextComponent("Entity Class: None"), (false));
-            } else if (((IBioClassification) entity).getBioplethoraClass() == BPEntityClasses.ECOHARMLESS) {
-                player.displayClientMessage(new StringTextComponent("Entity Class: Ecoharmless"), (false));
-            } else if (((IBioClassification) entity).getBioplethoraClass() == BPEntityClasses.PLETHONEUTRAL) {
-                player.displayClientMessage(new StringTextComponent("Entity Class: Plethoneutral"), (false));
-            } else if (((IBioClassification) entity).getBioplethoraClass() == BPEntityClasses.DANGERUM) {
-                player.displayClientMessage(new StringTextComponent("Entity Class: Dangerum"), (false));
-            } else if (((IBioClassification) entity).getBioplethoraClass() == BPEntityClasses.HELLSENT) {
-                player.displayClientMessage(new StringTextComponent("\u00A7cEntity Class: Hellsent"), (false));
-            } else if (((IBioClassification) entity).getBioplethoraClass() == BPEntityClasses.ELDERIA) {
-                player.displayClientMessage(new StringTextComponent("\u00A7cEntity Class: Elderia"), (false));
+            switch (((IBioClassification) entity).getBioplethoraClass()) {
+                case NONE: player.displayClientMessage(new StringTextComponent("Entity Class: None"), (false));
+                case ECOHARMLESS: player.displayClientMessage(new StringTextComponent("Entity Class: Ecoharmless"), (false));
+                case PLETHONEUTRAL: player.displayClientMessage(new StringTextComponent("Entity Class: Plethoneutral"), (false));
+                case DANGERUM: player.displayClientMessage(new StringTextComponent("Entity Class: Dangerum"), (false));
+                case HELLSENT: player.displayClientMessage(new StringTextComponent("Entity Class: Hellsent"), (false));
+                case ELDERIA: player.displayClientMessage(new StringTextComponent("Entity Class: Elderia"), (false));
             }
         }
         return retval;

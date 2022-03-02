@@ -116,6 +116,9 @@ repositories {
     maven {
         url 'https://maven.blamejared.com'
     }
+    maven {
+        url "https://maven.shedaniel.me/"
+    }
 }
 
 dependencies {
@@ -132,10 +135,10 @@ dependencies {
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51")
     //The One Probe
     implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
+    //Cloth Config
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:4.14.54")
     //Mixin
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    //Off-Hand Combat
-    implementation fg.deobf("curse.maven:off-hand-combat-417112:3203449")
     //Tetra
     implementation fg.deobf("curse.maven:tetra-289712:3585032")
     //Mutil (For Tetra)
@@ -145,6 +148,13 @@ dependencies {
     /*implementation fg.deobf("curse.maven:enchantment-descriptions-250419:3358861")*/
     //Bookshelf (for EnchDesc)
     /*implementation fg.deobf("net.darkhax.bookshelf:Bookshelf-1.16.5:10.0.1")*/
+
+    //Mob battle
+    implementation fg.deobf("curse.maven:mob-battle-mod-268746:3408702")
+    //Off-Hand Combat
+    implementation fg.deobf("curse.maven:off-hand-combat-417112:3203449")
+    //Grapple Hooks
+    implementation fg.deobf("curse.maven:grappling-hook-mod-238911:3564285")
 }
 
 jar {
