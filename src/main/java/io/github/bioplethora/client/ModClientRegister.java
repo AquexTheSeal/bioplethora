@@ -75,6 +75,7 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateBellophiteClusterRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.VERMILION_BLADE_PROJECTILE.get(), VermilionBladeProjectileRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WIND_ARROW.get(), WindArrowRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CRYOBLAZE.get(), CryoblazeRender::new);
 
         //others
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);

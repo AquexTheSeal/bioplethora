@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
-import io.github.bioplethora.entity.projectile.WindblazeEntity;
+import io.github.bioplethora.entity.projectile.CryoblazeEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundEvents;
@@ -68,7 +68,7 @@ public class AlphemKingRangedAttackGoal extends Goal {
             this.king.level.playSound(null, this.king.getX(), this.king.getY(), this.king.getZ(), SoundEvents.SHULKER_SHOOT, this.king.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
         }
 
-        WindblazeEntity windblazeEntity = new WindblazeEntity(world, this.king, d1, d2, d3);
+        CryoblazeEntity windblazeEntity = new CryoblazeEntity(world, this.king, d1, d2, d3);
         windblazeEntity.setPos(this.king.getX(), this.king.getY(0.5D) + 0.5D, windblazeEntity.getZ());
         world.addFreshEntity(windblazeEntity);
     }

@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -28,10 +29,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
+import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -48,16 +47,16 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     protected static final DataParameter<Boolean> ATTACKING2 = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
-    // TODO: 16/02/2022 Give a summoning effect to the Alphems.
     protected static final DataParameter<Boolean> ROARING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     // TODO: 16/02/2022 Add an animation for shooting/charging. Add a new and stronger projectile to replace the Windblaze projectile.
     protected static final DataParameter<Boolean> CHARGING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
-    // TODO: 16/02/2022 Add a jumping animation and a jumping AI goal.
     protected static final DataParameter<Boolean> JUMPING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     // TODO: 16/02/2022 Add a ramming animation and a ramming AI goal.
     protected static final DataParameter<Boolean> RAMMING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> BARRIERED = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> BERSERKED = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
+
+    private final ServerBossInfo bossInfo = new ServerBossInfo(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS);
     private final AnimationFactory factory = new AnimationFactory(this);
     public boolean explodedOnDeath = false;
     public double healthRegenTimer = 0;
@@ -148,7 +147,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         return this.factory;
     }
 
-    private <E extends IAnimatable>PlayState predicate(AnimationEvent<E> event) {
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 
         if (this.isDeadOrDying()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.death", true));
@@ -208,12 +207,14 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         super.aiStep();
         World world = this.level;
 
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+
         if (!this.isBarriered()) {
             ++barrierTimer;
-             if (barrierTimer == 150) {
-                 barrierTimer = 0;
-                 this.setBarriered(true);
-             }
+            if (barrierTimer == 150) {
+                barrierTimer = 0;
+                this.setBarriered(true);
+            }
 
             if (getTarget() != null) {
                 vecOfTarget = (float) (Math.atan2(getTarget().getZ() - getZ(), getTarget().getX() - getX()) * (180 / Math.PI) + 90);
@@ -239,7 +240,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             if (!(this.getHealth() <= 5)) {
                 ++healthRegenTimer;
                 if (healthRegenTimer == 10) {
-                    this.setHealth(this.getHealth() + 2 + this.getRandom().nextInt(4));
+                    this.setHealth(this.getHealth() + 1 + this.getRandom().nextInt(2));
                     healthRegenTimer = 0;
                 }
             }
@@ -254,17 +255,42 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
             if (!(this.getHealth() <= 5)) {
                 ++healthRegenTimer;
-                if (healthRegenTimer == 10) {
-                    this.setHealth(this.getHealth() + 1 + this.getRandom().nextInt(2));
+                if (healthRegenTimer == 20) {
+                    this.setHealth(this.getHealth() + 2);
                     healthRegenTimer = 0;
                 }
             }
         }
+
+        if (this.hasEffect(Effects.MOVEMENT_SLOWDOWN)) {
+            this.removeEffect(Effects.MOVEMENT_SLOWDOWN);
+        }
+        if (this.hasEffect(Effects.WEAKNESS)) {
+            this.removeEffect(Effects.WEAKNESS);
+        }
+        if (this.hasEffect(Effects.POISON)) {
+            this.removeEffect(Effects.POISON);
+        }
+        if (this.hasEffect(Effects.WITHER)) {
+            this.removeEffect(Effects.WITHER);
+        }
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayerEntity player) {
+        super.startSeenByPlayer(player);
+        this.bossInfo.addPlayer(player);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayerEntity player) {
+        super.stopSeenByPlayer(player);
+        this.bossInfo.removePlayer(player);
     }
 
     public void phaseAttack(LivingEntity entity, World world) {
 
-        float f1 = ((float)this.getAttributeValue(Attributes.ATTACK_KNOCKBACK) / 2);
+        float f1 = ((float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK) / 2);
 
         for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(5, 0.5, 5))) {
 
@@ -286,12 +312,13 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public void phaseAttack2(LivingEntity entity, World world) {
 
-        float f1 = (float)this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
+        float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
 
         for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(10, 0.5, 10))) {
 
             if (areaEnt != this) {
-                areaEnt.knockback(f1 * 0.5F, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
+                areaEnt.hurt(DamageSource.mobAttack(this), BioplethoraConfig.getHellMode ? 23 : 20);
+                areaEnt.knockback(f1, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
                 areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 0.5 - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
             }
@@ -305,7 +332,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public void phaseSmashing(LivingEntity entity, World world) {
 
-        float f1 = (float)this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
+        float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
 
         for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(15, 0.5, 15))) {
 
@@ -403,6 +430,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     }
 
     @Override
+    public boolean isPushable() {
+        return false;
+    }
+
+    @Override
     public boolean ignoreExplosion() {
         return true;
     }
@@ -415,6 +447,17 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     @Override
     public boolean isPushedByFluid() {
         return false;
+    }
+
+    public void checkDespawn() {
+    }
+
+    @Override
+    public boolean causeFallDamage(float p_225503_1_, float p_225503_2_) {
+        return false;
+    }
+
+    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
 
     @Override
@@ -493,5 +536,4 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public void setBerserked(boolean berserked) {
         this.entityData.set(BERSERKED, berserked);
     }
-
 }

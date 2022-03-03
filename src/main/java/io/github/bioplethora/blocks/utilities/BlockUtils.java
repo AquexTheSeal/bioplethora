@@ -10,8 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-import javax.annotation.Nullable;
-
 public class BlockUtils {
 
     public static void knockUpNearbyBlocks(World world, double yDelta, BlockPos point, int radiusX, int radiusY, int radiusZ, boolean sendParticles) {
@@ -78,11 +76,6 @@ public class BlockUtils {
 
         BlockState pointstate = world.getBlockState(point);
         world.playSound(null, point, pointstate.getSoundType().getBreakSound(), SoundCategory.PLAYERS, 1.0F, 1.0F);
-    }
-    
-    @Nullable
-    public static BlockPos scanForBlockNearPoint(World world, BlockPos point, int radiusX, int radiusY, int radiusZ) {
-        return point;
     }
 
     private BlockUtils(){}

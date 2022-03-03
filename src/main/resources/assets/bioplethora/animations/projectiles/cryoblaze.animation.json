@@ -1,0 +1,37 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.cryoblaze.main": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"cryoblaze": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * -360", "math.sin(query.anim_time * 90) * -360", "math.sin(query.anim_time * 90) * -360"]
+					}
+				},
+				"main_cube": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * -360", "math.sin(query.anim_time * 90) * -360", "math.sin(query.anim_time * 90) * -360"]
+					}
+				},
+				"part1": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * 360", 0, 0]
+					}
+				},
+				"part2": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * -360", 0, 0]
+					}
+				},
+				"part3": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * -360", 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

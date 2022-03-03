@@ -296,6 +296,9 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
     protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
 
+    public void checkDespawn() {
+    }
+
     @Override
     public boolean ignoreExplosion() {
         return true;

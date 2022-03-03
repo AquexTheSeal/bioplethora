@@ -15,7 +15,6 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
@@ -33,41 +32,31 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class BellophiteClusterEntity extends DamagingProjectileEntity implements IAnimatable {
+public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimatable {
 
-    public double xPower;
-    public double yPower;
-    public double zPower;
-    public int lifespan = 0;
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public BellophiteClusterEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
+    public CryoblazeEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
         super(type, world);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public BellophiteClusterEntity(World world, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
-        super(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
+    public CryoblazeEntity(World world, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
+        super(BioplethoraEntities.CRYOBLAZE.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
     }
 
-    public BellophiteClusterEntity(World world, LivingEntity p_i1769_2_, double p_i1769_3_, double p_i1769_5_, double p_i1769_7_) {
-        super(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), p_i1769_2_, p_i1769_3_, p_i1769_5_, p_i1769_7_, world);
-    }
-
-
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bellophite_cluster.main", true));
-        return PlayState.CONTINUE;
+    public CryoblazeEntity(World world, LivingEntity entity, double v, double v1, double v2) {
+        super(BioplethoraEntities.CRYOBLAZE.get(), entity, v, v1, v2, world);
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "bellophite_cluster_controller", 0, this::predicate));
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
+    public void tick() {
+        super.tick();
+        double x = this.getX(), y = this.getY(), z = this.getZ();
+        if (this.level instanceof ServerWorld) {
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 5, 0.2, 0.2, 0.2, 0.1);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, x, y, z, 3, 0.2, 0.2, 0.2, 0.1);
+        }
     }
 
     protected void onHit(RayTraceResult result) {
@@ -91,49 +80,34 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         }
     }
 
-    @Override
-    public void tick() {
-        super.tick();
-
-        ++lifespan;
-        if (lifespan == 100) {
-            this.remove();
-        }
-    }
-
     public void hitAndExplode() {
         double x = this.getX(), y = this.getY(), z = this.getZ();
         BlockPos blockpos = new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ());
-        AxisAlignedBB area = new AxisAlignedBB(this.getX() - (7 / 2d), this.getY() - (7 / 2d), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d));
         DamageSource castration = BioplethoraDamageSources.indirectCastration(this.getOwner(), this.getOwner());
 
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 20, 0.4, 0.4, 0.4, 0.1);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 20, 0.75, 0.75, 0.75, 0.01);
         }
 
         this.level.playSound(null, blockpos, SoundEvents.GLASS_BREAK, SoundCategory.NEUTRAL, (float) 1, (float) 1);
+        this.level.playSound(null, blockpos, SoundEvents.ITEM_BREAK, SoundCategory.NEUTRAL, (float) 1, (float) 1);
 
         if (this.level instanceof ServerWorld && !(this.getOwner() == null)) {
 
-            for (Entity entityArea : this.level.getEntitiesOfClass(Entity.class, area, null)) {
-                if (entityArea instanceof LivingEntity && entityArea != this.getOwner()) {
+            for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(7, 3, 7))) {
+                if (entityArea != null && entityArea != this.getOwner()) {
 
-                    if (this.getOwner() != null) {
-                        //hell mode + berserk
-                        if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(castration, (float) 13.5);
-                            //berserk only
-                        } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(castration, (float) 10);
-                            //default
-                        } else {
-                            entityArea.hurt(castration, (float) 5.5);
-                        }
+                    if (BioplethoraConfig.getHellMode) {
+                        entityArea.hurt(castration, (float) 14);
+                        entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 80, 2));
+                        entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 80, 1));
+                        entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 80, 1));
+                    } else {
+                        entityArea.hurt(castration, (float) 9.5);
+                        entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
+                        entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 1));
+                        entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 40));
                     }
-
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
-                    ((LivingEntity) entityArea).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));
                 }
             }
         }
@@ -154,22 +128,27 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
     }
 
     @Override
-    public boolean isNoGravity() {
-        return true;
-    }
-
-    @Override
-    public boolean shouldBurn() {
-        return false;
-    }
-
-    @Override
     public boolean isOnFire() {
         return false;
     }
 
     @Override
-    public boolean isPushedByFluid() {
+    public boolean isNoGravity() {
         return false;
+    }
+
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cryoblaze.main", true));
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "cryoblaze_controller", 0, this::predicate));
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
     }
 }
