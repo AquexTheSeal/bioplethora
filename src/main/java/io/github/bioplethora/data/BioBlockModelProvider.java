@@ -35,6 +35,18 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("yellow_grylynen_crystal_block", bioResLoc("yellow_grylynen_crystal_block"));
         this.cubeAll("red_grylynen_crystal_block", bioResLoc("red_grylynen_crystal_block"));
 
+        // Alphanum stone set
+        this.cubeAll("alphanum", bioResLoc("alphanum"));
+        this.simpleStoneSet("alphanum", "alphanum_stairs", "alphanum_wall", "alphanum_slab");
+
+        this.cubeAll("alphanum_bricks", bioResLoc("alphanum_bricks"));
+        this.simpleStoneSet("alphanum_bricks", "alphanum_brick_stairs", "alphanum_brick_wall", "alphanum_brick_slab");
+
+        this.cubeAll("polished_alphanum", bioResLoc("polished_alphanum"));
+        this.simpleStoneSet("polished_alphanum", "polished_alphanum_stairs", "polished_alphanum_wall", "polished_alphanum_slab");
+
+        this.cubeColumnHorizontal("alphanum_pillar", bioResLoc("alphanum_pillar"), bioResLoc("alphanum_pillar_top"));
+
         // Petrawood woodset
         this.cubeColumnHorizontal("petrawood_log", bioResLoc("petrawood_log_side"), bioResLoc("petrawood_log_top"));
         this.cubeAll("petrawood_wood", bioResLoc("petrawood_log_side"));
@@ -57,9 +69,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.stairs("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
         this.stairsInner("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
         this.stairsOuter("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
-        this.button("petrawood_button", bioResLoc("petrawood_planks"));
         this.buttonPressed("petrawood_button", bioResLoc("petrawood_planks"));
         this.buttonInventory("petrawood_button", bioResLoc("petrawood_planks"));
+        this.button("petrawood_button", bioResLoc("petrawood_planks"));
     }
 
     private ResourceLocation bioResLoc(String texture) {
@@ -68,6 +80,18 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
     private ResourceLocation mcResLoc(String texture) {
         return new ResourceLocation("minecraft", BLOCK_FOLDER + "/" + texture);
+    }
+
+    public void simpleStoneSet(String mainBlock, String stairs, String wall, String slab) {
+        this.stairs(stairs, bioResLoc(mainBlock), bioResLoc(mainBlock), bioResLoc(mainBlock));
+        this.stairsInner(stairs, bioResLoc(mainBlock), bioResLoc(mainBlock), bioResLoc(mainBlock));
+        this.stairsOuter(stairs, bioResLoc(mainBlock), bioResLoc(mainBlock), bioResLoc(mainBlock));
+        this.wallPost(wall, bioResLoc(mainBlock));
+        this.wallSide(wall, bioResLoc(mainBlock));
+        this.wallSideTall(wall, bioResLoc(mainBlock));
+        this.wallInventory(wall, bioResLoc(mainBlock));
+        this.slab(slab, bioResLoc(mainBlock), bioResLoc(mainBlock), bioResLoc(mainBlock));
+        this.slabTop(slab, bioResLoc(mainBlock), bioResLoc(mainBlock), bioResLoc(mainBlock));
     }
 
     public void pressurePlateUp(String name, ResourceLocation all) {

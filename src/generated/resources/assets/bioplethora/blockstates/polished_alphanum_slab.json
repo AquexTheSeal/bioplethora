@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "bioplethora:block/polished_alphanum_slab_top"
+    },
+    "type=bottom": {
+      "model": "bioplethora:block/polished_alphanum_slab"
+    },
+    "type=double": {
+      "model": "bioplethora:block/polished_alphanum"
+    }
+  }
+}

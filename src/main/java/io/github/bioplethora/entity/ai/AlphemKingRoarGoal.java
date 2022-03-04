@@ -65,8 +65,6 @@ public class AlphemKingRoarGoal extends Goal {
                     }
                 }
 
-                this.king.getNavigation().stop();
-
                 if (world instanceof ServerWorld) {
                     ((ServerWorld) world).sendParticles(ParticleTypes.CLOUD, this.king.getX(), this.king.getY(), this.king.getZ(), 30, 5, 2, 5, 0.01);
                 }

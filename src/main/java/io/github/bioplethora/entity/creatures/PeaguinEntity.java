@@ -3,9 +3,8 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
 import io.github.bioplethora.entity.IBioClassification;
+import io.github.bioplethora.entity.WaterAndLandAnimalEntity;
 import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
-import io.github.bioplethora.entity.ai.controller.WaterMoveController;
-import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
@@ -14,7 +13,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.GhastEntity;
@@ -29,8 +27,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.GroundPathNavigator;
-import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
@@ -50,22 +46,18 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class PeaguinEntity extends BPAnimalEntity implements IAnimatable, IAngerable, IBioClassification {
+public class PeaguinEntity extends WaterAndLandAnimalEntity implements IAnimatable, IAngerable, IBioClassification {
 
     private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(PeaguinEntity.class, DataSerializers.INT);
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
     private UUID persistentAngerTarget;
-    private boolean isLandNavigator;
 
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public PeaguinEntity(EntityType<? extends BPAnimalEntity> type, World worldIn) {
         super(type, worldIn);
         this.setTame(false);
-        this.setPathfindingMalus(PathNodeType.WATER, 0.0F);
-        this.setPathfindingMalus(PathNodeType.WATER_BORDER, 0.0F);
         this.noCulling = true;
-        switchNavigator(false);
     }
 
     @Override
@@ -87,14 +79,31 @@ public class PeaguinEntity extends BPAnimalEntity implements IAnimatable, IAnger
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new SitGoal(this));
-        this.goalSelector.addGoal(4, new BPAnimalMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(4, new BPAnimalMoveToTargetGoal(this, 1.6, 8) {
+            @Override
+            public boolean canUse() {
+                if (!entity.isInWater()) {
+                    return super.canUse();
+                } else {
+                    return false;
+                }
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                if (!entity.isInWater()) {
+                    return super.canContinueToUse();
+                } else {
+                    return false;
+                }
+            }
+        });
         this.goalSelector.addGoal(4, new BPAnimalMeleeGoal(this, 20, 0.5, 0.75));
         this.goalSelector.addGoal(5, new PeaguinFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));
-        this.goalSelector.addGoal(8, new PeaguinEntity.SwimGoal(this));
+
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(11, new LookRandomlyGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
@@ -216,7 +225,7 @@ public class PeaguinEntity extends BPAnimalEntity implements IAnimatable, IAnger
                     this.setOrderedToSit(!this.isOrderedToSit());
                     this.jumping = false;
                     this.navigation.stop();
-                    this.setTarget((LivingEntity) null);
+                    this.setTarget(null);
                     return ActionResultType.SUCCESS;
                 }
 
@@ -230,7 +239,7 @@ public class PeaguinEntity extends BPAnimalEntity implements IAnimatable, IAnger
                 if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, p_230254_1_)) {
                     this.tame(p_230254_1_);
                     this.navigation.stop();
-                    this.setTarget((LivingEntity) null);
+                    this.setTarget(null);
                     this.setOrderedToSit(true);
                     this.level.broadcastEntityEvent(this, (byte) 7);
                 } else {
@@ -358,59 +367,6 @@ public class PeaguinEntity extends BPAnimalEntity implements IAnimatable, IAnger
 
     @OnlyIn(Dist.CLIENT)
     public Vector3d getLeashOffset() {
-        return new Vector3d(0.0D, (double) (0.6F * this.getEyeHeight()), (double) (this.getBbWidth() * 0.4F));
-    }
-
-    protected boolean canRandomSwim() {
-        return true;
-    }
-
-    static class SwimGoal extends RandomSwimmingGoal {
-        private final PeaguinEntity fish;
-
-        public SwimGoal(PeaguinEntity peaguinEntity) {
-            super(peaguinEntity, 1.0D, 40);
-            this.fish = peaguinEntity;
-        }
-
-        public boolean canUse() {
-            return this.fish.canRandomSwim() && super.canUse();
-        }
-    }
-
-    private void switchNavigator(boolean onLand) {
-        if (onLand) {
-            this.moveControl = new MovementController(this);
-            this.navigation = new GroundPathNavigator(this, level);
-            this.isLandNavigator = true;
-        } else {
-            this.moveControl = new WaterMoveController(this, 1.5F);
-            this.navigation = new WaterAndLandPathNavigator(this, level);
-            this.isLandNavigator = false;
-        }
-    }
-
-    public void tick() {
-        super.tick();
-        if (isInWater() && this.isLandNavigator) {
-            switchNavigator(false);
-        }
-        if (!isInWater() && !this.isLandNavigator) {
-            switchNavigator(true);
-        }
-    }
-
-    public void travel(Vector3d stuckSpeedMultiplier) {
-
-        if (this.isEffectiveAi() && this.isInWater()) {
-            this.moveRelative(this.getSpeed(), stuckSpeedMultiplier);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-            if (this.getTarget() == null) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-            }
-        } else {
-            super.travel(stuckSpeedMultiplier);
-        }
+        return new Vector3d(0.0D, 0.6F * this.getEyeHeight(), this.getBbWidth() * 0.4F);
     }
 }

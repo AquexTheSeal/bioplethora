@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bioplethora:polished_alphanum_wall"
+    ]
+  },
+  "criteria": {
+    "has_polished_alphanum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:polished_alphanum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bioplethora:polished_alphanum_wall"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_alphanum",
+      "has_the_recipe"
+    ]
+  ]
+}

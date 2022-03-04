@@ -173,7 +173,6 @@ public abstract class FloatingMonsterEntity extends BPMonsterEntity implements I
                     break;
                 }
             }
-
         }
     }
 }

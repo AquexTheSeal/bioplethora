@@ -1,13 +1,13 @@
 package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.registry.BioplethoraDamageSources;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
@@ -35,6 +35,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimatable {
 
     private final AnimationFactory factory = new AnimationFactory(this);
+    public int lifespan = 0;
 
     public CryoblazeEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
         super(type, world);
@@ -54,8 +55,12 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
         super.tick();
         double x = this.getX(), y = this.getY(), z = this.getZ();
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 5, 0.2, 0.2, 0.2, 0.1);
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, x, y, z, 3, 0.2, 0.2, 0.2, 0.1);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 3, 0.2, 0.2, 0.2, 0.1);
+        }
+
+        ++lifespan;
+        if (lifespan == 100) {
+            this.remove();
         }
     }
 
@@ -72,8 +77,8 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !entityHitResult.getEntity().is(entity)) {
 
-            if (this.getOwner() instanceof SummonableMonsterEntity && ((SummonableMonsterEntity) this.getOwner()).getOwner() != null) {
-                if (entity != ((SummonableMonsterEntity) this.getOwner()).getOwner()) {
+            if (entity instanceof ProjectileEntity) {
+                if (!(((ProjectileEntity) entity).getOwner() == this.getOwner())) {
                     this.hitAndExplode();
                 }
             }
@@ -94,7 +99,7 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
 
         if (this.level instanceof ServerWorld && !(this.getOwner() == null)) {
 
-            for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(7, 3, 7))) {
+            for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5, 2, 5))) {
                 if (entityArea != null && entityArea != this.getOwner()) {
 
                     if (BioplethoraConfig.getHellMode) {

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bioplethora:polished_alphanum"
+    }
+  },
+  "result": {
+    "item": "bioplethora:polished_alphanum_wall",
+    "count": 6
+  }
+}

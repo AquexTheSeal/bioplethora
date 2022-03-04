@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bioplethora:alphanum"
+    }
+  },
+  "result": {
+    "item": "bioplethora:alphanum_stairs",
+    "count": 4
+  }
+}

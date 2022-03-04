@@ -77,6 +77,16 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
     }
 
     public void forVanillaTags() {
+        tag(BlockTags.BASE_STONE_OVERWORLD)
+                .add(BioplethoraBlocks.ALPHANUM.get())
+        ;
+
+        tag(BlockTags.WALLS)
+                .add(BioplethoraBlocks.ALPHANUM_WALL.get())
+                .add(BioplethoraBlocks.ALPHANUM_WALL_BRICKS.get())
+                .add(BioplethoraBlocks.POLISHED_ALPHANUM_WALL.get())
+        ;
+
         tag(BlockTags.LOGS)
                 .add(BioplethoraBlocks.PETRAWOOD_LOG.get())
                 .add(BioplethoraBlocks.PETRAWOOD_WOOD.get())

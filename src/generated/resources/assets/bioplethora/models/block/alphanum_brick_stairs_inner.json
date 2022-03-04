@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "side": "bioplethora:block/alphanum_bricks",
+    "bottom": "bioplethora:block/alphanum_bricks",
+    "top": "bioplethora:block/alphanum_bricks"
+  }
+}

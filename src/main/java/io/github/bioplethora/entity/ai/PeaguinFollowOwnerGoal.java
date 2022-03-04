@@ -83,8 +83,8 @@ public class PeaguinFollowOwnerGoal extends Goal {
                     this.teleportToOwner();
                 } else {
                     this.navigation.moveTo(this.owner, this.speedModifier);
+                    this.tamable.getMoveControl().setWantedPosition(this.owner.getX(), this.owner.getY(), this.owner.getZ(), 1.5D);
                 }
-
             }
         }
     }

@@ -40,6 +40,35 @@ public class BioplethoraBlocks {
     public static final RegistryObject<Block> MIRESTONE = registerBlock("mirestone", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
             .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).harvestTool(ToolType.PICKAXE).sound(SoundType.GRAVEL).noOcclusion()), null);
 
+    // Alphanum Set
+    public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
+            .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHER_GOLD_ORE).noOcclusion()), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> ALPHANUM_BRICKS = registerBlock("alphanum_bricks", () ->
+            new Block(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> POLISHED_ALPHANUM = registerBlock("polished_alphanum", () ->
+            new Block(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> ALPHANUM_PILLAR = registerBlock("alphanum_pillar", () ->
+            new RotatedPillarBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<StairsBlock> ALPHANUM_STAIRS = registerBlock("alphanum_stairs", () ->
+            new StairsBlock(BioplethoraBlocks.ALPHANUM.get().defaultBlockState(), AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<WallBlock> ALPHANUM_WALL = registerBlock("alphanum_wall", () ->
+            new WallBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SlabBlock> ALPHANUM_SLAB = registerBlock("alphanum_slab", () ->
+            new SlabBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<StairsBlock> ALPHANUM_STAIRS_BRICKS = registerBlock("alphanum_brick_stairs", () ->
+            new StairsBlock(BioplethoraBlocks.ALPHANUM_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<WallBlock> ALPHANUM_WALL_BRICKS = registerBlock("alphanum_brick_wall", () ->
+            new WallBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SlabBlock> ALPHANUM_SLAB_BRICKS = registerBlock("alphanum_brick_slab", () ->
+            new SlabBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<StairsBlock> POLISHED_ALPHANUM_STAIRS = registerBlock("polished_alphanum_stairs", () ->
+            new StairsBlock(BioplethoraBlocks.POLISHED_ALPHANUM.get().defaultBlockState(), AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<WallBlock> POLISHED_ALPHANUM_WALL = registerBlock("polished_alphanum_wall", () ->
+            new WallBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SlabBlock> POLISHED_ALPHANUM_SLAB = registerBlock("polished_alphanum_slab", () ->
+            new SlabBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
+
     // todo: Petrawood set for Rocky Woodlands biome
     public static final RegistryObject<RotatedPillarBlock> PETRAWOOD_LOG = registerBlock("petrawood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE)
             .strength(2.4F).sound(SoundType.WOOD).noOcclusion()), null);

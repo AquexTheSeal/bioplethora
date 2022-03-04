@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bioplethora:alphanum"
+    }
+  },
+  "result": {
+    "item": "bioplethora:alphanum_slab",
+    "count": 6
+  }
+}

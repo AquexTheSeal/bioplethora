@@ -15,7 +15,7 @@ import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
 
 public class CryoblazeRender extends GeoProjectilesRenderer<CryoblazeEntity> {
 
-    private static final RenderType BEAM = RenderType.entitySmoothCutout(new ResourceLocation(Bioplethora.MOD_ID, "textures/projectiles/bellophite_cluster.png"));
+    private static final RenderType BEAM = RenderType.entitySmoothCutout(new ResourceLocation(Bioplethora.MOD_ID, "textures/projectiles/cryoblaze.png"));
 
     public CryoblazeRender(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new CryoblazeModel());
@@ -23,7 +23,7 @@ public class CryoblazeRender extends GeoProjectilesRenderer<CryoblazeEntity> {
 
     @Override
     public RenderType getRenderType(CryoblazeEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.eyes(getTextureLocation(animatable));
+        return BEAM;
     }
 
     protected int getBlockLightLevel(CryoblazeEntity entityIn, BlockPos partialTicks) {
@@ -32,6 +32,8 @@ public class CryoblazeRender extends GeoProjectilesRenderer<CryoblazeEntity> {
 
     @Override
     public void renderEarly(CryoblazeEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+        float size = 1.2F;
+        stackIn.scale(size, size, size);
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

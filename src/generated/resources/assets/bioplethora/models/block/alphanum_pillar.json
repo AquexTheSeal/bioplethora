@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "bioplethora:block/alphanum_pillar",
+    "end": "bioplethora:block/alphanum_pillar_top"
+  }
+}

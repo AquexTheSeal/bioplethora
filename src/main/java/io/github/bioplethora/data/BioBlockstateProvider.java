@@ -36,6 +36,22 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
         this.simpleBlock(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
 
+        // Alphanum stone set
+        this.simpleBlock(BioplethoraBlocks.ALPHANUM.get());
+        this.simpleBlock(BioplethoraBlocks.ALPHANUM_BRICKS.get());
+        this.simpleBlock(BioplethoraBlocks.POLISHED_ALPHANUM.get());
+        this.logBlock(BioplethoraBlocks.ALPHANUM_PILLAR.get());
+
+        this.stairsBlock(BioplethoraBlocks.ALPHANUM_STAIRS.get(), bioResLoc("alphanum"));
+        this.stairsBlock(BioplethoraBlocks.ALPHANUM_STAIRS_BRICKS.get(), bioResLoc("alphanum_bricks"));
+        this.stairsBlock(BioplethoraBlocks.POLISHED_ALPHANUM_STAIRS.get(), bioResLoc("polished_alphanum"));
+        this.wallBlock(BioplethoraBlocks.ALPHANUM_WALL.get(), bioResLoc("alphanum"));
+        this.wallBlock(BioplethoraBlocks.ALPHANUM_WALL_BRICKS.get(), bioResLoc("alphanum_bricks"));
+        this.wallBlock(BioplethoraBlocks.POLISHED_ALPHANUM_WALL.get(), bioResLoc("polished_alphanum"));
+        this.slabBlock(BioplethoraBlocks.ALPHANUM_SLAB.get(), bioResLoc("alphanum"), bioResLoc("alphanum"));
+        this.slabBlock(BioplethoraBlocks.ALPHANUM_SLAB_BRICKS.get(), bioResLoc("alphanum_bricks"), bioResLoc("alphanum_bricks"));
+        this.slabBlock(BioplethoraBlocks.POLISHED_ALPHANUM_SLAB.get(), bioResLoc("polished_alphanum"), bioResLoc("polished_alphanum"));
+
         // Petrawood woodset
         this.fixedLogBlock(BioplethoraBlocks.PETRAWOOD_LOG.get());
         this.woodBlock(BioplethoraBlocks.PETRAWOOD_WOOD.get(), bioResLoc("petrawood_log_side"));

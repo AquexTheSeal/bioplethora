@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "bioplethora:alphanum"
+  },
+  "result": "bioplethora:polished_alphanum",
+  "count": 1
+}

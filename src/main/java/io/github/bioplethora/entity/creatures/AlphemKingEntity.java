@@ -95,7 +95,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             public boolean canUse() {
                 if (RANDOM.nextInt(this.checkRate) == 0) return false;
 
-                if (((AlphemKingEntity) entity).getRoaring()) {
+                if (!((AlphemKingEntity) entity).getRoaring()) {
                     return this.isExecutable(this, this.entity, this.entity.getTarget());
                 } else {
                     return false;
@@ -106,7 +106,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             public boolean canContinueToUse() {
                 if (RANDOM.nextInt(this.checkRate) == 0) return true;
 
-                if (((AlphemKingEntity) entity).getRoaring()) {
+                if (!((AlphemKingEntity) entity).getRoaring()) {
                     return this.isExecutable(this, this.entity, this.entity.getTarget());
                 } else {
                     return false;
@@ -129,7 +129,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
-        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, AlphemKingEntity.class)).setAlertOthers());
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
     }
 
     @Override

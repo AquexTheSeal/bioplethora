@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "bioplethora:alphanum"
+  },
+  "result": "bioplethora:alphanum_wall",
+  "count": 1
+}
