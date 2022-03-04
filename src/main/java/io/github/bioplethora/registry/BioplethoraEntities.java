@@ -29,6 +29,7 @@ public class BioplethoraEntities {
     public static final RegistryObject<EntityType<AlphemEntity>> ALPHEM = ENTITIES.register("alphem", () -> EntityType.Builder.of(AlphemEntity::new, EntityClassification.MONSTER).sized(1.2f, 1.4f).build(new ResourceLocation(Bioplethora.MOD_ID, "alphem").toString()));
     public static final RegistryObject<EntityType<GaugalemEntity>> GAUGALEM = ENTITIES.register("gaugalem", () -> EntityType.Builder.of(GaugalemEntity::new, EntityClassification.MONSTER).sized(1.2f, 4.0f).build(new ResourceLocation(Bioplethora.MOD_ID, "gaugalem").toString()));
     public static final RegistryObject<EntityType<DwarfMossadileEntity>> DWARF_MOSSADILE = ENTITIES.register("dwarf_mossadile", () -> EntityType.Builder.of(DwarfMossadileEntity::new, EntityClassification.MONSTER).sized(1.4f, 0.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "dwarf_mossadile").toString()));
+    public static final RegistryObject<EntityType<TrapjawEntity>> TRAPJAW = ENTITIES.register("trapjaw", () -> EntityType.Builder.of(TrapjawEntity::new, EntityClassification.MONSTER).sized(1.8f, 0.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "trapjaw").toString()));
 
     public static final RegistryObject<EntityType<GrylynenEntity>> WOODEN_GRYLYNEN = ENTITIES.register("wooden_grylynen", () -> EntityType.Builder.of((EntityType.IFactory<GrylynenEntity>) (type, world) ->
                     new GrylynenEntity(type, world, BPGrylynenTier.WOODEN), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "wooden_grylynen").toString()));
