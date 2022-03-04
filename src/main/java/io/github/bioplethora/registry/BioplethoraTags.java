@@ -21,6 +21,8 @@ public class BioplethoraTags {
         public static final ITag.INamedTag<Block> DIAMOND_GRYLYNEN_SPAWNABLE = forgeLoc("diamond_grylynen_spawnable");
         public static final ITag.INamedTag<Block> NETHERITE_GRYLYNEN_SPAWNABLE = forgeLoc("netherite_grylynen_spawnable");
 
+        public static final ITag.INamedTag<Block> ALPHANIA = forgeLoc("alphania");
+
         private static ITag.INamedTag<Block> bioLoc(String path) {
             return BlockTags.bind(new ResourceLocation(Bioplethora.MOD_ID, path).toString());
         }

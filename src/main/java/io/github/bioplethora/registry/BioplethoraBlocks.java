@@ -50,6 +50,9 @@ public class BioplethoraBlocks {
     public static final RegistryObject<RotatedPillarBlock> ALPHANUM_PILLAR = registerBlock("alphanum_pillar", () ->
             new RotatedPillarBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
+    public static final RegistryObject<RotatedPillarBlock> ALPHANUM_NUCLEUS = registerBlock("alphanum_nucleus", () ->
+            new RotatedPillarBlock(AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get()).lightLevel((level) -> 8)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+
     public static final RegistryObject<StairsBlock> ALPHANUM_STAIRS = registerBlock("alphanum_stairs", () ->
             new StairsBlock(BioplethoraBlocks.ALPHANUM.get().defaultBlockState(), AbstractBlock.Properties.copy(BioplethoraBlocks.ALPHANUM.get())), BioplethoraItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<WallBlock> ALPHANUM_WALL = registerBlock("alphanum_wall", () ->

@@ -114,6 +114,22 @@
   "block.bioplethora.yellow_grylynen_crystal_block": "Yellow Grylynen Crystal Block",
   "block.bioplethora.red_grylynen_crystal_block": "Red Grylynen Crystal Block",
 
+  "block.bioplethora.alphanum": "Alphanum",
+  "block.bioplethora.alphanum_bricks": "Alphanum Bricks",
+  "block.bioplethora.polished_alphanum": "Polished Alphanum",
+  "block.bioplethora.alphanum_pillar": "Alphanum Pillar",
+  "block.bioplethora.alphanum_nucleus": "Alphanum Nucleus",
+
+  "block.bioplethora.alphanum_stairs": "Alphanum Stairs",
+  "block.bioplethora.alphanum_wall": "Alphanum Wall",
+  "block.bioplethora.alphanum_slab": "Alphanum Slab",
+  "block.bioplethora.alphanum_brick_stairs": "Alphanum Brick Stairs",
+  "block.bioplethora.alphanum_brick_wall": "Alphanum Brick Wall",
+  "block.bioplethora.alphanum_brick_slab": "Alphanum Brick Slab",
+  "block.bioplethora.polished_alphanum_stairs": "Polished Alphanum Stairs",
+  "block.bioplethora.polished_alphanum_wall": "Polished Alphanum Wall",
+  "block.bioplethora.polished_alphanum_slab": "Polished Alphanum Slab",
+
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
 

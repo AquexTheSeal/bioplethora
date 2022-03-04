@@ -48,7 +48,7 @@ public class CavernFleignarTargetGoal extends TargetGoal {
 
             if (targetCandidate != null) {
                 boolean getTag = EntityTypeTags.getAllTags().getTagOrEmpty(BioplethoraTags.Entities.FLEIGNAR_TARGETS.getName()).contains(targetCandidate.getType());
-                if (validCheck(targetCandidate) || getTag) {
+                if (validCheck(targetCandidate) && getTag) {
                     if (!targetCandidate.hasEffect(BioplethoraEffects.SPIRIT_MANIPULATION.get())) {
                         fleignar.setTarget(targetCandidate);
                     }

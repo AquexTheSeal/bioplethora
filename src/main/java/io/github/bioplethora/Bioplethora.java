@@ -45,6 +45,7 @@ public class Bioplethora {
         BioplethoraBiomes.BIOMES.register(bus);
         BioplethoraEffects.EFFECTS.register(bus);
         BioplethoraEnchantments.ENCHANTMENTS.register(bus);
+        BioplethoraStructures.STRUCTURES.register(bus);
 
         BioplethoraTileEntities.TILE_ENTITIES.register(bus);
         BioplethoraContainerTypes.CONTAINERS.register(bus);
@@ -76,6 +77,7 @@ public class Bioplethora {
         LOGGER.info("Setting up [" + MOD_NAME + "], thank you for using this mod!");
 
         BPBiomeGeneration.generateBiomes();
+        BioplethoraStructures.setupStructures();
     }
 
     private void gatherData(final GatherDataEvent event) {

@@ -46,7 +46,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.simpleStoneSet("polished_alphanum", "polished_alphanum_stairs", "polished_alphanum_wall", "polished_alphanum_slab");
 
         this.cubeColumnHorizontal("alphanum_pillar", bioResLoc("alphanum_pillar"), bioResLoc("alphanum_pillar_top"));
-
+        this.cubeColumnHorizontal("alphanum_nucleus", bioResLoc("alphanum_nucleus"), bioResLoc("alphanum_pillar_top"));
         // Petrawood woodset
         this.cubeColumnHorizontal("petrawood_log", bioResLoc("petrawood_log_side"), bioResLoc("petrawood_log_top"));
         this.cubeAll("petrawood_wood", bioResLoc("petrawood_log_side"));

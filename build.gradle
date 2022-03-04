@@ -30,6 +30,7 @@ java {
 
 minecraft {
     mappings channel: 'parchment', version: "2021.10.17-${project.minecraftVersion}"
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
@@ -144,6 +145,11 @@ dependencies {
     //Mutil (For Tetra)
     implementation fg.deobf("curse.maven:mutil-351914:3456505")
 
+    //Huge Structure Blocks
+    implementation fg.deobf("curse.maven:huge-structure-blocks-474114:3318279")
+    //WorldEdit
+    implementation fg.deobf("curse.maven:worldedit-225608:3283693")
+
     //Enchantment Descriptions
     /*implementation fg.deobf("curse.maven:enchantment-descriptions-250419:3358861")*/
     //Bookshelf (for EnchDesc)
@@ -151,8 +157,6 @@ dependencies {
 
     //Mob battle
     implementation fg.deobf("curse.maven:mob-battle-mod-268746:3408702")
-    //Off-Hand Combat
-    implementation fg.deobf("curse.maven:off-hand-combat-417112:3203449")
     //Grapple Hooks
     implementation fg.deobf("curse.maven:grappling-hook-mod-238911:3564285")
 }

@@ -1,0 +1,15 @@
+{
+  "name": "bioplethora:alphanum_mausoleum/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "bioplethora:alphanum_mausoleum",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

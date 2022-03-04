@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "bioplethora:alphanum",
+    "bioplethora:alphanum_bricks",
+    "bioplethora:polished_alphanum",
+    "bioplethora:alphanum_stairs",
+    "bioplethora:alphanum_brick_stairs",
+    "bioplethora:polished_alphanum_stairs",
+    "bioplethora:alphanum_wall",
+    "bioplethora:alphanum_brick_wall",
+    "bioplethora:polished_alphanum_wall",
+    "bioplethora:alphanum_slab",
+    "bioplethora:alphanum_brick_slab",
+    "bioplethora:polished_alphanum_slab"
+  ]
+}

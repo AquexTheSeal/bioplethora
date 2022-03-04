@@ -41,6 +41,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BioplethoraBlocks.ALPHANUM_BRICKS.get());
         this.simpleBlock(BioplethoraBlocks.POLISHED_ALPHANUM.get());
         this.logBlock(BioplethoraBlocks.ALPHANUM_PILLAR.get());
+        this.differentTopLogBlock(BioplethoraBlocks.ALPHANUM_NUCLEUS.get(), BioplethoraBlocks.ALPHANUM_PILLAR.get());
 
         this.stairsBlock(BioplethoraBlocks.ALPHANUM_STAIRS.get(), bioResLoc("alphanum"));
         this.stairsBlock(BioplethoraBlocks.ALPHANUM_STAIRS_BRICKS.get(), bioResLoc("alphanum_bricks"));
@@ -87,6 +88,10 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
     public void fixedLogBlock(RotatedPillarBlock block) {
         axisBlock(block, extend(blockTexture(block), "_side"), extend(blockTexture(block), "_top"));
+    }
+
+    public void differentTopLogBlock(RotatedPillarBlock block, RotatedPillarBlock topBlock) {
+        axisBlock(block, blockTexture(block), extend(blockTexture(topBlock), "_top"));
     }
 
     public void pressurePlateBlock(PressurePlateBlock block, ModelFile pressurePlateUp, ModelFile pressurePlateDown) {

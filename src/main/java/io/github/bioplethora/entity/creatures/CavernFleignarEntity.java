@@ -6,6 +6,7 @@ import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.CavernFleignarMeleeGoal;
 import io.github.bioplethora.entity.ai.CavernFleignarTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
+import io.github.bioplethora.registry.BioplethoraTags;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -22,10 +23,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -187,6 +185,18 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
                 double d2 = this.random.nextGaussian() * 0.02D;
 
                 this.level.addParticle(ParticleTypes.POOF, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
+            }
+        }
+    }
+
+    @Override
+    public void checkDespawn() {
+        BlockPos posBelow = new BlockPos(this.getX(), this.getY(), this.getZ()).below();
+        if (!this.level.getBlockState(posBelow).is(BioplethoraTags.Blocks.ALPHANIA)) {
+            super.checkDespawn();
+        } else {
+            if (this.level.getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
+                this.remove();
             }
         }
     }

@@ -20,6 +20,21 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
         this.forVanillaTags();
 
+        tag(BioplethoraTags.Blocks.ALPHANIA)
+                .add(BioplethoraBlocks.ALPHANUM.get())
+                .add(BioplethoraBlocks.ALPHANUM_BRICKS.get())
+                .add(BioplethoraBlocks.POLISHED_ALPHANUM.get())
+                .add(BioplethoraBlocks.ALPHANUM_STAIRS.get())
+                .add(BioplethoraBlocks.ALPHANUM_STAIRS_BRICKS.get())
+                .add(BioplethoraBlocks.POLISHED_ALPHANUM_STAIRS.get())
+                .add(BioplethoraBlocks.ALPHANUM_WALL.get())
+                .add(BioplethoraBlocks.ALPHANUM_WALL_BRICKS.get())
+                .add(BioplethoraBlocks.POLISHED_ALPHANUM_WALL.get())
+                .add(BioplethoraBlocks.ALPHANUM_SLAB.get())
+                .add(BioplethoraBlocks.ALPHANUM_SLAB_BRICKS.get())
+                .add(BioplethoraBlocks.POLISHED_ALPHANUM_SLAB.get())
+        ;
+
         tag(BioplethoraTags.Blocks.GRYLYNEN_UNBREAKABLE)
                 .add(BioplethoraBlocks.BELLOPHITE_BLOCK.get())
                 .add(BioplethoraBlocks.BELLOPHITE_CORE_BLOCK.get())

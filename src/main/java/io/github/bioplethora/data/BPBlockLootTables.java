@@ -31,6 +31,7 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BioplethoraBlocks.ALPHANUM_BRICKS.get());
         dropSelf(BioplethoraBlocks.POLISHED_ALPHANUM.get());
         dropSelf(BioplethoraBlocks.ALPHANUM_PILLAR.get());
+        dropSelf(BioplethoraBlocks.ALPHANUM_NUCLEUS.get());
 
         dropSelf(BioplethoraBlocks.ALPHANUM_STAIRS.get());
         dropSelf(BioplethoraBlocks.ALPHANUM_STAIRS_BRICKS.get());
