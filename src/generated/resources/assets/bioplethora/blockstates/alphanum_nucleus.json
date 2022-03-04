@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "bioplethora:block/alphanum_nucleus_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "bioplethora:block/alphanum_nucleus"
+    },
+    "axis=z": {
+      "model": "bioplethora:block/alphanum_nucleus_horizontal",
+      "x": 90
+    }
+  }
+}
