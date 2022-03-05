@@ -1,0 +1,27 @@
+{
+  "name": "The Alphanum Nucleus Awakening",
+  "icon": "bioplethora:alphanum_nucleus",
+  "category": "others",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()This is the Alphanum Nucleus, this block can only be found in the final floor of $(l:alphanum_mausoleum)The Alphanum Mausoleum$(). This block is very important to summon the Alphem King in survival mode. To summon the Alphem King, you must shoot a Wind Arrow on the block itself, this will trigger the awakening of the Alphem King. The Alphem King's awakening will be broadcasted to all the players in the world (Can be disabled in the Config)."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name":"Alphanum Nucleus Block",
+      "multiblock": {
+        "pattern": [
+          ["0"]
+        ],
+        "mapping": {
+          " ": "ANY",
+          "0": "bioplethora:alphanum_nucleus"
+        },
+        "symmetrical": true,
+        "offset"     : [0, 0, 0],
+        "view_offset": [0, 0, 0]
+      }
+    }
+  ]
+}

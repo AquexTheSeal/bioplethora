@@ -7,6 +7,7 @@ import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
+import io.github.bioplethora.event.helper.AlphemKingSpawnHelper;
 import io.github.bioplethora.event.helper.GrylynenSpawnHelper;
 import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
@@ -173,6 +174,8 @@ public class ServerWorldEvents {
 
     @SubscribeEvent
     public static void onProjectileHit(ProjectileImpactEvent event) {
+
+        AlphemKingSpawnHelper.onProjectileImpact(event);
 
         Entity projectile = event.getEntity();
         RayTraceResult result = event.getRayTraceResult();

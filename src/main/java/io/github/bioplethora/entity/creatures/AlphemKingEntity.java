@@ -365,7 +365,9 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         if (this.deathTime == 100) {
 
             if (!explodedOnDeath) {
-                this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Explosion.Mode.NONE);
+                this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.HOSTILE, 1.0F, 1.0F);
+                this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, 1.0F);
+
                 explodedOnDeath = true;
             }
             this.remove();
@@ -375,6 +377,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
                 double d1 = this.random.nextGaussian() * 0.02D;
                 double d2 = this.random.nextGaussian() * 0.02D;
 
+                this.level.addParticle(ParticleTypes.EXPLOSION, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
                 this.level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
                 this.level.addParticle(ParticleTypes.POOF, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
             }

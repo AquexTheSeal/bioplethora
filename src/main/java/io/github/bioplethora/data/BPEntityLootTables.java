@@ -1,5 +1,6 @@
 package io.github.bioplethora.data;
 
+import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.data.loot.EntityLootTables;
@@ -97,21 +98,18 @@ public class BPEntityLootTables extends EntityLootTables {
                         .add(ItemLootEntry.lootTableItem(BioplethoraItems.BELLOPHITE.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(4F, 7F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.0F)))
-                                .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(BioplethoraItems.BELLOPHITE_CORE_FRAGMENT.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 4F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1F)))
-                                .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(BioplethoraItems.PRIMORDIAL_FRAGMENT.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(5F, 9F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.0F)))
-                                .when(KilledByPlayer.killedByPlayer())
                         ))
         );
 
@@ -315,6 +313,43 @@ public class BPEntityLootTables extends EntityLootTables {
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                                 .apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
+                                .when(KilledByPlayer.killedByPlayer())
+                        ))
+        );
+
+        // Alphem King
+        add(BioplethoraEntities.ALPHEM_KING.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.ALPHANUM_GEM.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(2F, 5F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
+                        ))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.ALPHEM_KING_REMNANT.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(2F, 2F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
+                        ))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.WINDPIECE.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(3F, 6F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.0F)))
+                                .when(KilledByPlayer.killedByPlayer())
+                        ))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.WINDY_ESSENCE.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
+                                .when(KilledByPlayer.killedByPlayer())
+                        ))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BioplethoraBlocks.ALPHANUM_PILLAR.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(6F, 12F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
         );

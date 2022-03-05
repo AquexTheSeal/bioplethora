@@ -30,6 +30,7 @@ public class BioplethoraConfig {
 
         public final ForgeConfigSpec.ConfigValue<Boolean> replaceCreativeTabBackground;
         public final ForgeConfigSpec.ConfigValue<Boolean> antibioCompatibility;
+        public final ForgeConfigSpec.ConfigValue<Boolean> announceAlphemKing;
 
         //Ecoharmless
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnCuttlefish;
@@ -82,6 +83,7 @@ public class BioplethoraConfig {
             builder.push("Other Mechanics");
             replaceCreativeTabBackground = builder.define("Replace the Bioplethora's creative tabs' background images with a custom one?", true);
             antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used together?", true);
+            announceAlphemKing = builder.define("Announce the summon of the Alphem King to all players in the world?", true);
             builder.pop();
 
             //===================================

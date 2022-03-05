@@ -1,0 +1,16 @@
+{
+  "name": "Cavern Fleignar",
+  "icon": "bioplethora:cavern_fleignar_spawn_egg",
+  "category": "plethoneutral_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()---"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:cavern_fleignar",
+      "text": "Cavern Fleignars spawn on caves on Y-levels below 50."
+    }
+  ]
+}

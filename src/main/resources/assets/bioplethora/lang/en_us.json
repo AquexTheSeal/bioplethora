@@ -210,6 +210,8 @@
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora. There is a hell mode option in the configs that enhances and strengthens most creatures, you can check it out!",
 
+  "message.bioplethora.alphem_king.summon": "An instance of the Alphem King is summoned by %s at coordinates %s, %s, and %s",
+
   "advancements.bioplethora.bioplethora_startup.title": "Welcome to Bioplethora!",
   "advancements.bioplethora.bioplethora_startup.desc": "Thank you for installing Bioplethora! Feel free to tame, kill, and farm these creatures!",
 

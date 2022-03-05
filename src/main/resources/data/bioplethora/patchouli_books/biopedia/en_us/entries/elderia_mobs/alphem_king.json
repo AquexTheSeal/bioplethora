@@ -1,0 +1,16 @@
+{
+  "name": "Alphem King",
+  "icon": "bioplethora:alphem_king_spawn_egg",
+  "category": "elderia_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()The Alphem King is one of the strongest and hardest bosses in Bioplethora. It can shoot a large row of giant explosives continuously, it's smashes gives off a devastating blow to the ground and it's targets, and it's roars calls multiple Alphems to fight alongside it. It also has a few defensive skills like regenerative barriers that cancels any attack, constant regeneration, and the ability to jump back for a quick retreat."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:alphem_king",
+      "text": "The Alphem King is summonable by shooting a Wind Arrow on a Alphanum Nucleus. Check out $(l:alphanum_nucleus_awakening)Alphanum Nucleus Awakening$()."
+    }
+  ]
+}

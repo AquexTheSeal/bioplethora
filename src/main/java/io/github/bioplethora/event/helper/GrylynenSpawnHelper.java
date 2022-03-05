@@ -1,6 +1,7 @@
 package io.github.bioplethora.event.helper;
 
 import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.registry.BioplethoraEffects;
 import io.github.bioplethora.registry.BioplethoraEntities;
@@ -84,6 +85,8 @@ public class GrylynenSpawnHelper {
 
     public static void breakSurroundingBlocks(World world, BlockPos centerPos) {
 
+        BlockUtils.destroyAllNearbyBlocks(world, centerPos, 1, 1, 1, true);
+        /*
         double x = centerPos.getX(), y = centerPos.getY(), z = centerPos.getZ();
         BlockPos b1 = new BlockPos(x, y + 1, z);
         BlockPos b2 = new BlockPos(x, y - 1, z);
@@ -144,6 +147,7 @@ public class GrylynenSpawnHelper {
         destroyBlockAt(b24, world);
         destroyBlockAt(b25, world);
         destroyBlockAt(b26, world);
+         */
     }
 
     public static void destroyBlockAt(BlockPos pos, World world) {

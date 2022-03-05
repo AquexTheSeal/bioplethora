@@ -22,7 +22,7 @@ public class BPCompatJER {
         registerLoot(BioplethoraEntities.CUTTLEFISH.get().create(world), "loot_tables/entities/cuttlefish.json");
         registerLoot(BioplethoraEntities.BELLOPHGOLEM.get().create(world), "loot_tables/entities/bellophgolem.json");
         registerLoot(BioplethoraEntities.ALTYRUS.get().create(world), "loot_tables/entities/altyrus.json");
-        registerLoot(BioplethoraEntities.PEAGUIN.get().create(world), "loot_tables/entities/peaguin.json");
+        registerLoot(BioplethoraEntities.PEAGUIN.get().create(world), "loot_tables/entities/alphanum_mausoleum.json");
     }
 
     public static void registerLoot(LivingEntity entity, String tableFile) {

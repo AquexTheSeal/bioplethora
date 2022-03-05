@@ -207,7 +207,7 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     }
 
     public static boolean checkFleignarSpawnRules(IWorld world, BlockPos pos) {
-        return pos.getY() <= 60;
+        return pos.getY() <= 50;
     }
 
     @Override

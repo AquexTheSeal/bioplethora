@@ -1,0 +1,17 @@
+{
+  "name": "Alphanum Mausoleum",
+  "icon": "bioplethora:alphanum_bricks",
+  "category": "structures_and_features",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()The Alphanum Mausoleum is a huge and rare structure that can be found in Cold or Mountainous biomes. This Structure is mandatory to find the Alphanum Core, which is a very crucial requirement for summoning the Alphem King, which is one of the hardest bosses in the mod."
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Alphanum Mausoleum",
+      "images": "bioplethora:textures/gui/patchouli/images/alphanum_mausoleum.png",
+      "border": "true"
+    }
+  ]
+}

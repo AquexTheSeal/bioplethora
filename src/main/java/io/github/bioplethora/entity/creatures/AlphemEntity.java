@@ -176,7 +176,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
 
     @Override
     public int getMaxSpawnClusterSize() {
-        return 4 + this.level.getRandom().nextInt(4);
+        return 8;
     }
 
     public net.minecraft.util.SoundEvent getAmbientSound() {
