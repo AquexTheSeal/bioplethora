@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:item/alphem_king_spawn_egg"
+  }
+}
