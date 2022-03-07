@@ -54,6 +54,7 @@ public class BioplethoraConfig {
         //Hellsent
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnCrephoxl;
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnBellophgolem;
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnNandbri;
 
         //Elderia
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnMyliothan;
@@ -116,6 +117,7 @@ public class BioplethoraConfig {
             builder.push("Hellsent Mobs");
             spawnCrephoxl = builder.define("Enable spawning Crephoxls", true);
             spawnBellophgolem = builder.define("Enable spawning Bellophgolems", true);
+            spawnNandbri = builder.define("Enable spawning Nandbris", true);
             builder.pop();
             //Elderia
             builder.push("Elderia Mobs");
