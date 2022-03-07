@@ -110,20 +110,20 @@ public class NandbricShortswordItem extends SwordItem {
             AxisAlignedBB hitrange = player.getBoundingBox().inflate(2.2D, 2.2D, 2.2D);
 
             if (hitrange.intersects(target.getBoundingBox())) {
-                double x = target.getX(), y = target.getY(), z = target.getZ();
+                boolean flag = target.hurt(DamageSource.mobAttack(player), 7.0F);
+                if(flag) {
+                    target.addEffect(new EffectInstance(Effects.POISON, 60, 5));
+                    player.doEnchantDamageEffects(player, target);
+                    ((PlayerEntity)player).getCooldowns().addCooldown(stack.getItem(), 22);
+                }
 
-                if(!world.isClientSide) {
-                    ((ServerWorld)world).sendParticles(ParticleTypes.SNEEZE, x, y + (player.getBbHeight() / 2), z, 30, 1.2, 1.2, 1.2, 0);
-                    world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), SoundEvents.ZOMBIE_INFECT, SoundCategory.PLAYERS, 1, 1);
-                    world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
+                if(world instanceof ServerWorld) {
+                    double x = target.getX(), y = target.getY(), z = target.getZ();
+                    BlockPos pos = new BlockPos(x, y, z);
 
-                    boolean flag = target.hurt(DamageSource.mobAttack(player), 7.0F);
-                    if(flag) {
-                        target.addEffect(new EffectInstance(Effects.POISON, 60, 5));
-                        player.doEnchantDamageEffects(player, target);
-                    }
-
-                    ((PlayerEntity) player).getCooldowns().addCooldown(stack.getItem(), 22);
+                    ((ServerWorld) world).sendParticles(ParticleTypes.SNEEZE, x, y + (target.getBbHeight() / 2), z, 30, 1.2, 1.2, 1.2, 0);
+                    world.playSound(null, pos, SoundEvents.ZOMBIE_INFECT, SoundCategory.PLAYERS, 1, 1);
+                    world.playSound(null, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
                 }
 
                 Hand hand = player.getUsedItemHand();
@@ -139,7 +139,7 @@ public class NandbricShortswordItem extends SwordItem {
             }
 
             if(player.getDeltaMovement().y > 0.1D) {
-                player.setDeltaMovement(player.getDeltaMovement().x, player.getDeltaMovement().y * 0.2, player.getDeltaMovement().z);
+                player.getDeltaMovement().multiply(1.0D, 0.2D, 1.0D);
             }
         }
     }
