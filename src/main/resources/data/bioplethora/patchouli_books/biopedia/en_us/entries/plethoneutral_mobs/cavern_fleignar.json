@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()---"
+      "text": "$(l)INFORMATION: $(br)$()Cavern Fleignars are firm and tentacle-like creatures that emits poison. It attacks players and other specific creatures when they get near to them. It's flesh could make a good meal, but it usually takes pretty long to cook."
     },
     {
       "type": "patchouli:entity",
