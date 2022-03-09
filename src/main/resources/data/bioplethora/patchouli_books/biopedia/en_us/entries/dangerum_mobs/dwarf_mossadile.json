@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()---"
+      "text": "$(l)INFORMATION: $(br)$()These small reptiles are hostile creatures that gives poison on bite, and they usually attack in groups. There is also a nether variant that gives fire instead of poison, the nether variant is also stronger in terms of some stats."
     },
     {
       "type": "patchouli:entity",
