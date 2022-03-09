@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()---"
+      "text": "$(l)INFORMATION: $(br)$()Peaguins are little and tamable neutral penguins that usually hunts it's targets with groups, because these creatures rely on numbers during a fight. If you get to tame one of these creatures, you can have it follow you even if you are in water."
     },
     {
       "type": "patchouli:entity",
