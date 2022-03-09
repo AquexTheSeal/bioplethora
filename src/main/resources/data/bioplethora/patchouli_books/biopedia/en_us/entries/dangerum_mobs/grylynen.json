@@ -10,7 +10,7 @@
     {
       "type": "patchouli:entity",
       "entity":"bioplethora:wooden_grylynen",
-      "text": "---"
+      "text": "These creatures spawn when it's corresponding variants' corresponding block is broken by a player. This can be prevented by an early game item that you have to explore."
     }
   ]
 }
