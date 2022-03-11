@@ -7,10 +7,10 @@
   ],
   "key": {
     "I": {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:iron_ingot"
     },
     "G": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:gold_ingot"
     },
     "C": {
       "item": "bioplethora:yellow_grylynen_crystal"

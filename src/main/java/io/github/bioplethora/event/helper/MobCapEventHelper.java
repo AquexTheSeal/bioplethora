@@ -13,7 +13,7 @@ public class MobCapEventHelper {
 
         if (BioplethoraConfig.COMMON.allowMobCaps.get()) {
             if (victim instanceof IMobCappedEntity) {
-                if (event.getSource()!= DamageSource.OUT_OF_WORLD) {
+                if (event.getSource() != DamageSource.OUT_OF_WORLD) {
                     if (event.getAmount() > ((IMobCappedEntity) victim).getMaxDamageCap()) {
                         event.setAmount(((IMobCappedEntity) victim).getMaxDamageCap());
                     }
