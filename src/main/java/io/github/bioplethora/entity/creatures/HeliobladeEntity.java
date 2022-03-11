@@ -2,6 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.IBioClassification;
+import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.HeliobladeCloningGoal;
@@ -49,7 +50,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimatable, IBioClassification {
+public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimatable, IBioClassification, IMobCappedEntity {
     private static final DataParameter<Boolean> DATA_IS_QUICKSHOOTING = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_CLONE = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
 
@@ -296,5 +297,10 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
         return BioplethoraSoundEvents.HELIOBLADE_DEATH.get();
+    }
+
+    @Override
+    public int getMaxDamageCap() {
+        return BioplethoraConfig.COMMON.heliobladeMobCap.get();
     }
 }

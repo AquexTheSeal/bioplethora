@@ -15,6 +15,7 @@
   "entity.bioplethora.helioblade": "Helioblade",
   "entity.bioplethora.alphem_king": "Alphem King",
   "entity.bioplethora.cavern_fleignar": "Cavern Fleignar",
+  "entity.bioplethora.trapjaw": "Trapjaw",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -53,6 +54,7 @@
   "item.bioplethora.helioblade_spawn_egg": "Helioblade Spawn Egg",
   "item.bioplethora.alphem_king_spawn_egg": "Alphem King Spawn Egg",
   "item.bioplethora.cavern_fleignar_spawn_egg": "Cavern Fleignar Spawn Egg",
+  "item.bioplethora.trapjaw_spawn_egg": "Trapjaw Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",
@@ -98,6 +100,7 @@
   "item.bioplethora.spirit_manipulation_charm": "Spirit Manipulation Charm",
 
   "item.bioplethora.green_crystal_shield": "Green Crystal Shield",
+  "item.bioplethora.yellow_crystal_shield": "Yellow Crystal Shield",
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
@@ -113,6 +116,8 @@
   "block.bioplethora.green_grylynen_crystal_block": "Green Grylynen Crystal Block",
   "block.bioplethora.yellow_grylynen_crystal_block": "Yellow Grylynen Crystal Block",
   "block.bioplethora.red_grylynen_crystal_block": "Red Grylynen Crystal Block",
+
+  "block.bioplethora.reinforcing_table": "Reinforcing Table",
 
   "block.bioplethora.alphanum": "Alphanum",
   "block.bioplethora.alphanum_bricks": "Alphanum Bricks",
@@ -240,6 +245,16 @@
   "advancements.bioplethora.cooked_cuttlefish_meat_obtain.desc": "Take a Cooked Cuttlefish Meat.",
 
   "bossbar.bioplethora.helioblade.clone_progress": "Time before next Helioblade cloning",
+
+  "tooltip.bioplethora.antibio_ecoharmless.desc": "+%s Damage against Ecoharmless creatures",
+  "tooltip.bioplethora.antibio_plethoneutral.desc": "+%s Damage against Plethoneutral creatures",
+  "tooltip.bioplethora.antibio_dangerum.desc": "+%s Damage against Dangerum creatures",
+  "tooltip.bioplethora.antibio_hellsent.desc": "+%s Damage against Hellsent creatures",
+  "tooltip.bioplethora.antibio_elderia.desc": "+%s Damage against Elderia creatures",
+
+  "key.category.bioplethora": "Bioplethora",
+  "key.bioplethora.vertical_up": "Move Up for water or flying mounts",
+  "key.bioplethora.vertical_down": "Move Down for water or flying mounts",
 
   "subtitles.bioplethora.crephoxl.idle": "Crephoxl grunts",
   "subtitles.bioplethora.crephoxl.hurt": "Crephoxl hurts",

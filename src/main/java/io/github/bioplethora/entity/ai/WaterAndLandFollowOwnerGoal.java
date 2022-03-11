@@ -13,7 +13,7 @@ import net.minecraft.world.IWorldReader;
 
 import java.util.EnumSet;
 
-public class PeaguinFollowOwnerGoal extends Goal {
+public class WaterAndLandFollowOwnerGoal extends Goal {
     private final TameableEntity tamable;
     private LivingEntity owner;
     private final IWorldReader level;
@@ -22,10 +22,10 @@ public class PeaguinFollowOwnerGoal extends Goal {
     private int timeToRecalcPath;
     private final float stopDistance;
     private final float startDistance;
-    //private float oldWaterCost;
+    private float oldWaterCost;
     private final boolean canFly;
 
-    public PeaguinFollowOwnerGoal(TameableEntity p_i225711_1_, double p_i225711_2_, float p_i225711_4_, float p_i225711_5_, boolean p_i225711_6_) {
+    public WaterAndLandFollowOwnerGoal(TameableEntity p_i225711_1_, double p_i225711_2_, float p_i225711_4_, float p_i225711_5_, boolean p_i225711_6_) {
         this.tamable = p_i225711_1_;
         this.level = p_i225711_1_.level;
         this.speedModifier = p_i225711_2_;
@@ -64,14 +64,14 @@ public class PeaguinFollowOwnerGoal extends Goal {
 
     public void start() {
         this.timeToRecalcPath = 0;
-        //this.oldWaterCost = this.tamable.getPathfindingMalus(PathNodeType.WATER);
-        //this.tamable.setPathfindingMalus(PathNodeType.WATER, 0.0F);
+        this.oldWaterCost = this.tamable.getPathfindingMalus(PathNodeType.WATER);
+        this.tamable.setPathfindingMalus(PathNodeType.WATER, 0.0F);
     }
 
     public void stop() {
         this.owner = null;
         this.navigation.stop();
-        //this.tamable.setPathfindingMalus(PathNodeType.WATER, this.oldWaterCost);
+        this.tamable.setPathfindingMalus(PathNodeType.WATER, this.oldWaterCost);
     }
 
     public void tick() {

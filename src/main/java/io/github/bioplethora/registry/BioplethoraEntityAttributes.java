@@ -24,6 +24,7 @@ public class BioplethoraEntityAttributes {
         event.put(BioplethoraEntities.ALPHEM.get(), AlphemEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.GAUGALEM.get(), GaugalemEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntity.setCustomAttributes().build());
+        event.put(BioplethoraEntities.TRAPJAW.get(), TrapjawEntity.setCustomAttributes().build());
 
         event.put(BioplethoraEntities.WOODEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
         event.put(BioplethoraEntities.STONE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());

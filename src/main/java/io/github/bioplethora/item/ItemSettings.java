@@ -26,4 +26,12 @@ public class ItemSettings {
         tooltip.add(new TranslationTextComponent(ItemSettings.BOSS_LEVEL).withStyle(ItemSettings.TIER_LEVEL_COLOR));
         tooltip.add(new TranslationTextComponent(ItemSettings.SHIFT_REMINDER).withStyle(ItemSettings.SHIFT_REMINDER_COLOR));
     }
+
+    public static TextFormatting ANTIBIO_BONUS_COLOR = TextFormatting.YELLOW;
+
+    public static String ECOHARMLESS_ENCH = "tooltip.bioplethora.antibio_ecoharmless.desc";
+    public static String PLETHONEUTRAL_ENCH = "tooltip.bioplethora.antibio_plethoneutral.desc";
+    public static String DANGERUM_ENCH = "tooltip.bioplethora.antibio_dangerum.desc";
+    public static String HELLSENT_ENCH = "tooltip.bioplethora.antibio_hellsent.desc";
+    public static String ELDERIA_ENCH = "tooltip.bioplethora.antibio_elderia.desc";
 }

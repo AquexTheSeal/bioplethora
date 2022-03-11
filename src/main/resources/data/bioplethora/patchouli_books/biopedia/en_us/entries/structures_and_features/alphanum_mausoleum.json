@@ -10,7 +10,7 @@
     {
       "type": "patchouli:image",
       "title": "Alphanum Mausoleum",
-      "images": "bioplethora:textures/gui/patchouli/images/alphanum_mausoleum.png",
+      "images": ["bioplethora:textures/gui/patchouli/images/alphanum_mausoleum.png"],
       "border": "true"
     }
   ]

@@ -10,7 +10,7 @@
     {
       "type": "patchouli:entity",
       "entity":"bioplethora:alphem_king",
-      "text": "The Alphem King is summonable by shooting a Wind Arrow on a Alphanum Nucleus. Check out $(l:alphanum_nucleus_awakening)Alphanum Nucleus Awakening$()."
+      "text": "The Alphem King is summonable by shooting a Wind Arrow on a Alphanum Nucleus. Check out $(l:nucleus_awakening)Alphanum Nucleus Awakening$()."
     }
   ]
 }

@@ -36,9 +36,16 @@ public class EntitySpawnManager {
         };
 
         private static final Consumer<MobSpawnInfoBuilder> DESERT_ENTITIES = (builder) -> {
-            //Nandbri
+            // Nandbri
             if(BioplethoraConfig.COMMON.spawnNandbri.get()) {
                 builder.addSpawn(ambient, new MobSpawnInfo.Spawners(BioplethoraEntities.NANDBRI.get(), 3 * spawnMultiplier, 1, 1));
+            }
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> SWAMP_ENTITIES = (builder) -> {
+            // Nandbri
+            if(BioplethoraConfig.COMMON.spawnTrapjaw.get()) {
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 15 * spawnMultiplier, 1, 3));
             }
         };
 
@@ -147,8 +154,11 @@ public class EntitySpawnManager {
                     if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST))
                         FOREST_ENTITIES.accept(spawnInfoBuilder);
                 case DESERT:
-                    if(hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.DRY))
+                    if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.DRY))
                         DESERT_ENTITIES.accept(spawnInfoBuilder);
+                case SWAMP:
+                    if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP))
+                        SWAMP_ENTITIES.accept(spawnInfoBuilder);
                 case JUNGLE:
                     if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE))
                         JUNGLE_ENTITIES.accept(spawnInfoBuilder);

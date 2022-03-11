@@ -26,6 +26,8 @@ public class BPBlockLootTables extends BlockLootTables {
         add(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
                 -> createSingleItemTableWithSilkTouch(sTouch, BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
 
+        dropSelf(BioplethoraBlocks.REINFORCING_TABLE.get());
+
         // Alphanum Stone Set
         dropSelf(BioplethoraBlocks.ALPHANUM.get());
         dropSelf(BioplethoraBlocks.ALPHANUM_BRICKS.get());
@@ -57,8 +59,6 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BioplethoraBlocks.PETRAWOOD_PRESSURE_PLATE.get());
         dropSelf(BioplethoraBlocks.PETRAWOOD_STAIRS.get());
         dropSelf(BioplethoraBlocks.PETRAWOOD_BUTTON.get());
-
-        dropSelf(BioplethoraBlocks.REINFORCING_TABLE.get());
     }
 
     @Override

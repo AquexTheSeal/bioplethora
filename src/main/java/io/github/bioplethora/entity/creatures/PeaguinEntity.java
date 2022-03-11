@@ -4,8 +4,7 @@ import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.WaterAndLandAnimalEntity;
-import io.github.bioplethora.entity.ai.HostileTamableNearestAttackableGoal;
-import io.github.bioplethora.entity.ai.PeaguinFollowOwnerGoal;
+import io.github.bioplethora.entity.ai.WaterAndLandFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
@@ -48,11 +47,15 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 public class PeaguinEntity extends WaterAndLandAnimalEntity implements IAnimatable, IAngerable, IBioClassification {
 
     private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(PeaguinEntity.class, DataSerializers.INT);
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
+
+    public static final Predicate<LivingEntity> PREY_SELECTOR = (entity) -> entity instanceof AbstractFishEntity;
+
     private UUID persistentAngerTarget;
 
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -103,7 +106,26 @@ public class PeaguinEntity extends WaterAndLandAnimalEntity implements IAnimatab
             }
         });
         this.goalSelector.addGoal(4, new BPAnimalMeleeGoal(this, 20, 0.5, 0.75));
-        this.goalSelector.addGoal(5, new PeaguinFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(4, new BPAnimalMoveToTargetGoal(this, 1.6, 8) {
+            @Override
+            public boolean canUse() {
+                if (!entity.isInWater()) {
+                    return super.canUse();
+                } else {
+                    return false;
+                }
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                if (!entity.isInWater()) {
+                    return super.canContinueToUse();
+                } else {
+                    return false;
+                }
+            }
+        });
+        this.goalSelector.addGoal(5, new WaterAndLandFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));
 
@@ -113,7 +135,7 @@ public class PeaguinEntity extends WaterAndLandAnimalEntity implements IAnimatab
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
-        this.targetSelector.addGoal(3, new HostileTamableNearestAttackableGoal<>(this, AbstractFishEntity.class, true));
+        this.targetSelector.addGoal(3, new NonTamedTargetGoal<>(this, AbstractFishEntity.class, false, PREY_SELECTOR));
     }
 
     @Override

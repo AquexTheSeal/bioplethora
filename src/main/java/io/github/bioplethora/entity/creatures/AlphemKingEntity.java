@@ -4,6 +4,7 @@ import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
+import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.ai.*;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
@@ -43,7 +44,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IBioClassification {
+public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IBioClassification, IMobCappedEntity {
 
     protected static final DataParameter<Boolean> ATTACKING2 = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
@@ -538,5 +539,10 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public void setBerserked(boolean berserked) {
         this.entityData.set(BERSERKED, berserked);
+    }
+
+    @Override
+    public int getMaxDamageCap() {
+        return BioplethoraConfig.COMMON.alphemKingMobCap.get();
     }
 }

@@ -1,6 +1,7 @@
 package io.github.bioplethora.integration;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.creatures.DwarfMossadileEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
@@ -35,6 +36,11 @@ public class BPCompatTOP {
 
                     String var = "Variant: ";
                     String ownerString = "Owner: ";
+                    String mobCap = "Damage Limit: ";
+
+                    if (entity instanceof IMobCappedEntity) {
+                        iProbeInfo.text(CompoundText.createLabelInfo(mobCap, ((IMobCappedEntity) entity).getMaxDamageCap()));
+                    }
 
                     if (entity instanceof DwarfMossadileEntity) {
                         boolean netherVariant = ((DwarfMossadileEntity) entity).isNetherVariant();
@@ -55,7 +61,7 @@ public class BPCompatTOP {
                     if (entity instanceof PrimordialRingEntity) {
                         boolean hasOwner = ((PrimordialRingEntity) entity).getOwner() != null;
                         if (hasOwner) {
-                            iProbeInfo.text(CompoundText.createLabelInfo(ownerString, ((PrimordialRingEntity) entity).getOwner()));
+                            iProbeInfo.text(CompoundText.createLabelInfo(ownerString, ((PrimordialRingEntity) entity).getOwner().getDisplayName()));
                         }
                     }
 

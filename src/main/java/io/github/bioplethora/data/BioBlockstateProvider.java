@@ -1,6 +1,7 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.registry.BioplethoraBlocks;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.PressurePlateBlock;
@@ -9,6 +10,7 @@ import net.minecraft.block.WoodButtonBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -35,6 +37,8 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get());
         this.simpleBlock(BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
         this.simpleBlock(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
+
+        //this.threeSideFacingBlock(BioplethoraBlocks.REINFORCING_TABLE.get());
 
         // Alphanum stone set
         this.simpleBlock(BioplethoraBlocks.ALPHANUM.get());
@@ -82,6 +86,20 @@ public class BioBlockstateProvider extends BlockStateProvider {
     }
 
     // Custom Generators
+    public void threeSideFacingBlock(ReinforcingTableBlock block) {
+        ModelFile all = models().withExistingParent(block.getRegistryName().getPath(), bioResLoc(block.getRegistryName().getPath()));
+
+        getVariantBuilder(block)
+                .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.SOUTH)
+                .modelForState().modelFile(all).addModel()
+                .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.WEST)
+                .modelForState().modelFile(all).rotationY(90).addModel()
+                .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.NORTH)
+                .modelForState().modelFile(all).rotationY(180).addModel()
+                .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.EAST)
+                .modelForState().modelFile(all).rotationY(270).addModel();
+    }
+
     public void pressurePlateBlock(PressurePlateBlock block, ResourceLocation all) {
         pressurePlateBlockInternal(block, block.getRegistryName().getPath(), all);
     }

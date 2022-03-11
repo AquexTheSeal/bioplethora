@@ -1,12 +1,10 @@
 package io.github.bioplethora.blocks.tile_entities;
 
 import io.github.bioplethora.gui.recipe.ReinforcingRecipe;
-import io.github.bioplethora.registry.BioplethoraItems;
 import io.github.bioplethora.registry.BioplethoraTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -54,7 +52,7 @@ public class ReinforcingTableTileEntity extends TileEntity implements ITickableT
     }
 
     private ItemStackHandler createHandler() {
-        return new ItemStackHandler(2) {
+        return new ItemStackHandler(3) {
             @Override
             protected void onContentsChanged(int slot) {
                 setChanged();
@@ -62,18 +60,12 @@ public class ReinforcingTableTileEntity extends TileEntity implements ITickableT
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                switch (slot) {
-                    case 0: return stack.getItem() == Items.GLASS_PANE;
-                    case 1: return stack.getItem() == BioplethoraItems.BELLOPHITE.get() || stack.getItem() == BioplethoraItems.BELLOPHITE.get();
-                    case 2: return stack.getItem() == BioplethoraItems.BELLOPHITE.get();
-                    default:
-                        return false;
-                }
+                return true;
             }
 
             @Override
             public int getSlotLimit(int slot) {
-                return 2;
+                return 3;
             }
 
             @Nonnull

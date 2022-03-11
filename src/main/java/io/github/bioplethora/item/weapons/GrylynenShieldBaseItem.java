@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.item.UseAction;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public abstract class GrylynenShieldBaseItem extends ShieldItem {
     public boolean canBeCooldown = false;
@@ -20,6 +21,11 @@ public abstract class GrylynenShieldBaseItem extends ShieldItem {
      * @return How much durability will the armor used by the user recover everytime the shield gets damaged?
      */
     public abstract int getArmorBonus();
+
+    /**
+     * This skill will trigger when the shield gets damaged. This custom void is executed through ForgeHooks in {@link io.github.bioplethora.event.ServerWorldEvents#onLivingAttack(LivingAttackEvent)}
+     */
+    public abstract void blockingSkill(ItemStack stack, LivingEntity user, Entity attacker, World world);
 
     public GrylynenShieldBaseItem(Properties properties) {
         super(properties);

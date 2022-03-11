@@ -32,6 +32,7 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.defaultBlock(BioplethoraBlocks.BLOCK_ITEMS.getEntries());
 
         this.grylynenShield(BioplethoraItems.GREEN_CRYSTAL_SHIELD.get());
+        this.grylynenShield(BioplethoraItems.YELLOW_CRYSTAL_SHIELD.get());
     }
 
     @Nonnull

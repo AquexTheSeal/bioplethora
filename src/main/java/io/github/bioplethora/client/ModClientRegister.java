@@ -10,6 +10,7 @@ import io.github.bioplethora.gui.screen.ReinforcingTableScreen;
 import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
+import io.github.bioplethora.keybindings.BPKeybinds;
 import io.github.bioplethora.registry.BioplethoraContainerTypes;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
@@ -48,6 +49,7 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALPHEM.get(), AlphemEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.GAUGALEM.get(), GaugalemEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.TRAPJAW.get(), TrapjawEntityRender::new);
 
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.WOODEN_GRYLYNEN.get(), GrylynenEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.STONE_GRYLYNEN.get(), GrylynenEntityRender::new);
@@ -83,6 +85,8 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);
 
         ScreenManager.register(BioplethoraContainerTypes.REINFORCING_TABLE_CONTAINER.get(), ReinforcingTableScreen::new);
+
+        BPKeybinds.register(event);
     }
 
     @OnlyIn(Dist.CLIENT)

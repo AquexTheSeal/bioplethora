@@ -1,0 +1,16 @@
+{
+  "name": "Trapjaw",
+  "icon": "bioplethora:trapjaw_spawn_egg",
+  "category": "dangerum_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()Trapjaws are ferocious and bloodthirsty creatures that roam around the murky swamps in the overworld, they bite off their prey with their very sharp fangs, ripping off every flesh out of them. These creatures are also tamable and you can use them to roam around the land and ocean."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:gaugalem",
+      "text": "Trapjaws often spawn in swamp biomes."
+    }
+  ]
+}

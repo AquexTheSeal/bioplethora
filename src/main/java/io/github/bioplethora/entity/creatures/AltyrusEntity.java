@@ -4,6 +4,7 @@ import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
+import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
@@ -44,7 +45,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
+public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification, IMobCappedEntity {
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_SUMMONING = EntityDataManager.defineId(AltyrusEntity.class, DataSerializers.BOOLEAN);
@@ -339,6 +340,11 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
         return this.boundOrigin;
     }
 
+    @Override
+    public int getMaxDamageCap() {
+        return BioplethoraConfig.COMMON.altyrusMobCap.get();
+    }
+
     class ChargeAttackGoal extends Goal {
         public ChargeAttackGoal() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
@@ -453,7 +459,6 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
                     break;
                 }
             }
-
         }
     }
 }

@@ -35,7 +35,10 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
     public void setLivingAnimations(AlphemKingEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
         super.setLivingAnimations(entity, uniqueID, customPredicate);
 
-        int i = entity.hurtTime;
+        /*
+        boolean isNegative = false;
+        boolean isNegative2 = false;
+        int hurtTime = entity.hurtTime;
 
         IBone head = this.getAnimationProcessor().getBone("head");
         IBone bodytop = this.getAnimationProcessor().getBone("bodytop");
@@ -45,52 +48,47 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
         IBone legl = this.getAnimationProcessor().getBone("legl");
         IBone legr = this.getAnimationProcessor().getBone("legr");
 
-        if (entity.isCharging()) {
-            ++chargeTime;
-            if (chargeTime == 1) {
-                head.setScaleX(1.2F * headEasingAnim(chargeTime));
-                head.setScaleY(1.2F * headEasingAnim(chargeTime));
-                head.setScaleZ(1.2F * headEasingAnim(chargeTime));
-            }
-
-            if (chargeTime >= 50) {
-                head.setScaleX(headEasingAnim(chargeTime));
-                head.setScaleY(headEasingAnim(chargeTime));
-                head.setScaleZ(headEasingAnim(chargeTime));
-            }
-
-            if (chargeTime == 69) {
-                chargeTime = 0;
-            }
+        if (entity.hurtTime >= 10) {
+            isNegative = Math.random() <= 0.5;
+            isNegative2 = Math.random() >= 0.5;
         }
+        if (entity.hurtTime > 0) {
+            randomHurtAnimSideward(head, hurtTime, isNegative);
+            randomHurtAnimSideward(bodytop, hurtTime, isNegative2);
+            randomHurtAnimSideward(bodymid, hurtTime, isNegative);
 
-        if (entity.hurtTime == 10) {
-            head.setPositionZ(-2F * hurtEasingAnim(i));
-            bodytop.setPositionZ(2F * hurtEasingAnim(i));
-            bodymid.setPositionZ(-2F * hurtEasingAnim(i));
-            arml.setPositionZ(2F * hurtEasingAnim(i));
-            armr.setPositionZ(-2F * hurtEasingAnim(i));
-            legl.setPositionZ(-2F * hurtEasingAnim(i));
-            legr.setPositionZ(2F * hurtEasingAnim(i));
+            randomHurtAnimForward(arml, hurtTime, isNegative2);
+            randomHurtAnimForward(armr, hurtTime, isNegative);
+            randomHurtAnimForward(legl, hurtTime, isNegative);
+            randomHurtAnimForward(legr, hurtTime, isNegative2);
+        } else if (entity.hurtTime == 0) {
+            clearAnimation(head);
+            clearAnimation(bodytop);
+            clearAnimation(bodymid);
+            clearAnimation(arml);
+            clearAnimation(armr);
+            clearAnimation(legl);
+            clearAnimation(legr);
         }
-
-        if (entity.hurtTime <= 9 && entity.hurtTime >= 5) {
-            head.setPositionZ(2F * hurtEasingAnim(i));
-            bodytop.setPositionZ(-2F * hurtEasingAnim(i));
-            bodymid.setPositionZ(2F * hurtEasingAnim(i));
-            arml.setPositionZ(-2F * hurtEasingAnim(i));
-            armr.setPositionZ(2F * hurtEasingAnim(i));
-            legl.setPositionZ(2F * hurtEasingAnim(i));
-            legr.setPositionZ(-2F * hurtEasingAnim(i));
-        }
+        */
     }
 
-    public float hurtEasingAnim(int i) {
-        return MathHelper.sin(i * 180F);
-        //return 1.5F * MathHelper.triangleWave((float)i - 10, 10.0F);
+    public float hurtEasingAnim(int hurtTime, int speed, int movementAmount) {
+        return MathHelper.cos(speed) * movementAmount;
     }
 
-    public float headEasingAnim(int i) {
-        return MathHelper.sin(i * 22.5F);
+    public void randomHurtAnimForward(IBone bone, int hurtTime, boolean isNegative) {
+        bone.setPositionZ(hurtEasingAnim(hurtTime, 45, isNegative ? 2 : -2));
+        bone.setRotationX(hurtEasingAnim(hurtTime, 45, isNegative ? 15 : -15));
+    }
+
+    public void randomHurtAnimSideward(IBone bone, int hurtTime, boolean isNegative) {
+        bone.setRotationY(hurtEasingAnim(hurtTime, 45, isNegative ? 15 : -15));
+    }
+
+    public void clearAnimation(IBone bone) {
+        bone.setPositionX(0);
+        bone.setPositionY(0);
+        bone.setPositionZ(0);
     }
 }

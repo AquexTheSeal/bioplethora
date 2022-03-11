@@ -2,6 +2,7 @@ package io.github.bioplethora;
 
 import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
+import io.github.bioplethora.keybindings.BPNetwork;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.world.EntitySpawnManager;
 import io.github.bioplethora.world.biome_helpers.BPBiomeGeneration;
@@ -76,6 +77,7 @@ public class Bioplethora {
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("Setting up [" + MOD_NAME + "], thank you for using this mod!");
 
+        BPNetwork.initializeNetwork();
         BPBiomeGeneration.generateBiomes();
         BioplethoraStructures.setupStructures();
     }

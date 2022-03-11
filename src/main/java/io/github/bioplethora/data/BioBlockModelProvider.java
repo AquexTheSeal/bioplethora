@@ -3,7 +3,9 @@ package io.github.bioplethora.data;
 import io.github.bioplethora.Bioplethora;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
@@ -35,6 +37,8 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("yellow_grylynen_crystal_block", bioResLoc("yellow_grylynen_crystal_block"));
         this.cubeAll("red_grylynen_crystal_block", bioResLoc("red_grylynen_crystal_block"));
 
+        //this.fixedOrientableWithBottom("reinforcing_table", bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_bottom"), bioResLoc("reinforcing_table_top"));
+
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));
         this.simpleStoneSet("alphanum", "alphanum_stairs", "alphanum_wall", "alphanum_slab");
@@ -47,6 +51,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.cubeColumnHorizontal("alphanum_pillar", bioResLoc("alphanum_pillar"), bioResLoc("alphanum_pillar_top"));
         this.cubeColumnHorizontal("alphanum_nucleus", bioResLoc("alphanum_nucleus"), bioResLoc("alphanum_pillar_top"));
+
         // Petrawood woodset
         this.cubeColumnHorizontal("petrawood_log", bioResLoc("petrawood_log_side"), bioResLoc("petrawood_log_top"));
         this.cubeAll("petrawood_wood", bioResLoc("petrawood_log_side"));
@@ -80,6 +85,16 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
     private ResourceLocation mcResLoc(String texture) {
         return new ResourceLocation("minecraft", BLOCK_FOLDER + "/" + texture);
+    }
+
+    public BlockModelBuilder fixedOrientableWithBottom(String name, ResourceLocation side, ResourceLocation front, ResourceLocation bottom, ResourceLocation top) {
+        ModelFile orientableWithBottom = withExistingParent(name, mcResLoc("orientable_with_bottom"));
+
+        return getBuilder(name).parent(orientableWithBottom)
+                .texture("side", side)
+                .texture("front", front)
+                .texture("bottom", bottom)
+                .texture("top", top);
     }
 
     public void simpleStoneSet(String mainBlock, String stairs, String wall, String slab) {

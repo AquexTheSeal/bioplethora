@@ -2,6 +2,7 @@ package io.github.bioplethora.blocks.utilities;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
@@ -22,7 +23,7 @@ public class BlockUtils {
                     BlockState blockState = world.getBlockState(pos);
                     Block block = blockState.getBlock();
 
-                    if (blockState.getMaterial().isSolid()) {
+                    if ((blockState.getMaterial().isSolid()) && (blockState.getBlock() != Blocks.BEDROCK)) {
                         if (Math.random() <= 0.3) {
                             FallingBlockEntity blockEntity = new FallingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, blockState);
                             if (randomYDelta) {

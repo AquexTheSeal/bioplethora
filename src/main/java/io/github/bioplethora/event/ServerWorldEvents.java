@@ -9,6 +9,8 @@ import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.AlphemKingSpawnHelper;
 import io.github.bioplethora.event.helper.GrylynenSpawnHelper;
+import io.github.bioplethora.event.helper.MobCapEventHelper;
+import io.github.bioplethora.event.helper.TooltipEventHelper;
 import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
@@ -39,6 +41,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -82,6 +85,11 @@ public class ServerWorldEvents {
     }
 
     @SubscribeEvent
+    public static void onTooltip(ItemTooltipEvent event) {
+        TooltipEventHelper.onTooltip(event);
+    }
+
+    @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         GrylynenSpawnHelper.onBlockBreak(event);
     }
@@ -97,9 +105,13 @@ public class ServerWorldEvents {
             ItemStack getUseItem = ((PlayerEntity) defendantEnt).getUseItem();
             Item getItem = getUseItem.getItem();
 
+            // Checks if damage source is from Fire
             boolean notFireDS = (event.getSource() != DamageSource.IN_FIRE);
+            // Checks if damage source is from Lava (yes, they have different damage sources)
             boolean notLavaDS = (event.getSource() != DamageSource.LAVA);
+            // Checks if damage source is from Cactus
             boolean notCactusDS = (event.getSource() != DamageSource.CACTUS);
+            // Checks if damage source is from the Void, a.k.a. "out of the world".
             boolean notVoidDS = (event.getSource() != DamageSource.OUT_OF_WORLD);
 
             if (notFireDS && notLavaDS && notCactusDS && notVoidDS) {
@@ -107,10 +119,16 @@ public class ServerWorldEvents {
                     ((BellophiteShieldItem) getItem).executeSkill(getUseItem, (LivingEntity) defendantEnt, defendantEnt.level);
                 }
 
+                // Checks if the defendant player is using an item that has GrylynenShieldBaseItem as it's superclass
                 if (getItem instanceof GrylynenShieldBaseItem) {
+
                     int recoveryAmount = ((GrylynenShieldBaseItem) getItem).getArmorBonus();
                     LivingEntity defendantLiving = (LivingEntity) defendantEnt;
 
+                    // Executes the blocking skill for GrylynenShieldBaseItem
+                    ((GrylynenShieldBaseItem) getItem).blockingSkill(getUseItem, defendantLiving, attackerEnt, event.getEntity().level);
+
+                    // Regenerates durability by each armor the player has respectively
                     defendantLiving.getItemBySlot(EquipmentSlotType.HEAD)
                             .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.HEAD).getDamageValue() + recoveryAmount);
                     defendantLiving.getItemBySlot(EquipmentSlotType.CHEST)
@@ -130,6 +148,8 @@ public class ServerWorldEvents {
         boolean dsFire = (event.getSource() == DamageSource.IN_FIRE);
         boolean dsVoid = (event.getSource() == DamageSource.OUT_OF_WORLD);
         boolean dsFire2 = (event.getSource() == DamageSource.ON_FIRE);
+
+        MobCapEventHelper.onEntityHurt(event);
 
         if (event.getEntity() instanceof HeliobladeEntity) {
 
