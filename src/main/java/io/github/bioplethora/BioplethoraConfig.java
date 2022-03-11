@@ -72,7 +72,7 @@ public class BioplethoraConfig {
             //        MAIN MECHANICS
             //===================================
             builder.push("Main Mechanics");
-            hellMode = builder.define("Hell Mode (Adds more mechanics and buffs to mobs to make the game harder)", true);
+            hellMode = builder.define("Hell Mode (Adds more mechanics and buffs to mobs to make the game harder, hellmode also makes items better.)", false);
             hellModeReminder = builder.define("Hell Mode Reminder (Reminds you everytime you join the world, enter a dimension, or respawn)", true);
             startupBiopedia = builder.define("Gives you a Biopedia upon joining the world", true);
             builder.pop();

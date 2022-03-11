@@ -252,6 +252,8 @@
   "tooltip.bioplethora.antibio_hellsent.desc": "+%s Damage against Hellsent creatures",
   "tooltip.bioplethora.antibio_elderia.desc": "+%s Damage against Elderia creatures",
 
+  "tooltip.bioplethora.no_use.desc": "This specific item has no use for your survival game at the moment. Don't throw away the item yet because we will add a use for it soon enough!",
+
   "key.category.bioplethora": "Bioplethora",
   "key.bioplethora.vertical_up": "Move Up for water or flying mounts",
   "key.bioplethora.vertical_down": "Move Down for water or flying mounts",

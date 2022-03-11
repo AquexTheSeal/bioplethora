@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " PW",
+    " PP",
+    "C  "
+  ],
+  "key": {
+    "P": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "item": "bioplethora:green_grylynen_crystal"
+    }
+  },
+  "result": {
+    "item": "bioplethora:green_crystal_shield",
+    "count": 1
+  }
+}

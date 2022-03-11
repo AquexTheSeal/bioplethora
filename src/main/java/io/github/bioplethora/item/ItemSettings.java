@@ -34,4 +34,8 @@ public class ItemSettings {
     public static String DANGERUM_ENCH = "tooltip.bioplethora.antibio_dangerum.desc";
     public static String HELLSENT_ENCH = "tooltip.bioplethora.antibio_hellsent.desc";
     public static String ELDERIA_ENCH = "tooltip.bioplethora.antibio_elderia.desc";
+
+    public static TextFormatting NO_USE_COLOR = TextFormatting.RED;
+
+    public static String NO_USE_YET = "tooltip.bioplethora.no_use.desc";
 }

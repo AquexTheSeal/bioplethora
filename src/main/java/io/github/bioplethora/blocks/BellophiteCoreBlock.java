@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -93,8 +92,7 @@ public class BellophiteCoreBlock extends Block {
                     ((world.getBlockState(b4)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get())) {
 
                 if (!entity.isCreative()) {
-                    ItemStack ItemToRemove = new ItemStack(BioplethoraItems.BELLOPHITE.get());
-                    entity.inventory.clearOrCountMatchingItems(p -> ItemToRemove.getItem() == p.getItem(), 1, entity.inventoryMenu.getCraftSlots());
+                    entity.getMainHandItem().shrink(1);
                 }
 
                 if (!world.isClientSide()) {

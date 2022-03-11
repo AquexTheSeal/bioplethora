@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "IGI",
+    " C "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "G": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "bioplethora:yellow_grylynen_crystal"
+    }
+  },
+  "result": {
+    "item": "bioplethora:yellow_crystal_shield",
+    "count": 1
+  }
+}
