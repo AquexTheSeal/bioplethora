@@ -21,6 +21,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -63,9 +65,10 @@ public class StellarScytheItem extends SwordItem {
 
 
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
         ItemSettings.sacredLevelText(tooltip);
 
         tooltip.add(new TranslationTextComponent("item.bioplethora.stellar_scythe.radius_slash.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));

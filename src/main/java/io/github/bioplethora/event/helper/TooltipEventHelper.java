@@ -10,9 +10,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 public class TooltipEventHelper {
 
     public static void onTooltip(ItemTooltipEvent event) {
-        if(event.getPlayer() == null) {
-            return;
-        }
+        if (event.getPlayer() == null) return;
+
         if (EnchantmentHelper.getItemEnchantmentLevel(BioplethoraEnchantments.ANTIBIO_ECOHARMLESS.get(), event.getItemStack()) > 0) {
             event.getToolTip().add(new TranslationTextComponent(ItemSettings.ECOHARMLESS_ENCH,
                     EnchantmentHelper.getItemEnchantmentLevel(BioplethoraEnchantments.ANTIBIO_ECOHARMLESS.get(), event.getItemStack()))

@@ -8,6 +8,8 @@ import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -52,7 +54,8 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     private static final DataParameter<Boolean> HAS_SADDLE = EntityDataManager.defineId(TrapjawEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
-    public static final Predicate<LivingEntity> PREY_SELECTOR = (entity) -> entity instanceof PlayerEntity || entity instanceof AnimalEntity;
+    public static final Predicate<LivingEntity> PREY_SELECTOR = (entity) ->
+            entity instanceof PlayerEntity || ((entity instanceof AnimalEntity) && !(entity instanceof TrapjawEntity));
 
     public TrapjawEntity(EntityType<? extends BPAnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -100,7 +103,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
             }
         });
         this.goalSelector.addGoal(4, new BPAnimalMeleeGoal(this, 30, 0.5, 0.6));
-        this.goalSelector.addGoal(5, new WaterAndLandFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(5, new WaterAndLandFollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));
 
@@ -162,9 +165,12 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
                         return ActionResultType.SUCCESS;
 
                     } else if (item instanceof SaddleItem && !this.isBaby()) {
-                        this.setSaddled(true);
-                        itemstack.shrink(1);
-                        return ActionResultType.SUCCESS;
+                        if (!this.isSaddled()) {
+                            this.setSaddled(true);
+                            itemstack.shrink(1);
+                            return ActionResultType.SUCCESS;
+                        }
+                        return ActionResultType.PASS;
                     }
 
                     ActionResultType actionresulttype = super.mobInteract(entity, resultType);
@@ -197,7 +203,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
                 }
 
             } else if (!entity.isCrouching()) {
-                if (this.isSaddled()) {
+                if (this.isSaddled() && !this.isInSittingPose()) {
                     entity.startRiding(this);
                 }
             }
@@ -300,7 +306,9 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         super.playStepSound(pos, state);
-        this.playSound(SoundEvents.RAVAGER_STEP, this.getSoundVolume(), this.getVoicePitch());
+        BlockState blockstate2 = this.level.getBlockState(pos.above());
+        SoundType soundtype2 = blockstate2.is(Blocks.SNOW) ? blockstate2.getSoundType(level, pos, this) : state.getSoundType(level, pos, this);
+        this.playSound(SoundEvents.RAVAGER_STEP, soundtype2.getVolume() * 0.15F, this.getVoicePitch());
     }
 
     @Override
@@ -339,7 +347,11 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     @Override
     protected float getWaterSlowDown() {
-        return 1.0F;
+        if (this.isVehicle()) {
+            return 1.0F;
+        } else {
+            return super.getWaterSlowDown();
+        }
     }
 
     public boolean canBeLeashed(PlayerEntity entity) {
@@ -348,7 +360,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     @OnlyIn(Dist.CLIENT)
     public Vector3d getLeashOffset() {
-        return new Vector3d(0.0D, this.getEyeHeight(), this.getBbWidth() * 0.4F);
+        return new Vector3d(0.0D, 0.6D * this.getEyeHeight(), this.getBbWidth() * 0.4F);
     }
 
     @Override
@@ -369,7 +381,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.trapjaw.swim", true));
             return PlayState.CONTINUE;
         }
-        if ((event.isMoving() && this.getTarget() != null) || (!this.isInWater() && this.isSaddled())) {
+        if ((event.isMoving() && this.getTarget() != null) || (!this.isInWater() && this.isVehicle())) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.trapjaw.run", true));
             return PlayState.CONTINUE;
         }

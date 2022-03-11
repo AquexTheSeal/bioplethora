@@ -38,6 +38,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -84,6 +86,7 @@ public class ServerWorldEvents {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onTooltip(ItemTooltipEvent event) {
         TooltipEventHelper.onTooltip(event);

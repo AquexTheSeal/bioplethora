@@ -21,6 +21,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -69,9 +71,10 @@ public class VermilionBladeItem extends SwordItem {
         return retval;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
         ItemSettings.bossLevelText(tooltip);
 
         tooltip.add(new TranslationTextComponent("item.bioplethora.vermilion_blade.blade_master.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));

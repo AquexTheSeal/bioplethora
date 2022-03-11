@@ -1,10 +1,10 @@
 package io.github.bioplethora.entity.ai;
 
+import io.github.bioplethora.entity.WaterAndLandAnimalEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.WalkNodeProcessor;
@@ -14,7 +14,7 @@ import net.minecraft.world.IWorldReader;
 import java.util.EnumSet;
 
 public class WaterAndLandFollowOwnerGoal extends Goal {
-    private final TameableEntity tamable;
+    private final WaterAndLandAnimalEntity tamable;
     private LivingEntity owner;
     private final IWorldReader level;
     private final double speedModifier;
@@ -25,14 +25,14 @@ public class WaterAndLandFollowOwnerGoal extends Goal {
     private float oldWaterCost;
     private final boolean canFly;
 
-    public WaterAndLandFollowOwnerGoal(TameableEntity p_i225711_1_, double p_i225711_2_, float p_i225711_4_, float p_i225711_5_, boolean p_i225711_6_) {
-        this.tamable = p_i225711_1_;
-        this.level = p_i225711_1_.level;
-        this.speedModifier = p_i225711_2_;
-        this.navigation = p_i225711_1_.getNavigation();
-        this.startDistance = p_i225711_4_;
-        this.stopDistance = p_i225711_5_;
-        this.canFly = p_i225711_6_;
+    public WaterAndLandFollowOwnerGoal(WaterAndLandAnimalEntity tamable, double speedModifier, float startDistance, float stopDistance, boolean canFly) {
+        this.tamable = tamable;
+        this.level = tamable.level;
+        this.speedModifier = speedModifier;
+        this.navigation = tamable.getNavigation();
+        this.startDistance = startDistance;
+        this.stopDistance = stopDistance;
+        this.canFly = canFly;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
@@ -82,8 +82,11 @@ public class WaterAndLandFollowOwnerGoal extends Goal {
                 if (this.tamable.distanceToSqr(this.owner) >= 144.0D) {
                     this.teleportToOwner();
                 } else {
-                    this.navigation.moveTo(this.owner, this.speedModifier);
-                    this.tamable.getMoveControl().setWantedPosition(this.owner.getX(), this.owner.getY(), this.owner.getZ(), 1.5D);
+                    if (!tamable.isInWater()) {
+                        this.navigation.moveTo(this.owner, this.speedModifier);
+                    } else {
+                        this.tamable.getMoveControl().setWantedPosition(this.owner.getX(), this.owner.getY(), this.owner.getZ(), 1.5D);
+                    }
                 }
             }
         }
@@ -110,7 +113,7 @@ public class WaterAndLandFollowOwnerGoal extends Goal {
         } else if (!this.canTeleportTo(new BlockPos(p_226328_1_, p_226328_2_, p_226328_3_))) {
             return false;
         } else {
-            this.tamable.moveTo((double)p_226328_1_ + 0.5D, (double)p_226328_2_, (double)p_226328_3_ + 0.5D, this.tamable.yRot, this.tamable.xRot);
+            this.tamable.moveTo((double)p_226328_1_ + 0.5D, p_226328_2_, (double)p_226328_3_ + 0.5D, this.tamable.yRot, this.tamable.xRot);
             this.navigation.stop();
             return true;
         }

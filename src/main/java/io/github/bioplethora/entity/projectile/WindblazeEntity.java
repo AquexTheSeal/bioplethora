@@ -83,12 +83,15 @@ public class WindblazeEntity extends DamagingProjectileEntity {
 
         entityArea.setDeltaMovement(entityArea.getDeltaMovement().add(0, 0.3 - entityArea.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
 
-        if (BioplethoraConfig.COMMON.hellMode.get() && (this.getOwner() != null)) {
-            entityArea.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), 3);
-            entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 1));
-            entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 60));
-        } else {
-            entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60));
+        if (this.getOwner() != null) {
+            if (BioplethoraConfig.COMMON.hellMode.get()) {
+                entityArea.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), 3);
+                entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 1));
+                entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 60));
+            } else {
+                entityArea.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), 1);
+                entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60));
+            }
         }
     }
 

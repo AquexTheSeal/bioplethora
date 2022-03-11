@@ -30,8 +30,6 @@ import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -377,22 +375,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
 
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-        List<ItemStack> list = getChargedProjectiles(stack);
-        if (isCharged(stack) && !list.isEmpty()) {
-            ItemStack itemstack = list.get(0);
-            tooltip.add((new TranslationTextComponent("item.minecraft.crossbow.projectile")).append(" ").append(itemstack.getDisplayName()));
-            if (flag.isAdvanced() && itemstack.getItem() == Items.FIREWORK_ROCKET) {
-                List<ITextComponent> list1 = Lists.newArrayList();
-                Items.FIREWORK_ROCKET.appendHoverText(itemstack, world, list1, flag);
-                if (!list1.isEmpty()) {
-                    for(int i = 0; i < list1.size(); ++i) {
-                        list1.set(i, (new StringTextComponent("  ")).append(list1.get(i)).withStyle(TextFormatting.GRAY));
-                    }
-
-                    tooltip.addAll(list1);
-                }
-            }
-        }
+        super.appendHoverText(stack, world, tooltip, flag);
         ItemSettings.sacredLevelText(tooltip);
 
         tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));

@@ -65,7 +65,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
                 .add(Attributes.ATTACK_DAMAGE, 7 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, 20 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 25 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }

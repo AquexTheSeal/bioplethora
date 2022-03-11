@@ -20,6 +20,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -106,9 +108,10 @@ public class AbyssalBladeItem extends SwordItem {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
         ItemSettings.sacredLevelText(tooltip);
 
         tooltip.add(new TranslationTextComponent("item.bioplethora.abyssal_blade.tridented_blade.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));

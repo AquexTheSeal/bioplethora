@@ -21,7 +21,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 group = 'bioplethora'
-version = "${project.minecraftVersion}-1.0.0-beta-v5"
+version = "${project.minecraftVersion}-1.0.0-beta-v5.2"
 
 java {
     archivesBaseName = 'bioplethora'
@@ -156,7 +156,7 @@ dependencies {
     /*implementation fg.deobf("net.darkhax.bookshelf:Bookshelf-1.16.5:10.0.1")*/
 
     //Mob battle
-    implementation fg.deobf("curse.maven:mob-battle-mod-268746:3408702")
+    /*implementation fg.deobf("curse.maven:mob-battle-mod-268746:3408702")*/
     //Grapple Hooks
     implementation fg.deobf("curse.maven:grappling-hook-mod-238911:3564285")
 }

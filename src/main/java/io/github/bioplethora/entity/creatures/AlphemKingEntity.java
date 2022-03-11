@@ -71,11 +71,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 13 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 14.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10.5)
                 .add(Attributes.ATTACK_DAMAGE, 30 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 8.0D)
-                .add(Attributes.MAX_HEALTH, 320 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 335 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.25F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64.0D);

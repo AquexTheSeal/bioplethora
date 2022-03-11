@@ -108,7 +108,7 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 80, 1));
                         entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 80, 1));
                     } else {
-                        entityArea.hurt(castration, (float) 9.5);
+                        entityArea.hurt(castration, (float) 11.5);
                         entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 1));
                         entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 40));
