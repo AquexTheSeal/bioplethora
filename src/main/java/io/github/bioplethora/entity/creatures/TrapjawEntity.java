@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.*;
-import io.github.bioplethora.entity.ai.WaterAndLandFollowOwnerGoal;
+import io.github.bioplethora.entity.ai.WaterFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
@@ -103,7 +103,8 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
             }
         });
         this.goalSelector.addGoal(4, new BPAnimalMeleeGoal(this, 30, 0.5, 0.6));
-        this.goalSelector.addGoal(5, new WaterAndLandFollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(5, new WaterFollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));
 
@@ -364,6 +365,11 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     }
 
     @Override
+    public float getScale() {
+        return super.getScale();
+    }
+
+    @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "trapjaw_controller", 0, this::predicate));
     }
@@ -381,7 +387,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.trapjaw.swim", true));
             return PlayState.CONTINUE;
         }
-        if ((event.isMoving() && this.getTarget() != null) || (!this.isInWater() && this.isVehicle())) {
+        if ((event.isMoving() && this.getTarget() != null) || (!this.isInWater() && this.isVehicle() && event.isMoving())) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.trapjaw.run", true));
             return PlayState.CONTINUE;
         }
@@ -510,7 +516,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     @Override
     public float getSteeringSpeed() {
-        return 1.5F;
+        return 0F;
     }
 
     @Override

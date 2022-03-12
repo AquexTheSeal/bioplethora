@@ -4,7 +4,7 @@ import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.WaterAndLandAnimalEntity;
-import io.github.bioplethora.entity.ai.WaterAndLandFollowOwnerGoal;
+import io.github.bioplethora.entity.ai.WaterFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
@@ -125,7 +125,8 @@ public class PeaguinEntity extends WaterAndLandAnimalEntity implements IAnimatab
                 }
             }
         });
-        this.goalSelector.addGoal(5, new WaterAndLandFollowOwnerGoal(this, 1.2D, 10.0F, 1.0F, false));
+        this.goalSelector.addGoal(5, new WaterFollowOwnerGoal(this, 1.2D, 10.0F, 1.0F, false));
+        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.2D, 10.0F, 1.0F, false));
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));
 

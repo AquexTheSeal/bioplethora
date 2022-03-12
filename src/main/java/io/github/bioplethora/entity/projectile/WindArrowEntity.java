@@ -1,6 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import io.github.bioplethora.registry.BioplethoraParticles;
@@ -8,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -123,8 +125,10 @@ public class WindArrowEntity extends AbstractArrowEntity {
         List<MobEntity> candidates = level.getEntitiesOfClass(MobEntity.class, this.getBoundingBox().inflate(targetRadius, targetRadius, targetRadius));
 
         if (!candidates.isEmpty()) {
-            candidates.sort(Comparator.comparing(WindArrowEntity.this::distanceToSqr, Double::compare));
-            entityData.set(DW_TARGET_ID, candidates.get(0).getId());
+            if (isValidTarget(candidates.get(0))) {
+                candidates.sort(Comparator.comparing(WindArrowEntity.this::distanceToSqr, Double::compare));
+                entityData.set(DW_TARGET_ID, candidates.get(0).getId());
+            }
         }
 
         newTargetCooldown = 5;
@@ -157,6 +161,15 @@ public class WindArrowEntity extends AbstractArrowEntity {
         return getTarget() != null;
     }
 
+    public boolean isValidTarget(LivingEntity entity) {
+        if (entity instanceof TameableEntity) {
+            return ((TameableEntity) entity).getOwner() != this.getOwner();
+        } else if (entity instanceof SummonableMonsterEntity) {
+            return ((SummonableMonsterEntity) entity).getOwner() != this.getOwner();
+        } else {
+            return entity != this.getOwner();
+        }
+    }
 
     public void onHitEntity(EntityRayTraceResult entityRayTraceResult) {
         super.onHitEntity(entityRayTraceResult);

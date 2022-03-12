@@ -13,7 +13,7 @@ import net.minecraft.world.IWorldReader;
 
 import java.util.EnumSet;
 
-public class WaterAndLandFollowOwnerGoal extends Goal {
+public class WaterFollowOwnerGoal extends Goal {
     private final WaterAndLandAnimalEntity tamable;
     private LivingEntity owner;
     private final IWorldReader level;
@@ -25,7 +25,7 @@ public class WaterAndLandFollowOwnerGoal extends Goal {
     private float oldWaterCost;
     private final boolean canFly;
 
-    public WaterAndLandFollowOwnerGoal(WaterAndLandAnimalEntity tamable, double speedModifier, float startDistance, float stopDistance, boolean canFly) {
+    public WaterFollowOwnerGoal(WaterAndLandAnimalEntity tamable, double speedModifier, float startDistance, float stopDistance, boolean canFly) {
         this.tamable = tamable;
         this.level = tamable.level;
         this.speedModifier = speedModifier;
@@ -82,11 +82,7 @@ public class WaterAndLandFollowOwnerGoal extends Goal {
                 if (this.tamable.distanceToSqr(this.owner) >= 144.0D) {
                     this.teleportToOwner();
                 } else {
-                    if (!tamable.isInWater()) {
-                        this.navigation.moveTo(this.owner, this.speedModifier);
-                    } else {
-                        this.tamable.getMoveControl().setWantedPosition(this.owner.getX(), this.owner.getY(), this.owner.getZ(), 1.5D);
-                    }
+                    this.tamable.getMoveControl().setWantedPosition(this.owner.getX(), this.owner.getY(), this.owner.getZ(), 1.5D);
                 }
             }
         }

@@ -254,11 +254,11 @@
 
   "bossbar.bioplethora.helioblade.clone_progress": "Time before next Helioblade cloning",
 
-  "tooltip.bioplethora.antibio_ecoharmless.desc": "+%s Damage against Ecoharmless creatures",
-  "tooltip.bioplethora.antibio_plethoneutral.desc": "+%s Damage against Plethoneutral creatures",
-  "tooltip.bioplethora.antibio_dangerum.desc": "+%s Damage against Dangerum creatures",
-  "tooltip.bioplethora.antibio_hellsent.desc": "+%s Damage against Hellsent creatures",
-  "tooltip.bioplethora.antibio_elderia.desc": "+%s Damage against Elderia creatures",
+  "tooltip.bioplethora.antibio_ecoharmless.desc": "+Extra damage against Ecoharmless creatures",
+  "tooltip.bioplethora.antibio_plethoneutral.desc": "+Extra damage against Plethoneutral creatures",
+  "tooltip.bioplethora.antibio_dangerum.desc": "+Extra damage against Dangerum creatures",
+  "tooltip.bioplethora.antibio_hellsent.desc": "+Extra damage against Hellsent creatures",
+  "tooltip.bioplethora.antibio_elderia.desc": "+Extra damage against Elderia creatures",
 
   "tooltip.bioplethora.no_use.desc": "This specific item has no use for your survival game at the moment. Don't throw away the item yet because we will add a use for it soon enough!",
 
@@ -294,6 +294,10 @@
   "death.attack.helioSlashed.indirect_0": "%s was sliced up by %s",
   "death.attack.helioSlashed.indirect_1": "%s was fatally slashed by %s",
   "death.attack.helioSlashed.indirect_2": "%s was cut into pieces by %s",
+
+  "death.attack.antibio.indirect_0": "%s was fired up by %s",
+  "death.attack.antibio.indirect_1": "%s was painfully poisoned by %s",
+  "death.attack.antibio.indirect_2": "%s was vanished by %s",
 
   "enchantment.bioplethora.antibio_ecoharmless.desc": "Deals more damage against entities classified as Ecoharmless.",
   "enchantment.bioplethora.antibio_plethoneutral.desc": "Deals more damage against entities classified as Plethoneutral.",

@@ -20,6 +20,10 @@ public class TrapjawEntityRender extends GeoEntityRenderer<TrapjawEntity> {
 
     @Override
     public void renderEarly(TrapjawEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+        float size = 0.5F;
+        if (animatable.isBaby()) {
+            stackIn.scale(size, size, size);
+        }
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 
