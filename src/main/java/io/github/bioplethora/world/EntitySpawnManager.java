@@ -31,14 +31,15 @@ public class EntitySpawnManager {
         private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_ENTITIES = (builder) -> {
 
             if (BioplethoraConfig.COMMON.spawnCavernFleignar.get()) {
-                builder.addSpawn(ambient, new MobSpawnInfo.Spawners(BioplethoraEntities.CAVERN_FLEIGNAR.get(), 20 * spawnMultiplier, 2, 6));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CAVERN_FLEIGNAR.get(), 20 * spawnMultiplier, 2, 6));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> DESERT_ENTITIES = (builder) -> {
             // Nandbri
             if(BioplethoraConfig.COMMON.spawnNandbri.get()) {
-                builder.addSpawn(ambient, new MobSpawnInfo.Spawners(BioplethoraEntities.NANDBRI.get(), 3 * spawnMultiplier, 1, 1));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.NANDBRI.get(), 3 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.NANDBRI.get(), 30 * spawnMultiplier, 1, 1));
             }
         };
 

@@ -21,7 +21,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 group = 'bioplethora'
-version = "${project.minecraftVersion}-1.0.0-beta-v5.3"
+version = "${project.minecraftVersion}-1.0.0-beta-v5.4"
 
 java {
     archivesBaseName = 'bioplethora'
