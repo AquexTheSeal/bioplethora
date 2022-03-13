@@ -148,6 +148,11 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
         }
     }
 
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 2;
+    }
+
     public ActionResultType mobInteract(PlayerEntity entity, Hand resultType) {
         ItemStack itemstack = entity.getItemInHand(resultType);
         Item item = itemstack.getItem();
@@ -339,7 +344,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     }
 
     protected int getExperienceReward(PlayerEntity playerEntity) {
-        return 1 + this.level.random.nextInt(3);
+        return 2 + this.level.random.nextInt(3);
     }
 
     public boolean isPushedByFluid() {
@@ -349,7 +354,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     @Override
     protected float getWaterSlowDown() {
         if (this.isVehicle()) {
-            return 1.0F;
+            return 0.95F;
         } else {
             return super.getWaterSlowDown();
         }
@@ -516,7 +521,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     @Override
     public float getSteeringSpeed() {
-        return 0F;
+        return 1.0F;
     }
 
     @Override

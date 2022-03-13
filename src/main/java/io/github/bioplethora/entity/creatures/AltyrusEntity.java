@@ -69,7 +69,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 15.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 22.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_DAMAGE, 35 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 7D)
@@ -155,7 +155,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
         if (worldIn instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
             this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(42 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(17.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(24.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
             this.setHealth(520 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
         }

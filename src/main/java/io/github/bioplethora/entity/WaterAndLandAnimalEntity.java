@@ -2,10 +2,14 @@ package io.github.bioplethora.entity;
 
 import io.github.bioplethora.entity.ai.BPCustomSwimmingGoal;
 import io.github.bioplethora.entity.ai.BPWaterChargingCoal;
+import io.github.bioplethora.entity.ai.controller.WaterMoveController;
+import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -24,7 +28,7 @@ public abstract class WaterAndLandAnimalEntity extends BPAnimalEntity {
         super(type, worldIn);
         this.setPathfindingMalus(PathNodeType.WATER, 0.0F);
         this.setPathfindingMalus(PathNodeType.WATER_BORDER, 0.0F);
-        //switchNavigator(false);
+        switchNavigator(false);
     }
 
     @Override
@@ -34,8 +38,7 @@ public abstract class WaterAndLandAnimalEntity extends BPAnimalEntity {
         this.goalSelector.addGoal(2, new BPCustomSwimmingGoal(this));
     }
 
-    /*
-    private void switchNavigator(boolean onLand) {
+    public void switchNavigator(boolean onLand) {
         if (onLand) {
             this.moveControl = new MovementController(this);
             this.navigation = new GroundPathNavigator(this, level);
@@ -52,11 +55,10 @@ public abstract class WaterAndLandAnimalEntity extends BPAnimalEntity {
         if (isInWater() && this.isLandNavigator) {
             switchNavigator(false);
         }
-        if (!isInWater() && !this.isLandNavigator) {
+        if ((!isInWater() || this.isVehicle()) && !this.isLandNavigator) {
             switchNavigator(true);
         }
     }
-     */
 
     public void setBoundOrigin(@Nullable BlockPos pBoundOrigin) {
         this.boundOrigin = pBoundOrigin;

@@ -43,6 +43,7 @@ public class BioEntityTagsProvider extends EntityTypeTagsProvider {
                 .add(BioplethoraEntities.IRON_GRYLYNEN.get())
                 .add(BioplethoraEntities.DIAMOND_GRYLYNEN.get())
                 .add(BioplethoraEntities.NETHERITE_GRYLYNEN.get())
+                .add(BioplethoraEntities.TRAPJAW.get())
         ;
         tag(BioplethoraTags.Entities.AUTOMATON_TYPE)
                 .add(BioplethoraEntities.BELLOPHGOLEM.get())

@@ -43,9 +43,10 @@ public class EntitySpawnManager {
         };
 
         private static final Consumer<MobSpawnInfoBuilder> SWAMP_ENTITIES = (builder) -> {
-            // Nandbri
+            // Trapjaw
             if(BioplethoraConfig.COMMON.spawnTrapjaw.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 15 * spawnMultiplier, 1, 3));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 5 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 55 * spawnMultiplier, 1, 2));
             }
         };
 
@@ -111,6 +112,12 @@ public class EntitySpawnManager {
             //Dwarf Mossadile
             if (BioplethoraConfig.COMMON.spawnDwarfMossadile.get()) {
                 builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.DWARF_MOSSADILE.get(), 30 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 5));
+            }
+
+            // Trapjaw
+            if(BioplethoraConfig.COMMON.spawnTrapjaw.get()) {
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 4 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 45 * spawnMultiplier, 1, 1));
             }
         };
 
