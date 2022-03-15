@@ -40,10 +40,10 @@ public class NandbriEntity extends BPMonsterEntity implements IAnimatable, IBioC
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
-                .add(Attributes.ATTACK_SPEED, 1.5)
-                .add(Attributes.ATTACK_DAMAGE, 3 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.ATTACK_KNOCKBACK, 0.3D)
+                .add(Attributes.ARMOR, 7 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ATTACK_SPEED, 10.5)
+                .add(Attributes.ATTACK_DAMAGE, 6 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_KNOCKBACK, 0.45D)
                 .add(Attributes.MAX_HEALTH, 40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.4)
                 .add(Attributes.MOVEMENT_SPEED, 0.5 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
@@ -52,7 +52,7 @@ public class NandbriEntity extends BPMonsterEntity implements IAnimatable, IBioC
 
     @Override
     public BPEntityClasses getBioplethoraClass() {
-        return BPEntityClasses.PLETHONEUTRAL;
+        return BPEntityClasses.DANGERUM;
     }
 
     @Override
@@ -61,15 +61,14 @@ public class NandbriEntity extends BPMonsterEntity implements IAnimatable, IBioC
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 0.75, 8));
-        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 13.6, 0.23, 0.47));
+        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 16, 0.45, 0.75));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, RabbitEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, ParrotEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, GolemEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, SlimeEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MagmaCubeEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, TrapjawEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, DwarfMossadileEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, NandbriEntity.class)).setAlertOthers());
     }
