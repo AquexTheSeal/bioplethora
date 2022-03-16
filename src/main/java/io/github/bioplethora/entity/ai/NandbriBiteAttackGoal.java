@@ -81,7 +81,7 @@ public class NandbriBiteAttackGoal extends BPMonsterMeleeGoal {
     }
 
     public void switchPhase() {
-        if(this.nandbri.attackPhase == 0 && Math.random() < 0.2) {
+        if(this.nandbri.attackPhase == 0 && Math.random() <= 0.66) {
             this.nandbri.attackPhase = 1;
         }
     }

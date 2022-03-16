@@ -5,12 +5,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()---"
+      "text": "$(l)INFORMATION: $(br)$()Nandbris are powerful, poisonous lizards. They are neutral and are a bit slow, but don't ever take that for granted. When angered, they are ruthless beings seeking to slaughter their target with their speedy attacks. Keep away from them!"
     },
     {
       "type": "patchouli:entity",
       "entity":"bioplethora:nandbri",
-      "text": "Nandbris spawn on ---."
+      "text": "Nandbris rarely spawn on deserts, usually in groups of 1-5"
     }
   ]
 }
