@@ -45,9 +45,9 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> SWAMP_ENTITIES = (builder) -> {
             // Trapjaw
-            if(BioplethoraConfig.COMMON.spawnTrapjaw.get()) {
+            if (BioplethoraConfig.COMMON.spawnTrapjaw.get()) {
                 builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 5 * spawnMultiplier, 1, 1));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 55 * spawnMultiplier, 1, 2));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 14 * spawnMultiplier, 1, 1));
             }
         };
 
@@ -118,7 +118,7 @@ public class EntitySpawnManager {
             // Trapjaw
             if(BioplethoraConfig.COMMON.spawnTrapjaw.get()) {
                 builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 4 * spawnMultiplier, 1, 1));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 45 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 14 * spawnMultiplier, 1, 1));
             }
         };
 

@@ -33,7 +33,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
@@ -52,6 +53,7 @@ import java.util.function.Predicate;
 
 public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatable, IBioClassification, IRideable, IVerticalMount, ISaddleable {
 
+    private static final DataParameter<Boolean> CARDINAL = EntityDataManager.defineId(TrapjawEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HAS_SADDLE = EntityDataManager.defineId(TrapjawEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
     public static final Predicate<LivingEntity> PREY_SELECTOR = (entity) ->
@@ -120,6 +122,37 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     @Override
     public boolean doHurtTarget(Entity entity) {
         return super.doHurtTarget(entity);
+    }
+
+    @Override
+    public ILivingEntityData finalizeSpawn(IServerWorld pLevel, DifficultyInstance pDifficulty, SpawnReason pReason, @Nullable ILivingEntityData pSpawnData, @Nullable CompoundNBT pDataTag) {
+
+        if (Math.random() <= 0.05) {
+            this.setCardinalVariant(true);
+            if (BioplethoraConfig.getHellMode) {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(16 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+                this.getAttribute(Attributes.ARMOR).setBaseValue(8 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(145 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+                this.setHealth(145 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            } else {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(12 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+                this.getAttribute(Attributes.ARMOR).setBaseValue(6.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(110 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+                this.setHealth(110 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            }
+        } else if (BioplethoraConfig.getHellMode) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(6 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(100 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(100 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        }
+
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
     }
 
     @Nullable
@@ -219,17 +252,20 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     public void addAdditionalSaveData(CompoundNBT compoundNBT) {
         super.addAdditionalSaveData(compoundNBT);
+        compoundNBT.putBoolean("isCardinal", this.isCardinalVariant());
         compoundNBT.putBoolean("isSaddled", this.isSaddled());
     }
 
     public void readAdditionalSaveData(CompoundNBT compoundNBT) {
         super.readAdditionalSaveData(compoundNBT);
+        this.setCardinalVariant(compoundNBT.getBoolean("isCardinal"));
         this.setSaddled(compoundNBT.getBoolean("isSaddled"));
     }
 
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(CARDINAL, false);
         this.entityData.define(HAS_SADDLE, false);
     }
 
@@ -239,6 +275,14 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     public void setSaddled(boolean saddled) {
         this.entityData.set(HAS_SADDLE, saddled);
+    }
+
+    public boolean isCardinalVariant() {
+        return this.entityData.get(CARDINAL);
+    }
+
+    public void setCardinalVariant(boolean cardinal) {
+        this.entityData.set(CARDINAL, cardinal);
     }
 
     public boolean hurt(DamageSource damageSource, float pAmount) {
@@ -330,9 +374,11 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
         return CreatureAttribute.WATER;
     }
 
+    /*
     public boolean checkSpawnObstruction(IWorldReader worldReader) {
         return worldReader.isUnobstructed(this);
     }
+     */
 
     public int getAmbientSoundInterval() {
         return 120;

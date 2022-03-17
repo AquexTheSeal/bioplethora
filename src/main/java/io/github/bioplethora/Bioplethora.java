@@ -47,6 +47,7 @@ public class Bioplethora {
         BioplethoraEffects.EFFECTS.register(bus);
         BioplethoraEnchantments.ENCHANTMENTS.register(bus);
         BioplethoraStructures.STRUCTURES.register(bus);
+        BioplethoraFeatures.FEATURES.register(bus);
 
         BioplethoraTileEntities.TILE_ENTITIES.register(bus);
         BioplethoraContainerTypes.CONTAINERS.register(bus);

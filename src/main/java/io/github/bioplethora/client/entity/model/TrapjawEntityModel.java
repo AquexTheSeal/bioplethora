@@ -18,7 +18,11 @@ public class TrapjawEntityModel extends AnimatedGeoModel<TrapjawEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(TrapjawEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/trapjaw.png");
+        if (entity.isCardinalVariant()) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/cardinal_trapjaw.png");
+        } else {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/trapjaw.png");
+        }
     }
 
     @Override

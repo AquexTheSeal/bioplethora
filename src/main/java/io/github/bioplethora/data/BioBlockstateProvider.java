@@ -3,10 +3,7 @@ package io.github.bioplethora.data;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.registry.BioplethoraBlocks;
-import net.minecraft.block.AbstractButtonBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.RotatedPillarBlock;
-import net.minecraft.block.WoodButtonBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -38,6 +35,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
         this.simpleBlock(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
 
+        this.simpleCarpetBlock(BioplethoraBlocks.FLEIGNARITE_REMAINS.get());
         //this.threeSideFacingBlock(BioplethoraBlocks.REINFORCING_TABLE.get());
 
         // Alphanum stone set
@@ -100,6 +98,22 @@ public class BioBlockstateProvider extends BlockStateProvider {
                 .modelForState().modelFile(all).rotationY(270).addModel();
     }
 
+    public void simpleCarpetBlock(Block block) {
+        carpetBlock(block, carpetBlock(block));
+    }
+
+    public ModelFile carpetBlock(Block block) {
+        return models().carpet(block.getRegistryName().getPath(), blockTexture(block));
+    }
+
+    public void carpetBlock(Block block, ModelFile model) {
+        carpetBlock(block, new ConfiguredModel(model));
+    }
+
+    public void carpetBlock(Block block, ConfiguredModel... models) {
+        getVariantBuilder(block).partialState().setModels(models);
+    }
+
     public void pressurePlateBlock(PressurePlateBlock block, ResourceLocation all) {
         pressurePlateBlockInternal(block, block.getRegistryName().getPath(), all);
     }
@@ -134,9 +148,10 @@ public class BioBlockstateProvider extends BlockStateProvider {
     private void buttonBlock(AbstractButtonBlock block, ResourceLocation all) {
 
         String baseName = block.getRegistryName().getPath();
+        ModelFile button = models().singleTexture(baseName, mcResLoc("button"), all);
+        ModelFile buttonPressed = models().singleTexture(baseName + "_pressed", mcResLoc("button_pressed"), all);
+        ModelFile buttonInventory = models().singleTexture(baseName + "_inventory", mcResLoc("button_inventory"), all);
 
-        ModelFile button = models().withExistingParent(baseName, mcResLoc("button")).texture("texture", all);
-        ModelFile buttonPressed = models().withExistingParent(baseName, mcResLoc("button_pressed")).texture("texture", all);
         int angleOffset = 180;
         getVariantBuilder(block)
                 .forAllStates(state -> {

@@ -2,6 +2,7 @@ package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BioplethoraBlocks;
+import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,6 +28,8 @@ public class BPBlockLootTables extends BlockLootTables {
                 -> createSingleItemTableWithSilkTouch(sTouch, BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
 
         dropSelf(BioplethoraBlocks.REINFORCING_TABLE.get());
+
+        add(BioplethoraBlocks.FLEIGNARITE_REMAINS.get(), createShearsOnlyDrop(BioplethoraItems.FLEIGNARITE_SCALES.get()));
 
         // Alphanum Stone Set
         dropSelf(BioplethoraBlocks.ALPHANUM.get());

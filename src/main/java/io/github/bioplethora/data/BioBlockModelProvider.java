@@ -37,6 +37,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("yellow_grylynen_crystal_block", bioResLoc("yellow_grylynen_crystal_block"));
         this.cubeAll("red_grylynen_crystal_block", bioResLoc("red_grylynen_crystal_block"));
 
+        this.carpet("fleignarite_remains", bioResLoc("fleignarite_remains"));
         //this.fixedOrientableWithBottom("reinforcing_table", bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_bottom"), bioResLoc("reinforcing_table_top"));
 
         // Alphanum stone set
@@ -74,9 +75,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.stairs("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
         this.stairsInner("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
         this.stairsOuter("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
+        this.button("petrawood_button", bioResLoc("petrawood_planks"));
         this.buttonPressed("petrawood_button", bioResLoc("petrawood_planks"));
         this.buttonInventory("petrawood_button", bioResLoc("petrawood_planks"));
-        this.button("petrawood_button", bioResLoc("petrawood_planks"));
     }
 
     private ResourceLocation bioResLoc(String texture) {

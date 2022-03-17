@@ -11,11 +11,14 @@ import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
 import io.github.bioplethora.keybindings.BPKeybinds;
+import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraContainerTypes;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.registry.BioplethoraItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
@@ -37,6 +40,8 @@ public class ModClientRegister {
     public static void registerRenderers(final FMLClientSetupEvent event) {
 
         Minecraft mcClient = event.getMinecraftSupplier().get();
+
+        RenderTypeLookup.setRenderLayer(BioplethoraBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
 
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);

@@ -1,6 +1,7 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.blocks.BPFlatBlock;
 import io.github.bioplethora.blocks.BellophiteCoreBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import net.minecraft.block.*;
@@ -37,8 +38,11 @@ public class BioplethoraBlocks {
     public static final RegistryObject<Block> RED_GRYLYNEN_CRYSTAL_BLOCK = registerFireResBlock("red_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS)
             .strength(0.5F).sound(SoundType.NETHER_GOLD_ORE).noOcclusion().lightLevel((level) -> 12)), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
+    public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new BPFlatBlock(AbstractBlock.Properties.of(Material.PLANT)
+            .strength(0.3F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_WART).noOcclusion().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+
     public static final RegistryObject<Block> MIRESTONE = registerBlock("mirestone", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
-            .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).harvestTool(ToolType.PICKAXE).sound(SoundType.GRAVEL).noOcclusion()), null);
+            .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion()), null);
 
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)

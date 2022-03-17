@@ -210,11 +210,6 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
         return pos.getY() <= 50;
     }
 
-    @Override
-    public int getMaxSpawnClusterSize() {
-        return 6;
-    }
-
     public boolean isPushable() {
         return false;
     }

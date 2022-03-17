@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/carpet",
+  "textures": {
+    "wool": "bioplethora:block/fleignarite_remains"
+  }
+}
