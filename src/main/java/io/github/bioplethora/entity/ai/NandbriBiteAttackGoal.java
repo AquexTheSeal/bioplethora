@@ -22,14 +22,17 @@ public class NandbriBiteAttackGoal extends BPMonsterMeleeGoal {
             }
 
             if (attacker.attackPhase != 0) {
+                attacker.setAttacking(false);
                 return false;
             }
 
             if (attacker.getScratching()) {
+                attacker.setAttacking(false);
                 return false;
             }
 
             if (attacker.getSpitting()) {
+                attacker.setAttacking(false);
                 return false;
             }
 
@@ -46,13 +49,13 @@ public class NandbriBiteAttackGoal extends BPMonsterMeleeGoal {
 
     @Override
     public boolean canUse() {
-        if(Math.random() < 0.1 && this.nandbri.getTarget() != null) return true;
+        if(Math.random() < 0.1) return false;
         return NandbriBiteAttackGoal.checkIfValid(this, nandbri, this.nandbri.getTarget());
     }
 
     @Override
     public boolean canContinueToUse() {
-        if(Math.random() < 0.1 && this.nandbri.getTarget() != null) return true;
+        if(Math.random() < 0.1) return true;
         return NandbriBiteAttackGoal.checkIfValid(this, nandbri, this.nandbri.getTarget());
     }
 
@@ -91,8 +94,9 @@ public class NandbriBiteAttackGoal extends BPMonsterMeleeGoal {
         this.baseTick();
         LivingEntity target = this.nandbri.getTarget();
         if (target != null) {
+            this.nandbri.lookAt(target, 30.0F, 30.0F);
+
             if (this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
-                this.nandbri.lookAt(target, 30.0F, 30.0F);
                 this.nandbri.doHurtTarget(target);
                 this.hasHit = true;
             }
