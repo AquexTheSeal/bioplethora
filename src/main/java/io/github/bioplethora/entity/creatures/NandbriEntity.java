@@ -12,9 +12,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
-import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.passive.GolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
@@ -76,9 +74,6 @@ public class NandbriEntity extends BPMonsterEntity implements IAnimatable, IBioC
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, GolemEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, SlimeEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MagmaCubeEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, TrapjawEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, DwarfMossadileEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, NandbriEntity.class)).setAlertOthers());
     }

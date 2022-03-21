@@ -3,13 +3,14 @@ package io.github.bioplethora.entity.ai;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.creatures.NandbriEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.WallOrFloorItem;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class NandbriScratchAttackGoal extends BPMonsterMeleeGoal {
@@ -28,10 +29,12 @@ public class NandbriScratchAttackGoal extends BPMonsterMeleeGoal {
             }
 
             if (attacker.attackPhase != 1) {
+                attacker.setScratching(false);
                 return false;
             }
 
             if (attacker.getSpitting()) {
+                attacker.setScratching(false);
                 return false;
             }
 
@@ -48,13 +51,13 @@ public class NandbriScratchAttackGoal extends BPMonsterMeleeGoal {
 
     @Override
     public boolean canUse() {
-        if(Math.random() < 0.1 && this.nandbri.getTarget() != null) return true;
+        if(Math.random() < 0.1) return false;
         return NandbriScratchAttackGoal.checkIfValid(this, nandbri, this.nandbri.getTarget());
     }
 
     @Override
     public boolean canContinueToUse() {
-        if(Math.random() < 0.1 && this.nandbri.getTarget() != null) return true;
+        if(Math.random() < 0.1) return true;
         return NandbriScratchAttackGoal.checkIfValid(this, nandbri, this.nandbri.getTarget());
     }
 
@@ -94,12 +97,18 @@ public class NandbriScratchAttackGoal extends BPMonsterMeleeGoal {
         this.baseTick();
         LivingEntity target = this.nandbri.getTarget();
         if (target != null) {
+            this.nandbri.lookAt(target, 30.0F, 30.0F);
+            double x = target.getX(), y = target.getY(), z = target.getZ();
+
             if (this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
-                this.nandbri.lookAt(target, 30.0F, 30.0F);
                 target.hurt(DamageSource.mobAttack(this.nandbri), 9.0F);
                 target.knockback(2, 2, 2);
                 world.playSound(null, this.nandbri, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.HOSTILE, 1, 1);
-
+                for (Entity entityIterator : world.getEntitiesOfClass(Entity.class, new AxisAlignedBB(x - (3 / 2d), y, z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)))) {
+                    if(entityIterator != nandbri && entityIterator != target) {
+                        entityIterator.hurt(DamageSource.mobAttack(nandbri), 4);
+                    }
+                }
                 this.hasHit = true;
             }
 
