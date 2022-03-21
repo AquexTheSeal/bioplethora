@@ -52,6 +52,10 @@ public class BioplethoraTags {
         public static final ITag.INamedTag<Item> STANDING_SIGNS = mcLoc("standing_signs");
         public static final ITag.INamedTag<Item> WALL_SIGNS = mcLoc("wall_signs");
 
+        // Curios Integration
+        public static final ITag.INamedTag<Item> CHARM = curiosLoc("charm");
+        public static final ITag.INamedTag<Item> NECKLACE = curiosLoc("necklace");
+
         // Wastelands of Baedoor Integration
         public static final ITag.INamedTag<Item> WOBR_SABRE = forgeLoc("wobr_sabre");
 
@@ -65,6 +69,10 @@ public class BioplethoraTags {
 
         private static ITag.INamedTag<Item> forgeLoc(String path) {
             return ItemTags.bind(new ResourceLocation("forge", path).toString());
+        }
+
+        private static ITag.INamedTag<Item> curiosLoc(String path) {
+            return ItemTags.bind(new ResourceLocation("curios", path).toString());
         }
     }
 

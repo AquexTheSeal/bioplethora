@@ -28,14 +28,14 @@ public class PendentBlocksFeature extends Feature<PendentBlocksFeatureConfig> {
             if (!config.getWhitelist().contains(blockstate.getBlock())) {
                 return false;
             } else {
-                this.generateBase(world, rand, pos, config);
-                this.generateVinesInArea(world, rand, pos, config);
+                this.generateTopPart(world, rand, pos.above(), config);
+                this.generatePendentsInSurroundings(world, rand, pos.above(), config);
                 return true;
             }
         }
     }
 
-    private void generateBase(IWorld world, Random rand, BlockPos pos, PendentBlocksFeatureConfig config) {
+    protected void generateTopPart(IWorld world, Random rand, BlockPos pos, PendentBlocksFeatureConfig config) {
         world.setBlock(pos, config.getTopBlockProvider().getState(rand, pos), 2);
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         BlockPos.Mutable mutable2 = new BlockPos.Mutable();
@@ -64,7 +64,7 @@ public class PendentBlocksFeature extends Feature<PendentBlocksFeatureConfig> {
 
     }
 
-    private void generateVinesInArea(IWorld world, Random rand, BlockPos pos, PendentBlocksFeatureConfig config) {
+    protected void generatePendentsInSurroundings(IWorld world, Random rand, BlockPos pos, PendentBlocksFeatureConfig config) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
         for (int i = 0; i < 100; ++i) {

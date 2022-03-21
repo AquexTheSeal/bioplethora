@@ -29,7 +29,9 @@ public class BPBlockLootTables extends BlockLootTables {
 
         dropSelf(BioplethoraBlocks.REINFORCING_TABLE.get());
 
-        add(BioplethoraBlocks.FLEIGNARITE_REMAINS.get(), createShearsOnlyDrop(BioplethoraItems.FLEIGNARITE_SCALES.get()));
+        dropOther(BioplethoraBlocks.FLEIGNARITE_REMAINS.get(), BioplethoraItems.FLEIGNARITE_SCALES.get());
+        dropOther(BioplethoraBlocks.FLEIGNARITE_VINES.get(), BioplethoraItems.FLEIGNARITE_SCALES.get());
+        dropOther(BioplethoraBlocks.FLEIGNARITE_VINES_PLANT.get(), BioplethoraItems.FLEIGNARITE_SCALES.get());
 
         // Alphanum Stone Set
         dropSelf(BioplethoraBlocks.ALPHANUM.get());

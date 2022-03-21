@@ -39,6 +39,8 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.carpet("fleignarite_remains", bioResLoc("fleignarite_remains"));
         //this.fixedOrientableWithBottom("reinforcing_table", bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_bottom"), bioResLoc("reinforcing_table_top"));
+        this.cross("fleignarite_vines", bioResLoc("fleignarite_vines"));
+        this.cross("fleignarite_vines_plant", bioResLoc("fleignarite_vines_plant"));
 
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));

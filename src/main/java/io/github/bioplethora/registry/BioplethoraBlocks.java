@@ -1,8 +1,10 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.blocks.BPFlatBlock;
 import io.github.bioplethora.blocks.BellophiteCoreBlock;
+import io.github.bioplethora.blocks.FleignariteRemainsBlock;
+import io.github.bioplethora.blocks.FleignariteVinesBlock;
+import io.github.bioplethora.blocks.FleignariteVinesTopBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -38,11 +40,17 @@ public class BioplethoraBlocks {
     public static final RegistryObject<Block> RED_GRYLYNEN_CRYSTAL_BLOCK = registerFireResBlock("red_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS)
             .strength(0.5F).sound(SoundType.NETHER_GOLD_ORE).noOcclusion().lightLevel((level) -> 12)), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
-    public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new BPFlatBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_WART).noOcclusion().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup);
-
     public static final RegistryObject<Block> MIRESTONE = registerBlock("mirestone", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
             .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion()), null);
+
+    // Fleignarite Blocks
+    public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new FleignariteRemainsBlock(AbstractBlock.Properties.of(Material.PLANT)
+            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<Block> FLEIGNARITE_VINES = registerBlock("fleignarite_vines", () -> new FleignariteVinesTopBlock(AbstractBlock.Properties.of(Material.PLANT)
+            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup, false);
+    public static final RegistryObject<Block> FLEIGNARITE_VINES_PLANT = registerBlock("fleignarite_vines_plant", () -> new FleignariteVinesBlock(AbstractBlock.Properties.of(Material.PLANT)
+            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)

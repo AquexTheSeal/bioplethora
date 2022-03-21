@@ -20,7 +20,7 @@ import java.util.List;
 public class SpiritManipulationCharmItem extends ActivatableItem {
 
     public SpiritManipulationCharmItem(Properties properties) {
-        super(properties);
+        super(properties, true);
     }
 
     @Override

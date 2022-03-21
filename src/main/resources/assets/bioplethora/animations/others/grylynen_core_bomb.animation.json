@@ -1,0 +1,20 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.grylynen_core_bomb.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"grylynen_core_bomb": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 45) * 150", "math.cos(query.anim_time * 45) * 150", "math.sin(query.anim_time * 45) * 150"]
+					},
+					"scale": {
+						"vector": ["math.abs(1.2 * (query.anim_time / 2))", "math.abs(1.2 * (query.anim_time / 2))", "math.abs(1.2 * (query.anim_time / 2))"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

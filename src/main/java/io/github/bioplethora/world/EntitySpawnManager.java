@@ -29,9 +29,9 @@ public class EntitySpawnManager {
         static EntityClassification waterAmbient = EntityClassification.WATER_AMBIENT;
 
         private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_ENTITIES = (builder) -> {
-
+            // Cavern Fleignar
             if (BioplethoraConfig.COMMON.spawnCavernFleignar.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CAVERN_FLEIGNAR.get(), 20 * spawnMultiplier, 2, 6));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CAVERN_FLEIGNAR.get(), 120 * spawnMultiplier, 4, 6));
             }
         };
 

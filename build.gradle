@@ -120,6 +120,9 @@ repositories {
     maven {
         url "https://maven.shedaniel.me/"
     }
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 dependencies {
@@ -140,6 +143,9 @@ dependencies {
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:4.14.54")
     //Mixin
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    //Curios
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios}:api")
     //Tetra
     implementation fg.deobf("curse.maven:tetra-289712:3585032")
     //Mutil (For Tetra)

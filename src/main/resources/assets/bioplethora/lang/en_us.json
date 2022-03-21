@@ -33,6 +33,7 @@
   "entity.bioplethora.cryoblaze": "Cryoblaze",
 
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
+  "entity.bioplethora.grylynen_core_bomb": "Grylynen Core Bomb",
   "entity.bioplethora.bellophite_shield_wave": "Bellophite Shield Wave",
 
   "enchantment.bioplethora.antibio_ecoharmless": "Antibio: Ecoharmless",
@@ -120,6 +121,9 @@
   "block.bioplethora.red_grylynen_crystal_block": "Red Grylynen Crystal Block",
 
   "block.bioplethora.fleignarite_remains": "Fleignarite Remains",
+  "block.bioplethora.fleignarite_vines": "Fleignarite Vines",
+  "block.bioplethora.fleignarite_vines_plant": "Fleignarite Vines",
+
   "block.bioplethora.reinforcing_table": "Reinforcing Table",
 
   "block.bioplethora.alphanum": "Alphanum",

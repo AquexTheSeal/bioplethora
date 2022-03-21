@@ -23,6 +23,17 @@ public class BioItemTagsProvider extends ItemTagsProvider {
                 .add(BioplethoraItems.WIND_ARROW.get())
         ;
 
+        // Curios Integration
+        tag(BioplethoraTags.Items.CHARM)
+                .add(BioplethoraItems.SPIRIT_FISSION_CHARM.get())
+                .add(BioplethoraItems.SPIRIT_MANIPULATION_CHARM.get())
+        ;
+
+        tag(BioplethoraTags.Items.NECKLACE)
+                .add(BioplethoraItems.SPIRIT_FISSION_CHARM.get())
+                .add(BioplethoraItems.SPIRIT_MANIPULATION_CHARM.get())
+        ;
+
         // Wastelands of Baedoor Integration
         tag(BioplethoraTags.Items.WOBR_SABRE)
                 .add(BioplethoraItems.ABYSSAL_BLADE.get())

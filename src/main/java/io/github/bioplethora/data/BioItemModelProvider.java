@@ -3,6 +3,7 @@ package io.github.bioplethora.data;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BioplethoraBlocks;
 import io.github.bioplethora.registry.BioplethoraItems;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ShieldItem;
@@ -31,8 +32,10 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.defaultItem(BioplethoraItems.ITEMS.getEntries());
         this.defaultBlock(BioplethoraBlocks.BLOCK_ITEMS.getEntries());
 
-        this.grylynenShield(BioplethoraItems.GREEN_CRYSTAL_SHIELD.get());
-        this.grylynenShield(BioplethoraItems.YELLOW_CRYSTAL_SHIELD.get());
+        this.grylynenShield(BioplethoraItems.GREEN_CRYSTAL_SHIELD);
+        this.grylynenShield(BioplethoraItems.YELLOW_CRYSTAL_SHIELD);
+
+        this.specialFlatTexture(BioplethoraBlocks.FLEIGNARITE_VINES, BioplethoraBlocks.FLEIGNARITE_VINES_PLANT);
     }
 
     @Nonnull
@@ -76,8 +79,9 @@ public class BioItemModelProvider extends ItemModelProvider {
         }
     }
 
-    public void grylynenShield(Item items) {
+    public void grylynenShield(RegistryObject<Item> item) {
 
+        Item items = item.get();
         String name = items.getRegistryName().getPath();
         ResourceLocation datagenLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
 
@@ -96,6 +100,22 @@ public class BioItemModelProvider extends ItemModelProvider {
             }
         } else {
             throw new IllegalStateException(name + " is not a Shield!");
+        }
+    }
+
+    public void specialFlatTexture(RegistryObject<Block> block, RegistryObject<Block> textureBlock) {
+        this.specialFlatTexture(block, textureBlock.get().getRegistryName().getPath());
+    }
+
+    public void specialFlatTexture(RegistryObject<Block> block, String texture) {
+        String name = block.getId().getPath();
+        ResourceLocation datagenLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
+
+        ModelFile.ExistingModelFile modelType = getMcLoc("item/generated");
+
+        if (!existingFileHelper.exists(datagenLoc, TEXTURE) || existingFileHelper.exists(datagenLoc, MODEL)) {
+            this.getBuilder(name).parent(modelType).texture("layer0", BLOCK_FOLDER + "/" + texture);
+            Bioplethora.LOGGER.info("Generate Block Item Successful: " + name);
         }
     }
 

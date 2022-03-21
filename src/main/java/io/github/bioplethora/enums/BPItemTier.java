@@ -8,7 +8,13 @@ import java.util.function.Supplier;
 
 public enum BPItemTier implements IItemTier {
 
-    WEAPON_VERMILION(5, 4231, 9.0F, 4.0F, 15, () -> Ingredient.of(BioplethoraItems.VERMILION_BLADE.get())),
+    FLEIGNARITE(2, 350, 7.0F, 3.0F, 12,
+            () -> Ingredient.of(BioplethoraItems.FLEIGNARITE_SCALES.get())),
+    REINFORCED_FLEIGNARITE(2540, 250, 9.0F, 4.0F, 22,
+            () -> Ingredient.of(BioplethoraItems.REINFORCED_FLEIGNARITE.get())),
+
+    VERMILION(5, 4231, 9.0F, 4.0F, 15,
+            () -> Ingredient.of(BioplethoraItems.VERMILION_BLADE.get())),
     ;
 
     private final int harvestLevel;

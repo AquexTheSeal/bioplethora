@@ -36,6 +36,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
 
         this.simpleCarpetBlock(BioplethoraBlocks.FLEIGNARITE_REMAINS.get());
+        this.simpleCrossBlock(BioplethoraBlocks.FLEIGNARITE_VINES.get());
+        this.simpleCrossBlock(BioplethoraBlocks.FLEIGNARITE_VINES_PLANT.get());
+
         //this.threeSideFacingBlock(BioplethoraBlocks.REINFORCING_TABLE.get());
 
         // Alphanum stone set
@@ -111,6 +114,22 @@ public class BioBlockstateProvider extends BlockStateProvider {
     }
 
     public void carpetBlock(Block block, ConfiguredModel... models) {
+        getVariantBuilder(block).partialState().setModels(models);
+    }
+
+    public void simpleCrossBlock(Block block) {
+        crossBlock(block, crossBlock(block));
+    }
+
+    public ModelFile crossBlock(Block block) {
+        return models().cross(block.getRegistryName().getPath(), blockTexture(block));
+    }
+
+    public void crossBlock(Block block, ModelFile model) {
+        crossBlock(block, new ConfiguredModel(model));
+    }
+
+    public void crossBlock(Block block, ConfiguredModel... models) {
         getVariantBuilder(block).partialState().setModels(models);
     }
 

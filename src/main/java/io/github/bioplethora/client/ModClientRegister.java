@@ -4,6 +4,7 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
 import io.github.bioplethora.client.entity.render.others.BellophiteShieldWaveRender;
+import io.github.bioplethora.client.entity.render.others.GrylynenCoreBombRender;
 import io.github.bioplethora.client.entity.render.others.PrimordialRingEntityRender;
 import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.gui.screen.ReinforcingTableScreen;
@@ -42,6 +43,8 @@ public class ModClientRegister {
         Minecraft mcClient = event.getMinecraftSupplier().get();
 
         RenderTypeLookup.setRenderLayer(BioplethoraBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BioplethoraBlocks.FLEIGNARITE_VINES.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BioplethoraBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
 
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);
@@ -89,6 +92,7 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.GRYLYNEN_CORE_BOMB.get(), GrylynenCoreBombRender::new);
 
         ScreenManager.register(BioplethoraContainerTypes.REINFORCING_TABLE_CONTAINER.get(), ReinforcingTableScreen::new);
 

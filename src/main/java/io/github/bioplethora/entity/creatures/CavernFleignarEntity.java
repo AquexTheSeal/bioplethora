@@ -4,22 +4,26 @@ import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.CavernFleignarMeleeGoal;
-import io.github.bioplethora.entity.ai.CavernFleignarTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
+import io.github.bioplethora.registry.BioplethoraEffects;
 import io.github.bioplethora.registry.BioplethoraTags;
+import io.github.bioplethora.world.BPFeatureGeneration;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -70,7 +74,8 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(2, new CavernFleignarMeleeGoal(this, 20, 0.8, 0.9));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
-        this.targetSelector.addGoal(2, new CavernFleignarTargetGoal(this, true));
+        //this.targetSelector.addGoal(2, new CavernFleignarTargetGoal(this, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::validTarget));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
     }
 
@@ -129,6 +134,11 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
         return SoundEvents.SQUID_DEATH;
+    }
+
+    @Override
+    protected float getVoicePitch() {
+        return 0.5F;
     }
 
     @Override
@@ -207,11 +217,25 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     }
 
     public static boolean checkFleignarSpawnRules(IWorld world, BlockPos pos) {
-        return pos.getY() <= 50;
+        if (world instanceof ISeedReader) {
+            return pos.getY() <= 50 && BPFeatureGeneration.isFleignariteChunk(pos, (ISeedReader) world);
+        } else {
+            return  false;
+        }
     }
 
     public boolean isPushable() {
         return false;
+    }
+
+    public boolean validTarget(LivingEntity target) {
+        boolean getTag = EntityTypeTags.getAllTags().getTagOrEmpty(BioplethoraTags.Entities.FLEIGNAR_TARGETS.getName()).contains(target.getType());
+
+        if (!EntityPredicates.ATTACK_ALLOWED.test(target) || !getTag) {
+            return false;
+        } else {
+            return !target.hasEffect(BioplethoraEffects.SPIRIT_MANIPULATION.get());
+        }
     }
 
     @Override

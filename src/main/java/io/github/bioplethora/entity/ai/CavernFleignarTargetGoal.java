@@ -13,7 +13,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 public class CavernFleignarTargetGoal extends TargetGoal {
 
     private final CavernFleignarEntity fleignar;
-    private static final EntityPredicate CONDITION = (new EntityPredicate()).range(8.0D).allowSameTeam();
+    private static final EntityPredicate CONDITION = (new EntityPredicate()).range(16.0D).allowSameTeam();
 
     public CavernFleignarTargetGoal(CavernFleignarEntity fleignar, boolean mustSee) {
         super(fleignar, mustSee, false);
