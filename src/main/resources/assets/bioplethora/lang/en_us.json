@@ -2,6 +2,8 @@
   "item.bioplethora.biopedia": "The Biopedia",
   "item.bioplethora.test_item": "A Random Experimental Item",
 
+  "biome.bioplethora.rocky_woodlands": "Rocky Woodlands",
+
   "entity.bioplethora.crephoxl": "Crephoxl",
   "entity.bioplethora.alphem": "Alphem",
   "entity.bioplethora.nandbri": "Nandbri",
@@ -16,6 +18,7 @@
   "entity.bioplethora.alphem_king": "Alphem King",
   "entity.bioplethora.cavern_fleignar": "Cavern Fleignar",
   "entity.bioplethora.trapjaw": "Trapjaw",
+  "entity.bioplethora.telemreye": "Telemreye",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -31,6 +34,8 @@
   "entity.bioplethora.primordial_ring": "Primordial Ring",
   "entity.bioplethora.wind_arrow": "Wind Arrow",
   "entity.bioplethora.cryoblaze": "Cryoblaze",
+  "entity.bioplethora.magma_bomb": "Magma Bomb",
+  "entity.bioplethora.windblaze": "Windblaze",
 
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.grylynen_core_bomb": "Grylynen Core Bomb",
@@ -77,6 +82,7 @@
   "item.bioplethora.fleignarite_scales": "Fleignarite Scales",
   "item.bioplethora.alphanum_gem": "Alphanum Gem",
   "item.bioplethora.alphem_king_remnant": "Alphem King Remnant",
+  "item.bioplethora.reinforced_fleignarite": "Reinforced Fleignarite",
 
   "item.bioplethora.green_grylynen_crystal": "Green Grylynen Crystal",
   "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
@@ -107,6 +113,26 @@
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
+  "item.bioplethora.fleignarite_axe": "Fleignarite Axe",
+  "item.bioplethora.fleignarite_hoe": "Fleignarite Hoe",
+  "item.bioplethora.fleignarite_pickaxe": "Fleignarite Pickaxe",
+  "item.bioplethora.fleignarite_shovel": "Fleignarite Shovel",
+  "item.bioplethora.fleignarite_sword": "Fleignarite Sword",
+  "item.bioplethora.reinforced_fleignarite_axe": "Reinforced Fleignarite Axe",
+  "item.bioplethora.reinforced_fleignarite_hoe": "Reinforced Fleignarite Hoe",
+  "item.bioplethora.reinforced_fleignarite_pickaxe": "Reinforced Fleignarite Pickaxe",
+  "item.bioplethora.reinforced_fleignarite_shovel": "Reinforced Fleignarite Shovel",
+  "item.bioplethora.reinforced_fleignarite_sword": "Reinforced Fleignarite Sword",
+
+  "item.bioplethora.fleignarite_boots": "Fleignarite Boots",
+  "item.bioplethora.fleignarite_chestplate": "Fleignarite Chestplate",
+  "item.bioplethora.fleignarite_helmet": "Fleignarite Helmet",
+  "item.bioplethora.fleignarite_leggings": "Fleignarite Leggings",
+  "item.bioplethora.reinforced_fleignarite_boots": "Reinforced Fleignarite Boots",
+  "item.bioplethora.reinforced_fleignarite_chestplate": "Reinforced Fleignarite Chestplate",
+  "item.bioplethora.reinforced_fleignarite_helmet": "Reinforced Fleignarite Helmet",
+  "item.bioplethora.reinforced_fleignarite_leggings": "Reinforced Fleignarite Leggings",
+
   "item.bioplethora.phantom_chime": "Phantom Chime",
   "item.bioplethora.magma_bomb": "Magma Bomb",
 
@@ -121,6 +147,7 @@
   "block.bioplethora.red_grylynen_crystal_block": "Red Grylynen Crystal Block",
 
   "block.bioplethora.fleignarite_remains": "Fleignarite Remains",
+  "block.bioplethora.fleignarite_splotch": "Fleignarite Splotch",
   "block.bioplethora.fleignarite_vines": "Fleignarite Vines",
   "block.bioplethora.fleignarite_vines_plant": "Fleignarite Vines",
 
@@ -141,6 +168,19 @@
   "block.bioplethora.polished_alphanum_stairs": "Polished Alphanum Stairs",
   "block.bioplethora.polished_alphanum_wall": "Polished Alphanum Wall",
   "block.bioplethora.polished_alphanum_slab": "Polished Alphanum Slab",
+
+  "block.bioplethora.petrawood_button": "Petrawood Button",
+  "block.bioplethora.petrawood_fence": "Petrawood Fence",
+  "block.bioplethora.petrawood_fence_gate": "Petrawood Fence Gate",
+  "block.bioplethora.petrawood_leaves": "Petrawood Leaves",
+  "block.bioplethora.petrawood_log": "Petrawood Log",
+  "block.bioplethora.petrawood_planks": "Petrawood Planks",
+  "block.bioplethora.petrawood_pressure_plate": "Petrawood Pressure Plate",
+  "block.bioplethora.petrawood_slab": "Petrawood Slab",
+  "block.bioplethora.petrawood_stairs": "Petrawood Stairs",
+  "block.bioplethora.petrawood_wood": "Petrawood Wood",
+  "block.bioplethora.stripped_petrawood_log": "Stripped Petrawood Log",
+  "block.bioplethora.stripped_petrawood_wood": "Stripped Petrawood Wood",
 
   "itemGroup.bioplethora_item_item_group": "Bioplethora Items",
   "itemGroup.bioplethora_spawn_eggs_item_group": "Bioplethora Mobs",
@@ -225,6 +265,11 @@
   "effect.bioplethora.spirit_fission": "Spirit Fission",
   "effect.bioplethora.spirit_manipulation": "Spirit Manipulation",
 
+  "item.bioplethora.fleignarite_weapon.gooey_stun.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability. When the target is hurt using this item, the fleignarite scales used for this item causes a quick stun that gives nausea and slowness for a short duration.",
+  "item.bioplethora.fleignarite_weapon.gooey_stun.skill": "Gooey Stun",
+  "item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability. This weapon can cause a very damaging blow that gives large amounts of debuffs every now and then thanks to it's bellophite attachment.",
+  "item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.skill": "Deadly Blow",
+
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora. There is a hell mode option in the configs that enhances and strengthens most creatures, you can check it out!",
 
@@ -303,6 +348,10 @@
   "death.attack.antibio.indirect_0": "%s was fired up by %s",
   "death.attack.antibio.indirect_1": "%s was painfully poisoned by %s",
   "death.attack.antibio.indirect_2": "%s was vanished by %s",
+
+  "death.attack.reinforcedFleignarite.indirect_0": "%s got his armor shattered by %s",
+  "death.attack.reinforcedFleignarite.indirect_1": "%s was brutally smashed into pieces by %s",
+  "death.attack.reinforcedFleignarite.indirect_2": "The skull of %s was brutally smashed up by %s",
 
   "enchantment.bioplethora.antibio_ecoharmless.desc": "Deals more damage against entities classified as Ecoharmless.",
   "enchantment.bioplethora.antibio_plethoneutral.desc": "Deals more damage against entities classified as Plethoneutral.",

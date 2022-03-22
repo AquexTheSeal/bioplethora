@@ -23,7 +23,7 @@ public class MyliothanEntityRender extends GeoEntityRenderer<MyliothanEntity> {
     @Override
     public void renderEarly(MyliothanEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
         float f = 1;
-        f = (float) ((double) f * 6.5D);
+        f = (float) ((double) f * 6.0D);
         stackIn.scale(f, f, f);
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }

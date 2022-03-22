@@ -5,6 +5,7 @@ import io.github.bioplethora.blocks.BellophiteCoreBlock;
 import io.github.bioplethora.blocks.FleignariteRemainsBlock;
 import io.github.bioplethora.blocks.FleignariteVinesBlock;
 import io.github.bioplethora.blocks.FleignariteVinesTopBlock;
+import io.github.bioplethora.blocks.tile_entities.FleignariteSplotchBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -46,11 +47,13 @@ public class BioplethoraBlocks {
     // Fleignarite Blocks
     public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new FleignariteRemainsBlock(AbstractBlock.Properties.of(Material.PLANT)
             .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> FLEIGNARITE_SPLOTCH = registerBlock("fleignarite_splotch", () -> new FleignariteSplotchBlock(AbstractBlock.Properties.of(Material.PLANT)
+            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> FLEIGNARITE_VINES = registerBlock("fleignarite_vines", () -> new FleignariteVinesTopBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup, false);
-    public static final RegistryObject<Block> FLEIGNARITE_VINES_PLANT = registerBlock("fleignarite_vines_plant", () -> new FleignariteVinesBlock(AbstractBlock.Properties.of(Material.PLANT)
             .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> FLEIGNARITE_VINES_PLANT = registerBlock("fleignarite_vines_plant", () -> new FleignariteVinesBlock(AbstractBlock.Properties.of(Material.PLANT)
+            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BioplethoraItemGroup.BioplethoraItemItemGroup, false);
 
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)

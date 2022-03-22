@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "bioplethora:item/crephoxl_feather"
+    "layer0": "bioplethora:item/fleignarite_axe"
   }
 }

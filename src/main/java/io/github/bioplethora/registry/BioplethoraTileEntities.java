@@ -1,6 +1,7 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.blocks.tile_entities.FleignariteSplotchTileEntity;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -12,4 +13,7 @@ public class BioplethoraTileEntities {
 
     public static final RegistryObject<TileEntityType<ReinforcingTableTileEntity>> REINFORCING_TABLE = TILE_ENTITIES.register("reinforcing_block",
             () -> TileEntityType.Builder.of(ReinforcingTableTileEntity::new, BioplethoraBlocks.REINFORCING_TABLE.get()).build(null));
+
+    public static final RegistryObject<TileEntityType<FleignariteSplotchTileEntity>> FLEIGNARITE_SPLOTCH = TILE_ENTITIES.register("fleignarite_splotch",
+            () -> TileEntityType.Builder.of(FleignariteSplotchTileEntity::new, BioplethoraBlocks.FLEIGNARITE_SPLOTCH.get()).build(null));
 }

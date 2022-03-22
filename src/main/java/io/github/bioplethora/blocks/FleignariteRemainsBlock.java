@@ -4,6 +4,7 @@ import io.github.bioplethora.registry.BioplethoraParticles;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
+import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -14,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class FleignariteRemainsBlock extends BPFlatBlock implements IWaterLoggable {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -25,17 +25,11 @@ public class FleignariteRemainsBlock extends BPFlatBlock implements IWaterLoggab
     }
 
     @Override
-    public void animateTick(BlockState pState, World pLevel, BlockPos pPos, Random pRand) {
-
-        if (0.15f < pRand.nextFloat()) {
-            if (Math.random() < 0.5) {
-                pLevel.addParticle(BioplethoraParticles.ANTIBIO_SPELL.get(), pPos.getX() + pRand.nextDouble(),
-                        pPos.getY() + 0.5D, pPos.getZ() + pRand.nextDouble(),
-                        0d, 0.05d, 0d);
-            }
-        }
-
-        super.animateTick(pState, pLevel, pPos, pRand);
+    public void stepOn(World pLevel, BlockPos pPos, Entity pEntity) {
+        pLevel.addParticle(BioplethoraParticles.ANTIBIO_SPELL.get(), pPos.getX() + pLevel.random.nextDouble(),
+                pPos.getY() + 0.5D, pPos.getZ() + pLevel.random.nextDouble(),
+                0d, 0.05d, 0d);
+        super.stepOn(pLevel, pPos, pEntity);
     }
 
     @Nullable

@@ -121,6 +121,10 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     // TODO: 11/03/2022 Pull the target to the mob 
     @Override
     public boolean doHurtTarget(Entity entity) {
+
+        if (entity instanceof LivingEntity) {
+            ((LivingEntity) entity).knockback(2, entity.getX() - this.getX(), entity.getZ() - this.getZ());
+        }
         return super.doHurtTarget(entity);
     }
 

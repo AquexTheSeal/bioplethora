@@ -23,6 +23,10 @@ public class BioplethoraDamageSources {
         return (new BioplethoraIndirectDamageSource("antibio", entity, source)).setMagic();
     }
 
+    public static DamageSource armorPiercingFleignarite(Entity entity, @Nullable Entity source) {
+        return (new BioplethoraIndirectDamageSource("armorPiercingFleignarite", entity, source)).bypassArmor();
+    }
+
     static class BioplethoraIndirectDamageSource extends EntityDamageSource {
 
         Entity indirectOwner;

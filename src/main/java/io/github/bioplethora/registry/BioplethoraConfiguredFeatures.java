@@ -2,11 +2,11 @@ package io.github.bioplethora.registry;
 
 import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.world.BPFeatureGeneration;
+import io.github.bioplethora.world.feature_config.FleignariteSplotchConfig;
 import io.github.bioplethora.world.feature_config.PendentBlocksFeatureConfig;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.BlockWithContextConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.placement.CaveEdgeConfig;
@@ -15,7 +15,8 @@ import net.minecraft.world.gen.placement.Placement;
 public class BioplethoraConfiguredFeatures {
 
     public static final ConfiguredFeature<?, ?> FLEIGNARITE_REMAINS_CONFIG = BioplethoraFeatures.FLEIGNARITE_PATCH.get()
-            .configured(new BlockWithContextConfig(BioplethoraBlocks.FLEIGNARITE_REMAINS.get().defaultBlockState(),
+            .configured(new FleignariteSplotchConfig(BioplethoraBlocks.FLEIGNARITE_REMAINS.get().defaultBlockState(),
+                    BioplethoraBlocks.FLEIGNARITE_SPLOTCH.get().defaultBlockState(),
                     BPFeatureGeneration.stoneBlockstates(),
                     ImmutableList.of(Blocks.CAVE_AIR.defaultBlockState(), Blocks.AIR.defaultBlockState()),
                     ImmutableList.of(Blocks.CAVE_AIR.defaultBlockState(), Blocks.AIR.defaultBlockState())))

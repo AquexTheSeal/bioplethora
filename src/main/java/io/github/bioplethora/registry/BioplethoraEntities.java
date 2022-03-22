@@ -19,7 +19,7 @@ public class BioplethoraEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Bioplethora.MOD_ID);
 
     //Ecoharmless
-    public static final RegistryObject<EntityType<CuttlefishEntity>> CUTTLEFISH = ENTITIES.register("cuttlefish", () -> EntityType.Builder.of(CuttlefishEntity::new, EntityClassification.WATER_CREATURE).sized(0.55f, 1.15f).build(new ResourceLocation(Bioplethora.MOD_ID, "cuttlefish").toString()));
+    public static final RegistryObject<EntityType<CuttlefishEntity>> CUTTLEFISH = ENTITIES.register("cuttlefish", () -> EntityType.Builder.of(CuttlefishEntity::new, EntityClassification.WATER_CREATURE).sized(0.75f, 0.6f).build(new ResourceLocation(Bioplethora.MOD_ID, "cuttlefish").toString()));
 
     //Plethoneutral
     public static final RegistryObject<EntityType<PeaguinEntity>> PEAGUIN = ENTITIES.register("peaguin", () -> EntityType.Builder.of(PeaguinEntity::new, EntityClassification.WATER_CREATURE).sized(1.2f, 1.4f).build(new ResourceLocation(Bioplethora.MOD_ID, "peaguin").toString()));
@@ -53,7 +53,7 @@ public class BioplethoraEntities {
 
     //Elderia
     public static final RegistryObject<EntityType<AltyrusEntity>> ALTYRUS = ENTITIES.register("altyrus", () -> EntityType.Builder.of(AltyrusEntity::new, EntityClassification.MONSTER).sized(3.5f, 4.75f).build(new ResourceLocation(Bioplethora.MOD_ID, "altyrus").toString()));
-    public static final RegistryObject<EntityType<MyliothanEntity>> MYLIOTHAN = ENTITIES.register("myliothan", () -> EntityType.Builder.of(MyliothanEntity::new, EntityClassification.MONSTER).sized(25.5f, 6f).build(new ResourceLocation(Bioplethora.MOD_ID, "myliothan").toString()));
+    public static final RegistryObject<EntityType<MyliothanEntity>> MYLIOTHAN = ENTITIES.register("myliothan", () -> EntityType.Builder.of(MyliothanEntity::new, EntityClassification.MONSTER).sized(20.5f, 5.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "myliothan").toString()));
     public static final RegistryObject<EntityType<AlphemKingEntity>> ALPHEM_KING = ENTITIES.register("alphem_king", () -> EntityType.Builder.of(AlphemKingEntity::new, EntityClassification.MONSTER).sized(3.5f, 4.75f).build(new ResourceLocation(Bioplethora.MOD_ID, "alphem_king").toString()));
 
     //Projectiles
@@ -80,6 +80,6 @@ public class BioplethoraEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_summoning").toString()));
     public static final RegistryObject<EntityType<BellophiteShieldWaveEntity>> BELLOPHITE_SHIELD_WAVE = ENTITIES.register("bellophite_shield_wave", () -> EntityType.Builder.of(BellophiteShieldWaveEntity::new, EntityClassification.MISC).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "bellophite_shield_wave").toString()));
-    public static final RegistryObject<EntityType<GrylynenCoreBombEntity>> GRYLYNEN_CORE_BOMB = ENTITIES.register("grylynen_core_bomb", () -> EntityType.Builder.of(GrylynenCoreBombEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4)
+    public static final RegistryObject<EntityType<GrylynenCoreBombEntity>> GRYLYNEN_CORE_BOMB = ENTITIES.register("grylynen_core_bomb", () -> EntityType.Builder.of(GrylynenCoreBombEntity::new, EntityClassification.MISC).sized(1.0F, 1.0F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "grylynen_core_bomb").toString()));
 }

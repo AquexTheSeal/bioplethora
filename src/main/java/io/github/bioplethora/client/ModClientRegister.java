@@ -1,6 +1,7 @@
 package io.github.bioplethora.client;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.client.block.render.FleignariteSplotchBlockRender;
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
 import io.github.bioplethora.client.entity.render.others.BellophiteShieldWaveRender;
@@ -12,10 +13,7 @@ import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
 import io.github.bioplethora.keybindings.BPKeybinds;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraContainerTypes;
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
@@ -29,6 +27,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -42,9 +41,14 @@ public class ModClientRegister {
 
         Minecraft mcClient = event.getMinecraftSupplier().get();
 
+        // Block Render Changer
         RenderTypeLookup.setRenderLayer(BioplethoraBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BioplethoraBlocks.FLEIGNARITE_VINES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BioplethoraBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BioplethoraBlocks.FLEIGNARITE_SPLOTCH.get(), RenderType.cutout());
+
+        // Tile Entity
+        ClientRegistry.bindTileEntityRenderer(BioplethoraTileEntities.FLEIGNARITE_SPLOTCH.get(), FleignariteSplotchBlockRender::new);
 
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BioplethoraEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);

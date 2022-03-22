@@ -5,16 +5,15 @@ import io.github.bioplethora.entity.IGrylynenTier;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.enums.BPGrylynenTier;
 import io.github.bioplethora.event.helper.GrylynenSpawnHelper;
-import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -33,9 +32,11 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public IGrylynenTier tier;
     public int birthTime = 0;
+    public boolean hasSound;
 
     public GrylynenCoreBombEntity(EntityType<?> entityType, World world) {
         super(entityType, world);
+        this.hasSound = false;
     }
 
     @Override
@@ -66,13 +67,18 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
                 getX() + (Math.random() / 2), getY() + (Math.random() / 2), getZ() + (Math.random() / 2),
                 0.01D, 0.01D, 0.01D);
 
+        if (!hasSound) {
+            this.playSound(SoundEvents.BEACON_ACTIVATE, 1.0F, 1.5F);
+            hasSound = true;
+        }
+
         if (this.birthTime >= (BioplethoraConfig.getHellMode ? 40 : 60)) {
 
             if (!this.level.isClientSide) {
                 ServerWorld serverworld = (ServerWorld) this.level;
                 BlockPos blockpos = (new BlockPos(this.getX(), this.getY(), this.getZ()));
 
-                GrylynenEntity grylynen = BioplethoraEntities.NETHERITE_GRYLYNEN.get().create(this.level);
+                GrylynenEntity grylynen = BioplethoraEntities.WOODEN_GRYLYNEN.get().create(this.level);
 
                 if (this.tier == BPGrylynenTier.WOODEN) {
                     grylynen = BioplethoraEntities.WOODEN_GRYLYNEN.get().create(this.level);
@@ -91,8 +97,12 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
                 grylynen.moveTo(blockpos, 0.0F, 0.0F);
                 grylynen.finalizeSpawn(serverworld, level.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
 
-                if (level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+                if (!level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                     GrylynenSpawnHelper.breakSurroundingBlocks(serverworld, blockpos);
+                }
+                this.playSound(SoundEvents.SLIME_BLOCK_BREAK, 1.0F, 0.5F);
+                if (!this.level.isClientSide()) {
+                    ((ServerWorld) level).sendParticles(ParticleTypes.FLAME, getX(), getY(), getZ(), 30, 0.75, 0.75, 0.75, 0.01);
                 }
                 serverworld.addFreshEntity(grylynen);
 
@@ -101,22 +111,14 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
         }
     }
 
-    public void setTier(IGrylynenTier tier) {
-        this.tier = tier;
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        this.remove();
+        return super.hurt(pSource, pAmount);
     }
 
-    public void summonParticleBarrier(ServerWorld serverWorld) {
-
-        int loop = 0; int particleAmount = 10; int xRad = 3; int zRad = 3;
-
-        if (loop < particleAmount) {
-            serverWorld.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,
-                    this.getX() + 0.5 + Math.cos(((Math.PI * 2) / particleAmount) * loop) * xRad,
-                    this.getY(),
-                    this.getZ() + 0.5 + Math.sin(((Math.PI * 2) / particleAmount) * loop) * zRad,
-                    0.0, 1.0, 0.0);
-            ++loop;
-        }
+    public void setTier(IGrylynenTier tier) {
+        this.tier = tier;
     }
 
     @Override
@@ -132,19 +134,5 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
     @Override
     public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    public void grantBirthAdvancement(int radius) {
-        Entity entity = this.getEntity();
-        World world = entity.level;
-        double x = entity.getX(), y = entity.getY(), z = entity.getZ();
-        AxisAlignedBB area = new AxisAlignedBB(x - (radius / 2d), y, z - (radius / 2d), x + (radius / 2d), y + (radius / 2d), z + (radius / 2d));
-
-        //Grant Advancement to all nearby players
-        for (LivingEntity entityIterator : world.getEntitiesOfClass(LivingEntity.class, area)) {
-            if (entityIterator != null) {
-                BioplethoraAdvancementHelper.grantBioAdvancement(entityIterator, "bioplethora:altyrus_summoning");
-            }
-        }
     }
 }

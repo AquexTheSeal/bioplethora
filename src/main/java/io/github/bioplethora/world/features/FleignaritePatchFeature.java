@@ -5,21 +5,21 @@ import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.CavernFleignarEntity;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import io.github.bioplethora.world.BPFeatureGeneration;
+import io.github.bioplethora.world.feature_config.FleignariteSplotchConfig;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.BlockWithContextConfig;
-import net.minecraft.world.gen.feature.BlockWithContextFeature;
+import net.minecraft.world.gen.feature.Feature;
 
 import java.util.Random;
 
-public class FleignaritePatchFeature extends BlockWithContextFeature {
+public class FleignaritePatchFeature extends Feature<FleignariteSplotchConfig> {
 
-    public FleignaritePatchFeature(Codec<BlockWithContextConfig> codec) {
+    public FleignaritePatchFeature(Codec<FleignariteSplotchConfig> codec) {
         super(codec);
     }
 
-    public boolean place(ISeedReader reader, ChunkGenerator generator, Random random, BlockPos pos, BlockWithContextConfig config) {
+    public boolean place(ISeedReader reader, ChunkGenerator generator, Random random, BlockPos pos, FleignariteSplotchConfig config) {
         if (config.placeOn.contains(reader.getBlockState(pos.below())) && config.placeIn.contains(reader.getBlockState(pos)) && config.placeUnder.contains(reader.getBlockState(pos.above()))) {
             if (BPFeatureGeneration.isFleignariteChunk(pos, reader)) {
                 if (Math.random() <= 0.15 && BioplethoraConfig.COMMON.spawnCavernFleignar.get()) {
@@ -29,7 +29,11 @@ public class FleignaritePatchFeature extends BlockWithContextFeature {
                         reader.addFreshEntity(fleignar);
                     }
                 }
-                reader.setBlock(pos, config.toPlace, 2);
+                if (Math.random() < 0.2) {
+                    reader.setBlock(pos, config.toPlaceRare, 2);
+                } else {
+                    reader.setBlock(pos, config.toPlace, 2);
+                }
                 return true;
             } else {
                 return false;

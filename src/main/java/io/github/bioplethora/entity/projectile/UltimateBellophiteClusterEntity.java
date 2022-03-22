@@ -1,11 +1,14 @@
 package io.github.bioplethora.entity.projectile;
 
+import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.registry.BioplethoraDamageSources;
 import io.github.bioplethora.registry.BioplethoraEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
@@ -13,10 +16,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -73,20 +73,31 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
 
     @Override
     protected void onHit(RayTraceResult result) {
-
-        Entity owner = this.getOwner();
         super.onHit(result);
+    }
 
-        if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult) result).getEntity().is(owner)) {
-            this.hitAndExplode();
-        }
+    @Override
+    protected void onHitBlock(BlockRayTraceResult p_230299_1_) {
+        super.onHitBlock(p_230299_1_);
+        this.hitAndExplode();
     }
 
     @Override
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
-
-        if (entityHitResult.getType() != RayTraceResult.Type.ENTITY || !entityHitResult.getEntity().is(entity)) {
+        if (entity instanceof ProjectileEntity) {
+            if (((ProjectileEntity) entity).getOwner() != this.getOwner()) {
+                this.hitAndExplode();
+            }
+        } else if (entity instanceof TameableEntity) {
+            if (((TameableEntity) entity).getOwner() != this.getOwner()) {
+                this.hitAndExplode();
+            }
+        } else if (entity instanceof SummonableMonsterEntity) {
+            if (((SummonableMonsterEntity) entity).getOwner() != this.getOwner()) {
+                this.hitAndExplode();
+            }
+        } else {
             this.hitAndExplode();
         }
     }

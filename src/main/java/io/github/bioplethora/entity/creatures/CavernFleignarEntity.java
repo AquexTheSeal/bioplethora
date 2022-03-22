@@ -75,7 +75,7 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
         //this.targetSelector.addGoal(2, new CavernFleignarTargetGoal(this, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::validTarget));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, false, false, this::validTarget));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(this.getClass()));
     }
 
@@ -231,10 +231,10 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     public boolean validTarget(LivingEntity target) {
         boolean getTag = EntityTypeTags.getAllTags().getTagOrEmpty(BioplethoraTags.Entities.FLEIGNAR_TARGETS.getName()).contains(target.getType());
 
-        if (!EntityPredicates.ATTACK_ALLOWED.test(target) || !getTag) {
-            return false;
-        } else {
+        if (EntityPredicates.ATTACK_ALLOWED.test(target) && (getTag || target instanceof PlayerEntity)) {
             return !target.hasEffect(BioplethoraEffects.SPIRIT_MANIPULATION.get());
+        } else {
+            return false;
         }
     }
 
