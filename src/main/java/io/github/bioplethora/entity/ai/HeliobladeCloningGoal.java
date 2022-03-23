@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
@@ -44,7 +44,7 @@ public class HeliobladeCloningGoal extends Goal {
                     ((ServerWorld) this.helioblade.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.helioblade.getX(), this.helioblade.getY(), this.helioblade.getZ(), 75, 0.3, 0.2, 0.2, 0.1);
                 }
 
-                HeliobladeEntity clone1 = new HeliobladeEntity(BioplethoraEntities.HELIOBLADE.get(), this.helioblade.level);
+                HeliobladeEntity clone1 = new HeliobladeEntity(BPEntities.HELIOBLADE.get(), this.helioblade.level);
                 clone1.setOwner(this.helioblade);
                 clone1.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
                 clone1.getAttribute(Attributes.ARMOR).setBaseValue(5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
@@ -60,7 +60,7 @@ public class HeliobladeCloningGoal extends Goal {
                 clone1.teleportRandomly();
                 this.helioblade.level.addFreshEntity(clone1);
 
-                HeliobladeEntity clone2 = new HeliobladeEntity(BioplethoraEntities.HELIOBLADE.get(), this.helioblade.level);
+                HeliobladeEntity clone2 = new HeliobladeEntity(BPEntities.HELIOBLADE.get(), this.helioblade.level);
                 clone2.setOwner(this.helioblade);
                 clone2.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
                 clone2.getAttribute(Attributes.ARMOR).setBaseValue(5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());

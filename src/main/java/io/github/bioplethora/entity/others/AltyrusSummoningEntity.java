@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity.others;
 
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
-import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
@@ -72,7 +72,7 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
                 this.grantBirthAdvancement(32);
 
-                AltyrusEntity altyrusEntity = BioplethoraEntities.ALTYRUS.get().create(this.level);
+                AltyrusEntity altyrusEntity = BPEntities.ALTYRUS.get().create(this.level);
                 altyrusEntity.moveTo(blockpos, 0.0F, 0.0F);
                 altyrusEntity.finalizeSpawn(serverworld, this.level.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, (ILivingEntityData)null, (CompoundNBT)null);
 
@@ -121,7 +121,7 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
         //Grant Advancement to all nearby players
         for (LivingEntity entityIterator : world.getEntitiesOfClass(LivingEntity.class, area)) {
             if (entityIterator != null) {
-                BioplethoraAdvancementHelper.grantBioAdvancement(entityIterator, "bioplethora:altyrus_summoning");
+                BPAdvancementHelper.grantBioAdvancement(entityIterator, "bioplethora:altyrus_summoning");
             }
         }
     }

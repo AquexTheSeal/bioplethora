@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.entity.SummonableMonsterEntity;
-import io.github.bioplethora.registry.BioplethoraDamageSources;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPDamageSources;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -49,11 +49,11 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
 
     @OnlyIn(Dist.CLIENT)
     public UltimateBellophiteClusterEntity(World world, double v, double v1, double v2, double v3, double v4, double v5) {
-        super(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), v, v1, v2, v3, v4, v5, world);
+        super(BPEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), v, v1, v2, v3, v4, v5, world);
     }
 
     public UltimateBellophiteClusterEntity(World world, LivingEntity entity, double v, double v1, double v2) {
-        super(BioplethoraEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), entity, v, v1, v2, world);
+        super(BPEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), entity, v, v1, v2, world);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -115,7 +115,7 @@ public class UltimateBellophiteClusterEntity extends DamagingProjectileEntity im
         double x = this.getX(), y = this.getY(), z = this.getZ();
         BlockPos blockPos = new BlockPos(x, y, z);
         AxisAlignedBB area = new AxisAlignedBB(x - (7 / 2d), y, z - (7 / 2d), x + (7 / 2d), y + (7 / 2d), z + (7 / 2d));
-        DamageSource castration = BioplethoraDamageSources.indirectCastration(this.getOwner(), this.getOwner());
+        DamageSource castration = BPDamageSources.indirectCastration(this.getOwner(), this.getOwner());
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 40, 0.6, 0.6, 0.6, 0.1);

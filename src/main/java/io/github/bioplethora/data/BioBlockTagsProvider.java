@@ -1,8 +1,8 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraTags;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPTags;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -20,29 +20,29 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
         this.forVanillaTags();
 
-        tag(BioplethoraTags.Blocks.ALPHANIA)
-                .add(BioplethoraBlocks.ALPHANUM.get())
-                .add(BioplethoraBlocks.ALPHANUM_BRICKS.get())
-                .add(BioplethoraBlocks.POLISHED_ALPHANUM.get())
-                .add(BioplethoraBlocks.ALPHANUM_STAIRS.get())
-                .add(BioplethoraBlocks.ALPHANUM_STAIRS_BRICKS.get())
-                .add(BioplethoraBlocks.POLISHED_ALPHANUM_STAIRS.get())
-                .add(BioplethoraBlocks.ALPHANUM_WALL.get())
-                .add(BioplethoraBlocks.ALPHANUM_WALL_BRICKS.get())
-                .add(BioplethoraBlocks.POLISHED_ALPHANUM_WALL.get())
-                .add(BioplethoraBlocks.ALPHANUM_SLAB.get())
-                .add(BioplethoraBlocks.ALPHANUM_SLAB_BRICKS.get())
-                .add(BioplethoraBlocks.POLISHED_ALPHANUM_SLAB.get())
+        tag(BPTags.Blocks.ALPHANIA)
+                .add(BPBlocks.ALPHANUM.get())
+                .add(BPBlocks.ALPHANUM_BRICKS.get())
+                .add(BPBlocks.POLISHED_ALPHANUM.get())
+                .add(BPBlocks.ALPHANUM_STAIRS.get())
+                .add(BPBlocks.ALPHANUM_STAIRS_BRICKS.get())
+                .add(BPBlocks.POLISHED_ALPHANUM_STAIRS.get())
+                .add(BPBlocks.ALPHANUM_WALL.get())
+                .add(BPBlocks.ALPHANUM_WALL_BRICKS.get())
+                .add(BPBlocks.POLISHED_ALPHANUM_WALL.get())
+                .add(BPBlocks.ALPHANUM_SLAB.get())
+                .add(BPBlocks.ALPHANUM_SLAB_BRICKS.get())
+                .add(BPBlocks.POLISHED_ALPHANUM_SLAB.get())
         ;
 
-        tag(BioplethoraTags.Blocks.GRYLYNEN_UNBREAKABLE)
-                .add(BioplethoraBlocks.BELLOPHITE_BLOCK.get())
-                .add(BioplethoraBlocks.BELLOPHITE_CORE_BLOCK.get())
+        tag(BPTags.Blocks.GRYLYNEN_UNBREAKABLE)
+                .add(BPBlocks.BELLOPHITE_BLOCK.get())
+                .add(BPBlocks.BELLOPHITE_CORE_BLOCK.get())
                 .add(Blocks.BEACON).add(Blocks.OBSIDIAN).add(Blocks.CRYING_OBSIDIAN)
                 .addTag(BlockTags.WITHER_IMMUNE)
         ;
 
-        tag(BioplethoraTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE)
+        tag(BPTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE)
                 .addTag(BlockTags.LOGS)
                 .addTag(BlockTags.PLANKS)
                 .addTag(BlockTags.WOODEN_PRESSURE_PLATES)
@@ -58,20 +58,20 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
                 .addTag(BlockTags.WALL_SIGNS)
         ;
 
-        tag(BioplethoraTags.Blocks.STONE_GRYLYNEN_SPAWNABLE)
+        tag(BPTags.Blocks.STONE_GRYLYNEN_SPAWNABLE)
                 .addTag(BlockTags.BASE_STONE_OVERWORLD)
                 .addTag(BlockTags.STONE_PRESSURE_PLATES)
                 .addTag(BlockTags.STONE_BRICKS)
         ;
 
-        tag(BioplethoraTags.Blocks.GOLDEN_GRYLYNEN_SPAWNABLE)
+        tag(BPTags.Blocks.GOLDEN_GRYLYNEN_SPAWNABLE)
                 .add(Blocks.GOLD_ORE)
                 .add(Blocks.NETHER_GOLD_ORE)
                 .add(Blocks.GOLD_BLOCK)
                 .add(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)
         ;
 
-        tag(BioplethoraTags.Blocks.IRON_GRYLYNEN_SPAWNABLE)
+        tag(BPTags.Blocks.IRON_GRYLYNEN_SPAWNABLE)
                 .add(Blocks.IRON_ORE)
                 .add(Blocks.IRON_BLOCK)
                 .add(Blocks.IRON_DOOR)
@@ -80,12 +80,12 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
                 .add(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE)
         ;
 
-        tag(BioplethoraTags.Blocks.DIAMOND_GRYLYNEN_SPAWNABLE)
+        tag(BPTags.Blocks.DIAMOND_GRYLYNEN_SPAWNABLE)
                 .add(Blocks.DIAMOND_ORE)
                 .add(Blocks.DIAMOND_BLOCK)
         ;
 
-        tag(BioplethoraTags.Blocks.NETHERITE_GRYLYNEN_SPAWNABLE)
+        tag(BPTags.Blocks.NETHERITE_GRYLYNEN_SPAWNABLE)
                 .add(Blocks.ANCIENT_DEBRIS)
                 .add(Blocks.NETHERITE_BLOCK)
         ;
@@ -93,41 +93,41 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
     public void forVanillaTags() {
         tag(BlockTags.BASE_STONE_OVERWORLD)
-                .add(BioplethoraBlocks.ALPHANUM.get())
+                .add(BPBlocks.ALPHANUM.get())
         ;
 
         tag(BlockTags.WALLS)
-                .add(BioplethoraBlocks.ALPHANUM_WALL.get())
-                .add(BioplethoraBlocks.ALPHANUM_WALL_BRICKS.get())
-                .add(BioplethoraBlocks.POLISHED_ALPHANUM_WALL.get())
+                .add(BPBlocks.ALPHANUM_WALL.get())
+                .add(BPBlocks.ALPHANUM_WALL_BRICKS.get())
+                .add(BPBlocks.POLISHED_ALPHANUM_WALL.get())
         ;
 
         tag(BlockTags.LOGS)
-                .add(BioplethoraBlocks.PETRAWOOD_LOG.get())
-                .add(BioplethoraBlocks.PETRAWOOD_WOOD.get())
-                .add(BioplethoraBlocks.STRIPPED_PETRAWOOD_LOG.get())
-                .add(BioplethoraBlocks.STRIPPED_PETRAWOOD_WOOD.get())
+                .add(BPBlocks.PETRAWOOD_LOG.get())
+                .add(BPBlocks.PETRAWOOD_WOOD.get())
+                .add(BPBlocks.STRIPPED_PETRAWOOD_LOG.get())
+                .add(BPBlocks.STRIPPED_PETRAWOOD_WOOD.get())
         ;
         tag(BlockTags.PLANKS)
-                .add(BioplethoraBlocks.PETRAWOOD_PLANKS.get())
+                .add(BPBlocks.PETRAWOOD_PLANKS.get())
         ;
         tag(BlockTags.WOODEN_PRESSURE_PLATES)
-                .add(BioplethoraBlocks.PETRAWOOD_PRESSURE_PLATE.get())
+                .add(BPBlocks.PETRAWOOD_PRESSURE_PLATE.get())
         ;
         tag(BlockTags.WOODEN_BUTTONS)
-                .add(BioplethoraBlocks.PETRAWOOD_BUTTON.get())
+                .add(BPBlocks.PETRAWOOD_BUTTON.get())
         ;
         tag(BlockTags.WOODEN_STAIRS)
-                .add(BioplethoraBlocks.PETRAWOOD_STAIRS.get())
+                .add(BPBlocks.PETRAWOOD_STAIRS.get())
         ;
         tag(BlockTags.WOODEN_SLABS)
-                .add(BioplethoraBlocks.PETRAWOOD_SLAB.get())
+                .add(BPBlocks.PETRAWOOD_SLAB.get())
         ;
         tag(BlockTags.WOODEN_FENCES)
-                .add(BioplethoraBlocks.PETRAWOOD_FENCE.get())
+                .add(BPBlocks.PETRAWOOD_FENCE.get())
         ;
         tag(BlockTags.FENCE_GATES)
-                .add(BioplethoraBlocks.PETRAWOOD_FENCE_GATE.get())
+                .add(BPBlocks.PETRAWOOD_FENCE_GATE.get())
         ;
     }
 }

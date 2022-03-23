@@ -7,8 +7,8 @@ import io.github.bioplethora.entity.ai.CrephoxlChargingGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -126,17 +126,17 @@ public class CrephoxlEntity extends BPMonsterEntity implements IAnimatable, IBio
 
     @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return BioplethoraSoundEvents.CREPHOXL_IDLE.get();
+        return BPSoundEvents.CREPHOXL_IDLE.get();
     }
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return BioplethoraSoundEvents.CREPHOXL_HURT.get();
+        return BPSoundEvents.CREPHOXL_HURT.get();
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return BioplethoraSoundEvents.CREPHOXL_DEATH.get();
+        return BPSoundEvents.CREPHOXL_DEATH.get();
     }
 
     @Override
@@ -164,7 +164,7 @@ public class CrephoxlEntity extends BPMonsterEntity implements IAnimatable, IBio
         super.die(source);
 
         Entity sourceEnt = source.getEntity();
-        BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:crephoxl_kill");
+        BPAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:crephoxl_kill");
     }
 
     protected void defineSynchedData() {

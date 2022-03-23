@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -43,16 +42,10 @@ public class AlphemKingJumpGoal extends Goal {
             ++this.jumpTime;
 
             World world = this.king.level;
-            BlockPos pos = new BlockPos((int) this.king.getX(), (int) this.king.getY(), (int) this.king.getZ());
 
             if (this.jumpTime == 520) {
 
                 this.king.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
-
-                /*this.king.knockback(1.5F,
-                        MathHelper.sin(this.king.yRot * ((float) Math.PI / 180F)),
-                        -MathHelper.cos(this.king.yRot * ((float) Math.PI / 180F)));
-                this.king.setDeltaMovement(this.king.getDeltaMovement().add(0, 3, 0));*/
 
                 float moveVector = (float) Math.toRadians(this.king.vecOfTarget + 90 + this.king.getRandom().nextFloat() * 150 - 75);
                 Vector3d getVector = this.king.getDeltaMovement().add(2.0F * Math.cos(moveVector), 0, 2.0F * Math.sin(moveVector));
@@ -64,7 +57,7 @@ public class AlphemKingJumpGoal extends Goal {
             }
 
             if (this.jumpTime >= 560) {
-                this.jumpTime = this.king.getRandom().nextInt(20);
+                this.jumpTime = 0;
             }
         }
 

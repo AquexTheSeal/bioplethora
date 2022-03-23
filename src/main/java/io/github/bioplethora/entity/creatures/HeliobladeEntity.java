@@ -10,9 +10,9 @@ import io.github.bioplethora.entity.ai.HeliobladeQuickShootingGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraDamageSources;
-import io.github.bioplethora.registry.BioplethoraItems;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.registry.BPDamageSources;
+import io.github.bioplethora.registry.BPItems;
+import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -144,7 +144,7 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
         iLivingEntityData = super.finalizeSpawn(iServerWorld, difficultyInstance, spawnReason, iLivingEntityData, compoundNBT);
 
         if (!this.level.isClientSide()) {
-            this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(BioplethoraItems.VERMILION_BLADE.get()));
+            this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(BPItems.VERMILION_BLADE.get()));
         }
 
         return iLivingEntityData;
@@ -167,7 +167,7 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
             for (LivingEntity entityIterator : world.getEntitiesOfClass(LivingEntity.class, area)) {
 
                 if (entityIterator == this.getTarget()) {
-                    entityIterator.hurt(BioplethoraDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
+                    entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
                     ++this.tpTimer;
                     if (this.tpTimer == 40) {
                         this.teleportRandomly();
@@ -176,7 +176,7 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
                 }
                 if ((entityIterator instanceof MobEntity)) {
                     if (((MobEntity) entityIterator).getTarget() == this) {
-                        entityIterator.hurt(BioplethoraDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
+                        entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
                     }
                 }
             }
@@ -286,17 +286,17 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
 
     @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return BioplethoraSoundEvents.HELIOBLADE_IDLE.get();
+        return BPSoundEvents.HELIOBLADE_IDLE.get();
     }
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return BioplethoraSoundEvents.HELIOBLADE_HURT.get();
+        return BPSoundEvents.HELIOBLADE_HURT.get();
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return BioplethoraSoundEvents.HELIOBLADE_DEATH.get();
+        return BPSoundEvents.HELIOBLADE_DEATH.get();
     }
 
     @Override

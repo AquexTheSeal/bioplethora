@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.registry.BioplethoraDamageSources;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPDamageSources;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -34,7 +34,7 @@ public class VermilionBladeProjectileEntity extends DamagingProjectileEntity imp
     }
 
     public VermilionBladeProjectileEntity(World world, LivingEntity entity, double v, double v1, double v2) {
-        super(BioplethoraEntities.VERMILION_BLADE_PROJECTILE.get(), entity, v, v1, v2, world);
+        super(BPEntities.VERMILION_BLADE_PROJECTILE.get(), entity, v, v1, v2, world);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -64,7 +64,7 @@ public class VermilionBladeProjectileEntity extends DamagingProjectileEntity imp
     protected void onHitEntity(EntityRayTraceResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
 
-        entity.hurt(BioplethoraDamageSources.helioSlashed(this.getOwner(), this.getOwner()), 5 * ((float) this.bladeSize * 0.75F));
+        entity.hurt(BPDamageSources.helioSlashed(this.getOwner(), this.getOwner()), 5 * ((float) this.bladeSize * 0.75F));
         this.remove();
     }
 

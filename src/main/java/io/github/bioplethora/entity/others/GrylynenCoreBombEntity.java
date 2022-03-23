@@ -5,7 +5,7 @@ import io.github.bioplethora.entity.IGrylynenTier;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.enums.BPGrylynenTier;
 import io.github.bioplethora.event.helper.GrylynenSpawnHelper;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -78,20 +78,20 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
                 ServerWorld serverworld = (ServerWorld) this.level;
                 BlockPos blockpos = (new BlockPos(this.getX(), this.getY(), this.getZ()));
 
-                GrylynenEntity grylynen = BioplethoraEntities.WOODEN_GRYLYNEN.get().create(this.level);
+                GrylynenEntity grylynen = BPEntities.WOODEN_GRYLYNEN.get().create(this.level);
 
                 if (this.tier == BPGrylynenTier.WOODEN) {
-                    grylynen = BioplethoraEntities.WOODEN_GRYLYNEN.get().create(this.level);
+                    grylynen = BPEntities.WOODEN_GRYLYNEN.get().create(this.level);
                 } else if (this.tier == BPGrylynenTier.STONE) {
-                    grylynen = BioplethoraEntities.STONE_GRYLYNEN.get().create(this.level);
+                    grylynen = BPEntities.STONE_GRYLYNEN.get().create(this.level);
                 } else if (this.tier == BPGrylynenTier.GOLDEN) {
-                    grylynen = BioplethoraEntities.GOLDEN_GRYLYNEN.get().create(this.level);
+                    grylynen = BPEntities.GOLDEN_GRYLYNEN.get().create(this.level);
                 } else if (this.tier == BPGrylynenTier.IRON) {
-                    grylynen = BioplethoraEntities.IRON_GRYLYNEN.get().create(this.level);
+                    grylynen = BPEntities.IRON_GRYLYNEN.get().create(this.level);
                 } else if (this.tier == BPGrylynenTier.DIAMOND) {
-                    grylynen = BioplethoraEntities.DIAMOND_GRYLYNEN.get().create(this.level);
+                    grylynen = BPEntities.DIAMOND_GRYLYNEN.get().create(this.level);
                 } else if (this.tier == BPGrylynenTier.NETHERITE) {
-                    grylynen = BioplethoraEntities.NETHERITE_GRYLYNEN.get().create(this.level);
+                    grylynen = BPEntities.NETHERITE_GRYLYNEN.get().create(this.level);
                 }
 
                 grylynen.moveTo(blockpos, 0.0F, 0.0F);

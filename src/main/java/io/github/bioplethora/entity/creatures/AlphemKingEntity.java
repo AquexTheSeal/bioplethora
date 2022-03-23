@@ -8,7 +8,7 @@ import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.ai.*;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -411,7 +411,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     @Override
     public SoundEvent getAmbientSound() {
-        return BioplethoraSoundEvents.BELLOPHGOLEM_IDLE.get();
+        return BPSoundEvents.BELLOPHGOLEM_IDLE.get();
     }
 
     @Override
@@ -430,7 +430,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     }
 
     public SoundEvent getRoarSound() {
-        return BioplethoraSoundEvents.ALPHEM_KING_ROAR.get();
+        return BPSoundEvents.ALPHEM_KING_ROAR.get();
     }
 
     @Override

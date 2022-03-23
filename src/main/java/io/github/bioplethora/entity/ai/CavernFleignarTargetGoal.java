@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.creatures.CavernFleignarEntity;
-import io.github.bioplethora.registry.BioplethoraEffects;
-import io.github.bioplethora.registry.BioplethoraTags;
+import io.github.bioplethora.registry.BPEffects;
+import io.github.bioplethora.registry.BPTags;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.TargetGoal;
@@ -47,9 +47,9 @@ public class CavernFleignarTargetGoal extends TargetGoal {
             LivingEntity targetCandidate = fleignar.level.getNearestEntity(LivingEntity.class, CONDITION, fleignar, fleignar.getX(), fleignar.getY(), fleignar.getZ(), searchRadius);
 
             if (targetCandidate != null) {
-                boolean getTag = EntityTypeTags.getAllTags().getTagOrEmpty(BioplethoraTags.Entities.FLEIGNAR_TARGETS.getName()).contains(targetCandidate.getType());
+                boolean getTag = EntityTypeTags.getAllTags().getTagOrEmpty(BPTags.Entities.FLEIGNAR_TARGETS.getName()).contains(targetCandidate.getType());
                 if (validCheck(targetCandidate) && getTag) {
-                    if (!targetCandidate.hasEffect(BioplethoraEffects.SPIRIT_MANIPULATION.get())) {
+                    if (!targetCandidate.hasEffect(BPEffects.SPIRIT_MANIPULATION.get())) {
                         fleignar.setTarget(targetCandidate);
                     }
                 }

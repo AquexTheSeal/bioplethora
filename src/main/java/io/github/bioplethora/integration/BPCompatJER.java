@@ -1,7 +1,7 @@
 package io.github.bioplethora.integration;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import jeresources.compatibility.JERAPI;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
@@ -17,12 +17,12 @@ public class BPCompatJER {
 
         World world = JERAPI.getInstance().getWorld();
 
-        registerLoot(BioplethoraEntities.CREPHOXL.get().create(world), "loot_tables/entities/crephoxl.json");
-        registerLoot(BioplethoraEntities.NANDBRI.get().create(world), "loot_tables/entities/nandbri.json");
-        registerLoot(BioplethoraEntities.CUTTLEFISH.get().create(world), "loot_tables/entities/cuttlefish.json");
-        registerLoot(BioplethoraEntities.BELLOPHGOLEM.get().create(world), "loot_tables/entities/bellophgolem.json");
-        registerLoot(BioplethoraEntities.ALTYRUS.get().create(world), "loot_tables/entities/altyrus.json");
-        registerLoot(BioplethoraEntities.PEAGUIN.get().create(world), "loot_tables/entities/alphanum_mausoleum.json");
+        registerLoot(BPEntities.CREPHOXL.get().create(world), "loot_tables/entities/crephoxl.json");
+        registerLoot(BPEntities.NANDBRI.get().create(world), "loot_tables/entities/nandbri.json");
+        registerLoot(BPEntities.CUTTLEFISH.get().create(world), "loot_tables/entities/cuttlefish.json");
+        registerLoot(BPEntities.BELLOPHGOLEM.get().create(world), "loot_tables/entities/bellophgolem.json");
+        registerLoot(BPEntities.ALTYRUS.get().create(world), "loot_tables/entities/altyrus.json");
+        registerLoot(BPEntities.PEAGUIN.get().create(world), "loot_tables/entities/alphanum_mausoleum.json");
     }
 
     public static void registerLoot(LivingEntity entity, String tableFile) {

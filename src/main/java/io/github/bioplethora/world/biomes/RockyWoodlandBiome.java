@@ -1,6 +1,6 @@
 package io.github.bioplethora.world.biomes;
 
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.audio.BackgroundMusicTracks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SoundEvents;
@@ -21,11 +21,11 @@ public class RockyWoodlandBiome {
         DefaultBiomeFeatures.commonSpawns(spawnInfo);
 
         spawnInfo.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 50, 2, 6));
+                new MobSpawnInfo.Spawners(BPEntities.ALPHEM.get(), 50, 2, 6));
         spawnInfo.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(BioplethoraEntities.WOODEN_GRYLYNEN.get(), 60, 1, 4));
+                new MobSpawnInfo.Spawners(BPEntities.WOODEN_GRYLYNEN.get(), 60, 1, 4));
         spawnInfo.addSpawn(EntityClassification.MONSTER,
-                new MobSpawnInfo.Spawners(BioplethoraEntities.STONE_GRYLYNEN.get(), 5, 1, 2));
+                new MobSpawnInfo.Spawners(BPEntities.STONE_GRYLYNEN.get(), 5, 1, 2));
 
         BiomeGenerationSettings.Builder biomeGenSettings = (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
 

@@ -9,7 +9,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
 
-public class BioplethoraDamageSources {
+public class BPDamageSources {
 
     public static DamageSource indirectCastration(Entity entity, @Nullable Entity source) {
         return (new BioplethoraIndirectDamageSource("indirectCastration", entity, source)).bypassArmor().setMagic().setExplosion();

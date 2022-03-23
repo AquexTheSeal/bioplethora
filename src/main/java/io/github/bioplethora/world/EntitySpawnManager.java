@@ -1,7 +1,7 @@
 package io.github.bioplethora.world;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -31,120 +31,120 @@ public class EntitySpawnManager {
         private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_ENTITIES = (builder) -> {
             // Cavern Fleignar
             if (BioplethoraConfig.COMMON.spawnCavernFleignar.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CAVERN_FLEIGNAR.get(), 120 * spawnMultiplier, 4, 6));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.CAVERN_FLEIGNAR.get(), 120 * spawnMultiplier, 4, 6));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> DESERT_ENTITIES = (builder) -> {
             // Nandbri
             if(BioplethoraConfig.COMMON.spawnNandbri.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.NANDBRI.get(), 3 * spawnMultiplier, 1, 1));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.NANDBRI.get(), 30 * spawnMultiplier, 1, 1));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.NANDBRI.get(), 3 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.NANDBRI.get(), 30 * spawnMultiplier, 1, 1));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> SWAMP_ENTITIES = (builder) -> {
             // Trapjaw
             if (BioplethoraConfig.COMMON.spawnTrapjaw.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 5 * spawnMultiplier, 1, 1));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 14 * spawnMultiplier, 1, 1));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.TRAPJAW.get(), 5 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.TRAPJAW.get(), 14 * spawnMultiplier, 1, 1));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> FOREST_ENTITIES = (builder) -> {
             //Crephoxl
             if (BioplethoraConfig.COMMON.spawnCrephoxl.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
             }
 
             //Alphem
             if (BioplethoraConfig.COMMON.spawnAlphem.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * spawnMultiplier, 4, 10));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 5 * spawnMultiplier, 4, 10));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.ALPHEM.get(), 18 * spawnMultiplier, 4, 10));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.ALPHEM.get(), 5 * spawnMultiplier, 4, 10));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
             //Crephoxl
             if (BioplethoraConfig.COMMON.spawnCrephoxl.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
             //Bellophgolem
             if (BioplethoraConfig.COMMON.spawnBellophgolem.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
             }
 
             //Crephoxl
             if (BioplethoraConfig.COMMON.spawnCrephoxl.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.CREPHOXL.get(), 7 * spawnMultiplier, 1, 1));
             }
 
             //Peaguin
             if (BioplethoraConfig.COMMON.spawnPeaguin.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.PEAGUIN.get(), 15 * spawnMultiplier, 3, 6));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.PEAGUIN.get(), 15 * spawnMultiplier, 3, 6));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> ICY_ENTITIES = (builder) -> {
             //Bellophgolem
             if (BioplethoraConfig.COMMON.spawnBellophgolem.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
             }
 
             //Peaguin
             if (BioplethoraConfig.COMMON.spawnPeaguin.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.PEAGUIN.get(), 25 * spawnMultiplier, 3, 6));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.PEAGUIN.get(), 25 * spawnMultiplier, 3, 6));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> SAVANNA_ENTITIES = (builder) -> {
             //Alphem
             if (BioplethoraConfig.COMMON.spawnAlphem.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 18 * spawnMultiplier, 4, 10));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.ALPHEM.get(), 5 * spawnMultiplier, 4, 10));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.ALPHEM.get(), 18 * spawnMultiplier, 4, 10));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.ALPHEM.get(), 5 * spawnMultiplier, 4, 10));
             }
 
             //Dwarf Mossadile
             if (BioplethoraConfig.COMMON.spawnDwarfMossadile.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.DWARF_MOSSADILE.get(), 30 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 5));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.DWARF_MOSSADILE.get(), 30 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 5));
             }
 
             // Trapjaw
             if(BioplethoraConfig.COMMON.spawnTrapjaw.get()) {
-                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 4 * spawnMultiplier, 1, 1));
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.TRAPJAW.get(), 14 * spawnMultiplier, 1, 1));
+                builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.TRAPJAW.get(), 4 * spawnMultiplier, 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.TRAPJAW.get(), 14 * spawnMultiplier, 1, 1));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
             //Cuttlefish
             if (BioplethoraConfig.COMMON.spawnCuttlefish.get()) {
-                builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BioplethoraEntities.CUTTLEFISH.get(), 70 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
+                builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BPEntities.CUTTLEFISH.get(), 70 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
             }
 
             //Myliothan
             if (BioplethoraConfig.COMMON.spawnMyliothan.get()) {
-                builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BioplethoraEntities.MYLIOTHAN.get(), BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 3));
+                builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BPEntities.MYLIOTHAN.get(), BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 3));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> NETHER_ENTITIES = (builder) -> {
             //Dwarf Mossadile
             if (BioplethoraConfig.COMMON.spawnDwarfMossadile.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.DWARF_MOSSADILE.get(), 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 6));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.DWARF_MOSSADILE.get(), 15 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 6));
             }
         };
 
         private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
             //Gaugalem
             if (BioplethoraConfig.COMMON.spawnGaugalem.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BioplethoraEntities.GAUGALEM.get(), 2 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.GAUGALEM.get(), 2 * BioplethoraConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
             }
         };
 

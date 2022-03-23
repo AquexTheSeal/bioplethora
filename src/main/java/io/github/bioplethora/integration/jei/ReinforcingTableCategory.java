@@ -2,8 +2,8 @@ package io.github.bioplethora.integration.jei;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.gui.recipe.ReinforcingRecipe;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraRecipes;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPRecipes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -20,12 +20,12 @@ import java.util.List;
 
 public class ReinforcingTableCategory implements IRecipeCategory<ReinforcingRecipe> {
 
-    public static final ResourceLocation CATEGORY_ID = new ResourceLocation(BioplethoraRecipes.REINFORCING.toString());
+    public static final ResourceLocation CATEGORY_ID = new ResourceLocation(BPRecipes.REINFORCING.toString());
     private IDrawable categoryIcon;
     private IDrawable categoryBackground;
 
     public ReinforcingTableCategory(IGuiHelper helper) {
-        categoryIcon = helper.createDrawableIngredient(new ItemStack(BioplethoraBlocks.REINFORCING_TABLE.get()));
+        categoryIcon = helper.createDrawableIngredient(new ItemStack(BPBlocks.REINFORCING_TABLE.get()));
         categoryBackground = helper.drawableBuilder(new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/jei/reinforcing.png"),
                 0, 0, 170, 80).setTextureSize(170, 80).build();
     }

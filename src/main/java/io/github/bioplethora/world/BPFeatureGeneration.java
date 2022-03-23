@@ -2,7 +2,7 @@ package io.github.bioplethora.world;
 
 import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraConfiguredFeatures;
+import io.github.bioplethora.registry.BPConfiguredFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -36,11 +36,11 @@ public class BPFeatureGeneration {
         List<Supplier<ConfiguredFeature<?, ?>>> locMod = event.getGeneration().getFeatures(GenerationStage.Decoration.LOCAL_MODIFICATIONS);
 
         if (types.contains(BiomeDictionary.Type.OVERWORLD)) {
-            undergroundDeco.add(() -> BioplethoraConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
-            undergroundDeco.add(() -> BioplethoraConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
+            undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
+            undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
 
-            locMod.add(() -> BioplethoraConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
-            locMod.add(() -> BioplethoraConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
+            locMod.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
+            locMod.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
         }
     }
 

@@ -13,12 +13,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 
-public class BioplethoraItemGroup {
+public class BPItemGroup {
     public static ItemGroup BioplethoraItemItemGroup = new ItemGroup("bioplethora_item_item_group") {
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(BioplethoraItems.ARBITRARY_BALLISTA.get());
+            return new ItemStack(BPItems.ARBITRARY_BALLISTA.get());
         }
 
         @OnlyIn(Dist.CLIENT)
@@ -45,7 +45,7 @@ public class BioplethoraItemGroup {
         public void fillItemList(NonNullList<ItemStack> items) {
             super.fillItemList(items);
 
-            for (RegistryObject<Enchantment> enchants : BioplethoraEnchantments.ENCHANTMENTS.getEntries()) {
+            for (RegistryObject<Enchantment> enchants : BPEnchantments.ENCHANTMENTS.getEntries()) {
                 Enchantment enchantment = enchants.get();
 
                 if (enchantment.isAllowedOnBooks()) {
@@ -59,7 +59,7 @@ public class BioplethoraItemGroup {
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(BioplethoraItems.PEAGUIN_SPAWN_EGG.get());
+            return new ItemStack(BPItems.PEAGUIN_SPAWN_EGG.get());
         }
 
         @OnlyIn(Dist.CLIENT)

@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class BioplethoraAdvancementHelper {
+public class BPAdvancementHelper {
 
     public static void grantBioAdvancement(Entity target, String advancement) {
         if (target instanceof ServerPlayerEntity) {

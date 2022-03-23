@@ -15,8 +15,8 @@ import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
-import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -67,7 +67,7 @@ public class ServerWorldEvents {
             }
 
             if (!eventEntity.level.isClientSide()) {
-                BioplethoraAdvancementHelper.grantBioAdvancement(eventEntity, "bioplethora:bioplethora_startup");
+                BPAdvancementHelper.grantBioAdvancement(eventEntity, "bioplethora:bioplethora_startup");
             }
 
             if (BioplethoraConfig.COMMON.startupBiopedia.get()) {
@@ -76,7 +76,7 @@ public class ServerWorldEvents {
                 CompoundNBT data = playerData.getCompound(PlayerEntity.PERSISTED_NBT_TAG);
 
                 if (!data.getBoolean("has_biopedia")) {
-                    ItemStack stack = new ItemStack(BioplethoraItems.BIOPEDIA.get());
+                    ItemStack stack = new ItemStack(BPItems.BIOPEDIA.get());
                     stack.setCount(1);
                     ItemHandlerHelper.giveItemToPlayer(eventEntity, stack);
                     data.putBoolean("has_biopedia", true);

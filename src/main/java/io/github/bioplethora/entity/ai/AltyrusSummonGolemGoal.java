@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.BellophgolemEntity;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.Goal;
@@ -42,7 +42,7 @@ public class AltyrusSummonGolemGoal extends Goal {
             if (this.summonTime == 400) {
                 BlockPos blockpos = this.altyrus.blockPosition();
 
-                BellophgolemEntity bellophgolemEntity = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
+                BellophgolemEntity bellophgolemEntity = BPEntities.BELLOPHGOLEM.get().create(world);
                 bellophgolemEntity.moveTo(blockpos, 0.0F, 0.0F);
                 bellophgolemEntity.setOwner(this.altyrus);
                 bellophgolemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
@@ -53,7 +53,7 @@ public class AltyrusSummonGolemGoal extends Goal {
 
                 serverworld.addFreshEntity(bellophgolemEntity);
 
-                BellophgolemEntity bellophgolemEntity2 = BioplethoraEntities.BELLOPHGOLEM.get().create(world);
+                BellophgolemEntity bellophgolemEntity2 = BPEntities.BELLOPHGOLEM.get().create(world);
                 bellophgolemEntity2.moveTo(blockpos, 0.0F, 0.0F);
                 bellophgolemEntity2.setOwner(this.altyrus);
                 bellophgolemEntity2.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);

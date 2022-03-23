@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -31,15 +31,15 @@ public class MagmaBombEntity extends ProjectileItemEntity {
     }
 
     public MagmaBombEntity(World world, LivingEntity entity) {
-        super(BioplethoraEntities.MAGMA_BOMB.get(), entity, world);
+        super(BPEntities.MAGMA_BOMB.get(), entity, world);
     }
 
     public MagmaBombEntity(World world, double v, double v1, double v2) {
-        super(BioplethoraEntities.MAGMA_BOMB.get(), v, v1, v2, world);
+        super(BPEntities.MAGMA_BOMB.get(), v, v1, v2, world);
     }
 
     protected Item getDefaultItem() {
-        return BioplethoraItems.MAGMA_BOMB.get();
+        return BPItems.MAGMA_BOMB.get();
     }
 
     @Override

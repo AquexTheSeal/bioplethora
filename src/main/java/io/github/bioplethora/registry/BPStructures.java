@@ -16,7 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BioplethoraStructures {
+public class BPStructures {
 
     public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, Bioplethora.MOD_ID);
 

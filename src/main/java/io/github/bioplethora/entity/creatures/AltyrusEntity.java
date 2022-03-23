@@ -9,8 +9,8 @@ import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -224,7 +224,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
         Entity sourceEnt = source.getEntity();
 
-        BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:altyrus_kill");
+        BPAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:altyrus_kill");
     }
 
     @Override
@@ -241,7 +241,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
     @Override
     public SoundEvent getAmbientSound() {
-        return BioplethoraSoundEvents.ALTYRUS_IDLE.get();
+        return BPSoundEvents.ALTYRUS_IDLE.get();
     }
 
     @Override
@@ -251,7 +251,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
     @Override
     public SoundEvent getDeathSound() {
-        return BioplethoraSoundEvents.BELLOPHGOLEM_DEATH.get();
+        return BPSoundEvents.BELLOPHGOLEM_DEATH.get();
     }
 
     public SoundEvent getDodgeSound() {
@@ -371,7 +371,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
             LivingEntity livingentity = AltyrusEntity.this.getTarget();
             Vector3d vector3d = livingentity.getEyePosition(1.0F);
             AltyrusEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
-            AltyrusEntity.this.playSound(BioplethoraSoundEvents.ALTYRUS_CHARGE.get(), 1.0F, 1.0F);
+            AltyrusEntity.this.playSound(BPSoundEvents.ALTYRUS_CHARGE.get(), 1.0F, 1.0F);
         }
         
         public void stop() {
@@ -450,7 +450,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
             }
 
             for(int i = 0; i < 3; ++i) {
-                BlockPos blockpos1 = blockpos.offset(AltyrusEntity.this.random.nextInt(15) - 7, AltyrusEntity.this.random.nextInt(11) - 3, AltyrusEntity.this.random.nextInt(15) - 7);
+                BlockPos blockpos1 = blockpos.offset(AltyrusEntity.this.random.nextInt(15) - 7, AltyrusEntity.this.random.nextInt(11) - 7, AltyrusEntity.this.random.nextInt(15) - 7);
                 if (AltyrusEntity.this.level.isEmptyBlock(blockpos1)) {
                     AltyrusEntity.this.moveControl.setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
                     if (AltyrusEntity.this.getTarget() == null) {

@@ -1,7 +1,7 @@
 package io.github.bioplethora.enums;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
@@ -15,13 +15,13 @@ import java.util.function.Supplier;
 public enum BPArmorMaterials implements IArmorMaterial {
 
     FLEIGNARITE("fleignarite", 22, new int[]{2, 5, 6, 2}, 12, SoundEvents.ARMOR_EQUIP_ELYTRA, 1.0F, 0.0F, () -> {
-        return Ingredient.of(BioplethoraItems.FLEIGNARITE_SCALES.get());
+        return Ingredient.of(BPItems.FLEIGNARITE_SCALES.get());
     }),
     REINFORCED_FLEIGNARITE("reinforced_fleignarite", 58, new int[]{5, 9, 8, 4}, 22, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.15F, () -> {
-        return Ingredient.of(BioplethoraItems.REINFORCED_FLEIGNARITE.get());
+        return Ingredient.of(BPItems.REINFORCED_FLEIGNARITE.get());
     }),
     PEAGUIN_SCALES("peaguin_scales", 17, new int[]{2, 5, 6, 2}, 15, SoundEvents.ARMOR_EQUIP_TURTLE, 0.0F, 0.0F, () -> {
-        return Ingredient.of(BioplethoraItems.PEAGUIN_SCALES.get());
+        return Ingredient.of(BPItems.PEAGUIN_SCALES.get());
     });
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };

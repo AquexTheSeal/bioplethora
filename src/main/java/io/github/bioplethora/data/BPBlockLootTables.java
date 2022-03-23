@@ -1,8 +1,8 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,57 +14,57 @@ public class BPBlockLootTables extends BlockLootTables {
 
     @Override
     protected void addTables() {
-        dropSelf(BioplethoraBlocks.NANDBRI_SCALE_BLOCK.get());
-        dropSelf(BioplethoraBlocks.BELLOPHITE_BLOCK.get());
-        dropSelf(BioplethoraBlocks.BELLOPHITE_CORE_BLOCK.get());
+        dropSelf(BPBlocks.NANDBRI_SCALE_BLOCK.get());
+        dropSelf(BPBlocks.BELLOPHITE_BLOCK.get());
+        dropSelf(BPBlocks.BELLOPHITE_CORE_BLOCK.get());
 
-        dropSelf(BioplethoraBlocks.MIRESTONE.get());
+        dropSelf(BPBlocks.MIRESTONE.get());
 
-        add(BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch, BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get()));
-        add(BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch, BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get()));
-        add(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch, BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
+        add(BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
+                -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get()));
+        add(BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
+                -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get()));
+        add(BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
+                -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
 
-        dropSelf(BioplethoraBlocks.REINFORCING_TABLE.get());
+        dropSelf(BPBlocks.REINFORCING_TABLE.get());
 
-        dropOther(BioplethoraBlocks.FLEIGNARITE_REMAINS.get(), BioplethoraItems.FLEIGNARITE_SCALES.get());
-        dropOther(BioplethoraBlocks.FLEIGNARITE_SPLOTCH.get(), BioplethoraItems.FLEIGNARITE_SCALES.get());
-        dropOther(BioplethoraBlocks.FLEIGNARITE_VINES.get(), BioplethoraItems.FLEIGNARITE_SCALES.get());
-        dropOther(BioplethoraBlocks.FLEIGNARITE_VINES_PLANT.get(), BioplethoraItems.FLEIGNARITE_SCALES.get());
+        dropOther(BPBlocks.FLEIGNARITE_REMAINS.get(), BPItems.FLEIGNARITE_SCALES.get());
+        dropOther(BPBlocks.FLEIGNARITE_SPLOTCH.get(), BPItems.FLEIGNARITE_SCALES.get());
+        dropOther(BPBlocks.FLEIGNARITE_VINES.get(), BPItems.FLEIGNARITE_SCALES.get());
+        dropOther(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), BPItems.FLEIGNARITE_SCALES.get());
 
         // Alphanum Stone Set
-        dropSelf(BioplethoraBlocks.ALPHANUM.get());
-        dropSelf(BioplethoraBlocks.ALPHANUM_BRICKS.get());
-        dropSelf(BioplethoraBlocks.POLISHED_ALPHANUM.get());
-        dropSelf(BioplethoraBlocks.ALPHANUM_PILLAR.get());
-        dropSelf(BioplethoraBlocks.ALPHANUM_NUCLEUS.get());
+        dropSelf(BPBlocks.ALPHANUM.get());
+        dropSelf(BPBlocks.ALPHANUM_BRICKS.get());
+        dropSelf(BPBlocks.POLISHED_ALPHANUM.get());
+        dropSelf(BPBlocks.ALPHANUM_PILLAR.get());
+        dropSelf(BPBlocks.ALPHANUM_NUCLEUS.get());
 
-        dropSelf(BioplethoraBlocks.ALPHANUM_STAIRS.get());
-        dropSelf(BioplethoraBlocks.ALPHANUM_STAIRS_BRICKS.get());
-        dropSelf(BioplethoraBlocks.POLISHED_ALPHANUM_STAIRS.get());
-        dropSelf(BioplethoraBlocks.ALPHANUM_WALL.get());
-        dropSelf(BioplethoraBlocks.ALPHANUM_WALL_BRICKS.get());
-        dropSelf(BioplethoraBlocks.POLISHED_ALPHANUM_WALL.get());
-        dropSelf(BioplethoraBlocks.ALPHANUM_SLAB.get());
-        dropSelf(BioplethoraBlocks.ALPHANUM_SLAB_BRICKS.get());
-        dropSelf(BioplethoraBlocks.POLISHED_ALPHANUM_SLAB.get());
+        dropSelf(BPBlocks.ALPHANUM_STAIRS.get());
+        dropSelf(BPBlocks.ALPHANUM_STAIRS_BRICKS.get());
+        dropSelf(BPBlocks.POLISHED_ALPHANUM_STAIRS.get());
+        dropSelf(BPBlocks.ALPHANUM_WALL.get());
+        dropSelf(BPBlocks.ALPHANUM_WALL_BRICKS.get());
+        dropSelf(BPBlocks.POLISHED_ALPHANUM_WALL.get());
+        dropSelf(BPBlocks.ALPHANUM_SLAB.get());
+        dropSelf(BPBlocks.ALPHANUM_SLAB_BRICKS.get());
+        dropSelf(BPBlocks.POLISHED_ALPHANUM_SLAB.get());
 
         // Petrawood woodset
-        dropSelf(BioplethoraBlocks.PETRAWOOD_LOG.get());
-        dropSelf(BioplethoraBlocks.PETRAWOOD_WOOD.get());
-        dropSelf(BioplethoraBlocks.STRIPPED_PETRAWOOD_LOG.get());
-        dropSelf(BioplethoraBlocks.STRIPPED_PETRAWOOD_WOOD.get());
-        dropSelf(BioplethoraBlocks.PETRAWOOD_PLANKS.get());
-        add(BioplethoraBlocks.PETRAWOOD_LEAVES.get(), createShearsOnlyDrop(BioplethoraBlocks.PETRAWOOD_LEAVES.get()));
+        dropSelf(BPBlocks.PETRAWOOD_LOG.get());
+        dropSelf(BPBlocks.PETRAWOOD_WOOD.get());
+        dropSelf(BPBlocks.STRIPPED_PETRAWOOD_LOG.get());
+        dropSelf(BPBlocks.STRIPPED_PETRAWOOD_WOOD.get());
+        dropSelf(BPBlocks.PETRAWOOD_PLANKS.get());
+        add(BPBlocks.PETRAWOOD_LEAVES.get(), createShearsOnlyDrop(BPBlocks.PETRAWOOD_LEAVES.get()));
 
-        dropSelf(BioplethoraBlocks.PETRAWOOD_FENCE.get());
-        dropSelf(BioplethoraBlocks.PETRAWOOD_FENCE_GATE.get());
-        dropSelf(BioplethoraBlocks.PETRAWOOD_SLAB.get());
-        dropSelf(BioplethoraBlocks.PETRAWOOD_PRESSURE_PLATE.get());
-        dropSelf(BioplethoraBlocks.PETRAWOOD_STAIRS.get());
-        dropSelf(BioplethoraBlocks.PETRAWOOD_BUTTON.get());
+        dropSelf(BPBlocks.PETRAWOOD_FENCE.get());
+        dropSelf(BPBlocks.PETRAWOOD_FENCE_GATE.get());
+        dropSelf(BPBlocks.PETRAWOOD_SLAB.get());
+        dropSelf(BPBlocks.PETRAWOOD_PRESSURE_PLATE.get());
+        dropSelf(BPBlocks.PETRAWOOD_STAIRS.get());
+        dropSelf(BPBlocks.PETRAWOOD_BUTTON.get());
     }
 
     @Override

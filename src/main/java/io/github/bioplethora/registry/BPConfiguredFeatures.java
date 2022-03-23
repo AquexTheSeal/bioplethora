@@ -12,11 +12,11 @@ import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.placement.CaveEdgeConfig;
 import net.minecraft.world.gen.placement.Placement;
 
-public class BioplethoraConfiguredFeatures {
+public class BPConfiguredFeatures {
 
-    public static final ConfiguredFeature<?, ?> FLEIGNARITE_REMAINS_CONFIG = BioplethoraFeatures.FLEIGNARITE_PATCH.get()
-            .configured(new FleignariteSplotchConfig(BioplethoraBlocks.FLEIGNARITE_REMAINS.get().defaultBlockState(),
-                    BioplethoraBlocks.FLEIGNARITE_SPLOTCH.get().defaultBlockState(),
+    public static final ConfiguredFeature<?, ?> FLEIGNARITE_REMAINS_CONFIG = BPFeatures.FLEIGNARITE_PATCH.get()
+            .configured(new FleignariteSplotchConfig(BPBlocks.FLEIGNARITE_REMAINS.get().defaultBlockState(),
+                    BPBlocks.FLEIGNARITE_SPLOTCH.get().defaultBlockState(),
                     BPFeatureGeneration.stoneBlockstates(),
                     ImmutableList.of(Blocks.CAVE_AIR.defaultBlockState(), Blocks.AIR.defaultBlockState()),
                     ImmutableList.of(Blocks.CAVE_AIR.defaultBlockState(), Blocks.AIR.defaultBlockState())))
@@ -25,11 +25,11 @@ public class BioplethoraConfiguredFeatures {
                             .count(FeatureSpread.of(14, 27))
                     );
 
-    public static final ConfiguredFeature<?, ?> FLEIGNARITE_VINES_CONFIG = BioplethoraFeatures.PENDENT_FLEIGNARITE.get()
+    public static final ConfiguredFeature<?, ?> FLEIGNARITE_VINES_CONFIG = BPFeatures.PENDENT_FLEIGNARITE.get()
             .configured(new PendentBlocksFeatureConfig.Builder()
                     .setTopBlock(Blocks.STONE)
-                    .setMiddleBlock(BioplethoraBlocks.FLEIGNARITE_VINES_PLANT.get())
-                    .setEndBlock(BioplethoraBlocks.FLEIGNARITE_VINES.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
+                    .setMiddleBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get())
+                    .setEndBlock(BPBlocks.FLEIGNARITE_VINES.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
                     .setWhitelist(BPFeatureGeneration.stoneBlocks())
                     .setMaxLength(2)
                     .build())

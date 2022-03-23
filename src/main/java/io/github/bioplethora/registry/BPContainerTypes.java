@@ -9,7 +9,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BioplethoraContainerTypes {
+public class BPContainerTypes {
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Bioplethora.MOD_ID);
 
     public static final RegistryObject<ContainerType<AbstractReinforcingContainer>> REINFORCING_TABLE_CONTAINER

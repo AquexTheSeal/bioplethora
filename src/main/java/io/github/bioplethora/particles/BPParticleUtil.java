@@ -1,7 +1,7 @@
 package io.github.bioplethora.particles;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraParticles;
+import io.github.bioplethora.registry.BPParticles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -17,8 +17,8 @@ public class BPParticleUtil {
 
         ParticleManager engine = Minecraft.getInstance().particleEngine;
 
-        engine.register(BioplethoraParticles.WIND_POOF.get(), WindPoofParticle.Factory::new);
-        engine.register(BioplethoraParticles.NIGHT_GAZE.get(), NightGazeParticle.Factory::new);
-        engine.register(BioplethoraParticles.ANTIBIO_SPELL.get(), AntibioSpellParticle.Factory::new);
+        engine.register(BPParticles.WIND_POOF.get(), WindPoofParticle.Factory::new);
+        engine.register(BPParticles.NIGHT_GAZE.get(), NightGazeParticle.Factory::new);
+        engine.register(BPParticles.ANTIBIO_SPELL.get(), AntibioSpellParticle.Factory::new);
     }
 }

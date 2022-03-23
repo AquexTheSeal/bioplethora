@@ -2,7 +2,7 @@ package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
-import io.github.bioplethora.registry.BioplethoraBlocks;
+import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
@@ -25,53 +25,53 @@ public class BioBlockstateProvider extends BlockStateProvider {
      */
     @Override
     protected void registerStatesAndModels() {
-        this.simpleBlock(BioplethoraBlocks.BELLOPHITE_BLOCK.get());
-        this.simpleBlock(BioplethoraBlocks.BELLOPHITE_CORE_BLOCK.get());
-        this.simpleBlock(BioplethoraBlocks.NANDBRI_SCALE_BLOCK.get());
+        this.simpleBlock(BPBlocks.BELLOPHITE_BLOCK.get());
+        this.simpleBlock(BPBlocks.BELLOPHITE_CORE_BLOCK.get());
+        this.simpleBlock(BPBlocks.NANDBRI_SCALE_BLOCK.get());
 
-        this.simpleBlock(BioplethoraBlocks.MIRESTONE.get());
+        this.simpleBlock(BPBlocks.MIRESTONE.get());
 
-        this.simpleBlock(BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get());
-        this.simpleBlock(BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
-        this.simpleBlock(BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
+        this.simpleBlock(BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get());
+        this.simpleBlock(BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
+        this.simpleBlock(BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
 
-        this.simpleCarpetBlock(BioplethoraBlocks.FLEIGNARITE_REMAINS.get());
-        this.simpleCrossBlock(BioplethoraBlocks.FLEIGNARITE_VINES.get());
-        this.simpleCrossBlock(BioplethoraBlocks.FLEIGNARITE_VINES_PLANT.get());
+        this.simpleCarpetBlock(BPBlocks.FLEIGNARITE_REMAINS.get());
+        this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES.get());
+        this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get());
 
         //this.threeSideFacingBlock(BioplethoraBlocks.REINFORCING_TABLE.get());
 
         // Alphanum stone set
-        this.simpleBlock(BioplethoraBlocks.ALPHANUM.get());
-        this.simpleBlock(BioplethoraBlocks.ALPHANUM_BRICKS.get());
-        this.simpleBlock(BioplethoraBlocks.POLISHED_ALPHANUM.get());
-        this.logBlock(BioplethoraBlocks.ALPHANUM_PILLAR.get());
-        this.differentTopLogBlock(BioplethoraBlocks.ALPHANUM_NUCLEUS.get(), BioplethoraBlocks.ALPHANUM_PILLAR.get());
+        this.simpleBlock(BPBlocks.ALPHANUM.get());
+        this.simpleBlock(BPBlocks.ALPHANUM_BRICKS.get());
+        this.simpleBlock(BPBlocks.POLISHED_ALPHANUM.get());
+        this.logBlock(BPBlocks.ALPHANUM_PILLAR.get());
+        this.differentTopLogBlock(BPBlocks.ALPHANUM_NUCLEUS.get(), BPBlocks.ALPHANUM_PILLAR.get());
 
-        this.stairsBlock(BioplethoraBlocks.ALPHANUM_STAIRS.get(), bioResLoc("alphanum"));
-        this.stairsBlock(BioplethoraBlocks.ALPHANUM_STAIRS_BRICKS.get(), bioResLoc("alphanum_bricks"));
-        this.stairsBlock(BioplethoraBlocks.POLISHED_ALPHANUM_STAIRS.get(), bioResLoc("polished_alphanum"));
-        this.wallBlock(BioplethoraBlocks.ALPHANUM_WALL.get(), bioResLoc("alphanum"));
-        this.wallBlock(BioplethoraBlocks.ALPHANUM_WALL_BRICKS.get(), bioResLoc("alphanum_bricks"));
-        this.wallBlock(BioplethoraBlocks.POLISHED_ALPHANUM_WALL.get(), bioResLoc("polished_alphanum"));
-        this.slabBlock(BioplethoraBlocks.ALPHANUM_SLAB.get(), bioResLoc("alphanum"), bioResLoc("alphanum"));
-        this.slabBlock(BioplethoraBlocks.ALPHANUM_SLAB_BRICKS.get(), bioResLoc("alphanum_bricks"), bioResLoc("alphanum_bricks"));
-        this.slabBlock(BioplethoraBlocks.POLISHED_ALPHANUM_SLAB.get(), bioResLoc("polished_alphanum"), bioResLoc("polished_alphanum"));
+        this.stairsBlock(BPBlocks.ALPHANUM_STAIRS.get(), bioResLoc("alphanum"));
+        this.stairsBlock(BPBlocks.ALPHANUM_STAIRS_BRICKS.get(), bioResLoc("alphanum_bricks"));
+        this.stairsBlock(BPBlocks.POLISHED_ALPHANUM_STAIRS.get(), bioResLoc("polished_alphanum"));
+        this.wallBlock(BPBlocks.ALPHANUM_WALL.get(), bioResLoc("alphanum"));
+        this.wallBlock(BPBlocks.ALPHANUM_WALL_BRICKS.get(), bioResLoc("alphanum_bricks"));
+        this.wallBlock(BPBlocks.POLISHED_ALPHANUM_WALL.get(), bioResLoc("polished_alphanum"));
+        this.slabBlock(BPBlocks.ALPHANUM_SLAB.get(), bioResLoc("alphanum"), bioResLoc("alphanum"));
+        this.slabBlock(BPBlocks.ALPHANUM_SLAB_BRICKS.get(), bioResLoc("alphanum_bricks"), bioResLoc("alphanum_bricks"));
+        this.slabBlock(BPBlocks.POLISHED_ALPHANUM_SLAB.get(), bioResLoc("polished_alphanum"), bioResLoc("polished_alphanum"));
 
         // Petrawood woodset
-        this.fixedLogBlock(BioplethoraBlocks.PETRAWOOD_LOG.get());
-        this.woodBlock(BioplethoraBlocks.PETRAWOOD_WOOD.get(), bioResLoc("petrawood_log_side"));
-        this.fixedLogBlock(BioplethoraBlocks.STRIPPED_PETRAWOOD_LOG.get());
-        this.woodBlock(BioplethoraBlocks.STRIPPED_PETRAWOOD_WOOD.get(), bioResLoc("stripped_petrawood_log_side"));
-        this.simpleBlock(BioplethoraBlocks.PETRAWOOD_PLANKS.get());
-        this.simpleBlock(BioplethoraBlocks.PETRAWOOD_LEAVES.get());
+        this.fixedLogBlock(BPBlocks.PETRAWOOD_LOG.get());
+        this.woodBlock(BPBlocks.PETRAWOOD_WOOD.get(), bioResLoc("petrawood_log_side"));
+        this.fixedLogBlock(BPBlocks.STRIPPED_PETRAWOOD_LOG.get());
+        this.woodBlock(BPBlocks.STRIPPED_PETRAWOOD_WOOD.get(), bioResLoc("stripped_petrawood_log_side"));
+        this.simpleBlock(BPBlocks.PETRAWOOD_PLANKS.get());
+        this.simpleBlock(BPBlocks.PETRAWOOD_LEAVES.get());
 
-        this.fenceBlock(BioplethoraBlocks.PETRAWOOD_FENCE.get(), bioResLoc("petrawood_planks"));
-        this.fenceGateBlock(BioplethoraBlocks.PETRAWOOD_FENCE_GATE.get(), bioResLoc("petrawood_planks"));
-        this.slabBlock(BioplethoraBlocks.PETRAWOOD_SLAB.get(), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
-        this.pressurePlateBlock(BioplethoraBlocks.PETRAWOOD_PRESSURE_PLATE.get(), bioResLoc("petrawood_planks"));
-        this.stairsBlock(BioplethoraBlocks.PETRAWOOD_STAIRS.get(), bioResLoc("petrawood_planks"));
-        this.buttonBlock(BioplethoraBlocks.PETRAWOOD_BUTTON.get(), bioResLoc("petrawood_planks"));
+        this.fenceBlock(BPBlocks.PETRAWOOD_FENCE.get(), bioResLoc("petrawood_planks"));
+        this.fenceGateBlock(BPBlocks.PETRAWOOD_FENCE_GATE.get(), bioResLoc("petrawood_planks"));
+        this.slabBlock(BPBlocks.PETRAWOOD_SLAB.get(), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
+        this.pressurePlateBlock(BPBlocks.PETRAWOOD_PRESSURE_PLATE.get(), bioResLoc("petrawood_planks"));
+        this.stairsBlock(BPBlocks.PETRAWOOD_STAIRS.get(), bioResLoc("petrawood_planks"));
+        this.buttonBlock(BPBlocks.PETRAWOOD_BUTTON.get(), bioResLoc("petrawood_planks"));
     }
 
     private ResourceLocation bioResLoc(String texture) {

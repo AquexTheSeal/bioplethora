@@ -1,9 +1,9 @@
 package io.github.bioplethora.blocks;
 
 import io.github.bioplethora.entity.others.AltyrusSummoningEntity;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -63,10 +63,10 @@ public class BellophiteCoreBlock extends Block {
         BlockPos b3 = new BlockPos(x, y - 1, z + 3);
         BlockPos b4 = new BlockPos(x, y - 1, z - 3);
 
-        if (entity.getMainHandItem().getItem() == BioplethoraItems.BELLOPHITE.get()) {
+        if (entity.getMainHandItem().getItem() == BPItems.BELLOPHITE.get()) {
 
-            if (((world.getBlockState(c1)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
-                    ((world.getBlockState(c2)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
+            if (((world.getBlockState(c1)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
+                    ((world.getBlockState(c2)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
                     //top layer
                     ((world.getBlockState(t1)).getBlock() == Blocks.CHAIN) &&
                     ((world.getBlockState(t2)).getBlock() == Blocks.CHAIN) &&
@@ -76,20 +76,20 @@ public class BellophiteCoreBlock extends Block {
                     ((world.getBlockState(t6)).getBlock() == Blocks.CHAIN) &&
                     ((world.getBlockState(t7)).getBlock() == Blocks.CHAIN) &&
                     ((world.getBlockState(t8)).getBlock() == Blocks.CHAIN) &&
-                    ((world.getBlockState(t9)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
-                    ((world.getBlockState(t10)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
-                    ((world.getBlockState(t11)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
-                    ((world.getBlockState(t12)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
+                    ((world.getBlockState(t9)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
+                    ((world.getBlockState(t10)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
+                    ((world.getBlockState(t11)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
+                    ((world.getBlockState(t12)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
                     //mid layer
                     ((world.getBlockState(m1)).getBlock() == Blocks.CHAIN) &&
                     ((world.getBlockState(m2)).getBlock() == Blocks.CHAIN) &&
                     ((world.getBlockState(m3)).getBlock() == Blocks.CHAIN) &&
                     ((world.getBlockState(m4)).getBlock() == Blocks.CHAIN) &&
                     //bottom layer
-                    ((world.getBlockState(b1)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
-                    ((world.getBlockState(b2)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
-                    ((world.getBlockState(b3)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get()) &&
-                    ((world.getBlockState(b4)).getBlock() == BioplethoraBlocks.BELLOPHITE_BLOCK.get())) {
+                    ((world.getBlockState(b1)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
+                    ((world.getBlockState(b2)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
+                    ((world.getBlockState(b3)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get()) &&
+                    ((world.getBlockState(b4)).getBlock() == BPBlocks.BELLOPHITE_BLOCK.get())) {
 
                 if (!entity.isCreative()) {
                     entity.getMainHandItem().shrink(1);
@@ -117,7 +117,7 @@ public class BellophiteCoreBlock extends Block {
                     ((ServerWorld) world).sendParticles(ParticleTypes.POOF, x, y, z, 40, 0.4, 0.4, 0.4, 0.1);
                     ServerWorld serverworld = (ServerWorld) world;
                     BlockPos blockpos = (new BlockPos(x, y, z));
-                    AltyrusSummoningEntity altyrusSummoningEntity = BioplethoraEntities.ALTYRUS_SUMMONING.get().create(world);
+                    AltyrusSummoningEntity altyrusSummoningEntity = BPEntities.ALTYRUS_SUMMONING.get().create(world);
                     altyrusSummoningEntity.moveTo(blockpos, 0.0F, 0.0F);
 
                     serverworld.addFreshEntity(altyrusSummoningEntity);

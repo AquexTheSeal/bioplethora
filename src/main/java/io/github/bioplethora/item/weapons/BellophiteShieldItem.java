@@ -2,7 +2,7 @@ package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.others.BellophiteShieldWaveEntity;
 import io.github.bioplethora.item.ItemSettings;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -76,7 +76,7 @@ public class BellophiteShieldItem extends ShieldItem {
             if (this.getIsCharged()) {
                 world.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundCategory.PLAYERS, 1, 1);
 
-                BellophiteShieldWaveEntity shieldWave = BioplethoraEntities.BELLOPHITE_SHIELD_WAVE.get().create(player.level);
+                BellophiteShieldWaveEntity shieldWave = BPEntities.BELLOPHITE_SHIELD_WAVE.get().create(player.level);
                 shieldWave.setOwner(player);
                 shieldWave.moveTo(pos, 0.0F, 0.0F);
 

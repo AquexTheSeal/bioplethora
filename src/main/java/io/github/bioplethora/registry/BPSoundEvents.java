@@ -7,7 +7,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BioplethoraSoundEvents {
+public class BPSoundEvents {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Bioplethora.MOD_ID);
 
     public static final RegistryObject<SoundEvent> CREPHOXL_IDLE = SOUNDS.register("crephoxl_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "crephoxl_idle")));

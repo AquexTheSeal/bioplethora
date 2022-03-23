@@ -6,7 +6,7 @@ import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.item.weapons.StellarScytheItem;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -50,7 +50,7 @@ public class GaugalemEntity extends FloatingMonsterEntity implements IAnimatable
 
     public GaugalemEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
-        this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(BioplethoraItems.STELLAR_SCYTHE.get()));
+        this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(BPItems.STELLAR_SCYTHE.get()));
         this.moveControl = new GaugalemEntity.MoveHelperController(this);
     }
 

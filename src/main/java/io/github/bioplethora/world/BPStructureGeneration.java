@@ -2,7 +2,7 @@ package io.github.bioplethora.world;
 
 import com.mojang.serialization.Codec;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraStructures;
+import io.github.bioplethora.registry.BPStructures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -42,7 +42,7 @@ public class BPStructureGeneration {
         if (types.contains(BiomeDictionary.Type.COLD) || types.contains(BiomeDictionary.Type.MOUNTAIN)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
 
-            structures.add(() -> BioplethoraStructures.ALPHANUM_MAUSOLEUM.get().configured(IFeatureConfig.NONE));
+            structures.add(() -> BPStructures.ALPHANUM_MAUSOLEUM.get().configured(IFeatureConfig.NONE));
         }
     }
 
@@ -71,7 +71,7 @@ public class BPStructureGeneration {
             Map<Structure<?>, StructureSeparationSettings> tempMap =
                     new HashMap<Structure<?>, StructureSeparationSettings>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
 
-            tempMap.putIfAbsent(BioplethoraStructures.ALPHANUM_MAUSOLEUM.get(), DimensionStructuresSettings.DEFAULTS.get(BioplethoraStructures.ALPHANUM_MAUSOLEUM.get()));
+            tempMap.putIfAbsent(BPStructures.ALPHANUM_MAUSOLEUM.get(), DimensionStructuresSettings.DEFAULTS.get(BPStructures.ALPHANUM_MAUSOLEUM.get()));
 
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }

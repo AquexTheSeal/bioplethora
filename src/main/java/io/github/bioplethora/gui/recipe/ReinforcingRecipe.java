@@ -2,8 +2,8 @@ package io.github.bioplethora.gui.recipe;
 
 import com.google.gson.JsonObject;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraRecipes;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
@@ -62,7 +62,7 @@ public class ReinforcingRecipe implements IRecipe<IInventory> {
     }
 
     public ItemStack getIcon() {
-        return new ItemStack(BioplethoraBlocks.REINFORCING_TABLE.get());
+        return new ItemStack(BPBlocks.REINFORCING_TABLE.get());
     }
 
     public ItemStack getResult() {
@@ -78,7 +78,7 @@ public class ReinforcingRecipe implements IRecipe<IInventory> {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(BioplethoraBlocks.REINFORCING_TABLE.get());
+        return new ItemStack(BPBlocks.REINFORCING_TABLE.get());
     }
 
     @Override
@@ -88,11 +88,11 @@ public class ReinforcingRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return BioplethoraRecipes.REINFORCING_SERIALIZER.get();
+        return BPRecipes.REINFORCING_SERIALIZER.get();
     }
 
     public IRecipeType<?> getType() {
-        return BioplethoraRecipes.REINFORCING;
+        return BPRecipes.REINFORCING;
     }
 
 

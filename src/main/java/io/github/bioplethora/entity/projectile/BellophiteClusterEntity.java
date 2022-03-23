@@ -2,8 +2,8 @@ package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
-import io.github.bioplethora.registry.BioplethoraDamageSources;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPDamageSources;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -47,11 +47,11 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
 
     @OnlyIn(Dist.CLIENT)
     public BellophiteClusterEntity(World world, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
-        super(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
+        super(BPEntities.BELLOPHITE_CLUSTER.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
     }
 
     public BellophiteClusterEntity(World world, LivingEntity p_i1769_2_, double p_i1769_3_, double p_i1769_5_, double p_i1769_7_) {
-        super(BioplethoraEntities.BELLOPHITE_CLUSTER.get(), p_i1769_2_, p_i1769_3_, p_i1769_5_, p_i1769_7_, world);
+        super(BPEntities.BELLOPHITE_CLUSTER.get(), p_i1769_2_, p_i1769_3_, p_i1769_5_, p_i1769_7_, world);
     }
 
 
@@ -105,7 +105,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         double x = this.getX(), y = this.getY(), z = this.getZ();
         BlockPos blockpos = new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ());
         AxisAlignedBB area = new AxisAlignedBB(this.getX() - (7 / 2d), this.getY() - (7 / 2d), this.getZ() - (7 / 2d), this.getX() + (7 / 2d), this.getY() + (7 / 2d), this.getZ() + (7 / 2d));
-        DamageSource castration = BioplethoraDamageSources.indirectCastration(this.getOwner(), this.getOwner());
+        DamageSource castration = BPDamageSources.indirectCastration(this.getOwner(), this.getOwner());
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 20, 0.4, 0.4, 0.4, 0.1);

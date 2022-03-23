@@ -37,22 +37,22 @@ public class Bioplethora {
         final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         /* final step of registering elements like Items, Entities, etc. */
-        BioplethoraItems.ITEMS.register(bus);
-        BioplethoraBlocks.BLOCK_ITEMS.register(bus);
-        BioplethoraEntities.ENTITIES.register(bus);
-        BioplethoraBlocks.BLOCKS.register(bus);
-        BioplethoraSoundEvents.SOUNDS.register(bus);
-        BioplethoraParticles.PARTICLES.register(bus);
-        BioplethoraBiomes.BIOMES.register(bus);
-        BioplethoraEffects.EFFECTS.register(bus);
-        BioplethoraEnchantments.ENCHANTMENTS.register(bus);
-        BioplethoraStructures.STRUCTURES.register(bus);
-        BioplethoraFeatures.FEATURES.register(bus);
+        BPItems.ITEMS.register(bus);
+        BPBlocks.BLOCK_ITEMS.register(bus);
+        BPEntities.ENTITIES.register(bus);
+        BPBlocks.BLOCKS.register(bus);
+        BPSoundEvents.SOUNDS.register(bus);
+        BPParticles.PARTICLES.register(bus);
+        BPBiomes.BIOMES.register(bus);
+        BPEffects.EFFECTS.register(bus);
+        BPEnchantments.ENCHANTMENTS.register(bus);
+        BPStructures.STRUCTURES.register(bus);
+        BPFeatures.FEATURES.register(bus);
 
         BioplethoraTileEntities.TILE_ENTITIES.register(bus);
-        BioplethoraContainerTypes.CONTAINERS.register(bus);
+        BPContainerTypes.CONTAINERS.register(bus);
 
-        BioplethoraRecipes.registerRecipes(bus);
+        BPRecipes.registerRecipes(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);
@@ -80,7 +80,7 @@ public class Bioplethora {
 
         BPNetwork.initializeNetwork();
         BPBiomeGeneration.generateBiomes();
-        BioplethoraStructures.setupStructures();
+        BPStructures.setupStructures();
     }
 
     private void gatherData(final GatherDataEvent event) {

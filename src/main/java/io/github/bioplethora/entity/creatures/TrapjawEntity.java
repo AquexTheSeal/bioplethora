@@ -6,7 +6,7 @@ import io.github.bioplethora.entity.ai.WaterFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
@@ -162,7 +162,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     @Nullable
     @Override
     public AgeableEntity getBreedOffspring(ServerWorld serverWorld, AgeableEntity entity) {
-        TrapjawEntity trapjaw = BioplethoraEntities.TRAPJAW.get().create(serverWorld);
+        TrapjawEntity trapjaw = BPEntities.TRAPJAW.get().create(serverWorld);
         UUID uuid = this.getOwnerUUID();
         if (uuid != null) {
             trapjaw.setOwnerUUID(uuid);

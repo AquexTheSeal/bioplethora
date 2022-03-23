@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons.fleignarite_set;
 
 import io.github.bioplethora.item.ItemSettings;
-import io.github.bioplethora.registry.BioplethoraDamageSources;
+import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -33,7 +33,7 @@ public class FleignariteAbilities {
         target.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, target.getRandom().nextBoolean() ? 40 : 60, 1, false, false, false));
         target.addEffect(new EffectInstance(Effects.CONFUSION, target.getRandom().nextBoolean() ? 60 : 40, 0, false, false, false));
 
-        target.hurt(BioplethoraDamageSources.armorPiercingFleignarite(attacker, attacker), (float) 2);
+        target.hurt(BPDamageSources.armorPiercingFleignarite(attacker, attacker), (float) 2);
     }
 
     public static void regenerateItem(ItemStack stack, Entity entity) {

@@ -8,7 +8,7 @@ import io.github.bioplethora.entity.ai.WaterFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -205,7 +205,7 @@ public class PeaguinEntity extends WaterAndLandAnimalEntity implements IAnimatab
     }
 
     public PeaguinEntity getBreedOffspring(ServerWorld serverWorld, AgeableEntity ageableEntity) {
-        PeaguinEntity peaguinEntity = BioplethoraEntities.PEAGUIN.get().create(serverWorld);
+        PeaguinEntity peaguinEntity = BPEntities.PEAGUIN.get().create(serverWorld);
         UUID uuid = this.getOwnerUUID();
         if (uuid != null) {
             peaguinEntity.setOwnerUUID(uuid);

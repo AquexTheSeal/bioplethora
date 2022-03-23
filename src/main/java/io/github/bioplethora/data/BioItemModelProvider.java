@@ -1,8 +1,8 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
@@ -29,13 +29,13 @@ public class BioItemModelProvider extends ItemModelProvider {
      */
     @Override
     public void registerModels() {
-        this.defaultItem(BioplethoraItems.ITEMS.getEntries());
-        this.defaultBlock(BioplethoraBlocks.BLOCK_ITEMS.getEntries());
+        this.defaultItem(BPItems.ITEMS.getEntries());
+        this.defaultBlock(BPBlocks.BLOCK_ITEMS.getEntries());
 
-        this.grylynenShield(BioplethoraItems.GREEN_CRYSTAL_SHIELD);
-        this.grylynenShield(BioplethoraItems.YELLOW_CRYSTAL_SHIELD);
+        this.grylynenShield(BPItems.GREEN_CRYSTAL_SHIELD);
+        this.grylynenShield(BPItems.YELLOW_CRYSTAL_SHIELD);
 
-        this.specialFlatTexture(BioplethoraBlocks.FLEIGNARITE_VINES, BioplethoraBlocks.FLEIGNARITE_VINES_PLANT);
+        this.specialFlatTexture(BPBlocks.FLEIGNARITE_VINES, BPBlocks.FLEIGNARITE_VINES_PLANT);
     }
 
     @Nonnull

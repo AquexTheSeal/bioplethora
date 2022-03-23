@@ -4,8 +4,8 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.criterion.*;
@@ -42,27 +42,27 @@ public class BioAdvancementProvider extends AdvancementProvider {
      */
     public void register(Consumer<Advancement> t) {
         // STARTUP
-        Advancement bioStartup = registerAdvancement("bioplethora_startup", FrameType.TASK, BioplethoraItems.BIOPEDIA.get()).addCriterion("startup",
+        Advancement bioStartup = registerAdvancement("bioplethora_startup", FrameType.TASK, BPItems.BIOPEDIA.get()).addCriterion("startup",
                 PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"))))).save(t, id("bioplethora_startup"));
 
         // ENTITIES
-        Advancement bellophgolemKill = registerAdvancement("bellophgolem_kill", FrameType.GOAL, BioplethoraItems.BELLOPHGOLEM_SPAWN_EGG.get())
+        Advancement bellophgolemKill = registerAdvancement("bellophgolem_kill", FrameType.GOAL, BPItems.BELLOPHGOLEM_SPAWN_EGG.get())
                 .parent(bioStartup).addCriterion("bellophgolem", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity()
-                        .of(BioplethoraEntities.BELLOPHGOLEM.getId()))).save(t, id("bellophgolem_kill"));
+                        .of(BPEntities.BELLOPHGOLEM.getId()))).save(t, id("bellophgolem_kill"));
 
-        Advancement alphemKill = registerAdvancement("alphem_kill", FrameType.GOAL, BioplethoraItems.ALPHEM_SPAWN_EGG.get())
+        Advancement alphemKill = registerAdvancement("alphem_kill", FrameType.GOAL, BPItems.ALPHEM_SPAWN_EGG.get())
                 .parent(bioStartup).addCriterion("alphem", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity()
-                        .of(BioplethoraEntities.ALPHEM.getId()))).save(t, id("alphem_kill"));
+                        .of(BPEntities.ALPHEM.getId()))).save(t, id("alphem_kill"));
 
 
         // ITEMS
-        Advancement bellophiteObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BioplethoraItems.BELLOPHITE.get())
+        Advancement bellophiteObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BPItems.BELLOPHITE.get())
                 .parent(bellophgolemKill).addCriterion("bellophite",
-                InventoryChangeTrigger.Instance.hasItems(BioplethoraItems.BELLOPHITE.get())).save(t, id("bellophgolem_obtain"));
+                InventoryChangeTrigger.Instance.hasItems(BPItems.BELLOPHITE.get())).save(t, id("bellophgolem_obtain"));
 
-        Advancement bellophiteArrowObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BioplethoraItems.BELLOPHITE.get())
+        Advancement bellophiteArrowObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BPItems.BELLOPHITE.get())
                 .parent(bellophgolemKill).addCriterion("bellophite",
-                InventoryChangeTrigger.Instance.hasItems(BioplethoraItems.BELLOPHITE.get())).save(t, id("bellophgolem_obtain"));
+                InventoryChangeTrigger.Instance.hasItems(BPItems.BELLOPHITE.get())).save(t, id("bellophgolem_obtain"));
     }
 
     private static Path getPath(Path pathIn, Advancement advancementIn) {

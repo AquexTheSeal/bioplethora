@@ -1,6 +1,6 @@
 package io.github.bioplethora.enums;
 
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -9,12 +9,12 @@ import java.util.function.Supplier;
 public enum BPItemTier implements IItemTier {
 
     FLEIGNARITE(2, 350, 7.0F, 3.0F, 12,
-            () -> Ingredient.of(BioplethoraItems.FLEIGNARITE_SCALES.get())),
+            () -> Ingredient.of(BPItems.FLEIGNARITE_SCALES.get())),
     REINFORCED_FLEIGNARITE(2540, 250, 9.0F, 4.0F, 22,
-            () -> Ingredient.of(BioplethoraItems.REINFORCED_FLEIGNARITE.get())),
+            () -> Ingredient.of(BPItems.REINFORCED_FLEIGNARITE.get())),
 
     VERMILION(5, 4231, 9.0F, 4.0F, 15,
-            () -> Ingredient.of(BioplethoraItems.VERMILION_BLADE.get())),
+            () -> Ingredient.of(BPItems.VERMILION_BLADE.get())),
     ;
 
     private final int harvestLevel;

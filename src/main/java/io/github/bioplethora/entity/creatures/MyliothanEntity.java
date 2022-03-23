@@ -4,7 +4,7 @@ import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.MyliothanChargeAttackGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
@@ -147,7 +147,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
 
     @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return BioplethoraSoundEvents.MYLIOTHAN_IDLE.get();
+        return BPSoundEvents.MYLIOTHAN_IDLE.get();
     }
 
     @Override

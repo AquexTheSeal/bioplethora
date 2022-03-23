@@ -1,7 +1,7 @@
 package io.github.bioplethora.gui.recipe;
 
 import com.google.gson.JsonObject;
-import io.github.bioplethora.registry.BioplethoraRecipes;
+import io.github.bioplethora.registry.BPRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.ICriterionInstance;
@@ -33,7 +33,7 @@ public class ReinforcingRecipeBuilder {
     }
 
     public static ReinforcingRecipeBuilder reinforcing(Ingredient topIngredient, Ingredient midIngredient, Ingredient botIngredient, Item pResult) {
-        return new ReinforcingRecipeBuilder(BioplethoraRecipes.REINFORCING_SERIALIZER.get(), topIngredient, midIngredient, botIngredient, pResult);
+        return new ReinforcingRecipeBuilder(BPRecipes.REINFORCING_SERIALIZER.get(), topIngredient, midIngredient, botIngredient, pResult);
     }
 
     public ReinforcingRecipeBuilder unlocks(String pName, ICriterionInstance pCriterion) {

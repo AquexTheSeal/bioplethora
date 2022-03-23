@@ -8,8 +8,8 @@ import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -171,7 +171,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
     public void die(DamageSource source) {
         super.die(source);
         Entity sourceEnt = source.getEntity();
-        BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:alphem_kill");
+        BPAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:alphem_kill");
     }
 
     @Override
@@ -195,7 +195,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
 
     @Override
     public void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(BioplethoraSoundEvents.ALPHEM_STEP.get(), 0.15f, 1);
+        this.playSound(BPSoundEvents.ALPHEM_STEP.get(), 0.15f, 1);
     }
 
     @OnlyIn(Dist.CLIENT)

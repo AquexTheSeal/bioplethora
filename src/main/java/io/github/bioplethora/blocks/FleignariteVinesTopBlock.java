@@ -1,7 +1,8 @@
 package io.github.bioplethora.blocks;
 
-import io.github.bioplethora.registry.BioplethoraBlocks;
+import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.*;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -9,7 +10,10 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -20,7 +24,7 @@ public class FleignariteVinesTopBlock extends AbstractTopPlantBlock implements I
 
     public FleignariteVinesTopBlock(AbstractBlock.Properties properties) {
         super(properties, Direction.DOWN, SHAPE, false, 0.1D);
-        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.TRUE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.valueOf(true)));
     }
 
     protected int getBlocksToGrowWhenBonemealed(Random pRandom) {
@@ -28,7 +32,7 @@ public class FleignariteVinesTopBlock extends AbstractTopPlantBlock implements I
     }
 
     protected Block getBodyBlock() {
-        return BioplethoraBlocks.FLEIGNARITE_VINES_PLANT.get();
+        return BPBlocks.FLEIGNARITE_VINES_PLANT.get();
     }
 
     protected boolean canGrowInto(BlockState pState) {
@@ -45,5 +49,28 @@ public class FleignariteVinesTopBlock extends AbstractTopPlantBlock implements I
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(WATERLOGGED);
+    }
+
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        if (pState.getValue(WATERLOGGED)) {
+            pLevel.getLiquidTicks().scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+        }
+
+        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+    }
+
+    @Override
+    public Fluid takeLiquid(IWorld p_204508_1_, BlockPos p_204508_2_, BlockState p_204508_3_) {
+        return IWaterLoggable.super.takeLiquid(p_204508_1_, p_204508_2_, p_204508_3_);
+    }
+
+    @Override
+    public boolean placeLiquid(IWorld pLevel, BlockPos pPos, BlockState pState, FluidState pFluidState) {
+        return IWaterLoggable.super.placeLiquid(pLevel, pPos, pState, pFluidState);
+    }
+
+    @Override
+    public boolean canPlaceLiquid(IBlockReader pLevel, BlockPos pPos, BlockState pState, Fluid pFluid) {
+        return IWaterLoggable.super.canPlaceLiquid(pLevel, pPos, pState, pFluid);
     }
 }

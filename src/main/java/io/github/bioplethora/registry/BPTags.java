@@ -10,7 +10,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 
-public class BioplethoraTags {
+public class BPTags {
     public static final class Blocks {
         public static final ITag.INamedTag<Block> GRYLYNEN_UNBREAKABLE = forgeLoc("grylynen_unbreakable");
 

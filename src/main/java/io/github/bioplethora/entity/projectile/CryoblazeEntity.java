@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BioplethoraConfig;
-import io.github.bioplethora.registry.BioplethoraDamageSources;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPDamageSources;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -43,11 +43,11 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
 
     @OnlyIn(Dist.CLIENT)
     public CryoblazeEntity(World world, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
-        super(BioplethoraEntities.CRYOBLAZE.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
+        super(BPEntities.CRYOBLAZE.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
     }
 
     public CryoblazeEntity(World world, LivingEntity entity, double v, double v1, double v2) {
-        super(BioplethoraEntities.CRYOBLAZE.get(), entity, v, v1, v2, world);
+        super(BPEntities.CRYOBLAZE.get(), entity, v, v1, v2, world);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
     public void hitAndExplode() {
         double x = this.getX(), y = this.getY(), z = this.getZ();
         BlockPos blockpos = new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ());
-        DamageSource castration = BioplethoraDamageSources.indirectCastration(this.getOwner(), this.getOwner());
+        DamageSource castration = BPDamageSources.indirectCastration(this.getOwner(), this.getOwner());
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 20, 0.75, 0.75, 0.75, 0.01);

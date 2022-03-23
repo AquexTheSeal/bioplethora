@@ -3,8 +3,8 @@ package io.github.bioplethora.integration.jei;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.gui.container.ReinforcingTableContainer;
 import io.github.bioplethora.gui.screen.ReinforcingTableScreen;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraRecipes;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPRecipes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -37,8 +37,8 @@ public class BPCompatJEI implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registry) {
         @SuppressWarnings("resource")
         ClientWorld world = Minecraft.getInstance().level;
-        registry.addRecipes(world.getRecipeManager().getAllRecipesFor(BioplethoraRecipes.REINFORCING), ReinforcingTableCategory.CATEGORY_ID);
-        addDescription(registry, new ItemStack(BioplethoraBlocks.REINFORCING_TABLE.get()));
+        registry.addRecipes(world.getRecipeManager().getAllRecipesFor(BPRecipes.REINFORCING), ReinforcingTableCategory.CATEGORY_ID);
+        addDescription(registry, new ItemStack(BPBlocks.REINFORCING_TABLE.get()));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class BPCompatJEI implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        registry.addRecipeCatalyst(new ItemStack(BioplethoraBlocks.REINFORCING_TABLE.get()), ReinforcingTableCategory.CATEGORY_ID);
+        registry.addRecipeCatalyst(new ItemStack(BPBlocks.REINFORCING_TABLE.get()), ReinforcingTableCategory.CATEGORY_ID);
     }
 
     @Override

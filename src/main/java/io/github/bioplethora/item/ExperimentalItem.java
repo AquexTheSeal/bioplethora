@@ -6,8 +6,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -15,7 +15,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -28,14 +27,18 @@ public class ExperimentalItem extends Item {
         super(properties);
     }
 
-    @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack itemInHand = playerIn.getItemInHand(handIn);
+    public UseAction getUseAnimation(ItemStack p_77661_1_) {
+        return UseAction.CROSSBOW;
+    }
 
-        if (!(worldIn instanceof ServerWorld))
-            return new ActionResult<>(ActionResultType.PASS, itemInHand);
+    public int getUseDuration(ItemStack p_77626_1_) {
+        return 72000;
+    }
 
-        return new ActionResult<>(ActionResultType.SUCCESS, itemInHand);
+    public ActionResult<ItemStack> use(World world, PlayerEntity entity, Hand handIn) {
+        ItemStack itemstack = entity.getItemInHand(handIn);
+        entity.startUsingItem(handIn);
+        return ActionResult.consume(itemstack);
     }
 
     @Override

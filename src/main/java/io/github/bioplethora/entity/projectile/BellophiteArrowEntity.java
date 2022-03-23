@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -37,11 +37,11 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
     }
 
     public BellophiteArrowEntity(World worldIn, LivingEntity shooter) {
-        super(BioplethoraEntities.BELLOPHITE_ARROW.get(), shooter, worldIn);
+        super(BPEntities.BELLOPHITE_ARROW.get(), shooter, worldIn);
     }
 
     public BellophiteArrowEntity(World worldIn, double x, double y, double z) {
-        super(BioplethoraEntities.BELLOPHITE_ARROW.get(), x, y, z, worldIn);
+        super(BPEntities.BELLOPHITE_ARROW.get(), x, y, z, worldIn);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
 
     @Override
     protected ItemStack getPickupItem() {
-        return new ItemStack(BioplethoraItems.BELLOPHITE_ARROW.get());
+        return new ItemStack(BPItems.BELLOPHITE_ARROW.get());
     }
 
     public void readAdditionalSaveData(CompoundNBT compoundNBT) {

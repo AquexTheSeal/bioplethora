@@ -2,8 +2,8 @@ package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.gui.recipe.ReinforcingRecipeBuilder;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -24,30 +24,30 @@ public class BioRecipeProvider extends RecipeProvider {
     protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
 
         /** @Param consumer, providedItem, requiredItem **/
-        ingotToBlock(consumer, BioplethoraBlocks.BELLOPHITE_BLOCK.get(), BioplethoraItems.BELLOPHITE.get());
-        blockToIngot(consumer, BioplethoraItems.BELLOPHITE.get(), BioplethoraBlocks.BELLOPHITE_BLOCK.get());
-        ingotToBlock(consumer, BioplethoraBlocks.NANDBRI_SCALE_BLOCK.get(), BioplethoraItems.NANDBRI_SCALES.get());
-        blockToIngot(consumer, BioplethoraItems.NANDBRI_SCALES.get(), BioplethoraBlocks.NANDBRI_SCALE_BLOCK.get());
+        ingotToBlock(consumer, BPBlocks.BELLOPHITE_BLOCK.get(), BPItems.BELLOPHITE.get());
+        blockToIngot(consumer, BPItems.BELLOPHITE.get(), BPBlocks.BELLOPHITE_BLOCK.get());
+        ingotToBlock(consumer, BPBlocks.NANDBRI_SCALE_BLOCK.get(), BPItems.NANDBRI_SCALES.get());
+        blockToIngot(consumer, BPItems.NANDBRI_SCALES.get(), BPBlocks.NANDBRI_SCALE_BLOCK.get());
 
-        ingotToBlock(consumer, BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get(), BioplethoraItems.GREEN_GRYLYNEN_CRYSTAL.get());
-        blockToIngot(consumer, BioplethoraItems.GREEN_GRYLYNEN_CRYSTAL.get(), BioplethoraBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get());
-        ingotToBlock(consumer, BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get(), BioplethoraItems.YELLOW_GRYLYNEN_CRYSTAL.get());
-        blockToIngot(consumer, BioplethoraItems.YELLOW_GRYLYNEN_CRYSTAL.get(), BioplethoraBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
-        ingotToBlock(consumer, BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), BioplethoraItems.RED_GRYLYNEN_CRYSTAL.get());
-        blockToIngot(consumer, BioplethoraItems.RED_GRYLYNEN_CRYSTAL.get(), BioplethoraBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
+        ingotToBlock(consumer, BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get(), BPItems.GREEN_GRYLYNEN_CRYSTAL.get());
+        blockToIngot(consumer, BPItems.GREEN_GRYLYNEN_CRYSTAL.get(), BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get());
+        ingotToBlock(consumer, BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get(), BPItems.YELLOW_GRYLYNEN_CRYSTAL.get());
+        blockToIngot(consumer, BPItems.YELLOW_GRYLYNEN_CRYSTAL.get(), BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
+        ingotToBlock(consumer, BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), BPItems.RED_GRYLYNEN_CRYSTAL.get());
+        blockToIngot(consumer, BPItems.RED_GRYLYNEN_CRYSTAL.get(), BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
 
-        foodCooking(consumer, BioplethoraItems.RAW_CUTTLEFISH_MEAT.get(), BioplethoraItems.COOKED_CUTTLEFISH_MEAT.get(), 0.30F, 200);
-        foodCooking(consumer, BioplethoraItems.RAW_FLENTAIR.get(), BioplethoraItems.COOKED_FLENTAIR.get(), 0.35F, 300);
+        foodCooking(consumer, BPItems.RAW_CUTTLEFISH_MEAT.get(), BPItems.COOKED_CUTTLEFISH_MEAT.get(), 0.30F, 200);
+        foodCooking(consumer, BPItems.RAW_FLENTAIR.get(), BPItems.COOKED_FLENTAIR.get(), 0.35F, 300);
 
-        stoneSetHelper(consumer, BioplethoraBlocks.ALPHANUM.get(), BioplethoraBlocks.ALPHANUM_BRICKS.get(), BioplethoraBlocks.POLISHED_ALPHANUM.get(),
-                BioplethoraBlocks.ALPHANUM_STAIRS.get(), BioplethoraBlocks.ALPHANUM_WALL.get(), BioplethoraBlocks.ALPHANUM_SLAB.get(),
-                BioplethoraBlocks.ALPHANUM_STAIRS_BRICKS.get(), BioplethoraBlocks.ALPHANUM_WALL_BRICKS.get(), BioplethoraBlocks.ALPHANUM_SLAB_BRICKS.get(),
-                BioplethoraBlocks.POLISHED_ALPHANUM_STAIRS.get(), BioplethoraBlocks.POLISHED_ALPHANUM_WALL.get(), BioplethoraBlocks.POLISHED_ALPHANUM_SLAB.get()
+        stoneSetHelper(consumer, BPBlocks.ALPHANUM.get(), BPBlocks.ALPHANUM_BRICKS.get(), BPBlocks.POLISHED_ALPHANUM.get(),
+                BPBlocks.ALPHANUM_STAIRS.get(), BPBlocks.ALPHANUM_WALL.get(), BPBlocks.ALPHANUM_SLAB.get(),
+                BPBlocks.ALPHANUM_STAIRS_BRICKS.get(), BPBlocks.ALPHANUM_WALL_BRICKS.get(), BPBlocks.ALPHANUM_SLAB_BRICKS.get(),
+                BPBlocks.POLISHED_ALPHANUM_STAIRS.get(), BPBlocks.POLISHED_ALPHANUM_WALL.get(), BPBlocks.POLISHED_ALPHANUM_SLAB.get()
         );
-        pillarCrafting(consumer, BioplethoraBlocks.ALPHANUM_PILLAR.get(), BioplethoraBlocks.ALPHANUM.get());
+        pillarCrafting(consumer, BPBlocks.ALPHANUM_PILLAR.get(), BPBlocks.ALPHANUM.get());
 
-        reinforcing(consumer, BioplethoraItems.ARBITRARY_BALLISTA.get(), BioplethoraItems.RED_GRYLYNEN_CRYSTAL.get(),
-                BioplethoraItems.BELLOPHITE.get(), Items.CROSSBOW);
+        reinforcing(consumer, BPItems.ARBITRARY_BALLISTA.get(), BPItems.RED_GRYLYNEN_CRYSTAL.get(),
+                BPItems.BELLOPHITE.get(), Items.CROSSBOW);
 
     }
 

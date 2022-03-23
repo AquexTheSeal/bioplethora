@@ -1,5 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
+import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
@@ -7,6 +8,7 @@ import io.github.bioplethora.entity.projectile.UltimateBellophiteClusterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvents;
@@ -113,6 +115,13 @@ public class AltyrusRangedAttackGoal extends Goal {
         if (target instanceof MobEntity) {
             if (target instanceof AlphemEntity || target instanceof AlphemKingEntity) {
                 return true;
+
+            } else if (((MobEntity) target).getTarget() instanceof SummonableMonsterEntity) {
+                return ((SummonableMonsterEntity) ((MobEntity) target).getTarget()).getOwner() == this.altyrus;
+
+            } else if (((MobEntity) target).getTarget() instanceof TameableEntity) {
+                return ((TameableEntity) ((MobEntity) target).getTarget()).getOwner() == this.altyrus;
+
             } else {
                 return ((MobEntity) target).getTarget() == this.altyrus;
             }

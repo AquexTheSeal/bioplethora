@@ -8,8 +8,8 @@ import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraAdvancementHelper;
-import io.github.bioplethora.registry.BioplethoraSoundEvents;
+import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -128,17 +128,17 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
 
     @Override
     public SoundEvent getAmbientSound() {
-        return BioplethoraSoundEvents.BELLOPHGOLEM_IDLE.get();
+        return BPSoundEvents.BELLOPHGOLEM_IDLE.get();
     }
 
     @Override
     public SoundEvent getHurtSound(DamageSource damageSource) {
-        return BioplethoraSoundEvents.BELLOPHGOLEM_HURT.get();
+        return BPSoundEvents.BELLOPHGOLEM_HURT.get();
     }
 
     @Override
     public SoundEvent getDeathSound() {
-        return BioplethoraSoundEvents.BELLOPHGOLEM_DEATH.get();
+        return BPSoundEvents.BELLOPHGOLEM_DEATH.get();
     }
 
     @Override
@@ -172,7 +172,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         super.die(source);
         Entity sourceEnt = source.getEntity();
 
-        BioplethoraAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:bellophgolem_kill");
+        BPAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:bellophgolem_kill");
     }
 
     public void aiStep() {

@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.creatures.CrephoxlEntity;
-import io.github.bioplethora.registry.BioplethoraDamageSources;
+import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.ParticleTypes;
@@ -57,7 +57,7 @@ public class CrephoxlChargingGoal extends Goal {
                 for (LivingEntity entityIterator : this.crephoxl.level.getEntitiesOfClass(LivingEntity.class, this.crephoxl.getBoundingBox().inflate(2))) {
 
                     if (entityIterator != this.crephoxl) {
-                        entityIterator.hurt(BioplethoraDamageSources.indirectCastration(this.crephoxl, this.crephoxl), 10);
+                        entityIterator.hurt(BPDamageSources.indirectCastration(this.crephoxl, this.crephoxl), 10);
                     }
                 }
 

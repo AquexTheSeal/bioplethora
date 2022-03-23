@@ -1,7 +1,7 @@
 package io.github.bioplethora.gui.container;
 
 
-import io.github.bioplethora.registry.BioplethoraBlocks;
+import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftResultInventory;
@@ -82,7 +82,7 @@ public abstract class AbstractReinforcingContainer extends Container {
     }
 
     public boolean stillValid(PlayerEntity pPlayer) {
-        return stillValid(access, player, BioplethoraBlocks.REINFORCING_TABLE.get());
+        return stillValid(access, player, BPBlocks.REINFORCING_TABLE.get());
     }
 
     protected boolean shouldQuickMoveToAdditionalSlot(ItemStack pStack) {

@@ -1,8 +1,8 @@
 package io.github.bioplethora.gui.container;
 
 import io.github.bioplethora.gui.recipe.ReinforcingRecipe;
-import io.github.bioplethora.registry.BioplethoraContainerTypes;
-import io.github.bioplethora.registry.BioplethoraRecipes;
+import io.github.bioplethora.registry.BPContainerTypes;
+import io.github.bioplethora.registry.BPRecipes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
@@ -24,7 +24,7 @@ public class ReinforcingTableContainer extends AbstractReinforcingContainer {
     }
 
     public ReinforcingTableContainer(int pContainerId, PlayerInventory pPlayerInventory, IWorldPosCallable pAccess) {
-        super(BioplethoraContainerTypes.REINFORCING_TABLE_CONTAINER.get(), pContainerId, pPlayerInventory, pAccess);
+        super(BPContainerTypes.REINFORCING_TABLE_CONTAINER.get(), pContainerId, pPlayerInventory, pAccess);
         this.level = pPlayerInventory.player.level;
     }
 
@@ -49,7 +49,7 @@ public class ReinforcingTableContainer extends AbstractReinforcingContainer {
     }
 
     public void createResult() {
-        List<ReinforcingRecipe> list = this.level.getRecipeManager().getRecipesFor(BioplethoraRecipes.REINFORCING, this.inputSlots, this.level);
+        List<ReinforcingRecipe> list = this.level.getRecipeManager().getRecipesFor(BPRecipes.REINFORCING, this.inputSlots, this.level);
         if (list.isEmpty()) {
             this.resultSlots.setItem(3, ItemStack.EMPTY);
         } else {

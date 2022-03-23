@@ -2,7 +2,7 @@ package io.github.bioplethora.item.weapons;
 
 import com.google.common.collect.Lists;
 import io.github.bioplethora.item.ItemSettings;
-import io.github.bioplethora.registry.BioplethoraEffects;
+import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -93,7 +93,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
 
         if (pEntity instanceof LivingEntity) {
             if (((LivingEntity) pEntity).getMainHandItem() == pStack || ((LivingEntity) pEntity).getOffhandItem() == pStack) {
-                if (!((LivingEntity) pEntity).hasEffect(BioplethoraEffects.SPIRIT_FISSION.get())) {
+                if (!((LivingEntity) pEntity).hasEffect(BPEffects.SPIRIT_FISSION.get())) {
                     ((LivingEntity) pEntity).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 5));
                     ((LivingEntity) pEntity).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 5));
                     ((LivingEntity) pEntity).addEffect(new EffectInstance(Effects.WEAKNESS, 5));

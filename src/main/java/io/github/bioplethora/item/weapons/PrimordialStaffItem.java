@@ -3,7 +3,7 @@ package io.github.bioplethora.item.weapons;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.item.ItemSettings;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -86,7 +86,7 @@ public class PrimordialStaffItem extends Item {
             if (i >= 10) {
 
                 if (worldIn instanceof ServerWorld) {
-                    PrimordialRingEntity ring = BioplethoraEntities.PRIMORDIAL_RING.get().create(worldIn);
+                    PrimordialRingEntity ring = BPEntities.PRIMORDIAL_RING.get().create(worldIn);
                     ring.moveTo(blockpos, 0.0F, 0.0F);
                     ring.setOwner(playerIn);
                     ring.finalizeSpawn((IServerWorld) worldIn, worldIn.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
@@ -96,7 +96,7 @@ public class PrimordialStaffItem extends Item {
 
                     worldIn.addFreshEntity(ring);
 
-                    PrimordialRingEntity ring2 = BioplethoraEntities.PRIMORDIAL_RING.get().create(worldIn);
+                    PrimordialRingEntity ring2 = BPEntities.PRIMORDIAL_RING.get().create(worldIn);
                     ring2.moveTo(blockpos, 0.0F, 0.0F);
                     ring2.setOwner(playerIn);
                     ring2.finalizeSpawn((IServerWorld) worldIn, worldIn.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);

@@ -5,8 +5,8 @@ import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.CavernFleignarMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BioplethoraEffects;
-import io.github.bioplethora.registry.BioplethoraTags;
+import io.github.bioplethora.registry.BPEffects;
+import io.github.bioplethora.registry.BPTags;
 import io.github.bioplethora.world.BPFeatureGeneration;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -202,7 +202,7 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     @Override
     public void checkDespawn() {
         BlockPos posBelow = new BlockPos(this.getX(), this.getY(), this.getZ()).below();
-        if (!this.level.getBlockState(posBelow).is(BioplethoraTags.Blocks.ALPHANIA)) {
+        if (!this.level.getBlockState(posBelow).is(BPTags.Blocks.ALPHANIA)) {
             super.checkDespawn();
         } else {
             if (this.level.getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
@@ -229,10 +229,10 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     }
 
     public boolean validTarget(LivingEntity target) {
-        boolean getTag = EntityTypeTags.getAllTags().getTagOrEmpty(BioplethoraTags.Entities.FLEIGNAR_TARGETS.getName()).contains(target.getType());
+        boolean getTag = EntityTypeTags.getAllTags().getTagOrEmpty(BPTags.Entities.FLEIGNAR_TARGETS.getName()).contains(target.getType());
 
         if (EntityPredicates.ATTACK_ALLOWED.test(target) && (getTag || target instanceof PlayerEntity)) {
-            return !target.hasEffect(BioplethoraEffects.SPIRIT_MANIPULATION.get());
+            return !target.hasEffect(BPEffects.SPIRIT_MANIPULATION.get());
         } else {
             return false;
         }

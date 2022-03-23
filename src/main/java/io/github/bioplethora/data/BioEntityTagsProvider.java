@@ -1,8 +1,8 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraTags;
+import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.EntityTypeTagsProvider;
 import net.minecraft.entity.EntityType;
@@ -18,11 +18,11 @@ public class BioEntityTagsProvider extends EntityTypeTagsProvider {
     @Override
     protected void addTags() {
         tag(EntityTypeTags.ARROWS)
-                .add(BioplethoraEntities.BELLOPHITE_ARROW.get())
-                .add(BioplethoraEntities.WIND_ARROW.get())
+                .add(BPEntities.BELLOPHITE_ARROW.get())
+                .add(BPEntities.WIND_ARROW.get())
         ;
 
-        tag(BioplethoraTags.Entities.FLEIGNAR_TARGETS)
+        tag(BPTags.Entities.FLEIGNAR_TARGETS)
                 .add(EntityType.ZOMBIE)
                 .add(EntityType.SPIDER)
                 .add(EntityType.CAVE_SPIDER)
@@ -31,24 +31,24 @@ public class BioEntityTagsProvider extends EntityTypeTagsProvider {
         ;
 
         // Wastelands of Baedoor Integration
-        tag(BioplethoraTags.Entities.AVOIDER_KILLABLE)
-                .add(BioplethoraEntities.CREPHOXL.get())
-                .add(BioplethoraEntities.ALPHEM.get())
-                .add(BioplethoraEntities.DWARF_MOSSADILE.get())
-                .add(BioplethoraEntities.GAUGALEM.get())
-                .add(BioplethoraEntities.BELLOPHGOLEM.get())
-                .add(BioplethoraEntities.WOODEN_GRYLYNEN.get())
-                .add(BioplethoraEntities.STONE_GRYLYNEN.get())
-                .add(BioplethoraEntities.GOLDEN_GRYLYNEN.get())
-                .add(BioplethoraEntities.IRON_GRYLYNEN.get())
-                .add(BioplethoraEntities.DIAMOND_GRYLYNEN.get())
-                .add(BioplethoraEntities.NETHERITE_GRYLYNEN.get())
-                .add(BioplethoraEntities.TRAPJAW.get())
+        tag(BPTags.Entities.AVOIDER_KILLABLE)
+                .add(BPEntities.CREPHOXL.get())
+                .add(BPEntities.ALPHEM.get())
+                .add(BPEntities.DWARF_MOSSADILE.get())
+                .add(BPEntities.GAUGALEM.get())
+                .add(BPEntities.BELLOPHGOLEM.get())
+                .add(BPEntities.WOODEN_GRYLYNEN.get())
+                .add(BPEntities.STONE_GRYLYNEN.get())
+                .add(BPEntities.GOLDEN_GRYLYNEN.get())
+                .add(BPEntities.IRON_GRYLYNEN.get())
+                .add(BPEntities.DIAMOND_GRYLYNEN.get())
+                .add(BPEntities.NETHERITE_GRYLYNEN.get())
+                .add(BPEntities.TRAPJAW.get())
         ;
-        tag(BioplethoraTags.Entities.AUTOMATON_TYPE)
-                .add(BioplethoraEntities.BELLOPHGOLEM.get())
-                .add(BioplethoraEntities.ALTYRUS.get())
-                .add(BioplethoraEntities.ALPHEM_KING.get())
+        tag(BPTags.Entities.AUTOMATON_TYPE)
+                .add(BPEntities.BELLOPHGOLEM.get())
+                .add(BPEntities.ALTYRUS.get())
+                .add(BPEntities.ALPHEM_KING.get())
         ;
     }
 }

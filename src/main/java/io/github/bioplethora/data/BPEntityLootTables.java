@@ -1,8 +1,8 @@
 package io.github.bioplethora.data;
 
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraItems;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
@@ -31,17 +31,17 @@ public class BPEntityLootTables extends EntityLootTables {
     protected void addTables() {
 
         // Crephoxl
-        add(BioplethoraEntities.CREPHOXL.get(), LootTable.lootTable()
+        add(BPEntities.CREPHOXL.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.CREPHOXL_FEATHER.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.CREPHOXL_FEATHER.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.CREPHOXL_STICK.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.CREPHOXL_STICK.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -49,10 +49,10 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Alphem
-        add(BioplethoraEntities.ALPHEM.get(), LootTable.lootTable()
+        add(BPEntities.ALPHEM.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.WINDPIECE.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.WINDPIECE.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -74,17 +74,17 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Bellophgolem
-        add(BioplethoraEntities.BELLOPHGOLEM.get(), LootTable.lootTable()
+        add(BPEntities.BELLOPHGOLEM.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.BELLOPHITE.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.BELLOPHITE.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.BELLOPHITE_CORE_FRAGMENT.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.BELLOPHITE_CORE_FRAGMENT.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 1F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -92,32 +92,32 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Altyrus
-        add(BioplethoraEntities.ALTYRUS.get(), LootTable.lootTable()
+        add(BPEntities.ALTYRUS.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.BELLOPHITE.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.BELLOPHITE.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(4F, 7F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.0F)))
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.BELLOPHITE_CORE_FRAGMENT.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.BELLOPHITE_CORE_FRAGMENT.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 4F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1F)))
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.PRIMORDIAL_FRAGMENT.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.PRIMORDIAL_FRAGMENT.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(5F, 9F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.0F)))
                         ))
         );
 
         // Cuttlefish
-        add(BioplethoraEntities.CUTTLEFISH.get(), LootTable.lootTable()
+        add(BPEntities.CUTTLEFISH.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.RAW_CUTTLEFISH_MEAT.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.RAW_CUTTLEFISH_MEAT.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.5F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -132,10 +132,10 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Peaguin
-        add(BioplethoraEntities.PEAGUIN.get(), LootTable.lootTable()
+        add(BPEntities.PEAGUIN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.PEAGUIN_SCALES.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.PEAGUIN_SCALES.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -143,17 +143,17 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Nandbri
-        add(BioplethoraEntities.NANDBRI.get(), LootTable.lootTable()
+        add(BPEntities.NANDBRI.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.NANDBRI_SCALES.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.NANDBRI_SCALES.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1F)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.NANDBRI_FANG.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.NANDBRI_FANG.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 1F)))
                                 .when(KilledByPlayer.killedByPlayer())
                                 .when(RandomChance.randomChance(0.12F))
@@ -161,10 +161,10 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Myliothan
-        add(BioplethoraEntities.MYLIOTHAN.get(), LootTable.lootTable()
+        add(BPEntities.MYLIOTHAN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.ABYSSAL_SCALES.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.ABYSSAL_SCALES.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 4F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.5F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -172,10 +172,10 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Helioblade
-        add(BioplethoraEntities.HELIOBLADE.get(), LootTable.lootTable()
+        add(BPEntities.HELIOBLADE.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.TOTEM_OF_SWERVING.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.TOTEM_OF_SWERVING.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 1F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -183,7 +183,7 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Wooden Grylynen
-        add(BioplethoraEntities.WOODEN_GRYLYNEN.get(), LootTable.lootTable()
+        add(BPEntities.WOODEN_GRYLYNEN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(Items.OAK_PLANKS)
@@ -193,7 +193,7 @@ public class BPEntityLootTables extends EntityLootTables {
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.GREEN_GRYLYNEN_CRYSTAL.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.GREEN_GRYLYNEN_CRYSTAL.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.5F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -201,7 +201,7 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Stone Grylynen
-        add(BioplethoraEntities.STONE_GRYLYNEN.get(), LootTable.lootTable()
+        add(BPEntities.STONE_GRYLYNEN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(Items.STONE)
@@ -211,7 +211,7 @@ public class BPEntityLootTables extends EntityLootTables {
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.GREEN_GRYLYNEN_CRYSTAL.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.GREEN_GRYLYNEN_CRYSTAL.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.5F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -219,7 +219,7 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Golden Grylynen
-        add(BioplethoraEntities.GOLDEN_GRYLYNEN.get(), LootTable.lootTable()
+        add(BPEntities.GOLDEN_GRYLYNEN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(Items.GOLD_INGOT)
@@ -229,7 +229,7 @@ public class BPEntityLootTables extends EntityLootTables {
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.YELLOW_GRYLYNEN_CRYSTAL.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.YELLOW_GRYLYNEN_CRYSTAL.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.3F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -237,7 +237,7 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Iron Grylynen
-        add(BioplethoraEntities.IRON_GRYLYNEN.get(), LootTable.lootTable()
+        add(BPEntities.IRON_GRYLYNEN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(Items.IRON_INGOT)
@@ -247,7 +247,7 @@ public class BPEntityLootTables extends EntityLootTables {
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.YELLOW_GRYLYNEN_CRYSTAL.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.YELLOW_GRYLYNEN_CRYSTAL.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.3F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -255,7 +255,7 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Diamond Grylynen
-        add(BioplethoraEntities.DIAMOND_GRYLYNEN.get(), LootTable.lootTable()
+        add(BPEntities.DIAMOND_GRYLYNEN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(Items.DIAMOND)
@@ -265,7 +265,7 @@ public class BPEntityLootTables extends EntityLootTables {
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.RED_GRYLYNEN_CRYSTAL.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.RED_GRYLYNEN_CRYSTAL.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.3F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -273,7 +273,7 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Netherite Grylynen
-        add(BioplethoraEntities.NETHERITE_GRYLYNEN.get(), LootTable.lootTable()
+        add(BPEntities.NETHERITE_GRYLYNEN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(Items.ANCIENT_DEBRIS)
@@ -291,7 +291,7 @@ public class BPEntityLootTables extends EntityLootTables {
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.RED_GRYLYNEN_CRYSTAL.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.RED_GRYLYNEN_CRYSTAL.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(0F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.3F)))
                                 .when(KilledByPlayer.killedByPlayer())
@@ -299,17 +299,17 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Cavern Fleignar
-        add(BioplethoraEntities.CAVERN_FLEIGNAR.get(), LootTable.lootTable()
+        add(BPEntities.CAVERN_FLEIGNAR.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.FLEIGNARITE_SCALES.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.FLEIGNARITE_SCALES.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.RAW_FLENTAIR.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.RAW_FLENTAIR.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                                 .apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
@@ -318,36 +318,36 @@ public class BPEntityLootTables extends EntityLootTables {
         );
 
         // Alphem King
-        add(BioplethoraEntities.ALPHEM_KING.get(), LootTable.lootTable()
+        add(BPEntities.ALPHEM_KING.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.ALPHANUM_GEM.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.ALPHANUM_GEM.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(2F, 5F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.ALPHEM_KING_REMNANT.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.ALPHEM_KING_REMNANT.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(2F, 2F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.WINDPIECE.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.WINDPIECE.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(3F, 6F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.5F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraItems.WINDY_ESSENCE.get())
+                        .add(ItemLootEntry.lootTableItem(BPItems.WINDY_ESSENCE.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(BioplethoraBlocks.ALPHANUM_PILLAR.get())
+                        .add(ItemLootEntry.lootTableItem(BPBlocks.ALPHANUM_PILLAR.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(6F, 12F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())

@@ -43,12 +43,12 @@ public class BioLanguageProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        addItems(BioplethoraItems.ITEMS.getEntries());
-        addBlocks(BioplethoraBlocks.BLOCKS.getEntries());
-        addEntityTypes(BioplethoraEntities.ENTITIES.getEntries());
-        addEffects(BioplethoraEffects.EFFECTS.getEntries());
-        addEnchantments(BioplethoraEnchantments.ENCHANTMENTS.getEntries());
-        addBiomes(BioplethoraBiomes.BIOMES.getEntries());
+        addItems(BPItems.ITEMS.getEntries());
+        addBlocks(BPBlocks.BLOCKS.getEntries());
+        addEntityTypes(BPEntities.ENTITIES.getEntries());
+        addEffects(BPEffects.EFFECTS.getEntries());
+        addEnchantments(BPEnchantments.ENCHANTMENTS.getEntries());
+        addBiomes(BPBiomes.BIOMES.getEntries());
 
         this.addDeathMessages();
         this.addSoundSubtitles();
@@ -62,7 +62,7 @@ public class BioLanguageProvider extends LanguageProvider {
     //=======================================================
 
     public void manualEntityTranslations() {
-        addManualEntity(BioplethoraEntities.ALTYRUS_SUMMONING, "Altyrus Summoning Core");
+        addManualEntity(BPEntities.ALTYRUS_SUMMONING, "Altyrus Summoning Core");
     }
 
     public void addDeathMessages() {
@@ -84,43 +84,43 @@ public class BioLanguageProvider extends LanguageProvider {
     }
 
     public void addSoundSubtitles() {
-        add(mobSubtitlesFormat(BioplethoraEntities.CREPHOXL, "idle"), "Crephoxl Grunts");
-        add(mobSubtitlesFormat(BioplethoraEntities.CREPHOXL, "hurt"), "Crephoxl Hurts");
-        add(mobSubtitlesFormat(BioplethoraEntities.CREPHOXL, "death"), "Crephoxl Dies");
+        add(mobSubtitlesFormat(BPEntities.CREPHOXL, "idle"), "Crephoxl Grunts");
+        add(mobSubtitlesFormat(BPEntities.CREPHOXL, "hurt"), "Crephoxl Hurts");
+        add(mobSubtitlesFormat(BPEntities.CREPHOXL, "death"), "Crephoxl Dies");
 
-        add(mobSubtitlesFormat(BioplethoraEntities.BELLOPHGOLEM, "idle"), "Bellophgolem Grunts");
-        add(mobSubtitlesFormat(BioplethoraEntities.BELLOPHGOLEM, "hurt"), "Bellophgolem Hurts");
-        add(mobSubtitlesFormat(BioplethoraEntities.BELLOPHGOLEM, "death"), "Bellophgolem Dies");
+        add(mobSubtitlesFormat(BPEntities.BELLOPHGOLEM, "idle"), "Bellophgolem Grunts");
+        add(mobSubtitlesFormat(BPEntities.BELLOPHGOLEM, "hurt"), "Bellophgolem Hurts");
+        add(mobSubtitlesFormat(BPEntities.BELLOPHGOLEM, "death"), "Bellophgolem Dies");
 
-        add(mobSubtitlesFormat(BioplethoraEntities.HELIOBLADE, "idle"), "Helioblade Grunts");
-        add(mobSubtitlesFormat(BioplethoraEntities.HELIOBLADE, "hurt"), "Helioblade Hurts");
-        add(mobSubtitlesFormat(BioplethoraEntities.HELIOBLADE, "death"), "Helioblade Dies");
+        add(mobSubtitlesFormat(BPEntities.HELIOBLADE, "idle"), "Helioblade Grunts");
+        add(mobSubtitlesFormat(BPEntities.HELIOBLADE, "hurt"), "Helioblade Hurts");
+        add(mobSubtitlesFormat(BPEntities.HELIOBLADE, "death"), "Helioblade Dies");
 
-        add(mobSubtitlesFormat(BioplethoraEntities.ALTYRUS, "idle"), "Altyrus Groans");
-        add(mobSubtitlesFormat(BioplethoraEntities.ALTYRUS, "charge"), "Altyrus Charges");
+        add(mobSubtitlesFormat(BPEntities.ALTYRUS, "idle"), "Altyrus Groans");
+        add(mobSubtitlesFormat(BPEntities.ALTYRUS, "charge"), "Altyrus Charges");
 
-        add(mobSubtitlesFormat(BioplethoraEntities.ALPHEM, "step"), "Alphem Walks");
+        add(mobSubtitlesFormat(BPEntities.ALPHEM, "step"), "Alphem Walks");
 
-        add(mobSubtitlesFormat(BioplethoraEntities.ALPHEM_KING, "roar"), "Alphem King Roars");
+        add(mobSubtitlesFormat(BPEntities.ALPHEM_KING, "roar"), "Alphem King Roars");
 
-        add(mobSubtitlesFormat(BioplethoraEntities.MYLIOTHAN, "idle"), "Myliothan Cries");
+        add(mobSubtitlesFormat(BPEntities.MYLIOTHAN, "idle"), "Myliothan Cries");
     }
 
     public void addTooltipHelper() {
         // Singular Item Tooltips
-        addSkilledItem(BioplethoraItems.CREPHOXL_HAMMER, "dysfunction", "Increased damage for enemies with 50 or more health. Enemies attacked with this weapon gets debuffs for a very short duration.");
-        addSkilledItem(BioplethoraItems.CREPHOXL_HAMMER, "deathsweep", "Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.");
-        addSkilledItem(BioplethoraItems.CREPHOXL_HAMMER, "aerial_shockwave", "On right click on the ground, this weapon creates a damaging shockwave on block right-click position, dealing 9 damage to nearby entities & sending them flying into the air. 3-second cooldown.");
+        addSkilledItem(BPItems.CREPHOXL_HAMMER, "dysfunction", "Increased damage for enemies with 50 or more health. Enemies attacked with this weapon gets debuffs for a very short duration.");
+        addSkilledItem(BPItems.CREPHOXL_HAMMER, "deathsweep", "Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.");
+        addSkilledItem(BPItems.CREPHOXL_HAMMER, "aerial_shockwave", "On right click on the ground, this weapon creates a damaging shockwave on block right-click position, dealing 9 damage to nearby entities & sending them flying into the air. 3-second cooldown.");
 
-        addSkilledItem(BioplethoraItems.BELLOPHITE_ARROW, "sharper_tip", "The Bellophgolem arrow deals more damage than the regular arrow.");
-        addSkilledItem(BioplethoraItems.BELLOPHITE_ARROW, "core_energy", "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.");
+        addSkilledItem(BPItems.BELLOPHITE_ARROW, "sharper_tip", "The Bellophgolem arrow deals more damage than the regular arrow.");
+        addSkilledItem(BPItems.BELLOPHITE_ARROW, "core_energy", "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.");
 
-        addSkilledItem(BioplethoraItems.BELLOPHITE_SHIELD, "recovery_bulwark", "The Bellophite shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.");
-        addSkilledItem(BioplethoraItems.BELLOPHITE_SHIELD, "core_impulse", "This shield stacks core points every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.");
+        addSkilledItem(BPItems.BELLOPHITE_SHIELD, "recovery_bulwark", "The Bellophite shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.");
+        addSkilledItem(BPItems.BELLOPHITE_SHIELD, "core_impulse", "This shield stacks core points every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.");
 
-        addManualSkilledItem(BioplethoraItems.ARBITRARY_BALLISTA, "heavy_duty_ballista", "Heavy-Duty Ballista", "This giant crossbow greatly enhances the shooting projectile's speed and power. When shooting, the crossbow causes a small explosion that recoils the user backwards.");
+        addManualSkilledItem(BPItems.ARBITRARY_BALLISTA, "heavy_duty_ballista", "Heavy-Duty Ballista", "This giant crossbow greatly enhances the shooting projectile's speed and power. When shooting, the crossbow causes a small explosion that recoils the user backwards.");
 
-        addSkilledItem(BioplethoraItems.NANDBRIC_SHORTSWORD, "toxin_rush", "Upon right-clicking at a mob that the crosshair is pointing at, the shortsword takes control over the player's mind, causing the player to rush toward the target and strike it with force upon impact. Best used by holding down right-click.");
+        addSkilledItem(BPItems.NANDBRIC_SHORTSWORD, "toxin_rush", "Upon right-clicking at a mob that the crosshair is pointing at, the shortsword takes control over the player's mind, causing the player to rush toward the target and strike it with force upon impact. Best used by holding down right-click.");
 
         // Armor/Weapon set tooltips
         addManualItemSkilledTooltip("fleignarite_weapon", "gooey_stun", "The fleignarite scales allows this weapon to slowly regenerate it's durability. When the target is hurt using this item, the fleignarite scales used for this item causes a quick stun that gives nausea and slowness for a short duration.");
@@ -135,11 +135,11 @@ public class BioLanguageProvider extends LanguageProvider {
     }
 
     public void addEnchDescIntegration() {
-        addAntibioEnchantmentDesc(BioplethoraEnchantments.ANTIBIO_ECOHARMLESS);
-        addAntibioEnchantmentDesc(BioplethoraEnchantments.ANTIBIO_PLETHONEUTRAL);
-        addAntibioEnchantmentDesc(BioplethoraEnchantments.ANTIBIO_DANGERUM);
-        addAntibioEnchantmentDesc(BioplethoraEnchantments.ANTIBIO_HELLSENT);
-        addAntibioEnchantmentDesc(BioplethoraEnchantments.ANTIBIO_ELDERIA);
+        addAntibioEnchantmentDesc(BPEnchantments.ANTIBIO_ECOHARMLESS);
+        addAntibioEnchantmentDesc(BPEnchantments.ANTIBIO_PLETHONEUTRAL);
+        addAntibioEnchantmentDesc(BPEnchantments.ANTIBIO_DANGERUM);
+        addAntibioEnchantmentDesc(BPEnchantments.ANTIBIO_HELLSENT);
+        addAntibioEnchantmentDesc(BPEnchantments.ANTIBIO_ELDERIA);
     }
 
     //=========================================================

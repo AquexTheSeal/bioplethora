@@ -2,9 +2,9 @@ package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
-import io.github.bioplethora.registry.BioplethoraEntities;
-import io.github.bioplethora.registry.BioplethoraItems;
-import io.github.bioplethora.registry.BioplethoraParticles;
+import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPItems;
+import io.github.bioplethora.registry.BPParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -51,11 +51,11 @@ public class WindArrowEntity extends AbstractArrowEntity {
     }
 
     public WindArrowEntity(World worldIn, LivingEntity shooter) {
-        super(BioplethoraEntities.WIND_ARROW.get(), shooter, worldIn);
+        super(BPEntities.WIND_ARROW.get(), shooter, worldIn);
     }
 
     public WindArrowEntity(World worldIn, double x, double y, double z) {
-        super(BioplethoraEntities.WIND_ARROW.get(), x, y, z, worldIn);
+        super(BPEntities.WIND_ARROW.get(), x, y, z, worldIn);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
         if (this.level instanceof ServerWorld) {
             if (!this.inGround) {
-                ((ServerWorld) this.level).sendParticles(BioplethoraParticles.WIND_POOF.get(), this.getX(), this.getY(), this.getZ(), 1, 0.1, 0.1, 0.1, 0.01);
+                ((ServerWorld) this.level).sendParticles(BPParticles.WIND_POOF.get(), this.getX(), this.getY(), this.getZ(), 1, 0.1, 0.1, 0.1, 0.01);
             }
         }
 
@@ -218,7 +218,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
     @Override
     protected ItemStack getPickupItem() {
-        return new ItemStack(BioplethoraItems.WIND_ARROW.get());
+        return new ItemStack(BPItems.WIND_ARROW.get());
     }
 
     public void readAdditionalSaveData(CompoundNBT compoundNBT) {

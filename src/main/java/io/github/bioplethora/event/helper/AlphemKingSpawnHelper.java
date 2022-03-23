@@ -4,8 +4,8 @@ import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.projectile.WindArrowEntity;
-import io.github.bioplethora.registry.BioplethoraBlocks;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -32,7 +32,7 @@ public class AlphemKingSpawnHelper {
             if (result instanceof BlockRayTraceResult) {
                 BlockRayTraceResult blockResult = (BlockRayTraceResult) result;
 
-                if (world.getBlockState(blockResult.getBlockPos()).getBlock() == BioplethoraBlocks.ALPHANUM_NUCLEUS.get()) {
+                if (world.getBlockState(blockResult.getBlockPos()).getBlock() == BPBlocks.ALPHANUM_NUCLEUS.get()) {
 
                     BlockUtils.destroyAllNearbyBlocks(world, blockResult.getBlockPos(), 3, 2, 3, false);
 
@@ -54,7 +54,7 @@ public class AlphemKingSpawnHelper {
 
                     windArrow.playSound(SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, 1.0F, 1.0F);
 
-                    AlphemKingEntity king = new AlphemKingEntity(BioplethoraEntities.ALPHEM_KING.get(), world);
+                    AlphemKingEntity king = new AlphemKingEntity(BPEntities.ALPHEM_KING.get(), world);
                     king.moveTo(blockResult.getBlockPos(), 30.0F, 30.0F);
                     king.setBarriered(true);
                     world.addFreshEntity(king);

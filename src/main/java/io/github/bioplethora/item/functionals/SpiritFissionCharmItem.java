@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.functionals;
 
 import io.github.bioplethora.item.ItemSettings;
-import io.github.bioplethora.registry.BioplethoraEffects;
+import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -28,7 +28,7 @@ public class SpiritFissionCharmItem extends ActivatableItem {
         super.activatedTick(pStack, pLevel, pEntity);
 
         if (pEntity instanceof PlayerEntity) {
-            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BioplethoraEffects.SPIRIT_FISSION.get(), 10, 0));
+            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BPEffects.SPIRIT_FISSION.get(), 10, 0));
         }
     }
 

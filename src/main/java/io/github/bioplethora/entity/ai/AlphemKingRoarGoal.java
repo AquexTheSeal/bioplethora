@@ -3,7 +3,7 @@ package io.github.bioplethora.entity.ai;
 import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
-import io.github.bioplethora.registry.BioplethoraEntities;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -82,13 +82,13 @@ public class AlphemKingRoarGoal extends Goal {
                 this.explodeOnBlockPos(aPos3, world);
                 this.explodeOnBlockPos(aPos4, world);
 
-                AlphemEntity alphem1 = BioplethoraEntities.ALPHEM.get().create(world);
+                AlphemEntity alphem1 = BPEntities.ALPHEM.get().create(world);
                 this.summonAlphem(alphem1, aPos1, world);
-                AlphemEntity alphem2 = BioplethoraEntities.ALPHEM.get().create(world);
+                AlphemEntity alphem2 = BPEntities.ALPHEM.get().create(world);
                 this.summonAlphem(alphem2, aPos2, world);
-                AlphemEntity alphem3 = BioplethoraEntities.ALPHEM.get().create(world);
+                AlphemEntity alphem3 = BPEntities.ALPHEM.get().create(world);
                 this.summonAlphem(alphem3, aPos3, world);
-                AlphemEntity alphem4 = BioplethoraEntities.ALPHEM.get().create(world);
+                AlphemEntity alphem4 = BPEntities.ALPHEM.get().create(world);
                 this.summonAlphem(alphem4, aPos4, world);
 
                 if (BioplethoraConfig.getHellMode) {
@@ -103,13 +103,13 @@ public class AlphemKingRoarGoal extends Goal {
                     this.explodeOnBlockPos(aPos7, world);
                     this.explodeOnBlockPos(aPos8, world);
 
-                    AlphemEntity alphem5 = BioplethoraEntities.ALPHEM.get().create(world);
+                    AlphemEntity alphem5 = BPEntities.ALPHEM.get().create(world);
                     this.summonAlphem(alphem5, aPos5, world);
-                    AlphemEntity alphem6 = BioplethoraEntities.ALPHEM.get().create(world);
+                    AlphemEntity alphem6 = BPEntities.ALPHEM.get().create(world);
                     this.summonAlphem(alphem6, aPos6, world);
-                    AlphemEntity alphem7 = BioplethoraEntities.ALPHEM.get().create(world);
+                    AlphemEntity alphem7 = BPEntities.ALPHEM.get().create(world);
                     this.summonAlphem(alphem7, aPos7, world);
-                    AlphemEntity alphem8 = BioplethoraEntities.ALPHEM.get().create(world);
+                    AlphemEntity alphem8 = BPEntities.ALPHEM.get().create(world);
                     this.summonAlphem(alphem8, aPos8, world);
                 }
 
