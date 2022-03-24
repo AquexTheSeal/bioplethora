@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;
@@ -120,7 +120,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
     }
 
     private void findNewTarget() {
-        double targetRadius = BioplethoraConfig.COMMON.hellMode.get() ? 13.0D : 10.0D;
+        double targetRadius = BPConfig.COMMON.hellMode.get() ? 13.0D : 10.0D;
         //List<LivingEntity> candidates = level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(targetRadius, targetRadius, targetRadius));
         List<MobEntity> candidates = level.getEntitiesOfClass(MobEntity.class, this.getBoundingBox().inflate(targetRadius, targetRadius, targetRadius));
 
@@ -200,7 +200,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
                 if (eI != null && eI != this.getOwner()) {
 
                     if (this.getOwner() != null) {
-                        eI.hurt(DamageSource.indirectMobAttack(this.getOwner(), (LivingEntity) this.getOwner()), BioplethoraConfig.getHellMode ? 3 : 5);
+                        eI.hurt(DamageSource.indirectMobAttack(this.getOwner(), (LivingEntity) this.getOwner()), BPConfig.getHellMode ? 3 : 5);
                     }
 
                     eI.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
@@ -213,7 +213,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
     @Override
     public double getBaseDamage() {
-        return 3.0D;
+        return BPConfig.getHellMode ? 3.0D : 5.5D;
     }
 
     @Override

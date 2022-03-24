@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "bioplethora.mixin-refmap.json",
   "mixins": [
+    "AbstractArrowEntityMixin",
     "LivingEntityMixin",
     "QuickChargeEnchantmentMixin"
   ],

@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
@@ -71,13 +71,13 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 19.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 19.5 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10.5)
-                .add(Attributes.ATTACK_DAMAGE, 30 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 30 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 8.0D)
-                .add(Attributes.MAX_HEALTH, 550 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 550 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
-                .add(Attributes.MOVEMENT_SPEED, 0.25F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.25F * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64.0D);
     }
 
@@ -195,11 +195,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     }
 
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        if (worldIn instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(26.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(590 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(380 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        if (worldIn instanceof ServerWorld && BPConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(26.5 * BPConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(590 * BPConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(380 * BPConfig.COMMON.mobHealthMultiplier.get());
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
@@ -231,11 +231,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
             world.addParticle(ParticleTypes.POOF, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
 
-            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.35F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get());
-            if (!BioplethoraConfig.getHellMode) {
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(37.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.35F * BPConfig.COMMON.mobMovementSpeedMultiplier.get());
+            if (!BPConfig.getHellMode) {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(37.0F * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
             } else {
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(45.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(45.0F * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
             }
 
             if (!(this.getHealth() <= 5)) {
@@ -247,11 +247,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             }
 
         } else {
-            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.20F * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get());
-            if (!BioplethoraConfig.getHellMode) {
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(30.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.20F * BPConfig.COMMON.mobMovementSpeedMultiplier.get());
+            if (!BPConfig.getHellMode) {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(30.0F * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
             } else {
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35.0F * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35.0F * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
             }
 
             if (!(this.getHealth() <= 5)) {
@@ -318,7 +318,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(10, 0.5, 10))) {
 
             if (areaEnt != this) {
-                areaEnt.hurt(DamageSource.mobAttack(this), BioplethoraConfig.getHellMode ? 23 : 20);
+                areaEnt.hurt(DamageSource.mobAttack(this), BPConfig.getHellMode ? 23 : 20);
                 areaEnt.knockback(f1, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
                 areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 0.5 - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
@@ -543,6 +543,6 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     @Override
     public int getMaxDamageCap() {
-        return BioplethoraConfig.COMMON.alphemKingMobCap.get();
+        return BPConfig.COMMON.alphemKingMobCap.get();
     }
 }

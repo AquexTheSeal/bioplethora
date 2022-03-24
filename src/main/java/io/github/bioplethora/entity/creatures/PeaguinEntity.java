@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.WaterAndLandAnimalEntity;
@@ -73,12 +73,12 @@ public class PeaguinEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 2 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 2 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 1.5)
-                .add(Attributes.ATTACK_DAMAGE, 2 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.ATTACK_KNOCKBACK, 0.5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, 20 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
-                .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 2 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_KNOCKBACK, 0.5 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 20 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 16D);
     }
 

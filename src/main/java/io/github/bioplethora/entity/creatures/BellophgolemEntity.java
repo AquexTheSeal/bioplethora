@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.BellophgolemRangedAttackGoal;
@@ -63,13 +63,13 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 10 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 10 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
-                .add(Attributes.ATTACK_DAMAGE, 23 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 23 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 7D)
-                .add(Attributes.MAX_HEALTH, 220 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 220 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
-                .add(Attributes.MOVEMENT_SPEED, 0.2 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.2 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }
 
@@ -150,7 +150,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
     public boolean doHurtTarget (Entity entity) {
         boolean flag = super.doHurtTarget(entity);
         /*f (flag && entity instanceof LivingEntity)*/
-        if (this.getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+        if (this.getHealth() <= 100 && BPConfig.COMMON.hellMode.get()) {
             if (this.level instanceof ServerWorld) {
                 ((World) this.level).explode(null, (int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ(), (float) 2, Explosion.Mode.BREAK);
                 ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), (int) 40, 0.75, 0.75,
@@ -178,7 +178,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
     public void aiStep() {
         super.aiStep();
 
-        if (((LivingEntity) this.getEntity()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+        if (((LivingEntity) this.getEntity()).getHealth() <= 100 && BPConfig.COMMON.hellMode.get()) {
             ((LivingEntity) this.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 5, 1));
         }
 
@@ -189,11 +189,11 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
     }
 
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        if (worldIn instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(30 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(12.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        if (worldIn instanceof ServerWorld && BPConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(30 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(12.5 * BPConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(245 * BPConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(245 * BPConfig.COMMON.mobHealthMultiplier.get());
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }

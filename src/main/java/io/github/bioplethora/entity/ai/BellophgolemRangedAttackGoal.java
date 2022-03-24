@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.creatures.BellophgolemEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
 import net.minecraft.entity.LivingEntity;
@@ -56,7 +56,7 @@ public class BellophgolemRangedAttackGoal extends Goal {
                 world.playSound(null, blockPos, SoundEvents.BEACON_ACTIVATE, SoundCategory.HOSTILE, (float) 1, (float) 1);
             }
 
-            if (!BioplethoraConfig.COMMON.hellMode.get()) {
+            if (!BPConfig.COMMON.hellMode.get()) {
                 if (this.chargeTime == 20) {
                     world.playSound(null, blockPos, SoundEvents.SHULKER_SHOOT, SoundCategory.HOSTILE, (float) 1, (float) 1);
 
@@ -65,7 +65,7 @@ public class BellophgolemRangedAttackGoal extends Goal {
                 }
 
                 /* IF IN HELLMODE*/
-            } else if (BioplethoraConfig.COMMON.hellMode.get()) {
+            } else if (BPConfig.COMMON.hellMode.get()) {
                 if (this.chargeTime == 20) {
                     world.playSound(null, blockPos, SoundEvents.SHULKER_SHOOT, SoundCategory.HOSTILE, (float) 1, (float) 1);
 

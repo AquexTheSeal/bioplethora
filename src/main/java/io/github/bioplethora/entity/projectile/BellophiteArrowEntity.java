@@ -1,5 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.entity.Entity;
@@ -101,7 +102,7 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
 
     @Override
     public double getBaseDamage() {
-        return 12.0D;
+        return BPConfig.getHellMode ? 7.0D : 9.5D;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.CrephoxlChargingGoal;
@@ -56,13 +56,13 @@ public class CrephoxlEntity extends BPMonsterEntity implements IAnimatable, IBio
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 6 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 6 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
-                .add(Attributes.ATTACK_DAMAGE, 10.5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 10.5 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 5D)
-                .add(Attributes.MAX_HEALTH, 90 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 90 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
-                .add(Attributes.MOVEMENT_SPEED, 0.15 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.15 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }
 
@@ -110,11 +110,11 @@ public class CrephoxlEntity extends BPMonsterEntity implements IAnimatable, IBio
     }
 
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        if (worldIn instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(15 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(8 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(120 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(245 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        if (worldIn instanceof ServerWorld && BPConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(15 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(8 * BPConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(120 * BPConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(245 * BPConfig.COMMON.mobHealthMultiplier.get());
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }

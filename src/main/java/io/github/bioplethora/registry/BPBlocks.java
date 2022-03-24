@@ -46,14 +46,18 @@ public class BPBlocks {
 
     // Fleignarite Blocks
     public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new FleignariteRemainsBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion().lightLevel((level) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion().hasPostProcess((bs, br, bp) -> true)
+            .lightLevel((level) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> FLEIGNARITE_SPLOTCH = registerBlock("fleignarite_splotch", () -> new FleignariteSplotchBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion().lightLevel((level) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion().hasPostProcess((bs, br, bp) -> true)
+            .lightLevel((level) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> FLEIGNARITE_VINES = registerBlock("fleignarite_vines", () -> new FleignariteVinesTopBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().hasPostProcess((bs, br, bp) -> true)
+            .lightLevel((level) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> FLEIGNARITE_VINES_PLANT = registerBlock("fleignarite_vines_plant", () -> new FleignariteVinesBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().lightLevel((level) -> 5)), BPItemGroup.BioplethoraItemItemGroup, false);
+            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().hasPostProcess((bs, br, bp) -> true)
+            .lightLevel((level) -> 5)), null, false);
 
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
@@ -75,7 +79,7 @@ public class BPBlocks {
     public static final RegistryObject<SlabBlock> ALPHANUM_SLAB = registerBlock("alphanum_slab", () ->
             new SlabBlock(AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<StairsBlock> ALPHANUM_STAIRS_BRICKS = registerBlock("alphanum_brick_stairs", () ->
-            new StairsBlock(BPBlocks.ALPHANUM_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get())), BPItemGroup.BioplethoraItemItemGroup);
+            new StairsBlock((BPBlocks.ALPHANUM_BRICKS.get().defaultBlockState()), AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<WallBlock> ALPHANUM_WALL_BRICKS = registerBlock("alphanum_brick_wall", () ->
             new WallBlock(AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<SlabBlock> ALPHANUM_SLAB_BRICKS = registerBlock("alphanum_brick_slab", () ->

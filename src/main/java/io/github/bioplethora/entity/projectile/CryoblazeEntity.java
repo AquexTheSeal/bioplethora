@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.registry.BPDamageSources;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
@@ -102,7 +102,7 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
             for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5, 2, 5))) {
                 if (entityArea != null && entityArea != this.getOwner()) {
 
-                    if (BioplethoraConfig.getHellMode) {
+                    if (BPConfig.getHellMode) {
                         entityArea.hurt(castration, (float) 14);
                         entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 80, 2));
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 80, 1));
@@ -118,7 +118,7 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
         }
 
         if (!this.level.isClientSide && this.getOwner() != null) {
-            if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+            if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BPConfig.COMMON.hellMode.get()) {
                 this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
             } else {
                 this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);

@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
-import com.google.common.collect.Lists;
 import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.entity.mixin_helpers.IAbstractArrowMixin;
 import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screen.Screen;
@@ -18,14 +18,11 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
@@ -39,10 +36,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Predicate;
 
 public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
 
+    public static int drawTime = 3;
     private boolean startSoundPlayed = false;
     private boolean midLoadSoundPlayed = false;
 
@@ -50,14 +47,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         super(properties);
     }
 
-    public Predicate<ItemStack> getSupportedHeldProjectiles() {
-        return super.getSupportedHeldProjectiles();
-    }
-
-    public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return super.getAllSupportedProjectiles();
-    }
-
+    @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity entity, Hand hand) {
         ItemStack itemstack = entity.getItemInHand(hand);
         if (isCharged(itemstack)) {
@@ -102,120 +92,9 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         }
     }
 
-    public void releaseUsing(ItemStack pStack, World pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
-        int i = this.getUseDuration(pStack) - pTimeLeft;
-        float f = getPowerForTime(i, pStack);
-        if (f >= 1.0F && !isCharged(pStack) && tryLoadProjectiles(pEntityLiving, pStack)) {
-            setCharged(pStack, true);
-            SoundCategory soundcategory = pEntityLiving instanceof PlayerEntity ? SoundCategory.PLAYERS : SoundCategory.HOSTILE;
-            pLevel.playSound(null, pEntityLiving.getX(), pEntityLiving.getY(), pEntityLiving.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
-        }
-    }
-
-    private static boolean tryLoadProjectiles(LivingEntity entity, ItemStack itemStack) {
-        int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, itemStack);
-        int j = i == 0 ? 1 : 3;
-        boolean flag = entity instanceof PlayerEntity && ((PlayerEntity)entity).abilities.instabuild;
-        ItemStack itemstack = entity.getProjectile(itemStack);
-        ItemStack itemstack1 = itemstack.copy();
-
-        for(int k = 0; k < j; ++k) {
-            if (k > 0) {
-                itemstack = itemstack1.copy();
-            }
-
-            if (itemstack.isEmpty() && flag) {
-                itemstack = new ItemStack(Items.ARROW);
-                itemstack1 = itemstack.copy();
-            }
-
-            if (!loadProjectile(entity, itemStack, itemstack, k > 0, flag)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private static boolean loadProjectile(LivingEntity entity, ItemStack itemStack, ItemStack itemStack1, boolean p_220023_3_, boolean p_220023_4_) {
-        if (itemStack1.isEmpty()) {
-            return false;
-        } else {
-            boolean flag = p_220023_4_ && itemStack1.getItem() instanceof ArrowItem;
-            ItemStack itemstack;
-            if (!flag && !p_220023_4_ && !p_220023_3_) {
-                itemstack = itemStack1.split(1);
-                if (itemStack1.isEmpty() && entity instanceof PlayerEntity) {
-                    ((PlayerEntity)entity).inventory.removeItem(itemStack1);
-                }
-            } else {
-                itemstack = itemStack1.copy();
-            }
-
-            addChargedProjectile(itemStack, itemstack);
-            return true;
-        }
-    }
-
-    public static boolean isCharged(ItemStack itemStack) {
-        CompoundNBT compoundnbt = itemStack.getTag();
-        return compoundnbt != null && compoundnbt.getBoolean("Charged");
-    }
-
-    public static void setCharged(ItemStack itemStack, boolean p_220011_1_) {
-        CompoundNBT compoundnbt = itemStack.getOrCreateTag();
-        compoundnbt.putBoolean("Charged", p_220011_1_);
-    }
-
-    private static void addChargedProjectile(ItemStack itemStack, ItemStack itemStack1) {
-        CompoundNBT compoundnbt = itemStack.getOrCreateTag();
-        ListNBT listnbt;
-        if (compoundnbt.contains("ChargedProjectiles", 9)) {
-            listnbt = compoundnbt.getList("ChargedProjectiles", 10);
-        } else {
-            listnbt = new ListNBT();
-        }
-
-        CompoundNBT compoundnbt1 = new CompoundNBT();
-        itemStack1.save(compoundnbt1);
-        listnbt.add(compoundnbt1);
-        compoundnbt.put("ChargedProjectiles", listnbt);
-    }
-
-    private static List<ItemStack> getChargedProjectiles(ItemStack p_220018_0_) {
-        List<ItemStack> list = Lists.newArrayList();
-        CompoundNBT compoundnbt = p_220018_0_.getTag();
-        if (compoundnbt != null && compoundnbt.contains("ChargedProjectiles", 9)) {
-            ListNBT listnbt = compoundnbt.getList("ChargedProjectiles", 10);
-            if (listnbt != null) {
-                for(int i = 0; i < listnbt.size(); ++i) {
-                    CompoundNBT compoundnbt1 = listnbt.getCompound(i);
-                    list.add(ItemStack.of(compoundnbt1));
-                }
-            }
-        }
-
-        return list;
-    }
-
-    private static void clearChargedProjectiles(ItemStack itemStack) {
-        CompoundNBT compoundnbt = itemStack.getTag();
-        if (compoundnbt != null) {
-            ListNBT listnbt = compoundnbt.getList("ChargedProjectiles", 9);
-            listnbt.clear();
-            compoundnbt.put("ChargedProjectiles", listnbt);
-        }
-
-    }
-
-    public static boolean containsChargedProjectile(ItemStack itemStack, Item item) {
-        return getChargedProjectiles(itemStack).stream().anyMatch((stack) -> stack.getItem() == item);
-    }
-
     private static void shootProjectile(World level, LivingEntity entity, Hand hand, ItemStack stack, ItemStack itemStack, float p_220016_5_, boolean b, float p_220016_7_, float p_220016_8_, float v) {
 
         double x = entity.getX(), y = entity.getY(), z = entity.getZ();
-        BlockPos pos = entity.getEntity().blockPosition();
 
         if (!level.isClientSide) {
             boolean flag = itemStack.getItem() == Items.FIREWORK_ROCKET;
@@ -264,7 +143,11 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         abstractarrowentity.setSoundEvent(SoundEvents.CROSSBOW_HIT);
         abstractarrowentity.setShotFromCrossbow(true);
         abstractarrowentity.setNoGravity(true);
-        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + 3);
+        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() * 2);
+
+        ((IAbstractArrowMixin) abstractarrowentity).setExplosionRadius(3.0F);
+        ((IAbstractArrowMixin) abstractarrowentity).setShouldExplode(true);
+
         int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, stack);
         if (i > 0) {
             abstractarrowentity.setPierceLevel((byte)i);
@@ -292,6 +175,26 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         onCrossbowShot(world, entity, stack);
     }
 
+    @Override
+    public void releaseUsing(ItemStack pStack, World pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
+        int i = this.getUseDuration(pStack) - pTimeLeft;
+        float f = getPowerForTime(i, pStack);
+        if (f >= 1.0F && !isCharged(pStack) && tryLoadProjectiles(pEntityLiving, pStack)) {
+            setCharged(pStack, true);
+            SoundCategory soundcategory = pEntityLiving instanceof PlayerEntity ? SoundCategory.PLAYERS : SoundCategory.HOSTILE;
+            pLevel.playSound(null, pEntityLiving.getX(), pEntityLiving.getY(), pEntityLiving.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
+        }
+    }
+
+    public static float getPowerForTime(int pUseTime, ItemStack pCrossbowStack) {
+        float f = (float)pUseTime / (float)getChargeDuration(pCrossbowStack);
+        if (f > 1.0F) {
+            f = 1.0F;
+        }
+
+        return f;
+    }
+
     private static float[] getShotPitches(Random p_220028_0_) {
         boolean flag = p_220028_0_.nextBoolean();
         return new float[]{1.0F, getRandomShotPitch(flag), getRandomShotPitch(!flag)};
@@ -315,6 +218,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         clearChargedProjectiles(p_220015_2_);
     }
 
+    @Override
     public void onUseTick(World world, LivingEntity entity, ItemStack stack, int num) {
         if (!world.isClientSide) {
             int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, stack);
@@ -338,21 +242,17 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         }
     }
 
-    public int getUseDuration(ItemStack p_77626_1_) {
-        return getChargeDuration(p_77626_1_) + 3;
+    public int getUseDuration(ItemStack stack) {
+        return getChargeDuration(stack) + 3;
     }
 
-    public static int getChargeDuration(ItemStack p_220026_0_) {
-        int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, p_220026_0_);
-        return i == 0 ? 25 : 25 - 5 * i;
+    public static int getChargeDuration(ItemStack stack) {
+        int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, stack);
+        return i == 0 ? 25 * drawTime : (25 - 5 * i) * drawTime;
     }
 
-    public UseAction getUseAnimation(ItemStack p_77661_1_) {
-        return UseAction.CROSSBOW;
-    }
-
-    private SoundEvent getStartSound(int p_220025_1_) {
-        switch(p_220025_1_) {
+    private SoundEvent getStartSound(int i) {
+        switch(i) {
             case 1:
                 return SoundEvents.CROSSBOW_QUICK_CHARGE_1;
             case 2:
@@ -364,16 +264,8 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         }
     }
 
-    private static float getPowerForTime(int p_220031_0_, ItemStack p_220031_1_) {
-        float f = (float)p_220031_0_ / (float)getChargeDuration(p_220031_1_);
-        if (f > 1.0F) {
-            f = 1.0F;
-        }
-
-        return f;
-    }
-
     @OnlyIn(Dist.CLIENT)
+    @Override
     public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.appendHoverText(stack, world, tooltip, flag);
         ItemSettings.sacredLevelText(tooltip);
@@ -388,6 +280,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         return p_220013_0_.getItem() == Items.CROSSBOW && containsChargedProjectile(p_220013_0_, Items.FIREWORK_ROCKET) ? 1.6F : 3.15F;
     }
 
+    @Override
     public int getDefaultProjectileRange() {
         return 8;
     }

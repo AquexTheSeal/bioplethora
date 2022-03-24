@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.enums.BPEntityClasses;
@@ -66,12 +66,12 @@ public class TelemreyeEntity extends BPMonsterEntity implements IAnimatable, IBi
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 12 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 12 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.8D)
-                .add(Attributes.ATTACK_DAMAGE, 15 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, 75 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
-                .add(Attributes.MOVEMENT_SPEED, 1.2 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 15 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 75 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 1.2 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }
 

@@ -1,6 +1,6 @@
 package io.github.bioplethora.event.helper;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.projectile.WindArrowEntity;
@@ -40,7 +40,7 @@ public class AlphemKingSpawnHelper {
                         ((ServerWorld) world).sendParticles(ParticleTypes.CLOUD, windArrow.getX(), windArrow.getY(), windArrow.getZ(),
                                 30, 1.2, 1.2, 1.2, 0.1);
 
-                        if (BioplethoraConfig.COMMON.announceAlphemKing.get()) {
+                        if (BPConfig.COMMON.announceAlphemKing.get()) {
                             List<ServerPlayerEntity> list = ((ServerWorld) world).getPlayers((playerEntity) -> true);
                             for (ServerPlayerEntity serverplayerentity : list) {
                                 serverplayerentity.playSound(SoundEvents.WITHER_DEATH, 1.0F, 1.0F);

@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.item.ItemSettings;
 import io.github.bioplethora.registry.BPEntities;
@@ -31,7 +31,7 @@ import java.util.List;
 
 public class PrimordialStaffItem extends Item {
 
-    public boolean hellConfig = BioplethoraConfig.COMMON.hellMode.get();
+    public boolean hellConfig = BPConfig.COMMON.hellMode.get();
     public int charge = 0;
 
     public PrimordialStaffItem(Properties properties) {

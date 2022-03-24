@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.others;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.IGrylynenTier;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.enums.BPGrylynenTier;
@@ -72,7 +72,7 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
             hasSound = true;
         }
 
-        if (this.birthTime >= (BioplethoraConfig.getHellMode ? 40 : 60)) {
+        if (this.birthTime >= (BPConfig.getHellMode ? 40 : 60)) {
 
             if (!this.level.isClientSide) {
                 ServerWorld serverworld = (ServerWorld) this.level;

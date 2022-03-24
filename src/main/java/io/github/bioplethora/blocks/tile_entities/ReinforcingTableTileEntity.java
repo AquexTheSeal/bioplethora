@@ -1,7 +1,7 @@
 package io.github.bioplethora.blocks.tile_entities;
 
 import io.github.bioplethora.gui.recipe.ReinforcingRecipe;
-import io.github.bioplethora.registry.BioplethoraTileEntities;
+import io.github.bioplethora.registry.BPTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class ReinforcingTableTileEntity extends TileEntity implements ITickableT
     }
 
     public ReinforcingTableTileEntity() {
-        this(BioplethoraTileEntities.REINFORCING_TABLE.get());
+        this(BPTileEntities.REINFORCING_TABLE.get());
     }
 
     @Override

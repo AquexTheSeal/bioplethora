@@ -3,8 +3,8 @@
 	"parent": "fleignarite_splotch_inventory",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "bioplethora:block/fleignarite_splotch",
-		"particles": "bioplethora:block/fleignarite_splotch"
+		"0": "bioplethora:block/fleignarite_splotch",
+		"particle": "bioplethora:block/fleignarite_splotch"
 	},
 	"elements": [
 		{
@@ -12,12 +12,12 @@
 			"from": [0, 0, 0],
 			"to": [16, 1, 16],
 			"faces": {
-				"north": {"uv": [7, 4.5, 11, 4.75], "texture": "#1"},
-				"east": {"uv": [7, 4.75, 11, 5], "texture": "#1"},
-				"south": {"uv": [7, 5, 11, 5.25], "texture": "#1"},
-				"west": {"uv": [7, 5.25, 11, 5.5], "texture": "#1"},
-				"up": {"uv": [4, 4, 0, 0], "texture": "#1"},
-				"down": {"uv": [4, 4, 0, 8], "texture": "#1"}
+				"north": {"uv": [7, 4.5, 11, 4.75], "texture": "#0"},
+				"east": {"uv": [7, 4.75, 11, 5], "texture": "#0"},
+				"south": {"uv": [7, 5, 11, 5.25], "texture": "#0"},
+				"west": {"uv": [7, 5.25, 11, 5.5], "texture": "#0"},
+				"up": {"uv": [4, 4, 0, 0], "texture": "#0"},
+				"down": {"uv": [4, 4, 0, 8], "texture": "#0"}
 			}
 		},
 		{
@@ -25,12 +25,12 @@
 			"from": [4, 1, 5],
 			"to": [12, 6, 13],
 			"faces": {
-				"north": {"uv": [6, 1.25, 8, 2.5], "texture": "#1"},
-				"east": {"uv": [6, 1.25, 8, 2.5], "texture": "#1"},
-				"south": {"uv": [6, 1.25, 8, 2.5], "texture": "#1"},
-				"west": {"uv": [6, 1.25, 8, 2.5], "texture": "#1"},
-				"up": {"uv": [6, 2, 4, 0], "texture": "#1"},
-				"down": {"uv": [6, 2, 4, 4], "texture": "#1"}
+				"north": {"uv": [6, 1.25, 8, 2.5], "texture": "#0"},
+				"east": {"uv": [6, 1.25, 8, 2.5], "texture": "#0"},
+				"south": {"uv": [6, 1.25, 8, 2.5], "texture": "#0"},
+				"west": {"uv": [6, 1.25, 8, 2.5], "texture": "#0"},
+				"up": {"uv": [6, 2, 4, 0], "texture": "#0"},
+				"down": {"uv": [6, 2, 4, 4], "texture": "#0"}
 			}
 		},
 		{
@@ -38,12 +38,12 @@
 			"from": [8, 1, 2],
 			"to": [14, 4, 9],
 			"faces": {
-				"north": {"uv": [7, 3.75, 8.5, 4.5], "texture": "#1"},
-				"east": {"uv": [6, 5.75, 7.75, 6.5], "texture": "#1"},
-				"south": {"uv": [7, 3.75, 8.5, 4.5], "texture": "#1"},
-				"west": {"uv": [7, 3.75, 8.5, 4.5], "texture": "#1"},
-				"up": {"uv": [5.5, 5.75, 4, 4], "texture": "#1"},
-				"down": {"uv": [7, 4, 5.5, 5.75], "texture": "#1"}
+				"north": {"uv": [7, 3.75, 8.5, 4.5], "texture": "#0"},
+				"east": {"uv": [6, 5.75, 7.75, 6.5], "texture": "#0"},
+				"south": {"uv": [7, 3.75, 8.5, 4.5], "texture": "#0"},
+				"west": {"uv": [7, 3.75, 8.5, 4.5], "texture": "#0"},
+				"up": {"uv": [5.5, 5.75, 4, 4], "texture": "#0"},
+				"down": {"uv": [7, 4, 5.5, 5.75], "texture": "#0"}
 			}
 		},
 		{
@@ -51,12 +51,12 @@
 			"from": [1, 1, 10],
 			"to": [5, 3, 14],
 			"faces": {
-				"north": {"uv": [2, 8, 3, 8.5], "texture": "#1"},
-				"east": {"uv": [2, 8, 3, 8.5], "texture": "#1"},
-				"south": {"uv": [2, 8, 3, 8.5], "texture": "#1"},
-				"west": {"uv": [2, 8, 3, 8.5], "texture": "#1"},
-				"up": {"uv": [6.5, 8.25, 5.5, 7.25], "texture": "#1"},
-				"down": {"uv": [7.5, 7.25, 6.5, 8.25], "texture": "#1"}
+				"north": {"uv": [2, 8, 3, 8.5], "texture": "#0"},
+				"east": {"uv": [2, 8, 3, 8.5], "texture": "#0"},
+				"south": {"uv": [2, 8, 3, 8.5], "texture": "#0"},
+				"west": {"uv": [2, 8, 3, 8.5], "texture": "#0"},
+				"up": {"uv": [6.5, 8.25, 5.5, 7.25], "texture": "#0"},
+				"down": {"uv": [7.5, 7.25, 6.5, 8.25], "texture": "#0"}
 			}
 		},
 		{
@@ -64,12 +64,12 @@
 			"from": [2, 1, 3],
 			"to": [6, 5, 7],
 			"faces": {
-				"north": {"uv": [0, 8, 1, 9], "texture": "#1"},
-				"east": {"uv": [0, 8, 1, 9], "texture": "#1"},
-				"south": {"uv": [0, 8, 1, 9], "texture": "#1"},
-				"west": {"uv": [0, 8, 1, 9], "texture": "#1"},
-				"up": {"uv": [9, 1, 8, 0], "texture": "#1"},
-				"down": {"uv": [2, 8, 1, 9], "texture": "#1"}
+				"north": {"uv": [0, 8, 1, 9], "texture": "#0"},
+				"east": {"uv": [0, 8, 1, 9], "texture": "#0"},
+				"south": {"uv": [0, 8, 1, 9], "texture": "#0"},
+				"west": {"uv": [0, 8, 1, 9], "texture": "#0"},
+				"up": {"uv": [9, 1, 8, 0], "texture": "#0"},
+				"down": {"uv": [2, 8, 1, 9], "texture": "#0"}
 			}
 		}
 	],

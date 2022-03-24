@@ -1,6 +1,6 @@
 package io.github.bioplethora.event.helper;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.others.GrylynenCoreBombEntity;
 import io.github.bioplethora.registry.BPEffects;
@@ -31,37 +31,37 @@ public class GrylynenSpawnHelper {
             if (!event.getPlayer().isCreative()) {
 
                 if (getTaggedBlock(BPTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
-                    if (Math.random() < (BioplethoraConfig.getHellMode ? 0.05 : 0.075) && BioplethoraConfig.COMMON.spawnWoodenGrylynen.get()) {
+                    if (Math.random() < (BPConfig.getHellMode ? 0.05 : 0.075) && BPConfig.COMMON.spawnWoodenGrylynen.get()) {
                         summonGrylynenCore(BPEntities.WOODEN_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.STONE_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
-                    if (Math.random() < (BioplethoraConfig.getHellMode ? 0.05 : 0.075) && BioplethoraConfig.COMMON.spawnStoneGrylynen.get()) {
+                    if (Math.random() < (BPConfig.getHellMode ? 0.05 : 0.075) && BPConfig.COMMON.spawnStoneGrylynen.get()) {
                         summonGrylynenCore(BPEntities.STONE_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.GOLDEN_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
-                    if (Math.random() < (BioplethoraConfig.getHellMode ? 0.075 : 0.1) && BioplethoraConfig.COMMON.spawnGoldenGrylynen.get()) {
+                    if (Math.random() < (BPConfig.getHellMode ? 0.075 : 0.1) && BPConfig.COMMON.spawnGoldenGrylynen.get()) {
                         summonGrylynenCore(BPEntities.GOLDEN_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.IRON_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
-                    if (Math.random() < (BioplethoraConfig.getHellMode ? 0.075 : 0.1) && BioplethoraConfig.COMMON.spawnIronGrylynen.get()) {
+                    if (Math.random() < (BPConfig.getHellMode ? 0.075 : 0.1) && BPConfig.COMMON.spawnIronGrylynen.get()) {
                         summonGrylynenCore(BPEntities.IRON_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.DIAMOND_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
-                    if (Math.random() < (BioplethoraConfig.getHellMode ? 0.1 : 0.1025) && BioplethoraConfig.COMMON.spawnDiamondGrylynen.get()) {
+                    if (Math.random() < (BPConfig.getHellMode ? 0.1 : 0.1025) && BPConfig.COMMON.spawnDiamondGrylynen.get()) {
                         summonGrylynenCore(BPEntities.DIAMOND_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.NETHERITE_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
-                    if (Math.random() < (BioplethoraConfig.getHellMode ? 0.1 : 0.1025) && BioplethoraConfig.COMMON.spawnNetheriteGrylynen.get()) {
+                    if (Math.random() < (BPConfig.getHellMode ? 0.1 : 0.1025) && BPConfig.COMMON.spawnNetheriteGrylynen.get()) {
                         summonGrylynenCore(BPEntities.NETHERITE_GRYLYNEN.get().create(world), world, pos);
                     }
                 }

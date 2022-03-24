@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
@@ -50,13 +50,13 @@ public class DwarfMossadileEntity extends BPMonsterEntity implements IAnimatable
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 2 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 2 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 1.5)
-                .add(Attributes.ATTACK_DAMAGE, 5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 5 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 0.3D)
-                .add(Attributes.MAX_HEALTH, 25 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 25 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
-                .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 32.0D);
     }
 
@@ -152,14 +152,14 @@ public class DwarfMossadileEntity extends BPMonsterEntity implements IAnimatable
             this.setNetherVariant(true);
         }
 
-        if (BioplethoraConfig.COMMON.hellMode.get()) {
-            this.getAttribute(Attributes.ARMOR).setBaseValue(4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(37 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(37 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        if (BPConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ARMOR).setBaseValue(4 * BPConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(37 * BPConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(37 * BPConfig.COMMON.mobHealthMultiplier.get());
         }
 
         if (this.isNetherVariant()) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(7.5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(7.5 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
         }
 
         return super.finalizeSpawn(world, difficultyIn, reason, spawnDataIn, dataTag);

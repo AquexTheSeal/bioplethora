@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.CavernFleignarMeleeGoal;
@@ -57,13 +57,13 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 4 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
-                .add(Attributes.ATTACK_DAMAGE, 8 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 8 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 1.5D)
-                .add(Attributes.MAX_HEALTH, 40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 40 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10)
-                .add(Attributes.MOVEMENT_SPEED, 0.1 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.1 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 24D);
     }
 
@@ -101,11 +101,11 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
 
     @Override
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        if (worldIn instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(8 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(80 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(80 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        if (worldIn instanceof ServerWorld && BPConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(8 * BPConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(80 * BPConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(80 * BPConfig.COMMON.mobHealthMultiplier.get());
         }
 
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -164,8 +164,8 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
 
             if (targetArea != this) {
                 float knockbackValue = ((float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK) / 2);
-                int poisonDuration = BioplethoraConfig.getHellMode ? 60 : 100;
-                int poisonAmplification = BioplethoraConfig.getHellMode ? 0 : 1;
+                int poisonDuration = BPConfig.getHellMode ? 60 : 100;
+                int poisonAmplification = BPConfig.getHellMode ? 0 : 1;
 
                 if (this.level instanceof ServerWorld) {
                     ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, entity.getX(), entity.getY(), entity.getZ(), 15, 1.2, 0.2, 1.2, 0.01);

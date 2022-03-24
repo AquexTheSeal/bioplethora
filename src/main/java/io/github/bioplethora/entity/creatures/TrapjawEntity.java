@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.*;
 import io.github.bioplethora.entity.ai.WaterFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
@@ -72,12 +72,12 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 4 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 1.5)
-                .add(Attributes.ATTACK_DAMAGE, 8 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.ATTACK_KNOCKBACK, 0.5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, 80 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
-                .add(Attributes.MOVEMENT_SPEED, 0.25D * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 8 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_KNOCKBACK, 0.5 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 80 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.25D * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 32D);
     }
 
@@ -133,22 +133,22 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
         if (Math.random() <= 0.05) {
             this.setCardinalVariant(true);
-            if (BioplethoraConfig.getHellMode) {
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(16 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-                this.getAttribute(Attributes.ARMOR).setBaseValue(8 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(145 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-                this.setHealth(145 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+            if (BPConfig.getHellMode) {
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(16 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+                this.getAttribute(Attributes.ARMOR).setBaseValue(8 * BPConfig.COMMON.mobArmorMultiplier.get());
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(145 * BPConfig.COMMON.mobHealthMultiplier.get());
+                this.setHealth(145 * BPConfig.COMMON.mobHealthMultiplier.get());
             } else {
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(12 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-                this.getAttribute(Attributes.ARMOR).setBaseValue(6.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(110 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-                this.setHealth(110 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(12 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+                this.getAttribute(Attributes.ARMOR).setBaseValue(6.5 * BPConfig.COMMON.mobArmorMultiplier.get());
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(110 * BPConfig.COMMON.mobHealthMultiplier.get());
+                this.setHealth(110 * BPConfig.COMMON.mobHealthMultiplier.get());
             }
-        } else if (BioplethoraConfig.getHellMode) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(6 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(100 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(100 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        } else if (BPConfig.getHellMode) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(6 * BPConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(100 * BPConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(100 * BPConfig.COMMON.mobHealthMultiplier.get());
         }
 
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);

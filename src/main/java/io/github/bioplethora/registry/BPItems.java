@@ -1,7 +1,7 @@
 package io.github.bioplethora.registry;
 
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.BioplethoraConfig;
 import io.github.bioplethora.enums.BPArmorMaterials;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.enums.BPItemTier;
@@ -30,7 +30,7 @@ public class BPItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Bioplethora.MOD_ID);
 
     //Variables
-    public static boolean hellConfig = BioplethoraConfig.COMMON.hellMode.get();
+    public static boolean hellConfig = BPConfig.COMMON.hellMode.get();
 
     //Main Items
     public static final RegistryObject<Item> BIOPEDIA = ITEMS.register("biopedia", () -> new BiopediaItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).stacksTo(1).tab(BPItemGroup.BioplethoraItemItemGroup)));

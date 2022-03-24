@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.registry.BPEntities;
@@ -91,7 +91,7 @@ public class AlphemKingRoarGoal extends Goal {
                 AlphemEntity alphem4 = BPEntities.ALPHEM.get().create(world);
                 this.summonAlphem(alphem4, aPos4, world);
 
-                if (BioplethoraConfig.getHellMode) {
+                if (BPConfig.getHellMode) {
 
                     BlockPos aPos5 = new BlockPos((int) this.king.getX(), (int) this.king.getY(), (int) this.king.getZ() + 4);
                     BlockPos aPos6 = new BlockPos((int) this.king.getX() + 4, (int) this.king.getY(), (int) this.king.getZ());

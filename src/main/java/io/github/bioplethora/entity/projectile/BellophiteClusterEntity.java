@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.registry.BPDamageSources;
 import io.github.bioplethora.registry.BPEntities;
@@ -120,10 +120,10 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
 
                     if (this.getOwner() != null) {
                         //hell mode + berserk
-                        if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+                        if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BPConfig.COMMON.hellMode.get()) {
                             entityArea.hurt(castration, (float) 13.5);
                             //berserk only
-                        } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BioplethoraConfig.COMMON.hellMode.get()) {
+                        } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BPConfig.COMMON.hellMode.get()) {
                             entityArea.hurt(castration, (float) 10);
                             //default
                         } else {
@@ -139,7 +139,7 @@ public class BellophiteClusterEntity extends DamagingProjectileEntity implements
         }
 
         if (!this.level.isClientSide && this.getOwner() != null) {
-            if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BioplethoraConfig.COMMON.hellMode.get()) {
+            if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BPConfig.COMMON.hellMode.get()) {
                 this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
             } else {
                 this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);

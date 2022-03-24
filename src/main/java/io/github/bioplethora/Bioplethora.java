@@ -38,9 +38,9 @@ public class Bioplethora {
 
         /* final step of registering elements like Items, Entities, etc. */
         BPItems.ITEMS.register(bus);
+        BPBlocks.BLOCKS.register(bus);
         BPBlocks.BLOCK_ITEMS.register(bus);
         BPEntities.ENTITIES.register(bus);
-        BPBlocks.BLOCKS.register(bus);
         BPSoundEvents.SOUNDS.register(bus);
         BPParticles.PARTICLES.register(bus);
         BPBiomes.BIOMES.register(bus);
@@ -49,7 +49,7 @@ public class Bioplethora {
         BPStructures.STRUCTURES.register(bus);
         BPFeatures.FEATURES.register(bus);
 
-        BioplethoraTileEntities.TILE_ENTITIES.register(bus);
+        BPTileEntities.TILE_ENTITIES.register(bus);
         BPContainerTypes.CONTAINERS.register(bus);
 
         BPRecipes.registerRecipes(bus);
@@ -67,7 +67,7 @@ public class Bioplethora {
         // register this class through the Minecraft Forge Event Bus
         MinecraftForge.EVENT_BUS.register(this);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BioplethoraConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BPConfig.COMMON_SPEC);
     }
 
     private void onInterModEnqueueEvent(final InterModEnqueueEvent event) {

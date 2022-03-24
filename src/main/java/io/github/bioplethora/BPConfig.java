@@ -3,7 +3,7 @@ package io.github.bioplethora;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class BioplethoraConfig {
+public class BPConfig {
 
     public static final ForgeConfigSpec COMMON_SPEC;
     public static final Common COMMON;
@@ -14,7 +14,7 @@ public class BioplethoraConfig {
         COMMON = commonSpecPair.getLeft();
     }
 
-    public static final boolean getHellMode = BioplethoraConfig.COMMON.hellMode.get();
+    public static final boolean getHellMode = BPConfig.COMMON.hellMode.get();
 
     public static class Common {
 

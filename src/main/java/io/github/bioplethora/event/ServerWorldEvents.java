@@ -1,16 +1,13 @@
 package io.github.bioplethora.event;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
-import io.github.bioplethora.event.helper.AlphemKingSpawnHelper;
-import io.github.bioplethora.event.helper.GrylynenSpawnHelper;
-import io.github.bioplethora.event.helper.MobCapEventHelper;
-import io.github.bioplethora.event.helper.TooltipEventHelper;
+import io.github.bioplethora.event.helper.*;
 import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
@@ -60,7 +57,7 @@ public class ServerWorldEvents {
         PlayerEntity eventEntity = event.getPlayer();
 
         if (eventEntity != null) {
-            if (BioplethoraConfig.COMMON.hellMode.get() && BioplethoraConfig.COMMON.hellModeReminder.get()) {
+            if (BPConfig.COMMON.hellMode.get() && BPConfig.COMMON.hellModeReminder.get()) {
                 if (!eventEntity.level.isClientSide()) {
                     eventEntity.displayClientMessage(new StringTextComponent("\u00A7cQuick Reminder: You are in Bioplethora Hell Mode. Most Bioplethora creatures will become stronger and more powerful."), (false));
                 }
@@ -70,7 +67,7 @@ public class ServerWorldEvents {
                 BPAdvancementHelper.grantBioAdvancement(eventEntity, "bioplethora:bioplethora_startup");
             }
 
-            if (BioplethoraConfig.COMMON.startupBiopedia.get()) {
+            if (BPConfig.COMMON.startupBiopedia.get()) {
 
                 CompoundNBT playerData = event.getPlayer().getPersistentData();
                 CompoundNBT data = playerData.getCompound(PlayerEntity.PERSISTED_NBT_TAG);
@@ -198,6 +195,7 @@ public class ServerWorldEvents {
     @SubscribeEvent
     public static void onProjectileHit(ProjectileImpactEvent event) {
 
+        ArrowMixinHelper.onProjectileImpact(event);
         AlphemKingSpawnHelper.onProjectileImpact(event);
 
         Entity projectile = event.getEntity();

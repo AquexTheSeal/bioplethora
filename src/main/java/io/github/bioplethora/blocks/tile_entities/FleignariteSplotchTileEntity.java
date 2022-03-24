@@ -1,6 +1,6 @@
 package io.github.bioplethora.blocks.tile_entities;
 
-import io.github.bioplethora.registry.BioplethoraTileEntities;
+import io.github.bioplethora.registry.BPTileEntities;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -20,7 +20,7 @@ public class FleignariteSplotchTileEntity extends TileEntity implements IAnimata
     }
 
     public FleignariteSplotchTileEntity() {
-        this(BioplethoraTileEntities.FLEIGNARITE_SPLOTCH.get());
+        this(BPTileEntities.FLEIGNARITE_SPLOTCH.get());
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {

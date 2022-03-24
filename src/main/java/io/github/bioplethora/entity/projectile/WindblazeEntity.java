@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -84,7 +84,7 @@ public class WindblazeEntity extends DamagingProjectileEntity {
         entityArea.setDeltaMovement(entityArea.getDeltaMovement().add(0, 0.3 - entityArea.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
 
         if (this.getOwner() != null) {
-            if (BioplethoraConfig.COMMON.hellMode.get()) {
+            if (BPConfig.COMMON.hellMode.get()) {
                 entityArea.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), 3);
                 entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 1));
                 entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 60));

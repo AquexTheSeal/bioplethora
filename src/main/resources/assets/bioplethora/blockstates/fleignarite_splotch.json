@@ -1,3 +1,7 @@
 {
-  "model": "bioplethora:block/fleignarite_splotch_inventory"
+  "variants": {
+    "": {
+      "model": "bioplethora:block/fleignarite_splotch_inventory"
+    }
+  }
 }

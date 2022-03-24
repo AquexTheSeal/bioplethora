@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.FloatingMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IGrylynenTier;
@@ -51,10 +51,10 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
                 .add(Attributes.ARMOR, 0)
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
-                .add(Attributes.ATTACK_DAMAGE, 2 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 2 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.MAX_HEALTH, 1)
-                .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FLYING_SPEED, 0.45 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.FLYING_SPEED, 0.45 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 32D);
     }
@@ -129,7 +129,7 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
     public ILivingEntityData finalizeSpawn(IServerWorld iServerWorld, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData iLivingEntityData, @Nullable CompoundNBT compoundNBT) {
         iLivingEntityData = super.finalizeSpawn(iServerWorld, difficultyInstance, spawnReason, iLivingEntityData, compoundNBT);
 
-        BioplethoraConfig.Common config = BioplethoraConfig.COMMON;
+        BPConfig.Common config = BPConfig.COMMON;
 
         if (iServerWorld instanceof ServerWorld && !config.hellMode.get()) {
             // If not Hellmode

@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.others;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.PrimordialRingFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.PrimordialRingOwnerHurtByTargetGoal;
@@ -49,15 +49,15 @@ public class PrimordialRingEntity extends SummonableMonsterEntity implements IAn
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 10 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 10 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
-                .add(Attributes.ATTACK_DAMAGE, 15 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 15 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
-                .add(Attributes.MAX_HEALTH, 50 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 50 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.25D * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D)
-                .add(Attributes.FLYING_SPEED, 1.5D * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get());
+                .add(Attributes.FLYING_SPEED, 1.5D * BPConfig.COMMON.mobMovementSpeedMultiplier.get());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.AlphemRangedAttackGoal;
@@ -61,12 +61,12 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 4 * BioplethoraConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 4 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
-                .add(Attributes.ATTACK_DAMAGE, 7 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, 25 * BioplethoraConfig.COMMON.mobHealthMultiplier.get())
-                .add(Attributes.MOVEMENT_SPEED, 0.25 * BioplethoraConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 7 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 25 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }
 
@@ -133,14 +133,14 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
     public ILivingEntityData finalizeSpawn(IServerWorld iServerWorld, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData iLivingEntityData, @Nullable CompoundNBT compoundNBT) {
         iLivingEntityData = super.finalizeSpawn(iServerWorld, difficultyInstance, spawnReason, iLivingEntityData, compoundNBT);
 
-        if (iServerWorld instanceof ServerWorld && BioplethoraConfig.COMMON.hellMode.get()) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(6.5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-            this.setHealth(40 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+        if (iServerWorld instanceof ServerWorld && BPConfig.COMMON.hellMode.get()) {
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(6.5 * BPConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(40 * BPConfig.COMMON.mobHealthMultiplier.get());
+            this.setHealth(40 * BPConfig.COMMON.mobHealthMultiplier.get());
         }
 
-        if (BioplethoraConfig.COMMON.hellMode.get()) {
+        if (BPConfig.COMMON.hellMode.get()) {
             if (Math.random() < 0.5) {
                 if (!this.level.isClientSide())
                     if (Math.random() < 0.5) {

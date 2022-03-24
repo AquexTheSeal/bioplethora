@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.LivingEntity;
@@ -46,10 +46,10 @@ public class HeliobladeCloningGoal extends Goal {
 
                 HeliobladeEntity clone1 = new HeliobladeEntity(BPEntities.HELIOBLADE.get(), this.helioblade.level);
                 clone1.setOwner(this.helioblade);
-                clone1.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-                clone1.getAttribute(Attributes.ARMOR).setBaseValue(5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-                clone1.getAttribute(Attributes.MAX_HEALTH).setBaseValue(30 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-                clone1.setHealth(30 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+                clone1.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+                clone1.getAttribute(Attributes.ARMOR).setBaseValue(5 * BPConfig.COMMON.mobArmorMultiplier.get());
+                clone1.getAttribute(Attributes.MAX_HEALTH).setBaseValue(30 * BPConfig.COMMON.mobHealthMultiplier.get());
+                clone1.setHealth(30 * BPConfig.COMMON.mobHealthMultiplier.get());
                 clone1.moveTo(blockpos, 0.1F, 0.1F);
 
                 clone1.setHasLimitedLife(true);
@@ -62,10 +62,10 @@ public class HeliobladeCloningGoal extends Goal {
 
                 HeliobladeEntity clone2 = new HeliobladeEntity(BPEntities.HELIOBLADE.get(), this.helioblade.level);
                 clone2.setOwner(this.helioblade);
-                clone2.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5 * BioplethoraConfig.COMMON.mobMeeleeDamageMultiplier.get());
-                clone2.getAttribute(Attributes.ARMOR).setBaseValue(5 * BioplethoraConfig.COMMON.mobArmorMultiplier.get());
-                clone2.getAttribute(Attributes.MAX_HEALTH).setBaseValue(30 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
-                clone2.setHealth(30 * BioplethoraConfig.COMMON.mobHealthMultiplier.get());
+                clone2.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
+                clone2.getAttribute(Attributes.ARMOR).setBaseValue(5 * BPConfig.COMMON.mobArmorMultiplier.get());
+                clone2.getAttribute(Attributes.MAX_HEALTH).setBaseValue(30 * BPConfig.COMMON.mobHealthMultiplier.get());
+                clone2.setHealth(30 * BPConfig.COMMON.mobHealthMultiplier.get());
                 clone2.moveTo(blockpos, 0.1F, 0.1F);
 
                 clone2.setHasLimitedLife(true);

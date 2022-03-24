@@ -1,6 +1,6 @@
 package io.github.bioplethora.enchantments;
 
-import io.github.bioplethora.BioplethoraConfig;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPDamageSources;
@@ -49,7 +49,7 @@ public class AntibioEnchantment extends Enchantment {
         Enchantment hel = BPEnchantments.ANTIBIO_HELLSENT.get();
         Enchantment eld = BPEnchantments.ANTIBIO_ELDERIA.get();
 
-        if (!BioplethoraConfig.COMMON.antibioCompatibility.get()) {
+        if (!BPConfig.COMMON.antibioCompatibility.get()) {
             if (this == eco) {
                 return getCompatHelper(pEnch, eco);
             } else if (this == ple) {
