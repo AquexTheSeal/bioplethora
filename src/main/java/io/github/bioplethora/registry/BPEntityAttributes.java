@@ -33,6 +33,8 @@ public class BPEntityAttributes {
         event.put(BPEntities.DIAMOND_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
         event.put(BPEntities.NETHERITE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
 
+        event.put(BPEntities.TERRAITH.get(), TerraithEntity.setCustomAttributes().build());
+
         //Hellsent
         event.put(BPEntities.HELIOBLADE.get(), HeliobladeEntity.setCustomAttributes().build());
         event.put(BPEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());

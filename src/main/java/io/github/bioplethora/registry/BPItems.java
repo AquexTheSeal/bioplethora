@@ -137,6 +137,7 @@ public class BPItems {
     public static final RegistryObject<Item> DIAMOND_GRYLYNEN_SPAWN_EGG = ITEMS.register("diamond_grylynen_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.DIAMOND_GRYLYNEN, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> NETHERITE_GRYLYNEN_SPAWN_EGG = ITEMS.register("netherite_grylynen_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.NETHERITE_GRYLYNEN, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
 
+    public static final RegistryObject<Item> TERRAITH_SPAWN_EGG = ITEMS.register("terraith_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.TERRAITH, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     /** @HELLSENT **/
     public static final RegistryObject<Item> CREPHOXL_SPAWN_EGG = ITEMS.register("crephoxl_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.CREPHOXL, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> BELLOPHGOLEM_SPAWN_EGG = ITEMS.register("bellophgolem_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.BELLOPHGOLEM, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));

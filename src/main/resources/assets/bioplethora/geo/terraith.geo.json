@@ -1,0 +1,108 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.terraith",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "terraith",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "terraith",
+					"pivot": [-1.5, 18.5, -2],
+					"cubes": [
+						{"origin": [-9, 11, -7], "size": [15, 19, 10], "uv": [0, 39]},
+						{"origin": [-9.99, 3.2, -8], "size": [17, 27, 12], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [-0.5, 28, -13.1]
+				},
+				{
+					"name": "bottom_jaw",
+					"parent": "head",
+					"pivot": [-1.5, 27, -8.1],
+					"rotation": [20, 0, 0],
+					"cubes": [
+						{"origin": [-6.5, 24, -18.1], "size": [10, 3, 10], "uv": [58, 0]}
+					]
+				},
+				{
+					"name": "upper_jaw",
+					"parent": "head",
+					"pivot": [-1.5, 27, -8.1],
+					"cubes": [
+						{"origin": [-6.5, 28, -18.1], "size": [10, 10, 10], "uv": [50, 57]},
+						{"origin": [-7.5, 21, -19.1], "size": [12, 18, 12], "uv": [0, 96]},
+						{"origin": [-6.5, 24, -17.1], "size": [10, 4, 9], "uv": [48, 77]}
+					]
+				},
+				{
+					"name": "right_arm",
+					"parent": "body",
+					"pivot": [6, 28, -3],
+					"cubes": [
+						{"origin": [6, 8, -5], "size": [6, 22, 6], "uv": [0, 68]},
+						{"origin": [7.5, 8, -4], "size": [4, 21, 4], "uv": [48, 90]}
+					]
+				},
+				{
+					"name": "left_arm",
+					"parent": "body",
+					"pivot": [-9, 28, -3],
+					"cubes": [
+						{"origin": [-15, 8, -5], "size": [6, 22, 6], "uv": [0, 68]},
+						{"origin": [-14.5, 8, -4], "size": [4, 21, 4], "uv": [48, 90]}
+					]
+				},
+				{
+					"name": "spine",
+					"parent": "body",
+					"pivot": [-0.5, 10.7, 0.6],
+					"rotation": [10, 0, 0],
+					"cubes": [
+						{"origin": [-4.5, 3.1, -1.9], "size": [6, 8, 5], "uv": [86, 26]}
+					]
+				},
+				{
+					"name": "spine2",
+					"parent": "spine",
+					"pivot": [-0.5, 2.7, 1.9],
+					"rotation": [27.5, 0, 0],
+					"cubes": [
+						{"origin": [-3.5, -1.9, 0.4], "size": [4, 5, 3], "uv": [46, 0]}
+					]
+				},
+				{
+					"name": "spine3",
+					"parent": "spine2",
+					"pivot": [-0.5, -1.8, 2.2],
+					"rotation": [32.5, 0, 0],
+					"cubes": [
+						{"origin": [-2.5, -6.9, 1.2], "size": [2, 5, 2], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "spine4",
+					"parent": "spine3",
+					"pivot": [-0.5, -6.8, 2.7],
+					"rotation": [30, 0, 0],
+					"cubes": [
+						{"origin": [-2, -11.9, 2], "size": [1, 5, 1], "uv": [7, 6]}
+					]
+				}
+			]
+		}
+	]
+}

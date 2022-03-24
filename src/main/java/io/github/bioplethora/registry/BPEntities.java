@@ -44,6 +44,7 @@ public class BPEntities {
             new GrylynenEntity(type, world, BPGrylynenTier.DIAMOND), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "diamond_grylynen").toString()));
     public static final RegistryObject<EntityType<GrylynenEntity>> NETHERITE_GRYLYNEN = ENTITIES.register("netherite_grylynen", () -> EntityType.Builder.of((EntityType.IFactory<GrylynenEntity>) (type, world) ->
             new GrylynenEntity(type, world, BPGrylynenTier.NETHERITE), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "netherite_grylynen").toString()));
+    public static final RegistryObject<EntityType<TerraithEntity>> TERRAITH = ENTITIES.register("terraith", () -> EntityType.Builder.of(TerraithEntity::new, EntityClassification.MONSTER).sized(1.5F, 1.8F).build(new ResourceLocation(Bioplethora.MOD_ID, "terraith").toString()));
 
     //Hellsent
     public static final RegistryObject<EntityType<CrephoxlEntity>> CREPHOXL = ENTITIES.register("crephoxl", () -> EntityType.Builder.of(CrephoxlEntity::new, EntityClassification.MONSTER).sized(3.5f, 5f).build(new ResourceLocation(Bioplethora.MOD_ID, "crephoxl").toString()));
