@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()Nandbris are powerful, poisonous lizards. They are neutral and are a bit slow, but don't ever take that for granted. When angered, they are ruthless beings seeking to slaughter their target with their speedy attacks. Keep away from them!"
+      "text": "$(l)INFORMATION: $(br)$()Nandbris are powerful, poisonous lizards. They are neutral, but don't ever take that for granted. When angered, they are ruthless beings seeking to slaughter their target with their speedy attacks. Keep away from them!"
     },
     {
       "type": "patchouli:entity",
