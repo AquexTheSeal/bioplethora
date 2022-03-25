@@ -37,7 +37,7 @@ public class TerraithEntity extends FloatingMonsterEntity implements IAnimatable
                 .add(Attributes.MAX_HEALTH, 20)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.4)
                 .add(Attributes.FLYING_SPEED, 5)
-                .add(Attributes.FOLLOW_RANGE, 16);
+                .add(Attributes.FOLLOW_RANGE, 32);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class TerraithEntity extends FloatingMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
         this.goalSelector.addGoal(4, new TerraithEntity.MoveRandomGoal());
         this.goalSelector.addGoal(3, new TerraithEntity.ChargeAttackGoal());
-        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 14, 0.5, 0.7));
+        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 15, 0.6, 0.9));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, TerraithEntity.class)).setAlertOthers());
