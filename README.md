@@ -58,6 +58,7 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 - The One Probe: https://www.curseforge.com/minecraft/mc-mods/the-one-probe
 - Wastelands of Baedoor: https://www.curseforge.com/minecraft/mc-mods/wastelands-of-baedoor
 - Enchantment Descriptions: https://www.curseforge.com/minecraft/mc-mods/enchantment-descriptions
+- FTB Chunks: https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge
 
 ### PLANNED
 
