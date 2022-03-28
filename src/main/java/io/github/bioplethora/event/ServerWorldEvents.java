@@ -18,6 +18,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -37,6 +38,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -150,6 +154,16 @@ public class ServerWorldEvents {
         boolean dsFire2 = (event.getSource() == DamageSource.ON_FIRE);
 
         MobCapEventHelper.onEntityHurt(event);
+
+        if (event.getEntity() instanceof ItemEntity) {
+            ItemEntity item = (ItemEntity) event.getEntity();
+
+            if (event.getSource().isExplosion()) {
+                if (item.getItem().getItem() == BPItems.ALPHANUM_OBLITERATOR.get()) {
+                    event.setCanceled(true);
+                }
+            }
+        }
 
         if (event.getEntity() instanceof HeliobladeEntity) {
 
@@ -371,5 +385,20 @@ public class ServerWorldEvents {
 
             BlockUtils.knockUpRandomNearbyBlocks(world, 0.5D, pos, 4, 2, 4, false, true);
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        RenderEventHelper.onPlayerTick(event);
+    }
+
+    @SubscribeEvent
+    public static void onRenderingPlayer(RenderPlayerEvent.Pre event) {
+        RenderEventHelper.onRenderingPlayer(event);
+    }
+
+    @SubscribeEvent
+    public static void onRenderingOverlay(RenderGameOverlayEvent.Pre event) {
+        RenderEventHelper.onRenderingOverlay(event);
     }
 }

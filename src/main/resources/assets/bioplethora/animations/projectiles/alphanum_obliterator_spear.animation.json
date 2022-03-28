@@ -1,0 +1,17 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.alphanum_obliterator_spear.idle": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"spear": {
+					"rotation": {
+						"vector": [0, 0, "math.lerp(0, 2, query.anim_time * 90) * 180"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

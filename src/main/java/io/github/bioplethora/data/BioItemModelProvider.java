@@ -79,6 +79,20 @@ public class BioItemModelProvider extends ItemModelProvider {
         }
     }
 
+    public void createBow(RegistryObject<Item> item) {
+        Item items = item.get();
+        String name = items.getRegistryName().getPath();
+        ResourceLocation datagenLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
+
+        if (items instanceof ShieldItem) {
+            if (!existingFileHelper.exists(datagenLoc, TEXTURE) || existingFileHelper.exists(datagenLoc, MODEL)) {
+
+            }
+        } else {
+            throw new IllegalStateException(name + " is not a Bow!");
+        }
+    }
+
     public void grylynenShield(RegistryObject<Item> item) {
 
         Item items = item.get();

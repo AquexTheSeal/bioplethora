@@ -120,6 +120,7 @@ public class BPEntityLootTables extends EntityLootTables {
                         .add(ItemLootEntry.lootTableItem(BPItems.RAW_CUTTLEFISH_MEAT.get())
                                 .apply(SetCount.setCount(RandomValueRange.between(1F, 3F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.5F)))
+                                .apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
                                 .when(KilledByPlayer.killedByPlayer())
                         ))
                 .withPool(LootPool.lootPool()
@@ -351,6 +352,17 @@ public class BPEntityLootTables extends EntityLootTables {
                                 .apply(SetCount.setCount(RandomValueRange.between(6F, 12F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
                                 .when(KilledByPlayer.killedByPlayer())
+                        ))
+        );
+
+        // Dwarf Mossadile
+        add(BPEntities.DWARF_MOSSADILE.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BPItems.RAW_MOSILE.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
+                                .apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
                         ))
         );
     }

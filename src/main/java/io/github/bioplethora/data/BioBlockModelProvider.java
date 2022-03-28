@@ -62,6 +62,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("stripped_petrawood_wood", bioResLoc("stripped_petrawood_log_side"));
         this.cubeAll("petrawood_planks", bioResLoc("petrawood_planks"));
         this.cubeAll("petrawood_leaves", bioResLoc("petrawood_leaves"));
+        this.cross("petrawood_sapling", bioResLoc("petrawood_sapling"));
 
         this.fencePost("petrawood_fence", bioResLoc("petrawood_planks"));
         this.fenceInventory("petrawood_fence", bioResLoc("petrawood_planks"));
@@ -80,6 +81,20 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.button("petrawood_button", bioResLoc("petrawood_planks"));
         this.buttonPressed("petrawood_button", bioResLoc("petrawood_planks"));
         this.buttonInventory("petrawood_button", bioResLoc("petrawood_planks"));
+
+        /*
+        this.doorBottomLeft("petrawood_door", bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
+        this.doorBottomRight("petrawood_door", bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
+        this.doorTopLeft("petrawood_door", bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
+        this.doorTopRight("petrawood_door", bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
+        this.trapdoorBottom("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
+        this.trapdoorOpen("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
+        this.trapdoorOrientableBottom("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
+        this.trapdoorTop("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
+        this.trapdoorOrientableOpen("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
+        this.trapdoorOrientableTop("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
+
+         */
     }
 
     private ResourceLocation bioResLoc(String texture) {

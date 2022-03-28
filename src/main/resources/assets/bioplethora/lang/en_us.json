@@ -19,6 +19,7 @@
   "entity.bioplethora.cavern_fleignar": "Cavern Fleignar",
   "entity.bioplethora.trapjaw": "Trapjaw",
   "entity.bioplethora.telemreye": "Telemreye",
+  "entity.bioplethora.terraith": "Terraith",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -36,6 +37,8 @@
   "entity.bioplethora.cryoblaze": "Cryoblaze",
   "entity.bioplethora.magma_bomb": "Magma Bomb",
   "entity.bioplethora.windblaze": "Windblaze",
+  "entity.bioplethora.alphanum_obliterator_spear": "Alphanum Obliterator Spear",
+  "entity.bioplethora.windy_essence": "Windy Essence",
 
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.grylynen_core_bomb": "Grylynen Core Bomb",
@@ -46,6 +49,7 @@
   "enchantment.bioplethora.antibio_dangerum": "Antibio: Dangerum",
   "enchantment.bioplethora.antibio_hellsent": "Antibio: Hellsent",
   "enchantment.bioplethora.antibio_elderia": "Antibio: Elderia",
+  "enchantment.bioplethora.devastating_blast": "Devastating Blast",
 
   "item.bioplethora.crephoxl_spawn_egg": "Crephoxl Spawn Egg",
   "item.bioplethora.alphem_spawn_egg": "Alphem Spawn Egg",
@@ -61,6 +65,7 @@
   "item.bioplethora.alphem_king_spawn_egg": "Alphem King Spawn Egg",
   "item.bioplethora.cavern_fleignar_spawn_egg": "Cavern Fleignar Spawn Egg",
   "item.bioplethora.trapjaw_spawn_egg": "Trapjaw Spawn Egg",
+  "item.bioplethora.terraith_spawn_egg": "Terraith Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",
@@ -92,6 +97,8 @@
   "item.bioplethora.cooked_cuttlefish_meat": "Cooked Cuttlefish Meat",
   "item.bioplethora.raw_flentair": "Raw Flentair",
   "item.bioplethora.cooked_flentair": "Cooked Flentair",
+  "item.bioplethora.raw_mosile": "Raw Mosile",
+  "item.bioplethora.cooked_mosile": "Cooked Mosile",
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
   "item.bioplethora.bellophite_shield": "Bellophite Shield",
@@ -110,6 +117,7 @@
 
   "item.bioplethora.green_crystal_shield": "Green Crystal Shield",
   "item.bioplethora.yellow_crystal_shield": "Yellow Crystal Shield",
+  "item.bioplethora.alphanum_obliterator": "Alphanum Obliterator",
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
@@ -262,6 +270,11 @@
   "item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.skill": "Yellow Crystal Energy",
   "item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to 2 seconds. Everytime this shield gets damaged, it slowly repairs your armor if you have any on you, there is also a chance for this shield to restore its user's health.",
 
+  "item.bioplethora.alphanum_obliterator.skullbreaker.skill": "Skullbreaker",
+  "item.bioplethora.alphanum_obliterator.skullbreaker.desc": "This weapon is a very heavy item, that it can cause a great amount of knockback to the target in melee.",
+  "item.bioplethora.alphanum_obliterator.blasting_spears.skill": "Blasting Spears",
+  "item.bioplethora.alphanum_obliterator.blasting_spears.desc": "This weapon shoots 3 missiles that can cause explosions that deal an amount of damage that scales with the Devastating Blast enchantment every time it is used. This weapon reloads for a maximum of 2 seconds before being able to shoot again, the reloading time can be decreased with the Quick Charge Enchantment. If the same weapon are in both hand slots, the mainhand shoot action can trigger the offhand shoot action.",
+
   "effect.bioplethora.spirit_fission": "Spirit Fission",
   "effect.bioplethora.spirit_manipulation": "Spirit Manipulation",
 
@@ -357,5 +370,6 @@
   "enchantment.bioplethora.antibio_plethoneutral.desc": "Deals more damage against entities classified as Plethoneutral.",
   "enchantment.bioplethora.antibio_dangerum.desc": "Deals more damage against entities classified as Dangerum.",
   "enchantment.bioplethora.antibio_hellsent.desc": "Deals more damage against entities classified as Hellsent.",
-  "enchantment.bioplethora.antibio_elderia.desc": "Deals more damage against entities classified as Elderia."
+  "enchantment.bioplethora.antibio_elderia.desc": "Deals more damage against entities classified as Elderia.",
+  "enchantment.bioplethora.devastating_blast.desc": "Gives more missile damage for the Alphanum Obliterator weapon."
 }

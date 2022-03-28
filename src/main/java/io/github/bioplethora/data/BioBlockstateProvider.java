@@ -65,6 +65,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.woodBlock(BPBlocks.STRIPPED_PETRAWOOD_WOOD.get(), bioResLoc("stripped_petrawood_log_side"));
         this.simpleBlock(BPBlocks.PETRAWOOD_PLANKS.get());
         this.simpleBlock(BPBlocks.PETRAWOOD_LEAVES.get());
+        this.simpleCrossBlock(BPBlocks.PETRAWOOD_SAPLING.get());
 
         this.fenceBlock(BPBlocks.PETRAWOOD_FENCE.get(), bioResLoc("petrawood_planks"));
         this.fenceGateBlock(BPBlocks.PETRAWOOD_FENCE_GATE.get(), bioResLoc("petrawood_planks"));
@@ -72,6 +73,12 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.pressurePlateBlock(BPBlocks.PETRAWOOD_PRESSURE_PLATE.get(), bioResLoc("petrawood_planks"));
         this.stairsBlock(BPBlocks.PETRAWOOD_STAIRS.get(), bioResLoc("petrawood_planks"));
         this.buttonBlock(BPBlocks.PETRAWOOD_BUTTON.get(), bioResLoc("petrawood_planks"));
+
+        /*
+        this.doorBlock(BPBlocks.PETRAWOOD_DOOR.get(), bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
+        this.trapdoorBlock(BPBlocks.PETRAWOOD_TRAPDOOR.get(), bioResLoc("petrawood_trapdoor"), true);
+
+         */
     }
 
     private ResourceLocation bioResLoc(String texture) {

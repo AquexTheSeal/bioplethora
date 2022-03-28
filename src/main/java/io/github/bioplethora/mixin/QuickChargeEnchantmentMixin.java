@@ -1,5 +1,6 @@
 package io.github.bioplethora.mixin;
 
+import io.github.bioplethora.item.weapons.AlphanumObliteratorItem;
 import io.github.bioplethora.item.weapons.VermilionBladeItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -17,6 +18,6 @@ public class QuickChargeEnchantmentMixin extends Enchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {
-        return stack.getItem() instanceof VermilionBladeItem || super.canEnchant(stack);
+        return stack.getItem() instanceof VermilionBladeItem || stack.getItem() instanceof AlphanumObliteratorItem || super.canEnchant(stack);
     }
 }

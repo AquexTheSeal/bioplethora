@@ -13,8 +13,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
@@ -32,22 +30,23 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimatable {
+public class AlphanumObliteratorSpearEntity extends DamagingProjectileEntity implements IAnimatable {
 
     private final AnimationFactory factory = new AnimationFactory(this);
     public int lifespan = 0;
+    public float baseDamage = BPConfig.getHellMode ? 15.0F : 12.0F;
 
-    public CryoblazeEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
+    public AlphanumObliteratorSpearEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
         super(type, world);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public CryoblazeEntity(World world, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
-        super(BPEntities.CRYOBLAZE.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
+    public AlphanumObliteratorSpearEntity(World world, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_) {
+        super(BPEntities.ALPHANUM_OBLITERATOR_SPEAR.get(), p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_, world);
     }
 
-    public CryoblazeEntity(World world, LivingEntity entity, double v, double v1, double v2) {
-        super(BPEntities.CRYOBLAZE.get(), entity, v, v1, v2, world);
+    public AlphanumObliteratorSpearEntity(World world, LivingEntity entity, double v, double v1, double v2) {
+        super(BPEntities.ALPHANUM_OBLITERATOR_SPEAR.get(), entity, v, v1, v2, world);
     }
 
     @Override
@@ -55,7 +54,7 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
         super.tick();
         double x = this.getX(), y = this.getY(), z = this.getZ();
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 3, 0.2, 0.2, 0.2, 0.1);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, x, y, z, 3, 0.1, 0.1, 0.1, 0.001);
         }
 
         ++lifespan;
@@ -87,6 +86,14 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
         this.hitAndExplode();
     }
 
+    public float getBaseDamage() {
+        return baseDamage;
+    }
+
+    public void setBaseDamage(float baseDamage) {
+        this.baseDamage = baseDamage;
+    }
+
     public void hitAndExplode() {
         double x = this.getX(), y = this.getY(), z = this.getZ();
         BlockPos blockpos = new BlockPos((int) this.getX(), (int) this.getY(), (int) this.getZ());
@@ -96,21 +103,18 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
             ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, x, y, z, 20, 0.75, 0.75, 0.75, 0.01);
         }
 
-        this.level.playSound(null, blockpos, SoundEvents.GLASS_BREAK, SoundCategory.NEUTRAL, (float) 1, (float) 1);
-        this.level.playSound(null, blockpos, SoundEvents.ITEM_BREAK, SoundCategory.NEUTRAL, (float) 1, (float) 1);
-
         if (this.level instanceof ServerWorld && !(this.getOwner() == null)) {
 
             for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5, 2, 5))) {
                 if (entityArea != null && entityArea != this.getOwner()) {
 
+                    entityArea.hurt(castration, getBaseDamage());
+                    
                     if (BPConfig.getHellMode) {
-                        entityArea.hurt(castration, (float) 14);
                         entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 80, 2));
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 80, 1));
                         entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 80, 1));
                     } else {
-                        entityArea.hurt(castration, (float) 11.5);
                         entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 1));
                         entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 40));
@@ -120,10 +124,10 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
         }
 
         if (!this.level.isClientSide && this.getOwner() != null) {
-            if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BPConfig.COMMON.hellMode.get()) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 3F, Explosion.Mode.BREAK);
+            if (BPConfig.COMMON.hellMode.get()) {
+                this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3F, Explosion.Mode.BREAK);
             } else {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Explosion.Mode.BREAK);
+                this.level.explode(this, this.getX(), this.getY(), this.getZ(), 2F, Explosion.Mode.BREAK);
             }
             this.remove();
         }
@@ -145,13 +149,13 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cryoblaze.main", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphanum_obliterator.idle", true));
         return PlayState.CONTINUE;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "cryoblaze_controller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "cryoblaze_alphanum_obliterator.idle", 0, this::predicate));
     }
 
     @Override

@@ -17,14 +17,7 @@ public abstract class BPAnimalEntity extends TameableEntity implements IAnimatab
 
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPAnimalEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(BPAnimalEntity.class, DataSerializers.BOOLEAN);
-    /*protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(AnimatableHostileEntity.class, DataSerializers.BOOLEAN);*/
 
-    protected boolean isAnimationFinished = false;
-
-    /**
-     * @param type
-     * @param worldIn
-     */
     public BPAnimalEntity(EntityType<? extends TameableEntity> type, World worldIn) {
         super(type, worldIn);
     }
@@ -40,7 +33,6 @@ public abstract class BPAnimalEntity extends TameableEntity implements IAnimatab
         super.defineSynchedData();
         this.entityData.define(MOVING, false);
         this.entityData.define(ATTACKING, false);
-        /*this.entityData.define(SMASHING, false);*/
     }
 
     public boolean getMoving() {
@@ -58,14 +50,4 @@ public abstract class BPAnimalEntity extends TameableEntity implements IAnimatab
     public void setAttacking(boolean attacking) {
         this.entityData.set(ATTACKING, attacking);
     }
-
-    /*public boolean getSmashing() {
-        return this.entityData.get(SMASHING);
-    }
-
-    /*public void setSmashing(boolean smashing) {
-        this.entityData.set(SMASHING, smashing);
-    }*/
-
-    //protected abstract boolean hurt();
 }

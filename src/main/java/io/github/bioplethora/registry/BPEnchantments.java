@@ -2,6 +2,7 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.enchantments.AntibioEnchantment;
+import io.github.bioplethora.enchantments.DevastatingBlastEnchantment;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -25,6 +26,9 @@ public class BPEnchantments {
             new AntibioEnchantment(Enchantment.Rarity.RARE, BPEntityClasses.HELLSENT, EquipmentSlotType.MAINHAND));
     public static final RegistryObject<Enchantment> ANTIBIO_ELDERIA = ENCHANTMENTS.register("antibio_elderia", () ->
             new AntibioEnchantment(Enchantment.Rarity.VERY_RARE, BPEntityClasses.ELDERIA, EquipmentSlotType.MAINHAND));
+
+    public static final RegistryObject<Enchantment> DEVASTATING_BLAST = ENCHANTMENTS.register("devastating_blast", () ->
+            new DevastatingBlastEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND));
 
     //public static final RegistryObject<Enchantment> HONED = ENCHANTMENTS.register("honed", () -> new HonedEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlotType.MAINHAND));
 

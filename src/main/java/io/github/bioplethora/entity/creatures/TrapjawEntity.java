@@ -57,7 +57,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     private static final DataParameter<Boolean> HAS_SADDLE = EntityDataManager.defineId(TrapjawEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
     public static final Predicate<LivingEntity> PREY_SELECTOR = (entity) ->
-            entity instanceof PlayerEntity || ((entity instanceof AnimalEntity) && !(entity instanceof TrapjawEntity));
+            entity instanceof PlayerEntity || (entity instanceof AnimalEntity && !(entity instanceof TrapjawEntity));
 
     public TrapjawEntity(EntityType<? extends BPAnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -446,7 +446,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.trapjaw.run", true));
             return PlayState.CONTINUE;
         }
-        if ((event.isMoving() && this.getTarget() == null)) {
+        if (event.isMoving() && this.getTarget() == null) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.trapjaw.walk", true));
             return PlayState.CONTINUE;
         }

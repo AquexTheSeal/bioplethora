@@ -8,6 +8,7 @@ import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.ai.*;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
+import io.github.bioplethora.mixin_helpers.IPlayerEntityMixin;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -281,12 +282,14 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public void startSeenByPlayer(ServerPlayerEntity player) {
         super.startSeenByPlayer(player);
         this.bossInfo.addPlayer(player);
+        ((IPlayerEntityMixin) player).setAlphanumCurse(true);
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayerEntity player) {
         super.stopSeenByPlayer(player);
         this.bossInfo.removePlayer(player);
+        ((IPlayerEntityMixin) player).setAlphanumCurse(false);
     }
 
     public void phaseAttack(LivingEntity entity, World world) {

@@ -58,6 +58,7 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.STRIPPED_PETRAWOOD_WOOD.get());
         dropSelf(BPBlocks.PETRAWOOD_PLANKS.get());
         add(BPBlocks.PETRAWOOD_LEAVES.get(), createShearsOnlyDrop(BPBlocks.PETRAWOOD_LEAVES.get()));
+        dropSelf(BPBlocks.PETRAWOOD_SAPLING.get());
 
         dropSelf(BPBlocks.PETRAWOOD_FENCE.get());
         dropSelf(BPBlocks.PETRAWOOD_FENCE_GATE.get());
@@ -65,6 +66,10 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.PETRAWOOD_PRESSURE_PLATE.get());
         dropSelf(BPBlocks.PETRAWOOD_STAIRS.get());
         dropSelf(BPBlocks.PETRAWOOD_BUTTON.get());
+        dropSelf(BPBlocks.PETRAWOOD_SIGN.get());
+        dropSelf(BPBlocks.PETRAWOOD_WALL_SIGN.get());
+        dropSelf(BPBlocks.PETRAWOOD_DOOR.get());
+        dropSelf(BPBlocks.PETRAWOOD_TRAPDOOR.get());
     }
 
     @Override

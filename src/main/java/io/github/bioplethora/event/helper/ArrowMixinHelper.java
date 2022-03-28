@@ -1,6 +1,6 @@
 package io.github.bioplethora.event.helper;
 
-import io.github.bioplethora.entity.mixin_helpers.IAbstractArrowMixin;
+import io.github.bioplethora.mixin_helpers.IAbstractArrowMixin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.world.Explosion;

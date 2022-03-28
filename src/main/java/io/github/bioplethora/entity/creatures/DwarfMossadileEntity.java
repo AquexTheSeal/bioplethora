@@ -143,7 +143,7 @@ public class DwarfMossadileEntity extends BPMonsterEntity implements IAnimatable
     }
 
     public int getMaxSpawnClusterSize() {
-        return 4;
+        return 3;
     }
 
     public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " AG",
+    "AGA",
+    "AA "
+  ],
+  "key": {
+    "G": {
+      "item": "bioplethora:alphanum_gem"
+    },
+    "A": {
+      "item": "bioplethora:alphanum"
+    }
+  },
+  "result": {
+    "item": "bioplethora:alphanum_obliterator",
+    "count": 1
+  }
+}

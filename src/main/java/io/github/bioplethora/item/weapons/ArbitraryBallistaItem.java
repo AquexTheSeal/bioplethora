@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.item.ItemSettings;
-import io.github.bioplethora.entity.mixin_helpers.IAbstractArrowMixin;
+import io.github.bioplethora.mixin_helpers.IAbstractArrowMixin;
 import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screen.Screen;
@@ -17,7 +17,10 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.ArrowItem;
+import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -143,7 +146,7 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
         abstractarrowentity.setSoundEvent(SoundEvents.CROSSBOW_HIT);
         abstractarrowentity.setShotFromCrossbow(true);
         abstractarrowentity.setNoGravity(true);
-        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() * 2);
+        abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() * 1.75);
 
         ((IAbstractArrowMixin) abstractarrowentity).setExplosionRadius(3.0F);
         ((IAbstractArrowMixin) abstractarrowentity).setShouldExplode(true);
@@ -164,11 +167,11 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
             ItemStack itemstack = list.get(i);
             boolean flag = entity instanceof PlayerEntity && ((PlayerEntity) entity).abilities.instabuild;
             if (!itemstack.isEmpty()) {
-                shootProjectile(world, entity, hand, stack, itemstack, afloat[i], flag, projectile, shootProjectile, 0.0F);
+                shootProjectile(world, entity, hand, stack, itemstack, afloat[i] / 2F, flag, projectile, shootProjectile, 0.0F);
             } else if (i == 1) {
-                shootProjectile(world, entity, hand, stack, itemstack, afloat[i], flag, projectile, shootProjectile, -10.0F);
+                shootProjectile(world, entity, hand, stack, itemstack, afloat[i] / 2F, flag, projectile, shootProjectile, -10.0F);
             } else if (i == 2) {
-                shootProjectile(world, entity, hand, stack, itemstack, afloat[i], flag, projectile, shootProjectile, 10.0F);
+                shootProjectile(world, entity, hand, stack, itemstack, afloat[i] / 2F, flag, projectile, shootProjectile, 10.0F);
             }
         }
 
@@ -232,12 +235,12 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
 
             if (f >= 0.2F && !this.startSoundPlayed) {
                 this.startSoundPlayed = true;
-                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), soundevent, SoundCategory.PLAYERS, 0.5F, 1.0F);
+                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), soundevent, SoundCategory.PLAYERS, 0.5F, 0.5F);
             }
 
             if (f >= 0.5F && soundevent1 != null && !this.midLoadSoundPlayed) {
                 this.midLoadSoundPlayed = true;
-                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), soundevent1, SoundCategory.PLAYERS, 0.5F, 1.0F);
+                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), soundevent1, SoundCategory.PLAYERS, 0.5F, 0.5F);
             }
         }
     }

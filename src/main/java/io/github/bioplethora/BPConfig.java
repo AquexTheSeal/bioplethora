@@ -136,9 +136,10 @@ public class BPConfig {
 
             //Mob Cap Limits
             builder.push("Mob Damage Limits (Only applies if Mob Caps are enabled)");
-            altyrusMobCap = builder.define("Damage Limit of the Altyrus", 70);
-            heliobladeMobCap = builder.define("Damage Limit of the Helioblade", 60);
-            alphemKingMobCap = builder.define("Damage Limit of the Helioblade", 45);
+            altyrusMobCap = builder.define("Damage Limit of the Altyrus", 40);
+            heliobladeMobCap = builder.define("Damage Limit of the Helioblade", 30);
+            alphemKingMobCap = builder.define("Damage Limit of the Helioblade", 30);
+            builder.pop();
         }
     }
 }

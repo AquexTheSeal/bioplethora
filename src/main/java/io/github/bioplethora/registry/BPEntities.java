@@ -74,6 +74,10 @@ public class BPEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "textures/projectiles").toString()));
     public static final RegistryObject<EntityType<CryoblazeEntity>> CRYOBLAZE = ENTITIES.register("cryoblaze", () -> EntityType.Builder.<CryoblazeEntity>of(CryoblazeEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "cryoblaze").toString()));
+    public static final RegistryObject<EntityType<AlphanumObliteratorSpearEntity>> ALPHANUM_OBLITERATOR_SPEAR = ENTITIES.register("alphanum_obliterator_spear", () -> EntityType.Builder.<AlphanumObliteratorSpearEntity>of(AlphanumObliteratorSpearEntity::new, EntityClassification.MISC).sized(1.0F, 1.0F).clientTrackingRange(4)
+            .build(new ResourceLocation(Bioplethora.MOD_ID, "alphanum_obliterator_spear").toString()));
+    public static final RegistryObject<EntityType<WindyEssenceEntity>> WINDY_ESSENCE = ENTITIES.register("windy_essence", () -> EntityType.Builder.of(WindyEssenceEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(4)
+            .build(new ResourceLocation(Bioplethora.MOD_ID, "windy_essence").toString()));
 
     //Others
     public static final RegistryObject<EntityType<PrimordialRingEntity>> PRIMORDIAL_RING = ENTITIES.register("primordial_ring", () -> EntityType.Builder.of(PrimordialRingEntity::new, EntityClassification.MONSTER).sized(3.5f, 2f).build(new ResourceLocation(Bioplethora.MOD_ID, "primordial_ring").toString()));

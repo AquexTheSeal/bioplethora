@@ -38,13 +38,17 @@ public class FleignariteAbilities {
 
     public static void regenerateItem(ItemStack stack, Entity entity) {
 
-        if (stack.getDamageValue() < stack.getMaxDamage()) {
-            stack.getOrCreateTag().putInt("regen_time", stack.getOrCreateTag().getInt("regen_time") + 1);
+        if (entity instanceof LivingEntity) {
+            if (((LivingEntity) entity).getMainHandItem() != stack && ((LivingEntity) entity).getOffhandItem() != stack) {
+                if (stack.getDamageValue() < stack.getMaxDamage()) {
+                    stack.getOrCreateTag().putInt("regen_time", stack.getOrCreateTag().getInt("regen_time") + 1);
 
-            if (stack.getOrCreateTag().getInt("regen_time") == 400) {
-                int i = Math.min((int)(2 * stack.getXpRepairRatio()), stack.getDamageValue());
-                stack.setDamageValue(stack.getDamageValue() - i);
-                stack.getOrCreateTag().putInt("regen_time", 0);
+                    if (stack.getOrCreateTag().getInt("regen_time") == 400) {
+                        int i = Math.min((int) (2 * stack.getXpRepairRatio()), stack.getDamageValue());
+                        stack.setDamageValue(stack.getDamageValue() - i);
+                        stack.getOrCreateTag().putInt("regen_time", 0);
+                    }
+                }
             }
         }
     }

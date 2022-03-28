@@ -3,15 +3,19 @@ package io.github.bioplethora.world;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class EntitySpawnManager {
 
@@ -136,16 +140,12 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> NETHER_ENTITIES = (builder) -> {
             //Dwarf Mossadile
-            if (BPConfig.COMMON.spawnDwarfMossadile.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.DWARF_MOSSADILE.get(), 15 * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 4, 6));
-            }
+            createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 4, 1, 3, BPConfig.COMMON.spawnDwarfMossadile);
         };
 
         private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
             //Gaugalem
-            if (BPConfig.COMMON.spawnGaugalem.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.GAUGALEM.get(), 2 * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
-            }
+            createSpawn(builder, monster, BPEntities.GAUGALEM, 2, 1, 1, BPConfig.COMMON.spawnGaugalem);
         };
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {
@@ -193,6 +193,16 @@ public class EntitySpawnManager {
                     if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
                         break;
             }
+        }
+    }
+
+    public static void createSpawn(MobSpawnInfoBuilder builder, EntityClassification classification, Supplier<? extends EntityType<?>> entity, int initWeight, int minSpawn, int maxSpawn, @Nullable ForgeConfigSpec.ConfigValue<Boolean> config) {
+        if (config != null) {
+            if (config.get()) {
+                builder.addSpawn(classification, new MobSpawnInfo.Spawners(entity.get(), initWeight * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), minSpawn, maxSpawn));
+            }
+        } else {
+            builder.addSpawn(classification, new MobSpawnInfo.Spawners(entity.get(), initWeight * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), minSpawn, maxSpawn));
         }
     }
 }
