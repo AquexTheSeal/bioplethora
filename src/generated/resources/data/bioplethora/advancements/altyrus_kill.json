@@ -1,0 +1,40 @@
+{
+  "parent": "bioplethora:bellophgolem_kill",
+  "display": {
+    "icon": {
+      "item": "bioplethora:altyrus_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.altyrus_kill.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.altyrus_kill.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "bioplethora:textures/block/bellophite_core_block.png"
+  },
+  "criteria": {
+    "altyrus": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "catType": "bioplethora:altyrus"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "altyrus"
+    ]
+  ]
+}

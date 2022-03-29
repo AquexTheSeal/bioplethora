@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.others;
 
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
-import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.helpers.advancements.AdvancementUtils;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.*;
 import net.minecraft.nbt.CompoundNBT;
@@ -121,7 +121,7 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
         //Grant Advancement to all nearby players
         for (LivingEntity entityIterator : world.getEntitiesOfClass(LivingEntity.class, area)) {
             if (entityIterator != null) {
-                BPAdvancementHelper.grantBioAdvancement(entityIterator, "bioplethora:altyrus_summoning");
+                AdvancementUtils.grantBioAdvancement(entityIterator, "bioplethora:altyrus_summoning");
             }
         }
     }

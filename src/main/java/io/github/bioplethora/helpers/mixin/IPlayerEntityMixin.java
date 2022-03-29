@@ -1,4 +1,4 @@
-package io.github.bioplethora.mixin_helpers;
+package io.github.bioplethora.helpers.mixin;
 
 public interface IPlayerEntityMixin {
 

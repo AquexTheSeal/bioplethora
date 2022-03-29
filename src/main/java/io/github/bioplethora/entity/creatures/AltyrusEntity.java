@@ -1,7 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BPConfig;
-import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
@@ -9,7 +8,8 @@ import io.github.bioplethora.entity.ai.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.helpers.advancements.AdvancementUtils;
+import io.github.bioplethora.helpers.blocks.BlockUtils;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -224,7 +224,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
         Entity sourceEnt = source.getEntity();
 
-        BPAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:altyrus_kill");
+        AdvancementUtils.grantBioAdvancement(sourceEnt, "bioplethora:altyrus_kill");
     }
 
     @Override

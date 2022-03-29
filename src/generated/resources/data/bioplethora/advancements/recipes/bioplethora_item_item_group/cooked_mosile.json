@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bioplethora:cooked_mosile"
+    ]
+  },
+  "criteria": {
+    "has_raw_mosile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:raw_mosile"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bioplethora:cooked_mosile"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_mosile",
+      "has_the_recipe"
+    ]
+  ]
+}

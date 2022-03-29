@@ -140,7 +140,7 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> NETHER_ENTITIES = (builder) -> {
             //Dwarf Mossadile
-            createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 4, 1, 3, BPConfig.COMMON.spawnDwarfMossadile);
+            createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 1, 1, 3, BPConfig.COMMON.spawnDwarfMossadile);
         };
 
         private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {

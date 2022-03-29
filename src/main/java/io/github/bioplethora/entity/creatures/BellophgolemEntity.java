@@ -8,7 +8,7 @@ import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BPAdvancementHelper;
+import io.github.bioplethora.helpers.advancements.AdvancementUtils;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -172,7 +172,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         super.die(source);
         Entity sourceEnt = source.getEntity();
 
-        BPAdvancementHelper.grantBioAdvancement(sourceEnt, "bioplethora:bellophgolem_kill");
+        AdvancementUtils.grantBioAdvancement(sourceEnt, "bioplethora:bellophgolem_kill");
     }
 
     public void aiStep() {

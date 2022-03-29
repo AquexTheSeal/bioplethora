@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "bioplethora:raw_mosile"
+  },
+  "result": "bioplethora:cooked_mosile",
+  "experience": 0.3,
+  "cookingtime": 100
+}

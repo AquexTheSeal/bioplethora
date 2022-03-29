@@ -1,0 +1,29 @@
+{
+  "parent": "bioplethora:bioplethora_startup",
+  "display": {
+    "icon": {
+      "item": "bioplethora:green_grylynen_crystal"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.grylynen_summon.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.grylynen_summon.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "bioplethora:textures/block/bellophite_core_block.png"
+  },
+  "criteria": {
+    "grylynen_summon": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "grylynen_summon"
+    ]
+  ]
+}

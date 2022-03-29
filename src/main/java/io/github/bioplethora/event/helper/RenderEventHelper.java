@@ -2,8 +2,9 @@ package io.github.bioplethora.event.helper;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.mixin_helpers.IPlayerEntityMixin;
+import io.github.bioplethora.helpers.mixin.IPlayerEntityMixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
@@ -71,21 +72,23 @@ public class RenderEventHelper {
 
 
     protected static void renderAlphanumCurse(double width, double height) {
-        RenderSystem.disableDepthTest();
-        RenderSystem.depthMask(false);
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(770, 771);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, (float) curseAlpha);
-        Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(Bioplethora.MOD_ID, "textures/misc/alphanum_curse.png"));
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuilder();
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.vertex(0.0D, height, -90.0D).uv(0.0F, 1.0F).endVertex();
-        bufferbuilder.vertex(width, height, -90.0D).uv(1.0F, 1.0F).endVertex();
-        bufferbuilder.vertex(width, 0.0D, -90.0D).uv(1.0F, 0.0F).endVertex();
-        bufferbuilder.vertex(0.0D, 0.0D, -90.0D).uv(0.0F, 0.0F).endVertex();
-        tessellator.end();
-        RenderSystem.depthMask(true);
-        RenderSystem.enableDepthTest();
+        if (BPConfig.COMMON.alphemCurseOverlay.get()) {
+            RenderSystem.disableDepthTest();
+            RenderSystem.depthMask(false);
+            RenderSystem.enableBlend();
+            RenderSystem.blendFunc(770, 771);
+            RenderSystem.color4f(1.0F, 1.0F, 1.0F, (float) curseAlpha);
+            Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(Bioplethora.MOD_ID, "textures/misc/alphanum_curse.png"));
+            Tessellator tessellator = Tessellator.getInstance();
+            BufferBuilder bufferbuilder = tessellator.getBuilder();
+            bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+            bufferbuilder.vertex(0.0D, height, -90.0D).uv(0.0F, 1.0F).endVertex();
+            bufferbuilder.vertex(width, height, -90.0D).uv(1.0F, 1.0F).endVertex();
+            bufferbuilder.vertex(width, 0.0D, -90.0D).uv(1.0F, 0.0F).endVertex();
+            bufferbuilder.vertex(0.0D, 0.0D, -90.0D).uv(0.0F, 0.0F).endVertex();
+            tessellator.end();
+            RenderSystem.depthMask(true);
+            RenderSystem.enableDepthTest();
+        }
     }
 }

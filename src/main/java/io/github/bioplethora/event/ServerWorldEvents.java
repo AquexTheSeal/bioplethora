@@ -1,18 +1,19 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.BPConfig;
-import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.*;
+import io.github.bioplethora.helpers.advancements.AdvancementUtils;
+import io.github.bioplethora.helpers.blocks.BlockUtils;
 import io.github.bioplethora.item.ExperimentalItem;
+import io.github.bioplethora.item.IHurtSkillArmor;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
-import io.github.bioplethora.registry.BPAdvancementHelper;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -68,7 +69,7 @@ public class ServerWorldEvents {
             }
 
             if (!eventEntity.level.isClientSide()) {
-                BPAdvancementHelper.grantBioAdvancement(eventEntity, "bioplethora:bioplethora_startup");
+                AdvancementUtils.grantBioAdvancement(eventEntity, "bioplethora:bioplethora_startup");
             }
 
             if (BPConfig.COMMON.startupBiopedia.get()) {
@@ -154,6 +155,30 @@ public class ServerWorldEvents {
         boolean dsFire2 = (event.getSource() == DamageSource.ON_FIRE);
 
         MobCapEventHelper.onEntityHurt(event);
+
+        if (event.getEntity() instanceof LivingEntity) {
+
+            LivingEntity living = (LivingEntity) event.getEntity();
+            ItemStack sHead = living.getItemBySlot(EquipmentSlotType.HEAD);
+            ItemStack sChest = living.getItemBySlot(EquipmentSlotType.CHEST);
+            ItemStack sLegs = living.getItemBySlot(EquipmentSlotType.LEGS);
+            ItemStack sFeet = living.getItemBySlot(EquipmentSlotType.FEET);
+
+            if (event.getSource().getEntity() instanceof LivingEntity) {
+                if (sHead.getItem() instanceof IHurtSkillArmor) {
+                    ((IHurtSkillArmor) sHead.getItem()).onUserHurtWithArmor(living, (LivingEntity) event.getSource().getEntity(), sHead);
+                }
+                if (sChest.getItem() instanceof IHurtSkillArmor) {
+                    ((IHurtSkillArmor) sChest.getItem()).onUserHurtWithArmor(living, (LivingEntity) event.getSource().getEntity(), sChest);
+                }
+                if (sLegs.getItem() instanceof IHurtSkillArmor) {
+                    ((IHurtSkillArmor) sLegs.getItem()).onUserHurtWithArmor(living, (LivingEntity) event.getSource().getEntity(), sLegs);
+                }
+                if (sFeet.getItem() instanceof IHurtSkillArmor) {
+                    ((IHurtSkillArmor) sFeet.getItem()).onUserHurtWithArmor(living, (LivingEntity) event.getSource().getEntity(), sFeet);
+                }
+            }
+        }
 
         if (event.getEntity() instanceof ItemEntity) {
             ItemEntity item = (ItemEntity) event.getEntity();

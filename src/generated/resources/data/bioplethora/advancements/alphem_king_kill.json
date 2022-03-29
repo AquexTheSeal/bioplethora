@@ -1,0 +1,40 @@
+{
+  "parent": "bioplethora:alphem_kill",
+  "display": {
+    "icon": {
+      "item": "bioplethora:alphem_king_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.alphem_king_kill.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.alphem_king_kill.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "bioplethora:textures/block/bellophite_core_block.png"
+  },
+  "criteria": {
+    "alphem_king": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "catType": "bioplethora:alphem_king"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "alphem_king"
+    ]
+  ]
+}

@@ -98,6 +98,8 @@ public class Bioplethora {
             dataGenerator.addProvider(new BioEntityTagsProvider(dataGenerator, efh));
             dataGenerator.addProvider(new BioItemTagsProvider(dataGenerator, new BioBlockTagsProvider(dataGenerator, efh), efh));
 
+            dataGenerator.addProvider(new BioAdvancementProvider(dataGenerator, efh));
+
             dataGenerator.addProvider(new BioLanguageProvider(dataGenerator, MOD_ID, "en_us_test"));
         }
     }

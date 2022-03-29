@@ -1,14 +1,14 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BPConfig;
-import io.github.bioplethora.blocks.utilities.BlockUtils;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.ai.*;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.mixin_helpers.IPlayerEntityMixin;
+import io.github.bioplethora.helpers.blocks.BlockUtils;
+import io.github.bioplethora.helpers.mixin.IPlayerEntityMixin;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;

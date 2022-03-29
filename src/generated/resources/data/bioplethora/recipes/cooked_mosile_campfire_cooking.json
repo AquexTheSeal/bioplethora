@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "bioplethora:raw_mosile"
+  },
+  "result": "bioplethora:cooked_mosile",
+  "experience": 0.3,
+  "cookingtime": 600
+}

@@ -13,17 +13,22 @@ import net.minecraft.data.AdvancementProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.RegistryObject;
 import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class BioAdvancementProvider extends AdvancementProvider {
 
@@ -32,8 +37,8 @@ public class BioAdvancementProvider extends AdvancementProvider {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
     private final DataGenerator datagen;
 
-    public BioAdvancementProvider(DataGenerator generatorIn) {
-        super(generatorIn);
+    public BioAdvancementProvider(DataGenerator generatorIn, ExistingFileHelper exFileHelper) {
+        super(generatorIn, exFileHelper);
         this.datagen = generatorIn;
     }
 
@@ -45,26 +50,48 @@ public class BioAdvancementProvider extends AdvancementProvider {
         Advancement bioStartup = registerAdvancement("bioplethora_startup", FrameType.TASK, BPItems.BIOPEDIA.get()).addCriterion("startup",
                 PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"))))).save(t, id("bioplethora_startup"));
 
-        // ENTITIES
-        Advancement bellophgolemKill = registerAdvancement("bellophgolem_kill", FrameType.GOAL, BPItems.BELLOPHGOLEM_SPAWN_EGG.get())
-                .parent(bioStartup).addCriterion("bellophgolem", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity()
-                        .of(BPEntities.BELLOPHGOLEM.getId()))).save(t, id("bellophgolem_kill"));
+        // ENTITY KILL
+        Advancement bellophgolemKill = entityKillAdvancement(BPEntities.BELLOPHGOLEM, BPItems.BELLOPHGOLEM_SPAWN_EGG, FrameType.GOAL, bioStartup, t);
+        Advancement altyrusKill = entityKillAdvancement(BPEntities.ALTYRUS, BPItems.ALTYRUS_SPAWN_EGG, FrameType.CHALLENGE, bellophgolemKill, t);
 
-        Advancement alphemKill = registerAdvancement("alphem_kill", FrameType.GOAL, BPItems.ALPHEM_SPAWN_EGG.get())
-                .parent(bioStartup).addCriterion("alphem", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity()
-                        .of(BPEntities.ALPHEM.getId()))).save(t, id("alphem_kill"));
+        Advancement alphemKill = entityKillAdvancement(BPEntities.ALPHEM, BPItems.ALPHEM_SPAWN_EGG, FrameType.TASK, bioStartup, t);
+        Advancement alphemKingKill = entityKillAdvancement(BPEntities.ALPHEM_KING, BPItems.ALPHEM_KING_SPAWN_EGG, FrameType.CHALLENGE, alphemKill, t);
 
+        // ENTITY TAME
+        Advancement peaguinTame = entityTameAdvancement(BPEntities.PEAGUIN, BPItems.PEAGUIN_SPAWN_EGG, FrameType.TASK, bioStartup, t);
+        Advancement trapjawTame = entityTameAdvancement(BPEntities.TRAPJAW, BPItems.TRAPJAW_SPAWN_EGG, FrameType.GOAL, bioStartup, t);
 
-        // ITEMS
-        Advancement bellophiteObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BPItems.BELLOPHITE.get())
-                .parent(bellophgolemKill).addCriterion("bellophite",
-                InventoryChangeTrigger.Instance.hasItems(BPItems.BELLOPHITE.get())).save(t, id("bellophgolem_obtain"));
-
-        Advancement bellophiteArrowObtain = registerAdvancement("bellophite_obtain", FrameType.TASK, BPItems.BELLOPHITE.get())
-                .parent(bellophgolemKill).addCriterion("bellophite",
-                InventoryChangeTrigger.Instance.hasItems(BPItems.BELLOPHITE.get())).save(t, id("bellophgolem_obtain"));
+        // CUSTOM TRIGGERS
+        Advancement grylynenSummon = customTriggerAdvancement("grylynen_summon", BPItems.GREEN_GRYLYNEN_CRYSTAL, FrameType.TASK, bioStartup, t);
     }
 
+    //==================================================
+    //            ADVANCEMENT FORMATS
+    //==================================================
+    public Advancement entityKillAdvancement(Supplier<? extends EntityType<?>> entity, RegistryObject<Item> iconItem, FrameType achievementLevel, Advancement parent, Consumer<Advancement> consumer) {
+        ResourceLocation registryName = entity.get().getRegistryName();
+
+        return registerAdvancement( registryName.getPath() + "_kill", achievementLevel, iconItem.get())
+                .parent(parent).addCriterion( registryName.getPath(), KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity()
+                        .of(registryName))).save(consumer, id(registryName.getPath() + "_kill"));
+    }
+
+    public Advancement entityTameAdvancement(Supplier<? extends EntityType<?>> entity, RegistryObject<Item> iconItem, FrameType achievementLevel, Advancement parent, Consumer<Advancement> consumer) {
+        ResourceLocation registryName = entity.get().getRegistryName();
+
+        return registerAdvancement( registryName.getPath() + "_tame", achievementLevel, iconItem.get())
+                .parent(parent).addCriterion(registryName.getPath(), TameAnimalTrigger.Instance.tamedAnimal(EntityPredicate.Builder.entity()
+                        .of(registryName).build())).save(consumer, id(registryName.getPath() + "_tame"));
+    }
+
+    public Advancement customTriggerAdvancement(String name, RegistryObject<Item> iconItem, FrameType achievementLevel, Advancement parent, Consumer<Advancement> consumer) {
+        return registerAdvancement(name, achievementLevel, iconItem.get())
+                .parent(parent).addCriterion(name, new ImpossibleTrigger.Instance()).save(consumer, id(name));
+    }
+
+    //================================================================
+    //             OTHER ADVANCEMENT GENERATOR HELPERS
+    //================================================================
     private static Path getPath(Path pathIn, Advancement advancementIn) {
         return pathIn.resolve("data/" + advancementIn.getId().getNamespace() + "/advancements/" + advancementIn.getId().getPath() + ".json");
     }

@@ -26,6 +26,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -163,6 +164,10 @@ public class DwarfMossadileEntity extends BPMonsterEntity implements IAnimatable
         }
 
         return super.finalizeSpawn(world, difficultyIn, reason, spawnDataIn, dataTag);
+    }
+
+    public boolean checkSpawnObstruction(IWorldReader pLevel) {
+        return pLevel.isUnobstructed(this) && !pLevel.containsAnyLiquid(this.getBoundingBox()) && Math.random() < 0.25;
     }
 
     @Override

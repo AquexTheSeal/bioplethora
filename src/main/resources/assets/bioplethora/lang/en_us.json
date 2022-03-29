@@ -273,15 +273,20 @@
   "item.bioplethora.alphanum_obliterator.skullbreaker.skill": "Skullbreaker",
   "item.bioplethora.alphanum_obliterator.skullbreaker.desc": "This weapon is a very heavy item, that it can cause a great amount of knockback to the target in melee.",
   "item.bioplethora.alphanum_obliterator.blasting_spears.skill": "Blasting Spears",
-  "item.bioplethora.alphanum_obliterator.blasting_spears.desc": "This weapon shoots 3 missiles that can cause explosions that deal an amount of damage that scales with the Devastating Blast enchantment every time it is used. This weapon reloads for a maximum of 2 seconds before being able to shoot again, the reloading time can be decreased with the Quick Charge Enchantment. If the same weapon are in both hand slots, the mainhand shoot action can trigger the offhand shoot action.",
+  "item.bioplethora.alphanum_obliterator.blasting_spears.desc": "This weapon shoots 3 missiles that can cause explosions that deal an amount of damage that scales with the Devastating Blast enchantment every time it is used. This weapon reloads for a maximum of 2 seconds before being able to shoot again, the reloading time can be decreased with the Quick Charge Enchantment. If the same weapon are loaded in both hand slots, the mainhand shoot action can trigger the offhand shoot action.",
 
   "effect.bioplethora.spirit_fission": "Spirit Fission",
   "effect.bioplethora.spirit_manipulation": "Spirit Manipulation",
 
-  "item.bioplethora.fleignarite_weapon.gooey_stun.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability. When the target is hurt using this item, the fleignarite scales used for this item causes a quick stun that gives nausea and slowness for a short duration.",
+  "item.bioplethora.fleignarite_weapon.gooey_stun.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability when the item is not used in any hand. When the target is hurt using this item, the fleignarite scales used for this item causes a quick stun that gives nausea and slowness for a short duration.",
   "item.bioplethora.fleignarite_weapon.gooey_stun.skill": "Gooey Stun",
-  "item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability. This weapon can cause a very damaging blow that gives large amounts of debuffs every now and then thanks to it's bellophite attachment.",
+  "item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability when the item is not used in any hand. This weapon can cause a very damaging blow that gives large amounts of debuffs every now and then thanks to it's bellophite attachment.",
   "item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.skill": "Deadly Blow",
+
+  "item.bioplethora.fleignarite_armor.sticky_piece.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability. When the user of the armor is hurt, the remaining little sticky goo that was left in the armor lessens the attacker's attack speed.",
+  "item.bioplethora.fleignarite_armor.gooey_piece.skill": "Gooey Piece",
+  "item.bioplethora.reinforced_fleignarite_armor.heavy_retaliation.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability. When the user of the armor is hurt, the core energy of the armor releases an impulse that can damage the attacker and debuff them for a short period.",
+  "item.bioplethora.reinforced_fleignarite_armor.heavy_retaliation.skill": "Gooey Piece",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora. There is a hell mode option in the configs that enhances and strengthens most creatures, you can check it out!",

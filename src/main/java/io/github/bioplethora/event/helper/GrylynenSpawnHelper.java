@@ -3,11 +3,13 @@ package io.github.bioplethora.event.helper;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.others.GrylynenCoreBombEntity;
+import io.github.bioplethora.helpers.advancements.AdvancementUtils;
 import io.github.bioplethora.registry.BPEffects;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -32,37 +34,37 @@ public class GrylynenSpawnHelper {
 
                 if (getTaggedBlock(BPTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.05 : 0.075) && BPConfig.COMMON.spawnWoodenGrylynen.get()) {
-                        summonGrylynenCore(BPEntities.WOODEN_GRYLYNEN.get().create(world), world, pos);
+                        summonGrylynenCore(event.getPlayer(), BPEntities.WOODEN_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.STONE_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.05 : 0.075) && BPConfig.COMMON.spawnStoneGrylynen.get()) {
-                        summonGrylynenCore(BPEntities.STONE_GRYLYNEN.get().create(world), world, pos);
+                        summonGrylynenCore(event.getPlayer(), BPEntities.STONE_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.GOLDEN_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.075 : 0.1) && BPConfig.COMMON.spawnGoldenGrylynen.get()) {
-                        summonGrylynenCore(BPEntities.GOLDEN_GRYLYNEN.get().create(world), world, pos);
+                        summonGrylynenCore(event.getPlayer(), BPEntities.GOLDEN_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.IRON_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.075 : 0.1) && BPConfig.COMMON.spawnIronGrylynen.get()) {
-                        summonGrylynenCore(BPEntities.IRON_GRYLYNEN.get().create(world), world, pos);
+                        summonGrylynenCore(event.getPlayer(), BPEntities.IRON_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.DIAMOND_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.1 : 0.1025) && BPConfig.COMMON.spawnDiamondGrylynen.get()) {
-                        summonGrylynenCore(BPEntities.DIAMOND_GRYLYNEN.get().create(world), world, pos);
+                        summonGrylynenCore(event.getPlayer(), BPEntities.DIAMOND_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.NETHERITE_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.1 : 0.1025) && BPConfig.COMMON.spawnNetheriteGrylynen.get()) {
-                        summonGrylynenCore(BPEntities.NETHERITE_GRYLYNEN.get().create(world), world, pos);
+                        summonGrylynenCore(event.getPlayer(), BPEntities.NETHERITE_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
             }
@@ -73,16 +75,12 @@ public class GrylynenSpawnHelper {
         return BlockTags.getAllTags().getTagOrEmpty(tag).contains(world.getBlockState(pos).getBlock());
     }
 
-    public static void summonGrylynenCore(GrylynenEntity grylynen, World world, BlockPos centerPos) {
+    public static void summonGrylynenCore(PlayerEntity summoner, GrylynenEntity grylynen, World world, BlockPos centerPos) {
 
         GrylynenCoreBombEntity core = BPEntities.GRYLYNEN_CORE_BOMB.get().create(world);
         if (!(world.getDifficulty() == Difficulty.PEACEFUL)) {
 
-            /*
-            if (world.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
-                breakSurroundingBlocks(world, centerPos);
-            }
-             */
+            AdvancementUtils.grantBioAdvancement(summoner, "grylynen_summon");
 
             if (!world.isClientSide()) {
                 ServerWorld serverworld = (ServerWorld) world;

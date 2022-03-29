@@ -1,0 +1,40 @@
+{
+  "parent": "bioplethora:bioplethora_startup",
+  "display": {
+    "icon": {
+      "item": "bioplethora:trapjaw_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.trapjaw_tame.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.trapjaw_tame.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "bioplethora:textures/block/bellophite_core_block.png"
+  },
+  "criteria": {
+    "trapjaw": {
+      "trigger": "minecraft:tame_animal",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "catType": "bioplethora:trapjaw"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "trapjaw"
+    ]
+  ]
+}

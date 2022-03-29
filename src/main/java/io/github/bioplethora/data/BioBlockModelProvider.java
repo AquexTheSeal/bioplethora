@@ -62,7 +62,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("stripped_petrawood_wood", bioResLoc("stripped_petrawood_log_side"));
         this.cubeAll("petrawood_planks", bioResLoc("petrawood_planks"));
         this.cubeAll("petrawood_leaves", bioResLoc("petrawood_leaves"));
-        this.cross("petrawood_sapling", bioResLoc("petrawood_sapling"));
+        //this.cross("petrawood_sapling", bioResLoc("petrawood_sapling"));
 
         this.fencePost("petrawood_fence", bioResLoc("petrawood_planks"));
         this.fenceInventory("petrawood_fence", bioResLoc("petrawood_planks"));

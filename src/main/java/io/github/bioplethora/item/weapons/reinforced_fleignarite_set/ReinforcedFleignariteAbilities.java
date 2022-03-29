@@ -52,8 +52,9 @@ public class ReinforcedFleignariteAbilities {
                 if (stack.getDamageValue() < stack.getMaxDamage()) {
                     stack.getOrCreateTag().putInt("regen_time", stack.getOrCreateTag().getInt("regen_time") + 1);
 
-                    if (stack.getOrCreateTag().getInt("regen_time") == 200) {
-                        stack.setDamageValue(stack.getDamageValue() - 2);
+                    if (stack.getOrCreateTag().getInt("regen_time") >= 100) {
+                        int i = Math.min((int) (4 * stack.getXpRepairRatio()), stack.getDamageValue());
+                        stack.setDamageValue(stack.getDamageValue() - i);
                         stack.getOrCreateTag().putInt("regen_time", 0);
                     }
                 }

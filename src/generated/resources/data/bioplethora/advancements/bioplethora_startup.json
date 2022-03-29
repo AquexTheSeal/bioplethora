@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "bioplethora:biopedia"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.bioplethora_startup.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.bioplethora_startup.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "bioplethora:textures/block/bellophite_core_block.png"
+  },
+  "criteria": {
+    "startup": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "dimension": "minecraft:overworld"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "startup"
+    ]
+  ]
+}

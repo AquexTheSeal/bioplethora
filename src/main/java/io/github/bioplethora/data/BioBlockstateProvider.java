@@ -65,7 +65,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.woodBlock(BPBlocks.STRIPPED_PETRAWOOD_WOOD.get(), bioResLoc("stripped_petrawood_log_side"));
         this.simpleBlock(BPBlocks.PETRAWOOD_PLANKS.get());
         this.simpleBlock(BPBlocks.PETRAWOOD_LEAVES.get());
-        this.simpleCrossBlock(BPBlocks.PETRAWOOD_SAPLING.get());
+        //this.simpleCrossBlock(BPBlocks.PETRAWOOD_SAPLING.get());
 
         this.fenceBlock(BPBlocks.PETRAWOOD_FENCE.get(), bioResLoc("petrawood_planks"));
         this.fenceGateBlock(BPBlocks.PETRAWOOD_FENCE_GATE.get(), bioResLoc("petrawood_planks"));

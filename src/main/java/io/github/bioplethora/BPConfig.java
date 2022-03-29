@@ -32,6 +32,7 @@ public class BPConfig {
         public final ForgeConfigSpec.ConfigValue<Boolean> replaceCreativeTabBackground;
         public final ForgeConfigSpec.ConfigValue<Boolean> antibioCompatibility;
         public final ForgeConfigSpec.ConfigValue<Boolean> announceAlphemKing;
+        public final ForgeConfigSpec.ConfigValue<Boolean> alphemCurseOverlay;
 
         //Ecoharmless
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnCuttlefish;
@@ -93,6 +94,7 @@ public class BPConfig {
             replaceCreativeTabBackground = builder.define("Replace the Bioplethora's creative tabs' background images with a custom one?", true);
             antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used on a single weapon together?", true);
             announceAlphemKing = builder.define("Announce the summon of the Alphem King to all players in the world?", true);
+            alphemCurseOverlay = builder.define("Enable the Alphem Curse overlay when fighting the Alphem King? (The overlay can conceal your health, hunger, and armor bars.)", true);
             builder.pop();
 
             //===================================
