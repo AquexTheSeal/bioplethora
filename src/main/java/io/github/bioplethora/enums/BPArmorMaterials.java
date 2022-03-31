@@ -20,6 +20,9 @@ public enum BPArmorMaterials implements IArmorMaterial {
     REINFORCED_FLEIGNARITE("reinforced_fleignarite", 58, new int[]{5, 9, 8, 4}, 22, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.15F, () -> {
         return Ingredient.of(BPItems.REINFORCED_FLEIGNARITE.get());
     }),
+    NANDBRIC("nandbric", 27, new int[]{3, 5, 6, 3}, 18, SoundEvents.ARMOR_EQUIP_ELYTRA, 1.0F, 0.3F, () -> {
+        return Ingredient.of(BPItems.NANDBRI_SCALES.get());
+    }),
     PEAGUIN_SCALES("peaguin_scales", 17, new int[]{2, 5, 6, 2}, 15, SoundEvents.ARMOR_EQUIP_TURTLE, 0.0F, 0.0F, () -> {
         return Ingredient.of(BPItems.PEAGUIN_SCALES.get());
     });
