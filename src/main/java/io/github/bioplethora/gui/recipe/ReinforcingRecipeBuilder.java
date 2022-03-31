@@ -77,9 +77,9 @@ public class ReinforcingRecipeBuilder {
         }
 
         public void serializeRecipeData(JsonObject pJson) {
-            pJson.add("topIngredient", this.topIngredient.toJson());
-            pJson.add("midIngredient", this.midIngredient.toJson());
-            pJson.add("botIngredient", this.botIngredient.toJson());
+            pJson.add("core", this.topIngredient.toJson());
+            pJson.add("material", this.midIngredient.toJson());
+            pJson.add("weapon", this.botIngredient.toJson());
             JsonObject jsonobject = new JsonObject();
             jsonobject.addProperty("item", Registry.ITEM.getKey(this.result).toString());
             pJson.add("result", jsonobject);

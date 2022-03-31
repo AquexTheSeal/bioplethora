@@ -73,7 +73,7 @@ public class BPConfig {
             //        MAIN MECHANICS
             //===================================
             builder.push("Main Mechanics");
-            hellMode = builder.define("Hell Mode (Adds more mechanics and buffs to mobs to make the game harder, hellmode also makes items better.)", false);
+            hellMode = builder.define("Hell Mode (Adds more mechanics and buffs to mobs to make the game harder, hellmode also makes items better)", false);
             hellModeReminder = builder.define("Hell Mode Reminder (Reminds you everytime you join the world, enter a dimension, or respawn)", true);
             startupBiopedia = builder.define("Gives you a Biopedia upon joining the world", true);
             builder.pop();
@@ -94,7 +94,7 @@ public class BPConfig {
             replaceCreativeTabBackground = builder.define("Replace the Bioplethora's creative tabs' background images with a custom one?", true);
             antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used on a single weapon together?", true);
             announceAlphemKing = builder.define("Announce the summon of the Alphem King to all players in the world?", true);
-            alphemCurseOverlay = builder.define("Enable the Alphem Curse overlay when fighting the Alphem King? (The overlay can conceal your health, hunger, and armor bars.)", true);
+            alphemCurseOverlay = builder.define("Enable the Alphem Curse overlay when fighting the Alphem King? (The overlay can conceal your health, hunger, and armor bars)", true);
             builder.pop();
 
             //===================================
@@ -140,7 +140,7 @@ public class BPConfig {
             builder.push("Mob Damage Limits (Only applies if Mob Caps are enabled)");
             altyrusMobCap = builder.define("Damage Limit of the Altyrus", 40);
             heliobladeMobCap = builder.define("Damage Limit of the Helioblade", 30);
-            alphemKingMobCap = builder.define("Damage Limit of the Helioblade", 30);
+            alphemKingMobCap = builder.define("Damage Limit of the Alphem King", 30);
             builder.pop();
         }
     }

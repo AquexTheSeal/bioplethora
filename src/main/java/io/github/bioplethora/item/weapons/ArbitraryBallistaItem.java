@@ -61,10 +61,9 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
                 if (area != entity) {
                     area.hurt(DamageSource.explosion(entity), 5);
                 }
-                if (area == entity) {
-                    area.hurt(DamageSource.explosion(entity), 1);
-                }
             }
+
+            entity.hurt(DamageSource.explosion((LivingEntity) null), 1);
 
             return ActionResult.consume(itemstack);
         } else if (!entity.getProjectile(itemstack).isEmpty()) {

@@ -118,6 +118,12 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
         return flag;
     }
 
+    @Override
+    protected void markHurt() {
+        this.remove();
+        super.markHurt();
+    }
+
     public void setTier(IGrylynenTier tier) {
         this.tier = tier;
     }

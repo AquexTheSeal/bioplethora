@@ -47,8 +47,8 @@ public class FleignariteArmorItem extends ArmorItem implements IHurtSkillArmor {
         if (pStack.getDamageValue() < pStack.getMaxDamage()) {
             pStack.getOrCreateTag().putInt("regen_time", pStack.getOrCreateTag().getInt("regen_time") + 1);
 
-            if (pStack.getOrCreateTag().getInt("regen_time") == 120) {
-                int i = Math.min((int) (2 * pStack.getXpRepairRatio()), pStack.getDamageValue());
+            if (pStack.getOrCreateTag().getInt("regen_time") == 400) {
+                int i = Math.min((int) (1 * pStack.getXpRepairRatio()), pStack.getDamageValue());
                 pStack.setDamageValue(pStack.getDamageValue() - i);
                 pStack.getOrCreateTag().putInt("regen_time", 0);
             }
