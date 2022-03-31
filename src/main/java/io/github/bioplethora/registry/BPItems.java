@@ -1,7 +1,9 @@
 package io.github.bioplethora.registry;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.client.entity.model.NandbricArmorModel;
 import io.github.bioplethora.enums.BPArmorMaterials;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.enums.BPItemTier;
@@ -19,10 +21,11 @@ import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.item.weapons.fleignarite_set.*;
 import io.github.bioplethora.item.weapons.reinforced_fleignarite_set.*;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemTier;
-import net.minecraft.item.Rarity;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -105,6 +108,83 @@ public class BPItems {
     public static final RegistryObject<Item> FLEIGNARITE_CHESTPLATE = ITEMS.register("fleignarite_chestplate", () -> new FleignariteArmorItem(BPArmorMaterials.FLEIGNARITE, EquipmentSlotType.CHEST, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> FLEIGNARITE_LEGGINGS = ITEMS.register("fleignarite_leggings", () -> new FleignariteArmorItem(BPArmorMaterials.FLEIGNARITE, EquipmentSlotType.LEGS, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> FLEIGNARITE_BOOTS = ITEMS.register("fleignarite_boots", () -> new FleignariteArmorItem(BPArmorMaterials.FLEIGNARITE, EquipmentSlotType.FEET, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
+
+    public static final RegistryObject<Item> NANDBRIC_HELMET = ITEMS.register("nandbric_helmet", () -> new ArmorItem(BPArmorMaterials.NANDBRIC, EquipmentSlotType.HEAD, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)) {
+        @Override
+        public BipedModel getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlotType slotType, BipedModel defaultModel) {
+            BipedModel armorModel = new BipedModel(1);
+
+            armorModel.head = new NandbricArmorModel.Layer1<>().helmet;
+
+            armorModel.crouching = entity.isCrouching();
+            armorModel.riding = defaultModel.riding;
+            armorModel.young = entity.isBaby();
+            return armorModel;
+        }
+
+        @Override
+        public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slotType, String type) {
+            return Bioplethora.MOD_ID + ":textures/models/armor/nandbric_layer_1.png";
+        }
+    });
+    public static final RegistryObject<Item> NANDBRIC_CHESTPLATE = ITEMS.register("nandbric_chestplate", () -> new ArmorItem(BPArmorMaterials.NANDBRIC, EquipmentSlotType.CHEST, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)) {
+        @Override
+        public BipedModel getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlotType slotType, BipedModel defaultModel) {
+            BipedModel armorModel = new BipedModel(1);
+
+            armorModel.body = new NandbricArmorModel.Layer1<>().chestplate;
+            armorModel.leftArm = new NandbricArmorModel.Layer1<>().leftarm;
+            armorModel.rightArm = new NandbricArmorModel.Layer1<>().rightarm;
+
+            armorModel.crouching = entity.isCrouching();
+            armorModel.riding = defaultModel.riding;
+            armorModel.young = entity.isBaby();
+            return armorModel;
+        }
+
+        @Override
+        public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slotType, String type) {
+            return Bioplethora.MOD_ID + ":textures/models/armor/nandbric_layer_1.png";
+        }
+    });
+    public static final RegistryObject<Item> NANDBRIC_LEGGINGS = ITEMS.register("nandbric_leggings", () -> new ArmorItem(BPArmorMaterials.NANDBRIC, EquipmentSlotType.LEGS, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)) {
+        @Override
+        public BipedModel getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlotType slotType, BipedModel defaultModel) {
+            BipedModel armorModel = new BipedModel(1);
+
+            armorModel.leftLeg = new NandbricArmorModel.Layer2<>().leftleg;
+            armorModel.rightLeg = new NandbricArmorModel.Layer2<>().rightleg;
+
+            armorModel.crouching = entity.isCrouching();
+            armorModel.riding = defaultModel.riding;
+            armorModel.young = entity.isBaby();
+            return armorModel;
+        }
+
+        @Override
+        public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slotType, String type) {
+            return Bioplethora.MOD_ID + ":textures/models/armor/nandbric_layer_2.png";
+        }
+    });
+    public static final RegistryObject<Item> NANDBRIC_BOOTS = ITEMS.register("nandbric_boots", () -> new ArmorItem(BPArmorMaterials.NANDBRIC, EquipmentSlotType.FEET, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)) {
+        @Override
+        public BipedModel getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlotType slotType, BipedModel defaultModel) {
+            BipedModel armorModel = new BipedModel(1);
+
+            armorModel.leftLeg = new NandbricArmorModel.Layer1<>().leftboot;
+            armorModel.rightLeg = new NandbricArmorModel.Layer1<>().rightboot;
+
+            armorModel.crouching = entity.isCrouching();
+            armorModel.riding = defaultModel.riding;
+            armorModel.young = entity.isBaby();
+            return armorModel;
+        }
+
+        @Override
+        public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slotType, String type) {
+            return Bioplethora.MOD_ID + ":textures/models/armor/nandbric_layer_1.png";
+        }
+    });
 
     public static final RegistryObject<Item> REINFORCED_FLEIGNARITE_HELMET = ITEMS.register("reinforced_fleignarite_helmet", () -> new ReinforcedFleignariteArmorItem(BPArmorMaterials.REINFORCED_FLEIGNARITE, EquipmentSlotType.HEAD, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> REINFORCED_FLEIGNARITE_CHESTPLATE = ITEMS.register("reinforced_fleignarite_chestplate", () -> new ReinforcedFleignariteArmorItem(BPArmorMaterials.REINFORCED_FLEIGNARITE, EquipmentSlotType.CHEST, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
