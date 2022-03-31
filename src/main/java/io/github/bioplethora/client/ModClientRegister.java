@@ -3,10 +3,7 @@ package io.github.bioplethora.client;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.block.render.FleignariteSplotchBlockRender;
 import io.github.bioplethora.client.entity.render.*;
-import io.github.bioplethora.client.entity.render.others.AltyrusSummoningRender;
-import io.github.bioplethora.client.entity.render.others.BellophiteShieldWaveRender;
-import io.github.bioplethora.client.entity.render.others.GrylynenCoreBombRender;
-import io.github.bioplethora.client.entity.render.others.PrimordialRingEntityRender;
+import io.github.bioplethora.client.entity.render.others.*;
 import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.gui.screen.ReinforcingTableScreen;
 import io.github.bioplethora.item.weapons.AlphanumObliteratorItem;
@@ -102,6 +99,7 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.GRYLYNEN_CORE_BOMB.get(), GrylynenCoreBombRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_SHARD.get(), AlphanumShardRender::new);
 
         ScreenManager.register(BPContainerTypes.REINFORCING_TABLE_CONTAINER.get(), ReinforcingTableScreen::new);
 

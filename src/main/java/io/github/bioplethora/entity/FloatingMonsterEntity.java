@@ -116,8 +116,8 @@ public abstract class FloatingMonsterEntity extends BPMonsterEntity implements I
     }
 
     public class MoveHelperController extends MovementController {
-        public MoveHelperController(FloatingMonsterEntity grylynen) {
-            super(grylynen);
+        public MoveHelperController(FloatingMonsterEntity floatingMob) {
+            super(floatingMob);
         }
 
         public void tick() {

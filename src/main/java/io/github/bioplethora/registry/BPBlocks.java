@@ -25,7 +25,7 @@ public class BPBlocks {
     public static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Bioplethora.MOD_ID);
 
     public static final RegistryObject<ReinforcingTableBlock> REINFORCING_TABLE = registerBlock("reinforcing_table", () -> new ReinforcingTableBlock(AbstractBlock.Properties.of(Material.METAL)
-            .strength(20.0F, 35).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), null);
+            .strength(20.0F, 35).sound(SoundType.NETHERITE_BLOCK).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> NANDBRI_SCALE_BLOCK = registerBlock("nandbri_scale_block", () -> new Block(AbstractBlock.Properties.of(Material.WOOL, MaterialColor.COLOR_LIGHT_GRAY)
             .strength(0.8F, 0.8F).harvestTool(ToolType.AXE).harvestLevel(3).sound(SoundType.BONE_BLOCK)), BPItemGroup.BioplethoraItemItemGroup);

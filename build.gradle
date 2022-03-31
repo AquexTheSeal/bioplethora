@@ -152,6 +152,10 @@ dependencies {
     implementation fg.deobf("curse.maven:ftb-library-forge-404465:3553840")
     //FTB Teams
     implementation fg.deobf("curse.maven:ftb-teams-forge-404468:3535953")
+    //Damage Indicators
+    implementation fg.deobf("curse.maven:damage-indicator-mod-for-forge-557596:3680500")
+    //Critical Lib
+    implementation fg.deobf("curse.maven:forge-criticalib-560696:3644558")
 
     //Tetra
     /*implementation fg.deobf("curse.maven:tetra-289712:3585032")*/

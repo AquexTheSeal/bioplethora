@@ -36,10 +36,10 @@ public abstract class AbstractReinforcingContainer extends Container {
         this.access = pAccess;
         this.player = pPlayerInventory.player;
 
-        addSlot(new Slot(this.inputSlots, 0, 44, 85 - 32));
+        addSlot(new Slot(this.inputSlots, 0, 44, 49 - 32));
         addSlot(new Slot(this.inputSlots, 1, 44, 67 - 32));
 
-        addSlot(new Slot(this.inputSlots, 2, 44, 49 - 32));
+        addSlot(new Slot(this.inputSlots, 2, 44, 85 - 32));
 
         addSlot(new Slot(this.resultSlots, 3, 127, 37) {
             public boolean mayPlace(ItemStack pStack) {

@@ -2,10 +2,7 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.*;
-import io.github.bioplethora.entity.others.AltyrusSummoningEntity;
-import io.github.bioplethora.entity.others.BellophiteShieldWaveEntity;
-import io.github.bioplethora.entity.others.GrylynenCoreBombEntity;
-import io.github.bioplethora.entity.others.PrimordialRingEntity;
+import io.github.bioplethora.entity.others.*;
 import io.github.bioplethora.entity.projectile.*;
 import io.github.bioplethora.enums.BPGrylynenTier;
 import net.minecraft.entity.EntityClassification;
@@ -87,4 +84,6 @@ public class BPEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "bellophite_shield_wave").toString()));
     public static final RegistryObject<EntityType<GrylynenCoreBombEntity>> GRYLYNEN_CORE_BOMB = ENTITIES.register("grylynen_core_bomb", () -> EntityType.Builder.of(GrylynenCoreBombEntity::new, EntityClassification.MISC).sized(1.0F, 1.0F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "grylynen_core_bomb").toString()));
+    public static final RegistryObject<EntityType<AlphanumShardEntity>> ALPHANUM_SHARD = ENTITIES.register("alphanum_shard", () -> EntityType.Builder.of(AlphanumShardEntity::new, EntityClassification.MISC).sized(0.8F, 1.5F).clientTrackingRange(4)
+            .build(new ResourceLocation(Bioplethora.MOD_ID, "alphanum_shard").toString()));
 }

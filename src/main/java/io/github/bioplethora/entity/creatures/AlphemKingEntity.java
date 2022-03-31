@@ -6,9 +6,11 @@ import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.ai.*;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
+import io.github.bioplethora.entity.others.AlphanumShardEntity;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.helpers.blocks.BlockUtils;
 import io.github.bioplethora.helpers.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -47,6 +49,7 @@ import javax.annotation.Nullable;
 
 public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IBioClassification, IMobCappedEntity {
 
+    //protected static final DataParameter<Boolean> SLEEPING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> ATTACKING2 = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SMASHING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> ROARING = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
@@ -62,6 +65,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     private final AnimationFactory factory = new AnimationFactory(this);
     public boolean explodedOnDeath = false;
     public double healthRegenTimer = 0;
+    public int summonShardTimer;
     public int attackPhase;
     public int barrierTimer;
     public float vecOfTarget;
@@ -223,6 +227,14 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             }
         }
 
+        if (this.getTarget() != null) {
+            attackPhase++;
+            if (this.attackPhase == 40) {
+                summonShard(8 + getRandom().nextInt(8));
+                this.attackPhase = 0;
+            }
+        }
+
         this.setBerserked(this.getHealth() <= this.getMaxHealth() / 2);
 
         if (this.isBerserked()) {
@@ -275,6 +287,20 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         }
         if (this.hasEffect(Effects.WITHER)) {
             this.removeEffect(Effects.WITHER);
+        }
+    }
+
+    public void summonShard(int amount) {
+        for (int i = 0; i < amount; i++) {
+            AlphanumShardEntity shard = BPEntities.ALPHANUM_SHARD.get().create(this.level);
+            double xPos = getRandom().nextBoolean() ? getX() + getRandom().nextInt(16) : getX() - getRandom().nextInt(16);
+            double zPos = getRandom().nextBoolean() ? getZ() + getRandom().nextInt(16) : getZ() - getRandom().nextInt(16);
+            if (this.getTarget() != null) {
+                shard.setTarget(this.getTarget());
+            }
+            shard.setOwner(this);
+            shard.setPos(xPos, getY(), zPos);
+            this.level.addFreshEntity(shard);
         }
     }
 

@@ -12,19 +12,19 @@ import javax.annotation.Nullable;
 public class BPDamageSources {
 
     public static DamageSource indirectCastration(Entity entity, @Nullable Entity source) {
-        return (new BioplethoraIndirectDamageSource("indirectCastration", entity, source)).bypassArmor().setMagic().setExplosion();
+        return new BioplethoraIndirectDamageSource("indirectCastration", entity, source).bypassArmor().setMagic().setExplosion();
     }
 
     public static DamageSource helioSlashed(Entity entity, @Nullable Entity source) {
-        return (new BioplethoraIndirectDamageSource("helioSlashed", entity, source)).bypassArmor().setMagic();
+        return new BioplethoraIndirectDamageSource("helioSlashed", entity, source).bypassArmor().setMagic();
     }
 
     public static DamageSource antibio(Entity entity, @Nullable Entity source) {
-        return (new BioplethoraIndirectDamageSource("antibio", entity, source)).setMagic();
+        return new BioplethoraIndirectDamageSource("antibio", entity, source).setMagic();
     }
 
     public static DamageSource armorPiercingFleignarite(Entity entity, @Nullable Entity source) {
-        return (new BioplethoraIndirectDamageSource("armorPiercingFleignarite", entity, source)).bypassArmor();
+        return new BioplethoraIndirectDamageSource("armorPiercingFleignarite", entity, source).bypassArmor();
     }
 
     static class BioplethoraIndirectDamageSource extends EntityDamageSource {

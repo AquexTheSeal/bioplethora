@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
@@ -61,12 +62,14 @@ public class RenderEventHelper {
         IPlayerEntityMixin mxPlayer = (IPlayerEntityMixin) player;
 
         if (mxPlayer.hasAlphanumCurse()) {
-            renderAlphanumCurse(getWidth, getHeight);
+            if (EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(player)) {
+                renderAlphanumCurse(getWidth, getHeight);
+            }
         }
     }
 
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (!reverseCurseAlpha) { curseAlpha += 0.001; if (curseAlpha >= 0.25) { reverseCurseAlpha = true; }
+        if (!reverseCurseAlpha) { curseAlpha += 0.001; if (curseAlpha >= 0.10) { reverseCurseAlpha = true; }
         } else { curseAlpha -= 0.001; if (curseAlpha <= 0) { reverseCurseAlpha = false; }}
     }
 

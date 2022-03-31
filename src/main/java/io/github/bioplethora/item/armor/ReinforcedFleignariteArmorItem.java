@@ -43,8 +43,8 @@ public class ReinforcedFleignariteArmorItem extends ArmorItem implements IHurtSk
         if (pStack.getDamageValue() < pStack.getMaxDamage()) {
             pStack.getOrCreateTag().putInt("regen_time", pStack.getOrCreateTag().getInt("regen_time") + 1);
 
-            if (pStack.getOrCreateTag().getInt("regen_time") == 80) {
-                int i = Math.min((int) (3 * pStack.getXpRepairRatio()), pStack.getDamageValue());
+            if (pStack.getOrCreateTag().getInt("regen_time") == 260) {
+                int i = Math.min((int) (2 * pStack.getXpRepairRatio()), pStack.getDamageValue());
                 pStack.setDamageValue(pStack.getDamageValue() - i);
                 pStack.getOrCreateTag().putInt("regen_time", 0);
             }
