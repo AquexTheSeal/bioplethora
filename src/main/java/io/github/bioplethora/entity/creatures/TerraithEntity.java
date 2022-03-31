@@ -6,13 +6,17 @@ import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -59,10 +63,15 @@ public class TerraithEntity extends FloatingMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
         this.goalSelector.addGoal(4, new TerraithEntity.MoveRandomGoal());
         this.goalSelector.addGoal(3, new TerraithEntity.ChargeAttackGoal());
-        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 15, 0.6, 0.9));
+        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 20, 0.6, 0.7));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, TerraithEntity.class)).setAlertOthers());
+    }
+
+    public void move(MoverType pType, Vector3d pPos) {
+        super.move(pType, pPos);
+        this.checkInsideBlocks();
     }
 
     @Override
