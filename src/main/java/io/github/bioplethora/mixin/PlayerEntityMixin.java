@@ -42,7 +42,7 @@ public class PlayerEntityMixin extends LivingEntity implements IPlayerEntityMixi
     //           MIXIN SECTION
     //===========================================
 
-    @Inject(at = @At("TAIL"), method = ("defineSynchedData"))
+    @Inject(at = @At("TAIL"), method = ("Lnet/minecraft/entity/player/PlayerEntity;defineSynchedData()V"))
     protected void defineSynchedData(CallbackInfo cbi) {
         this.entityData.define(ALPHANUM_CURSE, false);
     }

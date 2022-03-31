@@ -254,7 +254,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             if (!(this.getHealth() <= 5)) {
                 ++healthRegenTimer;
                 if (healthRegenTimer == 10) {
-                    this.setHealth(this.getHealth() + 1 + this.getRandom().nextInt(2));
+                    this.heal( 2 + this.getRandom().nextInt(2));
                     healthRegenTimer = 0;
                 }
             }
@@ -270,7 +270,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             if (!(this.getHealth() <= 5)) {
                 ++healthRegenTimer;
                 if (healthRegenTimer == 20) {
-                    this.setHealth(this.getHealth() + 2);
+                    this.heal(2F);
                     healthRegenTimer = 0;
                 }
             }

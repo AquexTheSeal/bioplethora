@@ -60,6 +60,7 @@ public class Bioplethora {
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(EventPriority.HIGH, EntitySpawnManager::onBiomeLoadingEvent);
+        forgeBus.addListener(EventPriority.NORMAL, BPVillagerTrades::onVillagerTrades);
         forgeBus.register(this);
 
         GeckoLib.initialize();
@@ -81,6 +82,7 @@ public class Bioplethora {
         BPNetwork.initializeNetwork();
         BPBiomeGeneration.generateBiomes();
         BPStructures.setupStructures();
+        BPExtras.addExtras();
     }
 
     private void gatherData(final GatherDataEvent event) {

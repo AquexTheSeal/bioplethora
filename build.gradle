@@ -40,10 +40,9 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
+            arg "-mixin.config=bioplethora.mixins.json"
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            arg "-mixin.config=bioplethora.mixins.json"
 
             mods {
                 bioplethora {
@@ -60,6 +59,8 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             arg "-mixin.config=bioplethora.mixins.json"
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
                 bioplethora {
@@ -77,6 +78,10 @@ minecraft {
 
             args '--mod', 'bioplethora', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
+            arg "-mixin.config=bioplethora.mixins.json"
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
             mods {
                 bioplethora {
                     source sourceSets.main
@@ -92,7 +97,7 @@ sourceSets.main.resources {
 
 mixin {
     // MixinGradle Settings
-    add sourceSets.main, 'bioplethora.mixin-refmap.json'
+    add sourceSets.main, 'bioplethora.refmap.json'
     config 'bioplethora.mixins.json'
 
     debug.verbose = true
@@ -194,8 +199,6 @@ jar {
                 "MixinConfigs" : "bioplethora.mixins.json"
         ])
     }
-
-    rename "mixin.refmap.json", "bioplethora.mixin-refmap.json"
 }
 
 publishing {

@@ -23,7 +23,10 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -132,15 +135,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
         }
 
         newTargetCooldown = 5;
-
-        /*if (!candidates.isEmpty() && !(candidates.get(0).getId() == this.getOwner().getId())) {
-            candidates.sort(Comparator.comparing(WindArrowEntity.this::distanceToSqr, Double::compare));
-            entityData.set(DW_TARGET_ID, candidates.get(0).getId());
-        }
-
-        if (!(candidates.get(0).getId() == this.getOwner().getId())) {
-            newTargetCooldown = 5;
-        }*/
     }
 
     @Override
@@ -152,10 +146,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
     private MobEntity getTarget() {
         return (MobEntity) level.getEntity(entityData.get(DW_TARGET_ID));
     }
-
-    /*private LivingEntity getTarget() {
-        return (LivingEntity) level.getEntity(entityData.get(DW_TARGET_ID));
-    }*/
 
     private boolean hasTarget() {
         return getTarget() != null;
@@ -173,12 +163,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
     public void onHitEntity(EntityRayTraceResult entityRayTraceResult) {
         super.onHitEntity(entityRayTraceResult);
-
-        this.projectileHit();
-    }
-
-    protected void onHit(RayTraceResult entityRayTraceResult) {
-        super.onHit(entityRayTraceResult);
 
         this.projectileHit();
     }
