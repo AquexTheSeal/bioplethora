@@ -18,15 +18,11 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class BellophiteArrowEntity extends AbstractArrowEntity {
 
@@ -55,7 +51,7 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
         super.tick();
         if (this.level instanceof ServerWorld) {
             if (!this.inGround) {
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 2, 0.4, 0.4, 0.4, 0.1);
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), (int) 2, 0.2, 0.2, 0.2, 0.01);
             }
         }
     }
@@ -66,8 +62,9 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
         this.projectileHit();
     }
 
-    protected void onHit(RayTraceResult entityRayTraceResult) {
-        super.onHit(entityRayTraceResult);
+    @Override
+    protected void onHitBlock(BlockRayTraceResult blockRayTraceResult) {
+        super.onHitBlock(blockRayTraceResult);
 
         this.projectileHit();
     }
@@ -84,14 +81,13 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
         this.level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundCategory.NEUTRAL, (float) 1, (float) 1);
 
         if(this.level instanceof ServerWorld) {
-            List<Entity> nearEntities = this.level.getEntitiesOfClass(Entity.class, area, null).stream().sorted(new Object() {
-                        Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                            return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                        }
-                    }.compareDistOf(this.getX(), this.getY(), this.getZ())).collect(Collectors.toList());
-            for (Entity entityIterator : nearEntities) {
+            for (Entity entityIterator : this.level.getEntitiesOfClass(Entity.class, area)) {
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
-                    entityIterator.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), (float) 10.5);
+                    if (this.getOwner() != null) {
+                        entityIterator.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), (float) 10.5);
+                    } else {
+                        entityIterator.hurt(DamageSource.MAGIC, (float) 10.5);
+                    }
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 2));
                     ((LivingEntity) entityIterator).addEffect(new EffectInstance(Effects.WEAKNESS, 60, 1));

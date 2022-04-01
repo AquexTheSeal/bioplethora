@@ -2,9 +2,9 @@ package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
+import io.github.bioplethora.particles.WindPoofParticleData;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;
-import io.github.bioplethora.registry.BPParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -33,6 +33,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
 
@@ -74,9 +75,13 @@ public class WindArrowEntity extends AbstractArrowEntity {
     public void tick() {
         super.tick();
 
-        if (this.level instanceof ServerWorld) {
-            if (!this.inGround) {
-                ((ServerWorld) this.level).sendParticles(BPParticles.WIND_POOF.get(), this.getX(), this.getY(), this.getZ(), 1, 0.1, 0.1, 0.1, 0.01);
+        if (!this.inGround) {
+            double px = getDeltaMovement().x() / 10, py = getDeltaMovement().y() / 10, pz = getDeltaMovement().z() / 10;
+
+            for (int i = 0; i < 10; i += 1) {
+                Color color = new Color(1.0f, 1.0f, 1.0f);
+                WindPoofParticleData wPoof = new WindPoofParticleData(color, 1);
+                this.level.addParticle(wPoof, getX() + (px * i), getY() + (py * i), getZ() + (pz * i), 0d, 0d, 0d);
             }
         }
 
