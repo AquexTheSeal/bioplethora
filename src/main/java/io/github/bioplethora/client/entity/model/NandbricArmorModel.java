@@ -3,9 +3,7 @@ package io.github.bioplethora.client.entity.model;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 
 public class NandbricArmorModel {
@@ -147,43 +145,6 @@ public class NandbricArmorModel {
             leftarm.render(matrixStack, buffer, packedLight, packedOverlay);
             rightboot.render(matrixStack, buffer, packedLight, packedOverlay);
             leftboot.render(matrixStack, buffer, packedLight, packedOverlay);
-        }
-
-        public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-            modelRenderer.xRot = x;
-            modelRenderer.yRot = y;
-            modelRenderer.zRot = z;
-        }
-    }
-
-    public static class Layer2<T extends LivingEntity> extends BipedModel<T> {
-        public final ModelRenderer rightleg;
-        public final ModelRenderer leftleg;
-        public final ModelRenderer bb_main;
-
-        public Layer2() {
-            super(0.9F);
-            texWidth = 64;
-            texHeight = 32;
-
-            rightleg = new ModelRenderer(this);
-            rightleg.setPos(-1.9F, 12.0F, 0.0F);
-            rightleg.texOffs(0, 16).addBox(-2.1F, 1.0F, -2.0F, 4.0F, 9.0F, 4.0F, 0.5F, false);
-
-            leftleg = new ModelRenderer(this);
-            leftleg.setPos(1.9F, 12.0F, 0.0F);
-            leftleg.texOffs(0, 16).addBox(-1.9F, 1.0F, -2.0F, 4.0F, 9.0F, 4.0F, 0.5F, false);
-
-            bb_main = new ModelRenderer(this);
-            bb_main.setPos(0.0F, 24.0F, 0.0F);
-            bb_main.texOffs(16, 23).addBox(-4.0F, -17.0F, -2.0F, 8.0F, 5.0F, 4.0F, 0.48F, false);
-        }
-
-        @Override
-        public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-            rightleg.render(matrixStack, buffer, packedLight, packedOverlay);
-            leftleg.render(matrixStack, buffer, packedLight, packedOverlay);
-            bb_main.render(matrixStack, buffer, packedLight, packedOverlay);
         }
 
         public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

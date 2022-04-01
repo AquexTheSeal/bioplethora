@@ -149,19 +149,6 @@ public class BPItems {
     });
     public static final RegistryObject<Item> NANDBRIC_LEGGINGS = ITEMS.register("nandbric_leggings", () -> new ArmorItem(BPArmorMaterials.NANDBRIC, EquipmentSlotType.LEGS, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)) {
         @Override
-        public BipedModel getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlotType slotType, BipedModel defaultModel) {
-            BipedModel armorModel = new BipedModel(1);
-
-            armorModel.leftLeg = new NandbricArmorModel.Layer2<>().leftleg;
-            armorModel.rightLeg = new NandbricArmorModel.Layer2<>().rightleg;
-
-            armorModel.crouching = entity.isCrouching();
-            armorModel.riding = defaultModel.riding;
-            armorModel.young = entity.isBaby();
-            return armorModel;
-        }
-
-        @Override
         public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slotType, String type) {
             return Bioplethora.MOD_ID + ":textures/models/armor/nandbric_layer_2.png";
         }
