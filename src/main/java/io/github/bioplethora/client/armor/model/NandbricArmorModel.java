@@ -1,4 +1,4 @@
-package io.github.bioplethora.client.entity.model;
+package io.github.bioplethora.client.armor.model;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

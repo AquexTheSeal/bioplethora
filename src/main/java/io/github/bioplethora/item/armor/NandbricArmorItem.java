@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.armor;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.client.entity.model.NandbricArmorModel;
+import io.github.bioplethora.client.armor.model.NandbricArmorModel;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

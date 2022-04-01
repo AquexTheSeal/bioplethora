@@ -1,9 +1,7 @@
 package io.github.bioplethora.registry;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.client.entity.model.NandbricArmorModel;
 import io.github.bioplethora.enums.BPArmorMaterials;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.enums.BPItemTier;
@@ -22,11 +20,10 @@ import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.item.weapons.fleignarite_set.*;
 import io.github.bioplethora.item.weapons.reinforced_fleignarite_set.*;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemTier;
+import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
