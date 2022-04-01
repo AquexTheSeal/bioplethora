@@ -40,6 +40,13 @@ public class BioRecipeProvider extends RecipeProvider {
         foodCooking(consumer, BPItems.RAW_FLENTAIR.get(), BPItems.COOKED_FLENTAIR.get(), 0.40F, 300);
         foodCooking(consumer, BPItems.RAW_MOSILE.get(), BPItems.COOKED_MOSILE.get(), 0.30F, 200);
 
+        armorSetHelper(consumer,  BPItems.FLEIGNARITE_SCALES.get(),
+                BPItems.FLEIGNARITE_HELMET.get(), BPItems.FLEIGNARITE_CHESTPLATE.get(),
+                BPItems.FLEIGNARITE_LEGGINGS.get(), BPItems.FLEIGNARITE_BOOTS.get());
+        armorSetHelper(consumer,  BPItems.NANDBRI_SCALES.get(),
+                BPItems.NANDBRIC_HELMET.get(), BPItems.NANDBRIC_CHESTPLATE.get(),
+                BPItems.NANDBRIC_LEGGINGS.get(), BPItems.NANDBRIC_BOOTS.get());
+
         stoneSetHelper(consumer, BPBlocks.ALPHANUM.get(), BPBlocks.ALPHANUM_BRICKS.get(), BPBlocks.POLISHED_ALPHANUM.get(),
                 BPBlocks.ALPHANUM_STAIRS.get(), BPBlocks.ALPHANUM_WALL.get(), BPBlocks.ALPHANUM_SLAB.get(),
                 BPBlocks.ALPHANUM_STAIRS_BRICKS.get(), BPBlocks.ALPHANUM_WALL_BRICKS.get(), BPBlocks.ALPHANUM_SLAB_BRICKS.get(),
@@ -49,11 +56,6 @@ public class BioRecipeProvider extends RecipeProvider {
 
         reinforcing(consumer, BPItems.ARBITRARY_BALLISTA.get(), BPItems.RED_GRYLYNEN_CRYSTAL.get(),
                 BPItems.BELLOPHITE.get(), Items.CROSSBOW);
-
-        helmetCrafting(consumer, BPItems.NANDBRIC_HELMET.get(), BPItems.NANDBRI_SCALES.get());
-        chestplateCrafting(consumer, BPItems.NANDBRIC_CHESTPLATE.get(), BPItems.NANDBRI_SCALES.get());
-        leggingsCrafting(consumer, BPItems.NANDBRIC_LEGGINGS.get(), BPItems.NANDBRI_SCALES.get());
-        bootsCrafting(consumer, BPItems.NANDBRIC_BOOTS.get(), BPItems.NANDBRI_SCALES.get());
     }
 
     public String getName() {
@@ -117,6 +119,30 @@ public class BioRecipeProvider extends RecipeProvider {
         stoneCutting(consumer, polishedBase, polishedSlab, 2);
     }
 
+    private void armorSetHelper(Consumer<IFinishedRecipe> consumer, IItemProvider material, IItemProvider helmet, IItemProvider chestplate, IItemProvider leggings, IItemProvider boots) {
+        ShapedRecipeBuilder.shaped(helmet, 2).define('S', material).pattern("SSS").pattern("S S")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(chestplate, 2).define('S', material).pattern("S S").pattern("SSS").pattern("SSS")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(leggings, 2).define('S', material).pattern("SSS").pattern("S S").pattern("S S")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(boots, 2).define('S', material).pattern("S S").pattern("S S")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+    }
+
+    private void toolSetHelper(Consumer<IFinishedRecipe> consumer, IItemProvider material, IItemProvider stick, IItemProvider sword, IItemProvider shovel, IItemProvider pickaxe, IItemProvider axe, IItemProvider hoe) {
+        ShapedRecipeBuilder.shaped(sword, 2).define('S', stick).define('M', material).pattern(" M ").pattern(" M ").pattern(" S ")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(shovel, 2).define('S', stick).define('M', material).pattern(" M ").pattern(" S ").pattern(" S ")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(pickaxe, 2).define('S', stick).define('M', material).pattern("MMM").pattern(" S ").pattern(" S ")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(axe, 2).define('S', stick).define('M', material).pattern("MM ").pattern("MS ").pattern(" S ")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(hoe, 2).define('S', stick).define('M', material).pattern("MM ").pattern(" S ").pattern(" S ")
+                .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
+    }
+
     private void stoneCutting(Consumer<IFinishedRecipe> consumer, IItemProvider baseItem, IItemProvider resultItem, int amount) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(baseItem), resultItem, amount).unlocks("has_stone", has(baseItem)).save(consumer, new ResourceLocation(Bioplethora.MOD_ID, resultItem.asItem().getRegistryName().getPath() + "_from_stone_stonecutting"));
     }
@@ -155,25 +181,5 @@ public class BioRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(providedItem, 6).define('#', requiredItem).pattern("###")
                 .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
 
-    }
-
-    private static void helmetCrafting(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
-        ShapedRecipeBuilder.shaped(providedItem).define('#', requiredItem).pattern("###").pattern("# #")
-                .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
-    }
-
-    private static void chestplateCrafting(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
-        ShapedRecipeBuilder.shaped(providedItem).define('#', requiredItem).pattern("# #").pattern("###").pattern("###")
-                .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
-    }
-
-    private static void leggingsCrafting(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
-        ShapedRecipeBuilder.shaped(providedItem).define('#', requiredItem).pattern("###").pattern("# #").pattern("# #")
-                .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
-    }
-
-    private static void bootsCrafting(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
-        ShapedRecipeBuilder.shaped(providedItem).define('#', requiredItem).pattern("   ").pattern("# #").pattern("# #")
-                .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
     }
 }

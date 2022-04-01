@@ -14,10 +14,10 @@ import java.util.function.Supplier;
 
 public enum BPArmorMaterials implements IArmorMaterial {
 
-    FLEIGNARITE("fleignarite", 22, new int[]{2, 5, 6, 2}, 12, SoundEvents.ARMOR_EQUIP_ELYTRA, 1.0F, 0.0F, () -> {
+    FLEIGNARITE("fleignarite", 18, new int[]{2, 5, 6, 2}, 12, SoundEvents.ARMOR_EQUIP_ELYTRA, 1.0F, 0.0F, () -> {
         return Ingredient.of(BPItems.FLEIGNARITE_SCALES.get());
     }),
-    REINFORCED_FLEIGNARITE("reinforced_fleignarite", 58, new int[]{5, 9, 8, 4}, 22, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.15F, () -> {
+    REINFORCED_FLEIGNARITE("reinforced_fleignarite", 30, new int[]{5, 9, 8, 4}, 22, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.12F, () -> {
         return Ingredient.of(BPItems.REINFORCED_FLEIGNARITE.get());
     }),
     NANDBRIC("nandbric", 27, new int[]{3, 5, 6, 3}, 18, SoundEvents.ARMOR_EQUIP_ELYTRA, 1.0F, 0.03F, () -> {

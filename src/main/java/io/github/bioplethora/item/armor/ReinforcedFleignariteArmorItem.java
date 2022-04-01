@@ -1,7 +1,10 @@
 package io.github.bioplethora.item.armor;
 
+import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.client.armor.model.ReinforcedFleignariteArmorModel;
 import io.github.bioplethora.item.IHurtSkillArmor;
 import io.github.bioplethora.registry.BPDamageSources;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -56,5 +59,52 @@ public class ReinforcedFleignariteArmorItem extends ArmorItem implements IHurtSk
     @Override
     public int getHurtAbilityCooldown() {
         return 80;
+    }
+
+    @Override
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlotType slot, A defaultModel) {
+        return slot == EquipmentSlotType.LEGS ? defaultModel : matchingModel(entity, slot, defaultModel);
+    }
+
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+        String defaultTexture = Bioplethora.MOD_ID + ":textures/models/armor/reinforced_fleignarite_layer_1.png";
+        String legTexture = Bioplethora.MOD_ID + ":textures/models/armor/reinforced_fleignarite_layer_2.png";
+
+        return slot == EquipmentSlotType.LEGS ? legTexture : defaultTexture;
+    }
+
+    public static <A extends BipedModel<?>> A matchingModel(LivingEntity entity, EquipmentSlotType slot, A defaultModel) {
+        boolean crouching = entity.isCrouching();
+        boolean riding = defaultModel.riding;
+        boolean young = entity.isBaby();
+
+        switch (slot) {
+            case HEAD:
+                BipedModel helmet = new BipedModel(1);
+                helmet.head = new ReinforcedFleignariteArmorModel<>().head;
+                helmet.crouching = crouching;
+                helmet.riding = riding;
+                helmet.young = young;
+                return (A) helmet;
+            case CHEST:
+                BipedModel chestplate = new BipedModel(1);
+                chestplate.body = new ReinforcedFleignariteArmorModel<>().body;
+                chestplate.leftArm = new ReinforcedFleignariteArmorModel<>().left_arm;
+                chestplate.rightArm = new ReinforcedFleignariteArmorModel<>().right_arm;
+                chestplate.crouching = crouching;
+                chestplate.riding = riding;
+                chestplate.young = young;
+                return (A) chestplate;
+            case FEET:
+                BipedModel boots = new BipedModel(1);
+                boots.leftLeg = new ReinforcedFleignariteArmorModel<>().left_shoe;
+                boots.rightLeg = new ReinforcedFleignariteArmorModel<>().right_shoe;
+                boots.crouching = crouching;
+                boots.riding = riding;
+                boots.young = young;
+                return (A) boots;
+        }
+        return defaultModel;
     }
 }
