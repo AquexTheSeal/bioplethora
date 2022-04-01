@@ -20,6 +20,9 @@ public class ArrowMixinHelper {
 
             if (mxArrow.getShouldExplode()) {
                 level.explode(null, x, y, z, mxArrow.getExplosionRadius(), Explosion.Mode.BREAK);
+
+                // Wind Arrow Bug Fix
+                arrow.remove();
             }
         }
     }

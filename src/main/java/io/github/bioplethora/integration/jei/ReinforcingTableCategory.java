@@ -26,7 +26,7 @@ public class ReinforcingTableCategory implements IRecipeCategory<ReinforcingReci
 
     public ReinforcingTableCategory(IGuiHelper helper) {
         categoryIcon = helper.createDrawableIngredient(new ItemStack(BPBlocks.REINFORCING_TABLE.get()));
-        categoryBackground = helper.drawableBuilder(new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/jei/reinforcing.png"),
+        categoryBackground = helper.drawableBuilder(new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/jei/reinforcing_table.png"),
                 0, 0, 170, 80).setTextureSize(170, 80).build();
     }
 
@@ -82,11 +82,11 @@ public class ReinforcingTableCategory implements IRecipeCategory<ReinforcingReci
 
         IGuiItemStackGroup recipeStacks = recipeLayout.getItemStacks();
 
-        recipeStacks.init(0, true, 46, 75);
-        recipeStacks.init(1, true, 46, 49);
-        recipeStacks.init(2, true, 46, 13);
+        recipeStacks.init(0, true, 43, 13);
+        recipeStacks.init(1, true, 43, 33);
+        recipeStacks.init(2, true, 43, 52);
 
-        recipeStacks.init(3, false, 127, 35);
+        recipeStacks.init(3, false, 126, 33);
         recipeStacks.set(3, recipe.getResult());
 
         List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);

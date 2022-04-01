@@ -3,9 +3,7 @@ package io.github.bioplethora.data;
 import io.github.bioplethora.Bioplethora;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
@@ -37,8 +35,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("yellow_grylynen_crystal_block", bioResLoc("yellow_grylynen_crystal_block"));
         this.cubeAll("red_grylynen_crystal_block", bioResLoc("red_grylynen_crystal_block"));
 
+        this.orientableWithBottom("reinforcing_table", bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_bottom"), bioResLoc("reinforcing_table_top"));
+
         this.carpet("fleignarite_remains", bioResLoc("fleignarite_remains"));
-        //this.fixedOrientableWithBottom("reinforcing_table", bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_bottom"), bioResLoc("reinforcing_table_top"));
         this.cross("fleignarite_vines", bioResLoc("fleignarite_vines"));
         this.cross("fleignarite_vines_plant", bioResLoc("fleignarite_vines_plant"));
 
@@ -103,16 +102,6 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
     private ResourceLocation mcResLoc(String texture) {
         return new ResourceLocation("minecraft", BLOCK_FOLDER + "/" + texture);
-    }
-
-    public BlockModelBuilder fixedOrientableWithBottom(String name, ResourceLocation side, ResourceLocation front, ResourceLocation bottom, ResourceLocation top) {
-        ModelFile orientableWithBottom = withExistingParent(name, mcResLoc("orientable_with_bottom"));
-
-        return getBuilder(name).parent(orientableWithBottom)
-                .texture("side", side)
-                .texture("front", front)
-                .texture("bottom", bottom)
-                .texture("top", top);
     }
 
     public void simpleStoneSet(String mainBlock, String stairs, String wall, String slab) {
