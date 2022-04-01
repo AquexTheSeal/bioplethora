@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bioplethora:nandbric_boots"
+    ]
+  },
+  "criteria": {
+    "has_nandbri_scales": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:nandbri_scales"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bioplethora:nandbric_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nandbri_scales",
+      "has_the_recipe"
+    ]
+  ]
+}

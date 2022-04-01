@@ -50,6 +50,10 @@ public class BioRecipeProvider extends RecipeProvider {
         reinforcing(consumer, BPItems.ARBITRARY_BALLISTA.get(), BPItems.RED_GRYLYNEN_CRYSTAL.get(),
                 BPItems.BELLOPHITE.get(), Items.CROSSBOW);
 
+        helmetCrafting(consumer, BPItems.NANDBRIC_HELMET.get(), BPItems.NANDBRI_SCALES.get());
+        chestplateCrafting(consumer, BPItems.NANDBRIC_CHESTPLATE.get(), BPItems.NANDBRI_SCALES.get());
+        leggingsCrafting(consumer, BPItems.NANDBRIC_LEGGINGS.get(), BPItems.NANDBRI_SCALES.get());
+        bootsCrafting(consumer, BPItems.NANDBRIC_BOOTS.get(), BPItems.NANDBRI_SCALES.get());
     }
 
     public String getName() {
@@ -151,5 +155,25 @@ public class BioRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(providedItem, 6).define('#', requiredItem).pattern("###")
                 .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
 
+    }
+
+    private static void helmetCrafting(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
+        ShapedRecipeBuilder.shaped(providedItem).define('#', requiredItem).pattern("###").pattern("# #")
+                .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
+    }
+
+    private static void chestplateCrafting(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
+        ShapedRecipeBuilder.shaped(providedItem).define('#', requiredItem).pattern("# #").pattern("###").pattern("###")
+                .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
+    }
+
+    private static void leggingsCrafting(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
+        ShapedRecipeBuilder.shaped(providedItem).define('#', requiredItem).pattern("###").pattern("# #").pattern("# #")
+                .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
+    }
+
+    private static void bootsCrafting(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
+        ShapedRecipeBuilder.shaped(providedItem).define('#', requiredItem).pattern("   ").pattern("# #").pattern("# #")
+                .unlockedBy("has_" + requiredItem.asItem().getRegistryName().getPath(), has(requiredItem)).save(consumer);
     }
 }

@@ -9,6 +9,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class NandbricArmorItem extends ArmorItem {
     public NandbricArmorItem(IArmorMaterial material, EquipmentSlotType slot, Properties properties) {
@@ -16,6 +18,7 @@ public class NandbricArmorItem extends ArmorItem {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlotType slot, A defaultModel) {
         return slot == EquipmentSlotType.LEGS ? defaultModel : matchingModel(entity, slot, defaultModel);
     }
