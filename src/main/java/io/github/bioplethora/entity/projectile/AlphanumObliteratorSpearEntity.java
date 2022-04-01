@@ -155,7 +155,7 @@ public class AlphanumObliteratorSpearEntity extends DamagingProjectileEntity imp
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "cryoblaze_alphanum_obliterator.idle", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "alphanum_obliterator_controller", 0, this::predicate));
     }
 
     @Override

@@ -35,11 +35,11 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
         this.simpleBlock(BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get());
 
+        this.reinforcingTableBlock(BPBlocks.REINFORCING_TABLE.get());
+
         this.simpleCarpetBlock(BPBlocks.FLEIGNARITE_REMAINS.get());
         this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES.get());
         this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get());
-
-        //this.threeSideFacingBlock(BioplethoraBlocks.REINFORCING_TABLE.get());
 
         // Alphanum stone set
         this.simpleBlock(BPBlocks.ALPHANUM.get());
@@ -94,8 +94,13 @@ public class BioBlockstateProvider extends BlockStateProvider {
     }
 
     // Custom Generators
-    public void threeSideFacingBlock(ReinforcingTableBlock block) {
-        ModelFile all = models().withExistingParent(block.getRegistryName().getPath(), bioResLoc(block.getRegistryName().getPath()));
+    public void reinforcingTableBlock(ReinforcingTableBlock block) {
+        ModelFile all = models().orientableWithBottom(block.getRegistryName().getPath(),
+                bioResLoc(block.getRegistryName().getPath() + "_side"),
+                bioResLoc(block.getRegistryName().getPath() + "_side"),
+                bioResLoc(block.getRegistryName().getPath() + "_bottom"),
+                bioResLoc(block.getRegistryName().getPath() + "_top")
+        );
 
         getVariantBuilder(block)
                 .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.SOUTH)
