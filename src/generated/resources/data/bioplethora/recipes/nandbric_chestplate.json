@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "# #",
-    "###",
-    "###"
+    "S S",
+    "SSS",
+    "SSS"
   ],
   "key": {
-    "#": {
+    "S": {
       "item": "bioplethora:nandbri_scales"
     }
   },
   "result": {
-    "item": "bioplethora:nandbric_chestplate"
+    "item": "bioplethora:nandbric_chestplate",
+    "count": 2
   }
 }

@@ -40,6 +40,30 @@ public class BioRecipeProvider extends RecipeProvider {
         foodCooking(consumer, BPItems.RAW_FLENTAIR.get(), BPItems.COOKED_FLENTAIR.get(), 0.40F, 300);
         foodCooking(consumer, BPItems.RAW_MOSILE.get(), BPItems.COOKED_MOSILE.get(), 0.30F, 200);
 
+        // TOOLS
+        toolSetHelper(consumer,  BPItems.FLEIGNARITE_SCALES.get(), BPItems.FLEIGNARITE_SCALES.get(),
+                BPItems.FLEIGNARITE_SWORD.get(), BPItems.FLEIGNARITE_SHOVEL.get(),
+                BPItems.FLEIGNARITE_PICKAXE.get(), BPItems.FLEIGNARITE_AXE.get(), BPItems.FLEIGNARITE_HOE.get());
+
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_SWORD.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_SWORD.get(), 0);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_SHOVEL.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_SHOVEL.get(), 0);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_PICKAXE.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_PICKAXE.get(), 0);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_AXE.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_AXE.get(), 0);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_HOE.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_HOE.get(), 0);
+
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_SWORD.get(), Items.NETHERITE_SWORD, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_SWORD.get(), 1);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_SHOVEL.get(), Items.NETHERITE_SHOVEL, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_SHOVEL.get(), 1);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_PICKAXE.get(), Items.NETHERITE_PICKAXE, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_PICKAXE.get(), 1);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_AXE.get(), Items.NETHERITE_AXE, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_AXE.get(), 1);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_HOE.get(), Items.NETHERITE_HOE, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_HOE.get(), 1);
+
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_SWORD.get(), BPItems.FLEIGNARITE_SWORD.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_SWORD, 2);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_SHOVEL.get(), BPItems.FLEIGNARITE_SHOVEL.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_SHOVEL, 2);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_PICKAXE.get(), BPItems.FLEIGNARITE_PICKAXE.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_PICKAXE, 2);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_AXE.get(), BPItems.FLEIGNARITE_AXE.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_AXE, 2);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_HOE.get(), BPItems.FLEIGNARITE_HOE.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_HOE, 2);
+
+        // ARMOR
         armorSetHelper(consumer,  BPItems.FLEIGNARITE_SCALES.get(),
                 BPItems.FLEIGNARITE_HELMET.get(), BPItems.FLEIGNARITE_CHESTPLATE.get(),
                 BPItems.FLEIGNARITE_LEGGINGS.get(), BPItems.FLEIGNARITE_BOOTS.get());
@@ -47,6 +71,22 @@ public class BioRecipeProvider extends RecipeProvider {
                 BPItems.NANDBRIC_HELMET.get(), BPItems.NANDBRIC_CHESTPLATE.get(),
                 BPItems.NANDBRIC_LEGGINGS.get(), BPItems.NANDBRIC_BOOTS.get());
 
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_HELMET.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_HELMET.get(), 0);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_CHESTPLATE.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_CHESTPLATE.get(), 0);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_LEGGINGS.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_LEGGINGS.get(), 0);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_BOOTS.get(), Items.NETHERITE_INGOT, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_BOOTS.get(), 0);
+
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_HELMET.get(), Items.NETHERITE_HELMET, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_HELMET.get(), 1);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_CHESTPLATE.get(), Items.NETHERITE_CHESTPLATE, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_CHESTPLATE.get(), 1);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_LEGGINGS.get(), Items.NETHERITE_LEGGINGS, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_LEGGINGS.get(), 1);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_BOOTS.get(), Items.NETHERITE_BOOTS, BPItems.BELLOPHITE.get(), BPItems.FLEIGNARITE_BOOTS.get(), 1);
+
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_HELMET.get(), BPItems.FLEIGNARITE_HELMET.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_HELMET, 2);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_CHESTPLATE.get(), BPItems.FLEIGNARITE_CHESTPLATE.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_CHESTPLATE, 2);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_LEGGINGS.get(), BPItems.FLEIGNARITE_LEGGINGS.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_LEGGINGS, 2);
+        reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_BOOTS.get(), BPItems.FLEIGNARITE_BOOTS.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_BOOTS, 2);
+
+        // STONE
         stoneSetHelper(consumer, BPBlocks.ALPHANUM.get(), BPBlocks.ALPHANUM_BRICKS.get(), BPBlocks.POLISHED_ALPHANUM.get(),
                 BPBlocks.ALPHANUM_STAIRS.get(), BPBlocks.ALPHANUM_WALL.get(), BPBlocks.ALPHANUM_SLAB.get(),
                 BPBlocks.ALPHANUM_STAIRS_BRICKS.get(), BPBlocks.ALPHANUM_WALL_BRICKS.get(), BPBlocks.ALPHANUM_SLAB_BRICKS.get(),
@@ -54,8 +94,8 @@ public class BioRecipeProvider extends RecipeProvider {
         );
         pillarCrafting(consumer, BPBlocks.ALPHANUM_PILLAR.get(), BPBlocks.ALPHANUM.get());
 
-        reinforcing(consumer, BPItems.ARBITRARY_BALLISTA.get(), BPItems.RED_GRYLYNEN_CRYSTAL.get(),
-                BPItems.BELLOPHITE.get(), Items.CROSSBOW);
+        // ETC.
+        reinforcing(consumer, BPItems.ARBITRARY_BALLISTA.get(), BPItems.RED_GRYLYNEN_CRYSTAL.get(), BPItems.BELLOPHITE.get(), Items.CROSSBOW, 0);
     }
 
     public String getName() {
@@ -72,8 +112,9 @@ public class BioRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(requiredItem)).save(consumer);
     }
 
-    private static void reinforcing(Consumer<IFinishedRecipe> consumer, Item providedItem, IItemProvider top, IItemProvider mid, IItemProvider bot) {
-        ReinforcingRecipeBuilder.reinforcing(Ingredient.of(top), Ingredient.of(mid), Ingredient.of(bot), providedItem).unlocks("has_item", has(bot)).save(consumer, new ResourceLocation(Bioplethora.MOD_ID, providedItem.getRegistryName().getPath() + "_reinforcing"));
+    private static void reinforcing(Consumer<IFinishedRecipe> consumer, Item providedItem, IItemProvider top, IItemProvider mid, IItemProvider bot, int dupeRecipe) {
+        ReinforcingRecipeBuilder.reinforcing(Ingredient.of(top), Ingredient.of(mid), Ingredient.of(bot), providedItem).unlocks("has_item", has(bot))
+                .save(consumer, new ResourceLocation(Bioplethora.MOD_ID, providedItem.getRegistryName().getPath() + "_reinforcing" + (dupeRecipe <= 0 ? "" : "_" + dupeRecipe)));
     }
 
     private void foodCooking(Consumer<IFinishedRecipe> consumer, Item input, Item output, float exp, int defaultTime) {
