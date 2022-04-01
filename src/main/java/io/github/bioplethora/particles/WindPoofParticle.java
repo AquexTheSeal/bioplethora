@@ -1,70 +1,162 @@
 package io.github.bioplethora.particles;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particles.BasicParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
+
+/**
+* @Credit MaxBogomol
+*/
 @OnlyIn(Dist.CLIENT)
 public class WindPoofParticle extends SpriteTexturedParticle {
 
     private final IAnimatedSprite sprites;
+    private float maxScale;
+    private float maxAlpha;
+    private float loseScale = 0.01F;
 
-    private WindPoofParticle(ClientWorld clientWorld, double p_i232384_2_, double p_i232384_4_, double p_i232384_6_, double p_i232384_8_, double p_i232384_10_, double p_i232384_12_, IAnimatedSprite sprite) {
-        super(clientWorld, p_i232384_2_, p_i232384_4_, p_i232384_6_);
-        this.sprites = sprite;
-        this.lifetime = 20;
-        float f = 1.0F;
-        this.rCol = f;
-        this.gCol = f;
-        this.bCol = f;
-        this.xd = p_i232384_8_ + (Math.random() * 2.0D - 1.0D) * (double)0.05F;
-        this.yd = p_i232384_10_ + (Math.random() * 2.0D - 1.0D) * (double)0.05F;
-        this.zd = p_i232384_12_ + (Math.random() * 2.0D - 1.0D) * (double)0.05F;
-        this.quadSize = 1.0F;
-        this.setSpriteFromAge(sprite);
+    private WindPoofParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, Color tint, double diameter, IAnimatedSprite sprites) {
+        super(world, x, y, z, velocityX, velocityY, velocityZ);
+        this.sprites = sprites;
+
+        setColor(tint.getRed()/255.0F, tint.getGreen()/255.0F, tint.getBlue()/255.0F);
+        setSize((float)diameter, (float)diameter);
+
+        final float PARTICLE_SCALE_FOR_ONE_METRE = 0.5F;
+        this.quadSize = PARTICLE_SCALE_FOR_ONE_METRE * (float)diameter;
+
+        this.lifetime = 100;
+
+        final float ALPHA_VALUE = 1.0F;
+        this.alpha = ALPHA_VALUE;
+
+        this.xd = velocityX; this.yd = velocityY; this.zd = velocityZ;
+
+        this.hasPhysics = true;
+        maxScale = this.quadSize;
+        maxAlpha = this.alpha;
     }
 
-    public int getLightColor(float p_189214_1_) {
-        return 15728880;
+    @Override
+    protected int getLightColor(float partialTick)
+    {
+        final int BLOCK_LIGHT = 15;
+        final int SKY_LIGHT = 15;
+        final int FULL_BRIGHTNESS_VALUE = LightTexture.pack(BLOCK_LIGHT, SKY_LIGHT);
+        return FULL_BRIGHTNESS_VALUE;
     }
 
+    @Override
     public void tick() {
-        this.xo = this.x;
-        this.yo = this.y;
-        this.zo = this.z;
+        xo = x; yo = y; zo = z;
+        quadSize = quadSize - loseScale;
+        alpha = alpha - (maxAlpha/(maxScale/loseScale));
+
+        if (quadSize <=0) {
+            this.remove();
+        }
+
+        move(xd, yd, zd);
+
+        if (onGround) {
+            this.remove();
+        }
+
+        if (yo == y && yd > 0) {
+            this.remove();
+        }
+
         if (this.age++ >= this.lifetime) {
             this.remove();
-        } else {
-            this.setSpriteFromAge(this.sprites);
-            this.yd += 0.004D;
-            this.move(this.xd, this.yd, this.zd);
-            this.xd *= 0.9F;
-            this.yd *= 0.9F;
-            this.zd *= 0.9F;
-            if (this.onGround) {
-                this.xd *= 0.7F;
-                this.zd *= 0.7F;
-            }
         }
     }
 
     public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return NORMAL_RENDER;
     }
 
+    public static final void beginRenderCommon(BufferBuilder buffer, TextureManager manager) {
+        RenderSystem.depthMask(false);
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+        RenderSystem.alphaFunc(GL11.GL_GREATER, 0.003921569F);
+        RenderSystem.disableLighting();
+
+        manager.bind(AtlasTexture.LOCATION_PARTICLES);
+        manager.getTexture(AtlasTexture.LOCATION_PARTICLES).setBlurMipmap(true, false);
+        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE);
+    }
+
+    public static final void endRenderCommon() {
+        Minecraft.getInstance().textureManager.getTexture(AtlasTexture.LOCATION_PARTICLES).restoreLastBlurMipmap();
+        RenderSystem.alphaFunc(GL11.GL_GREATER, 0.1F);
+        RenderSystem.disableBlend();
+        RenderSystem.depthMask(true);
+    }
+
+    public static final IParticleRenderType NORMAL_RENDER = new IParticleRenderType() {
+        @Override
+        public void begin(BufferBuilder pBuilder, TextureManager pTextureManager) {
+            beginRenderCommon(pBuilder, pTextureManager);
+        }
+
+        @Override
+        public void end(Tessellator pTesselator) {
+            pTesselator.end();
+            endRenderCommon();
+        }
+
+        @Override
+        public String toString() {
+            return "bioplethora:wind_poof";
+        }
+    };
+
+    public static final IParticleRenderType DIW_RENDER = new IParticleRenderType() {
+        @Override
+        public void begin(BufferBuilder pBuilder, TextureManager pTextureManager) {
+            beginRenderCommon(pBuilder, pTextureManager);
+            RenderSystem.disableDepthTest();
+        }
+
+        @Override
+        public void end(Tessellator pTesselator) {
+            pTesselator.end();
+            RenderSystem.enableDepthTest();
+            endRenderCommon();
+        }
+
+        @Override
+        public String toString() {
+            return "bioplethora:no_depth_wind_poof";
+        }
+    };
+
     @OnlyIn(Dist.CLIENT)
-    public static class Factory implements IParticleFactory<BasicParticleType> {
+    public static class Factory implements IParticleFactory<WindPoofParticleData> {
         private final IAnimatedSprite sprites;
 
         public Factory(IAnimatedSprite p_i50563_1_) {
             this.sprites = p_i50563_1_;
         }
 
-        public Particle createParticle(BasicParticleType p_199234_1_, ClientWorld p_199234_2_, double p_199234_3_, double p_199234_5_, double p_199234_7_, double p_199234_9_, double p_199234_11_, double p_199234_13_) {
-            WindPoofParticle windPoof = new WindPoofParticle(p_199234_2_, p_199234_3_, p_199234_5_, p_199234_7_, p_199234_9_, p_199234_11_, p_199234_13_, this.sprites);
-            windPoof.setColor(1.0f, 1.0f, 1.0f);
+        public Particle createParticle(WindPoofParticleData flameParticleData, ClientWorld world, double xPos, double yPos, double zPos, double xVelocity, double yVelocity, double zVelocity) {
+            WindPoofParticle windPoof = new WindPoofParticle(world, xPos, yPos, zPos, xVelocity, yVelocity, zVelocity,
+                    flameParticleData.getTint(), flameParticleData.getDiameter(),
+                    sprites);
+            windPoof.pickSprite(sprites);
             return windPoof;
         }
     }
