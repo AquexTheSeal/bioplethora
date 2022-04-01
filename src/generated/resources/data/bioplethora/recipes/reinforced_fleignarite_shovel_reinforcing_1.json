@@ -1,0 +1,15 @@
+{
+  "type": "bioplethora:reinforcing",
+  "core": {
+    "item": "minecraft:netherite_shovel"
+  },
+  "material": {
+    "item": "bioplethora:bellophite"
+  },
+  "weapon": {
+    "item": "bioplethora:fleignarite_shovel"
+  },
+  "result": {
+    "item": "bioplethora:reinforced_fleignarite_shovel"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "bioplethora:reinforcing",
+  "core": {
+    "item": "bioplethora:fleignarite_pickaxe"
+  },
+  "material": {
+    "item": "bioplethora:bellophite"
+  },
+  "weapon": {
+    "item": "minecraft:netherite_pickaxe"
+  },
+  "result": {
+    "item": "bioplethora:reinforced_fleignarite_pickaxe"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "bioplethora:reinforcing",
+  "core": {
+    "item": "bioplethora:fleignarite_helmet"
+  },
+  "material": {
+    "item": "bioplethora:bellophite"
+  },
+  "weapon": {
+    "item": "minecraft:netherite_helmet"
+  },
+  "result": {
+    "item": "bioplethora:reinforced_fleignarite_helmet"
+  }
+}

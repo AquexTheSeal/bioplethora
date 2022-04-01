@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "S S",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "bioplethora:fleignarite_scales"
+    }
+  },
+  "result": {
+    "item": "bioplethora:fleignarite_leggings",
+    "count": 2
+  }
+}

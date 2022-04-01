@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bioplethora:fleignarite_leggings"
+    ]
+  },
+  "criteria": {
+    "has_fleignarite_scales": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:fleignarite_scales"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bioplethora:fleignarite_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fleignarite_scales",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "bioplethora:reinforcing",
+  "core": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "material": {
+    "item": "bioplethora:bellophite"
+  },
+  "weapon": {
+    "item": "bioplethora:fleignarite_sword"
+  },
+  "result": {
+    "item": "bioplethora:reinforced_fleignarite_sword"
+  }
+}
