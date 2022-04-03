@@ -30,4 +30,7 @@ public class BPSoundEvents {
     public static final RegistryObject<SoundEvent> ALPHEM_STEP = SOUNDS.register("alphem_step", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "alphem_step")));
 
     public static final RegistryObject<SoundEvent> ALPHEM_KING_ROAR = SOUNDS.register("alphem_king_roar", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "alphem_king_roar")));
+
+    public static final RegistryObject<SoundEvent> TRUE_DEFENSE_CLASH = SOUNDS.register("true_defense_clash", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "true_defense_clash")));
+
 }

@@ -15,4 +15,5 @@ public class BPParticles {
     public static final RegistryObject<WindPoofParticleType> WIND_POOF = PARTICLES.register("wind_poof", WindPoofParticleType::new);
     public static final RegistryObject<BasicParticleType> NIGHT_GAZE = PARTICLES.register("night_gaze", () -> new BasicParticleType(true));
     public static final RegistryObject<BasicParticleType> ANTIBIO_SPELL = PARTICLES.register("antibio_spell", () -> new BasicParticleType(true));
+    public static final RegistryObject<BasicParticleType> TRUE_DEFENSE_CLASH = PARTICLES.register("true_defense_clash", () -> new BasicParticleType(true));
 }

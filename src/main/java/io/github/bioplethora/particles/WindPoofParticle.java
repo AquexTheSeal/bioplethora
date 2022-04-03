@@ -34,7 +34,7 @@ public class WindPoofParticle extends SpriteTexturedParticle {
         setColor(tint.getRed()/255.0F, tint.getGreen()/255.0F, tint.getBlue()/255.0F);
         setSize((float)diameter, (float)diameter);
 
-        final float PARTICLE_SCALE_FOR_ONE_METRE = 0.5F;
+        final float PARTICLE_SCALE_FOR_ONE_METRE = 0.2F;
         this.quadSize = PARTICLE_SCALE_FOR_ONE_METRE * (float)diameter;
 
         this.lifetime = 100;
@@ -50,8 +50,7 @@ public class WindPoofParticle extends SpriteTexturedParticle {
     }
 
     @Override
-    protected int getLightColor(float partialTick)
-    {
+    protected int getLightColor(float partialTick) {
         final int BLOCK_LIGHT = 15;
         final int SKY_LIGHT = 15;
         final int FULL_BRIGHTNESS_VALUE = LightTexture.pack(BLOCK_LIGHT, SKY_LIGHT);
@@ -64,7 +63,7 @@ public class WindPoofParticle extends SpriteTexturedParticle {
         quadSize = quadSize - loseScale;
         alpha = alpha - (maxAlpha/(maxScale/loseScale));
 
-        if (quadSize <=0) {
+        if (quadSize <= 0) {
             this.remove();
         }
 

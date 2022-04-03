@@ -9,6 +9,7 @@ import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.helpers.advancements.AdvancementUtils;
+import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -67,7 +68,8 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
                 .add(Attributes.ATTACK_DAMAGE, 7 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.MAX_HEALTH, 25 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 64D);
+                .add(Attributes.FOLLOW_RANGE, 64D)
+                .add(BPAttributes.TRUE_DEFENSE.get(), 2D);
     }
 
     @Override

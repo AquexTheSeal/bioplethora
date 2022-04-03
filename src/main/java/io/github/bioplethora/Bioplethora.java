@@ -48,6 +48,7 @@ public class Bioplethora {
         BPEnchantments.ENCHANTMENTS.register(bus);
         BPStructures.STRUCTURES.register(bus);
         BPFeatures.FEATURES.register(bus);
+        BPAttributes.ATTRIBUTES.register(bus);
 
         BPTileEntities.TILE_ENTITIES.register(bus);
         BPContainerTypes.CONTAINERS.register(bus);
@@ -61,6 +62,7 @@ public class Bioplethora {
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(EventPriority.HIGH, EntitySpawnManager::onBiomeLoadingEvent);
         forgeBus.addListener(EventPriority.NORMAL, BPVillagerTrades::onVillagerTrades);
+        forgeBus.addListener(EventPriority.NORMAL, BPAttributes::useTrueDefenseAttribute);
         forgeBus.register(this);
 
         GeckoLib.initialize();

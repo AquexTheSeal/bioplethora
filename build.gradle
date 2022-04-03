@@ -91,8 +91,8 @@ minecraft {
     }
 }
 
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
+sourceSets {
+    main.resources.srcDirs 'src/generated/resources'
 }
 
 mixin {

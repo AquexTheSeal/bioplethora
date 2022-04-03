@@ -83,5 +83,11 @@
     "sounds": [
       "bioplethora:alphem_king_roar"
     ]
+  },
+  "true_defense_clash": {
+    "subtitle": "subtitles.bioplethora.true_defense.clash",
+    "sounds": [
+      "bioplethora:true_defense_clash"
+    ]
   }
 }
