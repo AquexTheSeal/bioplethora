@@ -1,20 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "   ",
-    " S ",
-    " F "
+    " I ",
+    " # "
   ],
   "key": {
-    "S": {
+    "I": {
       "item": "bioplethora:nandbri_scales"
     },
-    "F": {
+    "#": {
       "item": "bioplethora:nandbri_fang"
     }
   },
   "result": {
-    "item": "bioplethora:nandbric_shortsword",
-    "count": 1
+    "item": "bioplethora:nandbric_shortsword"
   }
 }

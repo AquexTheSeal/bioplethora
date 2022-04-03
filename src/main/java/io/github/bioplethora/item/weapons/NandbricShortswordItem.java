@@ -3,6 +3,7 @@ package io.github.bioplethora.item.weapons;
 import io.github.bioplethora.item.ItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -18,6 +19,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -32,8 +34,16 @@ import java.util.List;
 public class NandbricShortswordItem extends SwordItem {
     private LivingEntity target;
 
-    public NandbricShortswordItem(IItemTier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
-        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+    public LivingEntity getTarget() {
+        return this.target;
+    }
+
+    public void setTarget(LivingEntity candidate) {
+        this.target = candidate;
+    }
+
+    public NandbricShortswordItem(IItemTier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties) {
+        super(tier, attackDamageModifier, attackSpeedModifier, properties);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -41,6 +51,11 @@ public class NandbricShortswordItem extends SwordItem {
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         ItemSettings.sacredLevelText(tooltip);
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.nandbric_shortsword.fast_strike.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        if(Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.nandbric_shortsword.fast_strike.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+        }
 
         tooltip.add(new TranslationTextComponent("item.bioplethora.nandbric_shortsword.toxin_rush.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
         if(Screen.hasShiftDown() || Screen.hasControlDown()) {
@@ -56,11 +71,12 @@ public class NandbricShortswordItem extends SwordItem {
         double x = entity.getX(), y = entity.getY(), z = entity.getZ();
         BlockPos pos = new BlockPos(x, y, z);
 
-        entity.addEffect(new EffectInstance(Effects.POISON, 60, 5));
+        if(retval) {
+            entity.addEffect(new EffectInstance(Effects.POISON, 60, 5));
+            entity.invulnerableTime = 5;
 
-        entity.invulnerableTime = 5;
-
-        world.playSound(null, pos, SoundEvents.ZOMBIE_INFECT, SoundCategory.HOSTILE, 1, 1);
+            world.playSound(null, pos, SoundEvents.ZOMBIE_INFECT, SoundCategory.HOSTILE, 1, 1);
+        }
 
         return retval;
     }
@@ -79,16 +95,17 @@ public class NandbricShortswordItem extends SwordItem {
         if (entity.getCooldowns().isOnCooldown(itemstack.getItem())) {
             return ActionResult.fail(itemstack);
         } else {
+            // Finds a target candidate by raytracing towards where the cursor points and checking for an entity
             double range = 24.0D;
             double distance = range * range;
             Vector3d vec = entity.getEyePosition(1);
             Vector3d vec1 = entity.getViewVector(1);
             Vector3d finalVec = vec.add(vec1.x * range, vec1.y * range, vec1.z * range);
             AxisAlignedBB aabb = entity.getBoundingBox().expandTowards(vec1.scale(range)).inflate(4.0D, 4.0D, 4.0D);
-            EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, vec, finalVec, aabb, (filter) -> !filter.isSpectator() && filter.isPickable(), distance);
+            EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, vec, finalVec, aabb, (filter) -> !filter.isSpectator() && filter != entity, distance);
 
             if(result != null) {
-                target = result.getEntity() instanceof LivingEntity ? (LivingEntity) result.getEntity() : null;
+                setTarget(result.getEntity() instanceof LivingEntity? (LivingEntity)result.getEntity() : null);
                 entity.startUsingItem(hand);
                 return ActionResult.success(itemstack);
             }
@@ -99,12 +116,19 @@ public class NandbricShortswordItem extends SwordItem {
     public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
         super.onUsingTick(stack, player, count);
 
-        if(target != null && target.getEntity() instanceof LivingEntity && target.getEntity() != player) {
+        Hand hand = player.getUsedItemHand();
+
+        if(target != null) {
+            double targetX = target.getX(),
+                    targetY = target.getY(),
+                    targetZ = target.getZ();
+            BlockPos pos = new BlockPos(targetX, targetY, targetZ);
             World world = player.level;
 
-            double vecX = target.getX() - player.getX();
+            // Charging
+            double vecX = targetX - player.getX();
             double vecY = player.getDeltaMovement().y;
-            double vecZ = target.getZ() - player.getZ();
+            double vecZ = targetZ - player.getZ();
             double vecM = Math.sqrt((Math.pow(vecX, 2)) + Math.pow(vecY, 2) + Math.pow(vecZ, 2));
             float speedModifier = 2.5f;
 
@@ -114,40 +138,48 @@ public class NandbricShortswordItem extends SwordItem {
 
             player.setDeltaMovement(vecX, vecY, vecZ);
 
-            AxisAlignedBB hitrange = player.getBoundingBox().inflate(2.2D, 2.2D, 2.2D);
+            // For looking toward the target
+            double d2 = target.getX() - player.getX();
+            double d1 = target.getZ() - player.getZ();
+            player.yRot = -((float) MathHelper.atan2(d2, d1)) * (180F / (float)Math.PI);
 
+            // For dealing damage to target
+            AxisAlignedBB hitrange = player.getBoundingBox().inflate(2.2D, 2.2D, 2.2D);
             if (hitrange.intersects(target.getBoundingBox())) {
-                boolean flag = target.hurt(DamageSource.mobAttack(player), 7.0F);
-                if(flag) {
-                    target.addEffect(new EffectInstance(Effects.POISON, 60, 5));
-                    player.doEnchantDamageEffects(player, target);
+                target.hurt(DamageSource.mobAttack(player), 7.0F);
+                if(!world.isClientSide) {
+                    EnchantmentHelper.doPostHurtEffects(target, player);
+                    EnchantmentHelper.doPostDamageEffects(player, target);
+                    target.addEffect(new EffectInstance(Effects.POISON, 300, 1));
                     ((PlayerEntity)player).getCooldowns().addCooldown(stack.getItem(), 22);
                 }
 
+                // Special FX
+                world.playSound(null, pos, SoundEvents.ZOMBIE_INFECT, SoundCategory.PLAYERS, 1, 1);
+                world.playSound(null, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
                 if(world instanceof ServerWorld) {
-                    double x = target.getX(), y = target.getY(), z = target.getZ();
-                    BlockPos pos = new BlockPos(x, y, z);
-
-                    ((ServerWorld) world).sendParticles(ParticleTypes.SNEEZE, x, y + (target.getBbHeight() / 2), z, 30, 1.2, 1.2, 1.2, 0);
-                    world.playSound(null, pos, SoundEvents.ZOMBIE_INFECT, SoundCategory.PLAYERS, 1, 1);
-                    world.playSound(null, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
+                    ((ServerWorld) world).sendParticles(ParticleTypes.SNEEZE, targetX, targetY + (target.getBbHeight() / 2), targetZ, 30, 1.2, 1.2, 1.2, 0);
                 }
 
-                Hand hand = player.getUsedItemHand();
-                player.swing(hand);
-                player.stopUsingItem();
+                // For awarding stats
                 if(player instanceof PlayerEntity) {
-                    PlayerEntity wielder = (PlayerEntity)player;
-                    wielder.awardStat(Stats.ITEM_USED.get(this));
-                    if(!wielder.isCreative()) {
+                    ((PlayerEntity)player).awardStat(Stats.ITEM_USED.get(this));
+                    if(!((PlayerEntity)player).abilities.instabuild) {
                         stack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
                     }
                 }
+
+                player.swing(hand);
+                player.stopUsingItem();
             }
 
+            // Prevents the user from being flung up into the air while using this weapon
             if(player.getDeltaMovement().y > 0.1D) {
-                player.getDeltaMovement().multiply(1.0D, 0.2D, 1.0D);
+                player.setDeltaMovement(player.getDeltaMovement().x(), 0.2D, player.getDeltaMovement().z());
             }
+        } else {
+            player.stopUsingItem();
+            ((PlayerEntity)player).getCooldowns().addCooldown(stack.getItem(), 20);
         }
     }
 
