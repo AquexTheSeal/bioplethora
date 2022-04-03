@@ -24,6 +24,8 @@ public class BioRecipeProvider extends RecipeProvider {
     protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
 
         /** @Param consumer, providedItem, requiredItem **/
+        shortsword(consumer, BPItems.NANDBRIC_SHORTSWORD.get(), BPItems.NANDBRI_SCALES.get(), BPItems.NANDBRI_FANG.get());
+
         ingotToBlock(consumer, BPBlocks.BELLOPHITE_BLOCK.get(), BPItems.BELLOPHITE.get());
         blockToIngot(consumer, BPItems.BELLOPHITE.get(), BPBlocks.BELLOPHITE_BLOCK.get());
         ingotToBlock(consumer, BPBlocks.NANDBRI_SCALE_BLOCK.get(), BPItems.NANDBRI_SCALES.get());
@@ -102,6 +104,11 @@ public class BioRecipeProvider extends RecipeProvider {
         return "Bioplethora Recipes";
     }
 
+    private static void shortsword(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider handle, IItemProvider material) {
+        ShapedRecipeBuilder.shaped(providedItem).define('I', handle).define('#', material).pattern(" I ").pattern(" # ")
+                .unlockedBy("has_item", has(material)).save(consumer);
+    }
+
     private static void ingotToBlock(Consumer<IFinishedRecipe> consumer, IItemProvider providedItem, IItemProvider requiredItem) {
         ShapedRecipeBuilder.shaped(providedItem, 1).define('#', requiredItem).pattern("###").pattern("###").pattern("###")
                 .unlockedBy("has_item", has(requiredItem)).save(consumer);
@@ -161,13 +168,13 @@ public class BioRecipeProvider extends RecipeProvider {
     }
 
     private void armorSetHelper(Consumer<IFinishedRecipe> consumer, IItemProvider material, IItemProvider helmet, IItemProvider chestplate, IItemProvider leggings, IItemProvider boots) {
-        ShapedRecipeBuilder.shaped(helmet, 2).define('S', material).pattern("SSS").pattern("S S")
+        ShapedRecipeBuilder.shaped(helmet).define('S', material).pattern("SSS").pattern("S S")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
-        ShapedRecipeBuilder.shaped(chestplate, 2).define('S', material).pattern("S S").pattern("SSS").pattern("SSS")
+        ShapedRecipeBuilder.shaped(chestplate).define('S', material).pattern("S S").pattern("SSS").pattern("SSS")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
-        ShapedRecipeBuilder.shaped(leggings, 2).define('S', material).pattern("SSS").pattern("S S").pattern("S S")
+        ShapedRecipeBuilder.shaped(leggings).define('S', material).pattern("SSS").pattern("S S").pattern("S S")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
-        ShapedRecipeBuilder.shaped(boots, 2).define('S', material).pattern("S S").pattern("S S")
+        ShapedRecipeBuilder.shaped(boots).define('S', material).pattern("S S").pattern("S S")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
     }
 
