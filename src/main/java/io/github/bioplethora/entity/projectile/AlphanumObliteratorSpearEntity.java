@@ -86,6 +86,11 @@ public class AlphanumObliteratorSpearEntity extends DamagingProjectileEntity imp
         this.hitAndExplode();
     }
 
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        return false;
+    }
+
     public float getBaseDamage() {
         return baseDamage;
     }
@@ -149,7 +154,7 @@ public class AlphanumObliteratorSpearEntity extends DamagingProjectileEntity imp
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphanum_obliterator.idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphanum_obliterator_spear.idle", true));
         return PlayState.CONTINUE;
     }
 
