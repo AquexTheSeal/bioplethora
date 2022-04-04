@@ -7,7 +7,6 @@ import io.github.bioplethora.entity.ai.CrephoxlChargingGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.helpers.advancements.AdvancementUtils;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -157,14 +156,6 @@ public class CrephoxlEntity extends BPMonsterEntity implements IAnimatable, IBio
             this.level.playSound(null, blockPos, SoundEvents.GENERIC_EXPLODE, SoundCategory.NEUTRAL, (float) 1, (float) 1);
         }
         return flag;
-    }
-
-    @Override
-    public void die(DamageSource source) {
-        super.die(source);
-
-        Entity sourceEnt = source.getEntity();
-        AdvancementUtils.grantBioAdvancement(sourceEnt, "bioplethora:crephoxl_kill");
     }
 
     protected void defineSynchedData() {

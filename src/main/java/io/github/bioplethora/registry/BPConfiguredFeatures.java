@@ -33,5 +33,5 @@ public class BPConfiguredFeatures {
                     .setWhitelist(BPFeatureGeneration.stoneBlocks())
                     .setMaxLength(2)
                     .build())
-            .range(168).squared().count(FeatureSpread.of(160, 320));
+            .range(168).squared().count(420);
 }

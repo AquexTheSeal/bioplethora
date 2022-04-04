@@ -10,6 +10,7 @@ import io.github.bioplethora.entity.ai.HeliobladeQuickShootingGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
+import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPDamageSources;
 import io.github.bioplethora.registry.BPItems;
 import io.github.bioplethora.registry.BPSoundEvents;
@@ -79,7 +80,8 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
                 .add(Attributes.MAX_HEALTH, 100 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.65 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 64D);
+                .add(Attributes.FOLLOW_RANGE, 64D)
+                .add(BPAttributes.TRUE_DEFENSE.get(), 5D);
     }
 
     @Override

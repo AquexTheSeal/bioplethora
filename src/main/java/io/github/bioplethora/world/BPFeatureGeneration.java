@@ -33,14 +33,10 @@ public class BPFeatureGeneration {
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
         List<Supplier<ConfiguredFeature<?, ?>>> undergroundDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION);
-        List<Supplier<ConfiguredFeature<?, ?>>> locMod = event.getGeneration().getFeatures(GenerationStage.Decoration.LOCAL_MODIFICATIONS);
 
         if (types.contains(BiomeDictionary.Type.OVERWORLD)) {
             undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
             undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
-
-            locMod.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
-            locMod.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
         }
     }
 

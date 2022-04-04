@@ -10,6 +10,7 @@ import io.github.bioplethora.entity.others.AlphanumShardEntity;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.helpers.blocks.BlockUtils;
 import io.github.bioplethora.helpers.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
@@ -83,7 +84,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
                 .add(Attributes.MAX_HEALTH, 550 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.25F * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 64.0D);
+                .add(Attributes.FOLLOW_RANGE, 64.0D)
+                .add(BPAttributes.TRUE_DEFENSE.get(), 3D);
     }
 
     @Override

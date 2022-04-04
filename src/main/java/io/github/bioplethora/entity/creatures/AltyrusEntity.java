@@ -10,6 +10,7 @@ import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.helpers.advancements.AdvancementUtils;
 import io.github.bioplethora.helpers.blocks.BlockUtils;
+import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -77,7 +78,8 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 1.5F * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FLYING_SPEED, 1.5F * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 64D);
+                .add(Attributes.FOLLOW_RANGE, 64D)
+                .add(BPAttributes.TRUE_DEFENSE.get(), 3D);
     }
 
     @Override
