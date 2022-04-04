@@ -19,7 +19,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -105,12 +104,15 @@ public class NandbricShortswordItem extends SwordItem {
             EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, vec, finalVec, aabb, (filter) -> !filter.isSpectator() && filter != entity, distance);
 
             if(result != null) {
-                setTarget(result.getEntity() instanceof LivingEntity? (LivingEntity)result.getEntity() : null);
-                entity.startUsingItem(hand);
-                return ActionResult.success(itemstack);
+                setTarget(result.getEntity() instanceof LivingEntity ? (LivingEntity)result.getEntity() : null);
+                if(target != null) {
+                    entity.startUsingItem(hand);
+                    return ActionResult.success(itemstack);
+                }
             }
+
+            return ActionResult.fail(itemstack);
         }
-        return ActionResult.fail(itemstack);
     }
 
     public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
@@ -138,13 +140,8 @@ public class NandbricShortswordItem extends SwordItem {
 
             player.setDeltaMovement(vecX, vecY, vecZ);
 
-            // For looking toward the target
-            double d2 = target.getX() - player.getX();
-            double d1 = target.getZ() - player.getZ();
-            player.yRot = -((float) MathHelper.atan2(d2, d1)) * (180F / (float)Math.PI);
-
             // For dealing damage to target
-            AxisAlignedBB hitrange = player.getBoundingBox().inflate(2.2D, 2.2D, 2.2D);
+            AxisAlignedBB hitrange = player.getBoundingBox().inflate(2D, 2D, 2D);
             if (hitrange.intersects(target.getBoundingBox())) {
                 target.hurt(DamageSource.mobAttack(player), 7.0F);
                 if(!world.isClientSide) {
