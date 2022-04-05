@@ -1,4 +1,4 @@
-package io.github.bioplethora.helpers.blocks;
+package io.github.bioplethora.helpers.world;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

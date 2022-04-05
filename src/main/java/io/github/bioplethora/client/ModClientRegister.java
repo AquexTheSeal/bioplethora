@@ -1,11 +1,13 @@
 package io.github.bioplethora.client;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.client.armor.render.AquChestplateRender;
 import io.github.bioplethora.client.block.render.FleignariteSplotchBlockRender;
 import io.github.bioplethora.client.entity.render.*;
 import io.github.bioplethora.client.entity.render.others.*;
 import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.gui.screen.ReinforcingTableScreen;
+import io.github.bioplethora.item.armor.AquChestplateItem;
 import io.github.bioplethora.item.weapons.AlphanumObliteratorItem;
 import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
@@ -29,6 +31,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 @Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModClientRegister {
@@ -44,6 +47,9 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_SPLOTCH.get(), RenderType.cutout());
+
+        // Armor
+        GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
 
         // Tile Entity
         ClientRegistry.bindTileEntityRenderer(BPTileEntities.FLEIGNARITE_SPLOTCH.get(), FleignariteSplotchBlockRender::new);

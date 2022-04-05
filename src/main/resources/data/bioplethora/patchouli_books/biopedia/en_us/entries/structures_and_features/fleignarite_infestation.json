@@ -1,0 +1,27 @@
+{
+  "name": "Fleignarite Infestation",
+  "icon": "bioplethora:fleignarite_splotch",
+  "category": "structures_and_features",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()The Fleignarite infestation appears on some specific chunks inside of caves, those chunks are called the Fleignarite infestation chunks. They usually consist of fleignarite vines, remains, and splotches. Cavern Fleignars are also common in these features."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name":"Fleignarite Splotch",
+      "multiblock": {
+        "pattern": [
+          ["0"]
+        ],
+        "mapping": {
+          " ": "ANY",
+          "0": "bioplethora:fleignarite_splotch"
+        },
+        "symmetrical": true,
+        "offset"     : [0, 0, 0],
+        "view_offset": [0, 0, 0]
+      }
+    }
+  ]
+}

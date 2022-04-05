@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()---"
+      "text": "$(l)INFORMATION: $(br)$()The Altyrus is an ancient being that has plenty of destructive capabilities, with it's smashes that can cause a very cataclysmic explosion, and it's projectiles that can cause a devastating blast. The Altyrus is also capable of dodging projectiles."
     },
     {
       "type": "patchouli:entity",

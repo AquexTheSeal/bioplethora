@@ -9,7 +9,7 @@ import io.github.bioplethora.entity.ai.AltyrusSummonGolemGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.helpers.advancements.AdvancementUtils;
-import io.github.bioplethora.helpers.blocks.BlockUtils;
+import io.github.bioplethora.helpers.world.BlockUtils;
 import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;

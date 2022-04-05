@@ -1,7 +1,6 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.world.biome_helpers.BPConfiguredSurfaceBuilders;
 import io.github.bioplethora.world.biomes.RockyWoodlandBiome;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.RegistryObject;

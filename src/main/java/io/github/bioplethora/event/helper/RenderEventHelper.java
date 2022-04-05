@@ -54,6 +54,10 @@ public class RenderEventHelper {
         stack1.popPose();
     }
 
+    public static void onRenderingItem(RenderGameOverlayEvent.Pre event) {
+
+    }
+
     public static void onRenderingOverlay(RenderGameOverlayEvent.Pre event) {
 
         int getWidth = event.getWindow().getGuiScaledWidth(), getHeight = event.getWindow().getGuiScaledHeight();

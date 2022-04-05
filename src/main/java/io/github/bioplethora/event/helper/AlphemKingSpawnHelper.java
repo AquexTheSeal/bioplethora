@@ -3,7 +3,7 @@ package io.github.bioplethora.event.helper;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.projectile.WindArrowEntity;
-import io.github.bioplethora.helpers.blocks.BlockUtils;
+import io.github.bioplethora.helpers.world.BlockUtils;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;

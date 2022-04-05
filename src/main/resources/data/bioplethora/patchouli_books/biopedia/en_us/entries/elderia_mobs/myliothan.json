@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()---"
+      "text": "$(l)INFORMATION: $(br)$()Myliothans are very rare and very giant deep sea creatures that roams around the very gaping ocean. The Myliothan can ram any traveler passing by and cause a very huge explosion."
     },
     {
       "type": "patchouli:entity",

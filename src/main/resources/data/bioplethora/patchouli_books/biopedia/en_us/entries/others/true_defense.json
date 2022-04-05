@@ -1,0 +1,11 @@
+{
+  "name": "True Defense",
+  "icon": "bioplethora:textures/particle/true_defense_clash.png",
+  "category": "others",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()True Defense is an attribute added by Bioplethora, this attribute reduces all kinds of damage for the user by depending on the attribute's amount. No damage source ignores this attribute, this includes armor piercing damage sources like void, and magic damage. Only few mobs have this attribute."
+    }
+  ]
+}

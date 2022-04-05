@@ -1,4 +1,4 @@
-package io.github.bioplethora.world.biome_helpers;
+package io.github.bioplethora.world;
 
 import io.github.bioplethora.registry.BPBiomes;
 import net.minecraft.util.RegistryKey;

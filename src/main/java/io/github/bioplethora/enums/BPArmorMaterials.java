@@ -4,6 +4,7 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -25,6 +26,11 @@ public enum BPArmorMaterials implements IArmorMaterial {
     }),
     PEAGUIN_SCALES("peaguin_scales", 17, new int[]{2, 5, 6, 2}, 15, SoundEvents.ARMOR_EQUIP_TURTLE, 0.0F, 0.0F, () -> {
         return Ingredient.of(BPItems.PEAGUIN_SCALES.get());
+    }),
+
+    // Aqu's personal chestplate. Don't mind it.
+    AQU("aqu", 78, new int[]{12, 20, 17, 12}, 79, SoundEvents.END_PORTAL_FRAME_FILL, 10.0F, 2.0F, () -> {
+        return Ingredient.of(Items.CHAIN_COMMAND_BLOCK);
     });
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };

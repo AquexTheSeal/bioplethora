@@ -8,10 +8,7 @@ import io.github.bioplethora.enums.BPItemTier;
 import io.github.bioplethora.item.BiopediaItem;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
 import io.github.bioplethora.item.ExperimentalItem;
-import io.github.bioplethora.item.armor.FleignariteArmorItem;
-import io.github.bioplethora.item.armor.NandbricArmorItem;
-import io.github.bioplethora.item.armor.PeaguinScaleArmorItem;
-import io.github.bioplethora.item.armor.ReinforcedFleignariteArmorItem;
+import io.github.bioplethora.item.armor.*;
 import io.github.bioplethora.item.extras.AlphanumGemItem;
 import io.github.bioplethora.item.extras.WindyEssenceItem;
 import io.github.bioplethora.item.functionals.SpiritFissionCharmItem;
@@ -116,6 +113,8 @@ public class BPItems {
     public static final RegistryObject<Item> REINFORCED_FLEIGNARITE_CHESTPLATE = ITEMS.register("reinforced_fleignarite_chestplate", () -> new ReinforcedFleignariteArmorItem(BPArmorMaterials.REINFORCED_FLEIGNARITE, EquipmentSlotType.CHEST, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> REINFORCED_FLEIGNARITE_LEGGINGS = ITEMS.register("reinforced_fleignarite_leggings", () -> new ReinforcedFleignariteArmorItem(BPArmorMaterials.REINFORCED_FLEIGNARITE, EquipmentSlotType.LEGS, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> REINFORCED_FLEIGNARITE_BOOTS = ITEMS.register("reinforced_fleignarite_boots", () -> new ReinforcedFleignariteArmorItem(BPArmorMaterials.REINFORCED_FLEIGNARITE, EquipmentSlotType.FEET, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
+
+    public static final RegistryObject<Item> AQU_CHESTPLATE = ITEMS.register("aqu_chestplate", () -> new AquChestplateItem(BPArmorMaterials.AQU, EquipmentSlotType.CHEST, new Item.Properties().rarity(BPRarityTypes.BOSS_WEAPON).fireResistant()));
 
     // Food Items
     public static final RegistryObject<Item> RAW_CUTTLEFISH_MEAT = ITEMS.register("raw_cuttlefish_meat", () -> new Item(new Item.Properties().food(BPFoods.RAW_CUTTLEFISH_MEAT).tab(BPItemGroup.BioplethoraItemItemGroup)));

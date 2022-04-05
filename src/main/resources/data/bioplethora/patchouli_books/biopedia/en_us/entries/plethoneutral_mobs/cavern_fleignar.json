@@ -10,7 +10,7 @@
     {
       "type": "patchouli:entity",
       "entity":"bioplethora:cavern_fleignar",
-      "text": "Cavern Fleignars spawn on caves on Y-levels below 50."
+      "text": "Cavern Fleignars spawn on caves on Y-levels below 50. Very common in underground Fleignarite infestation chunks."
     }
   ]
 }

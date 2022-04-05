@@ -1,0 +1,22 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.aqu_chestplate.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"cube_r1": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 15", "math.cos(query.anim_time * 180) * 15", "math.sin(query.anim_time * 180) * 45"]
+					}
+				},
+				"cube_r2": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -15", "math.cos(query.anim_time * 180) * -15", "math.sin(query.anim_time * 180) * 45"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

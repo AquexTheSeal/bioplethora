@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()---"
+      "text": "$(l)INFORMATION: $(br)$()Cuttlefishes are peaceful little creatures with defense mechanics similar to those of squids. They can drop meat that can be eaten very fast."
     },
     {
       "type": "patchouli:entity",
