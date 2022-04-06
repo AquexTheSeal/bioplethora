@@ -1,8 +1,8 @@
 {
-  "loader":"forge:separate-perspective",
-  "gui_light": "front",
-  "base": {
-    "parent": "bioplethora:item/arbitrary_ballista_in_hand"
+  "parent": "bioplethora:item/arbitrary_ballista_in_hand",
+  "textures": {
+    "0": "bioplethora:item/arbitrary_ballista_charged",
+    "particle": "arbitrary_ballista_standby"
   },
   "overrides": [
     {
@@ -38,16 +38,5 @@
       },
       "model": "bioplethora:item/arbitrary_ballista_charged_in_hand"
     }
-  ],
-  "perspectives": {
-    "gui": {
-      "parent": "bioplethora:item/arbitrary_ballista_inventory"
-    },
-    "ground": {
-      "parent": "bioplethora:item/arbitrary_ballista_inventory"
-    },
-    "fixed": {
-      "parent": "bioplethora:item/arbitrary_ballista_inventory"
-    }
-  }
+  ]
 }

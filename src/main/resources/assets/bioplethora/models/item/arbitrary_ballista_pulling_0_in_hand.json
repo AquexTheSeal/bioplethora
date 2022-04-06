@@ -2,6 +2,6 @@
   "parent": "bioplethora:item/arbitrary_ballista",
   "textures": {
     "0": "bioplethora:item/arbitrary_ballista_pulling_0",
-    "particle": "arbitrary_ballista_standby"
+    "particle": "bioplethora:item/arbitrary_ballista_standby"
   }
 }

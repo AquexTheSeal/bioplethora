@@ -1,33 +1,19 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "bioplethora:item/vermilion_blade"
+  "loader":"forge:separate-perspective",
+  "parent": "bioplethora:item/vermilion_blade_in_hand",
+  "gui_light": "front",
+  "base": {
+    "parent": "bioplethora:item/vermilion_blade_in_hand"
   },
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [0, -90, 55],
-      "translation": [0, 7.0, 0],
-      "scale": [1.7, 1.7, 0.85]
-    },
-    "thirdperson_lefthand": {
-      "rotation": [0, 90, -55],
-      "translation": [0, 7.0, 0],
-      "scale": [1.7, 1.7, 0.85]
-    },
-    "firstperson_righthand": {
-      "rotation": [-20, -90, 10],
-      "translation": [1.13, 5.2, -0.26],
-      "scale": [1.36, 1.36, 0.68]
-    },
-    "firstperson_lefthand": {
-      "rotation": [-20, -90, -80],
-      "translation": [1.13, 5.2, -0.26],
-      "scale": [1.36, 1.36, 0.68]
-    },
+  "perspectives": {
     "gui": {
-      "rotation": [0, 0, 0],
-      "translation": [0, 0, 0],
-      "scale": [1.1, 1.1, 1.1]
+      "parent": "bioplethora:item/vermilion_blade_inventory"
+    },
+    "ground": {
+      "parent": "bioplethora:item/vermilion_blade_inventory"
+    },
+    "fixed": {
+      "parent": "bioplethora:item/vermilion_blade_inventory"
     }
   }
 }

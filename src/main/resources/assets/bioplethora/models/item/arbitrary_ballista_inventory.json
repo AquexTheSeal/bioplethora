@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:item/generated",
+  "gui_light": "front",
+  "textures": {
+    "layer0": "bioplethora:item/arbitrary_ballista_standby_inventory"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "bioplethora:item/arbitrary_ballista_pulling_0_inventory"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "bioplethora:item/arbitrary_ballista_pulling_1_inventory"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "bioplethora:item/arbitrary_ballista_pulling_2_inventory"
+    },
+    {
+      "predicate": {
+        "charged": 1
+      },
+      "model": "bioplethora:item/arbitrary_ballista_charged_inventory"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "bioplethora:item/arbitrary_ballista_charged_inventory"
+    }
+  ]
+}

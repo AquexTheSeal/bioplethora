@@ -25,6 +25,9 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.client.model.SeparatePerspectiveModel;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -110,6 +113,11 @@ public class ModClientRegister {
         ScreenManager.register(BPContainerTypes.REINFORCING_TABLE_CONTAINER.get(), ReinforcingTableScreen::new);
 
         BPKeybinds.register(event);
+    }
+
+    @SubscribeEvent
+    public static void onModelRegistry(ModelRegistryEvent event) {
+        ModelLoaderRegistry.registerLoader(new ResourceLocation(Bioplethora.MOD_ID, "separate_perspective"), SeparatePerspectiveModel.Loader.INSTANCE);
     }
 
     @OnlyIn(Dist.CLIENT)

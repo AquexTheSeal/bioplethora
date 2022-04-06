@@ -1,0 +1,7 @@
+{
+  "parent": "bioplethora:item/arbitrary_ballista_inventory",
+  "textures": {
+    "0": "bioplethora:item/arbitrary_ballista_pulling_1_inventory",
+    "particle": "arbitrary_ballista_standby_inventory"
+  }
+}
