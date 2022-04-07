@@ -1,10 +1,14 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.api.events.BPHooks;
+import io.github.bioplethora.api.events.hooks.TrueDefenseHurtEvent;
+import io.github.bioplethora.api.world.EffectUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,22 +27,28 @@ public class BPAttributes {
         LivingEntity victim = (LivingEntity) event.getEntity();
         LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
 
-        if (victim.getAttribute(TRUE_DEFENSE.get()) != null) {
-            victim.playSound(BPSoundEvents.TRUE_DEFENSE_CLASH.get(), 1.0F, 0.5F + victim.getRandom().nextFloat());
+        if (!BPHooks.onTrueDefenseHurt(victim, event.getSource())) {
 
-            if (victim.level instanceof ServerWorld) {
-                ((ServerWorld) victim.level).sendParticles(BPParticles.TRUE_DEFENSE_CLASH.get(),
-                        victim.getX(), victim.getY() + 2, victim.getZ(), 1,
-                        victim.getRandom().nextDouble() / 2.0, victim.getRandom().nextDouble() / 2.0, victim.getRandom().nextDouble() / 2.0, 0.02);
+            if (victim.getAttribute(TRUE_DEFENSE.get()) != null) {
+                victim.playSound(BPSoundEvents.TRUE_DEFENSE_CLASH.get(), 1.0F, 0.5F + victim.getRandom().nextFloat());
 
-                    ((ServerWorld) victim.level).sendParticles(ParticleTypes.CRIT,
-                        victim.getX(), victim.getY(), victim.getZ(), 75,
-                        0.55, 0.55, 0.55, 0.01);
+                if (victim.level instanceof ServerWorld) {
+                    ((ServerWorld) victim.level).sendParticles(BPParticles.TRUE_DEFENSE_CLASH.get(),
+                            victim.getX(), victim.getY() + 2, victim.getZ(), 1,
+                            victim.getRandom().nextDouble() / 2.0, victim.getRandom().nextDouble() / 2.0, victim.getRandom().nextDouble() / 2.0, 0.02);
 
-                //victim.level.addParticle(BPParticles.TRUE_DEFENSE_CLASH.get(), victim.getX(), victim.getY() + 2, victim.getZ(), 0.01, 0.1, 0.01);
+                    EffectUtils.addCircleParticleForm(victim.level, victim, ParticleTypes.CRIT, 75, 0.55, 0.01);
+                }
+
+                event.setAmount(event.getAmount() - (float) victim.getAttributeValue(TRUE_DEFENSE.get()));
             }
-
-            event.setAmount(event.getAmount() - (float) victim.getAttributeValue(TRUE_DEFENSE.get()));
         }
+    }
+
+    @SubscribeEvent
+    public static void onTrueDefenseClash(TrueDefenseHurtEvent event) {
+        Bioplethora.LOGGER.info("Forgehook Works !!! No way !!! AAAAAAAAAAAAAAAAAAAAAAAAAA");
+        event.getWorld().explode(null, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), 15.0F, Explosion.Mode.BREAK);
+        Bioplethora.LOGGER.info("Forgehook Works !!! No way !!! AAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 }

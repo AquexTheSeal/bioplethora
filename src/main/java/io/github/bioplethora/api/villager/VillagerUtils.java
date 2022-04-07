@@ -1,4 +1,4 @@
-package io.github.bioplethora.helpers.villager;
+package io.github.bioplethora.api.villager;
 
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;

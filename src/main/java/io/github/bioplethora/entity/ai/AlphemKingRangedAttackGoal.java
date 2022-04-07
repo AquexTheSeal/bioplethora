@@ -72,14 +72,17 @@ public class AlphemKingRangedAttackGoal extends Goal {
         }
 
         CryoblazeEntity cryo = new CryoblazeEntity(world, this.king, d1, d2, d3);
+        cryo.setOwner(this.king);
         cryo.setPos(cryo.getX(), this.king.getY(0.5D) + 0.5D, cryo.getZ());
         world.addFreshEntity(cryo);
 
         CryoblazeEntity cryoL = new CryoblazeEntity(world, this.king, d1, d2, d3);
+        cryo.setOwner(this.king);
         cryoL.setPos(cryoL.getX() + vector3d.z * 4.0D, this.king.getY(0.5D) + 0.5D, cryoL.getZ() + vector3d.z * -4.0D);
         world.addFreshEntity(cryoL);
 
         CryoblazeEntity cryoR = new CryoblazeEntity(world, this.king, d1, d2, d3);
+        cryo.setOwner(this.king);
         cryoR.setPos(cryoR.getX() + vector3d.z * -4.0D, this.king.getY(0.5D) + 0.5D, cryoR.getZ() + vector3d.z * 4.0D);
         world.addFreshEntity(cryoR);
     }

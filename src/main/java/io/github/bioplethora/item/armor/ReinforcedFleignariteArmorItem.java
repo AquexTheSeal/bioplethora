@@ -1,9 +1,9 @@
 package io.github.bioplethora.item.armor;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.api.world.EffectUtils;
+import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.client.armor.model.ReinforcedFleignariteArmorModel;
-import io.github.bioplethora.helpers.world.EffectUtils;
-import io.github.bioplethora.helpers.world.EntityUtils;
 import io.github.bioplethora.item.IHurtSkillArmor;
 import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.client.renderer.entity.model.BipedModel;

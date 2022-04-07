@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.helpers.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;

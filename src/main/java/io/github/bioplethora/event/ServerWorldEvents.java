@@ -1,14 +1,14 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.api.advancements.AdvancementUtils;
+import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.*;
-import io.github.bioplethora.helpers.advancements.AdvancementUtils;
-import io.github.bioplethora.helpers.world.BlockUtils;
 import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.IHurtSkillArmor;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;

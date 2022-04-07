@@ -1,6 +1,6 @@
 package io.github.bioplethora.mixin;
 
-import io.github.bioplethora.helpers.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,5 +1,6 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.api.world.ItemUtils;
 import io.github.bioplethora.entity.projectile.VermilionBladeProjectileEntity;
 import io.github.bioplethora.item.ItemSettings;
 import net.minecraft.client.gui.screen.Screen;
@@ -8,7 +9,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,6 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -90,37 +89,14 @@ public class VermilionBladeItem extends SwordItem {
 
     public void shootBlade(ItemStack stack, LivingEntity entity, World world) {
 
-        if (!((PlayerEntity) entity).getCooldowns().isOnCooldown(stack.getItem())) {
-            float xA = -MathHelper.sin(entity.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(entity.xRot * ((float) Math.PI / 180F));
-            float yA = -MathHelper.sin(entity.xRot * ((float) Math.PI / 180F));
-            float zA = MathHelper.cos(entity.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(entity.xRot * ((float) Math.PI / 180F));
+        if (ItemUtils.checkCooldownUsable(entity, stack)) {
+            VermilionBladeProjectileEntity projectile = new VermilionBladeProjectileEntity(world, entity, ItemUtils.projAngleX(entity), ItemUtils.projAngleY(entity), ItemUtils.projAngleZ(entity));
+            ItemUtils.shootWithItemBreakable(entity, projectile, world, stack, 1);
 
-            VermilionBladeProjectileEntity projectile = new VermilionBladeProjectileEntity(world, entity, xA, yA, zA);
-            projectile.setBladeSize(this.bladeSize);
-            projectile.setOwner(entity);
-            projectile.setPos(entity.getX(), entity.getY() + 1.5, entity.getZ());
-            projectile.shootFromRotation(projectile, entity.xRot, entity.yHeadRot, 0, 1F, 0);
+            entity.playSound(SoundEvents.BLAZE_SHOOT, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+            if (++this.bladeSize >= 5) bladeSize = 1;
 
-            if (!((PlayerEntity) entity).isCreative()) {
-                if (entity.getMainHandItem() == stack) {
-                    stack.hurtAndBreak(1, entity, (entity1) -> entity1.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
-                } else if (entity.getOffhandItem() == stack) {
-                    stack.hurtAndBreak(1, entity, (entity1) -> entity1.broadcastBreakEvent(EquipmentSlotType.OFFHAND));
-                }
-            }
-
-            world.addFreshEntity(projectile);
-            world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.BLAZE_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
-
-            ++this.bladeSize;
-
-            if (this.bladeSize >= 5) {
-                bladeSize = 1;
-            }
-
-            if (!((PlayerEntity) entity).isCreative()) {
-                ((PlayerEntity) entity).getCooldowns().addCooldown(stack.getItem(), (5 * (this.bladeSize * 2)) - (EnchantmentHelper.getEnchantmentLevel(Enchantments.QUICK_CHARGE, entity) * 5));
-            }
+            ItemUtils.setStackOnCooldown(entity, stack, (5 * (this.bladeSize * 2)) - (EnchantmentHelper.getEnchantmentLevel(Enchantments.QUICK_CHARGE, entity) * 5), true);
         }
     }
 

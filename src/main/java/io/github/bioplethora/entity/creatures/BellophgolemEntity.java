@@ -1,6 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.api.advancements.AdvancementUtils;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.BellophgolemRangedAttackGoal;
@@ -8,7 +9,6 @@ import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.helpers.advancements.AdvancementUtils;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;

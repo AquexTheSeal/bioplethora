@@ -21,11 +21,11 @@ public class BiopediaItem extends Item {
 
     @Nonnull
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> use(World world, PlayerEntity playerIn, Hand handIn) {
 
         ItemStack stack = playerIn.getItemInHand(handIn);
 
-        if (!worldIn.isClientSide()) {
+        if (!world.isClientSide()) {
 
             if (playerIn instanceof ServerPlayerEntity) {
                 PatchouliAPI.get().openBookGUI((ServerPlayerEntity) playerIn, Registry.ITEM.getKey(this));

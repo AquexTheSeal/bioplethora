@@ -1,4 +1,4 @@
-package io.github.bioplethora.helpers.mixin;
+package io.github.bioplethora.api.mixin;
 
 public interface IAbstractArrowMixin {
 

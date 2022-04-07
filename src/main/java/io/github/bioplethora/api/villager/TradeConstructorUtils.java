@@ -1,4 +1,4 @@
-package io.github.bioplethora.helpers.villager;
+package io.github.bioplethora.api.villager;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;

@@ -1,4 +1,4 @@
-package io.github.bioplethora.helpers.world;
+package io.github.bioplethora.api.world;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

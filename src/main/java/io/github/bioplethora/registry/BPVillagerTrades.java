@@ -1,7 +1,7 @@
 package io.github.bioplethora.registry;
 
-import io.github.bioplethora.helpers.villager.TradeConstructorUtils;
-import io.github.bioplethora.helpers.villager.VillagerUtils;
+import io.github.bioplethora.api.villager.TradeConstructorUtils;
+import io.github.bioplethora.api.villager.VillagerUtils;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

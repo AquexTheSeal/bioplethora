@@ -1,5 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.api.extras.IntegrationUtils;
+import io.github.bioplethora.api.world.ItemUtils;
 import io.github.bioplethora.item.ItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -49,14 +51,7 @@ public class AbyssalBladeItem extends SwordItem {
             living.addEffect(new EffectInstance(Effects.WATER_BREATHING, 5));
         }
 
-        // Wastelands of Baedoor Integration
-        if (!stack.getOrCreateTag().getBoolean("is_NBT_set")) {
-            stack.getOrCreateTag().putBoolean("is_NBT_set", true);
-
-            stack.getOrCreateTag().putDouble("sabre_defence", 10);
-            stack.getOrCreateTag().putDouble("sabre_cooldown", 15);
-            stack.getOrCreateTag().putDouble("sabre_harm", 1);
-        }
+        IntegrationUtils.addWobrSaber(stack, 10, 15, 1);
     }
 
     public int getUseDuration(ItemStack p_77626_1_) {
@@ -81,7 +76,7 @@ public class AbyssalBladeItem extends SwordItem {
 
             int i = this.getUseDuration(stack) - value;
             if (i >= 10) {
-                if (!playerentity.getCooldowns().isOnCooldown(stack.getItem())) {
+                if (ItemUtils.checkCooldownUsable(entity, stack)) {
                     float f7 = playerentity.yRot;
                     float f = playerentity.xRot;
                     float f1 = -MathHelper.sin(f7 * ((float) Math.PI / 180F)) * MathHelper.cos(f * ((float) Math.PI / 180F));

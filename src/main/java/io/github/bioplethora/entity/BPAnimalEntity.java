@@ -5,6 +5,7 @@ import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -17,6 +18,11 @@ public abstract class BPAnimalEntity extends TameableEntity implements IAnimatab
 
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPAnimalEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(BPAnimalEntity.class, DataSerializers.BOOLEAN);
+
+    @Override
+    public boolean hurt(DamageSource p_70097_1_, float p_70097_2_) {
+        return super.hurt(p_70097_1_, p_70097_2_);
+    }
 
     public BPAnimalEntity(EntityType<? extends TameableEntity> type, World worldIn) {
         super(type, worldIn);

@@ -31,6 +31,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -85,32 +86,27 @@ public class AlphanumObliteratorItem extends Item implements IVanishable {
         float yTarget = -MathHelper.sin(pEntityLiving.xRot * ((float) Math.PI / 180F));
         float zTarget = MathHelper.cos(pEntityLiving.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(pEntityLiving.xRot * ((float) Math.PI / 180F));
         float damageAdditions = (float) EnchantmentHelper.getItemEnchantmentLevel(BPEnchantments.DEVASTATING_BLAST.get(), pStack) * 1.5F;
+        Vector3d vector3d = pEntityLiving.getViewVector(1.0F);
 
         AlphanumObliteratorSpearEntity projectile = new AlphanumObliteratorSpearEntity(pLevel, pEntityLiving, xTarget, yTarget, zTarget);
         projectile.setPos(pEntityLiving.getX(), pEntityLiving.getY() + 1.5, pEntityLiving.getZ());
+        projectile.setOwner(pEntityLiving);
         projectile.setBaseDamage((BPConfig.getHellMode ? 15.0F : 12.0F) + damageAdditions);
-        projectile.shootFromRotation(projectile,
-                pEntityLiving.xRot,
-                pEntityLiving.yHeadRot,
-                0, 1F, 0);
+        projectile.shootFromRotation(projectile, pEntityLiving.xRot, pEntityLiving.yHeadRot, 0, 1F, 0);
         pLevel.addFreshEntity(projectile);
 
         AlphanumObliteratorSpearEntity projectile1 = new AlphanumObliteratorSpearEntity(pLevel, pEntityLiving, xTarget, yTarget, zTarget);
-        projectile1.setPos(pEntityLiving.getX(), pEntityLiving.getY() + 1.5, pEntityLiving.getZ());
+        projectile1.setPos(pEntityLiving.getX() + vector3d.z * 4.0D, pEntityLiving.getY() + 1.5, pEntityLiving.getZ() + vector3d.z * -4.0D);
+        projectile.setOwner(pEntityLiving);
         projectile1.setBaseDamage((BPConfig.getHellMode ? 15.0F : 12.0F) + damageAdditions);
-        projectile1.shootFromRotation(projectile1,
-                pEntityLiving.xRot,
-                pEntityLiving.yHeadRot,
-                0, 1F, 1.0F);
+        projectile1.shootFromRotation(projectile1, pEntityLiving.xRot, pEntityLiving.yHeadRot, 0, 1F, 1.0F);
         pLevel.addFreshEntity(projectile1);
 
         AlphanumObliteratorSpearEntity projectile2 = new AlphanumObliteratorSpearEntity(pLevel, pEntityLiving, xTarget, yTarget, zTarget);
-        projectile2.setPos(pEntityLiving.getX(), pEntityLiving.getY() + 1.5, pEntityLiving.getZ());
+        projectile2.setPos(pEntityLiving.getX() + vector3d.z * -4.0D, pEntityLiving.getY() + 1.5, pEntityLiving.getZ() + vector3d.z * 4.0D);
+        projectile.setOwner(pEntityLiving);
         projectile2.setBaseDamage((BPConfig.getHellMode ? 15.0F : 12.0F) + damageAdditions);
-        projectile2.shootFromRotation(projectile2,
-                pEntityLiving.xRot,
-                pEntityLiving.yHeadRot,
-                0, 1F, 1.0F);
+        projectile2.shootFromRotation(projectile2, pEntityLiving.xRot, pEntityLiving.yHeadRot, 0, 1F, 1.0F);
         pLevel.addFreshEntity(projectile2);
     }
 

@@ -1,4 +1,4 @@
-package io.github.bioplethora.helpers.advancements;
+package io.github.bioplethora.api.advancements;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
