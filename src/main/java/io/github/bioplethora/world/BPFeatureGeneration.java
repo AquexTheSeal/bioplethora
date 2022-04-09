@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
@@ -33,11 +34,25 @@ public class BPFeatureGeneration {
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
         List<Supplier<ConfiguredFeature<?, ?>>> undergroundDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION);
+        List<Supplier<ConfiguredFeature<?, ?>>> vegDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
         if (types.contains(BiomeDictionary.Type.OVERWORLD)) {
             undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
             undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
         }
+
+        if (types.contains(BiomeDictionary.Type.NETHER)) {
+            if (getBiome(event, "minecraft:basalt_deltas")) {
+                undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.BASALT_SPELEOTHERM_CONFIG);
+            }
+        }
+    }
+
+    public static boolean getBiome(BiomeLoadingEvent event, String biome) {
+        return new ResourceLocation(biome).equals(event.getName());
     }
 
     public static ImmutableList<Block> stoneBlocks() {

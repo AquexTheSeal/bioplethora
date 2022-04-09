@@ -41,11 +41,14 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
         float tickCountNeg = 0.0F - (float) entity.tickCount;
         float lerpHelper = MathHelper.lerp(tickCountNeg, entity.hurtTime, entity.hurtTime) / entity.hurtDuration;
         float pi = (float) Math.PI;
+        float rotationScale = entity.isBerserked() ? 0.75f : 0.3f;
+
         if (entity.hurtTime > 0) {
             lerpHelper = lerpHelper * lerpHelper * lerpHelper;
-            head.setRotationX(head.getRotationX() + -MathHelper.sin(lerpHelper * pi) * 0.3f);
-            bodytop.setRotationX(bodytop.getRotationX() + -MathHelper.sin(lerpHelper * pi) * 0.3f);
-            bodymid.setRotationX(bodymid.getRotationX() + -MathHelper.sin(lerpHelper * pi) * 0.3f);
+            rotationScale = entity.getRandom().nextBoolean() ? rotationScale : -rotationScale;
+            head.setRotationX(head.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);
+            bodytop.setRotationX(bodytop.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);
+            bodymid.setRotationX(bodymid.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);
         }
     }
 }

@@ -5,10 +5,8 @@ import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -35,6 +33,11 @@ public class BPBlockLootTables extends BlockLootTables {
         dropOther(BPBlocks.FLEIGNARITE_SPLOTCH.get(), BPItems.FLEIGNARITE_SCALES.get());
         dropOther(BPBlocks.FLEIGNARITE_VINES.get(), BPItems.FLEIGNARITE_SCALES.get());
         dropOther(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), BPItems.FLEIGNARITE_SCALES.get());
+
+        // Nether Plants
+        dropSelf(BPBlocks.BASALT_SPELEOTHERM.get());
+        dropOther(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), BPBlocks.BASALT_SPELEOTHERM.get());
+        dropOther(BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), BPBlocks.BASALT_SPELEOTHERM.get());
 
         // Alphanum Stone Set
         dropSelf(BPBlocks.ALPHANUM.get());
@@ -77,26 +80,5 @@ public class BPBlockLootTables extends BlockLootTables {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return ForgeRegistries.BLOCKS.getValues().stream().filter(b -> Objects.requireNonNull(b.getRegistryName()).getNamespace().equals(Bioplethora.MOD_ID)).collect(Collectors.toList());
-    }
-
-    public void leafThingForTomi(Collection<RegistryObject<Block>> blocks) {
-        for (RegistryObject<Block> block : blocks) {
-            for (Block output : ForgeRegistries.BLOCKS.getValues().stream().filter(b -> b.getRegistryName().getNamespace().equals(Bioplethora.MOD_ID)).collect(Collectors.toList())) {
-
-                String regName = block.get().getRegistryName().getPath();
-                String[] split = regName.split("_");
-                if (split[split.length - 1].equals("leaves")) {
-                    continue;
-                }
-
-                String outName = output.getRegistryName().getPath();
-                String[] outSplit = outName.split("_");
-                if (outSplit[outSplit.length - 1].equals("sapling")) {
-                    if (outSplit[outSplit.length - 2].equals(split[split.length - 2])) {
-                        createLeavesDrops(block.get(), output);
-                    }
-                }
-            }
-        }
     }
 }

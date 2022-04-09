@@ -29,9 +29,23 @@ public class BPConfiguredFeatures {
             .configured(new PendentBlocksFeatureConfig.Builder()
                     .setTopBlock(Blocks.STONE)
                     .setMiddleBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get())
+                    .setFruitedBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get())
                     .setEndBlock(BPBlocks.FLEIGNARITE_VINES.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
                     .setWhitelist(BPFeatureGeneration.stoneBlocks())
+                    .setMinLength(1)
                     .setMaxLength(2)
                     .build())
-            .range(168).squared().count(420);
+            .range(128).squared().count(512);
+
+    public static final ConfiguredFeature<?, ?> BASALT_SPELEOTHERM_CONFIG = BPFeatures.PENDENT_BLOCKS.get()
+            .configured(new PendentBlocksFeatureConfig.Builder()
+                    .setTopBlock(Blocks.BASALT)
+                    .setMiddleBlock(BPBlocks.BASALT_SPELEOTHERM_PLANT.get())
+                    .setFruitedBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM.get())
+                    .setEndBlock(BPBlocks.BASALT_SPELEOTHERM.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
+                    .setWhitelist(ImmutableList.of(Blocks.BASALT, Blocks.NETHERRACK, Blocks.BLACKSTONE))
+                    .setMinLength(1)
+                    .setMaxLength(8)
+                    .build())
+            .range(128).squared().count(256);
 }

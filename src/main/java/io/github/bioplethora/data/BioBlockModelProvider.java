@@ -41,6 +41,11 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("fleignarite_vines", bioResLoc("fleignarite_vines"));
         this.cross("fleignarite_vines_plant", bioResLoc("fleignarite_vines_plant"));
 
+        // Nether Plants
+        this.cross("basalt_speleotherm", bioResLoc("basalt_speleotherm"));
+        this.cross("basalt_speleotherm_plant", bioResLoc("basalt_speleotherm_plant"));
+        this.cross("fiery_basalt_speleotherm", bioResLoc("fiery_basalt_speleotherm"));
+
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));
         this.simpleStoneSet("alphanum", "alphanum_stairs", "alphanum_wall", "alphanum_slab");

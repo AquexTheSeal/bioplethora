@@ -1,10 +1,7 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.blocks.BellophiteCoreBlock;
-import io.github.bioplethora.blocks.FleignariteRemainsBlock;
-import io.github.bioplethora.blocks.FleignariteVinesBlock;
-import io.github.bioplethora.blocks.FleignariteVinesTopBlock;
+import io.github.bioplethora.blocks.*;
 import io.github.bioplethora.blocks.tile_entities.FleignariteSplotchBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import net.minecraft.block.*;
@@ -44,6 +41,7 @@ public class BPBlocks {
     public static final RegistryObject<Block> MIRESTONE = registerBlock("mirestone", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
             .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion()), null);
 
+
     // Fleignarite Blocks
     public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new FleignariteRemainsBlock(AbstractBlock.Properties.of(Material.PLANT)
             .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion().hasPostProcess((bs, br, bp) -> true)
@@ -59,6 +57,13 @@ public class BPBlocks {
             .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().hasPostProcess((bs, br, bp) -> true)
             .lightLevel((level) -> 5)), null, false);
 
+    // Nether Plants
+    public static final RegistryObject<Block> BASALT_SPELEOTHERM = registerBlock("basalt_speleotherm", () -> new BPVinesTopBlock.BasaltSpeleothermTopBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).instabreak().noOcclusion().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> BASALT_SPELEOTHERM_PLANT = registerBlock("basalt_speleotherm_plant", () -> new BPVinesBlock.BasaltSpeleothermBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).instabreak().noOcclusion().hasPostProcess((bs, br, bp) -> true)), null, false);
+    public static final RegistryObject<Block> FIERY_BASALT_SPELEOTHERM = registerBlock("fiery_basalt_speleotherm", () -> new BPVinesBlock.FieryBasaltSpeleothermBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).instabreak().noOcclusion().hasPostProcess((bs, br, bp) -> true)), null, false);
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
             .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHER_GOLD_ORE).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);

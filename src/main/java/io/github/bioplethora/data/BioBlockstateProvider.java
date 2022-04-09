@@ -41,6 +41,11 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES.get());
         this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get());
 
+        // Nether Plants
+        this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM.get());
+        this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM_PLANT.get());
+        this.simpleCrossBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM.get());
+
         // Alphanum stone set
         this.simpleBlock(BPBlocks.ALPHANUM.get());
         this.simpleBlock(BPBlocks.ALPHANUM_BRICKS.get());

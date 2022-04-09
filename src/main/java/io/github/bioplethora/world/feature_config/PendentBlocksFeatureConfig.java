@@ -22,6 +22,8 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
             return config.topBlockProvider;
         }), BlockStateProvider.CODEC.fieldOf("block_provider").forGetter((config) -> {
             return config.middleBlockProvider;
+        }), BlockStateProvider.CODEC.fieldOf("fruited_block_provider").forGetter((config) -> {
+            return config.fruitedBlockProvider;
         }), BlockStateProvider.CODEC.fieldOf("end_block_provider").forGetter((config) -> {
             return config.endBlockProvider;
         }), Codec.INT.fieldOf("min_length").forGetter((config) -> {
@@ -35,14 +37,16 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
 
     private final BlockStateProvider topBlockProvider;
     private final BlockStateProvider middleBlockProvider;
+    private final BlockStateProvider fruitedBlockProvider;
     private final BlockStateProvider endBlockProvider;
     private final int minimalYSize;
     private final int maximalYSize;
     private final Set<Block> whitelist;
 
-    PendentBlocksFeatureConfig(BlockStateProvider baseBlockProvider, BlockStateProvider blockProvider, BlockStateProvider endBlockProvider, int minLength, int maxLength, List<BlockState> whitelist) {
+    PendentBlocksFeatureConfig(BlockStateProvider baseBlockProvider, BlockStateProvider blockProvider, BlockStateProvider fruitedBlockProvider, BlockStateProvider endBlockProvider, int minLength, int maxLength, List<BlockState> whitelist) {
         this.topBlockProvider = baseBlockProvider;
         this.middleBlockProvider = blockProvider;
+        this.fruitedBlockProvider = fruitedBlockProvider;
         this.endBlockProvider = endBlockProvider;
         this.minimalYSize = minLength;
         this.maximalYSize = maxLength;
@@ -56,6 +60,10 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
 
     public BlockStateProvider getMiddleBlockProvider() {
         return middleBlockProvider;
+    }
+
+    public BlockStateProvider getFruitedBlockProvider() {
+        return fruitedBlockProvider;
     }
 
     public BlockStateProvider getEndBlockProvider() {
@@ -86,6 +94,7 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
     public static class Builder {
         private BlockStateProvider topBlockProvider = new SimpleBlockStateProvider(Blocks.OAK_LOG.defaultBlockState());
         private BlockStateProvider middleBlockProvider = new SimpleBlockStateProvider(Blocks.OAK_LEAVES.defaultBlockState());
+        private BlockStateProvider fruitedBlockProvider = new SimpleBlockStateProvider(Blocks.OAK_LEAVES.defaultBlockState());
         private BlockStateProvider endBlockProvider = new SimpleBlockStateProvider(Blocks.AIR.defaultBlockState());
         private List<Block> whitelist = ImmutableList.of(Blocks.GRASS_BLOCK);
         private int minLength = 1;
@@ -99,7 +108,6 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
             }
             return this;
         }
-
         public PendentBlocksFeatureConfig.Builder setTopBlock(BlockState state) {
             if (state != null) {
                 topBlockProvider = new SimpleBlockStateProvider(state);
@@ -108,7 +116,6 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
             }
             return this;
         }
-
         public PendentBlocksFeatureConfig.Builder setTopBlock(BlockStateProvider provider) {
             if (provider != null) {
                 topBlockProvider = provider;
@@ -126,7 +133,6 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
             }
             return this;
         }
-
         public PendentBlocksFeatureConfig.Builder setMiddleBlock(BlockState state) {
             if (state != null) {
                 middleBlockProvider = new SimpleBlockStateProvider(state);
@@ -135,12 +141,36 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
             }
             return this;
         }
-
         public PendentBlocksFeatureConfig.Builder setMiddleBlock(BlockStateProvider provider) {
             if (provider != null) {
                 middleBlockProvider = provider;
             } else {
                 middleBlockProvider = new SimpleBlockStateProvider(Blocks.STONE.defaultBlockState());
+            }
+            return this;
+        }
+
+        public PendentBlocksFeatureConfig.Builder setFruitedBlock(Block block) {
+            if (block != null) {
+                fruitedBlockProvider = new SimpleBlockStateProvider(block.defaultBlockState());
+            } else {
+                fruitedBlockProvider = new SimpleBlockStateProvider(Blocks.STONE.defaultBlockState());
+            }
+            return this;
+        }
+        public PendentBlocksFeatureConfig.Builder setFruitedBlock(BlockState state) {
+            if (state != null) {
+                fruitedBlockProvider = new SimpleBlockStateProvider(state);
+            } else {
+                fruitedBlockProvider = new SimpleBlockStateProvider(Blocks.STONE.defaultBlockState());
+            }
+            return this;
+        }
+        public PendentBlocksFeatureConfig.Builder setFruitedBlock(BlockStateProvider provider) {
+            if (provider != null) {
+                fruitedBlockProvider = provider;
+            } else {
+                fruitedBlockProvider = new SimpleBlockStateProvider(Blocks.STONE.defaultBlockState());
             }
             return this;
         }
@@ -153,7 +183,6 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
             }
             return this;
         }
-
         public PendentBlocksFeatureConfig.Builder setEndBlock(BlockState state) {
             if (state != null) {
                 endBlockProvider = new SimpleBlockStateProvider(state);
@@ -162,7 +191,6 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
             }
             return this;
         }
-
         public PendentBlocksFeatureConfig.Builder setEndBlock(BlockStateProvider provider) {
             if (provider != null) {
                 endBlockProvider = provider;
@@ -193,6 +221,7 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
         public PendentBlocksFeatureConfig.Builder copy(PendentBlocksFeatureConfig config) {
             this.topBlockProvider = config.topBlockProvider;
             this.middleBlockProvider = config.middleBlockProvider;
+            this.fruitedBlockProvider = config.fruitedBlockProvider;
             this.endBlockProvider = config.endBlockProvider;
             this.minLength = config.minimalYSize;
             this.maxLength = config.maximalYSize;
@@ -200,7 +229,7 @@ public class PendentBlocksFeatureConfig implements IFeatureConfig {
         }
 
         public PendentBlocksFeatureConfig build() {
-            return new PendentBlocksFeatureConfig(topBlockProvider, middleBlockProvider, endBlockProvider, minLength, maxLength, this.whitelist.stream().map(Block::defaultBlockState).collect(Collectors.toList()));
+            return new PendentBlocksFeatureConfig(topBlockProvider, middleBlockProvider, fruitedBlockProvider, endBlockProvider, minLength, maxLength, this.whitelist.stream().map(Block::defaultBlockState).collect(Collectors.toList()));
         }
     }
 }

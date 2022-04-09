@@ -36,6 +36,9 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.grylynenShield(BPItems.YELLOW_CRYSTAL_SHIELD);
 
         this.specialFlatTexture(BPBlocks.FLEIGNARITE_VINES, BPBlocks.FLEIGNARITE_VINES_PLANT);
+
+        this.specialFlatTexture(BPBlocks.BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
+        this.specialFlatTexture(BPBlocks.FIERY_BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
     }
 
     @Nonnull

@@ -28,8 +28,8 @@ public class PendentBlocksFeature extends Feature<PendentBlocksFeatureConfig> {
             if (!config.getWhitelist().contains(blockstate.getBlock())) {
                 return false;
             } else {
-                this.generateTopPart(world, rand, pos.above(), config);
-                this.generatePendentsInSurroundings(world, rand, pos.above(), config);
+                this.generateTopPart(world, rand, pos, config);
+                this.generatePendentsInSurroundings(world, rand, pos, config);
                 return true;
             }
         }
@@ -96,6 +96,13 @@ public class PendentBlocksFeature extends Feature<PendentBlocksFeatureConfig> {
                 }
 
                 world.setBlock(mutable, config.getMiddleBlockProvider().getState(rand, mutable), 2);
+
+                /*
+                if (Math.random() < 0.35) {
+                    world.setBlock(mutable, config.getFruitedBlockProvider().getState(rand, mutable), 2);
+                } else {
+                    world.setBlock(mutable, config.getMiddleBlockProvider().getState(rand, mutable), 2);
+                }*/
             }
 
             mutable.move(Direction.DOWN);
