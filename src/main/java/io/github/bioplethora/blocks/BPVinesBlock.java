@@ -21,6 +21,24 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
 
     public abstract Block getFruitedBodyBlock();
 
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        if (pFacing == this.growthDirection.getOpposite() && !pState.canSurvive(pLevel, pCurrentPos)) {
+            pLevel.getBlockTicks().scheduleTick(pCurrentPos, this, 1);
+        }
+        AbstractTopPlantBlock abstracttopplantblock = this.getHeadBlock();
+        if (pFacing == this.growthDirection) {
+            Block block = pFacingState.getBlock();
+            if (block != getBodyBlock() && block != getFruitedBodyBlock() && block != abstracttopplantblock) {
+                return abstracttopplantblock.getStateForPlacement(pLevel);
+            }
+        }
+        if (this.scheduleFluidTicks) {
+            pLevel.getLiquidTicks().scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+        }
+        return pState;
+    }
+
+    @Override
     public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
         BlockPos blockpos = pPos.relative(this.growthDirection.getOpposite());
         BlockState blockstate = pLevel.getBlockState(blockpos);
@@ -28,28 +46,14 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
         if (!this.canAttachToBlock(block)) {
             return false;
         } else {
-            return block == this.getHeadBlock() || block == this.getBodyBlock() || block == this.getFruitedBodyBlock() || blockstate.isFaceSturdy(pLevel, blockpos, this.growthDirection);
+            return block == this.getHeadBlock() || block == this.getFruitedBodyBlock() || block == this.getBodyBlock() || blockstate.isFaceSturdy(pLevel, blockpos, this.growthDirection);
         }
     }
 
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        if (pFacing == this.growthDirection.getOpposite() && !pState.canSurvive(pLevel, pCurrentPos)) {
-            pLevel.getBlockTicks().scheduleTick(pCurrentPos, this, 1);
-        }
-
-        AbstractTopPlantBlock abstracttopplantblock = this.getHeadBlock();
-        if (pFacing == this.growthDirection) {
-            Block block = pFacingState.getBlock();
-            if (block != this && block != getFruitedBodyBlock() && block != abstracttopplantblock) {
-                return abstracttopplantblock.getStateForPlacement(pLevel);
-            }
-        }
-
-        if (this.scheduleFluidTicks) {
-            pLevel.getLiquidTicks().scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
-        }
-
-        return pState;
+    @Override
+    public void performBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        world.setBlock(pos, getFruitedBodyBlock().defaultBlockState(), 2);
+        super.performBonemeal(world, random, pos, state);
     }
 
     public static class BasaltSpeleothermBlock extends BPVinesBlock {
@@ -67,12 +71,6 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
         public Block getFruitedBodyBlock() {
             return BPBlocks.FIERY_BASALT_SPELEOTHERM.get();
         }
-
-        @Override
-        public void performBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-            super.performBonemeal(world, random, pos, state);
-            world.setBlock(pos, getFruitedBodyBlock().defaultBlockState(), 2);
-        }
     }
 
     public static class FieryBasaltSpeleothermBlock extends BPVinesBlock {
@@ -84,6 +82,11 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
         @Override
         protected AbstractTopPlantBlock getHeadBlock() {
             return (AbstractTopPlantBlock) BPBlocks.BASALT_SPELEOTHERM.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.BASALT_SPELEOTHERM_PLANT.get();
         }
 
         @Override

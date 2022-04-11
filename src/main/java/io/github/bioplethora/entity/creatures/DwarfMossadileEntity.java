@@ -24,10 +24,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -144,7 +141,12 @@ public class DwarfMossadileEntity extends BPMonsterEntity implements IAnimatable
     }
 
     public int getMaxSpawnClusterSize() {
-        return 3;
+        return 1;
+    }
+
+    @Override
+    public boolean checkSpawnRules(IWorld p_213380_1_, SpawnReason p_213380_2_) {
+        return super.checkSpawnRules(p_213380_1_, p_213380_2_) && !p_213380_1_.getBlockState(this.blockPosition().below()).isAir();
     }
 
     public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {

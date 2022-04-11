@@ -14,6 +14,7 @@ import io.github.bioplethora.item.IHurtSkillArmor;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
+import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -25,9 +26,11 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -395,20 +398,21 @@ public class ServerWorldEvents {
         PlayerEntity player = event.getPlayer();
 
         if (player.getMainHandItem().getItem() instanceof ExperimentalItem) {
-            /*
-            if (blockState.getMaterial().isSolid()) {
-                player.playSound(blockState.getSoundType().getBreakSound(), 1.0F, 1.0F);
-                FallingBlockEntity blockEntity = new FallingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, blockState);
-                blockEntity.setDeltaMovement(blockEntity.getDeltaMovement().add(0, 1, 0));
-                world.addFreshEntity(blockEntity);
-
-                if (world instanceof ServerWorld) {
-                    ((ServerWorld) world).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, blockState), pos.getX(), pos.getY() + 1, pos.getZ(),
-                            30, 0.6, 0.8, 0.6, 0.1);
-                }
-            }*/
-
             BlockUtils.knockUpRandomNearbyBlocks(world, 0.5D, pos, 4, 2, 4, false, true);
+        }
+
+        if (block == BPBlocks.FIERY_BASALT_SPELEOTHERM.get()) {
+            if (player.getMainHandItem().getItem() == Items.GLASS_BOTTLE) {
+                player.swing(Hand.MAIN_HAND);
+                player.addItem(new ItemStack(BPItems.FIERY_SAP_BOTTLE.get()));
+                world.setBlock(pos, BPBlocks.BASALT_SPELEOTHERM_PLANT.get().defaultBlockState(), 2);
+                player.getMainHandItem().shrink(1);
+            } else if (player.getOffhandItem().getItem() == Items.GLASS_BOTTLE) {
+                player.swing(Hand.OFF_HAND);
+                player.addItem(new ItemStack(BPItems.FIERY_SAP_BOTTLE.get()));
+                world.setBlock(pos, BPBlocks.BASALT_SPELEOTHERM_PLANT.get().defaultBlockState(), 2);
+                player.getOffhandItem().shrink(1);
+            }
         }
     }
 

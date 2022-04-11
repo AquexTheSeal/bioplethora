@@ -94,6 +94,7 @@
   "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
   "item.bioplethora.red_grylynen_crystal": "Red Grylynen Crystal",
 
+  "item.bioplethora.fiery_sap_bottle": "Fiery Sap Bottle",
   "item.bioplethora.raw_cuttlefish_meat": "Raw Cuttlefish Meat",
   "item.bioplethora.cooked_cuttlefish_meat": "Cooked Cuttlefish Meat",
   "item.bioplethora.raw_flentair": "Raw Flentair",
@@ -159,6 +160,10 @@
   "block.bioplethora.fleignarite_splotch": "Fleignarite Splotch",
   "block.bioplethora.fleignarite_vines": "Fleignarite Vines",
   "block.bioplethora.fleignarite_vines_plant": "Fleignarite Vines",
+
+  "block.bioplethora.basalt_speleotherm": "Basalt Speleotherm",
+  "block.bioplethora.basalt_speleotherm_plant": "Basalt Speleotherm",
+  "block.bioplethora.fiery_basalt_speleotherm": "Fiery Basalt Speleotherm",
 
   "block.bioplethora.reinforcing_table": "Reinforcing Table",
 

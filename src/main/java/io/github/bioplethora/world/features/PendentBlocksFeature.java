@@ -95,14 +95,12 @@ public class PendentBlocksFeature extends Feature<PendentBlocksFeatureConfig> {
                     break;
                 }
 
-                world.setBlock(mutable, config.getMiddleBlockProvider().getState(rand, mutable), 2);
-
-                /*
-                if (Math.random() < 0.35) {
+                int k = rand.nextInt(4);
+                if (k == 1) {
                     world.setBlock(mutable, config.getFruitedBlockProvider().getState(rand, mutable), 2);
                 } else {
                     world.setBlock(mutable, config.getMiddleBlockProvider().getState(rand, mutable), 2);
-                }*/
+                }
             }
 
             mutable.move(Direction.DOWN);

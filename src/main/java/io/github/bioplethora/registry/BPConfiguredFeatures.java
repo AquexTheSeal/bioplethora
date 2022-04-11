@@ -47,5 +47,5 @@ public class BPConfiguredFeatures {
                     .setMinLength(1)
                     .setMaxLength(8)
                     .build())
-            .range(128).squared().count(256);
+            .range(128).squared().count(128);
 }

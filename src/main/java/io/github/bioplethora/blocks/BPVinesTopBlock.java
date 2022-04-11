@@ -2,13 +2,10 @@ package io.github.bioplethora.blocks;
 
 import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.*;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
-import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
@@ -29,43 +26,15 @@ public abstract class BPVinesTopBlock extends AbstractTopPlantBlock {
 
     public abstract Block getFruitedBodyBlock();
 
-    public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
-        BlockPos blockpos = pPos.relative(this.growthDirection.getOpposite());
-        BlockState blockstate = pLevel.getBlockState(blockpos);
+    @Override
+    public boolean canSurvive(BlockState state, IWorldReader reader, BlockPos pos) {
+        BlockPos blockpos =  pos.relative(this.growthDirection.getOpposite());
+        BlockState blockstate = reader.getBlockState(blockpos);
         Block block = blockstate.getBlock();
         if (!this.canAttachToBlock(block)) {
             return false;
         } else {
-            return block == this.getHeadBlock() || (block != this.getBodyBlock() && block != this.getFruitedBodyBlock()) || blockstate.isFaceSturdy(pLevel, blockpos, this.growthDirection);
-        }
-    }
-
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        if (pFacing == this.growthDirection.getOpposite() && !pState.canSurvive(pLevel, pCurrentPos)) {
-            pLevel.getBlockTicks().scheduleTick(pCurrentPos, this, 1);
-        }
-
-        if (pLevel.getBlockState(pCurrentPos.below()) == getBodyBlock().defaultBlockState() || pLevel.getBlockState(pCurrentPos.below()) == getFruitedBodyBlock().defaultBlockState()) {
-            pLevel.setBlock(pCurrentPos, getBodyBlock().defaultBlockState(), 2);
-        }
-
-        if (pFacing != this.growthDirection || !pFacingState.is(this) && !(pFacingState.is(this.getBodyBlock()) || pFacingState.is(this.getFruitedBodyBlock()))) {
-            if (this.scheduleFluidTicks) {
-                pLevel.getLiquidTicks().scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
-            }
-
-            return pState;
-        } else {
-            return this.getBodyBlock().defaultBlockState();
-        }
-    }
-
-    @Override
-    public void tick(BlockState p_225534_1_, ServerWorld p_225534_2_, BlockPos p_225534_3_, Random p_225534_4_) {
-        super.tick(p_225534_1_, p_225534_2_, p_225534_3_, p_225534_4_);
-
-        if (p_225534_2_.getBlockState(p_225534_3_.below()) == getBodyBlock().defaultBlockState() || p_225534_2_.getBlockState(p_225534_3_.below()) == getFruitedBodyBlock().defaultBlockState()) {
-            p_225534_2_.setBlock(p_225534_3_, getBodyBlock().defaultBlockState(), 2);
+            return block == this.getHeadBlock() || block == this.getFruitedBodyBlock() || block == this.getBodyBlock() || blockstate.isFaceSturdy(reader, blockpos, this.growthDirection);
         }
     }
 

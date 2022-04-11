@@ -18,9 +18,7 @@ import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.item.weapons.fleignarite_set.*;
 import io.github.bioplethora.item.weapons.reinforced_fleignarite_set.*;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemTier;
-import net.minecraft.item.Rarity;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -117,6 +115,8 @@ public class BPItems {
     public static final RegistryObject<Item> AQU_CHESTPLATE = ITEMS.register("aqu_chestplate", () -> new AquChestplateItem(BPArmorMaterials.AQU, EquipmentSlotType.CHEST, new Item.Properties().rarity(BPRarityTypes.BOSS_WEAPON).fireResistant()));
 
     // Food Items
+    public static final RegistryObject<Item> FIERY_SAP_BOTTLE = ITEMS.register("fiery_sap_bottle", () -> new HoneyBottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).food(BPFoods.RAW_CUTTLEFISH_MEAT).tab(BPItemGroup.BioplethoraItemItemGroup)));
+
     public static final RegistryObject<Item> RAW_CUTTLEFISH_MEAT = ITEMS.register("raw_cuttlefish_meat", () -> new Item(new Item.Properties().food(BPFoods.RAW_CUTTLEFISH_MEAT).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> COOKED_CUTTLEFISH_MEAT = ITEMS.register("cooked_cuttlefish_meat", () -> new Item(new Item.Properties().food(BPFoods.COOKED_CUTTLEFISH_MEAT).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> RAW_FLENTAIR = ITEMS.register("raw_flentair", () -> new Item(new Item.Properties().food(BPFoods.RAW_FLENTAIR).tab(BPItemGroup.BioplethoraItemItemGroup)));

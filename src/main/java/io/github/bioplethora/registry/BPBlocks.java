@@ -64,6 +64,7 @@ public class BPBlocks {
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).instabreak().noOcclusion().hasPostProcess((bs, br, bp) -> true)), null, false);
     public static final RegistryObject<Block> FIERY_BASALT_SPELEOTHERM = registerBlock("fiery_basalt_speleotherm", () -> new BPVinesBlock.FieryBasaltSpeleothermBlock(
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).instabreak().noOcclusion().hasPostProcess((bs, br, bp) -> true)), null, false);
+
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
             .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHER_GOLD_ORE).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);

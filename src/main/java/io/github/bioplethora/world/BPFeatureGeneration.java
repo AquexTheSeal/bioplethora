@@ -45,7 +45,6 @@ public class BPFeatureGeneration {
 
         if (types.contains(BiomeDictionary.Type.NETHER)) {
             if (getBiome(event, "minecraft:basalt_deltas")) {
-                undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
                 vegDeco.add(() -> BPConfiguredFeatures.BASALT_SPELEOTHERM_CONFIG);
             }
         }

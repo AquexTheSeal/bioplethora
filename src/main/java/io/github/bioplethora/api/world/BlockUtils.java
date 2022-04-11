@@ -8,10 +8,19 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class BlockUtils {
+
+    public static boolean checkBlockstate(IWorld world, BlockPos pos, BlockState requiredState) {
+        return world.getBlockState(pos) == requiredState;
+    }
+
+    public static boolean checkBlock(IWorld world, BlockPos pos, Block requiredBlock) {
+        return checkBlockstate(world, pos, requiredBlock.defaultBlockState());
+    }
 
     public static void knockUpRandomNearbyBlocks(World world, double yDelta, BlockPos point, int radiusX, int radiusY, int radiusZ, boolean sendParticles, boolean randomYDelta) {
 
