@@ -2,6 +2,7 @@ package io.github.bioplethora.event.helper;
 
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.api.advancements.AdvancementUtils;
+import io.github.bioplethora.api.events.BPHooks;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.others.GrylynenCoreBombEntity;
 import io.github.bioplethora.registry.BPEffects;
@@ -76,6 +77,8 @@ public class GrylynenSpawnHelper {
     }
 
     public static void summonGrylynenCore(PlayerEntity summoner, GrylynenEntity grylynen, World world, BlockPos centerPos) {
+
+        if (BPHooks.onGrylynenSpawn(summoner)) return;
 
         GrylynenCoreBombEntity core = BPEntities.GRYLYNEN_CORE_BOMB.get().create(world);
         if (!(world.getDifficulty() == Difficulty.PEACEFUL)) {
