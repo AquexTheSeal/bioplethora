@@ -47,10 +47,10 @@ public class AlphanumShardEntity extends Entity implements IAnimatable {
                 alphem.finalizeSpawn(serverworld, this.level.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
                 alphem.moveTo(blockpos, 0.0F, 0.0F);
                 if (this.target != null) {
-                    alphem.setTarget(target);
+                    alphem.setTarget(this.getTarget());
                 }
                 if (this.owner != null) {
-                    alphem.setOwner(owner);
+                    alphem.setOwner(this.getOwner());
                 }
 
                 if (Math.random() < 0.10) {

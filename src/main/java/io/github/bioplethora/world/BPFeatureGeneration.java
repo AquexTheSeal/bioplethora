@@ -47,6 +47,15 @@ public class BPFeatureGeneration {
             if (getBiome(event, "minecraft:basalt_deltas")) {
                 vegDeco.add(() -> BPConfiguredFeatures.BASALT_SPELEOTHERM_CONFIG);
             }
+            if (getBiome(event, "minecraft:nether_wastes")) {
+                vegDeco.add(() -> BPConfiguredFeatures.THONTUS_THISTLE_CONFIG);
+            }
+            if (getBiome(event, "minecraft:warped_forest")) {
+                vegDeco.add(() -> BPConfiguredFeatures.TURQUOISE_PENDENT_CONFIG);
+            }
+            if (getBiome(event, "minecraft:crimson_forest")) {
+                vegDeco.add(() -> BPConfiguredFeatures.CERISE_IVY_CONFIG);
+            }
         }
     }
 

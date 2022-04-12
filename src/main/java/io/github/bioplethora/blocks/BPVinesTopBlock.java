@@ -54,4 +54,55 @@ public abstract class BPVinesTopBlock extends AbstractTopPlantBlock {
             return BPBlocks.BASALT_SPELEOTHERM_PLANT.get();
         }
     }
+
+    public static class ThontusThistleTopBlock extends BPVinesTopBlock {
+
+        public ThontusThistleTopBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.BERRIED_THONTUS_THISTLE.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.THONTUS_THISTLE_PLANT.get();
+        }
+    }
+
+    public static class TurquoisePendentTopBlock extends BPVinesTopBlock {
+
+        public TurquoisePendentTopBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.TURQUOISE_PENDENT_PLANT.get();
+        }
+    }
+
+    public static class CeriseIvyTopBlock extends BPVinesTopBlock {
+
+        public CeriseIvyTopBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.SEEDED_CERISE_IVY.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.CERISE_IVY_PLANT.get();
+        }
+    }
 }

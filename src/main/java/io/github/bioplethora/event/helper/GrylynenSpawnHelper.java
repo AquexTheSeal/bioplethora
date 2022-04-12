@@ -11,8 +11,7 @@ import io.github.bioplethora.registry.BPTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.IWorld;
@@ -33,37 +32,37 @@ public class GrylynenSpawnHelper {
 
             if (!event.getPlayer().isCreative()) {
 
-                if (getTaggedBlock(BPTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
+                if (getTaggedBlock(BPTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE, world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.05 : 0.075) && BPConfig.COMMON.spawnWoodenGrylynen.get()) {
                         summonGrylynenCore(event.getPlayer(), BPEntities.WOODEN_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
-                if (getTaggedBlock(BPTags.Blocks.STONE_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
+                if (getTaggedBlock(BPTags.Blocks.STONE_GRYLYNEN_SPAWNABLE, world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.05 : 0.075) && BPConfig.COMMON.spawnStoneGrylynen.get()) {
                         summonGrylynenCore(event.getPlayer(), BPEntities.STONE_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
-                if (getTaggedBlock(BPTags.Blocks.GOLDEN_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
+                if (getTaggedBlock(BPTags.Blocks.GOLDEN_GRYLYNEN_SPAWNABLE, world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.075 : 0.1) && BPConfig.COMMON.spawnGoldenGrylynen.get()) {
                         summonGrylynenCore(event.getPlayer(), BPEntities.GOLDEN_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
-                if (getTaggedBlock(BPTags.Blocks.IRON_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
+                if (getTaggedBlock(BPTags.Blocks.IRON_GRYLYNEN_SPAWNABLE, world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.075 : 0.1) && BPConfig.COMMON.spawnIronGrylynen.get()) {
                         summonGrylynenCore(event.getPlayer(), BPEntities.IRON_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
-                if (getTaggedBlock(BPTags.Blocks.DIAMOND_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
+                if (getTaggedBlock(BPTags.Blocks.DIAMOND_GRYLYNEN_SPAWNABLE, world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.1 : 0.1025) && BPConfig.COMMON.spawnDiamondGrylynen.get()) {
                         summonGrylynenCore(event.getPlayer(), BPEntities.DIAMOND_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
-                if (getTaggedBlock(BPTags.Blocks.NETHERITE_GRYLYNEN_SPAWNABLE.getName(), world, pos)) {
+                if (getTaggedBlock(BPTags.Blocks.NETHERITE_GRYLYNEN_SPAWNABLE, world, pos)) {
                     if (Math.random() < (BPConfig.getHellMode ? 0.1 : 0.1025) && BPConfig.COMMON.spawnNetheriteGrylynen.get()) {
                         summonGrylynenCore(event.getPlayer(), BPEntities.NETHERITE_GRYLYNEN.get().create(world), world, pos);
                     }
@@ -72,8 +71,8 @@ public class GrylynenSpawnHelper {
         }
     }
 
-    public static boolean getTaggedBlock(ResourceLocation tag, World world, BlockPos pos) {
-        return BlockTags.getAllTags().getTagOrEmpty(tag).contains(world.getBlockState(pos).getBlock());
+    public static boolean getTaggedBlock(ITag<Block> tag, World world, BlockPos pos) {
+        return world.getBlockState(pos).getBlock().is(tag);
     }
 
     public static void summonGrylynenCore(PlayerEntity summoner, GrylynenEntity grylynen, World world, BlockPos centerPos) {
@@ -100,7 +99,7 @@ public class GrylynenSpawnHelper {
     }
 
     public static void destroyBlockAt(BlockPos pos, World world) {
-        if (!getTaggedBlock(BPTags.Blocks.GRYLYNEN_UNBREAKABLE.getName(), world, pos)) {
+        if (!getTaggedBlock(BPTags.Blocks.GRYLYNEN_UNBREAKABLE, world, pos)) {
             world.destroyBlock(pos, true);
         }
     }

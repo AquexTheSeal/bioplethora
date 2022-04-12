@@ -55,6 +55,18 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.THONTUS_THISTLE.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.THONTUS_THISTLE_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.BERRIED_THONTUS_THISTLE.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.TURQUOISE_PENDENT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.TURQUOISE_PENDENT_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.CERISE_IVY.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CERISE_IVY_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.SEEDED_CERISE_IVY.get(), RenderType.cutout());
+
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
 

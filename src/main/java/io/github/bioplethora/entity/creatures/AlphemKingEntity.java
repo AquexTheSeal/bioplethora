@@ -294,14 +294,20 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public void summonShard(int amount) {
         for (int i = 0; i < amount; i++) {
+
+            double xPos = getRandom().nextBoolean() ? getX() + getRandom().nextInt(24) : getX() - getRandom().nextInt(24);
+            double zPos = getRandom().nextBoolean() ? getZ() + getRandom().nextInt(24) : getZ() - getRandom().nextInt(24);
+
             AlphanumShardEntity shard = BPEntities.ALPHANUM_SHARD.get().create(this.level);
-            double xPos = getRandom().nextBoolean() ? getX() + getRandom().nextInt(16) : getX() - getRandom().nextInt(16);
-            double zPos = getRandom().nextBoolean() ? getZ() + getRandom().nextInt(16) : getZ() - getRandom().nextInt(16);
             if (this.getTarget() != null) {
                 shard.setTarget(this.getTarget());
             }
             shard.setOwner(this);
-            shard.setPos(xPos, getY(), zPos);
+
+            for (double iy = getY(); this.level.isEmptyBlock(new BlockPos(xPos, getY(), zPos)); iy--) {
+                shard.setPos(xPos, iy + 1, zPos);
+            }
+
             this.level.addFreshEntity(shard);
         }
     }

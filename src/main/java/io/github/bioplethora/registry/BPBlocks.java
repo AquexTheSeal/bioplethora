@@ -59,11 +59,32 @@ public class BPBlocks {
 
     // Nether Plants
     public static final RegistryObject<Block> BASALT_SPELEOTHERM = registerBlock("basalt_speleotherm", () -> new BPVinesTopBlock.BasaltSpeleothermTopBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).instabreak().noOcclusion().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> BASALT_SPELEOTHERM_PLANT = registerBlock("basalt_speleotherm_plant", () -> new BPVinesBlock.BasaltSpeleothermBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).instabreak().noOcclusion().hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion().hasPostProcess((bs, br, bp) -> true)), null, false);
     public static final RegistryObject<Block> FIERY_BASALT_SPELEOTHERM = registerBlock("fiery_basalt_speleotherm", () -> new BPVinesBlock.FieryBasaltSpeleothermBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).instabreak().noOcclusion().hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion().lightLevel((level) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
+
+    public static final RegistryObject<Block> THONTUS_THISTLE = registerBlock("thontus_thistle", () -> new BPVinesTopBlock.ThontusThistleTopBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> THONTUS_THISTLE_PLANT = registerBlock("thontus_thistle_plant", () -> new BPVinesBlock.ThontusThistleBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), null, false);
+    public static final RegistryObject<Block> BERRIED_THONTUS_THISTLE = registerBlock("berried_thontus_thistle", () -> new BPVinesBlock.BerriedThontusThistleBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().lightLevel((level) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
+
+    public static final RegistryObject<Block> TURQUOISE_PENDENT = registerBlock("turquoise_pendent", () -> new BPVinesTopBlock.TurquoisePendentTopBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> TURQUOISE_PENDENT_PLANT = registerBlock("turquoise_pendent_plant", () -> new BPVinesBlock.TurquoisePendentBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), null, false);
+    public static final RegistryObject<Block> BLOSSOMING_TURQUOISE_PENDENT = registerBlock("blossoming_turquoise_pendent", () -> new BPVinesBlock.BlossomingTurquoisePendentBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().lightLevel((level) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
+
+    public static final RegistryObject<Block> CERISE_IVY = registerBlock("cerise_ivy", () -> new BPVinesTopBlock.CeriseIvyTopBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> CERISE_IVY_PLANT = registerBlock("cerise_ivy_plant", () -> new BPVinesBlock.CeriseIvyBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), null, false);
+    public static final RegistryObject<Block> SEEDED_CERISE_IVY = registerBlock("seeded_cerise_ivy", () -> new BPVinesBlock.SeededCeriseIvyBlock(
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().lightLevel((level) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
 
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)

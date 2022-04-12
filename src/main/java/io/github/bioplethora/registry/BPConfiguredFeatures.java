@@ -47,5 +47,41 @@ public class BPConfiguredFeatures {
                     .setMinLength(1)
                     .setMaxLength(8)
                     .build())
-            .range(128).squared().count(128);
+            .range(132).squared().count(115);
+
+    public static final ConfiguredFeature<?, ?> THONTUS_THISTLE_CONFIG = BPFeatures.PENDENT_BLOCKS.get()
+            .configured(new PendentBlocksFeatureConfig.Builder()
+                    .setTopBlock(Blocks.NETHERRACK)
+                    .setMiddleBlock(BPBlocks.THONTUS_THISTLE_PLANT.get())
+                    .setFruitedBlock(BPBlocks.BERRIED_THONTUS_THISTLE.get())
+                    .setEndBlock(BPBlocks.THONTUS_THISTLE.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
+                    .setWhitelist(ImmutableList.of(Blocks.NETHERRACK, Blocks.BLACKSTONE))
+                    .setMinLength(1)
+                    .setMaxLength(8)
+                    .build())
+            .range(132).squared().count(125);
+
+    public static final ConfiguredFeature<?, ?> TURQUOISE_PENDENT_CONFIG = BPFeatures.PENDENT_BLOCKS.get()
+            .configured(new PendentBlocksFeatureConfig.Builder()
+                    .setTopBlock(Blocks.WARPED_WART_BLOCK)
+                    .setMiddleBlock(BPBlocks.TURQUOISE_PENDENT_PLANT.get())
+                    .setFruitedBlock(BPBlocks.TURQUOISE_PENDENT.get())
+                    .setEndBlock(BPBlocks.THONTUS_THISTLE.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
+                    .setWhitelist(ImmutableList.of(Blocks.WARPED_WART_BLOCK, Blocks.NETHERRACK, Blocks.BLACKSTONE))
+                    .setMinLength(1)
+                    .setMaxLength(8)
+                    .build())
+            .range(132).squared().count(122);
+
+    public static final ConfiguredFeature<?, ?> CERISE_IVY_CONFIG = BPFeatures.PENDENT_BLOCKS.get()
+            .configured(new PendentBlocksFeatureConfig.Builder()
+                    .setTopBlock(Blocks.NETHER_WART_BLOCK)
+                    .setMiddleBlock(BPBlocks.CERISE_IVY_PLANT.get())
+                    .setFruitedBlock(BPBlocks.SEEDED_CERISE_IVY.get())
+                    .setEndBlock(BPBlocks.CERISE_IVY.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
+                    .setWhitelist(ImmutableList.of(Blocks.NETHER_WART_BLOCK, Blocks.NETHERRACK, Blocks.BLACKSTONE))
+                    .setMinLength(1)
+                    .setMaxLength(8)
+                    .build())
+            .range(132).squared().count(122);
 }

@@ -39,6 +39,18 @@ public class BPBlockLootTables extends BlockLootTables {
         dropOther(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), BPBlocks.BASALT_SPELEOTHERM.get());
         dropOther(BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), BPBlocks.BASALT_SPELEOTHERM.get());
 
+        dropSelf(BPBlocks.THONTUS_THISTLE.get());
+        dropOther(BPBlocks.THONTUS_THISTLE_PLANT.get(), BPBlocks.THONTUS_THISTLE.get());
+        dropOther(BPBlocks.BERRIED_THONTUS_THISTLE.get(), BPBlocks.THONTUS_THISTLE.get());
+
+        dropSelf(BPBlocks.TURQUOISE_PENDENT.get());
+        dropOther(BPBlocks.TURQUOISE_PENDENT_PLANT.get(), BPBlocks.TURQUOISE_PENDENT.get());
+        dropOther(BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get(), BPBlocks.TURQUOISE_PENDENT.get());
+
+        dropSelf(BPBlocks.CERISE_IVY.get());
+        dropOther(BPBlocks.CERISE_IVY_PLANT.get(), BPBlocks.CERISE_IVY.get());
+        dropOther(BPBlocks.SEEDED_CERISE_IVY.get(), BPBlocks.CERISE_IVY.get());
+
         // Alphanum Stone Set
         dropSelf(BPBlocks.ALPHANUM.get());
         dropSelf(BPBlocks.ALPHANUM_BRICKS.get());

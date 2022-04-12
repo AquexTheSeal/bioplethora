@@ -92,6 +92,19 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
     }
 
     public void forVanillaTags() {
+        tag(BlockTags.CLIMBABLE)
+                .add(BPBlocks.FLEIGNARITE_VINES.get())
+                .add(BPBlocks.FLEIGNARITE_VINES_PLANT.get())
+
+                .add(BPBlocks.THONTUS_THISTLE.get())
+                .add(BPBlocks.THONTUS_THISTLE_PLANT.get())
+                .add(BPBlocks.BERRIED_THONTUS_THISTLE.get())
+
+                .add(BPBlocks.TURQUOISE_PENDENT.get())
+                .add(BPBlocks.TURQUOISE_PENDENT_PLANT.get())
+                .add(BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get())
+        ;
+
         tag(BlockTags.BASE_STONE_OVERWORLD)
                 .add(BPBlocks.ALPHANUM.get())
         ;

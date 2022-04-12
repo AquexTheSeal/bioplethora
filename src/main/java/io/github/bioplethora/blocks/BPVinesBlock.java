@@ -1,15 +1,24 @@
 package io.github.bioplethora.blocks;
 
 import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.util.Direction;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import java.util.Optional;
 import java.util.Random;
 
 public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
@@ -56,6 +65,19 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
         super.performBonemeal(world, random, pos, state);
     }
 
+    @Override
+    public Optional<BlockPos> getHeadPos(IBlockReader p_235501_1_, BlockPos p_235501_2_, BlockState p_235501_3_) {
+        BlockPos blockpos = p_235501_2_;
+
+        Block block;
+        do {
+            blockpos = blockpos.relative(this.growthDirection);
+            block = p_235501_1_.getBlockState(blockpos).getBlock();
+        } while(block == p_235501_3_.getBlock() || block == getFruitedBodyBlock().getBlock());
+
+        return block == this.getHeadBlock() ? Optional.of(blockpos) : Optional.empty();
+    }
+
     public static class BasaltSpeleothermBlock extends BPVinesBlock {
 
         public BasaltSpeleothermBlock(AbstractBlock.Properties properties) {
@@ -72,7 +94,6 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
             return BPBlocks.FIERY_BASALT_SPELEOTHERM.get();
         }
     }
-
     public static class FieryBasaltSpeleothermBlock extends BPVinesBlock {
 
         public FieryBasaltSpeleothermBlock(AbstractBlock.Properties properties) {
@@ -92,6 +113,186 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
         @Override
         public Block getFruitedBodyBlock() {
             return BPBlocks.FIERY_BASALT_SPELEOTHERM.get();
+        }
+
+        @Override
+        public ActionResultType use(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockRayTraceResult pHit) {
+
+            boolean flag = false;
+            if (pPlayer.getItemInHand(pHand).getItem() == Items.GLASS_BOTTLE) {
+
+                pLevel.setBlock(pPos, getBodyBlock().defaultBlockState(), 2);
+                pPlayer.getItemInHand(pHand).shrink(1);
+                pLevel.playSound(null, pPos, SoundEvents.BREWING_STAND_BREW, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
+
+                if (pPlayer.getItemInHand(pHand).isEmpty()) {
+                    pPlayer.setItemInHand(pHand, new ItemStack(BPItems.FIERY_SAP_BOTTLE.get()));
+
+                } else if (!pPlayer.inventory.add(new ItemStack(BPItems.FIERY_SAP_BOTTLE.get()))) {
+                    pPlayer.drop(new ItemStack(BPItems.FIERY_SAP_BOTTLE.get()), false);
+                }
+
+                flag = true;
+            }
+            if (flag) {
+                return ActionResultType.sidedSuccess(pLevel.isClientSide);
+
+            } else {
+                return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+            }
+        }
+    }
+
+    public static class ThontusThistleBlock extends BPVinesBlock {
+
+        public ThontusThistleBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.THONTUS_THISTLE.get();
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.BERRIED_THONTUS_THISTLE.get();
+        }
+
+        @Override
+        public void entityInside(BlockState p_196262_1_, World p_196262_2_, BlockPos p_196262_3_, Entity entity) {
+            super.entityInside(p_196262_1_, p_196262_2_, p_196262_3_, entity);
+            entity.hurt(DamageSource.CACTUS, 1);
+        }
+    }
+    public static class BerriedThontusThistleBlock extends BPVinesBlock {
+
+        public BerriedThontusThistleBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.THONTUS_THISTLE.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.THONTUS_THISTLE_PLANT.get();
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.BERRIED_THONTUS_THISTLE.get();
+        }
+
+        @Override
+        public void entityInside(BlockState p_196262_1_, World p_196262_2_, BlockPos p_196262_3_, Entity entity) {
+            super.entityInside(p_196262_1_, p_196262_2_, p_196262_3_, entity);
+            entity.hurt(DamageSource.CACTUS, 1);
+        }
+
+        @Override
+        public ActionResultType use(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockRayTraceResult pHit) {
+            int i = pLevel.random.nextBoolean() ? 2 : 3;
+            pLevel.setBlock(pPos, getBodyBlock().defaultBlockState(), 2);
+            pLevel.playSound(null, pPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
+            popResource(pLevel, pPos, new ItemStack(Items.SWEET_BERRIES, i));
+            return ActionResultType.sidedSuccess(pLevel.isClientSide);
+        }
+    }
+
+    public static class TurquoisePendentBlock extends BPVinesBlock {
+
+        public TurquoisePendentBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.TURQUOISE_PENDENT.get();
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get();
+        }
+    }
+    public static class BlossomingTurquoisePendentBlock extends BPVinesBlock {
+
+        public BlossomingTurquoisePendentBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.TURQUOISE_PENDENT.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.TURQUOISE_PENDENT_PLANT.get();
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get();
+        }
+
+        @Override
+        public ActionResultType use(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockRayTraceResult pHit) {
+            int i = 2 + pLevel.random.nextInt(2);
+            pLevel.setBlock(pPos, getBodyBlock().defaultBlockState(), 2);
+            pLevel.playSound(null, pPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
+            popResource(pLevel, pPos, new ItemStack(Items.SWEET_BERRIES, i));
+            return ActionResultType.sidedSuccess(pLevel.isClientSide);
+        }
+    }
+
+    public static class CeriseIvyBlock extends BPVinesBlock {
+
+        public CeriseIvyBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.CERISE_IVY.get();
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.SEEDED_CERISE_IVY.get();
+        }
+    }
+    public static class SeededCeriseIvyBlock extends BPVinesBlock {
+
+        public SeededCeriseIvyBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.CERISE_IVY.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.CERISE_IVY_PLANT.get();
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.SEEDED_CERISE_IVY.get();
+        }
+
+        @Override
+        public ActionResultType use(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockRayTraceResult pHit) {
+            int i = 3 + pLevel.random.nextInt(5);
+            pLevel.setBlock(pPos, getBodyBlock().defaultBlockState(), 2);
+            pLevel.playSound(null, pPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
+            popResource(pLevel, pPos, new ItemStack(Items.SWEET_BERRIES, i));
+            return ActionResultType.sidedSuccess(pLevel.isClientSide);
         }
     }
 }
