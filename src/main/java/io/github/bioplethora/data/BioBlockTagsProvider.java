@@ -103,6 +103,10 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
                 .add(BPBlocks.TURQUOISE_PENDENT.get())
                 .add(BPBlocks.TURQUOISE_PENDENT_PLANT.get())
                 .add(BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get())
+
+                .add(BPBlocks.SOUL_ETERN.get())
+                .add(BPBlocks.SOUL_ETERN_PLANT.get())
+                .add(BPBlocks.FLOURISHED_SOUL_ETERN.get())
         ;
 
         tag(BlockTags.BASE_STONE_OVERWORLD)

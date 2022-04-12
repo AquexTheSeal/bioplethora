@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bioplethora:block/soul_etern_plant"
+  }
+}

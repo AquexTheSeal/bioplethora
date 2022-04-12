@@ -28,7 +28,7 @@ public abstract class BPVinesTopBlock extends AbstractTopPlantBlock {
 
     @Override
     public boolean canSurvive(BlockState state, IWorldReader reader, BlockPos pos) {
-        BlockPos blockpos =  pos.relative(this.growthDirection.getOpposite());
+        BlockPos blockpos = pos.relative(this.growthDirection.getOpposite());
         BlockState blockstate = reader.getBlockState(blockpos);
         Block block = blockstate.getBlock();
         if (!this.canAttachToBlock(block)) {
@@ -103,6 +103,23 @@ public abstract class BPVinesTopBlock extends AbstractTopPlantBlock {
         @Override
         protected Block getBodyBlock() {
             return BPBlocks.CERISE_IVY_PLANT.get();
+        }
+    }
+
+    public static class SoulEternTopBlock extends BPVinesTopBlock {
+
+        public SoulEternTopBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.FLOURISHED_SOUL_ETERN.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.SOUL_ETERN_PLANT.get();
         }
     }
 }

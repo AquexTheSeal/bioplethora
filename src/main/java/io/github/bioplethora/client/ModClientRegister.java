@@ -67,6 +67,10 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.CERISE_IVY_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.SEEDED_CERISE_IVY.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_ETERN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_ETERN_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.FLOURISHED_SOUL_ETERN.get(), RenderType.cutout());
+
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
 

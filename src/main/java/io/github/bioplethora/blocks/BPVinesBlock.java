@@ -295,4 +295,69 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
             return ActionResultType.sidedSuccess(pLevel.isClientSide);
         }
     }
+
+    public static class SoulEternBlock extends BPVinesBlock {
+
+        public SoulEternBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.SOUL_ETERN.get();
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.FLOURISHED_SOUL_ETERN.get();
+        }
+    }
+    public static class FlourishedSoulEternBlock extends BPVinesBlock {
+
+        public FlourishedSoulEternBlock(AbstractBlock.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.SOUL_ETERN.get();
+        }
+
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.SOUL_ETERN_PLANT.get();
+        }
+
+        @Override
+        public Block getFruitedBodyBlock() {
+            return BPBlocks.FLOURISHED_SOUL_ETERN.get();
+        }
+
+        @Override
+        public ActionResultType use(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockRayTraceResult pHit) {
+
+            boolean flag = false;
+            if (pPlayer.getItemInHand(pHand).getItem() == Items.GLASS_BOTTLE) {
+
+                pLevel.setBlock(pPos, getBodyBlock().defaultBlockState(), 2);
+                pPlayer.getItemInHand(pHand).shrink(1);
+                pLevel.playSound(null, pPos, SoundEvents.BREWING_STAND_BREW, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
+
+                if (pPlayer.getItemInHand(pHand).isEmpty()) {
+                    pPlayer.setItemInHand(pHand, new ItemStack(BPItems.SOUL_SAP_BOTTLE.get()));
+
+                } else if (!pPlayer.inventory.add(new ItemStack(BPItems.SOUL_SAP_BOTTLE.get()))) {
+                    pPlayer.drop(new ItemStack(BPItems.SOUL_SAP_BOTTLE.get()), false);
+                }
+
+                flag = true;
+            }
+            if (flag) {
+                return ActionResultType.sidedSuccess(pLevel.isClientSide);
+
+            } else {
+                return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+            }
+        }
+    }
 }

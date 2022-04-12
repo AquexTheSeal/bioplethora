@@ -46,6 +46,10 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("basalt_speleotherm_plant", bioResLoc("basalt_speleotherm_plant"));
         this.cross("fiery_basalt_speleotherm", bioResLoc("fiery_basalt_speleotherm"));
 
+        this.cross("soul_etern", bioResLoc("soul_etern"));
+        this.cross("soul_etern_plant", bioResLoc("soul_etern_plant"));
+        this.cross("flourished_soul_etern", bioResLoc("flourished_soul_etern"));
+
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));
         this.simpleStoneSet("alphanum", "alphanum_stairs", "alphanum_wall", "alphanum_slab");

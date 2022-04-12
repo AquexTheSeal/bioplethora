@@ -51,6 +51,10 @@ public class BPBlockLootTables extends BlockLootTables {
         dropOther(BPBlocks.CERISE_IVY_PLANT.get(), BPBlocks.CERISE_IVY.get());
         dropOther(BPBlocks.SEEDED_CERISE_IVY.get(), BPBlocks.CERISE_IVY.get());
 
+        dropSelf(BPBlocks.SOUL_ETERN.get());
+        dropOther(BPBlocks.SOUL_ETERN_PLANT.get(), BPBlocks.SOUL_ETERN.get());
+        dropOther(BPBlocks.FLOURISHED_SOUL_ETERN.get(), BPBlocks.SOUL_ETERN.get());
+
         // Alphanum Stone Set
         dropSelf(BPBlocks.ALPHANUM.get());
         dropSelf(BPBlocks.ALPHANUM_BRICKS.get());

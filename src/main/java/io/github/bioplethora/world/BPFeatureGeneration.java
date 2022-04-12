@@ -56,6 +56,9 @@ public class BPFeatureGeneration {
             if (getBiome(event, "minecraft:crimson_forest")) {
                 vegDeco.add(() -> BPConfiguredFeatures.CERISE_IVY_CONFIG);
             }
+            if (getBiome(event, "minecraft:soul_sand_valley")) {
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_ETERN_CONFIG);
+            }
         }
     }
 

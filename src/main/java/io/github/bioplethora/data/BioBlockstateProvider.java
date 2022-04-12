@@ -46,6 +46,10 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM_PLANT.get());
         this.simpleCrossBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM.get());
 
+        this.simpleCrossBlock(BPBlocks.SOUL_ETERN.get());
+        this.simpleCrossBlock(BPBlocks.SOUL_ETERN_PLANT.get());
+        this.simpleCrossBlock(BPBlocks.FLOURISHED_SOUL_ETERN.get());
+
         // Alphanum stone set
         this.simpleBlock(BPBlocks.ALPHANUM.get());
         this.simpleBlock(BPBlocks.ALPHANUM_BRICKS.get());
