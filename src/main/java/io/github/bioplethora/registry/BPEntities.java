@@ -18,6 +18,11 @@ public class BPEntities {
     //Ecoharmless
     public static final RegistryObject<EntityType<CuttlefishEntity>> CUTTLEFISH = ENTITIES.register("cuttlefish", () -> EntityType.Builder.of(CuttlefishEntity::new, EntityClassification.WATER_CREATURE).sized(0.75f, 0.6f).build(new ResourceLocation(Bioplethora.MOD_ID, "cuttlefish").toString()));
 
+    public static final RegistryObject<EntityType<EurydnEntity>> SOUL_EURYDN = ENTITIES.register("soul_eurydn", () -> EntityType.Builder.of((EntityType.IFactory<EurydnEntity>) (type, world) ->
+            new EurydnEntity(type, world, EurydnEntity.Variant.SOUL), EntityClassification.MONSTER).sized(1.8f, 1.1f).build(new ResourceLocation(Bioplethora.MOD_ID, "oul_eurydn").toString()));
+    public static final RegistryObject<EntityType<EurydnEntity>> FIERY_EURYDN = ENTITIES.register("fiery_eurydn", () -> EntityType.Builder.of((EntityType.IFactory<EurydnEntity>) (type, world) ->
+            new EurydnEntity(type, world, EurydnEntity.Variant.FIERY), EntityClassification.MONSTER).sized(1.8f, 1.1f).build(new ResourceLocation(Bioplethora.MOD_ID, "fiery_eurydn").toString()));
+
     //Plethoneutral
     public static final RegistryObject<EntityType<PeaguinEntity>> PEAGUIN = ENTITIES.register("peaguin", () -> EntityType.Builder.of(PeaguinEntity::new, EntityClassification.WATER_CREATURE).sized(1.2f, 1.4f).build(new ResourceLocation(Bioplethora.MOD_ID, "peaguin").toString()));
     public static final RegistryObject<EntityType<NandbriEntity>> NANDBRI = ENTITIES.register("nandbri", () -> EntityType.Builder.of(NandbriEntity::new, EntityClassification.MONSTER).sized(2.6f, 1.15f).build(new ResourceLocation(Bioplethora.MOD_ID, "nandbri").toString()));

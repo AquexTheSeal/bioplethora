@@ -38,7 +38,7 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
         tag(BPTags.Blocks.GRYLYNEN_UNBREAKABLE)
                 .add(BPBlocks.BELLOPHITE_BLOCK.get())
                 .add(BPBlocks.BELLOPHITE_CORE_BLOCK.get())
-                .add(Blocks.BEACON).add(Blocks.OBSIDIAN).add(Blocks.CRYING_OBSIDIAN)
+                .add(Blocks.BEACON).add(Blocks.OBSIDIAN).add(Blocks.CRYING_OBSIDIAN).add(Blocks.BEDROCK)
                 .addTag(BlockTags.WITHER_IMMUNE)
         ;
 

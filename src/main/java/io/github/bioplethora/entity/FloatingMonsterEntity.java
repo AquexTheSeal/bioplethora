@@ -150,7 +150,7 @@ public abstract class FloatingMonsterEntity extends BPMonsterEntity implements I
         }
 
         public boolean canUse() {
-            return !FloatingMonsterEntity.this.getMoveControl().hasWanted() && FloatingMonsterEntity.this.random.nextInt(7) == 0;
+            return !FloatingMonsterEntity.this.getMoveControl().hasWanted() && FloatingMonsterEntity.this.random.nextInt(5) == 0;
         }
 
         public boolean canContinueToUse() {
@@ -164,7 +164,7 @@ public abstract class FloatingMonsterEntity extends BPMonsterEntity implements I
             }
 
             for(int i = 0; i < 3; ++i) {
-                BlockPos blockpos1 = blockpos.offset(FloatingMonsterEntity.this.random.nextInt(15) - 7, FloatingMonsterEntity.this.random.nextInt(11) - 3, FloatingMonsterEntity.this.random.nextInt(15) - 7);
+                BlockPos blockpos1 = blockpos.offset(FloatingMonsterEntity.this.random.nextInt(15) - 7, FloatingMonsterEntity.this.random.nextInt(11) - 5, FloatingMonsterEntity.this.random.nextInt(15) - 7);
                 if (FloatingMonsterEntity.this.level.isEmptyBlock(blockpos1)) {
                     FloatingMonsterEntity.this.moveControl.setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
                     if (FloatingMonsterEntity.this.getTarget() == null) {

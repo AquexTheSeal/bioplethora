@@ -58,11 +58,6 @@ public class CuttlefishEntity extends SquidEntity implements IAnimatable, IBioCl
             return PlayState.CONTINUE;
         }
 
-        if(event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cuttlefish.idle", true));
-            return PlayState.CONTINUE;
-        }
-
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cuttlefish.idle", true));
         return PlayState.CONTINUE;
     }

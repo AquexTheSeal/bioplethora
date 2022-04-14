@@ -38,10 +38,9 @@ public class BPStructureGeneration {
     public static void generateStructures(final BiomeLoadingEvent event) {
         RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
+        List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
 
         if (types.contains(BiomeDictionary.Type.COLD) || types.contains(BiomeDictionary.Type.MOUNTAIN)) {
-            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
-
             structures.add(() -> BPStructures.ALPHANUM_MAUSOLEUM.get().configured(IFeatureConfig.NONE));
         }
     }
@@ -68,8 +67,7 @@ public class BPStructureGeneration {
             }
 
             // Adding our Structure to the Map
-            Map<Structure<?>, StructureSeparationSettings> tempMap =
-                    new HashMap<Structure<?>, StructureSeparationSettings>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
+            Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<Structure<?>, StructureSeparationSettings>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
 
             tempMap.putIfAbsent(BPStructures.ALPHANUM_MAUSOLEUM.get(), DimensionStructuresSettings.DEFAULTS.get(BPStructures.ALPHANUM_MAUSOLEUM.get()));
 

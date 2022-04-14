@@ -3,17 +3,22 @@ package io.github.bioplethora.registry;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
+import io.github.bioplethora.enums.BPGrylynenTier;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BPEntityAttributes {
+
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
 
         //Ecoharmless
         event.put(BPEntities.CUTTLEFISH.get(), CuttlefishEntity.setCustomAttributes().build());
+
+        event.put(BPEntities.SOUL_EURYDN.get(), EurydnEntity.setCustomAttributes().build());
+        event.put(BPEntities.FIERY_EURYDN.get(), EurydnEntity.setCustomAttributes().build());
 
         //Plethoneutral
         event.put(BPEntities.PEAGUIN.get(), PeaguinEntity.setCustomAttributes().build());
@@ -25,15 +30,14 @@ public class BPEntityAttributes {
         event.put(BPEntities.GAUGALEM.get(), GaugalemEntity.setCustomAttributes().build());
         event.put(BPEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntity.setCustomAttributes().build());
         event.put(BPEntities.TRAPJAW.get(), TrapjawEntity.setCustomAttributes().build());
-
-        event.put(BPEntities.WOODEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
-        event.put(BPEntities.STONE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
-        event.put(BPEntities.GOLDEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
-        event.put(BPEntities.IRON_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
-        event.put(BPEntities.DIAMOND_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
-        event.put(BPEntities.NETHERITE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes().build());
-
         event.put(BPEntities.TERRAITH.get(), TerraithEntity.setCustomAttributes().build());
+
+        event.put(BPEntities.WOODEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.WOODEN).build());
+        event.put(BPEntities.STONE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.STONE).build());
+        event.put(BPEntities.GOLDEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.GOLDEN).build());
+        event.put(BPEntities.IRON_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.IRON).build());
+        event.put(BPEntities.DIAMOND_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.DIAMOND).build());
+        event.put(BPEntities.NETHERITE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.NETHERITE).build());
 
         //Hellsent
         event.put(BPEntities.HELIOBLADE.get(), HeliobladeEntity.setCustomAttributes().build());

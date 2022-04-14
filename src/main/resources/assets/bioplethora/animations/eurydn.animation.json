@@ -1,0 +1,45 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.eurydn.idle": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -15", 0, 0]
+					},
+					"position": {
+						"vector": [0, "math.cos(query.anim_time * 180) * -2", 0]
+					}
+				},
+				"wingl": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 180) * 25", "math.sin(query.anim_time * 180) * 25"]
+					}
+				},
+				"wingr": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 180) * -25", "math.sin(query.anim_time * 180) * -25"]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -25", 0, 0]
+					}
+				},
+				"tailfront": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * 25", 0, 0]
+					}
+				},
+				"tailmid": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * 15", 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

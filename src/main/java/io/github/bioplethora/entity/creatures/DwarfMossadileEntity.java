@@ -141,7 +141,7 @@ public class DwarfMossadileEntity extends BPMonsterEntity implements IAnimatable
     }
 
     public int getMaxSpawnClusterSize() {
-        return 1;
+        return 3;
     }
 
     @Override

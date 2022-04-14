@@ -2,12 +2,12 @@ package io.github.bioplethora.world;
 
 import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.api.world.WorldgenUtils;
 import io.github.bioplethora.registry.BPConfiguredFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
@@ -44,26 +44,22 @@ public class BPFeatureGeneration {
         }
 
         if (types.contains(BiomeDictionary.Type.NETHER)) {
-            if (getBiome(event, "minecraft:basalt_deltas")) {
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.BASALT_DELTAS)) {
                 vegDeco.add(() -> BPConfiguredFeatures.BASALT_SPELEOTHERM_CONFIG);
             }
-            if (getBiome(event, "minecraft:nether_wastes")) {
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.NETHER_WASTES)) {
                 vegDeco.add(() -> BPConfiguredFeatures.THONTUS_THISTLE_CONFIG);
             }
-            if (getBiome(event, "minecraft:warped_forest")) {
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.WARPED_FOREST)) {
                 vegDeco.add(() -> BPConfiguredFeatures.TURQUOISE_PENDENT_CONFIG);
             }
-            if (getBiome(event, "minecraft:crimson_forest")) {
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.CRIMSON_FOREST)) {
                 vegDeco.add(() -> BPConfiguredFeatures.CERISE_IVY_CONFIG);
             }
-            if (getBiome(event, "minecraft:soul_sand_valley")) {
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SOUL_SAND_VALLEY)) {
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_ETERN_CONFIG);
             }
         }
-    }
-
-    public static boolean getBiome(BiomeLoadingEvent event, String biome) {
-        return new ResourceLocation(biome).equals(event.getName());
     }
 
     public static ImmutableList<Block> stoneBlocks() {

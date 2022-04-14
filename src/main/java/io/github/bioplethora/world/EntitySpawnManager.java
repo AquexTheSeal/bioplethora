@@ -1,6 +1,7 @@
 package io.github.bioplethora.world;
 
 import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.api.world.WorldgenUtils;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -138,9 +139,27 @@ public class EntitySpawnManager {
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> NETHER_ENTITIES = (builder) -> {
+        private static final Consumer<MobSpawnInfoBuilder> BASALT_DELTAS_ENTITIES = (builder) -> {
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> NETHER_WASTES_ENTITIES = (builder) -> {
             //Dwarf Mossadile
-            createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 1, 1, 1, BPConfig.COMMON.spawnDwarfMossadile);
+            createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 45, 2, 3, BPConfig.COMMON.spawnDwarfMossadile);
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> WARPED_FOREST_ENTITIES = (builder) -> {
+            //Dwarf Mossadile
+            createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 1, 1, 2, BPConfig.COMMON.spawnDwarfMossadile);
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> CRIMSON_FOREST_ENTITIES = (builder) -> {
+            //Dwarf Mossadile
+            createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 4, 1, 3, BPConfig.COMMON.spawnDwarfMossadile);
+        };
+
+        private static final Consumer<MobSpawnInfoBuilder> SOUL_SAND_VALLEY_ENTITIES = (builder) -> {
+            //Soul Eurydn
+            createSpawn(builder, monster, BPEntities.SOUL_EURYDN, 9, 2, 3, BPConfig.COMMON.spawnSoulEurydn);
         };
 
         private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
@@ -183,8 +202,21 @@ public class EntitySpawnManager {
                     if (hasOverworldType || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
                         WATER_ENTITIES.accept(spawnInfoBuilder);
                 case NETHER:
-                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER))
-                        NETHER_ENTITIES.accept(spawnInfoBuilder);
+                    if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.BASALT_DELTAS)) {
+                        BASALT_DELTAS_ENTITIES.accept(spawnInfoBuilder);
+                    }
+                    if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.NETHER_WASTES)) {
+                        NETHER_WASTES_ENTITIES.accept(spawnInfoBuilder);
+                    }
+                    if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.WARPED_FOREST)) {
+                        WARPED_FOREST_ENTITIES.accept(spawnInfoBuilder);
+                    }
+                    if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.CRIMSON_FOREST)) {
+                        CRIMSON_FOREST_ENTITIES.accept(spawnInfoBuilder);
+                    }
+                    if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SOUL_SAND_VALLEY)) {
+                        SOUL_SAND_VALLEY_ENTITIES.accept(spawnInfoBuilder);
+                    }
                 case THEEND:
                     if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.END))
                         END_ENTITIES.accept(spawnInfoBuilder);

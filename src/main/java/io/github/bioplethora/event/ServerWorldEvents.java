@@ -5,7 +5,6 @@ import io.github.bioplethora.api.advancements.AdvancementUtils;
 import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
-import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.*;
@@ -203,15 +202,6 @@ public class ServerWorldEvents {
                     helioblade.teleportRandomly();
                     event.setCanceled(true);
                 }
-            }
-        }
-
-        if (event.getEntity() instanceof GrylynenEntity) {
-
-            GrylynenEntity grylynen = (GrylynenEntity) event.getEntity();
-
-            if (!dsVoid) {
-                event.setAmount(1);
             }
         }
 

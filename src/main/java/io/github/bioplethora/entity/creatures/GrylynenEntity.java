@@ -6,20 +6,18 @@ import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IGrylynenTier;
 import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -30,8 +28,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
-
 public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
 
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -39,20 +35,19 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
 
     public GrylynenEntity(EntityType<? extends MonsterEntity> type, World worldIn, IGrylynenTier IGrylynenTier) {
         super(type, worldIn);
-        this.moveControl = new FlyingMovementController(this, 20, true);
         this.noCulling = true;
         this.xpReward = 15;
         this.moveControl = new MoveHelperController(this);
         this.tier = IGrylynenTier;
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes(IGrylynenTier tier) {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 0)
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
-                .add(Attributes.ATTACK_DAMAGE, 2 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, 1)
+                .add(Attributes.ATTACK_DAMAGE, tier.getTierDamage() * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.MAX_HEALTH, !BPConfig.getHellMode ? tier.getTierHealth() : tier.getHellTierHP())
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FLYING_SPEED, 0.45 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
@@ -103,6 +98,16 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
         return 3;
     }
 
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+
+        if (source != DamageSource.OUT_OF_WORLD) {
+            amount = 1;
+        }
+
+        return super.hurt(source, amount);
+    }
+
     public void tick() {
         super.tick();
 
@@ -123,30 +128,6 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
-    }
-
-    @Nullable
-    public ILivingEntityData finalizeSpawn(IServerWorld iServerWorld, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData iLivingEntityData, @Nullable CompoundNBT compoundNBT) {
-        iLivingEntityData = super.finalizeSpawn(iServerWorld, difficultyInstance, spawnReason, iLivingEntityData, compoundNBT);
-
-        BPConfig.Common config = BPConfig.COMMON;
-
-        if (iServerWorld instanceof ServerWorld && !config.hellMode.get()) {
-            // If not Hellmode
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.getGrylynenTier().getTierHealth());
-            this.setHealth(this.getGrylynenTier().getTierHealth());
-
-        } else if (iServerWorld instanceof ServerWorld && config.hellMode.get()) {
-            // If in Hellmode
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.getGrylynenTier().getHellTierHP());
-            this.setHealth(this.getGrylynenTier().getHellTierHP());
-        }
-
-        if (iServerWorld instanceof ServerWorld) {
-            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(this.getGrylynenTier().getTierDamage() * config.mobMeeleeDamageMultiplier.get());
-        }
-
-        return iLivingEntityData;
     }
 
     @Override

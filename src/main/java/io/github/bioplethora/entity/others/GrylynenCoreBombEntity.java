@@ -114,14 +114,14 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         boolean flag = super.hurt(pSource, pAmount);
-        if (flag) this.remove();
+        this.remove();
         return flag;
     }
 
     @Override
     protected void markHurt() {
-        this.remove();
         super.markHurt();
+        this.remove();
     }
 
     public void setTier(IGrylynenTier tier) {

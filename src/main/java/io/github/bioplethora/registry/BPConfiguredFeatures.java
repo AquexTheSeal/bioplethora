@@ -58,7 +58,7 @@ public class BPConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> TURQUOISE_PENDENT_CONFIG = BPFeatures.PENDENT_BLOCKS.get()
             .configured(new PendentBlocksFeatureConfig.Builder()
                     .setTopBlock(Blocks.WARPED_WART_BLOCK).setMiddleBlock(BPBlocks.TURQUOISE_PENDENT_PLANT.get())
-                    .setFruitedBlock(BPBlocks.TURQUOISE_PENDENT.get()).setEndBlock(BPBlocks.THONTUS_THISTLE.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
+                    .setFruitedBlock(BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get()).setEndBlock(BPBlocks.TURQUOISE_PENDENT.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
                     .setWhitelist(ImmutableList.of(Blocks.WARPED_WART_BLOCK, Blocks.NETHERRACK, Blocks.BLACKSTONE))
                     .setMinLength(2)
                     .setMaxLength(8)

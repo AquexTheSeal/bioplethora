@@ -16,7 +16,6 @@ public class BPCompatJER {
     private static void registerMobLoot() {
 
         World world = JERAPI.getInstance().getWorld();
-
         registerLoot(BPEntities.CREPHOXL.get().create(world), "loot_tables/entities/crephoxl.json");
         registerLoot(BPEntities.NANDBRI.get().create(world), "loot_tables/entities/nandbri.json");
         registerLoot(BPEntities.CUTTLEFISH.get().create(world), "loot_tables/entities/cuttlefish.json");

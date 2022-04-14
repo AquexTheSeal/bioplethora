@@ -8,6 +8,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.AnimationProcessor;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
 
@@ -34,6 +35,7 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
         super.setLivingAnimations(entity, uniqueID, customPredicate);
 
         AnimationProcessor ap = this.getAnimationProcessor();
+        EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
         IBone head = ap.getBone("head"), bodytop = ap.getBone("bodytop"), bodymid = ap.getBone("bodymid");
         IBone arml = ap.getBone("arml"), armr = ap.getBone("armr");
         IBone legl = ap.getBone("legl"), legr = ap.getBone("legr");
@@ -43,9 +45,12 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
         float pi = (float) Math.PI;
         float rotationScale = entity.isBerserked() ? 0.75f : 0.3f;
 
+        head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
+        head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
+
         if (entity.hurtTime > 0) {
             lerpHelper = lerpHelper * lerpHelper * lerpHelper;
-            rotationScale = entity.getRandom().nextBoolean() ? rotationScale : -rotationScale;
+            //rotationScale = entity.getRandom().nextBoolean() ? rotationScale : -rotationScale;
             head.setRotationX(head.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);
             bodytop.setRotationX(bodytop.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);
             bodymid.setRotationX(bodymid.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);
