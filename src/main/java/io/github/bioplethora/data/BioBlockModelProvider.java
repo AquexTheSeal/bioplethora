@@ -105,6 +105,10 @@ public class BioBlockModelProvider extends BlockModelProvider {
          */
     }
 
+    public void bigMushroom(String name, ResourceLocation all) {
+        singleTexture(name, bioResLoc("big_mushroom"), "0", all);
+    }
+
     private ResourceLocation bioResLoc(String texture) {
         return new ResourceLocation(Bioplethora.MOD_ID, BLOCK_FOLDER + "/" + texture);
     }

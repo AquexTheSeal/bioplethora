@@ -1,0 +1,74 @@
+{
+	"credit": "Made with Blockbench",
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 6, 13],
+			"color": 0,
+			"faces": {
+				"north": {"uv": [0, 0, 10, 6], "texture": "#missing"},
+				"east": {"uv": [0, 0, 10, 6], "texture": "#missing"},
+				"south": {"uv": [0, 0, 10, 6], "texture": "#missing"},
+				"west": {"uv": [0, 0, 10, 6], "texture": "#missing"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#missing"},
+				"down": {"uv": [0, 0, 10, 10], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [1, 6, 1],
+			"to": [15, 15, 15],
+			"color": 0,
+			"faces": {
+				"north": {"uv": [0, 0, 14, 9], "texture": "#missing"},
+				"east": {"uv": [0, 0, 14, 9], "texture": "#missing"},
+				"south": {"uv": [0, 0, 14, 9], "texture": "#missing"},
+				"west": {"uv": [0, 0, 14, 9], "texture": "#missing"},
+				"up": {"uv": [0, 0, 14, 14], "texture": "#missing"},
+				"down": {"uv": [0, 0, 14, 14], "texture": "#missing"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75.02, 39.16, -12.11],
+			"translation": [0, 2, -0.5],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75.02, 39.16, -12.11],
+			"translation": [0, 2, -0.5],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"firstperson_righthand": {
+			"rotation": [13.75, 0, 0],
+			"translation": [0, 0.75, -1],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [13.75, 0, 0],
+			"translation": [0, 0.75, -1],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"translation": [0, -0.75, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [45, 45, 0],
+			"translation": [0, -1, 0],
+			"scale": [0.65, 0.65, 0.65]
+		},
+		"head": {
+			"translation": [0, 14.75, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "big_mushroom",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

@@ -9,6 +9,7 @@ import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -103,6 +104,17 @@ public class BioBlockstateProvider extends BlockStateProvider {
     }
 
     // Custom Generators
+    public void bigMushroomBlock(Block block) {
+        bigMushroom(block, bigMushroom(block));
+    }
+
+    public ModelFile bigMushroom(Block block) {return bigMushroom(block.getRegistryName().getPath(), blockTexture(block));}
+    public void bigMushroom(Block block, ModelFile model) {
+        bigMushroom(block, new ConfiguredModel(model));
+    }
+    public void bigMushroom(Block block, ConfiguredModel... models) {getVariantBuilder(block).partialState().setModels(models);}
+    public BlockModelBuilder bigMushroom(String name, ResourceLocation all) {return models().singleTexture(name, bioResLoc("big_mushroom"), "0", all);}
+
     public void reinforcingTableBlock(ReinforcingTableBlock block) {
         ModelFile all = models().orientableWithBottom(block.getRegistryName().getPath(),
                 bioResLoc(block.getRegistryName().getPath() + "_side"),
@@ -126,33 +138,17 @@ public class BioBlockstateProvider extends BlockStateProvider {
         carpetBlock(block, carpetBlock(block));
     }
 
-    public ModelFile carpetBlock(Block block) {
-        return models().carpet(block.getRegistryName().getPath(), blockTexture(block));
-    }
-
-    public void carpetBlock(Block block, ModelFile model) {
-        carpetBlock(block, new ConfiguredModel(model));
-    }
-
-    public void carpetBlock(Block block, ConfiguredModel... models) {
-        getVariantBuilder(block).partialState().setModels(models);
-    }
+    public ModelFile carpetBlock(Block block) {return models().carpet(block.getRegistryName().getPath(), blockTexture(block));}
+    public void carpetBlock(Block block, ModelFile model) {carpetBlock(block, new ConfiguredModel(model));}
+    public void carpetBlock(Block block, ConfiguredModel... models) {getVariantBuilder(block).partialState().setModels(models);}
 
     public void simpleCrossBlock(Block block) {
         crossBlock(block, crossBlock(block));
     }
 
-    public ModelFile crossBlock(Block block) {
-        return models().cross(block.getRegistryName().getPath(), blockTexture(block));
-    }
-
-    public void crossBlock(Block block, ModelFile model) {
-        crossBlock(block, new ConfiguredModel(model));
-    }
-
-    public void crossBlock(Block block, ConfiguredModel... models) {
-        getVariantBuilder(block).partialState().setModels(models);
-    }
+    public ModelFile crossBlock(Block block) {return models().cross(block.getRegistryName().getPath(), blockTexture(block));}
+    public void crossBlock(Block block, ModelFile model) {crossBlock(block, new ConfiguredModel(model));}
+    public void crossBlock(Block block, ConfiguredModel... models) {getVariantBuilder(block).partialState().setModels(models);}
 
     public void pressurePlateBlock(PressurePlateBlock block, ResourceLocation all) {
         pressurePlateBlockInternal(block, block.getRegistryName().getPath(), all);
