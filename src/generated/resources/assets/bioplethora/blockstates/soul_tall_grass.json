@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "bioplethora:block/soul_tall_grass_upper"
+    },
+    "half=lower": {
+      "model": "bioplethora:block/soul_tall_grass_lower"
+    }
+  }
+}

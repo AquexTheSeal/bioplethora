@@ -42,6 +42,10 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("fleignarite_vines_plant", bioResLoc("fleignarite_vines_plant"));
 
         // Nether Plants
+        this.bigMushroom("soul_bigshroom", bioResLoc("soul_bigshroom"));
+
+        this.doubleCropPlant("soul_tall_grass", bioResLoc("soul_tall_grass_bottom"), bioResLoc("soul_tall_grass_top"));
+
         this.cross("basalt_speleotherm", bioResLoc("basalt_speleotherm"));
         this.cross("basalt_speleotherm_plant", bioResLoc("basalt_speleotherm_plant"));
         this.cross("fiery_basalt_speleotherm", bioResLoc("fiery_basalt_speleotherm"));
@@ -106,7 +110,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
     }
 
     public void bigMushroom(String name, ResourceLocation all) {
-        singleTexture(name, bioResLoc("big_mushroom"), "0", all);
+        singleTexture(name, bioResLoc("big_mushroom"), "0", all).texture("particle", all);
     }
 
     private ResourceLocation bioResLoc(String texture) {
@@ -127,6 +131,16 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.wallInventory(wall, bioResLoc(mainBlock));
         this.slab(slab, bioResLoc(mainBlock), bioResLoc(mainBlock), bioResLoc(mainBlock));
         this.slabTop(slab, bioResLoc(mainBlock), bioResLoc(mainBlock), bioResLoc(mainBlock));
+    }
+
+    public void doubleCrossPlant(String name, ResourceLocation bottom, ResourceLocation top) {
+        cross(name + "_lower", bottom);
+        cross(name + "_upper", top);
+    }
+
+    public void doubleCropPlant(String name, ResourceLocation bottom, ResourceLocation top) {
+        crop(name + "_lower", bottom);
+        crop(name + "_upper", top);
     }
 
     public void pressurePlateUp(String name, ResourceLocation all) {

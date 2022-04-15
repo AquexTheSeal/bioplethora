@@ -7,6 +7,7 @@ import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
@@ -43,6 +44,10 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get());
 
         // Nether Plants
+        this.bigMushroomBlock(BPBlocks.SOUL_BIGSHROOM.get());
+
+        this.doubleCropPlantBlock(BPBlocks.SOUL_TALL_GRASS.get());
+
         this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM.get());
         this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM_PLANT.get());
         this.simpleCrossBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM.get());
@@ -105,15 +110,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
     // Custom Generators
     public void bigMushroomBlock(Block block) {
-        bigMushroom(block, bigMushroom(block));
+        BlockModelBuilder mushroom = models().singleTexture(block.getRegistryName().getPath(), bioResLoc("big_mushroom"), "0", blockTexture(block)).texture("particle", blockTexture(block));
+        getVariantBuilder(block).partialState().setModels(new ConfiguredModel(mushroom));
     }
-
-    public ModelFile bigMushroom(Block block) {return bigMushroom(block.getRegistryName().getPath(), blockTexture(block));}
-    public void bigMushroom(Block block, ModelFile model) {
-        bigMushroom(block, new ConfiguredModel(model));
-    }
-    public void bigMushroom(Block block, ConfiguredModel... models) {getVariantBuilder(block).partialState().setModels(models);}
-    public BlockModelBuilder bigMushroom(String name, ResourceLocation all) {return models().singleTexture(name, bioResLoc("big_mushroom"), "0", all);}
 
     public void reinforcingTableBlock(ReinforcingTableBlock block) {
         ModelFile all = models().orientableWithBottom(block.getRegistryName().getPath(),
@@ -134,21 +133,35 @@ public class BioBlockstateProvider extends BlockStateProvider {
                 .modelForState().modelFile(all).rotationY(270).addModel();
     }
 
-    public void simpleCarpetBlock(Block block) {
-        carpetBlock(block, carpetBlock(block));
+    public void doubleCrossPlantBlock(Block block) {
+        ModelFile lower = models().cross(block.getRegistryName().getPath() + "_bottom", bioResLoc(block.getRegistryName().getPath() + "_bottom"));
+        ModelFile upper = models().cross(block.getRegistryName().getPath() + "_upper", bioResLoc(block.getRegistryName().getPath() + "_upper"));
+
+        getVariantBuilder(block)
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(lower).addModel()
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(upper).addModel();
     }
 
-    public ModelFile carpetBlock(Block block) {return models().carpet(block.getRegistryName().getPath(), blockTexture(block));}
-    public void carpetBlock(Block block, ModelFile model) {carpetBlock(block, new ConfiguredModel(model));}
-    public void carpetBlock(Block block, ConfiguredModel... models) {getVariantBuilder(block).partialState().setModels(models);}
+    public void doubleCropPlantBlock(Block block) {
+        ModelFile lower = models().crop(block.getRegistryName().getPath() + "_lower", bioResLoc(block.getRegistryName().getPath() + "_bottom"));
+        ModelFile upper = models().crop(block.getRegistryName().getPath() + "_upper", bioResLoc(block.getRegistryName().getPath() + "_top"));
+
+        getVariantBuilder(block)
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(lower).addModel()
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(upper).addModel();
+    }
+
+    public void simpleCarpetBlock(Block block) {
+        getVariantBuilder(block).partialState().setModels(new ConfiguredModel(models().carpet(block.getRegistryName().getPath(), blockTexture(block))));
+    }
 
     public void simpleCrossBlock(Block block) {
-        crossBlock(block, crossBlock(block));
+        getVariantBuilder(block).partialState().setModels(new ConfiguredModel(models().cross(block.getRegistryName().getPath(), blockTexture(block))));
     }
-
-    public ModelFile crossBlock(Block block) {return models().cross(block.getRegistryName().getPath(), blockTexture(block));}
-    public void crossBlock(Block block, ModelFile model) {crossBlock(block, new ConfiguredModel(model));}
-    public void crossBlock(Block block, ConfiguredModel... models) {getVariantBuilder(block).partialState().setModels(models);}
 
     public void pressurePlateBlock(PressurePlateBlock block, ResourceLocation all) {
         pressurePlateBlockInternal(block, block.getRegistryName().getPath(), all);
@@ -199,4 +212,6 @@ public class BioBlockstateProvider extends BlockStateProvider {
                             .build();
                 });
     }
+
+
 }

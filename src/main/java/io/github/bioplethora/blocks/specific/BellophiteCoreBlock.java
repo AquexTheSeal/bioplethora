@@ -1,4 +1,4 @@
-package io.github.bioplethora.blocks;
+package io.github.bioplethora.blocks.specific;
 
 import io.github.bioplethora.entity.others.AltyrusSummoningEntity;
 import io.github.bioplethora.registry.BPBlocks;

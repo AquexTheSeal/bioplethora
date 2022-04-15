@@ -159,7 +159,7 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> SOUL_SAND_VALLEY_ENTITIES = (builder) -> {
             //Soul Eurydn
-            createSpawn(builder, monster, BPEntities.SOUL_EURYDN, 9, 2, 3, BPConfig.COMMON.spawnSoulEurydn);
+            createSpawn(builder, monster, BPEntities.SOUL_EURYDN, 9, 1, 3, BPConfig.COMMON.spawnSoulEurydn);
         };
 
         private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {

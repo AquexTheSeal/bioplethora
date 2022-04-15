@@ -35,6 +35,10 @@ public class BPBlockLootTables extends BlockLootTables {
         dropOther(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), BPItems.FLEIGNARITE_SCALES.get());
 
         // Nether Plants
+        dropSelf(BPBlocks.SOUL_TALL_GRASS.get());
+
+        dropSelf(BPBlocks.SOUL_BIGSHROOM.get());
+
         dropSelf(BPBlocks.BASALT_SPELEOTHERM.get());
         dropOther(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), BPBlocks.BASALT_SPELEOTHERM.get());
         dropOther(BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), BPBlocks.BASALT_SPELEOTHERM.get());

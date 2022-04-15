@@ -51,6 +51,8 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_SPLOTCH.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_TALL_GRASS.get(), RenderType.cutout());
+
         RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), RenderType.cutout());

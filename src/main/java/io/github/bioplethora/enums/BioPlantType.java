@@ -1,4 +1,4 @@
-package io.github.bioplethora.blocks;
+package io.github.bioplethora.enums;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;

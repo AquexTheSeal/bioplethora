@@ -6,6 +6,7 @@
     "minecraft:beacon",
     "minecraft:obsidian",
     "minecraft:crying_obsidian",
+    "minecraft:bedrock",
     "#minecraft:wither_immune"
   ]
 }

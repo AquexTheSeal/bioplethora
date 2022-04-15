@@ -7,8 +7,10 @@ import io.github.bioplethora.world.feature_config.PendentBlocksFeatureConfig;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.FeatureSpread;
+import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
+import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.CaveEdgeConfig;
 import net.minecraft.world.gen.placement.Placement;
 
@@ -44,6 +46,20 @@ public class BPConfiguredFeatures {
                     .setMaxLength(8)
                     .build())
             .range(132).squared().count(115);
+
+    public static final ConfiguredFeature<?, ?> SOUL_BIGSHROOM_CONFIG = new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC)
+            .configured(new BlockClusterFeatureConfig.Builder(
+                    new SimpleBlockStateProvider(BPBlocks.SOUL_BIGSHROOM.get().defaultBlockState()),
+                    new SimpleBlockPlacer())
+                    .tries(64).build())
+            .decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(15);
+
+    public static final ConfiguredFeature<?, ?> SOUL_TALL_GRASS_CONFIG = Feature.RANDOM_PATCH
+            .configured(new BlockClusterFeatureConfig.Builder(
+                    new SimpleBlockStateProvider(BPBlocks.SOUL_TALL_GRASS.get().defaultBlockState()),
+                    new DoublePlantBlockPlacer())
+                    .tries(64).noProjection().build())
+            .decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(18);
 
     public static final ConfiguredFeature<?, ?> THONTUS_THISTLE_CONFIG = BPFeatures.PENDENT_BLOCKS.get()
             .configured(new PendentBlocksFeatureConfig.Builder()

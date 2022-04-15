@@ -1,4 +1,4 @@
-package io.github.bioplethora.blocks;
+package io.github.bioplethora.blocks.specific;
 
 import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.*;
