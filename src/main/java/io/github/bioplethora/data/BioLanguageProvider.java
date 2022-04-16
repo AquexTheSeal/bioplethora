@@ -3,6 +3,7 @@ package io.github.bioplethora.data;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.enchantments.AntibioEnchantment;
 import io.github.bioplethora.registry.*;
+import io.github.bioplethora.registry.worldgen.BPBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.enchantment.Enchantment;

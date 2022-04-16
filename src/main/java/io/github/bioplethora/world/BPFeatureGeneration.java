@@ -3,7 +3,7 @@ package io.github.bioplethora.world;
 import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.api.world.WorldgenUtils;
-import io.github.bioplethora.registry.BPConfiguredFeatures;
+import io.github.bioplethora.registry.worldgen.BPConfiguredFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

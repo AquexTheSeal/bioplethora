@@ -4,6 +4,10 @@ import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.keybindings.BPNetwork;
 import io.github.bioplethora.registry.*;
+import io.github.bioplethora.registry.worldgen.BPBiomes;
+import io.github.bioplethora.registry.worldgen.BPBlockPlacers;
+import io.github.bioplethora.registry.worldgen.BPFeatures;
+import io.github.bioplethora.registry.worldgen.BPStructures;
 import io.github.bioplethora.world.BPBiomeGeneration;
 import io.github.bioplethora.world.EntitySpawnManager;
 import net.minecraft.data.DataGenerator;
@@ -49,6 +53,7 @@ public class Bioplethora {
         BPStructures.STRUCTURES.register(bus);
         BPFeatures.FEATURES.register(bus);
         BPAttributes.ATTRIBUTES.register(bus);
+        BPBlockPlacers.BLOCK_PLACERS.register(bus);
 
         BPTileEntities.TILE_ENTITIES.register(bus);
         BPContainerTypes.CONTAINERS.register(bus);

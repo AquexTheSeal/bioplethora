@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.extras;
 
 import io.github.bioplethora.registry.BPBlocks;
-import io.github.bioplethora.registry.BPStructures;
+import io.github.bioplethora.registry.worldgen.BPStructures;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;

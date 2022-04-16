@@ -6,7 +6,9 @@ import net.minecraft.block.Blocks;
 
 public enum BioPlantType {
 
-    SOUL_SAND_VALLEY(ImmutableList.of(Blocks.SOUL_SAND, Blocks.SOUL_SOIL));
+    ALL(ImmutableList.of(Blocks.NETHERRACK, Blocks.WARPED_NYLIUM, Blocks.CRIMSON_NYLIUM, Blocks.BASALT, Blocks.SOUL_SAND, Blocks.SOUL_SOIL)),
+    SOUL_SAND_VALLEY(ImmutableList.of(Blocks.SOUL_SAND, Blocks.SOUL_SOIL))
+    ;
 
     private final ImmutableList<Block> whitelist;
 

@@ -1,6 +1,6 @@
 package io.github.bioplethora.world;
 
-import io.github.bioplethora.registry.BPBiomes;
+import io.github.bioplethora.registry.worldgen.BPBiomes;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;

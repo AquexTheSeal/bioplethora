@@ -1,4 +1,4 @@
-package io.github.bioplethora.registry;
+package io.github.bioplethora.registry.worldgen;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.world.biomes.RockyWoodlandBiome;

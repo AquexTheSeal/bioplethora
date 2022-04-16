@@ -1,6 +1,7 @@
-package io.github.bioplethora.registry;
+package io.github.bioplethora.registry.worldgen;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.WorldGenRegistries;

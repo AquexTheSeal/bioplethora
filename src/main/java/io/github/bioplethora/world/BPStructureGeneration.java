@@ -2,7 +2,7 @@ package io.github.bioplethora.world;
 
 import com.mojang.serialization.Codec;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.registry.BPStructures;
+import io.github.bioplethora.registry.worldgen.BPStructures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;

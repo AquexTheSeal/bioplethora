@@ -1,4 +1,4 @@
-package io.github.bioplethora.registry;
+package io.github.bioplethora.registry.worldgen;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
