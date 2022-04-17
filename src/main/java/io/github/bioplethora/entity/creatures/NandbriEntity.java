@@ -112,7 +112,7 @@ public class NandbriEntity extends BPMonsterEntity implements IAnimatable, IBioC
         boolean flag = super.doHurtTarget(entity);
         World world = entity.level;
         if(flag && entity instanceof LivingEntity) {
-            ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 200, 2));
+            ((LivingEntity) entity).addEffect(new EffectInstance(Effects.POISON, 100, 1));
             if(!world.isClientSide()) {
                 if(this.attackPhase == 0) {
                     world.playSound(null, this, SoundEvents.ZOMBIE_INFECT, SoundCategory.HOSTILE, 1, 1);
