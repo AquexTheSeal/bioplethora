@@ -39,6 +39,8 @@ public class BioItemModelProvider extends ItemModelProvider {
 
         this.specialFlatTexture(BPBlocks.SOUL_TALL_GRASS, "soul_tall_grass_top");
 
+        this.specialFlatTexture(BPBlocks.SOUL_MINISHROOM, BPBlocks.SOUL_MINISHROOM, ITEM_FOLDER);
+
         this.specialFlatTexture(BPBlocks.LAVA_SPIRE, BPBlocks.LAVA_SPIRE);
 
         this.specialFlatTexture(BPBlocks.BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
@@ -129,14 +131,22 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.specialFlatTexture(block, textureBlock.get().getRegistryName().getPath());
     }
 
+    public void specialFlatTexture(RegistryObject<Block> block, RegistryObject<Block> textureBlock, String fileDirectory) {
+        specialFlatTexture(block, textureBlock.get().getRegistryName().getPath(), fileDirectory);
+    }
+
     public void specialFlatTexture(RegistryObject<Block> block, String texture) {
+        specialFlatTexture(block, texture, BLOCK_FOLDER);
+    }
+
+    public void specialFlatTexture(RegistryObject<Block> block, String texture, String fileDirectory) {
         String name = block.getId().getPath();
         ResourceLocation datagenLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
 
         ModelFile.ExistingModelFile modelType = getMcLoc("item/generated");
 
         if (!existingFileHelper.exists(datagenLoc, TEXTURE) || existingFileHelper.exists(datagenLoc, MODEL)) {
-            this.getBuilder(name).parent(modelType).texture("layer0", BLOCK_FOLDER + "/" + texture);
+            this.getBuilder(name).parent(modelType).texture("layer0", fileDirectory + "/" + texture);
             Bioplethora.LOGGER.info("Generate Block Item Successful: " + name);
         }
     }

@@ -14,7 +14,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 
-public class BPPlantBlock extends BushBlock {
+public class BPPlantBlock extends BushBlock  {
 
     public BioPlantType type;
     public BioPlantShape shape;

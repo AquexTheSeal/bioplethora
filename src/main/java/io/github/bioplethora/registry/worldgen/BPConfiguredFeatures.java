@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.world.BPFeatureGeneration;
 import io.github.bioplethora.world.blockplacer.LavaEdgeBlockPlacer;
+import io.github.bioplethora.world.blockplacer.MinishroomBlockPlacer;
 import io.github.bioplethora.world.feature_config.FleignariteSplotchConfig;
 import io.github.bioplethora.world.feature_config.PendentBlocksFeatureConfig;
 import net.minecraft.block.AbstractTopPlantBlock;
@@ -26,6 +27,10 @@ public class BPConfiguredFeatures {
     //--------------------------------
 
     // Mushrooms
+    public static final ConfiguredFeature<?, ?> SOUL_MINISHROOM_CONFIG = makeDecoratedClusterPlants(
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_MINISHROOM.get(), new MinishroomBlockPlacer(), 15
+    );
+    
     public static final ConfiguredFeature<?, ?> SOUL_BIGSHROOM_CONFIG = makeDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_BIGSHROOM.get(), new SimpleBlockPlacer(), 12
     );

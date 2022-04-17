@@ -1,10 +1,13 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.blocks.SmallMushroomBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
@@ -44,6 +47,8 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get());
 
         // Nether Plants
+        this.smallMushroomBlock(BPBlocks.SOUL_MINISHROOM.get());
+
         this.bigMushroomBlock(BPBlocks.SOUL_BIGSHROOM.get());
 
         this.doubleCropPlantBlock(BPBlocks.SOUL_TALL_GRASS.get());
@@ -114,6 +119,53 @@ public class BioBlockstateProvider extends BlockStateProvider {
     public void bigMushroomBlock(Block block) {
         BlockModelBuilder mushroom = models().singleTexture(block.getRegistryName().getPath(), bioResLoc("big_mushroom"), "0", blockTexture(block)).texture("particle", blockTexture(block));
         getVariantBuilder(block).partialState().setModels(new ConfiguredModel(mushroom));
+    }
+
+    public void smallMushroomBlock(Block block) {
+
+        /*
+        getVariantBuilder(block)
+                .partialState().with(facing, Direction.SOUTH).with(amount, 1)
+                .modelForState().modelFile(mushroom1).addModel()
+                .partialState().with(facing, Direction.WEST).with(amount, 1)
+                .modelForState().modelFile(mushroom1).rotationY(90).addModel()
+                .partialState().with(facing, Direction.NORTH).with(amount, 1)
+                .modelForState().modelFile(mushroom1).rotationY(180).addModel()
+                .partialState().with(facing, Direction.EAST).with(amount, 1)
+                .modelForState().modelFile(mushroom1).rotationY(270).addModel()
+        ;
+         */
+
+        getVariantBuilder(block)
+                .forAllStates(state -> ConfiguredModel.builder()
+                        .modelFile(getMinishroomModel(block, state))
+                        .rotationY(minishroomRotation(state))
+                        .build());
+    }
+
+    public BlockModelBuilder getMinishroomModel(Block block, BlockState state) {
+        BlockModelBuilder mushroom1 = models().singleTexture(block.getRegistryName().getPath() + "_one", bioResLoc("small_mushroom_one"), "0", blockTexture(block)).texture("particle", blockTexture(block));
+        BlockModelBuilder mushroom2 = models().singleTexture(block.getRegistryName().getPath() + "_two", bioResLoc("small_mushroom_two"), "0", blockTexture(block)).texture("particle", blockTexture(block));
+        BlockModelBuilder mushroom3 = models().singleTexture(block.getRegistryName().getPath() + "_three", bioResLoc("small_mushroom_three"), "0", blockTexture(block)).texture("particle", blockTexture(block));
+
+        IntegerProperty amount = SmallMushroomBlock.MINISHROOMS;
+
+        switch (state.getValue(amount)) {
+            default: return mushroom1;
+            case 2: return mushroom2;
+            case 3: return mushroom3;
+        }
+    }
+
+    public int minishroomRotation(BlockState state) {
+        DirectionProperty facing = SmallMushroomBlock.FACING_DIRECTION;
+
+        switch (state.getValue(facing)) {
+            default: return 0;
+            case WEST: return 90;
+            case NORTH: return 180;
+            case EAST: return 270;
+        }
     }
 
     public void reinforcingTableBlock(ReinforcingTableBlock block) {

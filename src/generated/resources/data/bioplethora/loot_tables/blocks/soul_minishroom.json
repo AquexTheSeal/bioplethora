@@ -1,0 +1,58 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "bioplethora:soul_minishroom",
+                  "properties": {
+                    "minishrooms": "1"
+                  }
+                }
+              ],
+              "count": 1
+            },
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "bioplethora:soul_minishroom",
+                  "properties": {
+                    "minishrooms": "2"
+                  }
+                }
+              ],
+              "count": 2
+            },
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "bioplethora:soul_minishroom",
+                  "properties": {
+                    "minishrooms": "3"
+                  }
+                }
+              ],
+              "count": 3
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "bioplethora:soul_minishroom"
+        }
+      ]
+    }
+  ]
+}

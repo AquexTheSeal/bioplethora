@@ -1,11 +1,19 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.blocks.SmallMushroomBlock;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPItems;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Objects;
@@ -36,11 +44,13 @@ public class BPBlockLootTables extends BlockLootTables {
         dropOther(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), BPItems.FLEIGNARITE_SCALES.get());
 
         // Nether Plants
-        dropSelf(BPBlocks.SOUL_TALL_GRASS.get());
+        dropMinishroom(BPBlocks.SOUL_MINISHROOM.get());
 
         dropSelf(BPBlocks.SOUL_BIGSHROOM.get());
 
         dropOther(BPBlocks.LAVA_SPIRE.get(), Blocks.AIR);
+
+        dropSelf(BPBlocks.SOUL_TALL_GRASS.get());
 
         dropSelf(BPBlocks.BASALT_SPELEOTHERM.get());
         dropOther(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), BPBlocks.BASALT_SPELEOTHERM.get());
@@ -103,5 +113,25 @@ public class BPBlockLootTables extends BlockLootTables {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return ForgeRegistries.BLOCKS.getValues().stream().filter(b -> Objects.requireNonNull(b.getRegistryName()).getNamespace().equals(Bioplethora.MOD_ID)).collect(Collectors.toList());
+    }
+
+    public void dropMinishroom(Block shroom) {
+        this.add(shroom, (p_218478_0_) ->
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(applyExplosionDecay(shroom, ItemLootEntry.lootTableItem(p_218478_0_)
+                                        .apply(SetCount.setCount(ConstantRange.exactly(1))
+                                                .when(BlockStateProperty.hasBlockStateProperties(p_218478_0_).setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(SmallMushroomBlock.MINISHROOMS, 1))))
+                                        .apply(SetCount.setCount(ConstantRange.exactly(2))
+                                                .when(BlockStateProperty.hasBlockStateProperties(p_218478_0_).setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(SmallMushroomBlock.MINISHROOMS, 2))))
+                                        .apply(SetCount.setCount(ConstantRange.exactly(3))
+                                                .when(BlockStateProperty.hasBlockStateProperties(p_218478_0_).setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(SmallMushroomBlock.MINISHROOMS, 3))))
+                                ))
+                        )
+        );
     }
 }

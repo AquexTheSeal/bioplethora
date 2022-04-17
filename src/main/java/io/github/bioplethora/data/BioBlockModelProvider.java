@@ -42,6 +42,8 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("fleignarite_vines_plant", bioResLoc("fleignarite_vines_plant"));
 
         // Nether Plants
+        this.smallMushroom("soul_minishroom", bioResLoc("soul_minishroom"));
+
         this.bigMushroom("soul_bigshroom", bioResLoc("soul_bigshroom"));
 
         this.doubleCropPlant("soul_tall_grass", bioResLoc("soul_tall_grass_bottom"), bioResLoc("soul_tall_grass_top"));
@@ -113,6 +115,12 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
     public void bigMushroom(String name, ResourceLocation all) {
         singleTexture(name, bioResLoc("big_mushroom"), "0", all).texture("particle", all);
+    }
+
+    public void smallMushroom(String name, ResourceLocation all) {
+        singleTexture(name + "_one", bioResLoc("small_mushroom_one"), "0", all).texture("particle", all);
+        singleTexture(name + "_two", bioResLoc("small_mushroom_two"), "0", all).texture("particle", all);
+        singleTexture(name + "_three", bioResLoc("small_mushroom_three"), "0", all).texture("particle", all);
     }
 
     private ResourceLocation bioResLoc(String texture) {

@@ -63,6 +63,7 @@ public class BPFeatureGeneration {
                 vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SOUL_SAND_VALLEY)) {
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_MINISHROOM_CONFIG);
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_BIGSHROOM_CONFIG);
 
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_TALL_GRASS_CONFIG);

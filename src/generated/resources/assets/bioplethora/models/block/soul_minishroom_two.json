@@ -1,0 +1,7 @@
+{
+  "parent": "bioplethora:block/small_mushroom_two",
+  "textures": {
+    "0": "bioplethora:block/soul_minishroom",
+    "particle": "bioplethora:block/soul_minishroom"
+  }
+}

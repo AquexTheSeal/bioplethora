@@ -121,7 +121,7 @@ public class NandbricShortswordItem extends SwordItem {
                     how they're executed in a tick, so they may not work in some cases (e.g. the item will cooldown
                     but the target won't actually get hurt. this is annoying as hell and i'm not sure
                     how to fix this, but whatever ig, i'm too tired of finding a solution when i
-                    can't even find any... yet :true_despair:
+                    can't even find any... yet.
 
                     NOTE: running the `hurt` method in an if-statement (i.e. `if(this.target.hurt(DamageSource, float))`)
                     to return a boolean & do stuff based on that doesn't work either

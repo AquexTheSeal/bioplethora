@@ -1,10 +1,7 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.blocks.BPDoublePlantBlock;
-import io.github.bioplethora.blocks.BPPlantBlock;
-import io.github.bioplethora.blocks.BPVinesBlock;
-import io.github.bioplethora.blocks.BPVinesTopBlock;
+import io.github.bioplethora.blocks.*;
 import io.github.bioplethora.blocks.specific.*;
 import io.github.bioplethora.blocks.tile_entities.FleignariteSplotchBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
@@ -64,6 +61,9 @@ public class BPBlocks {
             .lightLevel((level) -> 5)), null, false);
 
     // Nether Plants
+    public static final RegistryObject<Block> SOUL_MINISHROOM = registerBlock("soul_minishroom", () -> new SmallMushroomBlock(BioPlantType.SOUL_SAND_VALLEY,
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.5F).noCollission().lightLevel((level) -> 4 * level.getValue(SmallMushroomBlock.MINISHROOMS))), BPItemGroup.BioplethoraItemItemGroup);
+
     public static final RegistryObject<Block> SOUL_BIGSHROOM = registerBlock("soul_bigshroom", () -> new BPPlantBlock(BioPlantType.SOUL_SAND_VALLEY, BioPlantShape.BIG_MUSHROOM,
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.5F).noOcclusion().lightLevel((level) -> 7)), BPItemGroup.BioplethoraItemItemGroup);
 
