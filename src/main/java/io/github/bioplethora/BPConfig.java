@@ -70,6 +70,9 @@ public class BPConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> heliobladeMobCap;
         public final ForgeConfigSpec.ConfigValue<Integer> alphemKingMobCap;
 
+        //Weapon Mechanics
+        public final ForgeConfigSpec.ConfigValue<Double> toxinRushSpeedModifier;
+
         Common(ForgeConfigSpec.Builder builder) {
 
             //===================================
@@ -79,6 +82,13 @@ public class BPConfig {
             hellMode = builder.define("Hell Mode (Adds more mechanics and buffs to mobs to make the game harder, hellmode also makes items better)", false);
             hellModeReminder = builder.define("Hell Mode Reminder (Reminds you everytime you join the world, enter a dimension, or respawn)", true);
             startupBiopedia = builder.define("Gives you a Biopedia upon joining the world", true);
+            builder.pop();
+
+            //===================================
+            //          WEAPON MECHANICS
+            //===================================
+            builder.push("Weapon Mechanics");
+            toxinRushSpeedModifier = builder.defineInRange("Multiplier for dashing speed of Nandbric Shortsword Toxin Rush ability. Minimum value of 0.5, maximum value of 5", 2.5f, 0.5f, 5f);
             builder.pop();
 
             //===================================

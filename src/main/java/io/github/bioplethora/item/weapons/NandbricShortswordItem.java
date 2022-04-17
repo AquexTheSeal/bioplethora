@@ -1,9 +1,9 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.item.ItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -33,16 +33,9 @@ import java.util.List;
 public class NandbricShortswordItem extends SwordItem {
     private LivingEntity target;
 
-    public LivingEntity getTarget() {
-        return this.target;
-    }
-
-    public void setTarget(LivingEntity candidate) {
-        this.target = candidate;
-    }
-
     public NandbricShortswordItem(IItemTier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
+        this.target = null;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -65,7 +58,6 @@ public class NandbricShortswordItem extends SwordItem {
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity entity, LivingEntity source) {
         boolean retval = super.hurtEnemy(stack, entity, source);
-
         World world = entity.level;
         double x = entity.getX(), y = entity.getY(), z = entity.getZ();
         BlockPos pos = new BlockPos(x, y, z);
@@ -81,7 +73,7 @@ public class NandbricShortswordItem extends SwordItem {
     }
 
     public UseAction getUseAnimation(ItemStack stack) {
-        return UseAction.BLOCK;
+        return UseAction.SPEAR;
     }
 
     public int getUseDuration(ItemStack stack) {
@@ -89,98 +81,87 @@ public class NandbricShortswordItem extends SwordItem {
     }
 
     public ActionResult<ItemStack> use(World world, PlayerEntity entity, Hand hand) {
+        super.use(world, entity, hand);
         ItemStack itemstack = entity.getItemInHand(hand);
 
-        if (entity.getCooldowns().isOnCooldown(itemstack.getItem())) {
+        double range = 24.0D;
+        double distance = range * range;
+        Vector3d vec = entity.getEyePosition(1);
+        Vector3d vec1 = entity.getViewVector(1);
+        Vector3d targetVec = vec.add(vec1.x * range, vec1.y * range, vec1.z * range);
+        AxisAlignedBB aabb = entity.getBoundingBox().expandTowards(vec1.scale(range)).inflate(4.0D, 4.0D, 4.0D);
+        EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, vec, targetVec, aabb, (filter) -> !filter.isSpectator() && filter != entity, distance);
+        boolean flag = result != null && result.getEntity() instanceof LivingEntity && result.getEntity().isAlive();
+
+        if(entity.getCooldowns().isOnCooldown(itemstack.getItem())) {
             return ActionResult.fail(itemstack);
         } else {
-            // Finds a target candidate by raytracing towards where the cursor points and checking for an entity
-            double range = 24.0D;
-            double distance = range * range;
-            Vector3d vec = entity.getEyePosition(1);
-            Vector3d vec1 = entity.getViewVector(1);
-            Vector3d finalVec = vec.add(vec1.x * range, vec1.y * range, vec1.z * range);
-            AxisAlignedBB aabb = entity.getBoundingBox().expandTowards(vec1.scale(range)).inflate(4.0D, 4.0D, 4.0D);
-            EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, vec, finalVec, aabb, (filter) -> !filter.isSpectator() && filter != entity, distance);
-
-            if(result != null) {
-                setTarget(result.getEntity() instanceof LivingEntity ? (LivingEntity)result.getEntity() : null);
-                if(target != null) {
+            if(flag) {
+                if(entity.canSee(result.getEntity())) {
+                    this.target = (LivingEntity) result.getEntity();
                     entity.startUsingItem(hand);
                     return ActionResult.success(itemstack);
-                }
-            }
-
-            return ActionResult.fail(itemstack);
+                } else return ActionResult.fail(itemstack);
+            } else return ActionResult.fail(itemstack);
         }
     }
 
-    public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
-        super.onUsingTick(stack, player, count);
+    public void onUsingTick(ItemStack itemstack, LivingEntity attacker, int count) {
+        super.onUsingTick(itemstack, attacker, count);
+        World world = attacker.level;
+        Hand hand = attacker.getUsedItemHand();
+        BlockPos attackerPos = new BlockPos(attacker.getX(), attacker.getY(), attacker.getZ());
 
-        Hand hand = player.getUsedItemHand();
+        if(this.target != null) {
+            AxisAlignedBB hitrange = attacker.getBoundingBox().inflate(2);
 
-        if(target != null) {
-            double targetX = target.getX(),
-                    targetY = target.getY(),
-                    targetZ = target.getZ();
-            BlockPos pos = new BlockPos(targetX, targetY, targetZ);
-            World world = player.level;
+            if(hitrange.intersects(this.target.getBoundingBox())) {
+                // TODO (i have no idea when exactly): Fix a stupid bug with some methods not executing in some cases
+                /* some of the methods here are buggy (such as LivingEntity#hurt) especially considering
+                    how they're executed in a tick, so they may not work in some cases (e.g. the item will cooldown
+                    but the target won't actually get hurt. this is annoying as hell and i'm not sure
+                    how to fix this, but whatever ig, i'm too tired of finding a solution when i
+                    can't even find any... yet :true_despair:
 
-            // Charging
-            double vecX = targetX - player.getX();
-            double vecY = player.getDeltaMovement().y;
-            double vecZ = targetZ - player.getZ();
-            double vecM = Math.sqrt((Math.pow(vecX, 2)) + Math.pow(vecY, 2) + Math.pow(vecZ, 2));
-            float speedModifier = 2.5f;
-
-            vecX = (vecX / vecM) * speedModifier;
-            vecY = (vecY / vecM) * speedModifier;
-            vecZ = (vecZ / vecM) * speedModifier;
-
-            player.setDeltaMovement(vecX, vecY, vecZ);
-
-            // For dealing damage to target
-            AxisAlignedBB hitrange = player.getBoundingBox().inflate(2D, 2D, 2D);
-            if (hitrange.intersects(target.getBoundingBox())) {
-                target.hurt(DamageSource.mobAttack(player), 7.0F);
-                if(!world.isClientSide) {
-                    EnchantmentHelper.doPostHurtEffects(target, player);
-                    EnchantmentHelper.doPostDamageEffects(player, target);
-                    target.addEffect(new EffectInstance(Effects.POISON, 300, 1));
-                    ((PlayerEntity)player).getCooldowns().addCooldown(stack.getItem(), 22);
-                }
-
-                // Special FX
-                world.playSound(null, pos, SoundEvents.ZOMBIE_INFECT, SoundCategory.PLAYERS, 1, 1);
-                world.playSound(null, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
-                if(world instanceof ServerWorld) {
-                    ((ServerWorld) world).sendParticles(ParticleTypes.SNEEZE, targetX, targetY + (target.getBbHeight() / 2), targetZ, 30, 1.2, 1.2, 1.2, 0);
-                }
-
-                // For awarding stats
-                if(player instanceof PlayerEntity) {
-                    ((PlayerEntity)player).awardStat(Stats.ITEM_USED.get(this));
-                    if(!((PlayerEntity)player).abilities.instabuild) {
-                        stack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+                    NOTE: running the `hurt` method in an if-statement (i.e. `if(this.target.hurt(DamageSource, float))`)
+                    to return a boolean & do stuff based on that doesn't work either
+                 */
+                this.target.hurt(DamageSource.mobAttack(attacker), 7);
+                this.target.addEffect(new EffectInstance(Effects.POISON, 200, 1));
+                if(attacker instanceof PlayerEntity) {
+                    ((PlayerEntity)attacker).getCooldowns().addCooldown(itemstack.getItem(), 22);
+                    ((PlayerEntity)attacker).awardStat(Stats.ITEM_USED.get(this));
+                    if(!((PlayerEntity)attacker).abilities.instabuild) {
+                        itemstack.hurtAndBreak(1, attacker, (user) -> user.broadcastBreakEvent(hand));
                     }
                 }
+                world.playSound(null, attackerPos, SoundEvents.ZOMBIE_INFECT, SoundCategory.PLAYERS, 1, 1);
+                world.playSound(null, attackerPos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
+                if(world instanceof ServerWorld) {
+                    ((ServerWorld)world).sendParticles(ParticleTypes.SNEEZE, this.target.getX(), this.target.getY() - (this.target.getBbHeight() / 2), this.target.getZ(), 30, 0.8, 1.2, 0.8, 0);
+                }
+                attacker.stopUsingItem();
+            } else {
+                double yDifference = this.target.getY() - attacker.getY();
+                boolean flag = yDifference <= 3 && yDifference > -1;
+                boolean canUseInNonCreative = attacker.getY() > this.target.getY() || flag;
+                double  vecX = this.target.getX() - attacker.getX(),
+                        vecY = this.target.getY() - attacker.getY(),
+                        vecZ = this.target.getZ() - attacker.getZ();
+                double vecM = Math.sqrt(Math.pow(vecX, 2) + Math.pow(vecY, 2) + Math.pow(vecZ, 2));
+                final double speedModifier = BPConfig.COMMON.toxinRushSpeedModifier.get();
+                vecX = (vecX / vecM) * speedModifier;
+                vecY = (vecY / vecM) * speedModifier;
+                vecZ = (vecZ / vecM) * speedModifier;
 
-                player.swing(hand);
-                player.stopUsingItem();
+                if(((PlayerEntity)attacker).abilities.instabuild || canUseInNonCreative) {
+                    attacker.setDeltaMovement(vecX, vecY, vecZ);
+                } else attacker.stopUsingItem();
             }
-
-            // Prevents the user from being flung up into the air while using this weapon
-            if(player.getDeltaMovement().y > 0.1D) {
-                player.setDeltaMovement(player.getDeltaMovement().x(), 0.2D, player.getDeltaMovement().z());
-            }
-        } else {
-            player.stopUsingItem();
-            ((PlayerEntity)player).getCooldowns().addCooldown(stack.getItem(), 20);
-        }
+        } else attacker.stopUsingItem();
     }
 
     public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entity, int value) {
-        target = null;
+        this.target = null;
     }
 }
