@@ -3,6 +3,7 @@ package io.github.bioplethora.registry.worldgen;
 import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.world.BPFeatureGeneration;
+import io.github.bioplethora.world.blockplacer.LavaEdgeBlockPlacer;
 import io.github.bioplethora.world.feature_config.FleignariteSplotchConfig;
 import io.github.bioplethora.world.feature_config.PendentBlocksFeatureConfig;
 import net.minecraft.block.AbstractTopPlantBlock;
@@ -26,13 +27,18 @@ public class BPConfiguredFeatures {
 
     // Mushrooms
     public static final ConfiguredFeature<?, ?> SOUL_BIGSHROOM_CONFIG = makeDecoratedClusterPlants(
-            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_BIGSHROOM.get(), new SimpleBlockPlacer(), 15
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_BIGSHROOM.get(), new SimpleBlockPlacer(), 12
     );
 
     // Grasses
     public static final ConfiguredFeature<?, ?> SOUL_TALL_GRASS_CONFIG = makeNoProjectionClusterPlants(
             Feature.RANDOM_PATCH, BPBlocks.SOUL_TALL_GRASS.get(), new DoublePlantBlockPlacer()
     ).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
+
+    // Other Plants
+    public static final ConfiguredFeature<?, ?> LAVA_SPIRE_CONFIG = makeDecoratedClusterPlants(
+            BPFeatures.LAVA_EDGE_CLUSTER.get(), BPBlocks.LAVA_SPIRE.get(), new LavaEdgeBlockPlacer(), 19
+    );
 
     // Vines
     public static final ConfiguredFeature<?, ?> BASALT_SPELEOTHERM_CONFIG = makePendentConfig(

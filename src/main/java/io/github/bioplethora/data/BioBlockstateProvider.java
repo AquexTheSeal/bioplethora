@@ -48,6 +48,8 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         this.doubleCropPlantBlock(BPBlocks.SOUL_TALL_GRASS.get());
 
+        this.simpleCrossBlock(BPBlocks.LAVA_SPIRE.get());
+
         this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM.get());
         this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM_PLANT.get());
         this.simpleCrossBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM.get());

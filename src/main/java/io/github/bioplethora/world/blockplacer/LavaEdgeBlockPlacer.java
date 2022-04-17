@@ -1,9 +1,11 @@
 package io.github.bioplethora.world.blockplacer;
 
 import com.mojang.serialization.Codec;
+import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.registry.worldgen.BPBlockPlacers;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.blockplacer.BlockPlacer;
@@ -18,18 +20,18 @@ public class LavaEdgeBlockPlacer extends BlockPlacer {
     @Override
     public void place(IWorld pLevel, BlockPos pPos, BlockState pState, Random pRandom) {
 
-        for (int radY = pPos.getY() - 7; radY <= pPos.getY() + 7; radY++) {
-            for (int radX = pPos.getX() - 7; radX <= pPos.getX() + 7; radX++) {
-                for (int radZ = pPos.getZ() - 7; radZ <= pPos.getZ() + 7; radZ++) {
-
-                    BlockPos pos = new BlockPos(radX, radY, radZ);
-
-                    if (pLevel.getFluidState(pos).is(FluidTags.LAVA)) {
-                        pLevel.setBlock(pPos, pState, 2);
-                    }
-                }
-            }
+        if (BlockUtils.checkNearestTaggedFluid(checkForLiquid(pPos), pLevel, FluidTags.LAVA)) {
+            pLevel.setBlock(pPos, pState, 2);
         }
+    }
+
+    public AxisAlignedBB checkForLiquid(BlockPos pPos) {
+        int areaint = 14;
+        double x = pPos.getX(), y = pPos.getY(), z = pPos.getZ();
+        return new AxisAlignedBB(
+                x - (areaint / 2d), y - (areaint / 2d), z - (areaint / 2d),
+                x + (areaint / 2d), y + (areaint / 2d), z + (areaint / 2d)
+        );
     }
 
     @Override

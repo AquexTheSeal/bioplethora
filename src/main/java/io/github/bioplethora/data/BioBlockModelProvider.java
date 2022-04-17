@@ -46,6 +46,8 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.doubleCropPlant("soul_tall_grass", bioResLoc("soul_tall_grass_bottom"), bioResLoc("soul_tall_grass_top"));
 
+        this.cross("lava_spire", bioResLoc("lava_spire"));
+
         this.cross("basalt_speleotherm", bioResLoc("basalt_speleotherm"));
         this.cross("basalt_speleotherm_plant", bioResLoc("basalt_speleotherm_plant"));
         this.cross("fiery_basalt_speleotherm", bioResLoc("fiery_basalt_speleotherm"));

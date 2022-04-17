@@ -5,10 +5,7 @@ import io.github.bioplethora.blocks.BPDoublePlantBlock;
 import io.github.bioplethora.blocks.BPPlantBlock;
 import io.github.bioplethora.blocks.BPVinesBlock;
 import io.github.bioplethora.blocks.BPVinesTopBlock;
-import io.github.bioplethora.blocks.specific.BellophiteCoreBlock;
-import io.github.bioplethora.blocks.specific.FleignariteRemainsBlock;
-import io.github.bioplethora.blocks.specific.FleignariteVinesBlock;
-import io.github.bioplethora.blocks.specific.FleignariteVinesTopBlock;
+import io.github.bioplethora.blocks.specific.*;
 import io.github.bioplethora.blocks.tile_entities.FleignariteSplotchBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.enums.BioPlantShape;
@@ -70,8 +67,8 @@ public class BPBlocks {
     public static final RegistryObject<Block> SOUL_BIGSHROOM = registerBlock("soul_bigshroom", () -> new BPPlantBlock(BioPlantType.SOUL_SAND_VALLEY, BioPlantShape.BIG_MUSHROOM,
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.5F).noOcclusion().lightLevel((level) -> 7)), BPItemGroup.BioplethoraItemItemGroup);
 
-    public static final RegistryObject<Block> LAVA_SPIRE = registerBlock("lava_spire", () -> new BPPlantBlock(BioPlantType.ALL, BioPlantShape.SIMPLE_PLANT,
-            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.NETHER_SPROUTS).strength(0.5F).noCollission().lightLevel((level) -> 13)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> LAVA_SPIRE = registerBlock("lava_spire", () -> new LavaSpireBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
+            .sound(SoundType.NETHER_SPROUTS).strength(0.3F).instabreak().noCollission().lightLevel((level) -> 13)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> SOUL_TALL_GRASS = registerBlock("soul_tall_grass", () -> new BPDoublePlantBlock(BioPlantType.SOUL_SAND_VALLEY, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);

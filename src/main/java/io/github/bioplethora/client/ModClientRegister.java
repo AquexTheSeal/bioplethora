@@ -53,6 +53,8 @@ public class ModClientRegister {
 
         RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_TALL_GRASS.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.LAVA_SPIRE.get(), RenderType.cutout());
+
         RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), RenderType.cutout());

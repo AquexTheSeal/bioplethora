@@ -10,5 +10,5 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BPBlockPlacers {
     public static final DeferredRegister<BlockPlacerType<?>> BLOCK_PLACERS = DeferredRegister.create(ForgeRegistries.BLOCK_PLACER_TYPES, Bioplethora.MOD_ID);
 
-    public static final RegistryObject<BlockPlacerType<?>> LAVA_EDGE_PLACER = BLOCK_PLACERS.register("lava_Edge_placer", () -> new BlockPlacerType<>(LavaEdgeBlockPlacer.CODEC));
+    public static final RegistryObject<BlockPlacerType<?>> LAVA_EDGE_PLACER = BLOCK_PLACERS.register("lava_edge_placer", () -> new BlockPlacerType<>(LavaEdgeBlockPlacer.CODEC));
 }

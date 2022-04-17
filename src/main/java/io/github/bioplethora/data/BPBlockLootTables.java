@@ -4,6 +4,7 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -38,6 +39,8 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.SOUL_TALL_GRASS.get());
 
         dropSelf(BPBlocks.SOUL_BIGSHROOM.get());
+
+        dropOther(BPBlocks.LAVA_SPIRE.get(), Blocks.AIR);
 
         dropSelf(BPBlocks.BASALT_SPELEOTHERM.get());
         dropOther(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), BPBlocks.BASALT_SPELEOTHERM.get());

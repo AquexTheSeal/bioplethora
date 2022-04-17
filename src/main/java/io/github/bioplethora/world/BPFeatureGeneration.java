@@ -46,15 +46,21 @@ public class BPFeatureGeneration {
         if (types.contains(BiomeDictionary.Type.NETHER)) {
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.BASALT_DELTAS)) {
                 vegDeco.add(() -> BPConfiguredFeatures.BASALT_SPELEOTHERM_CONFIG);
+
+                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.NETHER_WASTES)) {
                 vegDeco.add(() -> BPConfiguredFeatures.THONTUS_THISTLE_CONFIG);
+
+                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.WARPED_FOREST)) {
                 vegDeco.add(() -> BPConfiguredFeatures.TURQUOISE_PENDENT_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.CRIMSON_FOREST)) {
                 vegDeco.add(() -> BPConfiguredFeatures.CERISE_IVY_CONFIG);
+
+                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SOUL_SAND_VALLEY)) {
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_BIGSHROOM_CONFIG);

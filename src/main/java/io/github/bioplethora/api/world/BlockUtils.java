@@ -4,11 +4,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.FallingBlockEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -20,6 +25,26 @@ public class BlockUtils {
 
     public static boolean checkBlock(IWorld world, BlockPos pos, Block requiredBlock) {
         return checkBlockstate(world, pos, requiredBlock.defaultBlockState());
+    }
+
+    public static boolean checkNearestTaggedFluid(AxisAlignedBB pBb, IWorldReader level, ITag<Fluid> tag) {
+        int i = MathHelper.floor(pBb.minX), j = MathHelper.ceil(pBb.maxX);
+        int k = MathHelper.floor(pBb.minY), l = MathHelper.ceil(pBb.maxY);
+        int i1 = MathHelper.floor(pBb.minZ), j1 = MathHelper.ceil(pBb.maxZ);
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+
+        for(int k1 = i; k1 < j; ++k1) {
+            for(int l1 = k; l1 < l; ++l1) {
+                for(int i2 = i1; i2 < j1; ++i2) {
+                    BlockState blockstate = level.getBlockState(blockpos$mutable.set(k1, l1, i2));
+                    if (!blockstate.getFluidState().is(tag)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public static void knockUpRandomNearbyBlocks(World world, double yDelta, BlockPos point, int radiusX, int radiusY, int radiusZ, boolean sendParticles, boolean randomYDelta) {
