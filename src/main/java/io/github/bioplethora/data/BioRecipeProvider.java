@@ -179,15 +179,15 @@ public class BioRecipeProvider extends RecipeProvider {
     }
 
     private void toolSetHelper(Consumer<IFinishedRecipe> consumer, IItemProvider material, IItemProvider stick, IItemProvider sword, IItemProvider shovel, IItemProvider pickaxe, IItemProvider axe, IItemProvider hoe) {
-        ShapedRecipeBuilder.shaped(sword, 2).define('S', stick).define('M', material).pattern(" M ").pattern(" M ").pattern(" S ")
+        ShapedRecipeBuilder.shaped(sword).define('S', stick).define('M', material).pattern(" M ").pattern(" M ").pattern(" S ")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
-        ShapedRecipeBuilder.shaped(shovel, 2).define('S', stick).define('M', material).pattern(" M ").pattern(" S ").pattern(" S ")
+        ShapedRecipeBuilder.shaped(shovel).define('S', stick).define('M', material).pattern(" M ").pattern(" S ").pattern(" S ")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
-        ShapedRecipeBuilder.shaped(pickaxe, 2).define('S', stick).define('M', material).pattern("MMM").pattern(" S ").pattern(" S ")
+        ShapedRecipeBuilder.shaped(pickaxe).define('S', stick).define('M', material).pattern("MMM").pattern(" S ").pattern(" S ")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
-        ShapedRecipeBuilder.shaped(axe, 2).define('S', stick).define('M', material).pattern("MM ").pattern("MS ").pattern(" S ")
+        ShapedRecipeBuilder.shaped(axe).define('S', stick).define('M', material).pattern("MM ").pattern("MS ").pattern(" S ")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
-        ShapedRecipeBuilder.shaped(hoe, 2).define('S', stick).define('M', material).pattern("MM ").pattern(" S ").pattern(" S ")
+        ShapedRecipeBuilder.shaped(hoe).define('S', stick).define('M', material).pattern("MM ").pattern(" S ").pattern(" S ")
                 .unlockedBy("has_" + material.asItem().getRegistryName().getPath(), has(material)).save(consumer);
     }
 
