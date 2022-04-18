@@ -19,7 +19,13 @@ public class EurydnEntityModel extends AnimatedGeoModel<EurydnEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(EurydnEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/soul_eurydn.png");
+        if (entity.variant == EurydnEntity.Variant.FIERY) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/fiery_eurydn.png");
+        } else if (entity.variant == EurydnEntity.Variant.SOUL) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/soul_eurydn.png");
+        } else {
+            throw new IllegalStateException("Invalid Eurydn variant!");
+        }
     }
 
     @Override

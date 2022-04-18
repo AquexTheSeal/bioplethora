@@ -9,7 +9,7 @@ public enum BioPlantShape {
             Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)
     ),
     MINISHROOM(
-            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)
+            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D)
     ),
     BIG_MUSHROOM(
             VoxelShapes.or(

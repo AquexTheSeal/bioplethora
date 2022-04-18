@@ -140,6 +140,8 @@ public class EntitySpawnManager {
         };
 
         private static final Consumer<MobSpawnInfoBuilder> BASALT_DELTAS_ENTITIES = (builder) -> {
+            //Fiery Eurydn
+            createSpawn(builder, monster, BPEntities.FIERY_EURYDN, 9, 1, 3, BPConfig.COMMON.spawnFieryEurydn);
         };
 
         private static final Consumer<MobSpawnInfoBuilder> NETHER_WASTES_ENTITIES = (builder) -> {

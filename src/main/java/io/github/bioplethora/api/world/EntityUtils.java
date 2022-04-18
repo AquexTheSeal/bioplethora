@@ -2,6 +2,8 @@ package io.github.bioplethora.api.world;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -21,6 +23,15 @@ public class EntityUtils {
                 x + (xzRad / 2d), y + (yRad / 2d), z + (xzRad / 2d)
                 )
         );
+    }
+
+    public static void swingAHand(ItemStack stack, LivingEntity living) {
+        if (living.getMainHandItem() == stack) {
+            living.swing(Hand.MAIN_HAND);
+
+        } else if (living.getOffhandItem() == stack) {
+            living.swing(Hand.OFF_HAND);
+        }
     }
 
     public static <T extends Entity> List<T> getEntitiesInArea(Class<? extends T> entityClass, World world, BlockPos pos, double xzRad, double yRad) {

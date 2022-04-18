@@ -47,6 +47,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -99,6 +100,11 @@ public class ServerWorldEvents {
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         GrylynenSpawnHelper.onBlockBreak(event);
+    }
+
+    @SubscribeEvent
+    public static void performBonemealAction(BonemealEvent event) {
+        BonemealBlocksHelper.performBonemealAction(event);
     }
 
     @SubscribeEvent
