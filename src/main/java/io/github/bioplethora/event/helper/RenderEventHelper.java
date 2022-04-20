@@ -5,17 +5,17 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
@@ -25,37 +25,32 @@ public class RenderEventHelper {
     public static boolean reverseCurseAlpha;
     public static double curseAlpha;
 
-    public static void onRenderingPlayer(RenderPlayerEvent.Pre event) {
-        Minecraft mc = Minecraft.getInstance();
-        PlayerEntity player = event.getPlayer();
-        Vector3d lookVec = player.getViewVector(1.0F);
+    public static void onRenderingPlayer(RenderPlayerEvent event) {
 
-        event.getPlayer().getMainHandItem();
-        MatrixStack stack = event.getMatrixStack();
-        stack.pushPose();
-        stack.mulPose(Vector3f.XP.rotationDegrees(0));
-        stack.mulPose(Vector3f.YP.rotationDegrees(0));
-        stack.mulPose(Vector3f.ZP.rotationDegrees(0));
-
-        stack.translate(player.getX() + lookVec.x() * 4, 15, player.getZ() + lookVec.z() * 4);
-        IBakedModel model = mc.getItemRenderer().getModel(event.getPlayer().getMainHandItem(), null, null);
-        mc.getItemRenderer().render(event.getPlayer().getMainHandItem(), ItemCameraTransforms.TransformType.GROUND, true, stack, event.getBuffers(), event.getLight(), 1, model);
-        stack.popPose();
-
-        MatrixStack stack1 = event.getMatrixStack();
-        stack1.pushPose();
-        stack1.mulPose(Vector3f.XP.rotationDegrees(0));
-        stack1.mulPose(Vector3f.YP.rotationDegrees(0));
-        stack1.mulPose(Vector3f.ZP.rotationDegrees(0));
-
-        stack1.translate(player.getX() + lookVec.x() * 4, 15, player.getZ() + lookVec.z() * 4);
-        IBakedModel model1 = mc.getItemRenderer().getModel(event.getPlayer().getMainHandItem(), null, null);
-        mc.getItemRenderer().render(event.getPlayer().getMainHandItem(), ItemCameraTransforms.TransformType.GROUND, true, stack1, event.getBuffers(), event.getLight(), 1, model1);
-        stack1.popPose();
+        if (event.getPlayer().getMainHandItem().getItem() instanceof InfernalQuarterstaffItem) {
+            renderInfernalQuarterstaff(event);
+        }
     }
 
-    public static void onRenderingItem(RenderGameOverlayEvent.Pre event) {
+    public static void renderInfernalQuarterstaff(RenderPlayerEvent event) {
+        ClientPlayerEntity player = ((ClientPlayerEntity) event.getPlayer());
+        MatrixStack stack = event.getMatrixStack();
+        PlayerModel<AbstractClientPlayerEntity> model = event.getRenderer().getModel();
 
+        /*
+        model.rightArm.xRot = 55F; model.rightArm.yRot = 22.5F;
+
+        model.leftArm.setPos(-7F, 11F, -4F);
+        model.leftArm.xRot = -60F; model.leftArm.yRot = -17F; model.leftArm.zRot = -10F;
+
+        model.body.setPos(-4F, 11F, -6F);
+        model.body.xRot = -22.5F;
+
+        model.head.setPos(-4, 23, -10);
+
+         */
+
+        //event.getRenderer().render(player, player.yRot, event.getPartialRenderTick(), stack, event.getBuffers(), event.getLight());
     }
 
     public static void onRenderingOverlay(RenderGameOverlayEvent.Pre event) {

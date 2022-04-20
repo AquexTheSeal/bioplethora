@@ -8,10 +8,7 @@ import io.github.bioplethora.client.entity.render.others.*;
 import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.gui.screen.ReinforcingTableScreen;
 import io.github.bioplethora.item.armor.AquChestplateItem;
-import io.github.bioplethora.item.weapons.AlphanumObliteratorItem;
-import io.github.bioplethora.item.weapons.ArbitraryBallistaItem;
-import io.github.bioplethora.item.weapons.BellophiteShieldItem;
-import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
+import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.keybindings.BPKeybinds;
 import io.github.bioplethora.registry.*;
 import net.minecraft.client.Minecraft;
@@ -153,6 +150,9 @@ public class ModClientRegister {
         //Bellophite Shield
         ItemModelsProperties.register(BPItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);
         ItemModelsProperties.register(BPItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("charged"), (itemStack, clientWorld, entity) -> entity != null && ((BellophiteShieldItem) itemStack.getItem()).getCorePoints() == 3 ? 1.0F : 0.0F);
+
+        //Infernal Quarterstaff
+        ItemModelsProperties.register(BPItems.INFERNAL_QUARTERSTAFF.get(), new ResourceLocation("reverse"), (itemStack, clientWorld, entity) -> entity != null && InfernalQuarterstaffItem.isReversed(itemStack) ? 1.0F : 0.0F);
 
         //Arbitrary Ballista
         ItemModelsProperties.register(BPItems.ARBITRARY_BALLISTA.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity) -> {

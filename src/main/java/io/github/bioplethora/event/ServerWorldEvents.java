@@ -418,7 +418,7 @@ public class ServerWorldEvents {
     }
 
     @SubscribeEvent
-    public static void onRenderingPlayer(RenderPlayerEvent.Pre event) {
+    public static void onRenderingPlayer(RenderPlayerEvent event) {
         RenderEventHelper.onRenderingPlayer(event);
     }
 

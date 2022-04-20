@@ -80,6 +80,7 @@ public class BPItems {
     public static final RegistryObject<Item> YELLOW_CRYSTAL_SHIELD = ITEMS.register("yellow_crystal_shield", () -> new GrylynenShieldYellowItem(new Item.Properties().durability(1125).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     public static final RegistryObject<Item> ALPHANUM_OBLITERATOR = ITEMS.register("alphanum_obliterator", () -> new AlphanumObliteratorItem(new Item.Properties().durability(11500).rarity(BPRarityTypes.BOSS_WEAPON).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF = ITEMS.register("infernal_quarterstaff", () -> new InfernalQuarterstaffItem(ItemTier.NETHERITE, hellConfig ? 12 - BPItems.netheriteDMG : 8 - BPItems.netheriteDMG, -2.5f, new Item.Properties().durability(5200).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     // Tool sets
     public static final RegistryObject<Item> FLEIGNARITE_SWORD = ITEMS.register("fleignarite_sword", () -> new FleignariteSwordItem(BPItemTier.FLEIGNARITE, 7 - BPItems.netheriteDMG, -2.4F, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));

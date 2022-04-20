@@ -1,0 +1,6 @@
+{
+  "parent":"bioplethora:item/infernal_quarterstaff",
+  "textures": {
+    "layer0": "bioplethora:item/infernal_quarterstaff_reverse"
+  }
+}
