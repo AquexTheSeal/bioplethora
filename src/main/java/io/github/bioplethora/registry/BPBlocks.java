@@ -108,6 +108,12 @@ public class BPBlocks {
     public static final RegistryObject<Block> FLOURISHED_SOUL_ETERN = registerBlock("flourished_soul_etern", () -> new BPVinesBlock.FlourishedSoulEternBlock(
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().lightLevel((level) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
 
+    // Potted Plants
+    public static final RegistryObject<FlowerPotBlock> POTTED_SOUL_MINISHROOM = registerBlock("potted_soul_minishroom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SOUL_MINISHROOM, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
+    public static final RegistryObject<FlowerPotBlock> POTTED_SOUL_BIGSHROOM = registerBlock("potted_soul_bigshroom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SOUL_BIGSHROOM, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
+
+    public static final RegistryObject<FlowerPotBlock> POTTED_LAVA_SPIRE = registerBlock("potted_lava_spire", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LAVA_SPIRE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
+
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
             .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHER_GOLD_ORE).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);

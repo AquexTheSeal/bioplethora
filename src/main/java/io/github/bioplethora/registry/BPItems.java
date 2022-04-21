@@ -34,8 +34,6 @@ public class BPItems {
     public static final RegistryObject<Item> BIOPEDIA = ITEMS.register("biopedia", () -> new BiopediaItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).stacksTo(1).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new ExperimentalItem(new Item.Properties().fireResistant().rarity(BPRarityTypes.BOSS_WEAPON).stacksTo(1).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
-    // Vanilla mobs custom drops/items
-
     // Bioplethora mobs drops/items
     public static final RegistryObject<Item> CREPHOXL_FEATHER = ITEMS.register("crephoxl_feather", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> CREPHOXL_STICK = ITEMS.register("crephoxl_stick", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
@@ -52,6 +50,9 @@ public class BPItems {
     public static final RegistryObject<Item> REINFORCED_FLEIGNARITE = ITEMS.register("reinforced_fleignarite", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> ALPHANUM_GEM = ITEMS.register("alphanum_gem", () -> new AlphanumGemItem(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> ALPHEM_KING_REMNANT = ITEMS.register("alphem_king_remnant", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
+
+    public static final RegistryObject<Item> FIERY_CUBE = ITEMS.register("fiery_cube", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> SOUL_CUBE = ITEMS.register("soul_cube", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     public static final RegistryObject<Item> GREEN_GRYLYNEN_CRYSTAL = ITEMS.register("green_grylynen_crystal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> YELLOW_GRYLYNEN_CRYSTAL = ITEMS.register("yellow_grylynen_crystal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));

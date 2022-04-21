@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.IndirectEntityDamageSource;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -21,6 +22,10 @@ public class BPDamageSources {
 
     public static DamageSource antibio(Entity entity, @Nullable Entity source) {
         return new BioplethoraIndirectDamageSource("antibio", entity, source).setMagic();
+    }
+
+    public static DamageSource armorPiercingWeapon(Entity entity) {
+        return new IndirectEntityDamageSource("armorPiercingWeapon", entity, entity).bypassArmor();
     }
 
     public static DamageSource armorPiercingFleignarite(Entity entity, @Nullable Entity source) {

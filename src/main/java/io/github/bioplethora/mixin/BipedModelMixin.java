@@ -52,16 +52,28 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
     @Inject(method = "poseRightArm", at = @At(value = "HEAD"))
     private void poseRight(T living, CallbackInfo ci) {
 
-        if (living instanceof PlayerEntity) {
-            if (living.getMainHandItem().getItem() instanceof InfernalQuarterstaffItem) {
-                if (!(living.getUseItem().getItem() instanceof ShieldItem)) {
+        boolean IQMainHandR = living.getMainHandItem().getItem() instanceof InfernalQuarterstaffItem;
+        boolean IQOffHandL = living.getOffhandItem().getItem() instanceof InfernalQuarterstaffItem;
+        boolean IQBothHands = IQMainHandR && IQOffHandL;
 
+        if (living instanceof PlayerEntity) {
+            if (!(living.getUseItem().getItem() instanceof ShieldItem)) {
+
+                if ((IQMainHandR && !IQOffHandL) || IQBothHands) {
                     rightArm.xRot = -1F;
                     rightArm.zRot = 1F;
 
                     leftArm.xRot = -40F;
                     leftArm.yRot = -22.5F;
                     leftArm.zRot = -22.5F;
+
+                } else if (IQOffHandL) {
+                    leftArm.xRot = -1F;
+                    leftArm.zRot = 1F;
+
+                    rightArm.xRot = -40F;
+                    rightArm.yRot = -22.5F;
+                    rightArm.zRot = -22.5F;
                 }
             }
         }

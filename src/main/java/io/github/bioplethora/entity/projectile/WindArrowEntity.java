@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.BPConfig;
-import io.github.bioplethora.entity.SummonableMonsterEntity;
+import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.particles.WindPoofParticleData;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;
@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -157,13 +156,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
     }
 
     public boolean isValidTarget(LivingEntity entity) {
-        if (entity instanceof TameableEntity) {
-            return ((TameableEntity) entity).getOwner() != this.getOwner();
-        } else if (entity instanceof SummonableMonsterEntity) {
-            return ((SummonableMonsterEntity) entity).getOwner() != this.getOwner();
-        } else {
-            return entity != this.getOwner();
-        }
+        return EntityUtils.IsNotPet(this.getOwner()).test(entity);
     }
 
     public void onHitEntity(EntityRayTraceResult entityRayTraceResult) {

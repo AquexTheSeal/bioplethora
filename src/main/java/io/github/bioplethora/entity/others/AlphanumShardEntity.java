@@ -35,6 +35,7 @@ public class AlphanumShardEntity extends Entity implements IAnimatable {
 
     public void tick() {
         super.tick();
+
         ++timeBeforeExpire;
         if (timeBeforeExpire >= 40) {
             this.level.explode(this, getX(), getY(), getZ(), 1.5F, Explosion.Mode.BREAK);

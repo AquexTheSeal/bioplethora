@@ -304,9 +304,12 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             }
             shard.setOwner(this);
 
-            for (double iy = getY(); this.level.isEmptyBlock(new BlockPos(xPos, getY(), zPos)); iy--) {
-                shard.setPos(xPos, iy + 1, zPos);
+            double changeY = 20;
+            for (double yItr = getY(); this.level.getBlockState(new BlockPos(xPos, yItr, zPos)).isAir(); yItr--) {
+                changeY = yItr;
             }
+
+            shard.setPos(xPos, changeY, zPos);
 
             this.level.addFreshEntity(shard);
         }

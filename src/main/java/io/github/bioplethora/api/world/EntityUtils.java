@@ -1,7 +1,9 @@
 package io.github.bioplethora.api.world;
 
+import io.github.bioplethora.entity.SummonableMonsterEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -10,8 +12,21 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class EntityUtils {
+
+    public static Predicate<Entity> IsNotPet(Entity owner) {
+        return (entity) -> {
+            if (entity instanceof TameableEntity) {
+                return ((TameableEntity) entity).getOwner() != owner;
+            } else if (entity instanceof SummonableMonsterEntity) {
+                return ((SummonableMonsterEntity) entity).getOwner() != owner;
+            } else {
+                return entity != owner;
+            }
+        };
+    }
 
     public static void knockbackAwayFromUser(float force, LivingEntity user, LivingEntity target) {
         target.knockback(force, MathHelper.sin(user.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(user.yRot * ((float) Math.PI / 180F)));

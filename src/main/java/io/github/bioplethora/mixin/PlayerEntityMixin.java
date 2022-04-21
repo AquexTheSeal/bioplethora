@@ -1,6 +1,7 @@
 package io.github.bioplethora.mixin;
 
 import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.CooldownTracker;
 import net.minecraft.util.HandSide;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -20,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public class PlayerEntityMixin extends LivingEntity implements IPlayerEntityMixin {
+public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerEntityMixin {
 
     //===========================================
     //             VARIABLES
@@ -28,6 +30,9 @@ public class PlayerEntityMixin extends LivingEntity implements IPlayerEntityMixi
 
     @Shadow @Final public PlayerInventory inventory;
     @Shadow @Final protected static final DataParameter<Byte> DATA_PLAYER_MAIN_HAND = EntityDataManager.defineId(PlayerEntity.class, DataSerializers.BYTE);
+
+    @Shadow public abstract CooldownTracker getCooldowns();
+
     private static final DataParameter<Boolean> ALPHANUM_CURSE = EntityDataManager.defineId(PlayerEntity.class, DataSerializers.BOOLEAN);
 
     //===========================================
@@ -46,7 +51,15 @@ public class PlayerEntityMixin extends LivingEntity implements IPlayerEntityMixi
     protected void defineSynchedData(CallbackInfo cbi) {
         this.entityData.define(ALPHANUM_CURSE, false);
     }
-    
+
+    @Inject(at = @At("TAIL"), method = ("disableShield"), cancellable = true)
+    public void disableShield(boolean b, CallbackInfo ci) {
+        if (this.getUseItem().getItem() instanceof BellophiteShieldItem) {
+            this.level.broadcastEntityEvent(this, (byte) 30);
+            ci.cancel();
+        }
+    }
+
     @Override
     public boolean hasAlphanumCurse() {
         return this.entityData.get(ALPHANUM_CURSE);
