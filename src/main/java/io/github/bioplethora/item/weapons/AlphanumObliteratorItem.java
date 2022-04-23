@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.entity.projectile.AlphanumObliteratorSpearEntity;
 import io.github.bioplethora.registry.BPEnchantments;
 import io.github.bioplethora.registry.BPItems;
@@ -42,7 +43,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class AlphanumObliteratorItem extends Item implements IVanishable {
+public class AlphanumObliteratorItem extends Item implements IVanishable, IReachWeapon {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
     public AlphanumObliteratorItem(Properties properties) {
@@ -249,5 +250,15 @@ public class AlphanumObliteratorItem extends Item implements IVanishable {
 
     public int getEnchantmentValue() {
         return 1;
+    }
+
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        return IReachWeapon.super.onEntitySwing(stack, entity);
+    }
+
+    @Override
+    public double getReachDistance() {
+        return 6;
     }
 }

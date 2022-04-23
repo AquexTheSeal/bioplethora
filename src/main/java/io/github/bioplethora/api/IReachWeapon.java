@@ -15,7 +15,7 @@ import net.minecraft.util.math.vector.Vector3d;
 public interface IReachWeapon {
 
     /**
-     * @return Total Reach Distance (Default Distance {which is 4} + Additional Reach Distance)
+     * @return Total Reach Distance (Default Distance {which is 5} + Additional Reach Distance)
      */
     double getReachDistance();
 

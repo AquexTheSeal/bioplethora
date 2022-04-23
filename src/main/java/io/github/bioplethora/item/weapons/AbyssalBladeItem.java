@@ -1,6 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.extras.IntegrationUtils;
 import io.github.bioplethora.api.world.ItemUtils;
 import net.minecraft.client.gui.screen.Screen;
@@ -28,7 +29,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class AbyssalBladeItem extends SwordItem {
+public class AbyssalBladeItem extends SwordItem implements IReachWeapon {
 
     public AbyssalBladeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
@@ -113,5 +114,15 @@ public class AbyssalBladeItem extends SwordItem {
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
             tooltip.add(new TranslationTextComponent("item.bioplethora.abyssal_blade.tridented_blade.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
+    }
+
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        return IReachWeapon.super.onEntitySwing(stack, entity);
+    }
+
+    @Override
+    public double getReachDistance() {
+        return 7;
     }
 }

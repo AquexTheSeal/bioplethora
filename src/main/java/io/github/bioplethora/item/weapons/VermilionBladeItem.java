@@ -1,8 +1,9 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.world.ItemUtils;
 import io.github.bioplethora.entity.projectile.VermilionBladeProjectileEntity;
-import io.github.bioplethora.api.BPItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -26,7 +27,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class VermilionBladeItem extends SwordItem {
+public class VermilionBladeItem extends SwordItem implements IReachWeapon {
 
     public int bladeSize;
 
@@ -103,5 +104,15 @@ public class VermilionBladeItem extends SwordItem {
     @Override
     public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
         return true;
+    }
+
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        return IReachWeapon.super.onEntitySwing(stack, entity);
+    }
+
+    @Override
+    public double getReachDistance() {
+        return 8;
     }
 }

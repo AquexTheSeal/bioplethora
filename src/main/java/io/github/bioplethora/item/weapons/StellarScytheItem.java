@@ -1,6 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.IReachWeapon;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -27,7 +28,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class StellarScytheItem extends SwordItem {
+public class StellarScytheItem extends SwordItem implements IReachWeapon {
 
     public StellarScytheItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties properties) {
         super(tier, attackDamageIn, attackSpeedIn, properties);
@@ -63,8 +64,6 @@ public class StellarScytheItem extends SwordItem {
         return retval;
     }
 
-
-
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -75,5 +74,15 @@ public class StellarScytheItem extends SwordItem {
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
             tooltip.add(new TranslationTextComponent("item.bioplethora.stellar_scythe.radius_slash.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
+    }
+
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        return IReachWeapon.super.onEntitySwing(stack, entity);
+    }
+
+    @Override
+    public double getReachDistance() {
+        return 8.5;
     }
 }

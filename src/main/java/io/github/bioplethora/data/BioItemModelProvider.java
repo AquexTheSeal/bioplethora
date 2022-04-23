@@ -39,7 +39,7 @@ public class BioItemModelProvider extends ItemModelProvider {
 
         this.specialFlatTexture(BPBlocks.SOUL_TALL_GRASS, "soul_tall_grass_top");
 
-        this.specialFlatTexture(BPBlocks.SOUL_MINISHROOM, BPBlocks.SOUL_MINISHROOM, ITEM_FOLDER);
+        this.specialFlatTexture(BPBlocks.SOUL_MINISHROOM, "soul_minishroom", ITEM_FOLDER);
 
         this.specialFlatTexture(BPBlocks.LAVA_SPIRE, BPBlocks.LAVA_SPIRE);
 
