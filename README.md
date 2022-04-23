@@ -26,14 +26,26 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 ### Q: Is the Bioplethora Project made with MCreator?
 **A:** This mod is not made with the MCreator program. If you dislike the program in general, I suggest you read https://docs.google.com/document/d/1e7tN5vZgWEmMylNshZ9h6l0kXH8Ypqw-oJHL1qu0tgY/edit (documented by Toma400)
 
-# Credits / The Development Team
+# The Development Team
 **Lead Developer/s:** Sajevius, Aqu.
 
-**Coders** Sajevius, Aqu., CrimsonSteve
+**Coders** Sajevius, Aqu., Toma400
 
-**Texturers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi, Dylanvhs, Lyof
+**Texturers:** Sajevius, Aqu., SeagullBoi, Dylanvhs, Lyof
 
 **Modellers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi, Dylanvhs, Lyof
+
+**Extras (Animation, SFX, Music, etc.):** Aqu., Sajevius
+
+# Helpers / Extra Credits
+
+**Coders**: CrimsonSteve
+
+**Texturers:** Sonic-3xn40s
+
+**Modellers:** Sonic-3xn40s
+
+**Extras (Animation, SFX, Music, etc.):** Peach
 
 # Links
 
