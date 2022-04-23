@@ -33,7 +33,7 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 
 **Texturers:** Sajevius, Aqu., SeagullBoi, Dylanvhs, Lyof
 
-**Modellers:** Sajevius, Aqu., Sonic-3xn40s, SeagullBoi, Dylanvhs, Lyof
+**Modellers:** Sajevius, Aqu.s, SeagullBoi, Dylanvhs, Lyof
 
 **Extras (Animation, SFX, Music, etc.):** Aqu., Sajevius
 
