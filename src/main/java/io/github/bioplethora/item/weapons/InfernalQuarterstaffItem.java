@@ -3,6 +3,7 @@ package io.github.bioplethora.item.weapons;
 import io.github.bioplethora.api.world.EffectUtils;
 import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.api.world.ItemUtils;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -29,12 +30,17 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
 
-public class InfernalQuarterstaffItem extends SwordItem {
+public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon {
 
     LivingEntity markedEntity;
 
     public InfernalQuarterstaffItem(IItemTier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+    }
+
+    @Override
+    public double getReachDistance() {
+        return 6.5;
     }
 
     @Override
@@ -59,7 +65,7 @@ public class InfernalQuarterstaffItem extends SwordItem {
             setQuarterstaffCD(entity, 14);
         }
 
-        return super.onEntitySwing(stack, entity);
+        return IReachWeapon.super.onEntitySwing(stack, entity);
     }
 
     @Override
@@ -142,7 +148,7 @@ public class InfernalQuarterstaffItem extends SwordItem {
 
         Hand oppositeHand = hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
         boolean hasWeaponInOppositeHand = player.getItemInHand(oppositeHand).getItem() == this;
-    
+
         if (ItemUtils.checkCooldownUsable(player, player.getItemInHand(hand))) {
 
             if ((result != null ? result.getEntity() : null) != null) {
@@ -171,7 +177,7 @@ public class InfernalQuarterstaffItem extends SwordItem {
             entity.setDeltaMovement(entity.getDeltaMovement().add(0, 1.0, 0));
             entity.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 20, 1));
             entity.swing(hand);
-            world.playSound(entity, pos, SoundEvents.SHULKER_SHOOT, SoundCategory.PLAYERS, 1, 1);
+            world.playSound(entity, pos, SoundEvents.SHULKER_SHOOT, SoundCategory.PLAYERS, 1.3F, 1.75F);
             world.playSound(entity, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
             ItemUtils.setStackOnCooldown(entity, stack, 20, true);
             

@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.functionals;
 
-import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -36,11 +36,11 @@ public class SpiritFissionCharmItem extends ActivatableItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_fission_charm.spirit_fission.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_fission_charm.spirit_fission.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_fission_charm.spirit_fission.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_fission_charm.spirit_fission.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

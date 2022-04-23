@@ -1,4 +1,4 @@
-package io.github.bioplethora.item;
+package io.github.bioplethora.api;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;

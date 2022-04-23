@@ -120,7 +120,9 @@
 
   "item.bioplethora.green_crystal_shield": "Green Crystal Shield",
   "item.bioplethora.yellow_crystal_shield": "Yellow Crystal Shield",
+
   "item.bioplethora.alphanum_obliterator": "Alphanum Obliterator",
+  "item.bioplethora.infernal_quarterstaff": "Infernal Quarterstaff",
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
@@ -335,6 +337,8 @@
   "advancements.bioplethora.cooked_cuttlefish_meat_obtain.desc": "Take a Cooked Cuttlefish Meat.",
 
   "bossbar.bioplethora.helioblade.clone_progress": "Time before next Helioblade cloning",
+
+  "tooltip.bioplethora.reach_bonus.desc" : "+%s Reach Bonus",
 
   "tooltip.bioplethora.antibio_ecoharmless.desc": "+Extra damage against Ecoharmless creatures",
   "tooltip.bioplethora.antibio_plethoneutral.desc": "+Extra damage against Plethoneutral creatures",

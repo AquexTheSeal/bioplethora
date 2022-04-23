@@ -1,8 +1,9 @@
 package io.github.bioplethora.item;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.IBioClassification;
+import io.github.bioplethora.api.IReachWeapon;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -25,7 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ExperimentalItem extends Item {
+public class ExperimentalItem extends Item implements IReachWeapon {
 
     public ExperimentalItem(Properties properties) {
         super(properties);
@@ -53,6 +54,21 @@ public class ExperimentalItem extends Item {
     }
 
     @Override
+    public double getReachDistance() {
+        return 128.0D;
+    }
+
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        return IReachWeapon.super.onEntitySwing(stack, entity);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int pItemSlot, boolean pIsSelected) {
+        super.inventoryTick(stack, world, entity, pItemSlot, pIsSelected);
+    }
+
+    @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity entity, LivingEntity source) {
 
         World world = entity.level;
@@ -62,6 +78,8 @@ public class ExperimentalItem extends Item {
 
         boolean retval = super.hurtEnemy(stack, entity, source);
 
+        player.displayClientMessage(new StringTextComponent("Hit Successful"), (false));
+        /*
         if (entity instanceof IBioClassification) {
             switch (((IBioClassification) entity).getBioplethoraClass()) {
                 case NONE: player.displayClientMessage(new StringTextComponent("Entity Class: None"), (false));
@@ -71,7 +89,7 @@ public class ExperimentalItem extends Item {
                 case HELLSENT: player.displayClientMessage(new StringTextComponent("Entity Class: Hellsent"), (false));
                 case ELDERIA: player.displayClientMessage(new StringTextComponent("Entity Class: Elderia"), (false));
             }
-        }
+        }*/
         return retval;
     }
 

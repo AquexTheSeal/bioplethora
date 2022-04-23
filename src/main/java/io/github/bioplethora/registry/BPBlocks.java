@@ -109,9 +109,6 @@ public class BPBlocks {
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().lightLevel((level) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
 
     // Potted Plants
-    public static final RegistryObject<FlowerPotBlock> POTTED_SOUL_MINISHROOM = registerBlock("potted_soul_minishroom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SOUL_MINISHROOM, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
-    public static final RegistryObject<FlowerPotBlock> POTTED_SOUL_BIGSHROOM = registerBlock("potted_soul_bigshroom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SOUL_BIGSHROOM, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
-
     public static final RegistryObject<FlowerPotBlock> POTTED_LAVA_SPIRE = registerBlock("potted_lava_spire", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LAVA_SPIRE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 
     // Alphanum Set

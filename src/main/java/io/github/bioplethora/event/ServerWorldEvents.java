@@ -9,7 +9,7 @@ import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.*;
 import io.github.bioplethora.item.ExperimentalItem;
-import io.github.bioplethora.item.IHurtSkillArmor;
+import io.github.bioplethora.api.IHurtSkillArmor;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
@@ -222,7 +222,7 @@ public class ServerWorldEvents {
                     event.setCanceled(true);
 
                     if (!king.level.isClientSide()) {
-                        ((ServerWorld) king.level).sendParticles(ParticleTypes.ASH, king.getX(), king.getY(), king.getZ(),
+                        ((ServerWorld) king.level).sendParticles(ParticleTypes.ASH, king.getX(), king.getY() + 1, king.getZ(),
                                 30, 0.75, 0.75, 0.75, 0.01);
                     }
                 }

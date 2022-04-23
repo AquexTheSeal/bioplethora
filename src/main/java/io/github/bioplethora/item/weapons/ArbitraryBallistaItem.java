@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.api.mixin.IAbstractArrowMixin;
-import io.github.bioplethora.item.ItemSettings;
 import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screen.Screen;
@@ -270,11 +270,11 @@ public class ArbitraryBallistaItem extends CrossbowItem implements IVanishable {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.appendHoverText(stack, world, tooltip, flag);
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.arbitrary_ballista.heavy_duty_ballista.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 

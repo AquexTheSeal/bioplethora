@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.entity.others.BellophiteShieldWaveEntity;
-import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -107,16 +107,16 @@ public class BellophiteShieldItem extends ShieldItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.recovery_bulwark.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.recovery_bulwark.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.recovery_bulwark.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.recovery_bulwark.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.core_impulse.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.core_impulse.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.core_impulse.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.bellophite_shield.core_impulse.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 

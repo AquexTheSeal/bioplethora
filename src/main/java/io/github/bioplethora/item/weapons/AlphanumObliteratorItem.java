@@ -3,8 +3,8 @@ package io.github.bioplethora.item.weapons;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.entity.projectile.AlphanumObliteratorSpearEntity;
-import io.github.bioplethora.item.ItemSettings;
 import io.github.bioplethora.registry.BPEnchantments;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.BlockState;
@@ -207,16 +207,16 @@ public class AlphanumObliteratorItem extends Item implements IVanishable {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.skullbreaker.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.skullbreaker.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.skullbreaker.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.skullbreaker.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.blasting_spears.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.blasting_spears.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.blasting_spears.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.blasting_spears.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 

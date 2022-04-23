@@ -2,7 +2,7 @@ package io.github.bioplethora.item.weapons;
 
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
-import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -123,11 +123,11 @@ public class PrimordialStaffItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ItemSettings.bossLevelText(tooltip);
+        BPItemSettings.bossLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.primordial_staff.cores_aid.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.primordial_staff.cores_aid.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.primordial_staff.cores_aid.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.primordial_staff.cores_aid.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }
