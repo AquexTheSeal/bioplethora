@@ -1,6 +1,8 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.api.IHurtSkillArmor;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.advancements.AdvancementUtils;
 import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
@@ -9,10 +11,12 @@ import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.*;
 import io.github.bioplethora.item.ExperimentalItem;
-import io.github.bioplethora.api.IHurtSkillArmor;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
+import io.github.bioplethora.network.BPNetwork;
+import io.github.bioplethora.network.functions.LeftSwingPacket;
+import io.github.bioplethora.network.functions.RightSwingPacket;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
@@ -22,16 +26,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
@@ -53,11 +56,60 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 @Mod.EventBusSubscriber
 public class ServerWorldEvents {
+
+    @SubscribeEvent
+    public static void onPlayerLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
+
+        hitHandler(event.getPlayer(), event.getItemStack());
+
+        if (event.getItemStack().getItem() instanceof IReachWeapon) {
+            if (event.getWorld().isClientSide()) {
+                BPNetwork.CHANNEL.sendToServer(new LeftSwingPacket());
+            }
+        }
+    }
+
+    /**
+     * Off-Hand combat integration
+     */
+    @SubscribeEvent
+    public static void onPlayerRightClick(PlayerInteractEvent.RightClickEmpty event) {
+
+        if (ModList.get().isLoaded("offhandcombat") && event.getPlayer().getItemInHand(Hand.OFF_HAND) == event.getItemStack()) {
+
+            hitHandler(event.getPlayer(), event.getItemStack());
+
+            if (event.getItemStack().getItem() instanceof IReachWeapon) {
+                if (event.getWorld().isClientSide()) {
+                    BPNetwork.CHANNEL.sendToServer(new RightSwingPacket());
+                }
+            }
+        }
+    }
+
+    public static void hitHandler(PlayerEntity entity, ItemStack stack) {
+
+        if (stack.getItem() instanceof IReachWeapon) {
+
+            double range = ((IReachWeapon) stack.getItem()).getReachDistance();
+            double distance = range * range;
+            Vector3d vec = entity.getEyePosition(1);
+            Vector3d vec1 = entity.getViewVector(1);
+            Vector3d targetVec = vec.add(vec1.x * range, vec1.y * range, vec1.z * range);
+            AxisAlignedBB aabb = entity.getBoundingBox().expandTowards(vec1.scale(range)).inflate(4.0D, 4.0D, 4.0D);
+            EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, vec, targetVec, aabb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR, distance);
+
+            if ((result != null ? result.getEntity() : null) != null) {
+                entity.attack(result.getEntity());
+            }
+        }
+    }
 
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {

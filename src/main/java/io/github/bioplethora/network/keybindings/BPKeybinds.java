@@ -1,4 +1,4 @@
-package io.github.bioplethora.keybindings;
+package io.github.bioplethora.network.keybindings;
 
 import io.github.bioplethora.Bioplethora;
 import net.minecraft.client.settings.KeyBinding;

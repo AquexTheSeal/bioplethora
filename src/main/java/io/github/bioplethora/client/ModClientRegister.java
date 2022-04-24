@@ -9,7 +9,7 @@ import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.gui.screen.ReinforcingTableScreen;
 import io.github.bioplethora.item.armor.AquChestplateItem;
 import io.github.bioplethora.item.weapons.*;
-import io.github.bioplethora.keybindings.BPKeybinds;
+import io.github.bioplethora.network.keybindings.BPKeybinds;
 import io.github.bioplethora.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;

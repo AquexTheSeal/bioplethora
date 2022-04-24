@@ -117,11 +117,6 @@ public class AbyssalBladeItem extends SwordItem implements IReachWeapon {
     }
 
     @Override
-    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        return IReachWeapon.super.onEntitySwing(stack, entity);
-    }
-
-    @Override
     public double getReachDistance() {
         return 7;
     }

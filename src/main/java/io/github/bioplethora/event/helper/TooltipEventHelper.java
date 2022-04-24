@@ -1,7 +1,7 @@
 package io.github.bioplethora.event.helper;
 
-import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.registry.BPEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -21,7 +21,7 @@ public class TooltipEventHelper {
 
         if (event.getItemStack().getItem() instanceof IReachWeapon) {
             IReachWeapon reachWeapon = (IReachWeapon) event.getItemStack().getItem();
-            event.getToolTip().add(new TranslationTextComponent(BPItemSettings.REACH_BONUS, reachWeapon.getReachDistance() - 4).withStyle(BPItemSettings.REACH_BONUS_COLOR));
+            event.getToolTip().add(new TranslationTextComponent(BPItemSettings.REACH_BONUS, reachWeapon.getReachDistance() - 5).withStyle(BPItemSettings.REACH_BONUS_COLOR));
         }
 
         if (EnchantmentHelper.getItemEnchantmentLevel(BPEnchantments.ANTIBIO_ECOHARMLESS.get(), event.getItemStack()) > 0) {

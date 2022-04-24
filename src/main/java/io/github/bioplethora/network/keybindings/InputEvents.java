@@ -1,6 +1,7 @@
-package io.github.bioplethora.keybindings;
+package io.github.bioplethora.network.keybindings;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.network.BPNetwork;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;

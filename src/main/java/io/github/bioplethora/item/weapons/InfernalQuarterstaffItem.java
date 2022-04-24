@@ -1,9 +1,9 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.world.EffectUtils;
 import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.api.world.ItemUtils;
-import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -65,7 +65,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
             setQuarterstaffCD(entity, 14);
         }
 
-        return IReachWeapon.super.onEntitySwing(stack, entity);
+        return super.onEntitySwing(stack, entity);
     }
 
     @Override
