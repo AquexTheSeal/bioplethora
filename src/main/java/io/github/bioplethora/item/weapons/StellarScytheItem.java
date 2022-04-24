@@ -78,6 +78,6 @@ public class StellarScytheItem extends SwordItem implements IReachWeapon {
 
     @Override
     public double getReachDistance() {
-        return 8.5;
+        return 7.5;
     }
 }

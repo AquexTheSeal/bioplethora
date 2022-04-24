@@ -1,10 +1,13 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.world.EffectUtils;
 import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.api.world.ItemUtils;
 import io.github.bioplethora.registry.BPDamageSources;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -25,9 +28,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon {
@@ -123,7 +131,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
             if (itr != pAttacker && EntityUtils.IsNotPet(pAttacker).test(itr)) {
                 itr.invulnerableTime = 0;
                 itr.hurt(DamageSource.indirectMagic(pAttacker, pAttacker), 4 + shr);
-                EntityUtils.knockbackAwayFromUser(1.5F, pAttacker, itr);
+                EntityUtils.knockbackAwayFromUser(0.8F, pAttacker, itr);
 
                 if (itr != pTarget) {
                     pTarget.setSecondsOnFire(4);
@@ -157,6 +165,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                     player.swing(oppositeHand);
                 }
                 player.swing(hand);
+                player.addEffect(new EffectInstance(Effects.GLOWING, 40));
                 player.playSound(SoundEvents.GENERIC_BURN, 2.0F, 0.8F);
                 result.getEntity().hurt(DamageSource.indirectMagic(player, player), hasWeaponInOppositeHand ? 7.5F : 4F);
                 result.getEntity().setSecondsOnFire(hasWeaponInOppositeHand ? 10 : 7);
@@ -184,6 +193,28 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
             return ActionResultType.SUCCESS;
 
         } else return super.useOn(pContext);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        BPItemSettings.sacredLevelText(tooltip);
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.infernal_quarterstaff.fierce_slashing.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.infernal_quarterstaff.fierce_slashing.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
+        }
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.infernal_quarterstaff.flaming_art.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.infernal_quarterstaff.flaming_art.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
+        }
+
+        tooltip.add(new TranslationTextComponent("item.bioplethora.infernal_quarterstaff.snipe_afar.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
+        if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+            tooltip.add(new TranslationTextComponent("item.bioplethora.infernal_quarterstaff.snipe_afar.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
+        }
     }
 
     public static int getQuarterstaffCD(Entity entity) {

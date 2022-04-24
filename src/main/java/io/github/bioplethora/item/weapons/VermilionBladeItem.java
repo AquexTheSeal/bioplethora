@@ -108,6 +108,6 @@ public class VermilionBladeItem extends SwordItem implements IReachWeapon {
 
     @Override
     public double getReachDistance() {
-        return 8;
+        return 7;
     }
 }

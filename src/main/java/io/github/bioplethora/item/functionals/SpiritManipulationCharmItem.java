@@ -28,7 +28,7 @@ public class SpiritManipulationCharmItem extends ActivatableItem {
         super.activatedTick(pStack, pLevel, pEntity);
 
         if (pEntity instanceof PlayerEntity) {
-            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BPEffects.SPIRIT_MANIPULATION.get(), 10, 0));
+            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BPEffects.SPIRIT_MANIPULATION.get(), 10, 0, false, false));
         }
     }
 

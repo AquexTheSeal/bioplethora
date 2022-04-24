@@ -1,7 +1,6 @@
 package io.github.bioplethora.mixin;
 
 import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
-import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -50,14 +49,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerE
     @Inject(at = @At("TAIL"), method = ("Lnet/minecraft/entity/player/PlayerEntity;defineSynchedData()V"))
     protected void defineSynchedData(CallbackInfo cbi) {
         this.entityData.define(ALPHANUM_CURSE, false);
-    }
-
-    @Inject(at = @At("TAIL"), method = ("disableShield"), cancellable = true)
-    public void disableShield(boolean b, CallbackInfo ci) {
-        if (this.getUseItem().getItem() instanceof BellophiteShieldItem) {
-            this.level.broadcastEntityEvent(this, (byte) 30);
-            ci.cancel();
-        }
     }
 
     @Override

@@ -5,6 +5,7 @@
   "refmap": "bioplethora.refmap.json",
   "mixins": [
     "AbstractArrowEntityMixin",
+    "ItemEntityMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "QuickChargeEnchantmentMixin"

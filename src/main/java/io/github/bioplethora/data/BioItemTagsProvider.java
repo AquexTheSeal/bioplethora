@@ -27,11 +27,13 @@ public class BioItemTagsProvider extends ItemTagsProvider {
         tag(BPTags.Items.CHARM)
                 .add(BPItems.SPIRIT_FISSION_CHARM.get())
                 .add(BPItems.SPIRIT_MANIPULATION_CHARM.get())
+                .add(BPItems.SPIRIT_STRENGTHENING_CHARM.get())
         ;
 
         tag(BPTags.Items.NECKLACE)
                 .add(BPItems.SPIRIT_FISSION_CHARM.get())
                 .add(BPItems.SPIRIT_MANIPULATION_CHARM.get())
+                .add(BPItems.SPIRIT_STRENGTHENING_CHARM.get())
         ;
 
         // Wastelands of Baedoor Integration

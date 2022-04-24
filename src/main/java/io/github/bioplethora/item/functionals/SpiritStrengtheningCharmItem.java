@@ -17,9 +17,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SpiritFissionCharmItem extends ActivatableItem {
+public class SpiritStrengtheningCharmItem extends ActivatableItem {
 
-    public SpiritFissionCharmItem(Properties properties) {
+    public SpiritStrengtheningCharmItem(Properties properties) {
         super(properties, true);
     }
 
@@ -28,7 +28,7 @@ public class SpiritFissionCharmItem extends ActivatableItem {
         super.activatedTick(pStack, pLevel, pEntity);
 
         if (pEntity instanceof PlayerEntity) {
-            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BPEffects.SPIRIT_FISSION.get(), 10, 0, false, false));
+            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BPEffects.SPIRIT_STRENGTHENING.get(), 10, 0, false, false));
         }
     }
 
@@ -38,9 +38,9 @@ public class SpiritFissionCharmItem extends ActivatableItem {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_fission_charm.spirit_fission.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_strengthening_charm.spirit_strengthening.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_fission_charm.spirit_fission.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_strengthening_charm.spirit_strengthening.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

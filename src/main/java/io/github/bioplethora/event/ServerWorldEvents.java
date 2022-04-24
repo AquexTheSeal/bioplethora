@@ -18,12 +18,12 @@ import io.github.bioplethora.network.BPNetwork;
 import io.github.bioplethora.network.functions.LeftSwingPacket;
 import io.github.bioplethora.network.functions.RightSwingPacket;
 import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPEffects;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -240,13 +240,10 @@ public class ServerWorldEvents {
             }
         }
 
-        if (event.getEntity() instanceof ItemEntity) {
-            ItemEntity item = (ItemEntity) event.getEntity();
-
-            if (event.getSource().isExplosion()) {
-                if (item.getItem().getItem() == BPItems.ALPHANUM_OBLITERATOR.get()) {
-                    event.setCanceled(true);
-                }
+        if (event.getSource().getEntity() instanceof LivingEntity && event.getEntity() instanceof LivingEntity) {
+            if (((LivingEntity) event.getSource().getEntity()).hasEffect(BPEffects.SPIRIT_STRENGTHENING.get())) {
+                float healthScaledDmg = ((LivingEntity) event.getEntity()).getHealth() * 0.12F;
+                event.setAmount(event.getAmount() * 1.10F + healthScaledDmg);
             }
         }
 

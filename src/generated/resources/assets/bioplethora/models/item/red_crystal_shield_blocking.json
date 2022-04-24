@@ -1,0 +1,6 @@
+{
+  "parent": "bioplethora:item/grylynen_shield_base_blocking",
+  "textures": {
+    "layer0": "bioplethora:item/red_crystal_shield"
+  }
+}

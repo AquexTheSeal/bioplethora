@@ -36,7 +36,7 @@ public class GrylynenShieldYellowItem extends GrylynenShieldBaseItem {
         // Checks if it is a 50% chance
         if (Math.random() <= 0.5) {
             // Regenerates the user's health by 2 hearts
-            user.setHealth(user.getHealth() + 2);
+            user.heal(2F);
         }
     }
 

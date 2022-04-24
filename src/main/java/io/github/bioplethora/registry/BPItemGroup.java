@@ -1,7 +1,7 @@
 package io.github.bioplethora.registry;
 
-import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.Bioplethora;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.EnchantedBookItem;
@@ -65,13 +65,21 @@ public class BPItemGroup {
         @OnlyIn(Dist.CLIENT)
         @Override
         public ResourceLocation getTabsImage() {
-            return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bpeggs_tabs.png");
+            if (BPConfig.COMMON.replaceCreativeTabBackground.get()) {
+                return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bpeggs_tabs.png");
+            } else {
+                return super.getTabsImage();
+            }
         }
 
         @OnlyIn(Dist.CLIENT)
         @Override
         public ResourceLocation getBackgroundImage() {
-            return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bp_creative_tab.png");
+            if (BPConfig.COMMON.replaceCreativeTabBackground.get()) {
+                return new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/bp_creative_tab.png");
+            } else {
+                return super.getBackgroundImage();
+            }
         }
     };
 }
