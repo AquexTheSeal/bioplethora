@@ -34,10 +34,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -74,6 +71,7 @@ public class ServerWorldEvents {
             }
         }
     }
+
 
     /**
      * Off-Hand combat integration
@@ -242,7 +240,7 @@ public class ServerWorldEvents {
 
         if (event.getSource().getEntity() instanceof LivingEntity && event.getEntity() instanceof LivingEntity) {
             if (((LivingEntity) event.getSource().getEntity()).hasEffect(BPEffects.SPIRIT_STRENGTHENING.get())) {
-                float healthScaledDmg = ((LivingEntity) event.getEntity()).getHealth() * 0.12F;
+                float healthScaledDmg = MathHelper.ceil(((LivingEntity) event.getEntity()).getHealth() * 0.12F);
                 event.setAmount(event.getAmount() * 1.10F + healthScaledDmg);
             }
         }

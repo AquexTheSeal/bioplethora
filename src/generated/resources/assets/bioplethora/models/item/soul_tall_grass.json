@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "bioplethora:block/soul_tall_grass_top"
-  }
-}

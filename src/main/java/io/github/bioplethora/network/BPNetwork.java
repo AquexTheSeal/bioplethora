@@ -12,16 +12,17 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 public class BPNetwork {
 
     public static String NETWORK_VERSION = "0.1.0";
+    private static int packetIndex = 0;
 
     public static final SimpleChannel CHANNEL = NetworkRegistry
             .newSimpleChannel(new ResourceLocation(Bioplethora.MOD_ID, "network"), () -> NETWORK_VERSION,
                     version -> version.equals(NETWORK_VERSION), version -> version.equals(NETWORK_VERSION));
 
     public static void initializeNetwork() {
-        CHANNEL.registerMessage(0, VerticalMountUpPacket.class, VerticalMountUpPacket::encode, VerticalMountUpPacket::decode, VerticalMountUpPacket::verticalUp);
-        CHANNEL.registerMessage(1, VerticalMountDownPacket.class, VerticalMountDownPacket::encode, VerticalMountDownPacket::decode, VerticalMountDownPacket::verticalDown);
+        CHANNEL.registerMessage(packetIndex++, VerticalMountUpPacket.class, VerticalMountUpPacket::encode, VerticalMountUpPacket::decode, VerticalMountUpPacket::verticalUp);
+        CHANNEL.registerMessage(packetIndex++, VerticalMountDownPacket.class, VerticalMountDownPacket::encode, VerticalMountDownPacket::decode, VerticalMountDownPacket::verticalDown);
 
-        CHANNEL.registerMessage(2, LeftSwingPacket.class, LeftSwingPacket::encode, LeftSwingPacket::decode, LeftSwingPacket::leftClickTrigger);
-        CHANNEL.registerMessage(3, RightSwingPacket.class, RightSwingPacket::encode, RightSwingPacket::decode, RightSwingPacket::rightClickTrigger);
+        CHANNEL.registerMessage(packetIndex++, LeftSwingPacket.class, LeftSwingPacket::encode, LeftSwingPacket::decode, LeftSwingPacket::leftClickTrigger);
+        CHANNEL.registerMessage(packetIndex++, RightSwingPacket.class, RightSwingPacket::encode, RightSwingPacket::decode, RightSwingPacket::rightClickTrigger);
     }
 }

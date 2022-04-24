@@ -139,14 +139,13 @@ public class BioItemModelProvider extends ItemModelProvider {
     public void specialFlatTexture(RegistryObject<Block> block, String texture) {
         specialFlatTexture(block, texture, BLOCK_FOLDER);
     }
-
     public void specialFlatTexture(RegistryObject<Block> block, String texture, String fileDirectory) {
         String name = block.getId().getPath();
         ResourceLocation datagenLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
 
         ModelFile.ExistingModelFile modelType = getMcLoc("item/generated");
 
-        if (!existingFileHelper.exists(datagenLoc, TEXTURE) || existingFileHelper.exists(datagenLoc, MODEL)) {
+        if (existingFileHelper.exists(datagenLoc, TEXTURE) && !existingFileHelper.exists(datagenLoc, MODEL)) {
             this.getBuilder(name).parent(modelType).texture("layer0", fileDirectory + "/" + texture);
             Bioplethora.LOGGER.info("Generate Block Item Successful: " + name);
         }

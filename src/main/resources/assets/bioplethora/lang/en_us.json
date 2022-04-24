@@ -306,7 +306,7 @@
   "item.bioplethora.spirit_manipulation_charm.spirit_manipulation.desc": "This charm gives the Spirit manipulation effect while it's in the player's inventory. Cavern Fleignars do not aggravate to the player when the player has the Spirit Manipulation effect, because the effect conceals the player from these creatures by controlling their mind and senses.",
 
   "item.bioplethora.spirit_strengthening_charm.spirit_strengthening.skill": "Spirit Strengthening",
-  "item.bioplethora.spirit_strengthening_charm.spirit_strengthening.desc": "All attacks you deal does 10% more damage, in addition to extra damage that scales with the target's armor and current health.",
+  "item.bioplethora.spirit_strengthening_charm.spirit_strengthening.desc": "All attacks you deal does 10% more damage, in addition to extra damage that scales with the target's current health.",
 
   "item.bioplethora.peaguin_scale_armor.grace_embrace.skill":"Grace Embrace",
   "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
@@ -324,7 +324,7 @@
   "item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to 2 seconds. Everytime this shield gets damaged, it slowly repairs your armor if you have any on you, there is also a chance for this shield to restore its user's health.",
 
   "item.bioplethora.red_grylynen_shield.red_crystal_energy.skill": "Red Crystal Energy",
-  "item.bioplethora.red_grylynen_shield.red_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to only 1 second. Everytime this shield gets damaged, it slowly repairs your armor if you have any on you, there is also a chance for this shield to restore its user's health by either 2 or 3.",
+  "item.bioplethora.red_grylynen_shield.red_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to only 1 second. Everytime this shield gets damaged, the shield knocks back the attacker and it slowly repairs your armor if you are wearing any, there is also a chance for this shield to restore its user's health by either 2 or 3.",
   
   "item.bioplethora.alphanum_obliterator.skullbreaker.skill": "Skullbreaker",
   "item.bioplethora.alphanum_obliterator.skullbreaker.desc": "This weapon is a very heavy item, that it can cause a great amount of knockback to the target in melee.",

@@ -1,6 +1,7 @@
 package io.github.bioplethora.mixin;
 
 import com.google.common.collect.ImmutableList;
+import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -52,28 +53,31 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
     @Inject(method = "poseRightArm", at = @At(value = "HEAD"))
     private void poseRight(T living, CallbackInfo ci) {
 
-        boolean IQMainHandR = living.getMainHandItem().getItem() instanceof InfernalQuarterstaffItem;
-        boolean IQOffHandL = living.getOffhandItem().getItem() instanceof InfernalQuarterstaffItem;
-        boolean IQBothHands = IQMainHandR && IQOffHandL;
+        if (BPConfig.COMMON.enableCustomModelPositions.get()) {
 
-        if (living instanceof PlayerEntity) {
-            if (!(living.getUseItem().getItem() instanceof ShieldItem)) {
+            boolean IQMainHandR = living.getMainHandItem().getItem() instanceof InfernalQuarterstaffItem;
+            boolean IQOffHandL = living.getOffhandItem().getItem() instanceof InfernalQuarterstaffItem;
+            boolean IQBothHands = IQMainHandR && IQOffHandL;
 
-                if ((IQMainHandR && !IQOffHandL) || IQBothHands) {
-                    rightArm.xRot = -1F;
-                    rightArm.zRot = 1F;
+            if (living instanceof PlayerEntity) {
+                if (!(living.getUseItem().getItem() instanceof ShieldItem)) {
 
-                    leftArm.xRot = -40F;
-                    leftArm.yRot = -22.5F;
-                    leftArm.zRot = -22.5F;
+                    if ((IQMainHandR && !IQOffHandL) || IQBothHands) {
+                        rightArm.xRot = -1F;
+                        rightArm.zRot = 1F;
 
-                } else if (IQOffHandL) {
-                    leftArm.xRot = -1F;
-                    leftArm.zRot = 1F;
+                        leftArm.xRot = -40F;
+                        leftArm.yRot = -22.5F;
+                        leftArm.zRot = -22.5F;
 
-                    rightArm.xRot = -40F;
-                    rightArm.yRot = -22.5F;
-                    rightArm.zRot = -22.5F;
+                    } else if (IQOffHandL) {
+                        leftArm.xRot = -1F;
+                        leftArm.zRot = 1F;
+
+                        rightArm.xRot = -40F;
+                        rightArm.yRot = -22.5F;
+                        rightArm.zRot = -22.5F;
+                    }
                 }
             }
         }
@@ -82,24 +86,26 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
     @Inject(method = "setupAttackAnimation", at = @At("TAIL"))
     public void setupAttack(T livingEntity, float a, CallbackInfo ci) {
 
-        if (livingEntity instanceof PlayerEntity) {
-            if (!(this.attackTime <= 0.0F)) {
-                if (livingEntity.getMainHandItem().getItem() instanceof InfernalQuarterstaffItem) {
+        if (BPConfig.COMMON.enableCustomModelAnimations.get()) {
+            if (livingEntity instanceof PlayerEntity) {
+                if (!(this.attackTime <= 0.0F)) {
+                    if (livingEntity.getMainHandItem().getItem() instanceof InfernalQuarterstaffItem) {
 
-                    HandSide handside = this.getAttackArm(livingEntity);
-                    ModelRenderer modelrenderer = this.getArm(handside);
-                    float f;
+                        HandSide handside = this.getAttackArm(livingEntity);
+                        ModelRenderer modelrenderer = this.getArm(handside);
+                        float f;
 
-                    f = 1.0F - this.attackTime;
-                    f = f * f;
-                    f = f * f;
-                    f = 1.0F - f;
+                        f = 1.0F - this.attackTime;
+                        f = f * f;
+                        f = f * f;
+                        f = 1.0F - f;
 
-                    float f1 = MathHelper.sin(f * (float) Math.PI);
-                    float f2 = MathHelper.sin(this.attackTime * (float) Math.PI) * -(this.head.xRot - 0.7F) * 0.75F;
+                        float f1 = MathHelper.sin(f * (float) Math.PI);
+                        float f2 = MathHelper.sin(this.attackTime * (float) Math.PI) * -(this.head.xRot - 0.7F) * 0.75F;
 
-                    modelrenderer.xRot = (float) ((double) modelrenderer.xRot - ((double) f1 * 1.2D + (double) f2)) * 2;
-                    modelrenderer.xRot += MathHelper.sin(this.attackTime * (float) Math.PI) * 0.75F;
+                        modelrenderer.xRot = (float) ((double) modelrenderer.xRot - ((double) f1 * 1.2D + (double) f2)) * 2;
+                        modelrenderer.xRot += MathHelper.sin(this.attackTime * (float) Math.PI) * 0.75F;
+                    }
                 }
             }
         }

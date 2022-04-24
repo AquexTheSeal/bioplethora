@@ -28,6 +28,8 @@ public class BPConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> mobArmorMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobMovementSpeedMultiplier;
 
+        public final ForgeConfigSpec.ConfigValue<Boolean> enableCustomModelPositions;
+        public final ForgeConfigSpec.ConfigValue<Boolean> enableCustomModelAnimations;
         public final ForgeConfigSpec.ConfigValue<Boolean> allowMobCaps;
         public final ForgeConfigSpec.ConfigValue<Boolean> replaceCreativeTabBackground;
         public final ForgeConfigSpec.ConfigValue<Boolean> antibioCompatibility;
@@ -103,6 +105,8 @@ public class BPConfig {
             builder.pop();
 
             builder.push("Other Mechanics");
+            enableCustomModelPositions = builder.define("Should the player model change arm positions when holding specific items? (Has risk of crash)", true);
+            enableCustomModelAnimations = builder.define("Should the player model have custom animations when using specific items? (Has risk of crash)", true);
             allowMobCaps = builder.define("Should specific mobs, especially bosses, have a damage limit?", true);
             replaceCreativeTabBackground = builder.define("Replace the Bioplethora's creative tabs' background images with a custom one?", false);
             antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used on a single weapon together?", true);
