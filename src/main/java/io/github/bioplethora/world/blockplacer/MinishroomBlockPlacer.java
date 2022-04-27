@@ -14,8 +14,8 @@ import net.minecraft.world.gen.blockplacer.BlockPlacerType;
 import java.util.Random;
 
 public class MinishroomBlockPlacer extends BlockPlacer {
-    public static final Codec<MinishroomBlockPlacer> CODEC;
     public static final MinishroomBlockPlacer INSTANCE = new MinishroomBlockPlacer();
+    public static final Codec<MinishroomBlockPlacer> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
     public void place(IWorld pLevel, BlockPos pPos, BlockState pState, Random pRandom) {
@@ -41,9 +41,5 @@ public class MinishroomBlockPlacer extends BlockPlacer {
     @Override
     protected BlockPlacerType<?> type() {
         return BPBlockPlacers.MINISHROOM_PLACER.get();
-    }
-
-    static {
-        CODEC = Codec.unit(() -> INSTANCE);
     }
 }

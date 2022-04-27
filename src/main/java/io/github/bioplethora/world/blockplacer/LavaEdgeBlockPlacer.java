@@ -14,8 +14,8 @@ import net.minecraft.world.gen.blockplacer.BlockPlacerType;
 import java.util.Random;
 
 public class LavaEdgeBlockPlacer extends BlockPlacer {
-    public static final Codec<LavaEdgeBlockPlacer> CODEC;
     public static final LavaEdgeBlockPlacer INSTANCE = new LavaEdgeBlockPlacer();
+    public static final Codec<LavaEdgeBlockPlacer> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
     public void place(IWorld pLevel, BlockPos pPos, BlockState pState, Random pRandom) {
@@ -37,9 +37,5 @@ public class LavaEdgeBlockPlacer extends BlockPlacer {
     @Override
     protected BlockPlacerType<?> type() {
         return BPBlockPlacers.LAVA_EDGE_PLACER.get();
-    }
-
-    static {
-        CODEC = Codec.unit(() -> INSTANCE);
     }
 }

@@ -47,17 +47,17 @@ public class BPBlocks {
 
     // Fleignarite Blocks
     public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new FleignariteRemainsBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion().hasPostProcess((bs, br, bp) -> true)
+            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion()
             .lightLevel((block) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> FLEIGNARITE_SPLOTCH = registerBlock("fleignarite_splotch", () -> new FleignariteSplotchBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion().hasPostProcess((bs, br, bp) -> true)
+            .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion()
             .lightLevel((block) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> FLEIGNARITE_VINES = registerBlock("fleignarite_vines", () -> new FleignariteVinesTopBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().hasPostProcess((bs, br, bp) -> true)
+            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission()
             .lightLevel((block) -> 5)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> FLEIGNARITE_VINES_PLANT = registerBlock("fleignarite_vines_plant", () -> new FleignariteVinesBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission().hasPostProcess((bs, br, bp) -> true)
+            .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission()
             .lightLevel((block) -> 5)), null, false);
 
     // Nether Plants
@@ -77,51 +77,51 @@ public class BPBlocks {
 
     // Minor Plants (e.g. Grass, Tallgrass)
     public static final RegistryObject<Block> SOUL_SPROUTS = registerBlock("soul_sprouts", () -> new BPPlantBlock(BioPlantType.SOUL_SAND_VALLEY, BioPlantShape.SIMPLE_PLANT,
-            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> SOUL_TALL_GRASS = registerBlock("soul_tall_grass", () -> new BPDoublePlantBlock(BioPlantType.SOUL_SAND_VALLEY, BioPlantShape.SIMPLE_PLANT,
-            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
     // Nether Vines
     public static final RegistryObject<Block> SPIRIT_DANGLER = registerBlock("spirit_dangler", () -> new BPVinesTopBlock.SpiritDanglerTopBlock(
-            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 6).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 6)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> SPIRIT_DANGLER_PLANT = registerBlock("spirit_dangler_plant", () -> new BPVinesBlock.SpiritDanglerBlock(
-            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 8).hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 8)), null, false);
 
     // Fruitable Nether Vines
     public static final RegistryObject<Block> BASALT_SPELEOTHERM = registerBlock("basalt_speleotherm", () -> new BPFruitableVinesTopBlock.BasaltSpeleothermTopBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> BASALT_SPELEOTHERM_PLANT = registerBlock("basalt_speleotherm_plant", () -> new BPFruitableVinesBlock.BasaltSpeleothermBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion().hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion()), null, false);
     public static final RegistryObject<Block> FIERY_BASALT_SPELEOTHERM = registerBlock("fiery_basalt_speleotherm", () -> new BPFruitableVinesBlock.FieryBasaltSpeleothermBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion().lightLevel((block) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion().lightLevel((block) -> 7)), null, false);
 
     public static final RegistryObject<Block> THONTUS_THISTLE = registerBlock("thontus_thistle", () -> new BPFruitableVinesTopBlock.ThontusThistleTopBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.VINE).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.VINE).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> THONTUS_THISTLE_PLANT = registerBlock("thontus_thistle_plant", () -> new BPFruitableVinesBlock.ThontusThistleBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.VINE).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.VINE).strength(0.3F).instabreak().noCollission()), null, false);
     public static final RegistryObject<Block> BERRIED_THONTUS_THISTLE = registerBlock("berried_thontus_thistle", () -> new BPFruitableVinesBlock.BerriedThontusThistleBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.VINE).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.VINE).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 7)), null, false);
 
     public static final RegistryObject<Block> TURQUOISE_PENDENT = registerBlock("turquoise_pendent", () -> new BPFruitableVinesTopBlock.TurquoisePendentTopBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> TURQUOISE_PENDENT_PLANT = registerBlock("turquoise_pendent_plant", () -> new BPFruitableVinesBlock.TurquoisePendentBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().noCollission()), null, false);
     public static final RegistryObject<Block> BLOSSOMING_TURQUOISE_PENDENT = registerBlock("blossoming_turquoise_pendent", () -> new BPFruitableVinesBlock.BlossomingTurquoisePendentBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 7)), null, false);
 
     public static final RegistryObject<Block> CERISE_IVY = registerBlock("cerise_ivy", () -> new BPFruitableVinesTopBlock.CeriseIvyTopBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> CERISE_IVY_PLANT = registerBlock("cerise_ivy_plant", () -> new BPFruitableVinesBlock.CeriseIvyBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission()), null, false);
     public static final RegistryObject<Block> SEEDED_CERISE_IVY = registerBlock("seeded_cerise_ivy", () -> new BPFruitableVinesBlock.SeededCeriseIvyBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.WEEPING_VINES).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 7)), null, false);
 
     public static final RegistryObject<Block> SOUL_ETERN = registerBlock("soul_etern", () -> new BPFruitableVinesTopBlock.SoulEternTopBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> SOUL_ETERN_PLANT = registerBlock("soul_etern_plant", () -> new BPFruitableVinesBlock.SoulEternBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission()), null, false);
     public static final RegistryObject<Block> FLOURISHED_SOUL_ETERN = registerBlock("flourished_soul_etern", () -> new BPFruitableVinesBlock.FlourishedSoulEternBlock(
-            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 7).hasPostProcess((bs, br, bp) -> true)), null, false);
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 7)), null, false);
 
     // Potted Plants
     public static final RegistryObject<FlowerPotBlock> POTTED_LAVA_SPIRE = registerBlock("potted_lava_spire", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LAVA_SPIRE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);

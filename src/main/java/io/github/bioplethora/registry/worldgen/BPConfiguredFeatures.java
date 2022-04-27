@@ -37,12 +37,12 @@ public class BPConfiguredFeatures {
 
     // Grasses
     public static final ConfiguredFeature<?, ?> SOUL_SPROUTS_CONFIG = makeDecoratedClusterPlants(
-            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_SPROUTS.get(), new SimpleBlockPlacer(), 17
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_SPROUTS.get(), new SimpleBlockPlacer(), 26
     );
 
     public static final ConfiguredFeature<?, ?> SOUL_TALL_GRASS_CONFIG = makeNoProjectionClusterPlants(
             Feature.RANDOM_PATCH, BPBlocks.SOUL_TALL_GRASS.get(), new DoublePlantBlockPlacer()
-    ).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
+    ).count(22).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
 
     // Other Plants
     public static final ConfiguredFeature<?, ?> LAVA_SPIRE_CONFIG = makeDecoratedClusterPlants(
