@@ -22,24 +22,26 @@ public class BPAttributes {
 
     @SubscribeEvent
     public static void useTrueDefenseAttribute(LivingHurtEvent event) {
-        LivingEntity victim = (LivingEntity) event.getEntity();
-        LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
 
-        if (victim.getAttribute(TRUE_DEFENSE.get()) != null) {
+        if (event.getEntity() instanceof LivingEntity) {
+            LivingEntity victim = (LivingEntity) event.getEntity();
+            LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
 
-            if (BPHooks.onTrueDefenseHurt(victim, event.getSource())) return;
+            if (victim.getAttribute(TRUE_DEFENSE.get()) != null) {
 
-            victim.playSound(BPSoundEvents.TRUE_DEFENSE_CLASH.get(), 1.0F, 0.5F + victim.getRandom().nextFloat());
+                if (BPHooks.onTrueDefenseHurt(victim, event.getSource())) return;
 
-            if (victim.level instanceof ServerWorld) {
-                ((ServerWorld) victim.level).sendParticles(BPParticles.TRUE_DEFENSE_CLASH.get(),
-                        victim.getX(), victim.getY() + 2, victim.getZ(), 1,
-                        victim.getRandom().nextDouble() / 2.0, victim.getRandom().nextDouble() / 2.0, victim.getRandom().nextDouble() / 2.0, 0.02);
+                victim.playSound(BPSoundEvents.TRUE_DEFENSE_CLASH.get(), 1.0F, 0.5F + victim.getRandom().nextFloat());
+                if (victim.level instanceof ServerWorld) {
+                    ((ServerWorld) victim.level).sendParticles(BPParticles.TRUE_DEFENSE_CLASH.get(),
+                            victim.getX(), victim.getY() + 2, victim.getZ(), 1,
+                            victim.getRandom().nextDouble() / 2.0, victim.getRandom().nextDouble() / 2.0, victim.getRandom().nextDouble() / 2.0, 0.02);
 
-                EffectUtils.addCircleParticleForm(victim.level, victim, ParticleTypes.CRIT, 75, 0.55, 0.01);
+                    EffectUtils.addCircleParticleForm(victim.level, victim, ParticleTypes.CRIT, 75, 0.55, 0.01);
+                }
+
+                event.setAmount(event.getAmount() - (float) victim.getAttributeValue(TRUE_DEFENSE.get()));
             }
-
-            event.setAmount(event.getAmount() - (float) victim.getAttributeValue(TRUE_DEFENSE.get()));
         }
     }
 }

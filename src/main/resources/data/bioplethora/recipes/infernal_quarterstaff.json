@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " FF",
+    " B ",
+    "SS "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "F": {
+      "item": "bioplethora:fiery_cube"
+    },
+    "S": {
+      "item": "bioplethora:soul_cube"
+    }
+  },
+  "result": {
+    "item": "bioplethora:infernal_quarterstaff",
+    "count": 1
+  }
+}

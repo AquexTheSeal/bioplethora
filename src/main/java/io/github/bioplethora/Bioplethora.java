@@ -86,6 +86,8 @@ public class Bioplethora {
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("Setting up [" + MOD_NAME + "], thank you for using this mod!");
 
+        BPLootConditions.registerConditions();
+
         BPNetwork.initializeNetwork();
         BPBiomeGeneration.generateBiomes();
         BPStructures.setupStructures();

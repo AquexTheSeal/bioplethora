@@ -131,6 +131,8 @@ public class BPItems {
     //=================================================================
     /** @ECOHARMLESS **/
     public static final RegistryObject<Item> CUTTLEFISH_SPAWN_EGG = ITEMS.register("cuttlefish_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.CUTTLEFISH, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> ONOFISH_SPAWN_EGG = ITEMS.register("onofish_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.ONOFISH, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+
     public static final RegistryObject<Item> FIERY_EURYDN_SPAWN_EGG = ITEMS.register("fiery_eurydn_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.FIERY_EURYDN, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> SOUL_EURYDN_SPAWN_EGG = ITEMS.register("soul_eurydn_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.SOUL_EURYDN, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
 

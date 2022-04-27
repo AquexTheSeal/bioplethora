@@ -1,0 +1,98 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.onofish.idle": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"onofish": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * 5", 0, 0]
+					},
+					"position": {
+						"vector": [0, "math.sin(query.anim_time * 180) * 1", 0]
+					},
+					"scale": {
+						"vector": ["1 + math.sin(query.anim_time * 180) * -0.1", "1 + math.sin(query.anim_time * 180) * 0.15", "1 + math.cos(query.anim_time * 180) * 0.1"]
+					}
+				},
+				"tentacle1": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 25", 0, 0]
+					},
+					"scale": {
+						"vector": [1, "1 + math.cos(query.anim_time * 180) * 0.05", 1]
+					}
+				},
+				"tentaclebot1": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * -25", 0, 0]
+					}
+				},
+				"tentacle2": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * 25", 0, 0]
+					},
+					"scale": {
+						"vector": [1, "1 + math.cos(query.anim_time * 180) * -0.05", 1]
+					}
+				},
+				"tentaclebot2": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 25", 0, 0]
+					}
+				},
+				"tentacle3": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -25", 0, 0]
+					},
+					"scale": {
+						"vector": [1, "1 + math.sin(query.anim_time * 180) * 0.05", 1]
+					}
+				},
+				"tentaclebot3": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * 25", 0, 0]
+					}
+				}
+			}
+		},
+		"animation.onofish.death": {
+			"loop": true,
+			"animation_length": 1,
+			"override_previous_animation": true,
+			"bones": {
+				"onofish": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 360*16) * 5", 0]
+					},
+					"scale": {
+						"0.25": {
+							"vector": [1.3, 1, 1]
+						},
+						"1.0": {
+							"vector": [1.3, 1.5, 1.3],
+							"easing": "easeOutBack"
+						}
+					}
+				},
+				"tentacle1": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 360*4) * 15", 0, 0]
+					}
+				},
+				"tentacle2": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 360*4) * -15", 0, 0]
+					}
+				},
+				"tentacle3": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 360*4) * -15", 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

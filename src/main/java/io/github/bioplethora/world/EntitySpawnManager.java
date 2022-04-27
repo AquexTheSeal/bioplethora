@@ -141,7 +141,7 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> BASALT_DELTAS_ENTITIES = (builder) -> {
             //Fiery Eurydn
-            createSpawn(builder, monster, BPEntities.FIERY_EURYDN, 9, 1, 3, BPConfig.COMMON.spawnFieryEurydn);
+            createSpawn(builder, monster, BPEntities.FIERY_EURYDN, 8, 1, 3, BPConfig.COMMON.spawnFieryEurydn);
         };
 
         private static final Consumer<MobSpawnInfoBuilder> NETHER_WASTES_ENTITIES = (builder) -> {
@@ -161,12 +161,15 @@ public class EntitySpawnManager {
 
         private static final Consumer<MobSpawnInfoBuilder> SOUL_SAND_VALLEY_ENTITIES = (builder) -> {
             //Soul Eurydn
-            createSpawn(builder, monster, BPEntities.SOUL_EURYDN, 9, 1, 3, BPConfig.COMMON.spawnSoulEurydn);
+            createSpawn(builder, monster, BPEntities.SOUL_EURYDN, 6, 1, 3, BPConfig.COMMON.spawnSoulEurydn);
         };
 
         private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
             //Gaugalem
             createSpawn(builder, monster, BPEntities.GAUGALEM, 2, 1, 1, BPConfig.COMMON.spawnGaugalem);
+
+            //Onofish
+            createSpawn(builder, monster, BPEntities.FIERY_EURYDN, 4, 1, 2, BPConfig.COMMON.spawnOnofish);
         };
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {

@@ -1,0 +1,79 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.onofish",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "onofish",
+					"pivot": [0, 7, 0]
+				},
+				{
+					"name": "head",
+					"parent": "onofish",
+					"pivot": [0, 7, 0],
+					"cubes": [
+						{"origin": [-6, 7, -6], "size": [12, 3, 12], "uv": [0, 0]},
+						{"origin": [-5, 10, -4], "size": [10, 5, 8], "uv": [0, 15]},
+						{"origin": [-2, 12, -3], "size": [4, 1, 2], "pivot": [0, 7, 0], "rotation": [25, 0, 0], "uv": [28, 15]}
+					]
+				},
+				{
+					"name": "tentacle1",
+					"parent": "onofish",
+					"pivot": [3, 7, -3],
+					"cubes": [
+						{"origin": [2, 0, -4], "size": [2, 7, 2], "uv": [36, 0]}
+					]
+				},
+				{
+					"name": "tentaclebot1",
+					"parent": "tentacle1",
+					"pivot": [3, 0, -3],
+					"cubes": [
+						{"origin": [1.5, -7, -4.5], "size": [3, 7, 3], "uv": [12, 28]}
+					]
+				},
+				{
+					"name": "tentacle2",
+					"parent": "onofish",
+					"pivot": [0, 7, 4],
+					"cubes": [
+						{"origin": [-1, 0, 3], "size": [2, 7, 2], "uv": [32, 28]}
+					]
+				},
+				{
+					"name": "tentaclebot2",
+					"parent": "tentacle2",
+					"pivot": [0, 0, 4],
+					"cubes": [
+						{"origin": [-1.5, -7, 2.5], "size": [3, 7, 3], "uv": [0, 28]}
+					]
+				},
+				{
+					"name": "tentacle3",
+					"parent": "onofish",
+					"pivot": [-3, 8, -1],
+					"cubes": [
+						{"origin": [-4, 1, -2], "size": [2, 7, 2], "uv": [24, 28]}
+					]
+				},
+				{
+					"name": "tentaclebot3",
+					"parent": "tentacle3",
+					"pivot": [-3, 1, -1],
+					"cubes": [
+						{"origin": [-4.5, -6, -2.5], "size": [3, 7, 3], "uv": [0, 0]}
+					]
+				}
+			]
+		}
+	]
+}

@@ -22,6 +22,7 @@
   "entity.bioplethora.terraith": "Terraith",
   "entity.bioplethora.soul_eurydn": "Soul Eurydn",
   "entity.bioplethora.fiery_eurydn": "Fiery Eurydn",
+  "entity.bioplethora.onofish": "Onofish",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -71,6 +72,7 @@
   "item.bioplethora.terraith_spawn_egg": "Terraith Spawn Egg",
   "item.bioplethora.fiery_eurydn_spawn_egg": "Fiery Eurydn Spawn Egg",
   "item.bioplethora.soul_eurydn_spawn_egg": "Soul Eurydn Spawn Egg",
+  "item.bioplethora.onofish_spawn_egg": "Onofish Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",
