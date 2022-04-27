@@ -84,9 +84,9 @@ public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable,
         }
 
         ++this.jumpTime;
-        if (this.jumpTime == 140) {
-            this.setDeltaMovement(0, this.random.nextBoolean() ? .25 : -.30, 0);
-            jumpTime = 0;
+        if (this.jumpTime == 200) {
+            this.setDeltaMovement(0, this.random.nextBoolean() ? .15 : -.20, 0);
+            jumpTime = this.random.nextInt(50);
         }
     }
 
@@ -126,6 +126,18 @@ public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable,
 
     public void setVariant(int value) {
         this.entityData.set(DATA_VARIANT, value);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundNBT pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putInt("ono_variant", getVariant());
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundNBT pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        setVariant(pCompound.getInt("ono_variant"));
     }
 
     @Override
