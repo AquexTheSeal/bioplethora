@@ -72,7 +72,7 @@ public class GrylynenCoreBombEntity extends Entity implements IAnimatable {
             hasSound = true;
         }
 
-        if (this.birthTime >= (BPConfig.getHellMode ? 40 : 60)) {
+        if (this.birthTime >= (BPConfig.IN_HELLMODE ? 40 : 60)) {
 
             if (!this.level.isClientSide) {
                 ServerWorld serverworld = (ServerWorld) this.level;

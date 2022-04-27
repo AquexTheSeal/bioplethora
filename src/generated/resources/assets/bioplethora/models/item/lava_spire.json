@@ -1,3 +1,6 @@
 {
-  "parent": "bioplethora:block/lava_spire"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:block/lava_spire"
+  }
 }

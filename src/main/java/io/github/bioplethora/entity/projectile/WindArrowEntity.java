@@ -172,7 +172,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
                 if (eI != null && eI != this.getOwner()) {
 
                     if (this.getOwner() != null) {
-                        eI.hurt(DamageSource.indirectMobAttack(this.getOwner(), (LivingEntity) this.getOwner()), BPConfig.getHellMode ? 3 : 5);
+                        eI.hurt(DamageSource.indirectMobAttack(this.getOwner(), (LivingEntity) this.getOwner()), BPConfig.IN_HELLMODE ? 3 : 5);
                     }
 
                     eI.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
@@ -185,7 +185,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
     @Override
     public double getBaseDamage() {
-        return BPConfig.getHellMode ? 3.0D : 5.5D;
+        return BPConfig.IN_HELLMODE ? 3.0D : 5.5D;
     }
 
     @Override

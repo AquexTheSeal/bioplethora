@@ -55,6 +55,8 @@ public class BPFeatureGeneration {
                 vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.WARPED_FOREST)) {
+                vegDeco.add(() -> BPConfiguredFeatures.WARPED_DANCER_CONFIG);
+
                 vegDeco.add(() -> BPConfiguredFeatures.TURQUOISE_PENDENT_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.CRIMSON_FOREST)) {
@@ -66,7 +68,10 @@ public class BPFeatureGeneration {
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_MINISHROOM_CONFIG);
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_BIGSHROOM_CONFIG);
 
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_SPROUTS_CONFIG);
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_TALL_GRASS_CONFIG);
+
+                vegDeco.add(() -> BPConfiguredFeatures.SPIRIT_DANGLER_CONFIG);
 
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_ETERN_CONFIG);
             }

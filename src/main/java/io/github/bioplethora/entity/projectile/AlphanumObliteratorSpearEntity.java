@@ -34,7 +34,7 @@ public class AlphanumObliteratorSpearEntity extends DamagingProjectileEntity imp
 
     private final AnimationFactory factory = new AnimationFactory(this);
     public int lifespan = 0;
-    public float baseDamage = BPConfig.getHellMode ? 15.0F : 12.0F;
+    public float baseDamage = BPConfig.IN_HELLMODE ? 15.0F : 12.0F;
 
     public AlphanumObliteratorSpearEntity(EntityType<? extends DamagingProjectileEntity> type, World world) {
         super(type, world);
@@ -115,7 +115,7 @@ public class AlphanumObliteratorSpearEntity extends DamagingProjectileEntity imp
 
                     entityArea.hurt(castration, getBaseDamage());
                     
-                    if (BPConfig.getHellMode) {
+                    if (BPConfig.IN_HELLMODE) {
                         entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 80, 2));
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 80, 1));
                         entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 80, 1));

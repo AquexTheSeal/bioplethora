@@ -36,6 +36,10 @@ public class BPConfiguredFeatures {
     );
 
     // Grasses
+    public static final ConfiguredFeature<?, ?> SOUL_SPROUTS_CONFIG = makeDecoratedClusterPlants(
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_SPROUTS.get(), new SimpleBlockPlacer(), 17
+    );
+
     public static final ConfiguredFeature<?, ?> SOUL_TALL_GRASS_CONFIG = makeNoProjectionClusterPlants(
             Feature.RANDOM_PATCH, BPBlocks.SOUL_TALL_GRASS.get(), new DoublePlantBlockPlacer()
     ).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
@@ -45,32 +49,43 @@ public class BPConfiguredFeatures {
             BPFeatures.LAVA_EDGE_CLUSTER.get(), BPBlocks.LAVA_SPIRE.get(), new LavaEdgeBlockPlacer(), 19
     );
 
+    public static final ConfiguredFeature<?, ?> WARPED_DANCER_CONFIG = makeDecoratedClusterPlants(
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_SPROUTS.get(), new SimpleBlockPlacer(), 15
+    );
+
     // Vines
-    public static final ConfiguredFeature<?, ?> BASALT_SPELEOTHERM_CONFIG = makePendentConfig(
+    public static final ConfiguredFeature<?, ?> SPIRIT_DANGLER_CONFIG = makePendentConfig(
+            Blocks.SOUL_SOIL, BPBlocks.SPIRIT_DANGLER_PLANT.get(), BPBlocks.SPIRIT_DANGLER.get(),
+            ImmutableList.of(Blocks.SOUL_SOIL, Blocks.SOUL_SAND, Blocks.NETHERRACK, Blocks.BLACKSTONE),
+            1, 8, 132, 115
+    );
+    
+    // Fruitable Vines
+    public static final ConfiguredFeature<?, ?> BASALT_SPELEOTHERM_CONFIG = makeFruitablePendentConfig(
             Blocks.BASALT, BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), BPBlocks.BASALT_SPELEOTHERM.get(),
             ImmutableList.of(Blocks.BASALT, Blocks.NETHERRACK, Blocks.BLACKSTONE),
             1, 8, 132, 115
     );
 
-    public static final ConfiguredFeature<?, ?> THONTUS_THISTLE_CONFIG = makePendentConfig(
+    public static final ConfiguredFeature<?, ?> THONTUS_THISTLE_CONFIG = makeFruitablePendentConfig(
             Blocks.NETHERRACK, BPBlocks.THONTUS_THISTLE_PLANT.get(), BPBlocks.BERRIED_THONTUS_THISTLE.get(), BPBlocks.THONTUS_THISTLE.get(),
             ImmutableList.of(Blocks.NETHERRACK, Blocks.BLACKSTONE),
             2, 10, 132, 125
     );
 
-    public static final ConfiguredFeature<?, ?> TURQUOISE_PENDENT_CONFIG = makePendentConfig(
+    public static final ConfiguredFeature<?, ?> TURQUOISE_PENDENT_CONFIG = makeFruitablePendentConfig(
             Blocks.WARPED_WART_BLOCK, BPBlocks.TURQUOISE_PENDENT_PLANT.get(), BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get(), BPBlocks.TURQUOISE_PENDENT.get(),
             ImmutableList.of(Blocks.WARPED_WART_BLOCK, Blocks.NETHERRACK, Blocks.BLACKSTONE),
             2, 8, 132, 122
     );
 
-    public static final ConfiguredFeature<?, ?> CERISE_IVY_CONFIG = makePendentConfig(
+    public static final ConfiguredFeature<?, ?> CERISE_IVY_CONFIG = makeFruitablePendentConfig(
             Blocks.NETHER_WART_BLOCK, BPBlocks.CERISE_IVY_PLANT.get(), BPBlocks.SEEDED_CERISE_IVY.get(), BPBlocks.CERISE_IVY.get(),
             ImmutableList.of(Blocks.NETHER_WART_BLOCK, Blocks.NETHERRACK, Blocks.BLACKSTONE),
             1, 8, 132, 122
     );
 
-    public static final ConfiguredFeature<?, ?> SOUL_ETERN_CONFIG = makePendentConfig(
+    public static final ConfiguredFeature<?, ?> SOUL_ETERN_CONFIG = makeFruitablePendentConfig(
             Blocks.SOUL_SOIL, BPBlocks.SOUL_ETERN_PLANT.get(), BPBlocks.FLOURISHED_SOUL_ETERN.get(), BPBlocks.SOUL_ETERN.get(),
             ImmutableList.of(Blocks.SOUL_SOIL, Blocks.SOUL_SAND, Blocks.NETHERRACK, Blocks.BLACKSTONE),
             2, 10, 132, 125
@@ -105,7 +120,19 @@ public class BPConfiguredFeatures {
     //   FEATURE HELPERS
     //---------------------------
 
-    public static ConfiguredFeature<?, ?> makePendentConfig(Block top, Block middle, Block fruited, Block end, ImmutableList<Block> whitelist, int minLength, int maxLength, int range, int count) {
+    public static ConfiguredFeature<?, ?> makePendentConfig(Block top, Block middle, Block end, ImmutableList<Block> whitelist, int minLength, int maxLength, int range, int count) {
+        return BPFeatures.PENDENT_BLOCKS.get()
+                .configured(new PendentBlocksFeatureConfig.Builder()
+                        .setTopBlock(top).setMiddleBlock(middle)
+                        .setFruitedBlock(middle).setEndBlock(end.defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
+                        .setWhitelist(whitelist)
+                        .setMinLength(minLength)
+                        .setMaxLength(maxLength)
+                        .build())
+                .range(range).squared().count(count);
+    }
+
+    public static ConfiguredFeature<?, ?> makeFruitablePendentConfig(Block top, Block middle, Block fruited, Block end, ImmutableList<Block> whitelist, int minLength, int maxLength, int range, int count) {
         return BPFeatures.PENDENT_BLOCKS.get()
                 .configured(new PendentBlocksFeatureConfig.Builder()
                         .setTopBlock(top).setMiddleBlock(middle)

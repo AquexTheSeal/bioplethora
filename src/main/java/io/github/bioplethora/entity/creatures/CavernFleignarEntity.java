@@ -164,8 +164,8 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
 
             if (targetArea != this) {
                 float knockbackValue = ((float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK) / 2);
-                int poisonDuration = BPConfig.getHellMode ? 60 : 100;
-                int poisonAmplification = BPConfig.getHellMode ? 0 : 1;
+                int poisonDuration = BPConfig.IN_HELLMODE ? 60 : 100;
+                int poisonAmplification = BPConfig.IN_HELLMODE ? 0 : 1;
 
                 if (this.level instanceof ServerWorld) {
                     ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, entity.getX(), entity.getY(), entity.getZ(), 15, 1.2, 0.2, 1.2, 0.01);

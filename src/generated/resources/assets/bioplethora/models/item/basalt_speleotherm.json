@@ -1,3 +1,6 @@
 {
-  "parent": "bioplethora:block/basalt_speleotherm"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:block/basalt_speleotherm_plant"
+  }
 }

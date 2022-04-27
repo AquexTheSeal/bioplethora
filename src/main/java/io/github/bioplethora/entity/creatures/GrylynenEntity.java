@@ -47,7 +47,7 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
                 .add(Attributes.ATTACK_DAMAGE, tier.getTierDamage() * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, !BPConfig.getHellMode ? tier.getTierHealth() : tier.getHellTierHP())
+                .add(Attributes.MAX_HEALTH, !BPConfig.IN_HELLMODE ? tier.getTierHealth() : tier.getHellTierHP())
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FLYING_SPEED, 0.45 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)

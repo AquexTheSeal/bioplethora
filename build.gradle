@@ -137,11 +137,12 @@ dependencies {
     //Just Enough Items (JEI)
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
-    //Just Enough Resources (JER)
-    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
     //Patchouli
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51")
+
+    //Just Enough Resources (JER)
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
     //The One Probe
     implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
     //Mixin

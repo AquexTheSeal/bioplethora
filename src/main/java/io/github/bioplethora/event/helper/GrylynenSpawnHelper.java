@@ -33,40 +33,40 @@ public class GrylynenSpawnHelper {
             if (!event.getPlayer().isCreative()) {
 
                 if (getTaggedBlock(BPTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE, world, pos)) {
-                    if (Math.random() < (!BPConfig.getHellMode ? 0.025 : 0.045) && BPConfig.COMMON.spawnWoodenGrylynen.get()) {
+                    if (Math.random() < (!BPConfig.IN_HELLMODE ? 0.025 : 0.045) && BPConfig.COMMON.spawnWoodenGrylynen.get()) {
                         summonGrylynenCore(event.getPlayer(), BPEntities.WOODEN_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.STONE_GRYLYNEN_SPAWNABLE, world, pos)) {
-                    if (Math.random() < (!BPConfig.getHellMode ? 0.025 : 0.045) && BPConfig.COMMON.spawnStoneGrylynen.get()) {
+                    if (Math.random() < (!BPConfig.IN_HELLMODE ? 0.025 : 0.045) && BPConfig.COMMON.spawnStoneGrylynen.get()) {
                         summonGrylynenCore(event.getPlayer(), BPEntities.STONE_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.GOLDEN_GRYLYNEN_SPAWNABLE, world, pos)) {
-                    if (Math.random() < (!BPConfig.getHellMode ? 0.075 : 0.1) && BPConfig.COMMON.spawnGoldenGrylynen.get()) {
+                    if (Math.random() < (!BPConfig.IN_HELLMODE ? 0.075 : 0.1) && BPConfig.COMMON.spawnGoldenGrylynen.get()) {
                         world.destroyBlock(pos, false);
                         summonGrylynenCore(event.getPlayer(), BPEntities.GOLDEN_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.IRON_GRYLYNEN_SPAWNABLE, world, pos)) {
-                    if (Math.random() < (!BPConfig.getHellMode ? 0.075 : 0.1) && BPConfig.COMMON.spawnIronGrylynen.get()) {
+                    if (Math.random() < (!BPConfig.IN_HELLMODE ? 0.075 : 0.1) && BPConfig.COMMON.spawnIronGrylynen.get()) {
                         world.destroyBlock(pos, false);
                         summonGrylynenCore(event.getPlayer(), BPEntities.IRON_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.DIAMOND_GRYLYNEN_SPAWNABLE, world, pos)) {
-                    if (Math.random() < (!BPConfig.getHellMode ? 0.1 : 0.1025) && BPConfig.COMMON.spawnDiamondGrylynen.get()) {
+                    if (Math.random() < (!BPConfig.IN_HELLMODE ? 0.1 : 0.1025) && BPConfig.COMMON.spawnDiamondGrylynen.get()) {
                         world.destroyBlock(pos, false);
                         summonGrylynenCore(event.getPlayer(), BPEntities.DIAMOND_GRYLYNEN.get().create(world), world, pos);
                     }
                 }
 
                 if (getTaggedBlock(BPTags.Blocks.NETHERITE_GRYLYNEN_SPAWNABLE, world, pos)) {
-                    if (Math.random() < (!BPConfig.getHellMode ? 0.1 : 0.1025) && BPConfig.COMMON.spawnNetheriteGrylynen.get()) {
+                    if (Math.random() < (!BPConfig.IN_HELLMODE ? 0.1 : 0.1025) && BPConfig.COMMON.spawnNetheriteGrylynen.get()) {
                         world.destroyBlock(pos, false);
                         summonGrylynenCore(event.getPlayer(), BPEntities.NETHERITE_GRYLYNEN.get().create(world), world, pos);
                     }

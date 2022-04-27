@@ -98,7 +98,7 @@ public class BellophiteArrowEntity extends AbstractArrowEntity {
 
     @Override
     public double getBaseDamage() {
-        return BPConfig.getHellMode ? 7.0D : 9.5D;
+        return BPConfig.IN_HELLMODE ? 7.0D : 9.5D;
     }
 
     @Override

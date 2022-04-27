@@ -49,8 +49,16 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.SOUL_BIGSHROOM.get());
 
         dropOther(BPBlocks.LAVA_SPIRE.get(), Blocks.AIR);
+        add(BPBlocks.WARPED_DANCER.get(), (sTouch) ->
+                createShearsOnlyDrop(BPBlocks.WARPED_DANCER.get()));
 
-        dropSelf(BPBlocks.SOUL_TALL_GRASS.get());
+        add(BPBlocks.SOUL_SPROUTS.get(), (sTouch) ->
+                createShearsOnlyDrop(BPBlocks.SOUL_SPROUTS.get()));
+        add(BPBlocks.SOUL_TALL_GRASS.get(), (sTouch) ->
+                createShearsOnlyDrop(BPBlocks.SOUL_TALL_GRASS.get()));
+
+        dropSelf(BPBlocks.SPIRIT_DANGLER.get());
+        dropOther(BPBlocks.SPIRIT_DANGLER_PLANT.get(), BPBlocks.SPIRIT_DANGLER.get());
 
         dropSelf(BPBlocks.BASALT_SPELEOTHERM.get());
         dropOther(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), BPBlocks.BASALT_SPELEOTHERM.get());

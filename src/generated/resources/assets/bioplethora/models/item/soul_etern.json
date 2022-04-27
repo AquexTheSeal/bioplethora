@@ -1,3 +1,6 @@
 {
-  "parent": "bioplethora:block/soul_etern"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:block/soul_etern_plant"
+  }
 }

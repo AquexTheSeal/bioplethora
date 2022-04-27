@@ -36,17 +36,21 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.grylynenShield(BPItems.YELLOW_CRYSTAL_SHIELD);
         this.grylynenShield(BPItems.RED_CRYSTAL_SHIELD);
 
-        this.specialFlatTexture(BPBlocks.FLEIGNARITE_VINES, BPBlocks.FLEIGNARITE_VINES_PLANT);
+        this.flatBlock(BPBlocks.FLEIGNARITE_VINES, BPBlocks.FLEIGNARITE_VINES_PLANT);
 
-        this.specialFlatTexture(BPBlocks.SOUL_TALL_GRASS, "soul_tall_grass_top");
+        this.flatBlock(BPBlocks.SOUL_MINISHROOM, "soul_minishroom", ITEM_FOLDER);
 
-        this.specialFlatTexture(BPBlocks.SOUL_MINISHROOM, "soul_minishroom", ITEM_FOLDER);
+        this.flatBlock(BPBlocks.LAVA_SPIRE, BPBlocks.LAVA_SPIRE);
+        this.flatBlock(BPBlocks.WARPED_DANCER, BPBlocks.WARPED_DANCER);
 
-        this.specialFlatTexture(BPBlocks.LAVA_SPIRE, BPBlocks.LAVA_SPIRE);
+        this.flatBlock(BPBlocks.SOUL_SPROUTS, BPBlocks.SOUL_SPROUTS);
+        this.flatBlock(BPBlocks.SOUL_TALL_GRASS, "soul_tall_grass_top");
 
-        this.specialFlatTexture(BPBlocks.BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
-        this.specialFlatTexture(BPBlocks.FIERY_BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
-        this.specialFlatTexture(BPBlocks.SOUL_ETERN, BPBlocks.SOUL_ETERN_PLANT);
+        this.flatBlock(BPBlocks.SPIRIT_DANGLER, BPBlocks.SPIRIT_DANGLER_PLANT);
+
+        this.flatBlock(BPBlocks.BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
+        this.flatBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
+        this.flatBlock(BPBlocks.SOUL_ETERN, BPBlocks.SOUL_ETERN_PLANT);
     }
 
     @Nonnull
@@ -128,24 +132,26 @@ public class BioItemModelProvider extends ItemModelProvider {
         }
     }
 
-    public void specialFlatTexture(RegistryObject<Block> block, RegistryObject<Block> textureBlock) {
-        this.specialFlatTexture(block, textureBlock.get().getRegistryName().getPath());
+    public void flatBlock(RegistryObject<Block> block, RegistryObject<Block> textureBlock) {
+        this.flatBlock(block, textureBlock.get().getRegistryName().getPath());
     }
 
-    public void specialFlatTexture(RegistryObject<Block> block, RegistryObject<Block> textureBlock, String fileDirectory) {
-        specialFlatTexture(block, textureBlock.get().getRegistryName().getPath(), fileDirectory);
+    public void flatBlock(RegistryObject<Block> block, RegistryObject<Block> textureBlock, String fileDirectory) {
+        flatBlock(block, textureBlock.get().getRegistryName().getPath(), fileDirectory);
     }
 
-    public void specialFlatTexture(RegistryObject<Block> block, String texture) {
-        specialFlatTexture(block, texture, BLOCK_FOLDER);
+    public void flatBlock(RegistryObject<Block> block, String texture) {
+        flatBlock(block, texture, BLOCK_FOLDER);
     }
-    public void specialFlatTexture(RegistryObject<Block> block, String texture, String fileDirectory) {
+
+    public void flatBlock(RegistryObject<Block> block, String texture, String fileDirectory) {
         String name = block.getId().getPath();
-        ResourceLocation datagenLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
+        ResourceLocation itemLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
+        ResourceLocation blockLoc = new ResourceLocation(Bioplethora.MOD_ID, "block/" + name);
 
         ModelFile.ExistingModelFile modelType = getMcLoc("item/generated");
 
-        if (existingFileHelper.exists(datagenLoc, TEXTURE) && !existingFileHelper.exists(datagenLoc, MODEL)) {
+        if (!existingFileHelper.exists(blockLoc, MODEL) || existingFileHelper.exists(itemLoc, MODEL)) {
             this.getBuilder(name).parent(modelType).texture("layer0", fileDirectory + "/" + texture);
             Bioplethora.LOGGER.info("Generate Block Item Successful: " + name);
         }

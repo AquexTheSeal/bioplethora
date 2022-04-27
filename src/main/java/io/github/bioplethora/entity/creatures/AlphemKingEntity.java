@@ -247,7 +247,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             world.addParticle(ParticleTypes.POOF, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
 
             this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.35F * BPConfig.COMMON.mobMovementSpeedMultiplier.get());
-            if (!BPConfig.getHellMode) {
+            if (!BPConfig.IN_HELLMODE) {
                 this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(37.0F * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
             } else {
                 this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(45.0F * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
@@ -263,7 +263,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         } else {
             this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.20F * BPConfig.COMMON.mobMovementSpeedMultiplier.get());
-            if (!BPConfig.getHellMode) {
+            if (!BPConfig.IN_HELLMODE) {
                 this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(30.0F * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
             } else {
                 this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35.0F * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
@@ -358,7 +358,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(10, 0.5, 10))) {
 
             if (areaEnt != this) {
-                areaEnt.hurt(DamageSource.mobAttack(this), BPConfig.getHellMode ? 23 : 20);
+                areaEnt.hurt(DamageSource.mobAttack(this), BPConfig.IN_HELLMODE ? 23 : 20);
                 areaEnt.knockback(f1, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
                 areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 0.5 - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));

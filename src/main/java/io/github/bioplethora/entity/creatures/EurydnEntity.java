@@ -48,13 +48,13 @@ public class EurydnEntity extends FloatingMonsterEntity implements IAnimatable, 
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, (BPConfig.getHellMode ? 6 : 4) * BPConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, (BPConfig.IN_HELLMODE ? 6 : 4) * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 0.1)
                 .add(Attributes.ATTACK_KNOCKBACK, 0)
                 .add(Attributes.ATTACK_DAMAGE, 1)
-                .add(Attributes.MAX_HEALTH, (BPConfig.getHellMode ? 28 : 24) * BPConfig.COMMON.mobHealthMultiplier.get())
-                .add(Attributes.MOVEMENT_SPEED, (BPConfig.getHellMode ? 0.3 : 0.25) * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FLYING_SPEED, (BPConfig.getHellMode ? 0.45 : 0.25) * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MAX_HEALTH, (BPConfig.IN_HELLMODE ? 28 : 24) * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, (BPConfig.IN_HELLMODE ? 0.3 : 0.25) * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.FLYING_SPEED, (BPConfig.IN_HELLMODE ? 0.45 : 0.25) * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 32D);
     }

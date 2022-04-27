@@ -69,6 +69,8 @@
   "item.bioplethora.cavern_fleignar_spawn_egg": "Cavern Fleignar Spawn Egg",
   "item.bioplethora.trapjaw_spawn_egg": "Trapjaw Spawn Egg",
   "item.bioplethora.terraith_spawn_egg": "Terraith Spawn Egg",
+  "item.bioplethora.fiery_eurydn_spawn_egg": "Fiery Eurydn Spawn Egg",
+  "item.bioplethora.soul_eurydn_spawn_egg": "Soul Eurydn Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",
@@ -177,11 +179,16 @@
   "block.bioplethora.soul_bigshroom": "Soul Bigshroom",
   "block.bioplethora.soul_minishroom": "Soul Minishroom",
 
+  "block.bioplethora.soul_sprouts": "Soul Sprouts",
   "block.bioplethora.soul_tall_grass": "Soul Tall Grass",
 
   "block.bioplethora.lava_spire": "Lava Spire",
+  "block.bioplethora.warped_dancer": "Warped Dancer",
 
   "block.bioplethora.potted_lava_spire": "Potted Lava Spire",
+
+  "block.bioplethora.spirit_dangler": "Spirit Dangler",
+  "block.bioplethora.spirit_dangler_plant": "Spirit Dangler",
 
   "block.bioplethora.basalt_speleotherm": "Basalt Speleotherm",
   "block.bioplethora.basalt_speleotherm_plant": "Basalt Speleotherm",

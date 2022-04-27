@@ -14,7 +14,7 @@ public class BPConfig {
         COMMON = commonSpecPair.getLeft();
     }
 
-    public static final boolean getHellMode = BPConfig.COMMON.hellMode.get();
+    public static final boolean IN_HELLMODE = BPConfig.COMMON.hellMode.get();
 
     public static class Common {
 

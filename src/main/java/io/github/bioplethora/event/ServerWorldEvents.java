@@ -79,7 +79,7 @@ public class ServerWorldEvents {
     @SubscribeEvent
     public static void onPlayerRightClick(PlayerInteractEvent.RightClickEmpty event) {
 
-        if (ModList.get().isLoaded("offhandcombat") && event.getPlayer().getItemInHand(Hand.OFF_HAND) == event.getItemStack()) {
+        if (ModList.get().isLoaded("offhandcombat")) {
 
             hitHandler(event.getPlayer(), event.getItemStack());
 
@@ -212,8 +212,6 @@ public class ServerWorldEvents {
         boolean dsVoid = (event.getSource() == DamageSource.OUT_OF_WORLD);
         boolean dsFire2 = (event.getSource() == DamageSource.ON_FIRE);
 
-        MobCapEventHelper.onEntityHurt(event);
-
         if (event.getEntity() instanceof LivingEntity) {
 
             LivingEntity living = (LivingEntity) event.getEntity();
@@ -240,8 +238,12 @@ public class ServerWorldEvents {
 
         if (event.getSource().getEntity() instanceof LivingEntity && event.getEntity() instanceof LivingEntity) {
             if (((LivingEntity) event.getSource().getEntity()).hasEffect(BPEffects.SPIRIT_STRENGTHENING.get())) {
-                float healthScaledDmg = MathHelper.ceil(((LivingEntity) event.getEntity()).getHealth() * 0.12F);
-                event.setAmount(event.getAmount() * 1.10F + healthScaledDmg);
+                float dmgCap = BPConfig.IN_HELLMODE ? 7 : 12;
+                float floorReduction = MathHelper.ceil(((LivingEntity) event.getEntity()).getHealth() * 0.025F);
+                float floor = MathHelper.floor(((LivingEntity) event.getEntity()).getHealth() * 0.05F);
+                float armorReduction = MathHelper.ceil(((LivingEntity) event.getEntity()).getArmorValue() / 4F);
+                float healthScaledDmg = MathHelper.clamp(floor - floorReduction, 0.0F, dmgCap);
+                event.setAmount((event.getAmount() * 1.10F) + healthScaledDmg - armorReduction);
             }
         }
 
@@ -275,6 +277,8 @@ public class ServerWorldEvents {
                 }
             }
         }
+
+        MobCapEventHelper.onEntityHurt(event);
     }
 
     @SubscribeEvent

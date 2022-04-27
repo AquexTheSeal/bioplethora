@@ -133,7 +133,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
         if (Math.random() <= 0.05) {
             this.setCardinalVariant(true);
-            if (BPConfig.getHellMode) {
+            if (BPConfig.IN_HELLMODE) {
                 this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(16 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
                 this.getAttribute(Attributes.ARMOR).setBaseValue(8 * BPConfig.COMMON.mobArmorMultiplier.get());
                 this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(145 * BPConfig.COMMON.mobHealthMultiplier.get());
@@ -144,7 +144,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
                 this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(110 * BPConfig.COMMON.mobHealthMultiplier.get());
                 this.setHealth(110 * BPConfig.COMMON.mobHealthMultiplier.get());
             }
-        } else if (BPConfig.getHellMode) {
+        } else if (BPConfig.IN_HELLMODE) {
             this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(10 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
             this.getAttribute(Attributes.ARMOR).setBaseValue(6 * BPConfig.COMMON.mobArmorMultiplier.get());
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(100 * BPConfig.COMMON.mobHealthMultiplier.get());
