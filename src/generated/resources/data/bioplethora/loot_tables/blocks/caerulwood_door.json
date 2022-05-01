@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bioplethora:petrawood_fence_gate"
+          "name": "bioplethora:caerulwood_door"
         }
       ],
       "conditions": [

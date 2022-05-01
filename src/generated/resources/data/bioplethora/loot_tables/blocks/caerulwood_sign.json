@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bioplethora:petrawood_slab"
+          "name": "bioplethora:caerulwood_sign"
         }
       ],
       "conditions": [

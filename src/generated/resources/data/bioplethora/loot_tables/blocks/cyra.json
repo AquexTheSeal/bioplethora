@@ -6,12 +6,15 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bioplethora:petrawood_log"
+          "name": "bioplethora:cyra"
         }
       ],
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "minecraft:shears"
+          }
         }
       ]
     }
