@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "bioplethora:petrawood_log",
-    "bioplethora:petrawood_wood",
-    "bioplethora:stripped_petrawood_log",
-    "bioplethora:stripped_petrawood_wood"
+    "bioplethora:caerulwood_log",
+    "bioplethora:caerulwood_wood",
+    "bioplethora:stripped_caerulwood_log",
+    "bioplethora:stripped_caerulwood_wood"
   ]
 }

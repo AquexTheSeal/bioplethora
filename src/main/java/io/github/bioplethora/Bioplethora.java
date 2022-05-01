@@ -4,13 +4,11 @@ import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.network.BPNetwork;
 import io.github.bioplethora.registry.*;
-import io.github.bioplethora.registry.worldgen.BPBiomes;
-import io.github.bioplethora.registry.worldgen.BPBlockPlacers;
-import io.github.bioplethora.registry.worldgen.BPFeatures;
-import io.github.bioplethora.registry.worldgen.BPStructures;
+import io.github.bioplethora.registry.worldgen.*;
 import io.github.bioplethora.world.BPBiomeGeneration;
 import io.github.bioplethora.world.EntitySpawnManager;
 import net.minecraft.data.DataGenerator;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -23,6 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -54,7 +53,7 @@ public class Bioplethora {
         BPFeatures.FEATURES.register(bus);
         BPAttributes.ATTRIBUTES.register(bus);
         BPBlockPlacers.BLOCK_PLACERS.register(bus);
-
+        BPSurfaceBuilders.SURFACE_BUILDERS.register(bus);
         BPTileEntities.TILE_ENTITIES.register(bus);
         BPContainerTypes.CONTAINERS.register(bus);
 
@@ -63,6 +62,11 @@ public class Bioplethora {
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);
         bus.addListener(this::onInterModEnqueueEvent);
+
+        bus.addListener(BPWoodTypes::registerWoodType);
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            bus.addListener(BPWoodTypes::registerWoodTypeClient);
+        }
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(EventPriority.HIGH, EntitySpawnManager::onBiomeLoadingEvent);

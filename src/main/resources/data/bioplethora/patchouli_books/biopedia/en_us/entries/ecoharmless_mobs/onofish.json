@@ -1,0 +1,16 @@
+{
+  "name": "Onofish",
+  "icon": "bioplethora:onofish_spawn_egg",
+  "category": "ecoharmless_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()Onofishes are floating peaceful jellyfishes that likes to wander around the end."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:onofish",
+      "text": "Onofishes spawns commonly on water areas."
+    }
+  ]
+}

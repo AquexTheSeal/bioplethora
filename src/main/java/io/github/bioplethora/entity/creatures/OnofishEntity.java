@@ -25,6 +25,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -86,6 +87,7 @@ public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable,
         ++this.jumpTime;
         if (this.jumpTime == 200) {
             this.setDeltaMovement(0, this.random.nextBoolean() ? .15 : -.20, 0);
+            this.playSound(SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, 1, 1);
             jumpTime = this.random.nextInt(50);
         }
     }
@@ -96,7 +98,7 @@ public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable,
         if (this.deathTime == 20) {
             this.remove();
 
-            for(int i = 0; i < 20; ++i) {
+            for (int i = 0; i < 20; ++i) {
                 double d0 = this.random.nextGaussian() * 0.02D;
                 double d1 = this.random.nextGaussian() * 0.02D;
                 double d2 = this.random.nextGaussian() * 0.02D;
@@ -104,6 +106,11 @@ public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable,
                 this.level.addParticle(ParticleTypes.FIREWORK, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
             }
         }
+    }
+
+    @Override
+    public boolean checkSpawnRules(IWorld pLevel, SpawnReason pSpawnReason) {
+        return super.checkSpawnRules(pLevel, pSpawnReason) && blockPosition().getY() > 40;
     }
 
     @Nullable

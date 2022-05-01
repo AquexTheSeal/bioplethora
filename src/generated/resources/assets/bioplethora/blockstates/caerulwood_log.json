@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "bioplethora:block/caerulwood_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "bioplethora:block/caerulwood_log"
+    },
+    "axis=z": {
+      "model": "bioplethora:block/caerulwood_log_horizontal",
+      "x": 90
+    }
+  }
+}

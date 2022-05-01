@@ -29,12 +29,9 @@ public class BPBlockLootTables extends BlockLootTables {
 
         dropSelf(BPBlocks.MIRESTONE.get());
 
-        add(BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get()));
-        add(BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get()));
-        add(BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch)
-                -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
+        add(BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get()));
+        add(BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get()));
+        add(BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.RED_GRYLYNEN_CRYSTAL_BLOCK.get()));
 
         dropSelf(BPBlocks.REINFORCING_TABLE.get());
 
@@ -49,13 +46,10 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.SOUL_BIGSHROOM.get());
 
         dropOther(BPBlocks.LAVA_SPIRE.get(), Blocks.AIR);
-        add(BPBlocks.WARPED_DANCER.get(), (sTouch) ->
-                createShearsOnlyDrop(BPBlocks.WARPED_DANCER.get()));
+        add(BPBlocks.WARPED_DANCER.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.WARPED_DANCER.get()));
 
-        add(BPBlocks.SOUL_SPROUTS.get(), (sTouch) ->
-                createShearsOnlyDrop(BPBlocks.SOUL_SPROUTS.get()));
-        add(BPBlocks.SOUL_TALL_GRASS.get(), (sTouch) ->
-                createShearsOnlyDrop(BPBlocks.SOUL_TALL_GRASS.get()));
+        add(BPBlocks.SOUL_SPROUTS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.SOUL_SPROUTS.get()));
+        add(BPBlocks.SOUL_TALL_GRASS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.SOUL_TALL_GRASS.get()));
 
         dropSelf(BPBlocks.SPIRIT_DANGLER.get());
         dropOther(BPBlocks.SPIRIT_DANGLER_PLANT.get(), BPBlocks.SPIRIT_DANGLER.get());
@@ -80,9 +74,32 @@ public class BPBlockLootTables extends BlockLootTables {
         dropOther(BPBlocks.SOUL_ETERN_PLANT.get(), BPBlocks.SOUL_ETERN.get());
         dropOther(BPBlocks.FLOURISHED_SOUL_ETERN.get(), BPBlocks.SOUL_ETERN.get());
 
+        // End Plants
+        add(BPBlocks.CYRA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CYRA.get()));
+
         // Potted Plants
         dropPottedContents(BPBlocks.POTTED_LAVA_SPIRE.get());
 
+        // Caerulwood set
+        dropSelf(BPBlocks.CAERULWOOD_LOG.get());
+        dropSelf(BPBlocks.CAERULWOOD_WOOD.get());
+        dropSelf(BPBlocks.STRIPPED_CAERULWOOD_LOG.get());
+        dropSelf(BPBlocks.STRIPPED_CAERULWOOD_WOOD.get());
+        dropSelf(BPBlocks.CAERULWOOD_PLANKS.get());
+        add(BPBlocks.CAERULWOOD_LEAVES.get(), createShearsOnlyDrop(BPBlocks.CAERULWOOD_LEAVES.get()));
+        //dropSelf(BPBlocks.CAERULWOOD_SAPLING.get());
+
+        dropSelf(BPBlocks.CAERULWOOD_FENCE.get());
+        dropSelf(BPBlocks.CAERULWOOD_FENCE_GATE.get());
+        dropSelf(BPBlocks.CAERULWOOD_SLAB.get());
+        dropSelf(BPBlocks.CAERULWOOD_PRESSURE_PLATE.get());
+        dropSelf(BPBlocks.CAERULWOOD_STAIRS.get());
+        dropSelf(BPBlocks.CAERULWOOD_BUTTON.get());
+        dropSelf(BPBlocks.CAERULWOOD_SIGN.get());
+        dropSelf(BPBlocks.CAERULWOOD_WALL_SIGN.get());
+        dropSelf(BPBlocks.CAERULWOOD_DOOR.get());
+        dropSelf(BPBlocks.CAERULWOOD_TRAPDOOR.get());
+        
         // Alphanum Stone Set
         dropSelf(BPBlocks.ALPHANUM.get());
         dropSelf(BPBlocks.ALPHANUM_BRICKS.get());
@@ -100,6 +117,7 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.ALPHANUM_SLAB_BRICKS.get());
         dropSelf(BPBlocks.POLISHED_ALPHANUM_SLAB.get());
 
+        /*
         // Petrawood woodset
         dropSelf(BPBlocks.PETRAWOOD_LOG.get());
         dropSelf(BPBlocks.PETRAWOOD_WOOD.get());
@@ -119,6 +137,7 @@ public class BPBlockLootTables extends BlockLootTables {
         //dropSelf(BPBlocks.PETRAWOOD_WALL_SIGN.get());
         //dropSelf(BPBlocks.PETRAWOOD_DOOR.get());
         //dropSelf(BPBlocks.PETRAWOOD_TRAPDOOR.get());
+        */
     }
 
     @Override

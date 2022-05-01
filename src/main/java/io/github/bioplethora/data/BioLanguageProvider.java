@@ -4,6 +4,7 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.enchantments.AntibioEnchantment;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.registry.worldgen.BPBiomes;
+import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.enchantment.Enchantment;
@@ -24,7 +25,7 @@ public class BioLanguageProvider extends LanguageProvider {
 
     //==========================================================
     //                     VARIABLES
-    //==========================================================
+    //================================  ==========================
 
     List<Supplier<? extends EntityType<?>>> manualEntityList = new ArrayList<>();
     List<Supplier<? extends Block>> manualBlockList = new ArrayList<>();
@@ -64,6 +65,9 @@ public class BioLanguageProvider extends LanguageProvider {
 
     public void manualEntityTranslations() {
         addManualEntity(BPEntities.ALTYRUS_SUMMONING, "Altyrus Summoning Core");
+    }
+
+    public void manualBlockTranslations() {
     }
 
     public void addDeathMessages() {
@@ -252,8 +256,10 @@ public class BioLanguageProvider extends LanguageProvider {
     }
 
     public void addBlocks(Collection<RegistryObject<Block>> blocks) {
+        manualBlockTranslations();
+
         for (RegistryObject<Block> block : blocks) {
-            if (!manualBlockList.contains(block)) {
+            if (!manualBlockList.contains(block) && !(block.get() instanceof AbstractSignBlock)) {
                 addBlock(block, capitalizedSpacedRegistryObject(block));
             }
         }

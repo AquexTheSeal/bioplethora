@@ -3,12 +3,16 @@ package io.github.bioplethora.registry.worldgen;
 import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.world.BPFeatureGeneration;
-import io.github.bioplethora.world.blockplacer.LavaEdgeBlockPlacer;
-import io.github.bioplethora.world.blockplacer.MinishroomBlockPlacer;
-import io.github.bioplethora.world.feature_config.FleignariteSplotchConfig;
-import io.github.bioplethora.world.feature_config.PendentBlocksFeatureConfig;
+import io.github.bioplethora.world.blockplacers.LavaEdgeBlockPlacer;
+import io.github.bioplethora.world.blockplacers.MinishroomBlockPlacer;
+import io.github.bioplethora.world.featureconfigs.ChangedSurfaceFeatureConfig;
+import io.github.bioplethora.world.featureconfigs.ExpandedLakeFeatureConfig;
+import io.github.bioplethora.world.featureconfigs.FleignariteSplotchConfig;
+import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
+import io.github.bioplethora.world.features.ChangedSurfaceFeature;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.blockplacer.BlockPlacer;
@@ -26,7 +30,7 @@ public class BPConfiguredFeatures {
     //     TEMPLATED FEATURES
     //--------------------------------
 
-    // Mushrooms
+    // Nether Mushrooms
     public static final ConfiguredFeature<?, ?> SOUL_MINISHROOM_CONFIG = makeDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_MINISHROOM.get(), new MinishroomBlockPlacer(), 15
     );
@@ -35,7 +39,7 @@ public class BPConfiguredFeatures {
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_BIGSHROOM.get(), new SimpleBlockPlacer(), 12
     );
 
-    // Grasses
+    // Nether Grasses
     public static final ConfiguredFeature<?, ?> SOUL_SPROUTS_CONFIG = makeDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_SPROUTS.get(), new SimpleBlockPlacer(), 26
     );
@@ -44,7 +48,7 @@ public class BPConfiguredFeatures {
             Feature.RANDOM_PATCH, BPBlocks.SOUL_TALL_GRASS.get(), new DoublePlantBlockPlacer()
     ).count(22).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
 
-    // Other Plants
+    // Other Nether Plants
     public static final ConfiguredFeature<?, ?> LAVA_SPIRE_CONFIG = makeDecoratedClusterPlants(
             BPFeatures.LAVA_EDGE_CLUSTER.get(), BPBlocks.LAVA_SPIRE.get(), new LavaEdgeBlockPlacer(), 19
     );
@@ -53,14 +57,14 @@ public class BPConfiguredFeatures {
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_SPROUTS.get(), new SimpleBlockPlacer(), 15
     );
 
-    // Vines
+    // Nether Vines
     public static final ConfiguredFeature<?, ?> SPIRIT_DANGLER_CONFIG = makePendentConfig(
             Blocks.SOUL_SOIL, BPBlocks.SPIRIT_DANGLER_PLANT.get(), BPBlocks.SPIRIT_DANGLER.get(),
             ImmutableList.of(Blocks.SOUL_SOIL, Blocks.SOUL_SAND, Blocks.NETHERRACK, Blocks.BLACKSTONE),
             1, 8, 132, 115
     );
     
-    // Fruitable Vines
+    // Nether Fruitable Vines
     public static final ConfiguredFeature<?, ?> BASALT_SPELEOTHERM_CONFIG = makeFruitablePendentConfig(
             Blocks.BASALT, BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), BPBlocks.BASALT_SPELEOTHERM.get(),
             ImmutableList.of(Blocks.BASALT, Blocks.NETHERRACK, Blocks.BLACKSTONE),
@@ -91,6 +95,15 @@ public class BPConfiguredFeatures {
             2, 10, 132, 125
     );
 
+    // End Surfaces
+
+    public static final ConfiguredFeature<?, ?> END_HIGHLANDS_SURFACE_CONFIG = makeChangedSurfaceConfig(
+        BPBlocks.CYRA.get(), BPBlocks.CYRA.get(),
+            ImmutableList.of(
+                    Blocks.END_STONE.defaultBlockState()
+            )
+    );
+
     //--------------------------------------
     //    CUSTOMIZED FEATURES
     //--------------------------------------
@@ -116,9 +129,28 @@ public class BPConfiguredFeatures {
                     .build())
             .range(128).squared().count(512);
 
+    // End Lakes
+    public static final ConfiguredFeature<?, ?> CYRA_LAKE_CONFIG = BPFeatures.EXPANDED_LAKE.get()
+            .configured(new ExpandedLakeFeatureConfig.Builder()
+                    .setLiquid(Blocks.WATER.defaultBlockState())
+                    .setSides(BPBlocks.CYRA.get().defaultBlockState())
+                    .setBase(Blocks.OBSIDIAN.defaultBlockState())
+                    .build())
+            .range(60).squared().count(1);
+
     //---------------------------
     //   FEATURE HELPERS
     //---------------------------
+
+    public static ConfiguredFeature<?, ?> makeChangedSurfaceConfig(Block common, Block uncommon, ImmutableList<BlockState> whitelist) {
+        return new ChangedSurfaceFeature(ChangedSurfaceFeatureConfig.CODEC)
+                .configured(new ChangedSurfaceFeatureConfig.Builder()
+                        .setCommon(common.defaultBlockState())
+                        .setUncommon(uncommon.defaultBlockState())
+                        .setWhitelist(whitelist)
+                        .build())
+                .range(512).squared().count(1024);
+    }
 
     public static ConfiguredFeature<?, ?> makePendentConfig(Block top, Block middle, Block end, ImmutableList<Block> whitelist, int minLength, int maxLength, int range, int count) {
         return BPFeatures.PENDENT_BLOCKS.get()

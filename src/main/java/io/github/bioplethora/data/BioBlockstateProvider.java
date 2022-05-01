@@ -68,6 +68,17 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.SOUL_ETERN_PLANT.get());
         this.simpleCrossBlock(BPBlocks.FLOURISHED_SOUL_ETERN.get());
 
+        // End Plants
+        this.simpleBlock(BPBlocks.CYRA.get());
+
+        this.woodset("caerulwood",
+                BPBlocks.CAERULWOOD_PLANKS.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
+                BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get(), BPBlocks.CAERULWOOD_LEAVES.get(),
+                BPBlocks.CAERULWOOD_FENCE.get(), BPBlocks.CAERULWOOD_FENCE_GATE.get(), BPBlocks.CAERULWOOD_PRESSURE_PLATE.get(),
+                BPBlocks.CAERULWOOD_DOOR.get(), BPBlocks.CAERULWOOD_TRAPDOOR.get(), BPBlocks.CAERULWOOD_BUTTON.get(),
+                BPBlocks.CAERULWOOD_STAIRS.get(), BPBlocks.CAERULWOOD_SLAB.get(), BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()
+                );
+
         // Alphanum stone set
         this.simpleBlock(BPBlocks.ALPHANUM.get());
         this.simpleBlock(BPBlocks.ALPHANUM_BRICKS.get());
@@ -85,6 +96,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.slabBlock(BPBlocks.ALPHANUM_SLAB_BRICKS.get(), bioResLoc("alphanum_bricks"), bioResLoc("alphanum_bricks"));
         this.slabBlock(BPBlocks.POLISHED_ALPHANUM_SLAB.get(), bioResLoc("polished_alphanum"), bioResLoc("polished_alphanum"));
 
+        /*
         // Petrawood woodset
         this.fixedLogBlock(BPBlocks.PETRAWOOD_LOG.get());
         this.woodBlock(BPBlocks.PETRAWOOD_WOOD.get(), bioResLoc("petrawood_log_side"));
@@ -101,7 +113,6 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.stairsBlock(BPBlocks.PETRAWOOD_STAIRS.get(), bioResLoc("petrawood_planks"));
         this.buttonBlock(BPBlocks.PETRAWOOD_BUTTON.get(), bioResLoc("petrawood_planks"));
 
-        /*
         this.doorBlock(BPBlocks.PETRAWOOD_DOOR.get(), bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
         this.trapdoorBlock(BPBlocks.PETRAWOOD_TRAPDOOR.get(), bioResLoc("petrawood_trapdoor"), true);
 
@@ -121,26 +132,44 @@ public class BioBlockstateProvider extends BlockStateProvider {
     }
 
     // Custom Generators
+
+    public void woodset(String woodType,
+            Block planks, Block log, Block strippedLog, Block wood, Block strippedWood, Block leaves,
+            Block fence, Block fenceGate, Block pressurePlate, Block door, Block trapdoor,
+                        Block button, Block stairs, Block slab, Block sign, Block wallSign) {
+        this.fixedLogBlock((RotatedPillarBlock) log);
+        this.woodBlock((RotatedPillarBlock) wood, bioResLoc(woodType + "_log_side"));
+        this.fixedLogBlock((RotatedPillarBlock) strippedLog);
+        this.woodBlock((RotatedPillarBlock) strippedWood, bioResLoc("stripped_" + woodType + "_log_side"));
+        this.simpleBlock(planks);
+        this.simpleBlock(leaves);
+        //this.simpleCrossBlock(BPBlocks.PETRAWOOD_SAPLING.get());
+
+        this.fenceBlock((FenceBlock) fence, bioResLoc(woodType + "_planks"));
+        this.fenceGateBlock((FenceGateBlock) fenceGate, bioResLoc(woodType + "_planks"));
+        this.slabBlock((SlabBlock) slab, bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"));
+        this.pressurePlateBlock((PressurePlateBlock) pressurePlate, bioResLoc(woodType + "_planks"));
+        this.stairsBlock((StairsBlock) stairs, bioResLoc(woodType + "_planks"));
+        this.buttonBlock((AbstractButtonBlock) button, bioResLoc(woodType + "_planks"));
+        this.doorBlock((DoorBlock) door, bioResLoc(woodType + "_door_lower"), bioResLoc(woodType + "_door_upper"));
+        this.trapdoorBlock((TrapDoorBlock) trapdoor, bioResLoc(woodType + "_trapdoor"), false);
+        this.signBlock(sign, wallSign, bioResLoc(woodType + "_planks"));
+    }
+
+    public void signBlock(Block sign, Block wallSign, ResourceLocation texture) {
+        BlockModelBuilder pSign = models().getBuilder(sign.getRegistryName().getPath()).texture("particle", texture);
+        BlockModelBuilder pWallSign = models().getBuilder(wallSign.getRegistryName().getPath()).texture("particle", texture);
+
+        getVariantBuilder(sign).partialState().setModels(new ConfiguredModel(pSign));
+        getVariantBuilder(wallSign).partialState().setModels(new ConfiguredModel(pWallSign));
+    }
+
     public void bigMushroomBlock(Block block) {
         BlockModelBuilder mushroom = models().singleTexture(block.getRegistryName().getPath(), bioResLoc("big_mushroom"), "0", blockTexture(block)).texture("particle", blockTexture(block));
         getVariantBuilder(block).partialState().setModels(new ConfiguredModel(mushroom));
     }
 
     public void smallMushroomBlock(Block block) {
-
-        /*
-        getVariantBuilder(block)
-                .partialState().with(facing, Direction.SOUTH).with(amount, 1)
-                .modelForState().modelFile(mushroom1).addModel()
-                .partialState().with(facing, Direction.WEST).with(amount, 1)
-                .modelForState().modelFile(mushroom1).rotationY(90).addModel()
-                .partialState().with(facing, Direction.NORTH).with(amount, 1)
-                .modelForState().modelFile(mushroom1).rotationY(180).addModel()
-                .partialState().with(facing, Direction.EAST).with(amount, 1)
-                .modelForState().modelFile(mushroom1).rotationY(270).addModel()
-        ;
-         */
-
         getVariantBuilder(block)
                 .forAllStates(state -> ConfiguredModel.builder()
                         .modelFile(getMinishroomModel(block, state))

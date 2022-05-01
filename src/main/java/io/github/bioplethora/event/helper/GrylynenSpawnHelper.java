@@ -30,7 +30,7 @@ public class GrylynenSpawnHelper {
             double x = event.getPos().getX(), y = event.getPos().getY(), z = event.getPos().getZ();
             BlockPos pos = new BlockPos(x, y, z);
 
-            if (!event.getPlayer().isCreative()) {
+            if (!event.getPlayer().isCreative() && checkSpawnRules()) {
 
                 if (getTaggedBlock(BPTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE, world, pos)) {
                     if (Math.random() < (!BPConfig.IN_HELLMODE ? 0.025 : 0.045) && BPConfig.COMMON.spawnWoodenGrylynen.get()) {
@@ -72,6 +72,14 @@ public class GrylynenSpawnHelper {
                     }
                 }
             }
+        }
+    }
+
+    public static boolean checkSpawnRules() {
+        if (BPConfig.COMMON.grylynenIsOnlyHellmode.get()) {
+            return BPConfig.IN_HELLMODE;
+        } else {
+            return true;
         }
     }
 

@@ -63,6 +63,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("soul_etern_plant", bioResLoc("soul_etern_plant"));
         this.cross("flourished_soul_etern", bioResLoc("flourished_soul_etern"));
 
+        // End Plants
+        this.cubeAll("cyra", bioResLoc("cyra"));
+
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));
         this.simpleStoneSet("alphanum", "alphanum_stairs", "alphanum_wall", "alphanum_slab");
@@ -76,46 +79,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeColumnHorizontal("alphanum_pillar", bioResLoc("alphanum_pillar"), bioResLoc("alphanum_pillar_top"));
         this.cubeColumnHorizontal("alphanum_nucleus", bioResLoc("alphanum_nucleus"), bioResLoc("alphanum_pillar_top"));
 
-        // Petrawood woodset
-        this.cubeColumnHorizontal("petrawood_log", bioResLoc("petrawood_log_side"), bioResLoc("petrawood_log_top"));
-        this.cubeAll("petrawood_wood", bioResLoc("petrawood_log_side"));
-        this.cubeColumnHorizontal("stripped_petrawood_log", bioResLoc("stripped_petrawood_log_side"), bioResLoc("stripped_petrawood_log_top"));
-        this.cubeAll("stripped_petrawood_wood", bioResLoc("stripped_petrawood_log_side"));
-        this.cubeAll("petrawood_planks", bioResLoc("petrawood_planks"));
-        this.cubeAll("petrawood_leaves", bioResLoc("petrawood_leaves"));
-        //this.cross("petrawood_sapling", bioResLoc("petrawood_sapling"));
-
-        this.fencePost("petrawood_fence", bioResLoc("petrawood_planks"));
-        this.fenceInventory("petrawood_fence", bioResLoc("petrawood_planks"));
-        this.fenceSide("petrawood_fence", bioResLoc("petrawood_planks"));
-        this.fenceGateWall("petrawood_fence_gate", bioResLoc("petrawood_planks"));
-        this.fenceGateWallOpen("petrawood_fence_gate", bioResLoc("petrawood_planks"));
-        this.fenceGate("petrawood_fence_gate", bioResLoc("petrawood_planks"));
-        this.fenceGateOpen("petrawood_fence_gate", bioResLoc("petrawood_planks"));
-        this.slab("petrawood_slab", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
-        this.slabTop("petrawood_slab", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
-        this.pressurePlateUp("petrawood_pressure_plate", bioResLoc("petrawood_planks"));
-        this.pressurePlateDown("petrawood_pressure_plate", bioResLoc("petrawood_planks"));
-        this.stairs("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
-        this.stairsInner("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
-        this.stairsOuter("petrawood_stairs", bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"), bioResLoc("petrawood_planks"));
-        this.button("petrawood_button", bioResLoc("petrawood_planks"));
-        this.buttonPressed("petrawood_button", bioResLoc("petrawood_planks"));
-        this.buttonInventory("petrawood_button", bioResLoc("petrawood_planks"));
-
-        /*
-        this.doorBottomLeft("petrawood_door", bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
-        this.doorBottomRight("petrawood_door", bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
-        this.doorTopLeft("petrawood_door", bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
-        this.doorTopRight("petrawood_door", bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
-        this.trapdoorBottom("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
-        this.trapdoorOpen("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
-        this.trapdoorOrientableBottom("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
-        this.trapdoorTop("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
-        this.trapdoorOrientableOpen("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
-        this.trapdoorOrientableTop("petrawood_trapdoor", bioResLoc("petrawood_trapdoor"));
-
-         */
+        this.simpleWoodSet("caerulwood");
     }
 
     public void bigMushroom(String name, ResourceLocation all) {
@@ -134,6 +98,50 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
     private ResourceLocation mcResLoc(String texture) {
         return new ResourceLocation("minecraft", BLOCK_FOLDER + "/" + texture);
+    }
+    
+    public void simpleWoodSet(String woodType) {
+        this.cubeColumnHorizontal(woodType + "_log", bioResLoc(woodType + "_log_side"), bioResLoc(woodType + "_log_top"));
+        this.cubeAll(woodType + "_wood", bioResLoc(woodType + "_log_side"));
+        this.cubeColumnHorizontal("stripped_" + woodType + "_log", bioResLoc("stripped_" + woodType + "_log_side"), bioResLoc("stripped_" + woodType + "_log_top"));
+        this.cubeAll("stripped_" + woodType + "_wood", bioResLoc("stripped_" + woodType + "_log_side"));
+        this.cubeAll(woodType + "_planks", bioResLoc(woodType + "_planks"));
+        this.cubeAll(woodType + "_leaves", bioResLoc(woodType + "_leaves"));
+        //this.cross(woodType + "_sapling", bioResLoc(woodType + "_sapling"));
+
+        this.fencePost(woodType + "_fence_post", bioResLoc(woodType + "_planks"));
+        this.fenceInventory(woodType + "_fence_inventory", bioResLoc(woodType + "_planks"));
+        this.fenceSide(woodType + "_fence_side", bioResLoc(woodType + "_planks"));
+
+        this.fenceGateWall(woodType + "_fence_gate_wall", bioResLoc(woodType + "_planks"));
+        this.fenceGateWallOpen(woodType + "_fence_gate_wall_open", bioResLoc(woodType + "_planks"));
+        this.fenceGate(woodType + "_fence_gate", bioResLoc(woodType + "_planks"));
+        this.fenceGateOpen(woodType + "_fence_gate_open", bioResLoc(woodType + "_planks"));
+
+        this.slab(woodType + "_slab", bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"));
+        this.slabTop(woodType + "_slab_top", bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"));
+
+        this.pressurePlateUp(woodType + "_pressure_plate", bioResLoc(woodType + "_planks"));
+        this.pressurePlateDown(woodType + "_pressure_plate_down", bioResLoc(woodType + "_planks"));
+
+        this.stairs(woodType + "_stairs", bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"));
+        this.stairsInner(woodType + "_stairs_inner", bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"));
+        this.stairsOuter(woodType + "_stairs_outer", bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"), bioResLoc(woodType + "_planks"));
+
+        this.button(woodType + "_button", bioResLoc(woodType + "_planks"));
+        this.buttonPressed(woodType + "_button_pressed", bioResLoc(woodType + "_planks"));
+        this.buttonInventory(woodType + "_button_inventory", bioResLoc(woodType + "_planks"));
+
+        this.doorBottomLeft(woodType + "_door_bottom", bioResLoc(woodType + "_door_lower"), bioResLoc(woodType + "_door_upper"));
+        this.doorBottomRight(woodType + "_door_bottom_hinge", bioResLoc(woodType + "_door_lower"), bioResLoc(woodType + "_door_upper"));
+        this.doorTopLeft(woodType + "_door_top", bioResLoc(woodType + "_door_lower"), bioResLoc(woodType + "_door_upper"));
+        this.doorTopRight(woodType + "_door_top_hinge", bioResLoc(woodType + "_door_lower"), bioResLoc(woodType + "_door_upper"));
+
+        this.trapdoorBottom(woodType + "_trapdoor_bottom", bioResLoc(woodType + "_trapdoor"));
+        this.trapdoorOpen(woodType + "_trapdoor_open", bioResLoc(woodType + "_trapdoor"));
+        this.trapdoorTop(woodType + "_trapdoor_top", bioResLoc(woodType + "_trapdoor"));
+
+        this.sign(woodType + "_sign", bioResLoc(woodType + "_planks"));
     }
 
     public void simpleStoneSet(String mainBlock, String stairs, String wall, String slab) {
@@ -176,5 +184,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
     public void buttonInventory(String name, ResourceLocation all) {
         singleTexture(name + "_inventory", mcResLoc("button_inventory"), all);
+    }
+
+    public void sign(String name, ResourceLocation particle) {
+        getBuilder(name).texture("particle", particle);
     }
 }

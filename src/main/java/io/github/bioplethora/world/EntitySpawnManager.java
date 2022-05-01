@@ -130,7 +130,7 @@ public class EntitySpawnManager {
         private static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
             //Cuttlefish
             if (BPConfig.COMMON.spawnCuttlefish.get()) {
-                builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BPEntities.CUTTLEFISH.get(), 70 * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
+                builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BPEntities.CUTTLEFISH.get(), 40 * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
             }
 
             //Myliothan
@@ -169,7 +169,7 @@ public class EntitySpawnManager {
             createSpawn(builder, monster, BPEntities.GAUGALEM, 2, 1, 1, BPConfig.COMMON.spawnGaugalem);
 
             //Onofish
-            createSpawn(builder, monster, BPEntities.FIERY_EURYDN, 4, 1, 2, BPConfig.COMMON.spawnOnofish);
+            createSpawn(builder, monster, BPEntities.ONOFISH, 6, 2, 2, BPConfig.COMMON.spawnOnofish);
         };
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {

@@ -16,6 +16,7 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
@@ -42,7 +43,18 @@ public class ModClientRegister {
 
         Minecraft mcClient = event.getMinecraftSupplier().get();
 
-        // Block Render Changer
+        // Tile Entity
+        ClientRegistry.bindTileEntityRenderer(BPTileEntities.FLEIGNARITE_SPLOTCH.get(), FleignariteSplotchBlockRender::new);
+        ClientRegistry.bindTileEntityRenderer(BPTileEntities.BP_SIGN.get(), SignTileEntityRenderer::new);
+
+        // Woodsets
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_DOOR.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_TRAPDOOR.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_LEAVES.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_SIGN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_WALL_SIGN.get(), RenderType.cutout());
+
+        // Plants
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
@@ -79,9 +91,6 @@ public class ModClientRegister {
 
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
-
-        // Tile Entity
-        ClientRegistry.bindTileEntityRenderer(BPTileEntities.FLEIGNARITE_SPLOTCH.get(), FleignariteSplotchBlockRender::new);
 
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);
@@ -134,6 +143,8 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_OBLITERATOR_SPEAR.get(), AlphanumObliteratorSpearRender::new);
 
         //others
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.CAERULWOOD_BOAT.get(), BPBoatRender::new);
+
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);

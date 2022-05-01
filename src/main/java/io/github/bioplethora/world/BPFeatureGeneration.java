@@ -33,6 +33,8 @@ public class BPFeatureGeneration {
         RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
+        List<Supplier<ConfiguredFeature<?, ?>>> topLayerDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.TOP_LAYER_MODIFICATION);
+
         List<Supplier<ConfiguredFeature<?, ?>>> undergroundDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION);
         List<Supplier<ConfiguredFeature<?, ?>>> vegDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
@@ -74,6 +76,14 @@ public class BPFeatureGeneration {
                 vegDeco.add(() -> BPConfiguredFeatures.SPIRIT_DANGLER_CONFIG);
 
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_ETERN_CONFIG);
+            }
+        }
+
+        if (types.contains(BiomeDictionary.Type.END)) {
+            undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE_CONFIG);
+
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
+                topLayerDeco.add(() -> BPConfiguredFeatures.END_HIGHLANDS_SURFACE_CONFIG);
             }
         }
     }

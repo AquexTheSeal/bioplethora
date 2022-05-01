@@ -44,7 +44,6 @@ public class BPBlocks {
     public static final RegistryObject<Block> MIRESTONE = registerBlock("mirestone", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
             .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.GRAVEL).noOcclusion()), null);
 
-
     // Fleignarite Blocks
     public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new FleignariteRemainsBlock(AbstractBlock.Properties.of(Material.PLANT)
             .strength(0.3F).friction(0.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).noOcclusion()
@@ -126,6 +125,32 @@ public class BPBlocks {
     // Potted Plants
     public static final RegistryObject<FlowerPotBlock> POTTED_LAVA_SPIRE = registerBlock("potted_lava_spire", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LAVA_SPIRE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 
+    // End Plants
+
+    // End Blocks
+    public static final RegistryObject<Block> CYRA = registerBlock("cyra", () -> new Block(AbstractBlock.Properties.of(Material.GRASS)
+            .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+
+    // Caerulwood Woodset
+    public static final RegistryObject<Block> CAERULWOOD_PLANKS = registerBlock("caerulwood_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_LOG = registerBlock("caerulwood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_CAERULWOOD_LOG = registerBlock("stripped_caerulwood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LOG.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_WOOD = registerBlock("caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_CAERULWOOD_WOOD = registerBlock("stripped_caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_WOOD.get())), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<LeavesBlock> CAERULWOOD_LEAVES = registerBlock("caerulwood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).strength(2.4F).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<FenceBlock> CAERULWOOD_FENCE = registerBlock("caerulwood_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<FenceGateBlock> CAERULWOOD_FENCE_GATE = registerBlock("caerulwood_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<StandingSignBlock> CAERULWOOD_SIGN = registerBlock("caerulwood_sign", () -> new BPStandingSignBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get()), BPWoodTypes.CAERULWOOD), null, false);
+    public static final RegistryObject<WallSignBlock> CAERULWOOD_WALL_SIGN = registerBlock("caerulwood_wall_sign", () -> new BPWallSignBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get()), BPWoodTypes.CAERULWOOD), null, false);
+    public static final RegistryObject<PressurePlateBlock> CAERULWOOD_PRESSURE_PLATE = registerBlock("caerulwood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<DoorBlock> CAERULWOOD_DOOR = registerBlock("caerulwood_door", () -> new DoorBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<TrapDoorBlock> CAERULWOOD_TRAPDOOR = registerBlock("caerulwood_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<WoodButtonBlock> CAERULWOOD_BUTTON = registerBlock("caerulwood_button", () -> new WoodButtonBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<StairsBlock> CAERULWOOD_STAIRS = registerBlock("caerulwood_stairs", () -> new StairsBlock(() -> BPBlocks.CAERULWOOD_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SlabBlock> CAERULWOOD_SLAB = registerBlock("caerulwood_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
             .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHER_GOLD_ORE).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
@@ -159,13 +184,14 @@ public class BPBlocks {
             new SlabBlock(AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get())), BPItemGroup.BioplethoraItemItemGroup);
 
     // todo: Petrawood set for Rocky Woodlands biome
+    /*
     public static final RegistryObject<RotatedPillarBlock> PETRAWOOD_LOG = registerBlock("petrawood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), null);
     public static final RegistryObject<RotatedPillarBlock> PETRAWOOD_WOOD = registerBlock("petrawood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), null);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_PETRAWOOD_LOG = registerBlock("stripped_petrawood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_LOG.get()).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), null);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_PETRAWOOD_WOOD = registerBlock("stripped_petrawood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_WOOD.get()).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), null);
     public static final RegistryObject<Block> PETRAWOOD_PLANKS = registerBlock("petrawood_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), null);
     public static final RegistryObject<LeavesBlock> PETRAWOOD_LEAVES = registerBlock("petrawood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).strength(2.4F).sound(SoundType.GRASS).noOcclusion()), null);
-    //public static final RegistryObject<SaplingBlock> PETRAWOOD_SAPLING = registerBlock("petrawood_sapling", () -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.of(Material.PLANT).strength(2.4F).sound(SoundType.GRASS).noOcclusion()), null);
+    public static final RegistryObject<SaplingBlock> PETRAWOOD_SAPLING = registerBlock("petrawood_sapling", () -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.of(Material.PLANT).strength(2.4F).sound(SoundType.GRASS).noOcclusion()), null);
 
     public static final RegistryObject<FenceBlock> PETRAWOOD_FENCE = registerBlock("petrawood_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
     public static final RegistryObject<FenceGateBlock> PETRAWOOD_FENCE_GATE = registerBlock("petrawood_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
@@ -173,10 +199,11 @@ public class BPBlocks {
     public static final RegistryObject<PressurePlateBlock> PETRAWOOD_PRESSURE_PLATE = registerBlock("petrawood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
     public static final RegistryObject<StairsBlock> PETRAWOOD_STAIRS = registerBlock("petrawood_stairs", () -> new StairsBlock(BPBlocks.PETRAWOOD_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
     public static final RegistryObject<WoodButtonBlock> PETRAWOOD_BUTTON = registerBlock("petrawood_button", () -> new WoodButtonBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
-    //public static final RegistryObject<StandingSignBlock> PETRAWOOD_SIGN = registerBlock("petrawood_sign", () -> new StandingSignBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get()), BPWoodTypes.PETRAWOOD), null);
-    //public static final RegistryObject<WallSignBlock> PETRAWOOD_WALL_SIGN = registerBlock("petrawood_wall_sign", () -> new WallSignBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get()), BPWoodTypes.PETRAWOOD), null);
-    //public static final RegistryObject<DoorBlock> PETRAWOOD_DOOR = registerBlock("petrawood_door", () -> new DoorBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
-    //public static final RegistryObject<TrapDoorBlock> PETRAWOOD_TRAPDOOR = registerBlock("petrawood_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
+    public static final RegistryObject<StandingSignBlock> PETRAWOOD_SIGN = registerBlock("petrawood_sign", () -> new StandingSignBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get()), BPWoodTypes.PETRAWOOD), null);
+    public static final RegistryObject<WallSignBlock> PETRAWOOD_WALL_SIGN = registerBlock("petrawood_wall_sign", () -> new WallSignBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get()), BPWoodTypes.PETRAWOOD), null);
+    public static final RegistryObject<DoorBlock> PETRAWOOD_DOOR = registerBlock("petrawood_door", () -> new DoorBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
+    public static final RegistryObject<TrapDoorBlock> PETRAWOOD_TRAPDOOR = registerBlock("petrawood_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.copy(BPBlocks.PETRAWOOD_PLANKS.get())), null);
+    */
 
     //=================================================================================
     //                       REGULAR BLOCK CONSTRUCTORS

@@ -36,6 +36,13 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.grylynenShield(BPItems.YELLOW_CRYSTAL_SHIELD);
         this.grylynenShield(BPItems.RED_CRYSTAL_SHIELD);
 
+        // woodset
+        this.flatBlock(BPBlocks.CAERULWOOD_DOOR, "caerulwood_door", ITEM_FOLDER);
+        this.differentModelBlock(BPBlocks.CAERULWOOD_BUTTON, "caerulwood_button_inventory");
+        this.differentModelBlock(BPBlocks.CAERULWOOD_TRAPDOOR, "caerulwood_trapdoor_bottom");
+        this.differentModelBlock(BPBlocks.CAERULWOOD_FENCE, "caerulwood_fence_inventory");
+
+        // others
         this.flatBlock(BPBlocks.FLEIGNARITE_VINES, BPBlocks.FLEIGNARITE_VINES_PLANT);
 
         this.flatBlock(BPBlocks.SOUL_MINISHROOM, "soul_minishroom", ITEM_FOLDER);
@@ -132,19 +139,29 @@ public class BioItemModelProvider extends ItemModelProvider {
         }
     }
 
-    public void flatBlock(RegistryObject<Block> block, RegistryObject<Block> textureBlock) {
+    public void differentModelBlock(RegistryObject<? extends Block> block, String parent) {
+        String name = block.getId().getPath();
+        ResourceLocation blockLoc = new ResourceLocation(Bioplethora.MOD_ID, "block/" + name);
+        ResourceLocation itemLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
+
+        if (!existingFileHelper.exists(blockLoc, MODEL) || existingFileHelper.exists(itemLoc, MODEL)) {
+            this.withExistingParent(name, new ResourceLocation(Bioplethora.MOD_ID, "block/" + parent));
+        }
+    }
+
+    public void flatBlock(RegistryObject<? extends Block> block, RegistryObject<? extends Block> textureBlock) {
         this.flatBlock(block, textureBlock.get().getRegistryName().getPath());
     }
 
-    public void flatBlock(RegistryObject<Block> block, RegistryObject<Block> textureBlock, String fileDirectory) {
+    public void flatBlock(RegistryObject<? extends Block> block, RegistryObject<? extends Block> textureBlock, String fileDirectory) {
         flatBlock(block, textureBlock.get().getRegistryName().getPath(), fileDirectory);
     }
 
-    public void flatBlock(RegistryObject<Block> block, String texture) {
+    public void flatBlock(RegistryObject<? extends Block> block, String texture) {
         flatBlock(block, texture, BLOCK_FOLDER);
     }
 
-    public void flatBlock(RegistryObject<Block> block, String texture, String fileDirectory) {
+    public void flatBlock(RegistryObject<? extends Block> block, String texture, String fileDirectory) {
         String name = block.getId().getPath();
         ResourceLocation itemLoc = new ResourceLocation(Bioplethora.MOD_ID, "item/" + name);
         ResourceLocation blockLoc = new ResourceLocation(Bioplethora.MOD_ID, "block/" + name);

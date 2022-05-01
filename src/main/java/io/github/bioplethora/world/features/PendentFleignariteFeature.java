@@ -2,7 +2,7 @@ package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
 import io.github.bioplethora.world.BPFeatureGeneration;
-import io.github.bioplethora.world.feature_config.PendentBlocksFeatureConfig;
+import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;

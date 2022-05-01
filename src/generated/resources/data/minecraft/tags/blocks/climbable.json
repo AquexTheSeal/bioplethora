@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "bioplethora:spirit_dangler",
+    "bioplethora:spirit_dangler_plant",
     "bioplethora:fleignarite_vines",
     "bioplethora:fleignarite_vines_plant",
     "bioplethora:thontus_thistle",

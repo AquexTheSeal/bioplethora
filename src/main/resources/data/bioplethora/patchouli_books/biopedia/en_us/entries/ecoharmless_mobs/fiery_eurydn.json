@@ -1,0 +1,16 @@
+{
+  "name": "Fiery Eurydn",
+  "icon": "bioplethora:fiery_eurydn_spawn_egg",
+  "category": "ecoharmless_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()Fiery Eurydnia are the basalt deltas counterparts of the Soul Eurydnia. They are passive nether creatures that roam around the dangerous deltas that can phase through hard solids. They sometimes boost themselves like a rocket."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:fiery_eurydn",
+      "text": "Fiery Eurydnia commonly spawn on the Basalt Deltas."
+    }
+  ]
+}

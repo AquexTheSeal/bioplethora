@@ -1,0 +1,16 @@
+{
+  "name": "Soul Eurydn",
+  "icon": "bioplethora:soul_eurydn_spawn_egg",
+  "category": "ecoharmless_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()Soul Eurydnia are the soul sand valley counterparts of the Fiery Eurydnia. They are passive nether creatures that roam around the eerie valley that can phase through hard solids. They sometimes boost themselves like a rocket."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:soul_eurydn",
+      "text": "Soul Eurydnia commonly spawn on the Soul Sand Valley."
+    }
+  ]
+}

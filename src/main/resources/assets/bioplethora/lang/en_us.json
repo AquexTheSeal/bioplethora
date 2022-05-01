@@ -173,6 +173,24 @@
   "block.bioplethora.yellow_grylynen_crystal_block": "Yellow Grylynen Crystal Block",
   "block.bioplethora.red_grylynen_crystal_block": "Red Grylynen Crystal Block",
 
+  "block.bioplethora.caerulwood_button": "Caerulwood Button",
+  "block.bioplethora.caerulwood_door": "Caerulwood Door",
+  "block.bioplethora.caerulwood_fence": "Caerulwood Fence",
+  "block.bioplethora.caerulwood_fence_gate": "Caerulwood Fence Gate",
+  "block.bioplethora.caerulwood_leaves": "Caerulwood Leaves",
+  "block.bioplethora.caerulwood_log": "Caerulwood Log",
+  "block.bioplethora.caerulwood_planks": "Caerulwood Planks",
+  "block.bioplethora.caerulwood_pressure_plate": "Caerulwood Pressure Plate",
+  "block.bioplethora.caerulwood_sign": "Caerulwood Sign",
+  "block.bioplethora.caerulwood_slab": "Caerulwood Slab",
+  "block.bioplethora.caerulwood_stairs": "Caerulwood Stairs",
+  "block.bioplethora.caerulwood_trapdoor": "Caerulwood Trapdoor",
+  "block.bioplethora.caerulwood_wood": "Caerulwood Wood",
+  "block.bioplethora.stripped_caerulwood_log": "Stripped Caerulwood Log",
+  "block.bioplethora.stripped_caerulwood_wood": "Stripped Caerulwood Wood",
+  "item.bioplethora.caerulwood_boat": "Caerulwood Boat",
+  "entity.bioplethora.caerulwood_boat": "Caerulwood Boat",
+
   "block.bioplethora.fleignarite_remains": "Fleignarite Remains",
   "block.bioplethora.fleignarite_splotch": "Fleignarite Splotch",
   "block.bioplethora.fleignarite_vines": "Fleignarite Vines",
@@ -207,6 +225,8 @@
   "block.bioplethora.thontus_thistle_plant": "Thontus Thistle Plant",
   "block.bioplethora.turquoise_pendent": "Turquoise Pendent",
   "block.bioplethora.turquoise_pendent_plant": "Turquoise Pendent Plant",
+
+  "block.bioplethora.cyra": "Cyra",
 
   "block.bioplethora.reinforcing_table": "Reinforcing Table",
 

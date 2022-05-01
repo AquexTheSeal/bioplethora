@@ -27,6 +27,7 @@ public class BPConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> mobSpawnWeightMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobArmorMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobMovementSpeedMultiplier;
+        public final ForgeConfigSpec.ConfigValue<Boolean> grylynenIsOnlyHellmode;
 
         public final ForgeConfigSpec.ConfigValue<Boolean> enableCustomModelPositions;
         public final ForgeConfigSpec.ConfigValue<Boolean> enableCustomModelAnimations;
@@ -106,6 +107,7 @@ public class BPConfig {
             builder.pop();
 
             builder.push("Other Mechanics");
+            grylynenIsOnlyHellmode = builder.define("Enable Grylynens only in hellmode?", true);
             enableCustomModelPositions = builder.define("Should the player model change arm positions when holding specific items? (Has risk of crash)", true);
             enableCustomModelAnimations = builder.define("Should the player model have custom animations when using specific items? (Has risk of crash)", true);
             allowMobCaps = builder.define("Should specific mobs, especially bosses, have a damage limit?", true);
