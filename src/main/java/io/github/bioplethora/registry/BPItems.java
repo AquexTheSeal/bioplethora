@@ -167,4 +167,7 @@ public class BPItems {
     public static final RegistryObject<Item> ALPHEM_KING_SPAWN_EGG = ITEMS.register("alphem_king_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.ALPHEM_KING, BPEntityClasses.ELDERIA, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
 
     public static int netheriteDMG = 5;
+
+    // Plant Items
+    public static  final RegistryObject<Item> SWIVELBLOOM = ITEMS.register("swivelbloom", () -> new Item(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup)));
 }
