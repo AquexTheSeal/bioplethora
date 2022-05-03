@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.api.world.WorldgenUtils;
 import io.github.bioplethora.registry.worldgen.BPConfiguredFeatures;
+import io.github.bioplethora.registry.worldgen.BPTreeConfiguredFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -83,7 +84,7 @@ public class BPFeatureGeneration {
             undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE_CONFIG);
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
-                topLayerDeco.add(() -> BPConfiguredFeatures.END_HIGHLANDS_SURFACE_CONFIG);
+                    vegDeco.add(() -> BPTreeConfiguredFeatures.CAERULWOOD_TREE_CONFIG);
             }
         }
     }

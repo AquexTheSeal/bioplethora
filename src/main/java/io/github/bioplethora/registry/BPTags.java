@@ -12,6 +12,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class BPTags {
     public static final class Blocks {
+        public static final ITag.INamedTag<Block> CHORUS_SUPPORTIVE_END_BLOCKS = bioLoc("chorus_supportive_end_blocks");
+
         public static final ITag.INamedTag<Block> GRYLYNEN_UNBREAKABLE = forgeLoc("grylynen_unbreakable");
 
         public static final ITag.INamedTag<Block> WOODEN_GRYLYNEN_SPAWNABLE = forgeLoc("wooden_grylynen_spawnable");

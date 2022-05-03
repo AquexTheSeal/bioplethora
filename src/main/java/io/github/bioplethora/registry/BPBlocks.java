@@ -7,6 +7,7 @@ import io.github.bioplethora.blocks.tile_entities.FleignariteSplotchBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.enums.BioPlantShape;
 import io.github.bioplethora.enums.BioPlantType;
+import io.github.bioplethora.registry.worldgen.BPNBTTrees;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -125,12 +126,6 @@ public class BPBlocks {
     // Potted Plants
     public static final RegistryObject<FlowerPotBlock> POTTED_LAVA_SPIRE = registerBlock("potted_lava_spire", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LAVA_SPIRE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 
-    // End Plants
-
-    // End Blocks
-    public static final RegistryObject<Block> CYRA = registerBlock("cyra", () -> new Block(AbstractBlock.Properties.of(Material.GRASS)
-            .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
-
     // Caerulwood Woodset
     public static final RegistryObject<Block> CAERULWOOD_PLANKS = registerBlock("caerulwood_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_LOG = registerBlock("caerulwood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
@@ -138,7 +133,8 @@ public class BPBlocks {
     public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_WOOD = registerBlock("caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CAERULWOOD_WOOD = registerBlock("stripped_caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_WOOD.get())), BPItemGroup.BioplethoraItemItemGroup);
 
-    public static final RegistryObject<LeavesBlock> CAERULWOOD_LEAVES = registerBlock("caerulwood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).strength(2.4F).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<LeavesBlock> CAERULWOOD_LEAVES = registerBlock("caerulwood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SaplingBlock> CAERULWOOD_SAPLING = registerBlock("caerulwood_sapling", () -> new BPSaplingBlock(BioPlantType.CAERULWOOD_TREE, new BPNBTTrees.CaerulwoodNBTTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<FenceBlock> CAERULWOOD_FENCE = registerBlock("caerulwood_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<FenceGateBlock> CAERULWOOD_FENCE_GATE = registerBlock("caerulwood_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
@@ -150,6 +146,14 @@ public class BPBlocks {
     public static final RegistryObject<WoodButtonBlock> CAERULWOOD_BUTTON = registerBlock("caerulwood_button", () -> new WoodButtonBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<StairsBlock> CAERULWOOD_STAIRS = registerBlock("caerulwood_stairs", () -> new StairsBlock(() -> BPBlocks.CAERULWOOD_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<SlabBlock> CAERULWOOD_SLAB = registerBlock("caerulwood_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+
+    // End Plants
+    public static final RegistryObject<Block> AZURLIA = registerBlock("azurlia", () -> new BPReversePlantBlock(BioPlantType.CAERULWOOD_TREE, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 13).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
+    // End Blocks
+    public static final RegistryObject<Block> CYRA = registerBlock("cyra", () -> new Block(AbstractBlock.Properties.of(Material.GRASS)
+            .strength(1.0F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
 
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)

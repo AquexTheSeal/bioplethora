@@ -53,6 +53,7 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_LEAVES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_SIGN.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_WALL_SIGN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_SAPLING.get(), RenderType.cutout());
 
         // Plants
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
@@ -88,6 +89,8 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_ETERN.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_ETERN_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLOURISHED_SOUL_ETERN.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.AZURLIA.get(), RenderType.cutout());
 
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());

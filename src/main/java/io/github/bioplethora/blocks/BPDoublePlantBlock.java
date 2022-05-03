@@ -62,7 +62,7 @@ public class BPDoublePlantBlock extends DoublePlantBlock {
     }
 
     public ImmutableList<Block> getWhitelist() {
-        return type.getWhitelist();
+        return type.getWhitelist().get();
     }
 
     @Override

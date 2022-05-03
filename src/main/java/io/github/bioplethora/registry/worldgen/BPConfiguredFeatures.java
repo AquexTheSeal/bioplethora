@@ -1,6 +1,7 @@
 package io.github.bioplethora.registry.worldgen;
 
 import com.google.common.collect.ImmutableList;
+import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.world.BPFeatureGeneration;
 import io.github.bioplethora.world.blockplacers.LavaEdgeBlockPlacer;
@@ -14,6 +15,9 @@ import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.blockplacer.BlockPlacer;
 import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
@@ -93,15 +97,6 @@ public class BPConfiguredFeatures {
             Blocks.SOUL_SOIL, BPBlocks.SOUL_ETERN_PLANT.get(), BPBlocks.FLOURISHED_SOUL_ETERN.get(), BPBlocks.SOUL_ETERN.get(),
             ImmutableList.of(Blocks.SOUL_SOIL, Blocks.SOUL_SAND, Blocks.NETHERRACK, Blocks.BLACKSTONE),
             2, 10, 132, 125
-    );
-
-    // End Surfaces
-
-    public static final ConfiguredFeature<?, ?> END_HIGHLANDS_SURFACE_CONFIG = makeChangedSurfaceConfig(
-        BPBlocks.CYRA.get(), BPBlocks.CYRA.get(),
-            ImmutableList.of(
-                    Blocks.END_STONE.defaultBlockState()
-            )
     );
 
     //--------------------------------------
@@ -186,5 +181,14 @@ public class BPConfiguredFeatures {
 
     public static ConfiguredFeature<?, ?> makeDecoratedClusterPlants(Feature<BlockClusterFeatureConfig> feature, Block block, BlockPlacer placer, int count) {
         return makeClusterPlants(feature, block, placer).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(count);
+    }
+
+    public static <FC extends IFeatureConfig, F extends Feature<FC>, CF extends ConfiguredFeature<FC, F>> CF createConfiguredFeature(String id, CF configuredFeature) {
+        ResourceLocation bioplethoraID = new ResourceLocation(Bioplethora.MOD_ID, id);
+        if (WorldGenRegistries.CONFIGURED_FEATURE.keySet().contains(bioplethoraID))
+            throw new IllegalStateException("Configured Feature ID: \"" + bioplethoraID.toString() + "\" already exists in the Configured Features registry!");
+
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, bioplethoraID, configuredFeature);
+        return configuredFeature;
     }
 }

@@ -6,8 +6,10 @@ import io.github.bioplethora.world.featureconfigs.FleignariteSplotchConfig;
 import io.github.bioplethora.world.featureconfigs.NBTFeatureConfig;
 import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
 import io.github.bioplethora.world.features.*;
+import io.github.bioplethora.world.features.treefeatures.CaerulwoodTreeFeature;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,4 +27,8 @@ public class BPFeatures {
     public static final RegistryObject<Feature<ExpandedLakeFeatureConfig>> EXPANDED_LAKE = FEATURES.register("expanded_lake", () -> new ExpandedLakeFeature(ExpandedLakeFeatureConfig.CODEC));
 
     public static final RegistryObject<Feature<NBTFeatureConfig>> NBT_DRIVEN = FEATURES.register("nbt_driven", () -> new NBTFeature(NBTFeatureConfig.CODEC));
+
+    // Trees
+    public static final RegistryObject<Feature<NoFeatureConfig>> CAERULWOOD_TREE = FEATURES.register("caerulwood_tree", () -> new CaerulwoodTreeFeature(NoFeatureConfig.CODEC));
+
 }

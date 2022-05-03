@@ -8,7 +8,6 @@ import io.github.bioplethora.registry.worldgen.*;
 import io.github.bioplethora.world.BPBiomeGeneration;
 import io.github.bioplethora.world.EntitySpawnManager;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -21,7 +20,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -43,6 +41,7 @@ public class Bioplethora {
         BPItems.ITEMS.register(bus);
         BPBlocks.BLOCKS.register(bus);
         BPBlocks.BLOCK_ITEMS.register(bus);
+
         BPEntities.ENTITIES.register(bus);
         BPSoundEvents.SOUNDS.register(bus);
         BPParticles.PARTICLES.register(bus);
@@ -64,9 +63,7 @@ public class Bioplethora {
         bus.addListener(this::onInterModEnqueueEvent);
 
         bus.addListener(BPWoodTypes::registerWoodType);
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            bus.addListener(BPWoodTypes::registerWoodTypeClient);
-        }
+        bus.addListener(BPWoodTypes::registerWoodTypeClient);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(EventPriority.HIGH, EntitySpawnManager::onBiomeLoadingEvent);

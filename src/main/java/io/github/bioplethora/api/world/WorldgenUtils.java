@@ -1,7 +1,15 @@
 package io.github.bioplethora.api.world;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ISeedReader;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+
+import java.util.Random;
 
 public class WorldgenUtils {
 
@@ -22,5 +30,27 @@ public class WorldgenUtils {
 
     public static boolean getBiomeFromEvent(BiomeLoadingEvent event, String biome) {
         return new ResourceLocation(biome).equals(event.getName());
+    }
+
+    public static abstract class NBTTree {
+
+        protected abstract ConfiguredFeature<?, ?> getTree(Random random);
+
+        public boolean placeAt(ISeedReader worldIn, ChunkGenerator chunkGenerator, BlockPos pos, BlockState belowPos, Random random) {
+
+            ConfiguredFeature<?, ?> tree = this.getTree(random);
+            if (tree == null) {
+                return false;
+
+            } else {
+                worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 4);
+                if (tree.place(worldIn, chunkGenerator, random, pos)) {
+                    return true;
+                } else {
+                    worldIn.setBlock(pos, belowPos, 4);
+                    return false;
+                }
+            }
+        }
     }
 }

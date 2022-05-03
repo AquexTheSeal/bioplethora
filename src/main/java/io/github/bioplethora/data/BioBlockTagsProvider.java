@@ -20,6 +20,11 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
         this.forVanillaTags();
 
+        tag(BPTags.Blocks.CHORUS_SUPPORTIVE_END_BLOCKS)
+                .add(Blocks.END_STONE)
+                .add(Blocks.WARPED_NYLIUM)
+        ;
+
         tag(BPTags.Blocks.ALPHANIA)
                 .add(BPBlocks.ALPHANUM.get())
                 .add(BPBlocks.ALPHANUM_BRICKS.get())
@@ -131,6 +136,12 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
         ;
         tag(BlockTags.PLANKS)
                 .add(BPBlocks.CAERULWOOD_PLANKS.get())
+        ;
+        tag(BlockTags.SAPLINGS)
+                .add(BPBlocks.CAERULWOOD_SAPLING.get())
+        ;
+        tag(BlockTags.LEAVES)
+                .add(BPBlocks.CAERULWOOD_LEAVES.get())
         ;
         tag(BlockTags.DOORS)
                 .add(BPBlocks.CAERULWOOD_DOOR.get())

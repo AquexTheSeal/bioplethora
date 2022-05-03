@@ -70,13 +70,15 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         // End Plants
         this.simpleBlock(BPBlocks.CYRA.get());
+        this.simpleCrossBlock(BPBlocks.AZURLIA.get());
 
         this.woodset("caerulwood",
                 BPBlocks.CAERULWOOD_PLANKS.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
                 BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get(), BPBlocks.CAERULWOOD_LEAVES.get(),
-                BPBlocks.CAERULWOOD_FENCE.get(), BPBlocks.CAERULWOOD_FENCE_GATE.get(), BPBlocks.CAERULWOOD_PRESSURE_PLATE.get(),
-                BPBlocks.CAERULWOOD_DOOR.get(), BPBlocks.CAERULWOOD_TRAPDOOR.get(), BPBlocks.CAERULWOOD_BUTTON.get(),
-                BPBlocks.CAERULWOOD_STAIRS.get(), BPBlocks.CAERULWOOD_SLAB.get(), BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()
+                BPBlocks.CAERULWOOD_SAPLING.get(), BPBlocks.CAERULWOOD_FENCE.get(), BPBlocks.CAERULWOOD_FENCE_GATE.get(),
+                BPBlocks.CAERULWOOD_PRESSURE_PLATE.get(), BPBlocks.CAERULWOOD_DOOR.get(), BPBlocks.CAERULWOOD_TRAPDOOR.get(),
+                BPBlocks.CAERULWOOD_BUTTON.get(), BPBlocks.CAERULWOOD_STAIRS.get(), BPBlocks.CAERULWOOD_SLAB.get(),
+                BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()
                 );
 
         // Alphanum stone set
@@ -134,7 +136,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
     // Custom Generators
 
     public void woodset(String woodType,
-            Block planks, Block log, Block strippedLog, Block wood, Block strippedWood, Block leaves,
+            Block planks, Block log, Block strippedLog, Block wood, Block strippedWood, Block leaves, Block sapling,
             Block fence, Block fenceGate, Block pressurePlate, Block door, Block trapdoor,
                         Block button, Block stairs, Block slab, Block sign, Block wallSign) {
         this.fixedLogBlock((RotatedPillarBlock) log);
@@ -143,7 +145,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.woodBlock((RotatedPillarBlock) strippedWood, bioResLoc("stripped_" + woodType + "_log_side"));
         this.simpleBlock(planks);
         this.simpleBlock(leaves);
-        //this.simpleCrossBlock(BPBlocks.PETRAWOOD_SAPLING.get());
+        this.simpleCrossBlock(sapling);
 
         this.fenceBlock((FenceBlock) fence, bioResLoc(woodType + "_planks"));
         this.fenceGateBlock((FenceGateBlock) fenceGate, bioResLoc(woodType + "_planks"));

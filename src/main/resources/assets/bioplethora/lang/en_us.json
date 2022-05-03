@@ -188,6 +188,7 @@
   "block.bioplethora.caerulwood_wood": "Caerulwood Wood",
   "block.bioplethora.stripped_caerulwood_log": "Stripped Caerulwood Log",
   "block.bioplethora.stripped_caerulwood_wood": "Stripped Caerulwood Wood",
+  "block.bioplethora.caerulwood_sapling": "Caerulwood Sapling",
   "item.bioplethora.caerulwood_boat": "Caerulwood Boat",
   "entity.bioplethora.caerulwood_boat": "Caerulwood Boat",
 
@@ -195,6 +196,8 @@
   "block.bioplethora.fleignarite_splotch": "Fleignarite Splotch",
   "block.bioplethora.fleignarite_vines": "Fleignarite Vines",
   "block.bioplethora.fleignarite_vines_plant": "Fleignarite Vines",
+
+  "item.bioplethora.swivelbloom": "Swivelbloom",
 
   "block.bioplethora.soul_bigshroom": "Soul Bigshroom",
   "block.bioplethora.soul_minishroom": "Soul Minishroom",
@@ -209,6 +212,8 @@
 
   "block.bioplethora.spirit_dangler": "Spirit Dangler",
   "block.bioplethora.spirit_dangler_plant": "Spirit Dangler",
+
+  "block.bioplethora.azurlia": "Azurlia",
 
   "block.bioplethora.basalt_speleotherm": "Basalt Speleotherm",
   "block.bioplethora.basalt_speleotherm_plant": "Basalt Speleotherm",

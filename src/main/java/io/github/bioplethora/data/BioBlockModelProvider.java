@@ -66,6 +66,8 @@ public class BioBlockModelProvider extends BlockModelProvider {
         // End Plants
         this.cubeAll("cyra", bioResLoc("cyra"));
 
+        this.cross("azurlia", bioResLoc("azurlia"));
+
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));
         this.simpleStoneSet("alphanum", "alphanum_stairs", "alphanum_wall", "alphanum_slab");
@@ -107,7 +109,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("stripped_" + woodType + "_wood", bioResLoc("stripped_" + woodType + "_log_side"));
         this.cubeAll(woodType + "_planks", bioResLoc(woodType + "_planks"));
         this.cubeAll(woodType + "_leaves", bioResLoc(woodType + "_leaves"));
-        //this.cross(woodType + "_sapling", bioResLoc(woodType + "_sapling"));
+        this.cross(woodType + "_sapling", bioResLoc(woodType + "_sapling"));
 
         this.fencePost(woodType + "_fence_post", bioResLoc(woodType + "_planks"));
         this.fenceInventory(woodType + "_fence_inventory", bioResLoc(woodType + "_planks"));

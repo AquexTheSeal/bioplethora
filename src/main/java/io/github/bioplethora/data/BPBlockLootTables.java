@@ -77,6 +77,8 @@ public class BPBlockLootTables extends BlockLootTables {
         // End Plants
         add(BPBlocks.CYRA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CYRA.get()));
 
+        add(BPBlocks.AZURLIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.AZURLIA.get()));
+
         // Potted Plants
         dropPottedContents(BPBlocks.POTTED_LAVA_SPIRE.get());
 
@@ -86,8 +88,8 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.STRIPPED_CAERULWOOD_LOG.get());
         dropSelf(BPBlocks.STRIPPED_CAERULWOOD_WOOD.get());
         dropSelf(BPBlocks.CAERULWOOD_PLANKS.get());
-        add(BPBlocks.CAERULWOOD_LEAVES.get(), createShearsOnlyDrop(BPBlocks.CAERULWOOD_LEAVES.get()));
-        //dropSelf(BPBlocks.CAERULWOOD_SAPLING.get());
+        add(BPBlocks.CAERULWOOD_LEAVES.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CAERULWOOD_LEAVES.get()));
+        dropSelf(BPBlocks.CAERULWOOD_SAPLING.get());
 
         dropSelf(BPBlocks.CAERULWOOD_FENCE.get());
         dropSelf(BPBlocks.CAERULWOOD_FENCE_GATE.get());

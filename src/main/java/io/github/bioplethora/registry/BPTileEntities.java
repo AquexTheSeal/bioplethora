@@ -14,9 +14,7 @@ public class BPTileEntities {
 
     public static final RegistryObject<TileEntityType<BPSignTileEntity>> BP_SIGN = TILE_ENTITIES.register("bp_sign",
             () -> TileEntityType.Builder.of(BPSignTileEntity::new,
-
                     BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()
-
             ).build(null));
 
     public static final RegistryObject<TileEntityType<ReinforcingTableTileEntity>> REINFORCING_TABLE = TILE_ENTITIES.register("reinforcing_block",

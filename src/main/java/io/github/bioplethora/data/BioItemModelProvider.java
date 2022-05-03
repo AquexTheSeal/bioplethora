@@ -36,13 +36,7 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.grylynenShield(BPItems.YELLOW_CRYSTAL_SHIELD);
         this.grylynenShield(BPItems.RED_CRYSTAL_SHIELD);
 
-        // woodset
-        this.flatBlock(BPBlocks.CAERULWOOD_DOOR, "caerulwood_door", ITEM_FOLDER);
-        this.differentModelBlock(BPBlocks.CAERULWOOD_BUTTON, "caerulwood_button_inventory");
-        this.differentModelBlock(BPBlocks.CAERULWOOD_TRAPDOOR, "caerulwood_trapdoor_bottom");
-        this.differentModelBlock(BPBlocks.CAERULWOOD_FENCE, "caerulwood_fence_inventory");
-
-        // others
+        // nether plants
         this.flatBlock(BPBlocks.FLEIGNARITE_VINES, BPBlocks.FLEIGNARITE_VINES_PLANT);
 
         this.flatBlock(BPBlocks.SOUL_MINISHROOM, "soul_minishroom", ITEM_FOLDER);
@@ -58,6 +52,16 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.flatBlock(BPBlocks.BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
         this.flatBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
         this.flatBlock(BPBlocks.SOUL_ETERN, BPBlocks.SOUL_ETERN_PLANT);
+
+        // end plants
+        this.flatBlock(BPBlocks.AZURLIA, BPBlocks.AZURLIA);
+
+        // woodset
+        this.flatBlock(BPBlocks.CAERULWOOD_SAPLING, "caerulwood_sapling");
+        this.flatBlock(BPBlocks.CAERULWOOD_DOOR, "caerulwood_door", ITEM_FOLDER);
+        this.differentModelBlock(BPBlocks.CAERULWOOD_BUTTON, "caerulwood_button_inventory");
+        this.differentModelBlock(BPBlocks.CAERULWOOD_TRAPDOOR, "caerulwood_trapdoor_bottom");
+        this.differentModelBlock(BPBlocks.CAERULWOOD_FENCE, "caerulwood_fence_inventory");
     }
 
     @Nonnull

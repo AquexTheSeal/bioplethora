@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class LavaSpireBlock extends BPPlantBlock {
 
     public LavaSpireBlock(Properties properties) {
-        super(BioPlantType.ALL, BioPlantShape.SIMPLE_PLANT, properties);
+        super(BioPlantType.ALL_NETHER, BioPlantShape.SIMPLE_PLANT, properties);
     }
 
     @Override

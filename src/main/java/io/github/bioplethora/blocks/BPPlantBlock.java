@@ -48,7 +48,7 @@ public class BPPlantBlock extends BushBlock  {
     }
 
     public ImmutableList<Block> getWhitelist() {
-        return type.getWhitelist();
+        return type.getWhitelist().get();
     }
 
     public VoxelShape getShape() {

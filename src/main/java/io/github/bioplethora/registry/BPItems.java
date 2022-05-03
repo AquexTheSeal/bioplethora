@@ -123,9 +123,11 @@ public class BPItems {
     public static final RegistryObject<Item> RAW_MOSILE = ITEMS.register("raw_mosile", () -> new Item(new Item.Properties().food(BPFoods.RAW_MOSILE).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> COOKED_MOSILE = ITEMS.register("cooked_mosile", () -> new Item(new Item.Properties().food(BPFoods.COOKED_MOSILE).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
+    // Plant Items
+    public static  final RegistryObject<Item> SWIVELBLOOM = ITEMS.register("swivelbloom", () -> new Item(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup)));
+
     // Woodset Helpers
     public static final RegistryObject<Item> CAERULWOOD_SIGN = ITEMS.register("caerulwood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(BPItemGroup.BioplethoraItemItemGroup), BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()));
-
     public static final RegistryObject<Item> CAERULWOOD_BOAT = ITEMS.register("caerulwood_boat", () -> new BPBoatItem(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup), "caerulwood"));
 
     //=================================================================
@@ -168,6 +170,4 @@ public class BPItems {
 
     public static int netheriteDMG = 5;
 
-    // Plant Items
-    public static  final RegistryObject<Item> SWIVELBLOOM = ITEMS.register("swivelbloom", () -> new Item(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup)));
 }
