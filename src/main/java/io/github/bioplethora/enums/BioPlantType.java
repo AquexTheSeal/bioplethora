@@ -28,7 +28,9 @@ public enum BioPlantType {
     )),
 
     END_HIGHLANDS(() -> ImmutableList.of(
-            Blocks.WARPED_NYLIUM,
+            BPBlocks.CRYOSOIL.get(),
+            BPBlocks.IRION.get(),
+            BPBlocks.CYRA.get(),
             Blocks.END_STONE
     )),
 

@@ -69,6 +69,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.FLOURISHED_SOUL_ETERN.get());
 
         // End Plants
+        this.withSidesAndBottomBlock(BPBlocks.IRION.get(), BPBlocks.CRYOSOIL.get());
+        this.simpleBlock(BPBlocks.CRYOSOIL.get());
+
         this.simpleBlock(BPBlocks.CYRA.get());
         this.simpleCrossBlock(BPBlocks.AZURLIA.get());
 
@@ -243,6 +246,21 @@ public class BioBlockstateProvider extends BlockStateProvider {
                 .modelForState().modelFile(lower).addModel()
                 .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
                 .modelForState().modelFile(upper).addModel();
+    }
+
+    public void withSidesAndBottomBlock(Block topAndSides, Block soil) {
+        getVariantBuilder(topAndSides).partialState().setModels(
+                new ConfiguredModel(models()
+                        .cube(topAndSides.getRegistryName().getPath(),
+                                bioResLoc(soil.getRegistryName().getPath()),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_top"),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_side"),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_side"),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_side"),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_side")
+                        ).texture("particle", bioResLoc(topAndSides.getRegistryName().getPath() + "_top"))
+                )
+        );
     }
 
     public void simpleCarpetBlock(Block block) {

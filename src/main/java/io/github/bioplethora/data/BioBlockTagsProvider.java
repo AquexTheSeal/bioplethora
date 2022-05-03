@@ -20,9 +20,11 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
         this.forVanillaTags();
 
-        tag(BPTags.Blocks.CHORUS_SUPPORTIVE_END_BLOCKS)
-                .add(Blocks.END_STONE)
-                .add(Blocks.WARPED_NYLIUM)
+        tag(BPTags.Blocks.CAERULWOOD_LOGS)
+                .add(BPBlocks.CAERULWOOD_LOG.get())
+                .add(BPBlocks.CAERULWOOD_WOOD.get())
+                .add(BPBlocks.STRIPPED_CAERULWOOD_LOG.get())
+                .add(BPBlocks.STRIPPED_CAERULWOOD_WOOD.get())
         ;
 
         tag(BPTags.Blocks.ALPHANIA)

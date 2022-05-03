@@ -27,20 +27,24 @@ public abstract class NBTTreeFeature extends Feature<NoFeatureConfig> {
 
     public abstract boolean lowerYLevel(Random rand);
 
+    public boolean getSpawningCondition(ISeedReader world, Random random, BlockPos pos) {
+        return true;
+    }
+
     public String getRandomNBTTree(Random rand) {
         return getPossibleNBTTrees().get(rand.nextInt(getPossibleNBTTrees().size()));
     }
 
     public boolean place(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
 
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().set(pos);
+        BlockPos.Mutable mutablePos = new BlockPos.Mutable().set(pos);
 
-        int radius = 1;
-        for (int x = -radius; x <= radius; x++) {
-            for (int z = -radius; z <= radius; z++) {
-                if (Math.abs(x * z) > radius && Math.abs(x * z) < radius * 2) {
-                    blockpos$Mutable.set(pos).move(-x, -1, -z);
-                    if (!world.getBlockState(blockpos$Mutable).canOcclude()) {
+        int rad = 2;
+        for (int x = -rad; x <= rad; x++) {
+            for (int z = -rad; z <= rad; z++) {
+                if (Math.abs(x * z) > rad && Math.abs(x * z) < rad * 2) {
+                    mutablePos.set(pos).move(-x, -1, -z);
+                    if (!world.getBlockState(mutablePos).canOcclude()) {
                         return false;
                     }
                 }
@@ -57,13 +61,19 @@ public abstract class NBTTreeFeature extends Feature<NoFeatureConfig> {
 
         BlockPos halfOfNBT = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
         BlockPos.Mutable placementLocation = lowerYLevel(random) ?
-                blockpos$Mutable.set(pos).move(-halfOfNBT.getX(), -1, -halfOfNBT.getZ()) :
-                blockpos$Mutable.set(pos).move(-halfOfNBT.getX(), 0, -halfOfNBT.getZ()
+                mutablePos.set(pos).move(-halfOfNBT.getX(), -1, -halfOfNBT.getZ()) :
+                mutablePos.set(pos).move(-halfOfNBT.getX(), 0, -halfOfNBT.getZ()
                 );
 
-        Rotation rotation = Rotation.getRandom(random);
-        PlacementSettings placementsettings = new PlacementSettings().setRotation(rotation).setRotationPivot(halfOfNBT).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_AND_AIR).setIgnoreEntities(true);
-        template.placeInWorldChunk(world, placementLocation, placementsettings, random);
-        return true;
+        if (getSpawningCondition(world, random, placementLocation)) {
+
+            Rotation rotation = Rotation.getRandom(random);
+            PlacementSettings placementsettings = new PlacementSettings().setRotation(rotation).setRotationPivot(halfOfNBT).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_AND_AIR).setIgnoreEntities(true);
+            template.placeInWorldChunk(world, placementLocation, placementsettings, random);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

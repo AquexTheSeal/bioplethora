@@ -169,7 +169,7 @@ public class EntitySpawnManager {
             createSpawn(builder, monster, BPEntities.GAUGALEM, 2, 1, 1, BPConfig.COMMON.spawnGaugalem);
 
             //Onofish
-            createSpawn(builder, monster, BPEntities.ONOFISH, 6, 2, 2, BPConfig.COMMON.spawnOnofish);
+            createSpawn(builder, monster, BPEntities.ONOFISH, 6, 1, 2, BPConfig.COMMON.spawnOnofish);
         };
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {

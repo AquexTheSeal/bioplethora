@@ -131,6 +131,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
     minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
     //Geckolib
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${mc_version}:3.0.57")

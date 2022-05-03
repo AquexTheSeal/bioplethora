@@ -133,7 +133,7 @@ public class BPBlocks {
     public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_WOOD = registerBlock("caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CAERULWOOD_WOOD = registerBlock("stripped_caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_WOOD.get())), BPItemGroup.BioplethoraItemItemGroup);
 
-    public static final RegistryObject<LeavesBlock> CAERULWOOD_LEAVES = registerBlock("caerulwood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<LeavesBlock> CAERULWOOD_LEAVES = registerBlock("caerulwood_leaves", () -> new BPLeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<SaplingBlock> CAERULWOOD_SAPLING = registerBlock("caerulwood_sapling", () -> new BPSaplingBlock(BioPlantType.END_HIGHLANDS, new BPNBTTrees.CaerulwoodNBTTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<FenceBlock> CAERULWOOD_FENCE = registerBlock("caerulwood_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
@@ -152,6 +152,11 @@ public class BPBlocks {
             AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 13).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
     // End Blocks
+    public static final RegistryObject<Block> IRION = registerBlock("irion", () -> new Block(AbstractBlock.Properties.of(Material.GRASS)
+            .strength(1.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> CRYOSOIL = registerBlock("cryosoil", () -> new Block(AbstractBlock.Properties.of(Material.GRASS)
+            .strength(1.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.GRAVEL).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+
     public static final RegistryObject<Block> CYRA = registerBlock("cyra", () -> new Block(AbstractBlock.Properties.of(Material.GRASS)
             .strength(1.0F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
 

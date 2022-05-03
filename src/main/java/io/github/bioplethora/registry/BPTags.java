@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class BPTags {
     public static final class Blocks {
-        public static final ITag.INamedTag<Block> CHORUS_SUPPORTIVE_END_BLOCKS = bioLoc("chorus_supportive_end_blocks");
+        public static final ITag.INamedTag<Block> CAERULWOOD_LOGS = bioLoc("caerulwood_logs");
 
         public static final ITag.INamedTag<Block> GRYLYNEN_UNBREAKABLE = forgeLoc("grylynen_unbreakable");
 
@@ -39,6 +39,7 @@ public class BPTags {
     }
 
     public static final class Items {
+        public static final ITag.INamedTag<Item> CAERULWOOD_LOGS = bioLoc("caerulwood_logs");
 
         public static final ITag.INamedTag<Item> LOGS = mcLoc("logs");
         public static final ITag.INamedTag<Item> PLANKS = mcLoc("planks");

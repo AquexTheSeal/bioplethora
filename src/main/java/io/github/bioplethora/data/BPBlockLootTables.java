@@ -75,6 +75,9 @@ public class BPBlockLootTables extends BlockLootTables {
         dropOther(BPBlocks.FLOURISHED_SOUL_ETERN.get(), BPBlocks.SOUL_ETERN.get());
 
         // End Plants
+        dropSelf(BPBlocks.CRYOSOIL.get());
+        add(BPBlocks.IRION.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.CRYOSOIL.get()));
+
         add(BPBlocks.CYRA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CYRA.get()));
 
         add(BPBlocks.AZURLIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.AZURLIA.get()));

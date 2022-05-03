@@ -122,6 +122,11 @@ public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable,
     }
 
     @Override
+    public int getMaxSpawnClusterSize() {
+        return 1;
+    }
+
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_VARIANT, 1);

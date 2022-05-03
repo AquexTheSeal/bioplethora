@@ -84,7 +84,8 @@ public class BPFeatureGeneration {
             undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE_CONFIG);
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
-                    vegDeco.add(() -> BPTreeConfiguredFeatures.CAERULWOOD_TREE_CONFIG);
+
+                    vegDeco.add(() -> BPTreeConfiguredFeatures.CAERULWOOD_FOREST_VEGETATION_CONFIG);
             }
         }
     }

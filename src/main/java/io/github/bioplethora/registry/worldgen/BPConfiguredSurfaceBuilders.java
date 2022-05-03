@@ -22,10 +22,10 @@ public class BPConfiguredSurfaceBuilders {
 
     public static ConfiguredSurfaceBuilder<?> END_HIGHLANDS_SURFACE = register("end_highlands",
             BPSurfaceBuilders.NOISY.get().configured(new NoisySurfaceBuilderConfig(
-                    Blocks.WARPED_NYLIUM.defaultBlockState(), // Surface Block
-                    BPBlocks.MIRESTONE.get().defaultBlockState(), // Surface Block Uncommon
-                    Blocks.OBSIDIAN.defaultBlockState(), // Underground Block
-                    BPBlocks.CYRA.get().defaultBlockState() // Underwater Block
+                    BPBlocks.IRION.get().defaultBlockState(), // Surface Block
+                    BPBlocks.CRYOSOIL.get().defaultBlockState(), // Surface Block Uncommon
+                    BPBlocks.CRYOSOIL.get().defaultBlockState(), // Underground Block
+                    BPBlocks.CRYOSOIL.get().defaultBlockState() // Underwater Block
             )));
 
     private static <SC extends ISurfaceBuilderConfig>ConfiguredSurfaceBuilder<SC> register(String name, ConfiguredSurfaceBuilder<SC> csb) {
