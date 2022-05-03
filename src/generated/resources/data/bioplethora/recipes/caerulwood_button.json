@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "bioplethora:caerulwood_planks"
+    }
+  ],
+  "result": {
+    "item": "bioplethora:caerulwood_button"
+  }
+}
