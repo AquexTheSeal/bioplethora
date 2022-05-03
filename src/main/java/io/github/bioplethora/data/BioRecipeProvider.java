@@ -133,11 +133,6 @@ public class BioRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(requiredItem)).save(consumer);
     }
 
-    public static void reinforcing(Consumer<IFinishedRecipe> consumer, Item providedItem, IItemProvider top, IItemProvider mid, IItemProvider bot, int dupeRecipe) {
-        ReinforcingRecipeBuilder.reinforcing(Ingredient.of(top), Ingredient.of(mid), Ingredient.of(bot), providedItem).unlocks("has_item", has(bot))
-                .save(consumer, new ResourceLocation(Bioplethora.MOD_ID, providedItem.getRegistryName().getPath() + "_reinforcing" + (dupeRecipe <= 0 ? "" : "_" + dupeRecipe)));
-    }
-
     public void foodCooking(Consumer<IFinishedRecipe> consumer, Item input, Item output, float exp, int defaultTime) {
         String inputItemString = input.getRegistryName().getPath();
         
@@ -148,6 +143,11 @@ public class BioRecipeProvider extends RecipeProvider {
         
         CookingRecipeBuilder.cooking(Ingredient.of(input), output, exp, defaultTime * 3, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE).unlockedBy("has_" + inputItemString, has(input))
                 .save(consumer, new ResourceLocation(Bioplethora.MOD_ID, output.getRegistryName().getPath() + "_campfire_cooking"));
+    }
+
+    public static void reinforcing(Consumer<IFinishedRecipe> consumer, Item providedItem, IItemProvider top, IItemProvider mid, IItemProvider bot, int dupeRecipe) {
+        ReinforcingRecipeBuilder.reinforcing(Ingredient.of(top), Ingredient.of(mid), Ingredient.of(bot), providedItem).unlocks("has_item", has(bot))
+                .save(consumer, new ResourceLocation(Bioplethora.MOD_ID, providedItem.getRegistryName().getPath() + "_reinforcing" + (dupeRecipe <= 0 ? "" : "_" + dupeRecipe)));
     }
 
     public void woodset(Consumer<IFinishedRecipe> consumer, ITag<Item> logsTag,
