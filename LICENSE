@@ -1,30 +1,88 @@
-MIT License
+                        BAEDOOR MOD LICENSE
+                       Version 1, 1 May 2022
 
-Copyright (c) 2021 AquexTheSeal. Sajevius Crend
+                        created by Toma400
+                         (Tomasz Stępień)
 
-CODE
 
-This project uses some code from other sources, credit goes to the following:
-Sin Tachikawa, WeirdNerd
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+License created originally to distinct Baedoor mods from other art
+(since mods differ by copyrights inherited from parent game) and
+to set distinction between All Rights Reserved and Baedoor Mod
+License (later: BML), since BML gives you some more possibilities.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+As much as it is private license for Toma400's mods, all modders
+are welcome to use BML for their own purposes, with requirement to
+not remove anything but section 4 (if it is redundant).
+If license is edited, it should be stated explicitly in its first
+paragraph that it is modified.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+License may change in the future with next iterations.
+For software under BML license I will use term "product". Parent
+game for mod (for which it was made for) is called as "core game".
 
-ASSETS (e.g. Textures, Models, SFX, and etc.)
 
-All assets od this mod is ARR (All Rights Reserved). No permission is given to use any of it.
+1. GENERAL LICENSE
+Baedoor Mod License prohibits use of any product's contents - by
+that it is meant code and assets in their broad sense - if not stated
+in section 2.
+Content copyrights belong to product's owner (or team, if stated so).
+
+Any exceptions in copyrights' holding or specific licenses being used
+for part of product's contents are stated explicitly on either
+product's distribution page, readme, license or EULA.
+If more than one license is used for product's contents, BML is
+applied only to contents not being under any other license.
+
+
+2. CONTENT USE EXCEPTIONS
+Any use of product's contents has to be discussed with copyrights owner
+before it gets used for any purpose, unless it is meant to be used for:
+
+  2.1. Mod compatibility with the product, which isn't blatant copy-paste
+       of content feature and is within core game EULA
+    -> "Compatibility feature" needs to add feature that is exclusive
+       and wasn't done in any of those mods. Most of compatibilities
+       should count here, but this subsection is here to protect from
+       copy-pasting product's feature and calling it "compatibility".
+    -> Compatibility has to follow core game EULA, so if said agreement
+       prohibits selling of mods, compatibility software using product's
+       contents should not be sold, to comply that EULA.
+
+  2.2. Porting the product to another core game version, if copyright's
+       owner is not active nor reachable via any provided social media
+       for over a year
+    -> You need explicit permission from author to port product to
+       another core game version or API, if said author is active.
+    -> If author is unreachable by any means for more than one year,
+       you are granted to use its contents ONLY to port the mod to
+       another core game version or API, and to maintain it.
+       This permission is granted until author becomes active again.
+       Person who ports product should leave message for author(s) for
+       them to know that product is being ported and that they can
+       inspect it.
+    -> Author who came back after such long break has right to do
+       anything with said port, though users of BML license are asked
+       to not overuse this right as stated here.
+    -> Porting author has also to directly mention and link to
+       original mod in visible place of their site, and is asked to
+       put mod's author in team's section (if publishing site offers
+       such feature), and if publishing site has possibility to grant
+       you any benefits from downloads, porting author needs to set
+       at least 25% of benefits to original author of the mod.
+
+
+3. REDISTRIBUTION OF PRODUCT AND WAYS OF USE
+Baedoor Mod License does not allow for further redistribution of the
+product.
+BML allows user to:
+
+  3.1. Using the product for its intended purpose (playing within core
+       game environment)
+  3.2. Changing product for their own private purposes (not being
+         shared with anyone)
+  3.3. Creating new creative public content based on the product
+       (gameplay videos)
+  3.4. Creating modpacks with product
+
+As long as none of the above breaks core game EULA.
