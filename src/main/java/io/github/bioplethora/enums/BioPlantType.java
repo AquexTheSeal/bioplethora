@@ -28,7 +28,8 @@ public enum BioPlantType {
     )),
 
     END_HIGHLANDS(() -> ImmutableList.of(
-            Blocks.WARPED_NYLIUM
+            Blocks.WARPED_NYLIUM,
+            Blocks.END_STONE
     )),
 
     CAERULWOOD_TREE(() -> ImmutableList.of(

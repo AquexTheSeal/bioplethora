@@ -17,9 +17,6 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import java.util.Random;
 
-/**
- * Supposedly NoFeatureConfig, but saplings won't allow that. The BaseTreeFeatureConfig will not be used, it will only be there for the sake of being there.
- */
 public abstract class NBTTreeFeature extends Feature<NoFeatureConfig> {
 
     public NBTTreeFeature(Codec<NoFeatureConfig> config) {

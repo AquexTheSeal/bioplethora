@@ -134,7 +134,7 @@ public class BPBlocks {
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CAERULWOOD_WOOD = registerBlock("stripped_caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_WOOD.get())), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<LeavesBlock> CAERULWOOD_LEAVES = registerBlock("caerulwood_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<SaplingBlock> CAERULWOOD_SAPLING = registerBlock("caerulwood_sapling", () -> new BPSaplingBlock(BioPlantType.CAERULWOOD_TREE, new BPNBTTrees.CaerulwoodNBTTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SaplingBlock> CAERULWOOD_SAPLING = registerBlock("caerulwood_sapling", () -> new BPSaplingBlock(BioPlantType.END_HIGHLANDS, new BPNBTTrees.CaerulwoodNBTTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<FenceBlock> CAERULWOOD_FENCE = registerBlock("caerulwood_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<FenceGateBlock> CAERULWOOD_FENCE_GATE = registerBlock("caerulwood_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
