@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "side": "bioplethora:block/petrawood_planks",
-    "bottom": "bioplethora:block/petrawood_planks",
-    "top": "bioplethora:block/petrawood_planks"
-  }
-}

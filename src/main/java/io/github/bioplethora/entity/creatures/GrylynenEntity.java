@@ -47,7 +47,7 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
                 .add(Attributes.ATTACK_DAMAGE, tier.getTierDamage() * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, !BPConfig.getHellMode ? tier.getTierHealth() : tier.getHellTierHP())
+                .add(Attributes.MAX_HEALTH, !BPConfig.IN_HELLMODE ? tier.getTierHealth() : tier.getHellTierHP())
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FLYING_SPEED, 0.45 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
@@ -100,23 +100,19 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-
         if (source != DamageSource.OUT_OF_WORLD) {
             amount = 1;
         }
-
         return super.hurt(source, amount);
     }
 
     public void tick() {
         super.tick();
-
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
-
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CRIT, x, y, z, 5, 0.65, 0.65, 0.65, 0.01);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.END_ROD, x, y, z, 5, 0.65, 0.65, 0.65, 0.01);
         }
     }
 
@@ -136,13 +132,18 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
     }
 
     @Override
+    protected float getVoicePitch() {
+        return 0.95F + (this.getRandom().nextFloat() / 2);
+    }
+
+    @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return SoundEvents.BLAZE_AMBIENT;
+        return SoundEvents.AXE_STRIP;
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return SoundEvents.BLAZE_DEATH;
+        return SoundEvents.BAMBOO_BREAK;
     }
 
     public IGrylynenTier getGrylynenTier() {

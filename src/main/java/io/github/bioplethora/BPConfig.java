@@ -14,7 +14,7 @@ public class BPConfig {
         COMMON = commonSpecPair.getLeft();
     }
 
-    public static final boolean getHellMode = BPConfig.COMMON.hellMode.get();
+    public static final boolean IN_HELLMODE = BPConfig.COMMON.hellMode.get();
 
     public static class Common {
 
@@ -27,7 +27,10 @@ public class BPConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> mobSpawnWeightMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobArmorMultiplier;
         public final ForgeConfigSpec.ConfigValue<Integer> mobMovementSpeedMultiplier;
+        public final ForgeConfigSpec.ConfigValue<Boolean> grylynenIsOnlyHellmode;
 
+        public final ForgeConfigSpec.ConfigValue<Boolean> enableCustomModelPositions;
+        public final ForgeConfigSpec.ConfigValue<Boolean> enableCustomModelAnimations;
         public final ForgeConfigSpec.ConfigValue<Boolean> allowMobCaps;
         public final ForgeConfigSpec.ConfigValue<Boolean> replaceCreativeTabBackground;
         public final ForgeConfigSpec.ConfigValue<Boolean> antibioCompatibility;
@@ -39,6 +42,7 @@ public class BPConfig {
 
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnSoulEurydn;
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnFieryEurydn;
+        public final ForgeConfigSpec.ConfigValue<Boolean> spawnOnofish;
 
         //Plethoneutral
         public final ForgeConfigSpec.ConfigValue<Boolean> spawnPeaguin;
@@ -103,6 +107,9 @@ public class BPConfig {
             builder.pop();
 
             builder.push("Other Mechanics");
+            grylynenIsOnlyHellmode = builder.define("Enable Grylynens only in hellmode?", true);
+            enableCustomModelPositions = builder.define("Should the player model change arm positions when holding specific items? (Has risk of crash)", true);
+            enableCustomModelAnimations = builder.define("Should the player model have custom animations when using specific items? (Has risk of crash)", true);
             allowMobCaps = builder.define("Should specific mobs, especially bosses, have a damage limit?", true);
             replaceCreativeTabBackground = builder.define("Replace the Bioplethora's creative tabs' background images with a custom one?", false);
             antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used on a single weapon together?", true);
@@ -117,6 +124,7 @@ public class BPConfig {
             //Ecoharmless
             builder.push("Ecoharmless Mobs");
             spawnCuttlefish = builder.define("Enable mob spawning for Cuttlefishes", true);
+            spawnOnofish = builder.define("Enable mob spawning for Onofishes", true);
 
             spawnSoulEurydn = builder.define("Enable mob spawning for Soul Eurydnia", true);
             spawnFieryEurydn = builder.define("Enable mob spawning for Fiery Eurydnia", true);

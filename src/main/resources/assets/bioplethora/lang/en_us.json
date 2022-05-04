@@ -20,6 +20,9 @@
   "entity.bioplethora.trapjaw": "Trapjaw",
   "entity.bioplethora.telemreye": "Telemreye",
   "entity.bioplethora.terraith": "Terraith",
+  "entity.bioplethora.soul_eurydn": "Soul Eurydn",
+  "entity.bioplethora.fiery_eurydn": "Fiery Eurydn",
+  "entity.bioplethora.onofish": "Onofish",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -67,6 +70,9 @@
   "item.bioplethora.cavern_fleignar_spawn_egg": "Cavern Fleignar Spawn Egg",
   "item.bioplethora.trapjaw_spawn_egg": "Trapjaw Spawn Egg",
   "item.bioplethora.terraith_spawn_egg": "Terraith Spawn Egg",
+  "item.bioplethora.fiery_eurydn_spawn_egg": "Fiery Eurydn Spawn Egg",
+  "item.bioplethora.soul_eurydn_spawn_egg": "Soul Eurydn Spawn Egg",
+  "item.bioplethora.onofish_spawn_egg": "Onofish Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",
@@ -89,6 +95,8 @@
   "item.bioplethora.alphanum_gem": "Alphanum Gem",
   "item.bioplethora.alphem_king_remnant": "Alphem King Remnant",
   "item.bioplethora.reinforced_fleignarite": "Reinforced Fleignarite",
+  "item.bioplethora.fiery_cube": "Fiery Cube",
+  "item.bioplethora.soul_cube": "Soul Cube",
 
   "item.bioplethora.green_grylynen_crystal": "Green Grylynen Crystal",
   "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
@@ -117,10 +125,13 @@
   "item.bioplethora.wind_arrow": "Wind Arrow",
   "item.bioplethora.spirit_fission_charm": "Spirit Fission Charm",
   "item.bioplethora.spirit_manipulation_charm": "Spirit Manipulation Charm",
-
+  "item.bioplethora.spirit_strengthening_charm": "Spirit Strengthening Charm",
   "item.bioplethora.green_crystal_shield": "Green Crystal Shield",
   "item.bioplethora.yellow_crystal_shield": "Yellow Crystal Shield",
+  "item.bioplethora.red_crystal_shield": "Red Crystal Shield",
+
   "item.bioplethora.alphanum_obliterator": "Alphanum Obliterator",
+  "item.bioplethora.infernal_quarterstaff": "Infernal Quarterstaff",
 
   "item.bioplethora.peaguin_scale_helmet": "Peaguin Scale Helmet",
 
@@ -144,6 +155,11 @@
   "item.bioplethora.reinforced_fleignarite_helmet": "Reinforced Fleignarite Helmet",
   "item.bioplethora.reinforced_fleignarite_leggings": "Reinforced Fleignarite Leggings",
 
+  "item.bioplethora.nandbric_boots": "Nandbric Boots",
+  "item.bioplethora.nandbric_chestplate": "Nandbric Chestplate",
+  "item.bioplethora.nandbric_helmet": "Nandbric Helmet",
+  "item.bioplethora.nandbric_leggings": "Nandbric Leggings",
+
   "item.bioplethora.phantom_chime": "Phantom Chime",
   "item.bioplethora.magma_bomb": "Magma Bomb",
 
@@ -157,18 +173,67 @@
   "block.bioplethora.yellow_grylynen_crystal_block": "Yellow Grylynen Crystal Block",
   "block.bioplethora.red_grylynen_crystal_block": "Red Grylynen Crystal Block",
 
+  "block.bioplethora.caerulwood_button": "Caerulwood Button",
+  "block.bioplethora.caerulwood_door": "Caerulwood Door",
+  "block.bioplethora.caerulwood_fence": "Caerulwood Fence",
+  "block.bioplethora.caerulwood_fence_gate": "Caerulwood Fence Gate",
+  "block.bioplethora.caerulwood_leaves": "Caerulwood Leaves",
+  "block.bioplethora.caerulwood_log": "Caerulwood Log",
+  "block.bioplethora.caerulwood_planks": "Caerulwood Planks",
+  "block.bioplethora.caerulwood_pressure_plate": "Caerulwood Pressure Plate",
+  "block.bioplethora.caerulwood_sign": "Caerulwood Sign",
+  "block.bioplethora.caerulwood_slab": "Caerulwood Slab",
+  "block.bioplethora.caerulwood_stairs": "Caerulwood Stairs",
+  "block.bioplethora.caerulwood_trapdoor": "Caerulwood Trapdoor",
+  "block.bioplethora.caerulwood_wood": "Caerulwood Wood",
+  "block.bioplethora.stripped_caerulwood_log": "Stripped Caerulwood Log",
+  "block.bioplethora.stripped_caerulwood_wood": "Stripped Caerulwood Wood",
+  "block.bioplethora.caerulwood_sapling": "Caerulwood Sapling",
+  "item.bioplethora.caerulwood_boat": "Caerulwood Boat",
+  "entity.bioplethora.caerulwood_boat": "Caerulwood Boat",
+
   "block.bioplethora.fleignarite_remains": "Fleignarite Remains",
   "block.bioplethora.fleignarite_splotch": "Fleignarite Splotch",
   "block.bioplethora.fleignarite_vines": "Fleignarite Vines",
   "block.bioplethora.fleignarite_vines_plant": "Fleignarite Vines",
 
+  "item.bioplethora.swivelbloom": "Swivelbloom",
+
+  "block.bioplethora.soul_bigshroom": "Soul Bigshroom",
+  "block.bioplethora.soul_minishroom": "Soul Minishroom",
+
+  "block.bioplethora.soul_sprouts": "Soul Sprouts",
+  "block.bioplethora.soul_tall_grass": "Soul Tall Grass",
+
+  "block.bioplethora.lava_spire": "Lava Spire",
+  "block.bioplethora.warped_dancer": "Warped Dancer",
+
+  "block.bioplethora.potted_lava_spire": "Potted Lava Spire",
+
+  "block.bioplethora.spirit_dangler": "Spirit Dangler",
+  "block.bioplethora.spirit_dangler_plant": "Spirit Dangler",
+
+  "block.bioplethora.cryosoil": "Cryosoil",
+  "block.bioplethora.irion": "Irion",
+  "block.bioplethora.azurlia": "Azurlia",
+
   "block.bioplethora.basalt_speleotherm": "Basalt Speleotherm",
   "block.bioplethora.basalt_speleotherm_plant": "Basalt Speleotherm",
   "block.bioplethora.fiery_basalt_speleotherm": "Fiery Basalt Speleotherm",
-
   "block.bioplethora.soul_etern": "Soul Etern",
   "block.bioplethora.soul_etern_plant": "Soul Etern Plant",
   "block.bioplethora.flourished_soul_etern": "Flourished Soul Etern",
+  "block.bioplethora.berried_thontus_thistle": "Berried Thontus Thistle",
+  "block.bioplethora.blossoming_turquoise_pendent": "Blossoming Turquoise Pendent",
+  "block.bioplethora.cerise_ivy": "Cerise Ivy",
+  "block.bioplethora.cerise_ivy_plant": "Cerise Ivy Plant",
+  "block.bioplethora.seeded_cerise_ivy": "Seeded Cerise Ivy",
+  "block.bioplethora.thontus_thistle": "Thontus Thistle",
+  "block.bioplethora.thontus_thistle_plant": "Thontus Thistle Plant",
+  "block.bioplethora.turquoise_pendent": "Turquoise Pendent",
+  "block.bioplethora.turquoise_pendent_plant": "Turquoise Pendent Plant",
+
+  "block.bioplethora.cyra": "Cyra",
 
   "block.bioplethora.reinforcing_table": "Reinforcing Table",
 
@@ -260,6 +325,13 @@
   "item.bioplethora.totem_of_swerving.blessed_instinct.skill": "Blessed Instinct",
   "item.bioplethora.totem_of_swerving.blessed_instinct.desc": "When on offhand or mainhand. The user has a 1/3 chance of dodging any projectile.",
 
+  "item.bioplethora.infernal_quarterstaff.fierce_slashing.skill": "Fierce Slashing",
+  "item.bioplethora.infernal_quarterstaff.fierce_slashing.desc": "When this double-sided blade hurts it's targets, this weapon ignites the target, then switches it's blade to deals extra damage to all the entities on the target's surroundings and knock them back.",
+  "item.bioplethora.infernal_quarterstaff.flaming_art.skill": "Flaming Art",
+  "item.bioplethora.infernal_quarterstaff.flaming_art.desc": "Swinging the weapon on air can hurt surrounding enemies. Right-clicking on a block while shifting launches the player upwards.",
+  "item.bioplethora.infernal_quarterstaff.snipe_afar.skill": "Snipe Afar",
+  "item.bioplethora.infernal_quarterstaff.snipe_afar.desc": "Right-clicking on an entity within a 32-block radius damages and ignites them. The damage increases if one of the same item is in the opposite hand of the user.",
+
   "item.bioplethora.wind_arrow.windy_essence.skill": "Windy Essence",
   "item.bioplethora.wind_arrow.windy_essence.desc": "This arrow homes on to the nearest entity, and it slows all nearby entities on impact.",
 
@@ -268,7 +340,10 @@
 
   "item.bioplethora.spirit_manipulation_charm.spirit_manipulation.skill": "Spirit Manipulation",
   "item.bioplethora.spirit_manipulation_charm.spirit_manipulation.desc": "This charm gives the Spirit manipulation effect while it's in the player's inventory. Cavern Fleignars do not aggravate to the player when the player has the Spirit Manipulation effect, because the effect conceals the player from these creatures by controlling their mind and senses.",
-  
+
+  "item.bioplethora.spirit_strengthening_charm.spirit_strengthening.skill": "Spirit Strengthening",
+  "item.bioplethora.spirit_strengthening_charm.spirit_strengthening.desc": "All attacks you deal does 10% more damage, in addition to extra damage that scales with the target's current health.",
+
   "item.bioplethora.peaguin_scale_armor.grace_embrace.skill":"Grace Embrace",
   "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
 
@@ -284,6 +359,9 @@
   "item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.skill": "Yellow Crystal Energy",
   "item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to 2 seconds. Everytime this shield gets damaged, it slowly repairs your armor if you have any on you, there is also a chance for this shield to restore its user's health.",
 
+  "item.bioplethora.red_grylynen_shield.red_crystal_energy.skill": "Red Crystal Energy",
+  "item.bioplethora.red_grylynen_shield.red_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to only 1 second. Everytime this shield gets damaged, the shield knocks back the attacker and it slowly repairs your armor if you are wearing any, there is also a chance for this shield to restore its user's health by either 2 or 3.",
+  
   "item.bioplethora.alphanum_obliterator.skullbreaker.skill": "Skullbreaker",
   "item.bioplethora.alphanum_obliterator.skullbreaker.desc": "This weapon is a very heavy item, that it can cause a great amount of knockback to the target in melee.",
   "item.bioplethora.alphanum_obliterator.blasting_spears.skill": "Blasting Spears",
@@ -291,6 +369,7 @@
 
   "effect.bioplethora.spirit_fission": "Spirit Fission",
   "effect.bioplethora.spirit_manipulation": "Spirit Manipulation",
+  "effect.bioplethora.spirit_strengthening": "Spirit Strengthening",
 
   "item.bioplethora.fleignarite_weapon.gooey_stun.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability when the item is not used in any hand. When the target is hurt using this item, the fleignarite scales used for this item causes a quick stun that gives nausea and slowness for a short duration.",
   "item.bioplethora.fleignarite_weapon.gooey_stun.skill": "Gooey Stun",
@@ -335,6 +414,8 @@
   "advancements.bioplethora.cooked_cuttlefish_meat_obtain.desc": "Take a Cooked Cuttlefish Meat.",
 
   "bossbar.bioplethora.helioblade.clone_progress": "Time before next Helioblade cloning",
+
+  "tooltip.bioplethora.reach_bonus.desc" : "+%s Reach Bonus",
 
   "tooltip.bioplethora.antibio_ecoharmless.desc": "+Extra damage against Ecoharmless creatures",
   "tooltip.bioplethora.antibio_plethoneutral.desc": "+Extra damage against Plethoneutral creatures",

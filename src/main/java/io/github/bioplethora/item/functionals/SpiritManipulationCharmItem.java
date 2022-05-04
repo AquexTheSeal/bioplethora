@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.functionals;
 
-import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -28,7 +28,7 @@ public class SpiritManipulationCharmItem extends ActivatableItem {
         super.activatedTick(pStack, pLevel, pEntity);
 
         if (pEntity instanceof PlayerEntity) {
-            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BPEffects.SPIRIT_MANIPULATION.get(), 10, 0));
+            ((PlayerEntity) pEntity).addEffect(new EffectInstance(BPEffects.SPIRIT_MANIPULATION.get(), 10, 0, false, false));
         }
     }
 
@@ -36,11 +36,11 @@ public class SpiritManipulationCharmItem extends ActivatableItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_manipulation_charm.spirit_manipulation.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_manipulation_charm.spirit_manipulation.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_manipulation_charm.spirit_manipulation.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.spirit_manipulation_charm.spirit_manipulation.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

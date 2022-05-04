@@ -9,13 +9,14 @@ import io.github.bioplethora.client.entity.render.projectile.*;
 import io.github.bioplethora.gui.screen.ReinforcingTableScreen;
 import io.github.bioplethora.item.armor.AquChestplateItem;
 import io.github.bioplethora.item.weapons.*;
-import io.github.bioplethora.keybindings.BPKeybinds;
+import io.github.bioplethora.network.keybindings.BPKeybinds;
 import io.github.bioplethora.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
@@ -42,15 +43,32 @@ public class ModClientRegister {
 
         Minecraft mcClient = event.getMinecraftSupplier().get();
 
-        // Block Render Changer
+        // Tile Entity
+        ClientRegistry.bindTileEntityRenderer(BPTileEntities.FLEIGNARITE_SPLOTCH.get(), FleignariteSplotchBlockRender::new);
+        ClientRegistry.bindTileEntityRenderer(BPTileEntities.BP_SIGN.get(), SignTileEntityRenderer::new);
+
+        // Woodsets
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_DOOR.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_TRAPDOOR.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_LEAVES.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_SIGN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_WALL_SIGN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_SAPLING.get(), RenderType.cutout());
+
+        // Plants
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_SPLOTCH.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_SPROUTS.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_TALL_GRASS.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(BPBlocks.LAVA_SPIRE.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.WARPED_DANCER.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.SPIRIT_DANGLER.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.SPIRIT_DANGLER_PLANT.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), RenderType.cutout());
@@ -72,14 +90,14 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_ETERN_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLOURISHED_SOUL_ETERN.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.AZURLIA.get(), RenderType.cutout());
+
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
 
-        // Tile Entity
-        ClientRegistry.bindTileEntityRenderer(BPTileEntities.FLEIGNARITE_SPLOTCH.get(), FleignariteSplotchBlockRender::new);
-
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.ONOFISH.get(), OnofishRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.SOUL_EURYDN.get(), EurydnEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.FIERY_EURYDN.get(), EurydnEntityRender::new);
@@ -128,6 +146,8 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_OBLITERATOR_SPEAR.get(), AlphanumObliteratorSpearRender::new);
 
         //others
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.CAERULWOOD_BOAT.get(), BPBoatRender::new);
+
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);

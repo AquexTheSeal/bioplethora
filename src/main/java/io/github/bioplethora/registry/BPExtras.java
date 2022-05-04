@@ -23,11 +23,23 @@ public class BPExtras {
 
         // Compostables
         addCompostableBlock(BPBlocks.FLEIGNARITE_VINES.get(), 0.4F);
-        addCompostableBlock(BPBlocks.PETRAWOOD_LEAVES.get(), 0.3F);
+
+        addCompostableBlock(BPBlocks.CAERULWOOD_LEAVES.get(), 0.3F);
+        //addCompostableBlock(BPBlocks.PETRAWOOD_LEAVES.get(), 0.3F);
+
+        addCompostableBlock(BPBlocks.SOUL_SPROUTS.get(), 0.45F);
+        addCompostableBlock(BPBlocks.SOUL_TALL_GRASS.get(), 0.6F);
+
+        addCompostableBlock(BPBlocks.SOUL_MINISHROOM.get(), 0.3F);
+        addCompostableBlock(BPBlocks.SOUL_BIGSHROOM.get(), 0.75F);
 
         // Stripables
-        addStripableBlock(BPBlocks.PETRAWOOD_LOG.get(), BPBlocks.STRIPPED_PETRAWOOD_LOG.get());
-        addStripableBlock(BPBlocks.PETRAWOOD_WOOD.get(), BPBlocks.STRIPPED_PETRAWOOD_WOOD.get());
+
+        addStripableBlock(BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get());
+        addStripableBlock(BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get());
+
+        //addStripableBlock(BPBlocks.PETRAWOOD_LOG.get(), BPBlocks.STRIPPED_PETRAWOOD_LOG.get());
+        //addStripableBlock(BPBlocks.PETRAWOOD_WOOD.get(), BPBlocks.STRIPPED_PETRAWOOD_WOOD.get());
     }
 
     public static void addFlammableBlock(Block block, int encouragement, int flammability) {

@@ -1,6 +1,6 @@
 {
   "name": "Grylynen",
-  "icon": "bioplethora:wooden_grylynen_spawn_egg",
+  "icon": "bioplethora:iron_grylynen_spawn_egg",
   "category": "dangerum_mobs",
   "pages": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "type": "patchouli:entity",
-      "entity":"bioplethora:wooden_grylynen",
-      "text": "These creatures spawn when it's corresponding variants' corresponding block is broken by a player. This can be prevented by an early game item that you have to explore."
+      "entity":"bioplethora:iron_grylynen",
+      "text": "[Hellmode-exclusive only, this can be changed in the config.] These creatures spawn when it's corresponding variants' corresponding block is broken by a player. This can be prevented by an early game item that you have to explore."
     }
   ]
 }

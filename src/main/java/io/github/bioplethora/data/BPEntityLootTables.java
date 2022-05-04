@@ -13,6 +13,7 @@ import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.loot.functions.Smelt;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -363,6 +364,33 @@ public class BPEntityLootTables extends EntityLootTables {
                                 .apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
                         ))
         );
+
+        // Soul Eurydn
+        add(BPEntities.SOUL_EURYDN.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BPItems.SOUL_CUBE.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
+                        ))
+        );
+
+        // Fiery Eurydn
+        add(BPEntities.SOUL_EURYDN.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BPItems.FIERY_CUBE.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
+                        ))
+        );
+    }
+
+    public LootPool.Builder addBasicEntity(RegistryObject<EntityType<?>> entity) {
+        return LootPool.lootPool().setRolls(ConstantRange.exactly(1))
+                        .apply(SetCount.setCount(RandomValueRange.between(1F, 2F)))
+                        .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.0F)))
+        ;
     }
 
     @Override

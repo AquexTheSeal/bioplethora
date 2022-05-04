@@ -20,6 +20,13 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
         this.forVanillaTags();
 
+        tag(BPTags.Blocks.CAERULWOOD_LOGS)
+                .add(BPBlocks.CAERULWOOD_LOG.get())
+                .add(BPBlocks.CAERULWOOD_WOOD.get())
+                .add(BPBlocks.STRIPPED_CAERULWOOD_LOG.get())
+                .add(BPBlocks.STRIPPED_CAERULWOOD_WOOD.get())
+        ;
+
         tag(BPTags.Blocks.ALPHANIA)
                 .add(BPBlocks.ALPHANUM.get())
                 .add(BPBlocks.ALPHANUM_BRICKS.get())
@@ -93,6 +100,9 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
     public void forVanillaTags() {
         tag(BlockTags.CLIMBABLE)
+                .add(BPBlocks.SPIRIT_DANGLER.get())
+                .add(BPBlocks.SPIRIT_DANGLER_PLANT.get())
+
                 .add(BPBlocks.FLEIGNARITE_VINES.get())
                 .add(BPBlocks.FLEIGNARITE_VINES_PLANT.get())
 
@@ -119,6 +129,45 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
                 .add(BPBlocks.POLISHED_ALPHANUM_WALL.get())
         ;
 
+        // woodset
+        tag(BlockTags.LOGS)
+                .add(BPBlocks.CAERULWOOD_LOG.get())
+                .add(BPBlocks.CAERULWOOD_WOOD.get())
+                .add(BPBlocks.STRIPPED_CAERULWOOD_LOG.get())
+                .add(BPBlocks.STRIPPED_CAERULWOOD_WOOD.get())
+        ;
+        tag(BlockTags.PLANKS)
+                .add(BPBlocks.CAERULWOOD_PLANKS.get())
+        ;
+        tag(BlockTags.SAPLINGS)
+                .add(BPBlocks.CAERULWOOD_SAPLING.get())
+        ;
+        tag(BlockTags.LEAVES)
+                .add(BPBlocks.CAERULWOOD_LEAVES.get())
+        ;
+        tag(BlockTags.DOORS)
+                .add(BPBlocks.CAERULWOOD_DOOR.get())
+        ;
+        tag(BlockTags.WOODEN_PRESSURE_PLATES)
+                .add(BPBlocks.CAERULWOOD_PRESSURE_PLATE.get())
+        ;
+        tag(BlockTags.WOODEN_BUTTONS)
+                .add(BPBlocks.CAERULWOOD_BUTTON.get())
+        ;
+        tag(BlockTags.WOODEN_STAIRS)
+                .add(BPBlocks.CAERULWOOD_STAIRS.get())
+        ;
+        tag(BlockTags.WOODEN_SLABS)
+                .add(BPBlocks.CAERULWOOD_SLAB.get())
+        ;
+        tag(BlockTags.WOODEN_FENCES)
+                .add(BPBlocks.CAERULWOOD_FENCE.get())
+        ;
+        tag(BlockTags.FENCE_GATES)
+                .add(BPBlocks.CAERULWOOD_FENCE_GATE.get())
+        ;
+        
+        /*
         tag(BlockTags.LOGS)
                 .add(BPBlocks.PETRAWOOD_LOG.get())
                 .add(BPBlocks.PETRAWOOD_WOOD.get())
@@ -146,5 +195,6 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.FENCE_GATES)
                 .add(BPBlocks.PETRAWOOD_FENCE_GATE.get())
         ;
+         */
     }
 }

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "bioplethora:block/cryosoil",
+    "up": "bioplethora:block/irion_top",
+    "north": "bioplethora:block/irion_side",
+    "south": "bioplethora:block/irion_side",
+    "east": "bioplethora:block/irion_side",
+    "west": "bioplethora:block/irion_side",
+    "particle": "bioplethora:block/irion_top"
+  }
+}

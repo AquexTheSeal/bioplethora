@@ -104,7 +104,7 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
             for (LivingEntity entityArea : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5, 2, 5))) {
                 if (entityArea != null && entityArea != this.getOwner()) {
 
-                    if (BPConfig.getHellMode) {
+                    if (BPConfig.IN_HELLMODE) {
                         entityArea.hurt(castration, (float) 14);
                         entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 80, 2));
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 80, 1));

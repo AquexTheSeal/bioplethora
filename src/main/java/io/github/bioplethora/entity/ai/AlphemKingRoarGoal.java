@@ -91,7 +91,7 @@ public class AlphemKingRoarGoal extends Goal {
                 AlphemEntity alphem4 = BPEntities.ALPHEM.get().create(world);
                 this.summonAlphem(alphem4, aPos4, world);
 
-                if (BPConfig.getHellMode) {
+                if (BPConfig.IN_HELLMODE) {
 
                     BlockPos aPos5 = new BlockPos((int) this.king.getX(), (int) this.king.getY(), (int) this.king.getZ() + 4);
                     BlockPos aPos6 = new BlockPos((int) this.king.getX() + 4, (int) this.king.getY(), (int) this.king.getZ());

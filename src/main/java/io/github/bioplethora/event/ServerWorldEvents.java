@@ -1,6 +1,8 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.api.IHurtSkillArmor;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.advancements.AdvancementUtils;
 import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
@@ -9,32 +11,30 @@ import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.*;
 import io.github.bioplethora.item.ExperimentalItem;
-import io.github.bioplethora.item.IHurtSkillArmor;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
+import io.github.bioplethora.network.BPNetwork;
+import io.github.bioplethora.network.functions.LeftSwingPacket;
+import io.github.bioplethora.network.functions.RightSwingPacket;
 import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPEffects;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -53,11 +53,61 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 @Mod.EventBusSubscriber
 public class ServerWorldEvents {
+
+    @SubscribeEvent
+    public static void onPlayerLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
+
+        hitHandler(event.getPlayer(), event.getItemStack());
+
+        if (event.getItemStack().getItem() instanceof IReachWeapon) {
+            if (event.getWorld().isClientSide()) {
+                BPNetwork.CHANNEL.sendToServer(new LeftSwingPacket());
+            }
+        }
+    }
+
+
+    /**
+     * Off-Hand combat integration
+     */
+    @SubscribeEvent
+    public static void onPlayerRightClick(PlayerInteractEvent.RightClickEmpty event) {
+
+        if (ModList.get().isLoaded("offhandcombat")) {
+
+            hitHandler(event.getPlayer(), event.getItemStack());
+
+            if (event.getItemStack().getItem() instanceof IReachWeapon) {
+                if (event.getWorld().isClientSide()) {
+                    BPNetwork.CHANNEL.sendToServer(new RightSwingPacket());
+                }
+            }
+        }
+    }
+
+    public static void hitHandler(PlayerEntity entity, ItemStack stack) {
+
+        if (stack.getItem() instanceof IReachWeapon) {
+
+            double range = ((IReachWeapon) stack.getItem()).getReachDistance();
+            double distance = range * range;
+            Vector3d vec = entity.getEyePosition(1);
+            Vector3d vec1 = entity.getViewVector(1);
+            Vector3d targetVec = vec.add(vec1.x * range, vec1.y * range, vec1.z * range);
+            AxisAlignedBB aabb = entity.getBoundingBox().expandTowards(vec1.scale(range)).inflate(4.0D, 4.0D, 4.0D);
+            EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, vec, targetVec, aabb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR, distance);
+
+            if ((result != null ? result.getEntity() : null) != null) {
+                entity.attack(result.getEntity());
+            }
+        }
+    }
 
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
@@ -162,8 +212,6 @@ public class ServerWorldEvents {
         boolean dsVoid = (event.getSource() == DamageSource.OUT_OF_WORLD);
         boolean dsFire2 = (event.getSource() == DamageSource.ON_FIRE);
 
-        MobCapEventHelper.onEntityHurt(event);
-
         if (event.getEntity() instanceof LivingEntity) {
 
             LivingEntity living = (LivingEntity) event.getEntity();
@@ -188,13 +236,14 @@ public class ServerWorldEvents {
             }
         }
 
-        if (event.getEntity() instanceof ItemEntity) {
-            ItemEntity item = (ItemEntity) event.getEntity();
-
-            if (event.getSource().isExplosion()) {
-                if (item.getItem().getItem() == BPItems.ALPHANUM_OBLITERATOR.get()) {
-                    event.setCanceled(true);
-                }
+        if (event.getSource().getEntity() instanceof LivingEntity && event.getEntity() instanceof LivingEntity) {
+            if (((LivingEntity) event.getSource().getEntity()).hasEffect(BPEffects.SPIRIT_STRENGTHENING.get())) {
+                float dmgCap = BPConfig.IN_HELLMODE ? 7 : 12;
+                float floorReduction = MathHelper.ceil(((LivingEntity) event.getEntity()).getHealth() * 0.025F);
+                float floor = MathHelper.floor(((LivingEntity) event.getEntity()).getHealth() * 0.05F);
+                float armorReduction = MathHelper.ceil(((LivingEntity) event.getEntity()).getArmorValue() / 4F);
+                float healthScaledDmg = MathHelper.clamp(floor - floorReduction, 0.0F, dmgCap);
+                event.setAmount((event.getAmount() * 1.10F) + healthScaledDmg - armorReduction);
             }
         }
 
@@ -222,12 +271,14 @@ public class ServerWorldEvents {
                     event.setCanceled(true);
 
                     if (!king.level.isClientSide()) {
-                        ((ServerWorld) king.level).sendParticles(ParticleTypes.ASH, king.getX(), king.getY(), king.getZ(),
+                        ((ServerWorld) king.level).sendParticles(ParticleTypes.ASH, king.getX(), king.getY() + 1, king.getZ(),
                                 30, 0.75, 0.75, 0.75, 0.01);
                     }
                 }
             }
         }
+
+        MobCapEventHelper.onEntityHurt(event);
     }
 
     @SubscribeEvent

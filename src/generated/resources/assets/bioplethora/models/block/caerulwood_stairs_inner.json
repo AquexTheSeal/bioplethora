@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "side": "bioplethora:block/caerulwood_planks",
+    "bottom": "bioplethora:block/caerulwood_planks",
+    "top": "bioplethora:block/caerulwood_planks"
+  }
+}

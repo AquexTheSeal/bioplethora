@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "bioplethora:block/caerulwood_planks"
+  }
+}

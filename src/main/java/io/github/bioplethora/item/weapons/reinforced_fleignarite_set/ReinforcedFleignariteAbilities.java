@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.weapons.reinforced_fleignarite_set;
 
-import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;
@@ -63,11 +63,11 @@ public class ReinforcedFleignariteAbilities {
     }
 
     public static void abilityTooltip(List<ITextComponent> tooltip) {
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

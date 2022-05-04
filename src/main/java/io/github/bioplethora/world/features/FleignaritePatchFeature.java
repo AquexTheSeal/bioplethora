@@ -5,7 +5,7 @@ import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.creatures.CavernFleignarEntity;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.world.BPFeatureGeneration;
-import io.github.bioplethora.world.feature_config.FleignariteSplotchConfig;
+import io.github.bioplethora.world.featureconfigs.FleignariteSplotchConfig;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;

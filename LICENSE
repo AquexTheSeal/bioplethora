@@ -4,12 +4,17 @@
                         created by Toma400
                          (Tomasz Stępień)
 
-
-
 License created originally to distinct Baedoor mods from other art
 (since mods differ by copyrights inherited from parent game) and
 to set distinction between All Rights Reserved and Baedoor Mod
 License (later: BML), since BML gives you some more possibilities.
+=======
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
 As much as it is private license for Toma400's mods, all modders
 are welcome to use BML for their own purposes, with requirement to
@@ -86,3 +91,22 @@ BML allows user to:
   3.4. Creating modpacks with product
 
 As long as none of the above breaks core game EULA.
+
+All assets of this mod is ARR (All Rights Reserved). No permission is given to use any of it.
+
+NOTE
+
+This project uses some code from other sources, credit goes to the following:
+- Sin Tachikawa
+- Invalid2.
+
+Following files contains used code from other sources:
+- WindArrowEntity
+- BPMonsterGoal
+- BPMonsterMeleeGoal
+- BPMonsterMovableGoal
+- BPMonsterMoveToTargetGoal
+- BPAnimalGoal
+- BPAnimalMeleeGoal
+- BPAnimalMovableGoal
+- BPAnimalMoveToTargetGoal

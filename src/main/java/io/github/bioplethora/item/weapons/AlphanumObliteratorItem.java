@@ -3,8 +3,9 @@ package io.github.bioplethora.item.weapons;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.entity.projectile.AlphanumObliteratorSpearEntity;
-import io.github.bioplethora.item.ItemSettings;
 import io.github.bioplethora.registry.BPEnchantments;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.BlockState;
@@ -42,7 +43,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class AlphanumObliteratorItem extends Item implements IVanishable {
+public class AlphanumObliteratorItem extends Item implements IVanishable, IReachWeapon {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
     public AlphanumObliteratorItem(Properties properties) {
@@ -91,21 +92,21 @@ public class AlphanumObliteratorItem extends Item implements IVanishable {
         AlphanumObliteratorSpearEntity projectile = new AlphanumObliteratorSpearEntity(pLevel, pEntityLiving, xTarget, yTarget, zTarget);
         projectile.setPos(pEntityLiving.getX(), pEntityLiving.getY() + 1.5, pEntityLiving.getZ());
         projectile.setOwner(pEntityLiving);
-        projectile.setBaseDamage((BPConfig.getHellMode ? 15.0F : 12.0F) + damageAdditions);
+        projectile.setBaseDamage((BPConfig.IN_HELLMODE ? 15.0F : 12.0F) + damageAdditions);
         projectile.shootFromRotation(projectile, pEntityLiving.xRot, pEntityLiving.yHeadRot, 0, 1F, 0);
         pLevel.addFreshEntity(projectile);
 
         AlphanumObliteratorSpearEntity projectile1 = new AlphanumObliteratorSpearEntity(pLevel, pEntityLiving, xTarget, yTarget, zTarget);
         projectile1.setPos(pEntityLiving.getX() + vector3d.z * 4.0D, pEntityLiving.getY() + 1.5, pEntityLiving.getZ() + vector3d.z * -4.0D);
         projectile.setOwner(pEntityLiving);
-        projectile1.setBaseDamage((BPConfig.getHellMode ? 15.0F : 12.0F) + damageAdditions);
+        projectile1.setBaseDamage((BPConfig.IN_HELLMODE ? 15.0F : 12.0F) + damageAdditions);
         projectile1.shootFromRotation(projectile1, pEntityLiving.xRot, pEntityLiving.yHeadRot, 0, 1F, 1.0F);
         pLevel.addFreshEntity(projectile1);
 
         AlphanumObliteratorSpearEntity projectile2 = new AlphanumObliteratorSpearEntity(pLevel, pEntityLiving, xTarget, yTarget, zTarget);
         projectile2.setPos(pEntityLiving.getX() + vector3d.z * -4.0D, pEntityLiving.getY() + 1.5, pEntityLiving.getZ() + vector3d.z * 4.0D);
         projectile.setOwner(pEntityLiving);
-        projectile2.setBaseDamage((BPConfig.getHellMode ? 15.0F : 12.0F) + damageAdditions);
+        projectile2.setBaseDamage((BPConfig.IN_HELLMODE ? 15.0F : 12.0F) + damageAdditions);
         projectile2.shootFromRotation(projectile2, pEntityLiving.xRot, pEntityLiving.yHeadRot, 0, 1F, 1.0F);
         pLevel.addFreshEntity(projectile2);
     }
@@ -207,16 +208,16 @@ public class AlphanumObliteratorItem extends Item implements IVanishable {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.skullbreaker.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.skullbreaker.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.skullbreaker.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.skullbreaker.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.blasting_spears.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.blasting_spears.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.blasting_spears.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.alphanum_obliterator.blasting_spears.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 
@@ -249,5 +250,10 @@ public class AlphanumObliteratorItem extends Item implements IVanishable {
 
     public int getEnchantmentValue() {
         return 1;
+    }
+
+    @Override
+    public double getReachDistance() {
+        return 6;
     }
 }

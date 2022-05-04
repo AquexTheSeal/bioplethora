@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.api.world.EntityUtils;
-import io.github.bioplethora.item.ItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -24,21 +24,21 @@ public class GrylynenShieldRedItem extends GrylynenShieldBaseItem {
 
     @Override
     public int getCooldownReduction() {
-        return 60;
+        return 20;
     }
 
     @Override
     public int getArmorBonus() {
-        return 2;
+        return 5;
     }
 
     @Override
     public void blockingSkill(ItemStack stack, LivingEntity user, Entity attacker, World world) {
         if (EntityUtils.isLiving(attacker)) {
-            EntityUtils.knockbackAwayFromUser(3, user, (LivingEntity) attacker);
+            EntityUtils.knockbackAwayFromUser(0.6F, user, (LivingEntity) attacker);
         }
         if (Math.random() <= 0.75) {
-            user.heal(2F);
+            user.heal(2F + user.getRandom().nextInt(1));
         }
     }
 
@@ -46,11 +46,11 @@ public class GrylynenShieldRedItem extends GrylynenShieldBaseItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.red_grylynen_shield.red_crystal_energy.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.red_grylynen_shield.red_crystal_energy.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.red_grylynen_shield.red_crystal_energy.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.red_grylynen_shield.red_crystal_energy.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

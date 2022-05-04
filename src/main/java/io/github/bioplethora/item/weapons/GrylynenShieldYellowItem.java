@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.api.BPItemSettings;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -36,7 +36,7 @@ public class GrylynenShieldYellowItem extends GrylynenShieldBaseItem {
         // Checks if it is a 50% chance
         if (Math.random() <= 0.5) {
             // Regenerates the user's health by 2 hearts
-            user.setHealth(user.getHealth() + 2);
+            user.heal(2F);
         }
     }
 
@@ -44,11 +44,11 @@ public class GrylynenShieldYellowItem extends GrylynenShieldBaseItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

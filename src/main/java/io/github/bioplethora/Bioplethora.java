@@ -2,12 +2,9 @@ package io.github.bioplethora;
 
 import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
-import io.github.bioplethora.keybindings.BPNetwork;
+import io.github.bioplethora.network.BPNetwork;
 import io.github.bioplethora.registry.*;
-import io.github.bioplethora.registry.worldgen.BPBiomes;
-import io.github.bioplethora.registry.worldgen.BPBlockPlacers;
-import io.github.bioplethora.registry.worldgen.BPFeatures;
-import io.github.bioplethora.registry.worldgen.BPStructures;
+import io.github.bioplethora.registry.worldgen.*;
 import io.github.bioplethora.world.BPBiomeGeneration;
 import io.github.bioplethora.world.EntitySpawnManager;
 import net.minecraft.data.DataGenerator;
@@ -44,6 +41,7 @@ public class Bioplethora {
         BPItems.ITEMS.register(bus);
         BPBlocks.BLOCKS.register(bus);
         BPBlocks.BLOCK_ITEMS.register(bus);
+
         BPEntities.ENTITIES.register(bus);
         BPSoundEvents.SOUNDS.register(bus);
         BPParticles.PARTICLES.register(bus);
@@ -54,7 +52,7 @@ public class Bioplethora {
         BPFeatures.FEATURES.register(bus);
         BPAttributes.ATTRIBUTES.register(bus);
         BPBlockPlacers.BLOCK_PLACERS.register(bus);
-
+        BPSurfaceBuilders.SURFACE_BUILDERS.register(bus);
         BPTileEntities.TILE_ENTITIES.register(bus);
         BPContainerTypes.CONTAINERS.register(bus);
 
@@ -63,6 +61,9 @@ public class Bioplethora {
         bus.addListener(this::setup);
         bus.addListener(this::gatherData);
         bus.addListener(this::onInterModEnqueueEvent);
+
+        bus.addListener(BPWoodTypes::registerWoodType);
+        bus.addListener(BPWoodTypes::registerWoodTypeClient);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(EventPriority.HIGH, EntitySpawnManager::onBiomeLoadingEvent);
@@ -85,6 +86,8 @@ public class Bioplethora {
 
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("Setting up [" + MOD_NAME + "], thank you for using this mod!");
+
+        BPLootConditions.registerConditions();
 
         BPNetwork.initializeNetwork();
         BPBiomeGeneration.generateBiomes();

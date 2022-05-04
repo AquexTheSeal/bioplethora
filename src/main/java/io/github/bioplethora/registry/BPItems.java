@@ -11,9 +11,7 @@ import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.armor.*;
 import io.github.bioplethora.item.extras.AlphanumGemItem;
 import io.github.bioplethora.item.extras.WindyEssenceItem;
-import io.github.bioplethora.item.functionals.SpiritFissionCharmItem;
-import io.github.bioplethora.item.functionals.SpiritManipulationCharmItem;
-import io.github.bioplethora.item.functionals.SwervingTotemItem;
+import io.github.bioplethora.item.functionals.*;
 import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.item.weapons.fleignarite_set.*;
 import io.github.bioplethora.item.weapons.reinforced_fleignarite_set.*;
@@ -50,10 +48,8 @@ public class BPItems {
     public static final RegistryObject<Item> REINFORCED_FLEIGNARITE = ITEMS.register("reinforced_fleignarite", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> ALPHANUM_GEM = ITEMS.register("alphanum_gem", () -> new AlphanumGemItem(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> ALPHEM_KING_REMNANT = ITEMS.register("alphem_king_remnant", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
-
     public static final RegistryObject<Item> FIERY_CUBE = ITEMS.register("fiery_cube", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> SOUL_CUBE = ITEMS.register("soul_cube", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
-
     public static final RegistryObject<Item> GREEN_GRYLYNEN_CRYSTAL = ITEMS.register("green_grylynen_crystal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> YELLOW_GRYLYNEN_CRYSTAL = ITEMS.register("yellow_grylynen_crystal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> RED_GRYLYNEN_CRYSTAL = ITEMS.register("red_grylynen_crystal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
@@ -76,10 +72,10 @@ public class BPItems {
     public static final RegistryObject<Item> WIND_ARROW = ITEMS.register("wind_arrow", () -> new WindArrowItem(new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> SPIRIT_FISSION_CHARM = ITEMS.register("spirit_fission_charm", () -> new SpiritFissionCharmItem(new Item.Properties().stacksTo(1).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> SPIRIT_MANIPULATION_CHARM = ITEMS.register("spirit_manipulation_charm", () -> new SpiritManipulationCharmItem(new Item.Properties().stacksTo(1).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
-
+    public static final RegistryObject<Item> SPIRIT_STRENGTHENING_CHARM = ITEMS.register("spirit_strengthening_charm", () -> new SpiritStrengtheningCharmItem(new Item.Properties().stacksTo(1).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> GREEN_CRYSTAL_SHIELD = ITEMS.register("green_crystal_shield", () -> new GrylynenShieldGreenItem(new Item.Properties().durability(740).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> YELLOW_CRYSTAL_SHIELD = ITEMS.register("yellow_crystal_shield", () -> new GrylynenShieldYellowItem(new Item.Properties().durability(1125).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
-
+    public static final RegistryObject<Item> RED_CRYSTAL_SHIELD = ITEMS.register("red_crystal_shield", () -> new GrylynenShieldRedItem(new Item.Properties().durability(18575).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> ALPHANUM_OBLITERATOR = ITEMS.register("alphanum_obliterator", () -> new AlphanumObliteratorItem(new Item.Properties().durability(11500).rarity(BPRarityTypes.BOSS_WEAPON).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF = ITEMS.register("infernal_quarterstaff", () -> new InfernalQuarterstaffItem(ItemTier.NETHERITE, hellConfig ? 12 - BPItems.netheriteDMG : 8 - BPItems.netheriteDMG, -2.5f, new Item.Properties().durability(5200).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
@@ -127,11 +123,22 @@ public class BPItems {
     public static final RegistryObject<Item> RAW_MOSILE = ITEMS.register("raw_mosile", () -> new Item(new Item.Properties().food(BPFoods.RAW_MOSILE).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> COOKED_MOSILE = ITEMS.register("cooked_mosile", () -> new Item(new Item.Properties().food(BPFoods.COOKED_MOSILE).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
+    // Plant Items
+    public static  final RegistryObject<Item> SWIVELBLOOM = ITEMS.register("swivelbloom", () -> new Item(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup)));
+
+    // Woodset Helpers
+    public static final RegistryObject<Item> CAERULWOOD_SIGN = ITEMS.register("caerulwood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(BPItemGroup.BioplethoraItemItemGroup), BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()));
+    public static final RegistryObject<Item> CAERULWOOD_BOAT = ITEMS.register("caerulwood_boat", () -> new BPBoatItem(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup), "caerulwood"));
+
     //=================================================================
     //                  BIOPLETHORA SPAWN EGGS
     //=================================================================
     /** @ECOHARMLESS **/
     public static final RegistryObject<Item> CUTTLEFISH_SPAWN_EGG = ITEMS.register("cuttlefish_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.CUTTLEFISH, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> ONOFISH_SPAWN_EGG = ITEMS.register("onofish_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.ONOFISH, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+
+    public static final RegistryObject<Item> FIERY_EURYDN_SPAWN_EGG = ITEMS.register("fiery_eurydn_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.FIERY_EURYDN, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> SOUL_EURYDN_SPAWN_EGG = ITEMS.register("soul_eurydn_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.SOUL_EURYDN, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
 
     /** @PLETHONEUTRAL **/
     public static final RegistryObject<Item> NANDBRI_SPAWN_EGG = ITEMS.register("nandbri_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.NANDBRI, BPEntityClasses.PLETHONEUTRAL, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
@@ -162,4 +169,5 @@ public class BPItems {
     public static final RegistryObject<Item> ALPHEM_KING_SPAWN_EGG = ITEMS.register("alphem_king_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.ALPHEM_KING, BPEntityClasses.ELDERIA, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
 
     public static int netheriteDMG = 5;
+
 }

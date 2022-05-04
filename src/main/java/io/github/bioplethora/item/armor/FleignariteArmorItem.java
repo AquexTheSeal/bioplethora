@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.armor;
 
-import io.github.bioplethora.item.IHurtSkillArmor;
-import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.api.IHurtSkillArmor;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -61,11 +61,11 @@ public class FleignariteArmorItem extends ArmorItem implements IHurtSkillArmor {
     public void appendHoverText(ItemStack pStack, @Nullable World pLevel, List<ITextComponent> pTooltip, ITooltipFlag pFlag) {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
 
-        ItemSettings.sacredLevelText(pTooltip);
+        BPItemSettings.sacredLevelText(pTooltip);
 
-        pTooltip.add(new TranslationTextComponent("item.bioplethora.fleignarite_armor.sticky_piece.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        pTooltip.add(new TranslationTextComponent("item.bioplethora.fleignarite_armor.sticky_piece.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            pTooltip.add(new TranslationTextComponent("item.bioplethora.fleignarite_armor.sticky_piece.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            pTooltip.add(new TranslationTextComponent("item.bioplethora.fleignarite_armor.sticky_piece.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

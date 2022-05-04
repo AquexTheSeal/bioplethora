@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.weapons.fleignarite_set;
 
-import io.github.bioplethora.item.ItemSettings;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;
@@ -54,11 +54,11 @@ public class FleignariteAbilities {
     }
 
     public static void abilityTooltip(List<ITextComponent> tooltip) {
-        ItemSettings.sacredLevelText(tooltip);
+        BPItemSettings.sacredLevelText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("item.bioplethora.fleignarite_weapon.gooey_stun.skill").withStyle(ItemSettings.SKILL_NAME_COLOR));
+        tooltip.add(new TranslationTextComponent("item.bioplethora.fleignarite_weapon.gooey_stun.skill").withStyle(BPItemSettings.SKILL_NAME_COLOR));
         if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-            tooltip.add(new TranslationTextComponent("item.bioplethora.fleignarite_weapon.gooey_stun.desc").withStyle(ItemSettings.SKILL_DESC_COLOR));
+            tooltip.add(new TranslationTextComponent("item.bioplethora.fleignarite_weapon.gooey_stun.desc").withStyle(BPItemSettings.SKILL_DESC_COLOR));
         }
     }
 }

@@ -1,6 +1,7 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.entity.BPBoatEntity;
 import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.entity.others.*;
 import io.github.bioplethora.entity.projectile.*;
@@ -17,11 +18,12 @@ public class BPEntities {
 
     //Ecoharmless
     public static final RegistryObject<EntityType<CuttlefishEntity>> CUTTLEFISH = ENTITIES.register("cuttlefish", () -> EntityType.Builder.of(CuttlefishEntity::new, EntityClassification.WATER_CREATURE).sized(0.75f, 0.6f).build(new ResourceLocation(Bioplethora.MOD_ID, "cuttlefish").toString()));
+    public static final RegistryObject<EntityType<OnofishEntity>> ONOFISH = ENTITIES.register("onofish", () -> EntityType.Builder.of(OnofishEntity::new, EntityClassification.CREATURE).sized(0.75f, 0.85f).build(new ResourceLocation(Bioplethora.MOD_ID, "onofish").toString()));
 
     public static final RegistryObject<EntityType<EurydnEntity>> SOUL_EURYDN = ENTITIES.register("soul_eurydn", () -> EntityType.Builder.of((EntityType.IFactory<EurydnEntity>) (type, world) ->
-            new EurydnEntity(type, world, EurydnEntity.Variant.SOUL), EntityClassification.MONSTER).sized(1.8f, 1.1f).build(new ResourceLocation(Bioplethora.MOD_ID, "oul_eurydn").toString()));
+            new EurydnEntity(type, world, EurydnEntity.Variant.SOUL), EntityClassification.CREATURE).sized(1.8f, 1.1f).build(new ResourceLocation(Bioplethora.MOD_ID, "oul_eurydn").toString()));
     public static final RegistryObject<EntityType<EurydnEntity>> FIERY_EURYDN = ENTITIES.register("fiery_eurydn", () -> EntityType.Builder.of((EntityType.IFactory<EurydnEntity>) (type, world) ->
-            new EurydnEntity(type, world, EurydnEntity.Variant.FIERY), EntityClassification.MONSTER).sized(1.8f, 1.1f).build(new ResourceLocation(Bioplethora.MOD_ID, "fiery_eurydn").toString()));
+            new EurydnEntity(type, world, EurydnEntity.Variant.FIERY), EntityClassification.CREATURE).sized(1.8f, 1.1f).build(new ResourceLocation(Bioplethora.MOD_ID, "fiery_eurydn").toString()));
 
     //Plethoneutral
     public static final RegistryObject<EntityType<PeaguinEntity>> PEAGUIN = ENTITIES.register("peaguin", () -> EntityType.Builder.of(PeaguinEntity::new, EntityClassification.WATER_CREATURE).sized(1.2f, 1.4f).build(new ResourceLocation(Bioplethora.MOD_ID, "peaguin").toString()));
@@ -29,7 +31,7 @@ public class BPEntities {
     public static final RegistryObject<EntityType<CavernFleignarEntity>> CAVERN_FLEIGNAR = ENTITIES.register("cavern_fleignar", () -> EntityType.Builder.of(CavernFleignarEntity::new, EntityClassification.MONSTER).sized(0.8f, 4.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "cavern_fleignar").toString()));
 
     //Dangerum
-    public static final RegistryObject<EntityType<AlphemEntity>> ALPHEM = ENTITIES.register("alphem", () -> EntityType.Builder.of(AlphemEntity::new, EntityClassification.MONSTER).sized(1.2f, 1.4f).build(new ResourceLocation(Bioplethora.MOD_ID, "alphem").toString()));
+    public static final RegistryObject<EntityType<AlphemEntity>> ALPHEM = ENTITIES.register("alphem", () -> EntityType.Builder.of(AlphemEntity::new, EntityClassification.CREATURE).sized(1.2f, 1.4f).build(new ResourceLocation(Bioplethora.MOD_ID, "alphem").toString()));
     public static final RegistryObject<EntityType<GaugalemEntity>> GAUGALEM = ENTITIES.register("gaugalem", () -> EntityType.Builder.of(GaugalemEntity::new, EntityClassification.MONSTER).sized(1.2f, 4.0f).build(new ResourceLocation(Bioplethora.MOD_ID, "gaugalem").toString()));
     public static final RegistryObject<EntityType<DwarfMossadileEntity>> DWARF_MOSSADILE = ENTITIES.register("dwarf_mossadile", () -> EntityType.Builder.of(DwarfMossadileEntity::new, EntityClassification.MONSTER).sized(1.4f, 0.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "dwarf_mossadile").toString()));
     public static final RegistryObject<EntityType<TrapjawEntity>> TRAPJAW = ENTITIES.register("trapjaw", () -> EntityType.Builder.of(TrapjawEntity::new, EntityClassification.MONSTER).sized(2.2f, 1.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "trapjaw").toString()));
@@ -82,6 +84,8 @@ public class BPEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "windy_essence").toString()));
 
     //Others
+    public static final RegistryObject<EntityType<BPBoatEntity>> CAERULWOOD_BOAT = createBoat("caerulwood");
+
     public static final RegistryObject<EntityType<PrimordialRingEntity>> PRIMORDIAL_RING = ENTITIES.register("primordial_ring", () -> EntityType.Builder.of(PrimordialRingEntity::new, EntityClassification.MONSTER).sized(3.5f, 2f).build(new ResourceLocation(Bioplethora.MOD_ID, "primordial_ring").toString()));
     public static final RegistryObject<EntityType<AltyrusSummoningEntity>> ALTYRUS_SUMMONING = ENTITIES.register("altyrus_summoning", () -> EntityType.Builder.of(AltyrusSummoningEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_summoning").toString()));
@@ -91,4 +95,11 @@ public class BPEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "grylynen_core_bomb").toString()));
     public static final RegistryObject<EntityType<AlphanumShardEntity>> ALPHANUM_SHARD = ENTITIES.register("alphanum_shard", () -> EntityType.Builder.of(AlphanumShardEntity::new, EntityClassification.MISC).sized(0.8F, 1.5F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "alphanum_shard").toString()));
+
+    //============================
+    //       HELPERS
+    //============================
+    public static RegistryObject<EntityType<BPBoatEntity>> createBoat(String woodType) {
+        return ENTITIES.register(woodType + "_boat", () -> EntityType.Builder.<BPBoatEntity>of(BPBoatEntity::new, EntityClassification.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(Bioplethora.MOD_ID, woodType + "_boat").toString()));
+    }
 }

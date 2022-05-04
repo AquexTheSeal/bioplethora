@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.api.world.WorldgenUtils;
 import io.github.bioplethora.registry.worldgen.BPConfiguredFeatures;
+import io.github.bioplethora.registry.worldgen.BPTreeConfiguredFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -33,6 +34,8 @@ public class BPFeatureGeneration {
         RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
+        List<Supplier<ConfiguredFeature<?, ?>>> topLayerDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.TOP_LAYER_MODIFICATION);
+
         List<Supplier<ConfiguredFeature<?, ?>>> undergroundDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION);
         List<Supplier<ConfiguredFeature<?, ?>>> vegDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
@@ -55,6 +58,8 @@ public class BPFeatureGeneration {
                 vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.WARPED_FOREST)) {
+                vegDeco.add(() -> BPConfiguredFeatures.WARPED_DANCER_CONFIG);
+
                 vegDeco.add(() -> BPConfiguredFeatures.TURQUOISE_PENDENT_CONFIG);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.CRIMSON_FOREST)) {
@@ -66,9 +71,21 @@ public class BPFeatureGeneration {
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_MINISHROOM_CONFIG);
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_BIGSHROOM_CONFIG);
 
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_SPROUTS_CONFIG);
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_TALL_GRASS_CONFIG);
 
+                vegDeco.add(() -> BPConfiguredFeatures.SPIRIT_DANGLER_CONFIG);
+
                 vegDeco.add(() -> BPConfiguredFeatures.SOUL_ETERN_CONFIG);
+            }
+        }
+
+        if (types.contains(BiomeDictionary.Type.END)) {
+            undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE_CONFIG);
+
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
+
+                    vegDeco.add(() -> BPTreeConfiguredFeatures.CAERULWOOD_FOREST_VEGETATION_CONFIG);
             }
         }
     }

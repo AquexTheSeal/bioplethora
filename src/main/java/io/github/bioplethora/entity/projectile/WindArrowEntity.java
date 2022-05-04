@@ -31,7 +31,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
@@ -43,9 +42,9 @@ import java.util.List;
  */
 public class WindArrowEntity extends AbstractArrowEntity {
 
-    private static final DataParameter<Integer> DW_TARGET_ID = EntityDataManager.defineId(WindArrowEntity.class, DataSerializers.INT);
-    private static final int NO_TARGET = -1;
-    private int newTargetCooldown = 0;
+    public static final DataParameter<Integer> TARGET_ID = EntityDataManager.defineId(WindArrowEntity.class, DataSerializers.INT);
+    public static final int NULL_TARGET_INT = -1;
+    public int relocateCD = 0;
 
     private int duration = 200;
 
@@ -64,11 +63,6 @@ public class WindArrowEntity extends AbstractArrowEntity {
     @Override
     public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @Override
-    protected void doPostHurtEffects(@Nonnull LivingEntity living) {
-        super.doPostHurtEffects(living);
     }
 
     public void tick() {
@@ -93,40 +87,36 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
         if (!level.isClientSide && this.tickCount > 3) {
             if (hasTarget() && (!getTarget().isAlive() || this.inGround)) {
-                entityData.set(DW_TARGET_ID, NO_TARGET);
+                entityData.set(TARGET_ID, NULL_TARGET_INT);
             }
 
-            if (!hasTarget() && !this.inGround && newTargetCooldown <= 0) {
-                findNewTarget();
+            if (!hasTarget() && !this.inGround && relocateCD <= 0) {
+                locateAnotherTarget();
             } else {
-                newTargetCooldown--;
+                relocateCD--;
             }
         }
 
         if (tickCount > 3 && hasTarget() && !this.inGround) {
-            double deltaX = getDeltaMovement().x();
-            double deltaY = getDeltaMovement().y();
-            double deltaZ = getDeltaMovement().z();
+            double deltaX = getDeltaMovement().x(), deltaY = getDeltaMovement().y(), deltaZ = getDeltaMovement().z();
             Entity target = getTarget();
 
             Vector3d arrowLoc = new Vector3d(getX(), getY(), getZ());
             Vector3d targetLoc = new Vector3d(target.getX(), target.getY() + target.getBbHeight() / 2, target.getZ());
-
             Vector3d lookVec = targetLoc.subtract(arrowLoc);
-
             Vector3d arrowMotion = new Vector3d(deltaX, deltaY, deltaZ);
 
-            double theta = wrap180Radian(angleBetween(arrowMotion, lookVec));
-            theta = clampAbs(theta, Math.PI / 2);
+            double radian = wrap180Radian(angleBetween(arrowMotion, lookVec));
+            radian = clampAbs(radian, Math.PI / 2);
 
             Vector3d crossProduct = arrowMotion.cross(lookVec).normalize();
-            Vector3d adjustedLookVec = transform(crossProduct, theta, arrowMotion);
+            Vector3d adjustedLookVec = transform(crossProduct, radian, arrowMotion);
             shoot(adjustedLookVec.x, adjustedLookVec.y, adjustedLookVec.z, 1.0F, 0);
         }
 
     }
 
-    private void findNewTarget() {
+    public void locateAnotherTarget() {
         double targetRadius = BPConfig.COMMON.hellMode.get() ? 13.0D : 10.0D;
         //List<LivingEntity> candidates = level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(targetRadius, targetRadius, targetRadius));
         List<MobEntity> candidates = level.getEntitiesOfClass(MobEntity.class, this.getBoundingBox().inflate(targetRadius, targetRadius, targetRadius));
@@ -134,21 +124,21 @@ public class WindArrowEntity extends AbstractArrowEntity {
         if (!candidates.isEmpty()) {
             if (isValidTarget(candidates.get(0))) {
                 candidates.sort(Comparator.comparing(WindArrowEntity.this::distanceToSqr, Double::compare));
-                entityData.set(DW_TARGET_ID, candidates.get(0).getId());
+                entityData.set(TARGET_ID, candidates.get(0).getId());
             }
         }
 
-        newTargetCooldown = 5;
+        relocateCD = 5;
     }
 
     @Override
     public void defineSynchedData() {
         super.defineSynchedData();
-        entityData.define(DW_TARGET_ID, NO_TARGET);
+        entityData.define(TARGET_ID, NULL_TARGET_INT);
     }
 
     private MobEntity getTarget() {
-        return (MobEntity) level.getEntity(entityData.get(DW_TARGET_ID));
+        return (MobEntity) level.getEntity(entityData.get(TARGET_ID));
     }
 
     private boolean hasTarget() {
@@ -182,7 +172,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
                 if (eI != null && eI != this.getOwner()) {
 
                     if (this.getOwner() != null) {
-                        eI.hurt(DamageSource.indirectMobAttack(this.getOwner(), (LivingEntity) this.getOwner()), BPConfig.getHellMode ? 3 : 5);
+                        eI.hurt(DamageSource.indirectMobAttack(this.getOwner(), (LivingEntity) this.getOwner()), BPConfig.IN_HELLMODE ? 3 : 5);
                     }
 
                     eI.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
@@ -195,7 +185,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
 
     @Override
     public double getBaseDamage() {
-        return BPConfig.getHellMode ? 3.0D : 5.5D;
+        return BPConfig.IN_HELLMODE ? 3.0D : 5.5D;
     }
 
     @Override
@@ -220,33 +210,21 @@ public class WindArrowEntity extends AbstractArrowEntity {
         return 1F;
     }
 
-    private Vector3d transform(Vector3d axis, double angle, Vector3d normal) {
+    public final Vector3d transform(Vector3d axis, double angle, Vector3d normal) {
 
-        double m00 = 1;
-        double m01 = 0;
-        double m02 = 0;
+        double m00 = 1, m01 = 0, m02 = 0;
+        double m10 = 0, m11 = 1, m12 = 0;
+        double m20 = 0,  m21 = 0,  m22 = 1;
 
-        double m10 = 0;
-        double m11 = 1;
-        double m12 = 0;
-
-        double m20 = 0;
-        double m21 = 0;
-        double m22 = 1;
         double mag = Math.sqrt(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
         if (mag >= 1.0E-10) {
             mag = 1.0 / mag;
-            double ax = axis.x * mag;
-            double ay = axis.y * mag;
-            double az = axis.z * mag;
+            double ax = axis.x * mag, ay = axis.y * mag, az = axis.z * mag;
 
-            double sinTheta = Math.sin(angle);
-            double cosTheta = Math.cos(angle);
+            double sinTheta = Math.sin(angle), cosTheta = Math.cos(angle);
             double t = 1.0 - cosTheta;
 
-            double xz = ax * az;
-            double xy = ax * ay;
-            double yz = ay * az;
+            double xz = ax * az, xy = ax * ay, yz = ay * az;
 
             m00 = t * ax * ax + cosTheta;
             m01 = t * xy - sinTheta * az;
@@ -260,12 +238,10 @@ public class WindArrowEntity extends AbstractArrowEntity {
             m21 = t * yz + sinTheta * ax;
             m22 = t * az * az + cosTheta;
         }
-        return new Vector3d(m00 * normal.x + m01 * normal.y + m02 * normal.z,
-                m10 * normal.x + m11 * normal.y + m12 * normal.z,
-                m20 * normal.x + m21 * normal.y + m22 * normal.z);
+        return new Vector3d(m00 * normal.x + m01 * normal.y + m02 * normal.z, m10 * normal.x + m11 * normal.y + m12 * normal.z, m20 * normal.x + m21 * normal.y + m22 * normal.z);
     }
 
-    private double angleBetween(Vector3d v1, Vector3d v2) {
+    public final double angleBetween(Vector3d v1, Vector3d v2) {
         double vDot = v1.dot(v2) / (v1.length() * v2.length());
         if (vDot < -1.0) {
             vDot = -1.0;
@@ -276,7 +252,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
         return Math.acos(vDot);
     }
 
-    private double wrap180Radian(double radian) {
+    public final double wrap180Radian(double radian) {
         radian %= 2 * Math.PI;
         while (radian >= Math.PI) {
             radian -= 2 * Math.PI;
@@ -287,7 +263,7 @@ public class WindArrowEntity extends AbstractArrowEntity {
         return radian;
     }
 
-    private double clampAbs(double param, double maxMagnitude) {
+    public final double clampAbs(double param, double maxMagnitude) {
         if (Math.abs(param) > maxMagnitude) {
 
             if (param < 0) {

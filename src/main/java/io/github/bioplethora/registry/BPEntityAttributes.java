@@ -16,6 +16,7 @@ public class BPEntityAttributes {
 
         //Ecoharmless
         event.put(BPEntities.CUTTLEFISH.get(), CuttlefishEntity.setCustomAttributes().build());
+        event.put(BPEntities.ONOFISH.get(), OnofishEntity.setCustomAttributes().build());
 
         event.put(BPEntities.SOUL_EURYDN.get(), EurydnEntity.setCustomAttributes().build());
         event.put(BPEntities.FIERY_EURYDN.get(), EurydnEntity.setCustomAttributes().build());

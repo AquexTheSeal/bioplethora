@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "bioplethora:caerulwood_logs"
+    }
+  ],
+  "result": {
+    "item": "bioplethora:caerulwood_planks",
+    "count": 4
+  }
+}
