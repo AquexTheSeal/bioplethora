@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.entity.creatures.CavernFleignarEntity;
 import io.github.bioplethora.registry.BPEntities;
-import io.github.bioplethora.world.BPFeatureGeneration;
+import io.github.bioplethora.world.BPVanillaBiomeFeatureGeneration;
 import io.github.bioplethora.world.featureconfigs.FleignariteSplotchConfig;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -21,7 +21,7 @@ public class FleignaritePatchFeature extends Feature<FleignariteSplotchConfig> {
 
     public boolean place(ISeedReader reader, ChunkGenerator generator, Random random, BlockPos pos, FleignariteSplotchConfig config) {
         if (config.placeOn.contains(reader.getBlockState(pos.below())) && config.placeIn.contains(reader.getBlockState(pos)) && config.placeUnder.contains(reader.getBlockState(pos.above()))) {
-            if (BPFeatureGeneration.isFleignariteChunk(pos, reader)) {
+            if (BPVanillaBiomeFeatureGeneration.isFleignariteChunk(pos, reader)) {
                 if (Math.random() <= 0.15 && BPConfig.COMMON.spawnCavernFleignar.get()) {
                     if (reader.getBlockState(pos.above()).isAir() && reader.getBlockState(pos.above(2)).isAir() && reader.getBlockState(pos.above(3)).isAir()) {
                         CavernFleignarEntity fleignar = BPEntities.CAVERN_FLEIGNAR.get().create(reader.getLevel());

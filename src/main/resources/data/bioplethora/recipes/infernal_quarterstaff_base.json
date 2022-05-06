@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " OT",
+    "OTO",
+    "TO "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:bone"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "bioplethora:infernal_quarterstaff_base",
+    "count": 1
+  }
+}

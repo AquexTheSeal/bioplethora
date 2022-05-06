@@ -19,6 +19,12 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
     protected void addTags() {
 
         this.forVanillaTags();
+        tag(BPTags.Blocks.GROUND_END_BLOCKS)
+                .add(Blocks.END_STONE)
+                .add(BPBlocks.CYRA.get())
+                .add(BPBlocks.CRYOSOIL.get())
+                .add(BPBlocks.IRION.get())
+        ;
 
         tag(BPTags.Blocks.CAERULWOOD_LOGS)
                 .add(BPBlocks.CAERULWOOD_LOG.get())
@@ -51,50 +57,27 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
         tag(BPTags.Blocks.WOODEN_GRYLYNEN_SPAWNABLE)
                 .addTag(BlockTags.LOGS)
-                .addTag(BlockTags.PLANKS)
-                .addTag(BlockTags.WOODEN_PRESSURE_PLATES)
-                .addTag(BlockTags.WOODEN_BUTTONS)
-                .addTag(BlockTags.WOODEN_STAIRS)
-                .addTag(BlockTags.WOODEN_SLABS)
-                .addTag(BlockTags.WOODEN_FENCES)
-                .addTag(BlockTags.FENCE_GATES)
-                .addTag(BlockTags.WOODEN_DOORS)
-                .addTag(BlockTags.WOODEN_TRAPDOORS)
-                .addTag(BlockTags.SIGNS)
-                .addTag(BlockTags.STANDING_SIGNS)
-                .addTag(BlockTags.WALL_SIGNS)
         ;
 
         tag(BPTags.Blocks.STONE_GRYLYNEN_SPAWNABLE)
                 .addTag(BlockTags.BASE_STONE_OVERWORLD)
-                .addTag(BlockTags.STONE_PRESSURE_PLATES)
-                .addTag(BlockTags.STONE_BRICKS)
         ;
 
         tag(BPTags.Blocks.GOLDEN_GRYLYNEN_SPAWNABLE)
                 .add(Blocks.GOLD_ORE)
-                .add(Blocks.NETHER_GOLD_ORE)
                 .add(Blocks.GOLD_BLOCK)
-                .add(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)
         ;
 
         tag(BPTags.Blocks.IRON_GRYLYNEN_SPAWNABLE)
                 .add(Blocks.IRON_ORE)
-                .add(Blocks.IRON_BLOCK)
-                .add(Blocks.IRON_DOOR)
-                .add(Blocks.IRON_BARS)
-                .add(Blocks.IRON_TRAPDOOR)
-                .add(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE)
         ;
 
         tag(BPTags.Blocks.DIAMOND_GRYLYNEN_SPAWNABLE)
                 .add(Blocks.DIAMOND_ORE)
-                .add(Blocks.DIAMOND_BLOCK)
         ;
 
         tag(BPTags.Blocks.NETHERITE_GRYLYNEN_SPAWNABLE)
                 .add(Blocks.ANCIENT_DEBRIS)
-                .add(Blocks.NETHERITE_BLOCK)
         ;
     }
 

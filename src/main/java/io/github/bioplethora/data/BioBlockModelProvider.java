@@ -76,7 +76,11 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.cubeAll("cyra", bioResLoc("cyra"));
 
+        this.cross("irion_grass", bioResLoc("irion_grass"));
+        this.doubleCrossPlant("irion_tall_grass", bioResLoc("irion_tall_grass_bottom"), bioResLoc("irion_tall_grass_top"));
+
         this.cross("azurlia", bioResLoc("azurlia"));
+        this.doubleCrossPlant("artairius", bioResLoc("artairius_bottom"), bioResLoc("artairius_top"));
 
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));

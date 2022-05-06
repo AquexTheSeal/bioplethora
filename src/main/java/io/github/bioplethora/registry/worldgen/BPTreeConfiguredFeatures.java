@@ -8,10 +8,18 @@ import net.minecraft.world.gen.placement.Placement;
 
 public class BPTreeConfiguredFeatures {
 
-    public static final ConfiguredFeature<?, ?> CAERULWOOD_TREE_CONFIG = BPFeatures.CAERULWOOD_TREE.get().configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE));
-
-    public static final ConfiguredFeature<?, ?> CAERULWOOD_FOREST_VEGETATION_CONFIG = Feature.RANDOM_SELECTOR
+    public static final ConfiguredFeature<?, ?> CAERULWOOD_TREE_CONFIG = BPFeatures.CAERULWOOD_TREE.get()
+            .configured(new NoFeatureConfig())
+            .decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
+            );
+    public static final ConfiguredFeature<?, ?> CAERI_PLAINS_TREES = Feature.RANDOM_SELECTOR
+            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(CAERULWOOD_TREE_CONFIG.weighted(0.33333334F)), CAERULWOOD_TREE_CONFIG))
+            .decorated(Features.Placements.HEIGHTMAP_SQUARE)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.05F, 1))
+            );
+    public static final ConfiguredFeature<?, ?> CAERI_FOREST_TREES = Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(CAERULWOOD_TREE_CONFIG.weighted(0.6666667F)), CAERULWOOD_TREE_CONFIG))
             .decorated(Features.Placements.HEIGHTMAP_SQUARE)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(10, 0.1F, 1)));
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(10, 0.1F, 1))
+            );
 }

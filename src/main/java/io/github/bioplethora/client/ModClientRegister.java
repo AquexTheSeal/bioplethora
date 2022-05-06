@@ -90,7 +90,13 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_ETERN_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLOURISHED_SOUL_ETERN.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.IRION_GRASS.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.IRION_TALL_GRASS.get(), RenderType.cutout());
+
         RenderTypeLookup.setRenderLayer(BPBlocks.AZURLIA.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.ARTAIRIUS.get(), RenderType.cutout());
+
 
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
@@ -153,6 +159,13 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.GRYLYNEN_CORE_BOMB.get(), GrylynenCoreBombRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_SHARD.get(), AlphanumShardRender::new);
+
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.CREPHOXL_HAMMER_SMASH.get(), BPEffectRender::new);
+
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_SLASH.get(), BPEffectRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_SOUL_PURGE.get(), BPEffectRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_AIR_JUMP.get(), BPEffectRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_FLAMING_SNIPE.get(), BPEffectRender::new);
 
         ScreenManager.register(BPContainerTypes.REINFORCING_TABLE_CONTAINER.get(), ReinforcingTableScreen::new);
 

@@ -1,20 +1,27 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.entity.creatures.CuttlefishEntity;
+import io.github.bioplethora.entity.creatures.GaugalemEntity;
+import io.github.bioplethora.entity.creatures.OnofishEntity;
 import io.github.bioplethora.entity.projectile.BellophiteArrowEntity;
 import io.github.bioplethora.entity.projectile.MagmaBombEntity;
 import io.github.bioplethora.entity.projectile.WindArrowEntity;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
+import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.ProjectileDispenseBehavior;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -51,5 +58,16 @@ public class ModCommonRegister {
                 });
             }
         });
+    }
+
+
+    @SubscribeEvent
+    public static void registerEntityPlacements(FMLCommonSetupEvent event) {
+        EntitySpawnPlacementRegistry.register(BPEntities.CUTTLEFISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CuttlefishEntity::checkCuttlefishSpawnRules);
+        EntitySpawnPlacementRegistry.register(BPEntities.ONOFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, OnofishEntity::checkOnofishSpawnRules);
+
+        EntitySpawnPlacementRegistry.register(BPEntities.DWARF_MOSSADILE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
+
+        EntitySpawnPlacementRegistry.register(BPEntities.GAUGALEM.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GaugalemEntity::checkGaugalemSpawnRules);
     }
 }

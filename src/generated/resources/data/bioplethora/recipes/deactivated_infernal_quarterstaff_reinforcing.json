@@ -1,0 +1,15 @@
+{
+  "type": "bioplethora:reinforcing",
+  "core": {
+    "item": "bioplethora:infernal_quarterstaff_blade"
+  },
+  "material": {
+    "item": "bioplethora:infernal_quarterstaff_base"
+  },
+  "weapon": {
+    "item": "bioplethora:infernal_quarterstaff_blade"
+  },
+  "result": {
+    "item": "bioplethora:deactivated_infernal_quarterstaff"
+  }
+}

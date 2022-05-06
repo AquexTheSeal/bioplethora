@@ -8,7 +8,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.ModList;
 import vazkii.patchouli.api.PatchouliAPI;
 
 import javax.annotation.Nonnull;
@@ -25,12 +28,22 @@ public class BiopediaItem extends Item {
 
         ItemStack stack = playerIn.getItemInHand(handIn);
 
-        if (!world.isClientSide()) {
+        if (ModList.get().isLoaded("patchouli")) {
+            if (!world.isClientSide()) {
 
-            if (playerIn instanceof ServerPlayerEntity) {
-                PatchouliAPI.get().openBookGUI((ServerPlayerEntity) playerIn, Registry.ITEM.getKey(this));
+                if (playerIn instanceof ServerPlayerEntity) {
+                    PatchouliAPI.get().openBookGUI((ServerPlayerEntity) playerIn, Registry.ITEM.getKey(this));
+                }
             }
+            return new ActionResult<>(ActionResultType.SUCCESS, stack);
+        } else {
+            playerIn.displayClientMessage(new TranslationTextComponent("message.bioplethora.biopedia.patchouli_notif")
+                            .withStyle(TextFormatting.WHITE)
+                            .withStyle(TextFormatting.BOLD)
+                            .withStyle(TextFormatting.ITALIC),
+                    true
+            );
+            return new ActionResult<>(ActionResultType.PASS, stack);
         }
-        return new ActionResult<>(ActionResultType.SUCCESS, stack);
     }
 }

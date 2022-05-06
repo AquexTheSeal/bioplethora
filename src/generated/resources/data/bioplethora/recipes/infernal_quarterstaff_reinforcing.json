@@ -1,0 +1,15 @@
+{
+  "type": "bioplethora:reinforcing",
+  "core": {
+    "item": "bioplethora:fiery_cube"
+  },
+  "material": {
+    "item": "bioplethora:deactivated_infernal_quarterstaff"
+  },
+  "weapon": {
+    "item": "bioplethora:soul_cube"
+  },
+  "result": {
+    "item": "bioplethora:infernal_quarterstaff"
+  }
+}

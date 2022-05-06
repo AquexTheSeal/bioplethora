@@ -41,15 +41,15 @@ public class Bioplethora {
         BPItems.ITEMS.register(bus);
         BPBlocks.BLOCKS.register(bus);
         BPBlocks.BLOCK_ITEMS.register(bus);
-
         BPEntities.ENTITIES.register(bus);
+
+        BPFeatures.FEATURES.register(bus);
         BPSoundEvents.SOUNDS.register(bus);
         BPParticles.PARTICLES.register(bus);
         BPBiomes.BIOMES.register(bus);
         BPEffects.EFFECTS.register(bus);
         BPEnchantments.ENCHANTMENTS.register(bus);
         BPStructures.STRUCTURES.register(bus);
-        BPFeatures.FEATURES.register(bus);
         BPAttributes.ATTRIBUTES.register(bus);
         BPBlockPlacers.BLOCK_PLACERS.register(bus);
         BPSurfaceBuilders.SURFACE_BUILDERS.register(bus);

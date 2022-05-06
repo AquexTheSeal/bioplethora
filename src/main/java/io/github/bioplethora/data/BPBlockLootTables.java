@@ -78,9 +78,13 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.CRYOSOIL.get());
         add(BPBlocks.IRION.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.CRYOSOIL.get()));
 
+        add(BPBlocks.IRION_GRASS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.IRION_GRASS.get()));
+        add(BPBlocks.IRION_TALL_GRASS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.IRION_TALL_GRASS.get()));
+
         add(BPBlocks.CYRA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CYRA.get()));
 
         add(BPBlocks.AZURLIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.AZURLIA.get()));
+        dropSelf(BPBlocks.ARTAIRIUS.get());
 
         // Potted Plants
         dropPottedContents(BPBlocks.POTTED_LAVA_SPIRE.get());

@@ -2,8 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:gold_ore",
-    "minecraft:nether_gold_ore",
-    "minecraft:gold_block",
-    "minecraft:heavy_weighted_pressure_plate"
+    "minecraft:gold_block"
   ]
 }

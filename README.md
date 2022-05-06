@@ -1,7 +1,7 @@
 ![3YNAR1d_20x](https://user-images.githubusercontent.com/71295972/143822148-72a48595-e5e1-444c-b23e-75e8b5f570ff.png)
 
 # Bioplethora
-Bioplethora is a Forge 1.16 mod that adds a variety of new creatures and monsters. They vary from small and tameable cute animals, to giant and collosal monstrosities! 
+Bioplethora is a Forge 1.16 mod that adds a variety of new creatures and monsters. They vary from small and tameable cute animals, to giant and colossal monstrosities! Along with several plants 
 
 # Downloads
 Main download: Bioplethora currently has NO downloads at the moment. There aren't any public releases yet.
@@ -15,7 +15,7 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 **A:** There are a few developers that helped out on this project. Lead developers are Aqu. (Discord: Aqu#3595), and Sajevius (Discord: Sajevius#4645).
 
 ### Q: Will this mod be ported to future versions?
-**A:** It is possible that we will port this mod to future versions. Probably around 1.18, 1.19, or in other future versions.
+**A:** It is possible that we will port this mod to future versions. Probably around 1.18, 1.19, or in other future versions, the 1.18 port of this mod will most likely be handled by Toma400.
 
 ### Q: Will this mod be backported to 1.12.2, 1.7.10, or any other previous versions?
 **A:** It has never been planned to backport Bioplethora to previous versions yet, and I doubt we will do so.
@@ -63,14 +63,17 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 ### REQUIRED DEPENDENCY
 
 - GeckoLib: https://www.curseforge.com/minecraft/mc-mods/geckolib
-- Patchouli: https://www.curseforge.com/minecraft/mc-mods/patchouli
+- Abnormal's Core (or Blueprint): 
 
 ### FINISHED / CURRENT
 
+- Patchouli: https://www.curseforge.com/minecraft/mc-mods/patchouli
 - The One Probe: https://www.curseforge.com/minecraft/mc-mods/the-one-probe
 - Wastelands of Baedoor: https://www.curseforge.com/minecraft/mc-mods/wastelands-of-baedoor
 - Enchantment Descriptions: https://www.curseforge.com/minecraft/mc-mods/enchantment-descriptions
 - FTB Chunks: https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge
+- Just Enough Items: 
+- Curios: 
 
 ### PLANNED
 

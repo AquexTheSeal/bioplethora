@@ -3,17 +3,14 @@ package io.github.bioplethora.registry.worldgen;
 import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BPBlocks;
-import io.github.bioplethora.world.BPFeatureGeneration;
+import io.github.bioplethora.world.BPVanillaBiomeFeatureGeneration;
 import io.github.bioplethora.world.blockplacers.LavaEdgeBlockPlacer;
 import io.github.bioplethora.world.blockplacers.MinishroomBlockPlacer;
-import io.github.bioplethora.world.featureconfigs.ChangedSurfaceFeatureConfig;
 import io.github.bioplethora.world.featureconfigs.ExpandedLakeFeatureConfig;
 import io.github.bioplethora.world.featureconfigs.FleignariteSplotchConfig;
 import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
-import io.github.bioplethora.world.features.ChangedSurfaceFeature;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -99,6 +96,19 @@ public class BPConfiguredFeatures {
             2, 10, 132, 125
     );
 
+    // End Ground Plants
+    public static final ConfiguredFeature<?, ?> IRION_GRASS_CONFIG = makeDecoratedClusterPlants(
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.IRION_GRASS.get(), new SimpleBlockPlacer(), 32
+    );
+
+    public static final ConfiguredFeature<?, ?> IRION_TALL_GRASS_CONFIG = makeNoProjectionClusterPlants(
+            Feature.RANDOM_PATCH, BPBlocks.IRION_TALL_GRASS.get(), new DoublePlantBlockPlacer()
+    ).count(13).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
+
+    public static final ConfiguredFeature<?, ?> ARTAIRIUS_CONFIG = makeNoProjectionClusterPlants(
+            Feature.RANDOM_PATCH, BPBlocks.ARTAIRIUS.get(), new DoublePlantBlockPlacer()
+    ).count(8).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
+
     //--------------------------------------
     //    CUSTOMIZED FEATURES
     //--------------------------------------
@@ -106,7 +116,7 @@ public class BPConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> FLEIGNARITE_REMAINS_CONFIG = BPFeatures.FLEIGNARITE_PATCH.get()
             .configured(new FleignariteSplotchConfig(BPBlocks.FLEIGNARITE_REMAINS.get().defaultBlockState(),
                     BPBlocks.FLEIGNARITE_SPLOTCH.get().defaultBlockState(),
-                    BPFeatureGeneration.stoneBlockstates(),
+                    BPVanillaBiomeFeatureGeneration.stoneBlockstates(),
                     ImmutableList.of(Blocks.CAVE_AIR.defaultBlockState(), Blocks.AIR.defaultBlockState()),
                     ImmutableList.of(Blocks.CAVE_AIR.defaultBlockState(), Blocks.AIR.defaultBlockState())))
 
@@ -118,7 +128,7 @@ public class BPConfiguredFeatures {
             .configured(new PendentBlocksFeatureConfig.Builder()
                     .setTopBlock(Blocks.STONE).setMiddleBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get())
                     .setFruitedBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get()).setEndBlock(BPBlocks.FLEIGNARITE_VINES.get().defaultBlockState().setValue(AbstractTopPlantBlock.AGE, 23))
-                    .setWhitelist(BPFeatureGeneration.stoneBlocks())
+                    .setWhitelist(BPVanillaBiomeFeatureGeneration.stoneBlocks())
                     .setMinLength(1)
                     .setMaxLength(2)
                     .build())
@@ -136,16 +146,6 @@ public class BPConfiguredFeatures {
     //---------------------------
     //   FEATURE HELPERS
     //---------------------------
-
-    public static ConfiguredFeature<?, ?> makeChangedSurfaceConfig(Block common, Block uncommon, ImmutableList<BlockState> whitelist) {
-        return new ChangedSurfaceFeature(ChangedSurfaceFeatureConfig.CODEC)
-                .configured(new ChangedSurfaceFeatureConfig.Builder()
-                        .setCommon(common.defaultBlockState())
-                        .setUncommon(uncommon.defaultBlockState())
-                        .setWhitelist(whitelist)
-                        .build())
-                .range(512).squared().count(1024);
-    }
 
     public static ConfiguredFeature<?, ?> makePendentConfig(Block top, Block middle, Block end, ImmutableList<Block> whitelist, int minLength, int maxLength, int range, int count) {
         return BPFeatures.PENDENT_BLOCKS.get()

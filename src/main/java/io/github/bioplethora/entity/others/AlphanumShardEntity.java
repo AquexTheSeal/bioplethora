@@ -38,7 +38,7 @@ public class AlphanumShardEntity extends Entity implements IAnimatable {
 
         ++timeBeforeExpire;
         if (timeBeforeExpire >= 40) {
-            this.level.explode(this, getX(), getY(), getZ(), 1.5F, Explosion.Mode.BREAK);
+            this.level.explode(this, getX(), getY(), getZ(), 0.5F, Explosion.Mode.NONE);
             if (!this.level.isClientSide()) {
                 ((ServerWorld) this.level).sendParticles(ParticleTypes.FIREWORK, getX(), getY(), getZ(), 45, 0.45, 0.45, 0.45, 0.01);
 

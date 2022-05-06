@@ -5,9 +5,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.Random;
 
@@ -30,6 +32,10 @@ public class WorldgenUtils {
 
     public static boolean getBiomeFromEvent(BiomeLoadingEvent event, String biome) {
         return new ResourceLocation(biome).equals(event.getName());
+    }
+
+    public static boolean getBiomeFromEvent(BiomeLoadingEvent event, RegistryObject<Biome> biome) {
+        return new ResourceLocation(biome.getId().toString()).equals(event.getName());
     }
 
     public static abstract class NBTTree {

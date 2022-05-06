@@ -14,6 +14,7 @@ import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.BellophiteShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
+import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import io.github.bioplethora.network.BPNetwork;
 import io.github.bioplethora.network.functions.LeftSwingPacket;
 import io.github.bioplethora.network.functions.RightSwingPacket;
@@ -105,6 +106,12 @@ public class ServerWorldEvents {
 
             if ((result != null ? result.getEntity() : null) != null) {
                 entity.attack(result.getEntity());
+            }
+
+            if (result == null) {
+                if (stack.getItem() instanceof InfernalQuarterstaffItem) {
+                    ((InfernalQuarterstaffItem) stack.getItem()).emptySwingHandler(stack, entity);
+                }
             }
         }
     }

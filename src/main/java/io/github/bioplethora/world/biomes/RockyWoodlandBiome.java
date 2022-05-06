@@ -4,7 +4,6 @@ import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.audio.BackgroundMusicTracks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Features;
@@ -15,7 +14,7 @@ import java.util.function.Supplier;
 
 public class RockyWoodlandBiome {
 
-    public static Biome makeRockyWoodlandBiome(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
+    public static Biome make(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder spawnInfo = new MobSpawnInfo.Builder();
         DefaultBiomeFeatures.farmAnimals(spawnInfo);
         DefaultBiomeFeatures.commonSpawns(spawnInfo);
@@ -59,15 +58,13 @@ public class RockyWoodlandBiome {
         biomeGenSettings.addFeature(GenerationStage.Decoration.LAKES, Features.LAKE_LAVA);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.ICY).depth(depth).scale(scale)
-                .temperature(-0.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder())
+                .temperature(-0.5F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder())
                         .fogColor(12638463)
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .skyColor(7972607)
                         .foliageColorOverride(-13266085)
                         .grassColorOverride(-9923462)
-                        //.skyColor(getSkyColorWithTemperatureModifier(0.8F))
-                        //.ambientParticle(new ParticleEffectAmbience(BioplethoraParticles.NIGHT_GAZE.get(), 0.003f))
                         .ambientLoopSound(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0D))
                         .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111D))
@@ -75,11 +72,4 @@ public class RockyWoodlandBiome {
                         .build())
                 .mobSpawnSettings(spawnInfo.build()).generationSettings(biomeGenSettings.build()).build();
     }
-
-    private static int getSkyColorWithTemperatureModifier(float temperature) {
-        float lvt_1_1_ = temperature / 3.0F;
-        lvt_1_1_ = MathHelper.clamp(lvt_1_1_, -1.0F, 1.0F);
-        return MathHelper.hsvToRgb(0.2460909F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
-    }
-
 }

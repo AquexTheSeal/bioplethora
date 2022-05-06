@@ -112,6 +112,8 @@ public class BioRecipeProvider extends RecipeProvider {
 
         // ETC.
         reinforcing(consumer, BPItems.ARBITRARY_BALLISTA.get(), BPItems.RED_GRYLYNEN_CRYSTAL.get(), BPItems.BELLOPHITE.get(), Items.CROSSBOW, 0);
+        reinforcing(consumer, BPItems.INFERNAL_QUARTERSTAFF_DEACTIVATED.get(), BPItems.INFERNAL_QUARTERSTAFF_BLADE.get(), BPItems.INFERNAL_QUARTERSTAFF_BASE.get(), BPItems.INFERNAL_QUARTERSTAFF_BLADE.get(), 0);
+        reinforcing(consumer, BPItems.INFERNAL_QUARTERSTAFF.get(), BPItems.FIERY_CUBE.get(), BPItems.INFERNAL_QUARTERSTAFF_DEACTIVATED.get(), BPItems.SOUL_CUBE.get(), 0);
     }
 
     public String getName() {

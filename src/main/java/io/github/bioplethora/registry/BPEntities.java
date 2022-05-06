@@ -5,6 +5,7 @@ import io.github.bioplethora.entity.BPBoatEntity;
 import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.entity.others.*;
 import io.github.bioplethora.entity.projectile.*;
+import io.github.bioplethora.enums.BPEffectTypes;
 import io.github.bioplethora.enums.BPGrylynenTier;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -96,10 +97,24 @@ public class BPEntities {
     public static final RegistryObject<EntityType<AlphanumShardEntity>> ALPHANUM_SHARD = ENTITIES.register("alphanum_shard", () -> EntityType.Builder.of(AlphanumShardEntity::new, EntityClassification.MISC).sized(0.8F, 1.5F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "alphanum_shard").toString()));
 
+    public static final RegistryObject<EntityType<BPEffectEntity>> CREPHOXL_HAMMER_SMASH = createEffectEntity("crephoxl_hammer_smash", BPEffectTypes.AERIAL_SHOCKWAVE);
+
+    public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_SLASH = createEffectEntity("infernal_quarterstaff_slash", BPEffectTypes.FLAMING_SLASH);
+    public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_SOUL_PURGE = createEffectEntity("infernal_quarterstaff_soul_purge", BPEffectTypes.SOUL_PURGE);
+    public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_AIR_JUMP = createEffectEntity("infernal_quarterstaff_air_jump", BPEffectTypes.AIR_JUMP);
+    public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_FLAMING_SNIPE = createEffectEntity("infernal_quarterstaff_flaming_snipe", BPEffectTypes.FLAMING_SNIPE);
+
     //============================
     //       HELPERS
     //============================
     public static RegistryObject<EntityType<BPBoatEntity>> createBoat(String woodType) {
-        return ENTITIES.register(woodType + "_boat", () -> EntityType.Builder.<BPBoatEntity>of(BPBoatEntity::new, EntityClassification.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(Bioplethora.MOD_ID, woodType + "_boat").toString()));
+        return ENTITIES.register(woodType + "_boat", () -> EntityType.Builder.<BPBoatEntity>of(BPBoatEntity::new, EntityClassification.MISC).sized(1.375F, 0.5625F).build(new ResourceLocation(Bioplethora.MOD_ID, woodType + "_boat").toString()));
+    }
+
+    public static RegistryObject<EntityType<BPEffectEntity>> createEffectEntity(String registryName, BPEffectTypes effectType) {
+        return ENTITIES.register(registryName, () -> EntityType.Builder.of((EntityType.IFactory<BPEffectEntity>) (type, world) ->
+                        new BPEffectEntity(type, world, effectType), EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(4)
+                .build(new ResourceLocation(Bioplethora.MOD_ID, registryName).toString()));
+
     }
 }

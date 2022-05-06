@@ -38,27 +38,27 @@ public class AlphemKingRangedAttackGoal extends Goal {
 
             ++this.chargeTime;
 
-            if (this.chargeTime == 100 && !this.king.isSilent()) {
+            if (this.chargeTime == 160 && !this.king.isSilent()) {
                 this.king.level.playSound(null, this.king.getX(), this.king.getY(), this.king.getZ(), SoundEvents.BEACON_ACTIVATE, this.king.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
             }
 
-            if (this.chargeTime == 120) {this.shootBlaze(world, target);}
+            if (this.chargeTime == 180) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 130) {this.shootBlaze(world, target);}
+            if (this.chargeTime == 190) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 140) {this.shootBlaze(world, target);}
+            if (this.chargeTime == 200) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 150) {this.shootBlaze(world, target);}
+            if (this.chargeTime == 210) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 160) {this.shootBlaze(world, target);}
+            if (this.chargeTime == 220) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 170) {
+            if (this.chargeTime == 230) {
                 this.shootBlaze(world, target);
                 this.chargeTime = 0;
             }
         }
 
-        this.king.setCharging(this.chargeTime > 100);
+        this.king.setCharging(this.chargeTime > 140);
     }
 
     public void shootBlaze(World world, LivingEntity target) {

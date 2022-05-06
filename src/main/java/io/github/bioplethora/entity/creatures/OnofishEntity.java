@@ -22,6 +22,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
@@ -36,6 +37,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable, IBioClassification {
     private static final DataParameter<Integer> DATA_VARIANT = EntityDataManager.defineId(OnofishEntity.class, DataSerializers.INT);
@@ -108,9 +110,8 @@ public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable,
         }
     }
 
-    @Override
-    public boolean checkSpawnRules(IWorld pLevel, SpawnReason pSpawnReason) {
-        return super.checkSpawnRules(pLevel, pSpawnReason) && blockPosition().getY() > 40;
+    public static boolean checkOnofishSpawnRules(EntityType<OnofishEntity> onofishEntityEntityType, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
+        return pPos.getY() > 40 && pRandom.nextInt(7) == 1;
     }
 
     @Nullable

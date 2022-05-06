@@ -48,9 +48,13 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> {
         head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
         head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
 
+        if (entity.isCharging()) {
+            arml.setRotationX(90);
+            armr.setRotationX(90);
+        }
+
         if (entity.hurtTime > 0) {
             lerpHelper = lerpHelper * lerpHelper * lerpHelper;
-            //rotationScale = entity.getRandom().nextBoolean() ? rotationScale : -rotationScale;
             head.setRotationX(head.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);
             bodytop.setRotationX(bodytop.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);
             bodymid.setRotationX(bodymid.getRotationX() + -MathHelper.sin(lerpHelper * pi) * rotationScale);

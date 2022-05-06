@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:ancient_debris",
-    "minecraft:netherite_block"
+    "minecraft:ancient_debris"
   ]
 }

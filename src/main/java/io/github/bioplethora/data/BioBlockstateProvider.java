@@ -73,7 +73,13 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BPBlocks.CRYOSOIL.get());
 
         this.simpleBlock(BPBlocks.CYRA.get());
+
+        this.simpleCrossBlock(BPBlocks.IRION_GRASS.get());
+        this.doubleCrossPlantBlock(BPBlocks.IRION_TALL_GRASS.get());
+
         this.simpleCrossBlock(BPBlocks.AZURLIA.get());
+
+        this.doubleCrossPlantBlock(BPBlocks.ARTAIRIUS.get());
 
         this.woodset("caerulwood",
                 BPBlocks.CAERULWOOD_PLANKS.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
@@ -227,8 +233,8 @@ public class BioBlockstateProvider extends BlockStateProvider {
     }
 
     public void doubleCrossPlantBlock(Block block) {
-        ModelFile lower = models().cross(block.getRegistryName().getPath() + "_bottom", bioResLoc(block.getRegistryName().getPath() + "_bottom"));
-        ModelFile upper = models().cross(block.getRegistryName().getPath() + "_upper", bioResLoc(block.getRegistryName().getPath() + "_upper"));
+        ModelFile lower = models().cross(block.getRegistryName().getPath() + "_lower", bioResLoc(block.getRegistryName().getPath() + "_bottom"));
+        ModelFile upper = models().cross(block.getRegistryName().getPath() + "_upper", bioResLoc(block.getRegistryName().getPath() + "_top"));
 
         getVariantBuilder(block)
                 .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)

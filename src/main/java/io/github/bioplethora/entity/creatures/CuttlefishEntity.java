@@ -21,6 +21,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.Random;
+
 public class CuttlefishEntity extends SquidEntity implements IAnimatable, IBioClassification {
 
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -67,14 +69,9 @@ public class CuttlefishEntity extends SquidEntity implements IAnimatable, IBioCl
         data.addAnimationController(new AnimationController<>(this, "cuttlefish_controller", 0, this::predicate));
     }
 
-    @Override
-    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
-        return super.checkSpawnRules(world, reason) && CuttlefishEntity.checkCuttlefishSpawnRules(level, blockPosition());
-    }
-
-    public static boolean checkCuttlefishSpawnRules(IWorld world, BlockPos pos) {
-        if (pos.getY() < world.getSeaLevel()) {
-            return world.getFluidState(pos).is(FluidTags.WATER);
+    public static boolean checkCuttlefishSpawnRules(EntityType<CuttlefishEntity> cuttlefishEntityEntityType, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
+        if (pPos.getY() < pLevel.getSeaLevel()) {
+            return pLevel.getFluidState(pPos).is(FluidTags.WATER);
         } else {
             return false;
         }

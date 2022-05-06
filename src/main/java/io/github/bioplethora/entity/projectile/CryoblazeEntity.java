@@ -6,6 +6,7 @@ import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.network.IPacket;
@@ -105,15 +106,20 @@ public class CryoblazeEntity extends DamagingProjectileEntity implements IAnimat
                 if (entityArea != null && entityArea != this.getOwner()) {
 
                     if (BPConfig.IN_HELLMODE) {
-                        entityArea.hurt(castration, (float) 14);
+                        entityArea.hurt(castration, (float) 9);
                         entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 80, 2));
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 80, 1));
                         entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 80, 1));
                     } else {
-                        entityArea.hurt(castration, (float) 11.5);
+                        entityArea.hurt(castration, (float) 6);
                         entityArea.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 60, 1));
                         entityArea.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 60, 1));
                         entityArea.addEffect(new EffectInstance(Effects.WEAKNESS, 40));
+                    }
+
+                    if (entityArea instanceof PlayerEntity) {
+                        PlayerEntity player = (PlayerEntity) entityArea;
+                        player.disableShield(true);
                     }
                 }
             }

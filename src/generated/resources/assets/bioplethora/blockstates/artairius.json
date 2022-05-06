@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "bioplethora:block/artairius_upper"
+    },
+    "half=lower": {
+      "model": "bioplethora:block/artairius_lower"
+    }
+  }
+}

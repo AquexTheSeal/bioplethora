@@ -1,9 +1,12 @@
 package io.github.bioplethora.item.weapons;
 
+import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.api.world.EffectUtils;
 import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.api.world.ItemUtils;
-import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.entity.others.BPEffectEntity;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -96,6 +99,12 @@ public class CrephoxlHammerItem extends AxeItem {
             ItemUtils.setStackOnCooldown(entity, stack, 60, true);
             world.playSound(entity, pos, SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.PLAYERS, 1, 1);
             entity.swing(hand);
+
+            BPEffectEntity effect = BPEntities.CREPHOXL_HAMMER_SMASH.get().create(entity.level);
+            effect.setOwner(entity);
+            effect.moveTo(entity.blockPosition(), entity.yBodyRot, 0.0F);
+            entity.level.addFreshEntity(effect);
+            BlockUtils.knockUpRandomNearbyBlocks(world, 0.35D, entity.blockPosition().below(), 4, 3, 4, false, true);
 
             if (!world.isClientSide()) {
                 ((ServerWorld)world).sendParticles(ParticleTypes.CLOUD, x, y + 1.2, z, 50, 3, 0.2, 3, 0);

@@ -77,15 +77,15 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 19.5 * BPConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 16.5 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10.5)
                 .add(Attributes.ATTACK_DAMAGE, 30 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 8.0D)
-                .add(Attributes.MAX_HEALTH, 550 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 510 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.25F * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64.0D)
-                .add(BPAttributes.TRUE_DEFENSE.get(), 3D);
+                .add(BPAttributes.TRUE_DEFENSE.get(), 2D);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 1.0F, 8) {
+        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 1.0F, 12) {
             @Override
             public boolean canUse() {
                 if (RANDOM.nextInt(this.checkRate) == 0) return false;
@@ -134,7 +134,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(4, new AlphemKingRoarGoal(this));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
@@ -159,11 +159,6 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         if (this.isDeadOrDying()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.death", true));
-            return PlayState.CONTINUE;
-        }
-
-        if (this.isJumping()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.jump", true));
             return PlayState.CONTINUE;
         }
 
@@ -204,8 +199,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
         if (worldIn instanceof ServerWorld && BPConfig.COMMON.hellMode.get()) {
             this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(35 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(26.5 * BPConfig.COMMON.mobArmorMultiplier.get());
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(590 * BPConfig.COMMON.mobHealthMultiplier.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(21.5 * BPConfig.COMMON.mobArmorMultiplier.get());
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(550 * BPConfig.COMMON.mobHealthMultiplier.get());
             this.setHealth(380 * BPConfig.COMMON.mobHealthMultiplier.get());
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -232,7 +227,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         if (this.getTarget() != null) {
             attackPhase++;
             if (this.attackPhase == 40) {
-                summonShard(8 + getRandom().nextInt(8));
+                summonShard(BPConfig.IN_HELLMODE ? 5 + getRandom().nextInt(6) : 4 + getRandom().nextInt(4));
                 this.attackPhase = 0;
             }
         }
@@ -255,7 +250,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
             if (!(this.getHealth() <= 5)) {
                 ++healthRegenTimer;
-                if (healthRegenTimer == 10) {
+                if (healthRegenTimer == 40) {
                     this.heal( 2 + this.getRandom().nextInt(2));
                     healthRegenTimer = 0;
                 }
@@ -271,7 +266,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
             if (!(this.getHealth() <= 5)) {
                 ++healthRegenTimer;
-                if (healthRegenTimer == 20) {
+                if (healthRegenTimer == 60) {
                     this.heal(2F);
                     healthRegenTimer = 0;
                 }

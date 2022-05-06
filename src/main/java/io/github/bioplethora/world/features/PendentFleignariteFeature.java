@@ -1,7 +1,7 @@
 package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
-import io.github.bioplethora.world.BPFeatureGeneration;
+import io.github.bioplethora.world.BPVanillaBiomeFeatureGeneration;
 import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +21,7 @@ public class PendentFleignariteFeature extends PendentBlocksFeature {
         if (!world.isEmptyBlock(pos)) {
             return false;
         } else {
-            if (BPFeatureGeneration.isFleignariteChunk(pos, world)) {
+            if (BPVanillaBiomeFeatureGeneration.isFleignariteChunk(pos, world)) {
                 if (!validPlace(world, pos, config)) {
                     return false;
                 } else {

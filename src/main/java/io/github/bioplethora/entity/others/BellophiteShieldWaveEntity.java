@@ -18,10 +18,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class BellophiteShieldWaveEntity extends Entity implements IAnimatable {
 
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -67,15 +63,9 @@ public class BellophiteShieldWaveEntity extends Entity implements IAnimatable {
 
             ++lifespan;
             this.moveTo(pos, 0.0F, 0.0F);
-
-            List<Entity> nearEntities = world.getEntitiesOfClass(Entity.class, area, null).stream().sorted(new Object() {
-                Comparator<Entity> compareDistOf(double dx, double dy, double dz) {
-                    return Comparator.comparing((entCnd -> entCnd.distanceToSqr(dx, dy, dz)));
-                }
-            }.compareDistOf(x, y, z)).collect(Collectors.toList());
-            for (Entity entityIterator : nearEntities) {
+            for (Entity entityIterator : world.getEntitiesOfClass(Entity.class, area, null)) {
                 if (entityIterator instanceof LivingEntity && entityIterator != this.getOwner()) {
-                    entityIterator.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), 2F);
+                    entityIterator.hurt(DamageSource.indirectMagic(this.getOwner(), this.getOwner()), 1F);
                 }
             }
         }

@@ -5,12 +5,15 @@ import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.world.EffectUtils;
 import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.api.world.ItemUtils;
+import io.github.bioplethora.entity.others.BPEffectEntity;
 import io.github.bioplethora.registry.BPDamageSources;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -51,29 +54,36 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
         return 6.5;
     }
 
-    @Override
-    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+    public void addIQEffect(LivingEntity entity, EntityType<? extends BPEffectEntity> slashEntity) {
+        BPEffectEntity slash = slashEntity.create(entity.level);
+        slash.setOwner(entity);
+        slash.moveTo(entity.blockPosition(), entity.yBodyRot, 0.0F);
+        slash.setYBodyRot(entity.yRot);
+        slash.setYHeadRot(entity.yRot);
+        entity.level.addFreshEntity(slash);
+    }
 
-        if (getQuarterstaffCD(entity) <= 0) {
-            entity.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1.3F, 0.2F + entity.getRandom().nextFloat());
+    public void emptySwingHandler(ItemStack stack, LivingEntity entity) {
 
-            if (!entity.level.isClientSide) {
-                double d0 = -MathHelper.sin(entity.yRot * ((float) Math.PI / 180F));
-                double d1 = MathHelper.cos(entity.yRot * ((float) Math.PI / 180F));
-                ((ServerWorld) entity.level).sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX() + d0, entity.getY(0.5D), entity.getZ() + d1, 0, d0, 0.0D, d1, 0.0D);
-            }
-            if (entity.level instanceof ServerWorld) {
-                for (Entity entityIterator : entity.level.getEntitiesOfClass(Entity.class, entity.getBoundingBox().inflate(3D, 1D, 3D))) {
+        double d0 = -MathHelper.sin(entity.yRot * ((float) Math.PI / 180F));
+        double d1 = MathHelper.cos(entity.yRot * ((float) Math.PI / 180F));
 
-                    if (entityIterator instanceof LivingEntity && entityIterator != entity && EntityUtils.IsNotPet(entity).test(entityIterator)) {
-                        entityIterator.hurt(BPDamageSources.armorPiercingWeapon(entity), 4 + EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SWEEPING_EDGE, stack));
-                    }
-                }
-            }
-            setQuarterstaffCD(entity, 14);
+        entity.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1.3F, 0.2F + entity.getRandom().nextFloat());
+        entity.playSound(SoundEvents.GENERIC_BURN, 2.0F, 1.2F);
+
+        if (!entity.level.isClientSide) {
+            ((ServerWorld) entity.level).sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX() + d0, entity.getY(0.5D), entity.getZ() + d1, 0, d0, 0.0D, d1, 0.0D);
         }
 
-        return super.onEntitySwing(stack, entity);
+        if (entity.level instanceof ServerWorld) {
+            for (Entity entityIterator : entity.level.getEntitiesOfClass(Entity.class, entity.getBoundingBox().inflate(3D, 1D, 3D))) {
+
+                if (entityIterator instanceof LivingEntity && entityIterator != entity && EntityUtils.IsNotPet(entity).test(entityIterator)) {
+                    entityIterator.hurt(BPDamageSources.armorPiercingWeapon(entity), 4 + EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SWEEPING_EDGE, stack));
+                }
+            }
+        }
+        addIQEffect(entity, BPEntities.INFERNAL_QUARTERSTAFF_SLASH.get());
     }
 
     @Override
@@ -112,6 +122,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
         pTarget.setSecondsOnFire(7);
         setMarkedEntity(pTarget);
         setReversed(pStack, true);
+        addIQEffect(pAttacker, BPEntities.INFERNAL_QUARTERSTAFF_SLASH.get());
 
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
@@ -142,6 +153,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                 }
             }
         }
+        addIQEffect(pAttacker, BPEntities.INFERNAL_QUARTERSTAFF_SOUL_PURGE.get());
     }
 
     @Override
@@ -169,6 +181,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                 player.playSound(SoundEvents.GENERIC_BURN, 2.0F, 0.8F);
                 result.getEntity().hurt(DamageSource.indirectMagic(player, player), hasWeaponInOppositeHand ? 7.5F : 4F);
                 result.getEntity().setSecondsOnFire(hasWeaponInOppositeHand ? 10 : 7);
+                addIQEffect(player, BPEntities.INFERNAL_QUARTERSTAFF_FLAMING_SNIPE.get());
                 ItemUtils.setStackOnCooldown(player, player.getItemInHand(hand), hasWeaponInOppositeHand ? 40 : 100, true);
             }
         }
@@ -188,6 +201,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
             entity.swing(hand);
             world.playSound(entity, pos, SoundEvents.SHULKER_SHOOT, SoundCategory.PLAYERS, 1.3F, 1.75F);
             world.playSound(entity, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
+            addIQEffect(entity, BPEntities.INFERNAL_QUARTERSTAFF_AIR_JUMP.get());
             ItemUtils.setStackOnCooldown(entity, stack, 20, true);
             
             return ActionResultType.SUCCESS;

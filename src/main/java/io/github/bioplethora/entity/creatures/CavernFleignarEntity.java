@@ -7,7 +7,7 @@ import io.github.bioplethora.entity.ai.CavernFleignarMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPEffects;
 import io.github.bioplethora.registry.BPTags;
-import io.github.bioplethora.world.BPFeatureGeneration;
+import io.github.bioplethora.world.BPVanillaBiomeFeatureGeneration;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -218,7 +218,7 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
 
     public static boolean checkFleignarSpawnRules(IWorld world, BlockPos pos) {
         if (world instanceof ISeedReader) {
-            return pos.getY() <= 50 && BPFeatureGeneration.isFleignariteChunk(pos, (ISeedReader) world);
+            return pos.getY() <= 50 && BPVanillaBiomeFeatureGeneration.isFleignariteChunk(pos, (ISeedReader) world);
         } else {
             return  false;
         }

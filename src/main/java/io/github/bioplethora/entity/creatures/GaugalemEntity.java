@@ -44,6 +44,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class GaugalemEntity extends FloatingMonsterEntity implements IAnimatable, IFlyingAnimal, IBioClassification {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -117,13 +118,8 @@ public class GaugalemEntity extends FloatingMonsterEntity implements IAnimatable
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
-    @Override
-    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
-        return super.checkSpawnRules(world, reason) && checkGaugalemSpawnRules(level, blockPosition());
-    }
-
-    public static boolean checkGaugalemSpawnRules(IWorld world, BlockPos pos) {
-        return pos.getY() > 40;
+    public static boolean checkGaugalemSpawnRules(EntityType<GaugalemEntity> gaugalemEntityEntityType, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
+        return pPos.getY() > 40;
     }
 
     public boolean doHurtTarget(Entity entity) {

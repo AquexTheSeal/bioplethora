@@ -47,6 +47,7 @@
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.grylynen_core_bomb": "Grylynen Core Bomb",
   "entity.bioplethora.bellophite_shield_wave": "Bellophite Shield Wave",
+  "entity.bioplethora.infernal_quarterstaff_slash": "Infernal Quarterstaff Slash",
 
   "enchantment.bioplethora.antibio_ecoharmless": "Antibio: Ecoharmless",
   "enchantment.bioplethora.antibio_plethoneutral": "Antibio: Plethoneutral",
@@ -97,6 +98,9 @@
   "item.bioplethora.reinforced_fleignarite": "Reinforced Fleignarite",
   "item.bioplethora.fiery_cube": "Fiery Cube",
   "item.bioplethora.soul_cube": "Soul Cube",
+  "item.bioplethora.infernal_quarterstaff_base": "Infernal Quarterstaff Base",
+  "item.bioplethora.infernal_quarterstaff_blade": "Infernal Quarterstaff Blade",
+  "item.bioplethora.deactivated_infernal_quarterstaff": "Deactivated Infernal Quarterstaff",
 
   "item.bioplethora.green_grylynen_crystal": "Green Grylynen Crystal",
   "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
@@ -215,7 +219,10 @@
 
   "block.bioplethora.cryosoil": "Cryosoil",
   "block.bioplethora.irion": "Irion",
+  "block.bioplethora.irion_grass": "Irion Grass",
+  "block.bioplethora.irion_tall_grass": "Irion Tall Grass",
   "block.bioplethora.azurlia": "Azurlia",
+  "block.bioplethora.artairius": "Artairius",
 
   "block.bioplethora.basalt_speleotherm": "Basalt Speleotherm",
   "block.bioplethora.basalt_speleotherm_plant": "Basalt Speleotherm",
@@ -384,6 +391,7 @@
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
   "patchouli.bioplethora.bioplethora_guide.landing_text": "A guide of a world with many creatures and monsters, varying from small, tiny creatures, to colossal, and giant, monsters. This is, Bioplethora. There is a hell mode option in the configs that enhances and strengthens most creatures, you can check it out!",
 
+  "message.bioplethora.biopedia.patchouli_notif": "Install the Patchouli mod to read this book!",
   "message.bioplethora.alphem_king.summon": "An instance of the Alphem King is summoned by %s at coordinates %s, %s, and %s",
 
   "advancements.bioplethora.bioplethora_startup.title": "Welcome to Bioplethora!",

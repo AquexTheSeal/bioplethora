@@ -14,6 +14,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -148,8 +149,16 @@ public class BPBlocks {
     public static final RegistryObject<SlabBlock> CAERULWOOD_SLAB = registerBlock("caerulwood_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
 
     // End Plants
+    public static final RegistryObject<Block> IRION_GRASS = registerBlock("irion_grass", () -> new BPPlantBlock(BioPlantType.END_HIGHLANDS, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.copy(Blocks.TALL_GRASS).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> IRION_TALL_GRASS = registerBlock("irion_tall_grass", () -> new BPDoublePlantBlock(BioPlantType.END_HIGHLANDS, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.copy(BPBlocks.IRION_GRASS.get()).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
     public static final RegistryObject<Block> AZURLIA = registerBlock("azurlia", () -> new BPReversePlantBlock(BioPlantType.CAERULWOOD_TREE, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 13).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<Block> ARTAIRIUS = registerBlock("artairius", () -> new BPDoublePlantBlock(BioPlantType.END_HIGHLANDS, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.copy(BPBlocks.IRION_GRASS.get()).lightLevel((block) -> block.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER ? 13 : 5).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
     // End Blocks
     public static final RegistryObject<Block> IRION = registerBlock("irion", () -> new Block(AbstractBlock.Properties.of(Material.GRASS)

@@ -53,6 +53,9 @@ public class BPItems {
     public static final RegistryObject<Item> GREEN_GRYLYNEN_CRYSTAL = ITEMS.register("green_grylynen_crystal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> YELLOW_GRYLYNEN_CRYSTAL = ITEMS.register("yellow_grylynen_crystal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> RED_GRYLYNEN_CRYSTAL = ITEMS.register("red_grylynen_crystal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF_BASE = ITEMS.register("infernal_quarterstaff_base", () -> new Item(new Item.Properties().stacksTo(16).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF_BLADE = ITEMS.register("infernal_quarterstaff_blade", () -> new Item(new Item.Properties().stacksTo(16).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF_DEACTIVATED = ITEMS.register("deactivated_infernal_quarterstaff", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     // Vanilla mobs custom Weapons
     public static final RegistryObject<Item> PHANTOM_CHIME = ITEMS.register("phantom_chime", () -> new PhantomChimeItem(new Item.Properties().stacksTo(1).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));

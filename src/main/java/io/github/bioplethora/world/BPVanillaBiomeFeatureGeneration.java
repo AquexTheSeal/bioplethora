@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.api.world.WorldgenUtils;
 import io.github.bioplethora.registry.worldgen.BPConfiguredFeatures;
-import io.github.bioplethora.registry.worldgen.BPTreeConfiguredFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -27,7 +26,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID)
-public class BPFeatureGeneration {
+public class BPVanillaBiomeFeatureGeneration {
 
     @SubscribeEvent
     public static void generateFeatures(final BiomeLoadingEvent event) {
@@ -83,10 +82,25 @@ public class BPFeatureGeneration {
         if (types.contains(BiomeDictionary.Type.END)) {
             undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE_CONFIG);
 
+            /*
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
 
-                    vegDeco.add(() -> BPTreeConfiguredFeatures.CAERULWOOD_FOREST_VEGETATION_CONFIG);
+                vegDeco.add(() -> BPTreeConfiguredFeatures.CAERULWOOD_TREE_CLUSTER_CONFIG);
+
+                vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
+
+                vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
             }
+
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS)) {
+
+                vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
+
+                vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
+
+            }*/
         }
     }
 
