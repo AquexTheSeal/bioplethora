@@ -8,6 +8,7 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -30,15 +31,7 @@ public class BPCustomBiomeFeatureGeneration {
         List<Supplier<ConfiguredFeature<?, ?>>> undergroundDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION);
         List<Supplier<ConfiguredFeature<?, ?>>> vegDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
-        if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_FOREST)) {
-
-            vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_FOREST_TREES);
-
-            vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS_CONFIG);
-            vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
-
-            vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
-        }
+        List<Supplier<ConfiguredCarver<?>>> test = event.getGeneration().getCarvers(GenerationStage.Carving.AIR);
 
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_PLAINS)) {
 
@@ -49,6 +42,19 @@ public class BPCustomBiomeFeatureGeneration {
 
             vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
 
+            vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_PLANT_PATCH_CONFIG);
+        }
+
+        if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_FOREST)) {
+
+            vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_FOREST_TREES);
+
+            vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
+
+            vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
+
+            vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_PLANT_PATCH_CONFIG);
         }
     }
 }

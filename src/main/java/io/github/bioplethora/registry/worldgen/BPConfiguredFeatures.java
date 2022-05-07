@@ -9,6 +9,7 @@ import io.github.bioplethora.world.blockplacers.MinishroomBlockPlacer;
 import io.github.bioplethora.world.featureconfigs.ExpandedLakeFeatureConfig;
 import io.github.bioplethora.world.featureconfigs.FleignariteSplotchConfig;
 import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
+import io.github.bioplethora.world.features.SingularBlockFeature;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -21,9 +22,7 @@ import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placement.CaveEdgeConfig;
-import net.minecraft.world.gen.placement.NoiseDependant;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.placement.*;
 
 public class BPConfiguredFeatures {
 
@@ -96,7 +95,7 @@ public class BPConfiguredFeatures {
             2, 10, 132, 125
     );
 
-    // End Ground Plants
+    // End Plants
     public static final ConfiguredFeature<?, ?> IRION_GRASS_CONFIG = makeDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.IRION_GRASS.get(), new SimpleBlockPlacer(), 32
     );
@@ -134,7 +133,7 @@ public class BPConfiguredFeatures {
                     .build())
             .range(128).squared().count(512);
 
-    // End Lakes
+    // End Plants
     public static final ConfiguredFeature<?, ?> CYRA_LAKE_CONFIG = BPFeatures.EXPANDED_LAKE.get()
             .configured(new ExpandedLakeFeatureConfig.Builder()
                     .setLiquid(Blocks.WATER.defaultBlockState())
@@ -142,6 +141,17 @@ public class BPConfiguredFeatures {
                     .setBase(Blocks.OBSIDIAN.defaultBlockState())
                     .build())
             .range(60).squared().count(1);
+
+    public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_PLANT_CONFIG = new SingularBlockFeature(BlockClusterFeatureConfig.CODEC)
+            .configured(new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(BPBlocks.BYRSS_LANTERN_PLANT.get().defaultBlockState()), new DoublePlantBlockPlacer()).build())
+            .decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
+            );
+    public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_PLANT_PATCH_CONFIG = Feature.RANDOM_SELECTOR
+            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(BYRSS_LANTERN_PLANT_CONFIG.weighted(0.4446667F)), BYRSS_LANTERN_PLANT_CONFIG))
+            .range(80).squared().count(2)
+                    //.decorated(Placement.END_ISLAND.configured(IPlacementConfig.NONE))
+                    .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.025F, 1))
+            );
 
     //---------------------------
     //   FEATURE HELPERS

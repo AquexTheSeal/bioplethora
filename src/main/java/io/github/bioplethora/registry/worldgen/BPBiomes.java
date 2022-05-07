@@ -7,6 +7,7 @@ import io.github.bioplethora.world.biomes.end.CaeriForestBiome;
 import io.github.bioplethora.world.biomes.end.CaeriPlainsBiome;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -19,6 +20,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class BPBiomes {
 
@@ -26,13 +28,16 @@ public class BPBiomes {
 
     // Overworld
     public static final RegistryObject<Biome> ROCKY_WOODLANDS = BIOMES.register("rocky_woodlands",
-            () -> RockyWoodlandBiome.make(() -> BPConfiguredSurfaceBuilders.ROCKY_WOODLANDS_SURFACE, 0.15f, 1.4f));
+            () -> RockyWoodlandBiome.make(() -> BPConfiguredSurfaceBuilders.ROCKY_WOODLANDS_SURFACE, 0.15f, 1.4f)
+    );
 
     // End
     public static final RegistryObject<Biome> CAERI_PLAINS = BIOMES.register("caeri_plains",
-            () -> CaeriPlainsBiome.make(() -> BPConfiguredSurfaceBuilders.END_HIGHLANDS_SURFACE));
+            () -> CaeriPlainsBiome.make(() -> BPConfiguredSurfaceBuilders.CAERI_SURFACE)
+    );
     public static final RegistryObject<Biome> CAERI_FOREST = BIOMES.register("caeri_forest",
-            () -> CaeriForestBiome.make(() -> BPConfiguredSurfaceBuilders.END_HIGHLANDS_SURFACE));
+            () -> CaeriForestBiome.make(() -> BPConfiguredSurfaceBuilders.CAERI_SURFACE)
+    );
 
     public static final class Type {
         public static final BiomeDictionary.Type CAERI = BiomeDictionary.Type.getType("CAERI");
@@ -69,8 +74,8 @@ public class BPBiomes {
 
         @SubscribeEvent
         public static void addEndBiomes(RegistryEvent.Register<Biome> event) {
-            register(CAERI_PLAINS.get(), CAERI_PLAINS.getId(), 10, 10, event);
-            register(CAERI_FOREST.get(), CAERI_FOREST.getId(), 10, 10, event);
+            register(CAERI_PLAINS.get(), CAERI_PLAINS.getId(), 6, 6, event);
+            register(CAERI_FOREST.get(), CAERI_FOREST.getId(), 8, 8, event);
         }
     }
 
@@ -94,10 +99,10 @@ public class BPBiomes {
 
     private static void register(Biome biome, ResourceLocation registryName, float weight, float weightRange, RegistryEvent.Register<Biome> event) {
 
-        BiomeUtil.addEndBiome(RegistryKey.create(Registry.BIOME_REGISTRY, biome.getRegistryName()),(int)weight);
+        BiomeUtil.addEndBiome(RegistryKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(biome.getRegistryName())), MathHelper.floor(weight));
 
         BP_BIOMES.put(registryName, ForgeRegistries.BIOMES.getValue(registryName));
-        BP_BIOME_WEIGHTS.put(getBiomes()[BP_BIOME_WEIGHTS.size()],weight);
-        BP_BIOMES_WEIGHT_RANGES.put(getBiomes()[BP_BIOMES_WEIGHT_RANGES.size()],weightRange);
+        BP_BIOME_WEIGHTS.put(getBiomes()[BP_BIOME_WEIGHTS.size()], weight);
+        BP_BIOMES_WEIGHT_RANGES.put(getBiomes()[BP_BIOMES_WEIGHT_RANGES.size()], weightRange);
     }
 }

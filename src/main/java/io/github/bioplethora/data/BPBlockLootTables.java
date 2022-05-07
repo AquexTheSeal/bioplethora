@@ -86,6 +86,9 @@ public class BPBlockLootTables extends BlockLootTables {
         add(BPBlocks.AZURLIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.AZURLIA.get()));
         dropSelf(BPBlocks.ARTAIRIUS.get());
 
+        dropSelf(BPBlocks.BYRSS_FRUIT_BLOCK.get());
+        dropSelf(BPBlocks.BYRSS_LANTERN_PLANT.get());
+
         // Potted Plants
         dropPottedContents(BPBlocks.POTTED_LAVA_SPIRE.get());
 

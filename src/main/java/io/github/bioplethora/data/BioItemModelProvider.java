@@ -59,6 +59,7 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.flatBlock(BPBlocks.AZURLIA, BPBlocks.AZURLIA);
         this.flatBlock(BPBlocks.ARTAIRIUS, "artairius_top");
 
+        this.flatBlock(BPBlocks.BYRSS_LANTERN_PLANT, "byrss_lantern_plant", ITEM_FOLDER);
 
         // woodset
         this.flatBlock(BPBlocks.CAERULWOOD_SAPLING, "caerulwood_sapling");

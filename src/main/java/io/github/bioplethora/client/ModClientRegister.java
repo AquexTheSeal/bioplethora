@@ -97,6 +97,7 @@ public class ModClientRegister {
 
         RenderTypeLookup.setRenderLayer(BPBlocks.ARTAIRIUS.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.BYRSS_LANTERN_PLANT.get(), RenderType.cutout());
 
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());

@@ -82,6 +82,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("azurlia", bioResLoc("azurlia"));
         this.doubleCrossPlant("artairius", bioResLoc("artairius_bottom"), bioResLoc("artairius_top"));
 
+        this.cubeAll("byrss_fruit_block", bioResLoc("byrss_fruit_block"));
+        this.lanternPlant("byrss_lantern_plant", bioResLoc("byrss_lantern_plant_bottom"), bioResLoc("byrss_lantern_plant_top"));
+
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));
         this.simpleStoneSet("alphanum", "alphanum_stairs", "alphanum_wall", "alphanum_slab");
@@ -96,6 +99,19 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeColumnHorizontal("alphanum_nucleus", bioResLoc("alphanum_nucleus"), bioResLoc("alphanum_pillar_top"));
 
         this.simpleWoodSet("caerulwood");
+    }
+
+    public void lanternPlant(String name, ResourceLocation bottom, ResourceLocation top) {
+        lanternPlantBottom(name + "_bottom", bottom);
+        lanternPlantTop(name + "_top", top);
+    }
+
+    public void lanternPlantBottom(String name, ResourceLocation all) {
+        singleTexture(name, bioResLoc("lantern_plant_bottom"), "0", all).texture("particle", all);
+    }
+
+    public void lanternPlantTop(String name, ResourceLocation all) {
+        singleTexture(name, bioResLoc("lantern_plant_top"), "0", all).texture("particle", all);
     }
 
     public void bigMushroom(String name, ResourceLocation all) {

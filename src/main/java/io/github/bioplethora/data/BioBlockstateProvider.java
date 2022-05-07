@@ -81,6 +81,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         this.doubleCrossPlantBlock(BPBlocks.ARTAIRIUS.get());
 
+        this.simpleBlock(BPBlocks.BYRSS_FRUIT_BLOCK.get());
+        this.lanternPlantBlock(BPBlocks.BYRSS_LANTERN_PLANT.get());
+
         this.woodset("caerulwood",
                 BPBlocks.CAERULWOOD_PLANKS.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
                 BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get(), BPBlocks.CAERULWOOD_LEAVES.get(),
@@ -126,8 +129,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         this.doorBlock(BPBlocks.PETRAWOOD_DOOR.get(), bioResLoc("petrawood_door_lower"), bioResLoc("petrawood_door_upper"));
         this.trapdoorBlock(BPBlocks.PETRAWOOD_TRAPDOOR.get(), bioResLoc("petrawood_trapdoor"), true);
-
-         */
+        */
     }
 
     private ResourceLocation bioResLoc(String texture) {
@@ -230,6 +232,19 @@ public class BioBlockstateProvider extends BlockStateProvider {
                 .modelForState().modelFile(all).rotationY(180).addModel()
                 .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.EAST)
                 .modelForState().modelFile(all).rotationY(270).addModel();
+    }
+
+    public void lanternPlantBlock(Block block) {
+        String bottomTexture = block.getRegistryName().getPath() + "_bottom";
+        BlockModelBuilder bottom = models().singleTexture(bottomTexture, bioResLoc("lantern_plant_bottom"), "0", extend(blockTexture(block), "_bottom")).texture("particle", extend(blockTexture(block), "_bottom"));
+        String topTexture = block.getRegistryName().getPath() + "_top";
+        BlockModelBuilder top = models().singleTexture(topTexture, bioResLoc("lantern_plant_top"), "0", extend(blockTexture(block), "_top")).texture("particle", extend(blockTexture(block), "_top"));
+
+        getVariantBuilder(block)
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(bottom).addModel()
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(top).addModel();
     }
 
     public void doubleCrossPlantBlock(Block block) {

@@ -65,7 +65,7 @@ public class NoisySurfaceBuilder extends SurfaceBuilder<NoisySurfaceBuilderConfi
                     i = j;
                     if (i1 >= seaLevel - 1) {
 
-                        if (random.nextDouble() < 0.75) {
+                        if (random.nextDouble() < 0.80) {
                             chunk.setBlockState(blockpos$mutable, state, false);
                         } else {
                             chunk.setBlockState(blockpos$mutable, state1, false);

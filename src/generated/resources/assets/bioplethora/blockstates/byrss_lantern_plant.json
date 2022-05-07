@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "bioplethora:block/byrss_lantern_plant_top"
+    },
+    "half=lower": {
+      "model": "bioplethora:block/byrss_lantern_plant_bottom"
+    }
+  }
+}

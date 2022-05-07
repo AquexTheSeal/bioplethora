@@ -20,7 +20,7 @@ public class BPConfiguredSurfaceBuilders {
                     Blocks.STONE.defaultBlockState() // Underwater Block
             )));
 
-    public static ConfiguredSurfaceBuilder<?> END_HIGHLANDS_SURFACE = register("end_highlands",
+    public static ConfiguredSurfaceBuilder<?> CAERI_SURFACE = register("end_highlands",
             BPSurfaceBuilders.NOISY.get().configured(new NoisySurfaceBuilderConfig(
                     BPBlocks.IRION.get().defaultBlockState(), // Surface Block
                     BPBlocks.CRYOSOIL.get().defaultBlockState(), // Surface Block Uncommon
