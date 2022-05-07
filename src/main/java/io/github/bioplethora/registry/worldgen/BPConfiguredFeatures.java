@@ -1,7 +1,6 @@
 package io.github.bioplethora.registry.worldgen;
 
 import com.google.common.collect.ImmutableList;
-import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.world.BPVanillaBiomeFeatureGeneration;
 import io.github.bioplethora.world.blockplacers.LavaEdgeBlockPlacer;
@@ -13,9 +12,6 @@ import io.github.bioplethora.world.features.SingularBlockFeature;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.blockplacer.BlockPlacer;
 import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
@@ -147,10 +143,14 @@ public class BPConfiguredFeatures {
             .decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             );
     public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_PLANT_PATCH_CONFIG = Feature.RANDOM_SELECTOR
+            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(BYRSS_LANTERN_PLANT_CONFIG.weighted(0.4222667F)), BYRSS_LANTERN_PLANT_CONFIG))
+            .range(85).squared().count(2)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.025F, 1))
+            );
+    public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_FOREST_PATCH_CONFIG = Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(BYRSS_LANTERN_PLANT_CONFIG.weighted(0.4446667F)), BYRSS_LANTERN_PLANT_CONFIG))
-            .range(80).squared().count(2)
-                    //.decorated(Placement.END_ISLAND.configured(IPlacementConfig.NONE))
-                    .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.025F, 1))
+            .range(110).squared().count(5)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.025F, 1))
             );
 
     //---------------------------
@@ -191,14 +191,5 @@ public class BPConfiguredFeatures {
 
     public static ConfiguredFeature<?, ?> makeDecoratedClusterPlants(Feature<BlockClusterFeatureConfig> feature, Block block, BlockPlacer placer, int count) {
         return makeClusterPlants(feature, block, placer).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(count);
-    }
-
-    public static <FC extends IFeatureConfig, F extends Feature<FC>, CF extends ConfiguredFeature<FC, F>> CF createConfiguredFeature(String id, CF configuredFeature) {
-        ResourceLocation bioplethoraID = new ResourceLocation(Bioplethora.MOD_ID, id);
-        if (WorldGenRegistries.CONFIGURED_FEATURE.keySet().contains(bioplethoraID))
-            throw new IllegalStateException("Configured Feature ID: \"" + bioplethoraID.toString() + "\" already exists in the Configured Features registry!");
-
-        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, bioplethoraID, configuredFeature);
-        return configuredFeature;
     }
 }

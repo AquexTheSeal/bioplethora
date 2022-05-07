@@ -54,7 +54,7 @@ public class BPCustomBiomeFeatureGeneration {
 
             vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
 
-            vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_PLANT_PATCH_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_FOREST_PATCH_CONFIG);
         }
     }
 }
