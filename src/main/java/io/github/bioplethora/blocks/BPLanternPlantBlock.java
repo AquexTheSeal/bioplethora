@@ -6,9 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -84,6 +86,18 @@ public class BPLanternPlantBlock extends DoublePlantBlock {
         p_196390_1_.setBlock(p_196390_2_, this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), p_196390_3_);
         p_196390_1_.setBlock(p_196390_2_.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), p_196390_3_);
         p_196390_1_.setBlock(p_196390_2_.above().above(), this.fruit.defaultBlockState(), p_196390_3_);
+    }
+
+    public void playerWillDestroy(World pLevel, BlockPos pPos, BlockState pState, PlayerEntity pPlayer) {
+        if (!pLevel.isClientSide) {
+            if (pPlayer.isCreative()) {
+                preventCreativeDropFromBottomPart(pLevel, pPos, pState, pPlayer);
+            } else {
+                dropResources(pState, pLevel, pPos, (TileEntity)null, pPlayer, pPlayer.getMainHandItem());
+            }
+        }
+
+        super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
 
     @Override

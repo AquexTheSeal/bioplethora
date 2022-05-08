@@ -48,9 +48,7 @@ public class BPBiomes {
     //==============================================
     //                OTHERS
     //==============================================
-    private static final HashMap<Biome, Float> BP_BIOMES_WEIGHT_RANGES = new HashMap<>();
     private static final HashMap<ResourceLocation, Biome> BP_BIOMES = new HashMap<>();
-    private static final HashMap<Biome, Float> BP_BIOME_WEIGHTS = new HashMap<>();
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = Bioplethora.MOD_ID)
     public static class RegistryEvents {
@@ -89,20 +87,8 @@ public class BPBiomes {
         return BP_BIOMES.values().toArray(new Biome[0]);
     }
 
-    public static float getWeightForBiome(Biome biome) {
-        return BP_BIOME_WEIGHTS.get(biome);
-    }
-
-    public static float getWeightRangeForBiome(Biome biome) {
-        return BP_BIOMES_WEIGHT_RANGES.get(biome);
-    }
-
     private static void register(Biome biome, ResourceLocation registryName, float weight, float weightRange, RegistryEvent.Register<Biome> event) {
-
         BiomeUtil.addEndBiome(RegistryKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(biome.getRegistryName())), MathHelper.floor(weight));
-
         BP_BIOMES.put(registryName, ForgeRegistries.BIOMES.getValue(registryName));
-        BP_BIOME_WEIGHTS.put(getBiomes()[BP_BIOME_WEIGHTS.size()], weight);
-        BP_BIOMES_WEIGHT_RANGES.put(getBiomes()[BP_BIOMES_WEIGHT_RANGES.size()], weightRange);
     }
 }

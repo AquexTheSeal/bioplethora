@@ -40,3 +40,10 @@ mandatory=false
 versionRange="[1.16-42,)"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.<modid>]]
+modId="abnormals_core"
+mandatory=true
+versionRange="[1.16.5-3.2.0,)"
+ordering="AFTER"
+side="BOTH"

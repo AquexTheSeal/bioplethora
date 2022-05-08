@@ -1,5 +1,6 @@
 package io.github.bioplethora.registry;
 
+import com.minecraftabnormals.abnormals_core.core.util.registry.BlockSubRegistryHelper;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.*;
 import io.github.bioplethora.blocks.specific.*;
@@ -25,6 +26,8 @@ import java.util.function.Supplier;
 public class BPBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Bioplethora.MOD_ID);
     public static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Bioplethora.MOD_ID);
+
+    public static final BlockSubRegistryHelper HELPER = Bioplethora.REGISTRY_HELPER.getBlockSubHelper();
 
     public static final RegistryObject<ReinforcingTableBlock> REINFORCING_TABLE = registerBlock("reinforcing_table", () -> new ReinforcingTableBlock(AbstractBlock.Properties.of(Material.METAL)
             .strength(20.0F, 35).sound(SoundType.NETHERITE_BLOCK).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), BPItemGroup.BioplethoraItemItemGroup);

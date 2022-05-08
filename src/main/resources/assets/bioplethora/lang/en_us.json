@@ -3,6 +3,8 @@
   "item.bioplethora.test_item": "A Random Experimental Item",
 
   "biome.bioplethora.rocky_woodlands": "Rocky Woodlands",
+  "biome.bioplethora.caeri_plains": "Caeri Plains",
+  "biome.bioplethora.caeri_forest": "Caeri Forest",
 
   "entity.bioplethora.crephoxl": "Crephoxl",
   "entity.bioplethora.alphem": "Alphem",
@@ -47,7 +49,11 @@
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.grylynen_core_bomb": "Grylynen Core Bomb",
   "entity.bioplethora.bellophite_shield_wave": "Bellophite Shield Wave",
+  "entity.bioplethora.infernal_quarterstaff_air_jump": "Infernal Quarterstaff Air Jump",
+  "entity.bioplethora.infernal_quarterstaff_flaming_snipe": "Infernal Quarterstaff Flaming Snipe",
   "entity.bioplethora.infernal_quarterstaff_slash": "Infernal Quarterstaff Slash",
+  "entity.bioplethora.infernal_quarterstaff_soul_purge": "Infernal Quarterstaff Soul Purge",
+  "entity.bioplethora.crephoxl_hammer_smash": "Crephoxl Hammer Smash",
 
   "enchantment.bioplethora.antibio_ecoharmless": "Antibio: Ecoharmless",
   "enchantment.bioplethora.antibio_plethoneutral": "Antibio: Plethoneutral",

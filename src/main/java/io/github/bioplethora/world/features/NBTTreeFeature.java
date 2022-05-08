@@ -61,8 +61,8 @@ public abstract class NBTTreeFeature extends Feature<NoFeatureConfig> {
 
         BlockPos halfOfNBT = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
         BlockPos.Mutable placementLocation = lowerYLevel(random) ?
-                mutablePos.set(pos).move(-halfOfNBT.getX(), -1, -halfOfNBT.getZ()) :
-                mutablePos.set(pos).move(-halfOfNBT.getX(), 0, -halfOfNBT.getZ()
+                mutablePos.set(pos).move(-halfOfNBT.getX(), -2, -halfOfNBT.getZ()) :
+                mutablePos.set(pos).move(-halfOfNBT.getX(), -1, -halfOfNBT.getZ()
                 );
 
         if (getSpawningCondition(world, random, placementLocation)) {

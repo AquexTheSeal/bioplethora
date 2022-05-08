@@ -1,5 +1,7 @@
 package io.github.bioplethora;
 
+import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
+import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
 import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.network.BPNetwork;
@@ -20,6 +22,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -32,6 +35,11 @@ public class Bioplethora {
     public static final String MOD_ID = "bioplethora";
     public static final String MOD_NAME = "Bioplethora";
     public static final Logger LOGGER = LogManager.getLogger();
+
+    // TODO: 08/05/2022 Switch Item, Block, and Entity to Abnormal's core registry system for easier future registry. (after: Sounds)
+    public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> {
+        helper.putSubHelper(ForgeRegistries.ITEMS, new ItemSubRegistryHelper(helper));
+    });
 
     public Bioplethora() {
         instance = this;
