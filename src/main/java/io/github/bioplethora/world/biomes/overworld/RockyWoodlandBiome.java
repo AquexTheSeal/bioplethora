@@ -1,4 +1,4 @@
-package io.github.bioplethora.world.biomes;
+package io.github.bioplethora.world.biomes.overworld;
 
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.audio.BackgroundMusicTracks;

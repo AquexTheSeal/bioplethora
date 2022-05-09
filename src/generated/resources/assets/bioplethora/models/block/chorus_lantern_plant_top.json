@@ -1,0 +1,7 @@
+{
+  "parent": "bioplethora:block/lantern_plant_top",
+  "textures": {
+    "0": "bioplethora:block/chorus_lantern_plant_top",
+    "particle": "bioplethora:block/chorus_lantern_plant_top"
+  }
+}

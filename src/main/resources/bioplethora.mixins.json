@@ -5,10 +5,13 @@
   "refmap": "bioplethora.refmap.json",
   "mixins": [
     "AbstractArrowEntityMixin",
+    "DimensionGeneratorSettingsMixin",
+    "DimensionTypeMixin",
     "ItemEntityMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
-    "QuickChargeEnchantmentMixin"
+    "QuickChargeEnchantmentMixin",
+    "ServerWorldInfoMiixn"
   ],
   "injectors": {
     "defaultRequire": 1

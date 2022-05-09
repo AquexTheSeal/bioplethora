@@ -41,7 +41,7 @@ versionRange="[1.16-42,)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.<modid>]]
+[[dependencies.bioplethora]]
 modId="abnormals_core"
 mandatory=true
 versionRange="[1.16.5-3.2.0,)"

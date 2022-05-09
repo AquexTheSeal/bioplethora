@@ -1,6 +1,5 @@
 package io.github.bioplethora.registry;
 
-import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
 import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.enums.BPArmorMaterials;
@@ -25,8 +24,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BPItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Bioplethora.MOD_ID);
-
-    public static final ItemSubRegistryHelper HELPER = Bioplethora.REGISTRY_HELPER.getItemSubHelper();
 
     //Variables
     public static boolean hellConfig = BPConfig.COMMON.hellMode.get();

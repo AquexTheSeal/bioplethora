@@ -89,6 +89,9 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.BYRSS_FRUIT_BLOCK.get());
         dropSelf(BPBlocks.BYRSS_LANTERN_PLANT.get());
 
+        dropSelf(BPBlocks.CHORUS_CITRUS_BLOCK.get());
+        dropSelf(BPBlocks.CHORUS_LANTERN_PLANT.get());
+
         // Potted Plants
         dropPottedContents(BPBlocks.POTTED_LAVA_SPIRE.get());
 

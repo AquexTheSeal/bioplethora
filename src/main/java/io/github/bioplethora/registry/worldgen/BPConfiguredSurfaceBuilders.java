@@ -20,7 +20,15 @@ public class BPConfiguredSurfaceBuilders {
                     Blocks.STONE.defaultBlockState() // Underwater Block
             )));
 
-    public static ConfiguredSurfaceBuilder<?> CAERI_SURFACE = register("end_highlands",
+    public static ConfiguredSurfaceBuilder<?> CRYEANUM_SURFACE = register("cryeanum",
+            BPSurfaceBuilders.NOISY.get().configured(new NoisySurfaceBuilderConfig(
+                    BPBlocks.CYRA.get().defaultBlockState(), // Surface Block
+                    Blocks.END_STONE.defaultBlockState(), // Surface Block Uncommon
+                    Blocks.END_STONE.defaultBlockState(), // Underground Block
+                    Blocks.END_STONE.defaultBlockState() // Underwater Block
+            )));
+
+    public static ConfiguredSurfaceBuilder<?> CAERI_SURFACE = register("caeri",
             BPSurfaceBuilders.NOISY.get().configured(new NoisySurfaceBuilderConfig(
                     BPBlocks.IRION.get().defaultBlockState(), // Surface Block
                     BPBlocks.CRYOSOIL.get().defaultBlockState(), // Surface Block Uncommon

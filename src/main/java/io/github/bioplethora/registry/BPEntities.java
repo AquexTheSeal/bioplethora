@@ -1,6 +1,5 @@
 package io.github.bioplethora.registry;
 
-import com.minecraftabnormals.abnormals_core.core.util.registry.EntitySubRegistryHelper;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.BPBoatEntity;
 import io.github.bioplethora.entity.creatures.*;
@@ -17,7 +16,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class BPEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Bioplethora.MOD_ID);
-    public static final EntitySubRegistryHelper HELPER = Bioplethora.REGISTRY_HELPER.getEntitySubHelper();
 
     //Ecoharmless
     public static final RegistryObject<EntityType<CuttlefishEntity>> CUTTLEFISH = ENTITIES.register("cuttlefish", () -> EntityType.Builder.of(CuttlefishEntity::new, EntityClassification.WATER_CREATURE).sized(0.75f, 0.6f).build(new ResourceLocation(Bioplethora.MOD_ID, "cuttlefish").toString()));

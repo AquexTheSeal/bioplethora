@@ -2,9 +2,10 @@ package io.github.bioplethora.registry.worldgen;
 
 import com.minecraftabnormals.abnormals_core.core.util.BiomeUtil;
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.world.biomes.RockyWoodlandBiome;
 import io.github.bioplethora.world.biomes.end.CaeriForestBiome;
 import io.github.bioplethora.world.biomes.end.CaeriPlainsBiome;
+import io.github.bioplethora.world.biomes.nether.CryeanumPlains;
+import io.github.bioplethora.world.biomes.overworld.RockyWoodlandBiome;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -29,6 +30,11 @@ public class BPBiomes {
     // Overworld
     public static final RegistryObject<Biome> ROCKY_WOODLANDS = BIOMES.register("rocky_woodlands",
             () -> RockyWoodlandBiome.make(() -> BPConfiguredSurfaceBuilders.ROCKY_WOODLANDS_SURFACE, 0.15f, 1.4f)
+    );
+
+    // Nether
+    public static final RegistryObject<Biome> CRYEANUM_PLAINS = BIOMES.register("cryeanum_plains",
+            () -> CryeanumPlains.make(() -> BPConfiguredSurfaceBuilders.CRYEANUM_SURFACE)
     );
 
     // End
@@ -56,6 +62,14 @@ public class BPBiomes {
         @SubscribeEvent
         public static void addBiomeDictionary(FMLCommonSetupEvent event) {
 
+            // Nether
+            BiomeDictionary.addTypes(getKey(CRYEANUM_PLAINS.get()),
+                    BiomeDictionary.Type.NETHER, BiomeDictionary.Type.PLAINS,
+                    BiomeDictionary.Type.DENSE, BiomeDictionary.Type.HOT,
+                    BiomeDictionary.Type.WET, BiomeDictionary.Type.MAGICAL
+            );
+
+            // End
             BiomeDictionary.addTypes(getKey(CAERI_PLAINS.get()),
                     Type.CAERI, BiomeDictionary.Type.END,
                     Type.CAERI_PLAINS, BiomeDictionary.Type.PLAINS,

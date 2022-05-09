@@ -85,6 +85,16 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("byrss_fruit_block", bioResLoc("byrss_fruit_block"));
         this.lanternPlant("byrss_lantern_plant", bioResLoc("byrss_lantern_plant_bottom"), bioResLoc("byrss_lantern_plant_top"));
 
+        this.cube("chorus_citrus_block",
+                bioResLoc("chorus_citrus_block_top"),
+                bioResLoc("chorus_citrus_block_top"),
+                bioResLoc("chorus_citrus_block_side"),
+                bioResLoc("chorus_citrus_block_side"),
+                bioResLoc("chorus_citrus_block_side"),
+                bioResLoc("chorus_citrus_block_side")
+        );
+        this.lanternPlant("chorus_lantern_plant", bioResLoc("chorus_lantern_plant_bottom"), bioResLoc("chorus_lantern_plant_top"));
+
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));
         this.simpleStoneSet("alphanum", "alphanum_stairs", "alphanum_wall", "alphanum_slab");

@@ -82,25 +82,17 @@ public class BPVanillaBiomeFeatureGeneration {
         if (types.contains(BiomeDictionary.Type.END)) {
             undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE_CONFIG);
 
-            /*
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
 
-                vegDeco.add(() -> BPTreeConfiguredFeatures.CAERULWOOD_TREE_CLUSTER_CONFIG);
-
-                vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS_CONFIG);
-                vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
-
-                vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_HIGHLANDS_PATCH_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_CONFIG);
             }
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS)) {
 
-                vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS_CONFIG);
-                vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_MIDLANDS_PATCH_CONFIG);
 
-                vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
-
-            }*/
+            }
         }
     }
 

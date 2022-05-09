@@ -84,6 +84,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BPBlocks.BYRSS_FRUIT_BLOCK.get());
         this.lanternPlantBlock(BPBlocks.BYRSS_LANTERN_PLANT.get());
 
+        this.withSidesBlock(BPBlocks.CHORUS_CITRUS_BLOCK.get());
+        this.lanternPlantBlock(BPBlocks.CHORUS_LANTERN_PLANT.get());
+
         this.woodset("caerulwood",
                 BPBlocks.CAERULWOOD_PLANKS.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
                 BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get(), BPBlocks.CAERULWOOD_LEAVES.get(),
@@ -280,6 +283,21 @@ public class BioBlockstateProvider extends BlockStateProvider {
                                 bioResLoc(topAndSides.getRegistryName().getPath() + "_side"),
                                 bioResLoc(topAndSides.getRegistryName().getPath() + "_side")
                         ).texture("particle", bioResLoc(topAndSides.getRegistryName().getPath() + "_top"))
+                )
+        );
+    }
+
+    public void withSidesBlock(Block block) {
+        getVariantBuilder(block).partialState().setModels(
+                new ConfiguredModel(models()
+                        .cube(block.getRegistryName().getPath(),
+                                bioResLoc(block.getRegistryName().getPath() + "_top"),
+                                bioResLoc(block.getRegistryName().getPath() + "_top"),
+                                bioResLoc(block.getRegistryName().getPath() + "_side"),
+                                bioResLoc(block.getRegistryName().getPath() + "_side"),
+                                bioResLoc(block.getRegistryName().getPath() + "_side"),
+                                bioResLoc(block.getRegistryName().getPath() + "_side")
+                        ).texture("particle", bioResLoc(block.getRegistryName().getPath() + "_top"))
                 )
         );
     }

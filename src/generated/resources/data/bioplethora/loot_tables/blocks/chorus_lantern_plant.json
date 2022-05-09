@@ -12,7 +12,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "bioplethora:byrss_lantern_plant",
+                  "block": "bioplethora:chorus_lantern_plant",
                   "properties": {
                     "half": "upper"
                   }
@@ -24,7 +24,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "bioplethora:byrss_lantern_plant"
+          "name": "bioplethora:chorus_lantern_plant"
         }
       ]
     }

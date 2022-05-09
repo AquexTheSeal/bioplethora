@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "bioplethora:block/chorus_citrus_block_top",
+    "up": "bioplethora:block/chorus_citrus_block_top",
+    "north": "bioplethora:block/chorus_citrus_block_side",
+    "south": "bioplethora:block/chorus_citrus_block_side",
+    "east": "bioplethora:block/chorus_citrus_block_side",
+    "west": "bioplethora:block/chorus_citrus_block_side",
+    "particle": "bioplethora:block/chorus_citrus_block_top"
+  }
+}
