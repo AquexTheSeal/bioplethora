@@ -1,7 +1,7 @@
 package io.github.bioplethora.world;
 
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.api.world.WorldgenUtils;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;

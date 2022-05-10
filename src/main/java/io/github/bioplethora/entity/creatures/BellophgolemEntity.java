@@ -1,13 +1,13 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.api.advancements.AdvancementUtils;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.BellophgolemRangedAttackGoal;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
@@ -78,9 +78,9 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AlphemEntity.class, 24.0F));
-        this.goalSelector.addGoal(2, new BPMonsterMoveToTargetGoal(this, 1.6, 8));
+        this.goalSelector.addGoal(2, new GeckoMoveToTargetGoal<>(this, 1.6, 8));
         //this.goalSelector.addGoal(1, new BellophgolemAnimatedSmashingGoal(this));
-        this.goalSelector.addGoal(2, new BPMonsterMeleeGoal(this, 60, 0.6, 0.7));
+        this.goalSelector.addGoal(2, new GeckoMeleeGoal<>(this, 60, 0.6, 0.7));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new BellophgolemRangedAttackGoal(this));

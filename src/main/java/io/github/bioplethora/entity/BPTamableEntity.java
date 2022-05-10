@@ -2,10 +2,11 @@ package io.github.bioplethora.entity;
 
 import io.github.bioplethora.entity.ai.gecko.IGeckoBaseEntity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -14,12 +15,17 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 /**
  * Credits: WeirdNerd (Permission Granted)
  */
-public abstract class BPMonsterEntity extends MonsterEntity implements IAnimatable, IGeckoBaseEntity {
+public abstract class BPTamableEntity extends TameableEntity implements IAnimatable, IGeckoBaseEntity {
 
-    protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPTamableEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(BPTamableEntity.class, DataSerializers.BOOLEAN);
 
-    public BPMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+    @Override
+    public boolean hurt(DamageSource p_70097_1_, float p_70097_2_) {
+        return super.hurt(p_70097_1_, p_70097_2_);
+    }
+
+    public BPTamableEntity(EntityType<? extends TameableEntity> type, World worldIn) {
         super(type, worldIn);
     }
 

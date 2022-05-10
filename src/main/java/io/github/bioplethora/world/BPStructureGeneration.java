@@ -40,7 +40,7 @@ public class BPStructureGeneration {
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
         List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
 
-        if (types.contains(BiomeDictionary.Type.COLD) || types.contains(BiomeDictionary.Type.MOUNTAIN)) {
+        if (types.contains(BiomeDictionary.Type.COLD) || types.contains(BiomeDictionary.Type.MOUNTAIN) || types.contains(BiomeDictionary.Type.FOREST)) {
             structures.add(() -> BPStructures.ALPHANUM_MAUSOLEUM.get().configured(IFeatureConfig.NONE));
         }
     }

@@ -3,6 +3,7 @@ package io.github.bioplethora.world.features;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import io.github.bioplethora.Bioplethora;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -39,18 +40,6 @@ public abstract class NBTTreeFeature extends Feature<NoFeatureConfig> {
 
         BlockPos.Mutable mutablePos = new BlockPos.Mutable().set(pos);
 
-        int rad = 2;
-        for (int x = -rad; x <= rad; x++) {
-            for (int z = -rad; z <= rad; z++) {
-                if (Math.abs(x * z) > rad && Math.abs(x * z) < rad * 2) {
-                    mutablePos.set(pos).move(-x, -1, -z);
-                    if (!world.getBlockState(mutablePos).canOcclude()) {
-                        return false;
-                    }
-                }
-            }
-        }
-
         TemplateManager tManager = world.getLevel().getStructureManager();
         Template template = tManager.get(new ResourceLocation(Bioplethora.MOD_ID, "features/" + getRandomNBTTree(random)));
 
@@ -75,5 +64,20 @@ public abstract class NBTTreeFeature extends Feature<NoFeatureConfig> {
         } else {
             return false;
         }
+    }
+
+    public boolean defaultTreeCanPlace(ISeedReader world, Random random, BlockPos pos) {
+        if (lowerYLevel(random)) {
+            int checkRad = 2;
+            for (int x = -checkRad; x < checkRad; x++) {
+                for (int z = -checkRad; z < checkRad; z++) {
+                    BlockPos.Mutable checkPos = pos.mutable().move(x, 0, z);
+                    if (world.isEmptyBlock(checkPos) || world.getBlockState(checkPos).getBlock() instanceof LeavesBlock) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

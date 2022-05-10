@@ -1,7 +1,7 @@
 package io.github.bioplethora.event.helper;
 
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.projectile.WindArrowEntity;
 import io.github.bioplethora.registry.BPBlocks;

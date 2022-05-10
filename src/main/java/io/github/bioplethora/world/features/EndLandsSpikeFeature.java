@@ -36,6 +36,7 @@ public class EndLandsSpikeFeature extends Feature<NoFeatureConfig> {
             createPillar(clampRandom(rand, 8, 3), world, rand, mutablePos3);
             createPillar(clampRandom(rand, 7, 2), world, rand, mutablePos4);
             return true;
+
         } else return false;
     }
 

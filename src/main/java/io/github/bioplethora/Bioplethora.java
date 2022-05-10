@@ -1,5 +1,6 @@
 package io.github.bioplethora;
 
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.network.BPNetwork;
@@ -77,7 +78,8 @@ public class Bioplethora {
         // register this class through the Minecraft Forge Event Bus
         MinecraftForge.EVENT_BUS.register(this);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BPConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BPConfig.COMMON_SPEC, "bioplethora/common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BPConfig.WORLDGEN_SPEC, "bioplethora/worldgen.toml");
     }
 
     private void onInterModEnqueueEvent(final InterModEnqueueEvent event) {

@@ -1,7 +1,7 @@
-package io.github.bioplethora.entity.ai.tameable;
+package io.github.bioplethora.entity.ai.gecko;
 
-import io.github.bioplethora.entity.BPAnimalEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
@@ -12,29 +12,29 @@ import java.util.function.BiFunction;
 /**
  * Credits: WeirdNerd (Permission Granted)
  */
-public class BPAnimalMeleeGoal extends BPAnimalGoal {
-    private final double animationLength;
-    private final BiFunction<Double, Double, Boolean> attackPredicate;
-    private boolean hasHit;
+public class GeckoMeleeGoal<E extends MobEntity> extends BPTameableGoal<E> {
+    public double animationLength;
+    public BiFunction<Double, Double, Boolean> attackPredicate;
+    public boolean hasHit;
 
-    public BPAnimalMeleeGoal(BPAnimalEntity entity, double animationLength, double attackBegin, double attackEnd) {
+    public GeckoMeleeGoal(E entity, double animationLength, double attackBegin, double attackEnd) {
         this.entity = entity;
         this.animationLength = animationLength;
         this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
         this.setFlags(EnumSet.of(Flag.LOOK));
     }
 
-    private static boolean checkIfValid(BPAnimalMeleeGoal goal, BPAnimalEntity attacker, LivingEntity target) {
+    public static boolean checkIfValid(GeckoMeleeGoal goal, MobEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
-                attacker.setAttacking(false);
+                ((IGeckoBaseEntity) attacker).setAttacking(false);
                 return false;
             }
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= BPAnimalGoal.getAttackReachSq(attacker, target)) return true;
+            if (distance <= BPTameableGoal.getAttackReachSq(attacker, target)) return true;
         }
-        attacker.setAttacking(false);
+        ((IGeckoBaseEntity) attacker).setAttacking(false);
         return false;
     }
 
@@ -42,19 +42,19 @@ public class BPAnimalMeleeGoal extends BPAnimalGoal {
     public boolean canUse() {
         if (Math.random() <= 0.1) return false;
 
-        return BPAnimalMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
+        return GeckoMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
     }
 
     @Override
     public boolean canContinueToUse() {
         if (Math.random() <= 0.1) return true;
 
-        return BPAnimalMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
+        return GeckoMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
     }
 
     @Override
     public void start() {
-        this.entity.setAttacking(true);
+        ((IGeckoBaseEntity) this.entity).setAttacking(true);
         this.entity.setAggressive(true);
         this.animationProgress = 0;
     }
@@ -65,7 +65,7 @@ public class BPAnimalMeleeGoal extends BPAnimalGoal {
         if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             this.entity.setTarget(null);
         }
-        this.entity.setAttacking(false);
+        ((IGeckoBaseEntity) this.entity).setAttacking(false);
         this.entity.setAggressive(false);
         this.hasHit = false;
         this.animationProgress = 0;

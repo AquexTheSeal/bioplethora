@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.BPMonsterEntity;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.entity.creatures.NandbriEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -13,10 +13,10 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class NandbriScratchAttackGoal extends BPMonsterMeleeGoal {
-    public NandbriEntity nandbri = (NandbriEntity) entity;
+public class NandbriScratchAttackGoal extends GeckoMeleeGoal<NandbriEntity> {
+    public NandbriEntity nandbri = entity;
 
-    public NandbriScratchAttackGoal(BPMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
+    public NandbriScratchAttackGoal(NandbriEntity entity, double animationLength, double attackBegin, double attackEnd) {
         super(entity, animationLength, attackBegin, attackEnd);
     }
 

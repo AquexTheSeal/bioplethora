@@ -1,11 +1,11 @@
 package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.BPMonsterEntity;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
-public class CavernFleignarMeleeGoal extends BPMonsterMeleeGoal {
+public class CavernFleignarMeleeGoal extends GeckoMeleeGoal {
 
     public CavernFleignarMeleeGoal(BPMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
         super(entity, animationLength, attackBegin, attackEnd);

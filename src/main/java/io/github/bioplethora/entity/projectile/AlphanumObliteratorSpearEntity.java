@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.BPDamageSources;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;

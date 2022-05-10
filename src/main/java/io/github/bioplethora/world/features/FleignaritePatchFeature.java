@@ -1,7 +1,7 @@
 package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.CavernFleignarEntity;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.world.BPVanillaBiomeFeatureGeneration;

@@ -1,6 +1,6 @@
 package io.github.bioplethora.enchantments;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPDamageSources;

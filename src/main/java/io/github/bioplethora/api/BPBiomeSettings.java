@@ -7,9 +7,9 @@ import net.minecraft.world.gen.GenerationStage;
 public class BPBiomeSettings {
 
     public static void addDefaultCaeriVegetation(BiomeGenerationSettings.Builder builder) {
-        builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, BPConfiguredFeatures.IRION_GRASS_CONFIG);
-        builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
-        builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, BPConfiguredFeatures.ARTAIRIUS_CONFIG);
+        builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, BPConfiguredFeatures.IRION_GRASS);
+        builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, BPConfiguredFeatures.IRION_TALL_GRASS);
+        builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, BPConfiguredFeatures.ARTAIRIUS);
     }
 
     // End

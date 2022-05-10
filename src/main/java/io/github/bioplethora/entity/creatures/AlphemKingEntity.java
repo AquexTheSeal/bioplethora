@@ -1,13 +1,13 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
 import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.ai.*;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.entity.others.AlphanumShardEntity;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPAttributes;
@@ -98,7 +98,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 1.0F, 12) {
+        this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<AlphemKingEntity>(this, 1.0F, 12) {
             @Override
             public boolean canUse() {
                 if (RANDOM.nextInt(this.checkRate) == 0) return false;

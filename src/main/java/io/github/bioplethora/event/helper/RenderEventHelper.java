@@ -2,9 +2,9 @@ package io.github.bioplethora.event.helper;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;

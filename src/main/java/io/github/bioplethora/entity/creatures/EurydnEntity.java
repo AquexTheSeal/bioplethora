@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.FloatingMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.enums.BPEntityClasses;

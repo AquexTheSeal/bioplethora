@@ -1,10 +1,10 @@
 package io.github.bioplethora.event;
 
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.api.IHurtSkillArmor;
 import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.advancements.AdvancementUtils;
 import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;

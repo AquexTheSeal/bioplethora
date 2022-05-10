@@ -25,6 +25,8 @@ public class BPFeatures {
     public static final RegistryObject<Feature<BlockClusterFeatureConfig>> SINGULAR_BLOCK = FEATURES.register("singular_block", () -> new SingularBlockFeature(BlockClusterFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NBTFeatureConfig>> NBT_DRIVEN = FEATURES.register("nbt_driven", () -> new NBTFeature(NBTFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPIKE = FEATURES.register("end_land_spike", () -> new EndLandsSpikeFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> END_ICICLE = FEATURES.register("end_icicle", () -> new EndIcicleFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> END_FROZEN_ISLAND = FEATURES.register("end_frozen_island", () -> new EndFrozenIslandFeature(NoFeatureConfig.CODEC));
 
     // Trees
     public static final RegistryObject<Feature<NoFeatureConfig>> CAERULWOOD_TREE = FEATURES.register("caerulwood_tree", () -> new CaerulwoodTreeFeature(NoFeatureConfig.CODEC));

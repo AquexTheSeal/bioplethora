@@ -1,6 +1,6 @@
 package io.github.bioplethora.event.helper;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IMobCappedEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;

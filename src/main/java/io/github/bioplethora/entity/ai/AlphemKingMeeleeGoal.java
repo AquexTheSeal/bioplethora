@@ -1,18 +1,18 @@
 package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.BPMonsterEntity;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
 
-public class AlphemKingMeeleeGoal extends BPMonsterMeleeGoal {
+public class AlphemKingMeeleeGoal extends GeckoMeleeGoal<AlphemKingEntity> {
     
-    public AlphemKingEntity king = (AlphemKingEntity) entity;
+    public AlphemKingEntity king = entity;
 
-    public AlphemKingMeeleeGoal(BPMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
+    public AlphemKingMeeleeGoal(AlphemKingEntity entity, double animationLength, double attackBegin, double attackEnd) {
         super(entity, animationLength, attackBegin, attackEnd);
     }
 

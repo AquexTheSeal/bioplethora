@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.entity.FloatingMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -63,7 +63,7 @@ public class TerraithEntity extends FloatingMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
         this.goalSelector.addGoal(4, new TerraithEntity.MoveRandomGoal());
         this.goalSelector.addGoal(3, new TerraithEntity.ChargeAttackGoal());
-        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 20, 0.6, 0.7));
+        this.goalSelector.addGoal(1, new GeckoMeleeGoal<>(this, 20, 0.6, 0.7));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, TerraithEntity.class)).setAlertOthers());

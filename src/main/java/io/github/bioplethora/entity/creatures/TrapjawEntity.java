@@ -1,10 +1,10 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.*;
 import io.github.bioplethora.entity.ai.WaterFollowOwnerGoal;
-import io.github.bioplethora.entity.ai.tameable.BPAnimalMeleeGoal;
-import io.github.bioplethora.entity.ai.tameable.BPAnimalMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.block.BlockState;
@@ -85,7 +85,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(2, new SitGoal(this));
-        this.goalSelector.addGoal(4, new BPAnimalMoveToTargetGoal(this, 1.6, 8) {
+        this.goalSelector.addGoal(4, new GeckoMoveToTargetGoal<TrapjawEntity>(this, 1.6, 8) {
             @Override
             public boolean canUse() {
                 if (!entity.isInWater()) {
@@ -104,7 +104,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
                 }
             }
         });
-        this.goalSelector.addGoal(4, new BPAnimalMeleeGoal(this, 30, 0.5, 0.6));
+        this.goalSelector.addGoal(4, new GeckoMeleeGoal<>(this, 30, 0.5, 0.6));
         this.goalSelector.addGoal(5, new WaterFollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));

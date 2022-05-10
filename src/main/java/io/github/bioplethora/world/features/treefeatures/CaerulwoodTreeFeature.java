@@ -3,7 +3,6 @@ package io.github.bioplethora.world.features.treefeatures;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import io.github.bioplethora.world.features.NBTTreeFeature;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -36,6 +35,6 @@ public class CaerulwoodTreeFeature extends NBTTreeFeature {
 
     @Override
     public boolean getSpawningCondition(ISeedReader world, Random random, BlockPos pos) {
-        return !world.isEmptyBlock(pos.below()) && !(world.getBlockState(pos.below()).getBlock() instanceof LeavesBlock);
+        return defaultTreeCanPlace(world, random, pos);
     }
 }

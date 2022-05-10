@@ -39,6 +39,7 @@ public class GaugalemEntityRender extends GeoEntityRenderer<GaugalemEntity> {
 
     @Override
     public void renderRecursively(GeoBone bone, MatrixStack stack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+
         if (/*bone.getName().equals("armr") ||*/ bone.getName().equals("handr")) {
             if ((!bone.isHidden)) {
                 stack.pushPose();

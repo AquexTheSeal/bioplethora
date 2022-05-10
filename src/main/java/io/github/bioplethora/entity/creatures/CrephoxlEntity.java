@@ -1,11 +1,11 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.CrephoxlChargingGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
@@ -69,8 +69,8 @@ public class CrephoxlEntity extends BPMonsterEntity implements IAnimatable, IBio
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(2, new BPMonsterMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(2, new BPMonsterMeleeGoal(this, 60, 0.5, 0.6));
+        this.goalSelector.addGoal(2, new GeckoMoveToTargetGoal<>(this, 1.6, 8));
+        this.goalSelector.addGoal(2, new GeckoMeleeGoal<>(this, 60, 0.5, 0.6));
         this.goalSelector.addGoal(3, new CrephoxlChargingGoal(this));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));

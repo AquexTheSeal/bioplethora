@@ -1,9 +1,9 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.FloatingMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.item.weapons.StellarScytheItem;
 import io.github.bioplethora.registry.BPItems;
@@ -80,7 +80,7 @@ public class GaugalemEntity extends FloatingMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
         this.goalSelector.addGoal(3, new GaugalemEntity.ChargeAttackGoal());
         this.goalSelector.addGoal(4, new GaugalemEntity.MoveRandomGoal());
-        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 40, 0.5, 0.6));
+        this.goalSelector.addGoal(1, new GeckoMeleeGoal<>(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
@@ -119,7 +119,7 @@ public class GaugalemEntity extends FloatingMonsterEntity implements IAnimatable
     }
 
     public static boolean checkGaugalemSpawnRules(EntityType<GaugalemEntity> gaugalemEntityEntityType, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
-        return pPos.getY() > 40;
+        return pPos.getY() > 40 && pRandom.nextInt(5) == 1;
     }
 
     public boolean doHurtTarget(Entity entity) {
@@ -167,7 +167,9 @@ public class GaugalemEntity extends FloatingMonsterEntity implements IAnimatable
         super.aiStep();
 
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 5, 0.4, 0.4, 0.4, 0.1);
+            if (!this.hasEffect(Effects.INVISIBILITY)) {
+                ((ServerWorld) this.level).sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 5, 0.4, 0.4, 0.4, 0.1);
+            }
         }
     }
 

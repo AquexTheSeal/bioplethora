@@ -3,6 +3,7 @@ package io.github.bioplethora.world;
 import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.api.world.WorldgenUtils;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.worldgen.BPConfiguredFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -39,59 +40,62 @@ public class BPVanillaBiomeFeatureGeneration {
         List<Supplier<ConfiguredFeature<?, ?>>> vegDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
         if (types.contains(BiomeDictionary.Type.OVERWORLD)) {
-            undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
-            undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
-            vegDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS_CONFIG);
-            vegDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES_CONFIG);
+            undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS);
+            undergroundDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES);
+            vegDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_REMAINS);
+            vegDeco.add(() -> BPConfiguredFeatures.FLEIGNARITE_VINES);
         }
 
         if (types.contains(BiomeDictionary.Type.NETHER)) {
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.BASALT_DELTAS)) {
-                vegDeco.add(() -> BPConfiguredFeatures.BASALT_SPELEOTHERM_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.BASALT_SPELEOTHERM);
 
-                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.NETHER_WASTES)) {
-                vegDeco.add(() -> BPConfiguredFeatures.THONTUS_THISTLE_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.THONTUS_THISTLE);
 
-                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.WARPED_FOREST)) {
-                vegDeco.add(() -> BPConfiguredFeatures.WARPED_DANCER_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.WARPED_DANCER);
 
-                vegDeco.add(() -> BPConfiguredFeatures.TURQUOISE_PENDENT_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.TURQUOISE_PENDENT);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.CRIMSON_FOREST)) {
-                vegDeco.add(() -> BPConfiguredFeatures.CERISE_IVY_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.CERISE_IVY);
 
-                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.LAVA_SPIRE);
             }
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SOUL_SAND_VALLEY)) {
-                vegDeco.add(() -> BPConfiguredFeatures.SOUL_MINISHROOM_CONFIG);
-                vegDeco.add(() -> BPConfiguredFeatures.SOUL_BIGSHROOM_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_MINISHROOM);
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_BIGSHROOM);
 
-                vegDeco.add(() -> BPConfiguredFeatures.SOUL_SPROUTS_CONFIG);
-                vegDeco.add(() -> BPConfiguredFeatures.SOUL_TALL_GRASS_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_SPROUTS);
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_TALL_GRASS);
 
-                vegDeco.add(() -> BPConfiguredFeatures.SPIRIT_DANGLER_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.SPIRIT_DANGLER);
 
-                vegDeco.add(() -> BPConfiguredFeatures.SOUL_ETERN_CONFIG);
+                vegDeco.add(() -> BPConfiguredFeatures.SOUL_ETERN);
             }
         }
 
         if (types.contains(BiomeDictionary.Type.END)) {
-            undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE_CONFIG);
+            if (BPConfig.WORLDGEN.cyraLakesEnd.get()) undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE);
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
-
-                vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_HIGHLANDS_PATCH_CONFIG);
-                vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_CONFIG);
+                if (BPConfig.WORLDGEN.chorusLanternHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_HIGHLANDS_PATCH);
+                if (BPConfig.WORLDGEN.endSpikeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH);
             }
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS)) {
+                if (BPConfig.WORLDGEN.chorusLanternMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_MIDLANDS_PATCH);
 
-                vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_MIDLANDS_PATCH_CONFIG);
+            }
 
+            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SMALL_END_ISLANDS)) {
+                if (BPConfig.WORLDGEN.endIcicleIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_ISLANDS_ICICLE_PATCH);
+                if (BPConfig.WORLDGEN.endFrozenIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_FROZEN_ISLAND_DECORATED);
             }
         }
     }

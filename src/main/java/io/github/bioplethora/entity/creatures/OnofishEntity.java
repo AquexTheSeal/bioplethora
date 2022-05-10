@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
-import io.github.bioplethora.entity.FloatingMonsterEntity;
+import io.github.bioplethora.config.BPConfig;
+import io.github.bioplethora.entity.FloatingCreatureEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.entity.EntityType;
@@ -12,7 +12,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -39,13 +38,13 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class OnofishEntity extends FloatingMonsterEntity implements IAnimatable, IBioClassification {
+public class OnofishEntity extends FloatingCreatureEntity implements IAnimatable, IBioClassification {
     private static final DataParameter<Integer> DATA_VARIANT = EntityDataManager.defineId(OnofishEntity.class, DataSerializers.INT);
     private final AnimationFactory factory = new AnimationFactory(this);
     public int particleTime;
     public int jumpTime;
 
-    public OnofishEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+    public OnofishEntity(EntityType<? extends FloatingCreatureEntity> type, World worldIn) {
         super(type, worldIn);
         this.moveControl = new MoveHelperController(this);
     }

@@ -8,7 +8,7 @@ import net.minecraft.util.EntityPredicates;
 
 public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
 
-    public AlphemKingSmashingGoal(BPMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
+    public AlphemKingSmashingGoal(AlphemKingEntity entity, double animationLength, double attackBegin, double attackEnd) {
         super(entity, animationLength, attackBegin, attackEnd);
     }
 

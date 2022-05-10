@@ -1,7 +1,7 @@
-package io.github.bioplethora.entity.ai.monster;
+package io.github.bioplethora.entity.ai.gecko;
 
-import io.github.bioplethora.entity.BPMonsterEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
 import java.util.Random;
@@ -9,16 +9,16 @@ import java.util.Random;
 /**
  * Credits: WeirdNerd (Permission Granted)
  */
-public abstract class BPMonsterGoal extends Goal {
+public abstract class BPTameableGoal<E extends MobEntity> extends Goal {
 
     protected static final Random RANDOM = new Random();
-    public BPMonsterEntity entity;
+    public E entity;
     protected long tickDelta;
     protected double animationProgress;
     private long lastGameTime;
     private boolean isFirsLoop = true;
 
-    protected static double getAttackReachSq(BPMonsterEntity attacker, LivingEntity target) {
+    protected static double getAttackReachSq(LivingEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
     }
 

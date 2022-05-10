@@ -1,5 +1,6 @@
 package io.github.bioplethora.entity;
 
+import io.github.bioplethora.entity.ai.gecko.IGeckoBaseEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.network.datasync.DataParameter;
@@ -14,7 +15,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 /**
  * Credits: WeirdNerd (Permission Granted)
  */
-public abstract class BPAnimalEntity extends TameableEntity implements IAnimatable {
+public abstract class BPAnimalEntity extends TameableEntity implements IAnimatable, IGeckoBaseEntity {
 
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPAnimalEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(BPAnimalEntity.class, DataSerializers.BOOLEAN);

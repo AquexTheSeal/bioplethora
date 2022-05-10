@@ -1,10 +1,10 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -68,8 +68,8 @@ public class DwarfMossadileEntity extends BPMonsterEntity implements IAnimatable
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1F));
-        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 1, 8));
-        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 40, 0.5, 0.6));
+        this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<>(this, 1, 8));
+        this.goalSelector.addGoal(1, new GeckoMeleeGoal<>(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));

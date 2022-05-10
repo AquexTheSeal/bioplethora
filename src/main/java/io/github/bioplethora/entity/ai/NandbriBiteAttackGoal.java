@@ -1,15 +1,15 @@
 package io.github.bioplethora.entity.ai;
 
 import io.github.bioplethora.entity.BPMonsterEntity;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.entity.creatures.NandbriEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 
-public class NandbriBiteAttackGoal extends BPMonsterMeleeGoal {
-    public NandbriEntity nandbri = (NandbriEntity) entity;
-    public NandbriBiteAttackGoal(BPMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
+public class NandbriBiteAttackGoal extends GeckoMeleeGoal<NandbriEntity> {
+    public NandbriEntity nandbri = entity;
+    public NandbriBiteAttackGoal(NandbriEntity entity, double animationLength, double attackBegin, double attackEnd) {
         super(entity, animationLength, attackBegin, attackEnd);
     }
 

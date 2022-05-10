@@ -1,7 +1,7 @@
 package io.github.bioplethora.registry;
 
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.config.BPConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.EnchantedBookItem;

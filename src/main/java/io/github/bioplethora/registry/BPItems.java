@@ -1,7 +1,7 @@
 package io.github.bioplethora.registry;
 
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.enums.BPArmorMaterials;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.enums.BPItemTier;

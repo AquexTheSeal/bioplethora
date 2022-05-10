@@ -1,11 +1,11 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.ai.NandbriScratchAttackGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.NandbriBiteAttackGoal;
+import io.github.bioplethora.entity.ai.NandbriScratchAttackGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -67,7 +67,7 @@ public class NandbriEntity extends BPMonsterEntity implements IAnimatable, IBioC
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 0.75, 8));
+        this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<>(this, 0.75, 8));
         this.goalSelector.addGoal(1, new NandbriBiteAttackGoal(this, 16, 0.45, 0.75));
         this.goalSelector.addGoal(1, new NandbriScratchAttackGoal(this, 16.8, 0.23, 0.38));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));

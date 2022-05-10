@@ -1,6 +1,6 @@
 package io.github.bioplethora.mixin;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.BipedModel;

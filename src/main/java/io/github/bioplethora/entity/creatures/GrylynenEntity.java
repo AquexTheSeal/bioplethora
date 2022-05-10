@@ -1,10 +1,10 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.FloatingMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IGrylynenTier;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -59,7 +59,7 @@ public class GrylynenEntity extends FloatingMonsterEntity implements IAnimatable
         super.registerGoals();
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
         this.goalSelector.addGoal(3, new GrylynenEntity.ChargeAttackGoal());
-        this.goalSelector.addGoal(3, new BPMonsterMeleeGoal(this, 20, 0.7, 0.8));
+        this.goalSelector.addGoal(3, new GeckoMeleeGoal<>(this, 20, 0.7, 0.8));
         this.goalSelector.addGoal(4, new GrylynenEntity.MoveRandomGoal());
         this.goalSelector.addGoal(5, new SwimGoal(this));
 

@@ -37,24 +37,24 @@ public class BPCustomBiomeFeatureGeneration {
 
             vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_PLAINS_TREES);
 
-            vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS_CONFIG);
-            vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS);
+            vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS);
 
-            vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS);
 
-            vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_PLANT_PATCH_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_PLANT_PATCH);
         }
 
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_FOREST)) {
 
             vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_FOREST_TREES);
 
-            vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS_CONFIG);
-            vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS);
+            vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS);
 
-            vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.ARTAIRIUS);
 
-            vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_FOREST_PATCH_CONFIG);
+            vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_FOREST_PATCH);
         }
     }
 }

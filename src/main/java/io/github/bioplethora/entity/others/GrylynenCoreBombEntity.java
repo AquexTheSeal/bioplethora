@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.others;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IGrylynenTier;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.enums.BPGrylynenTier;

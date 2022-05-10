@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.BPConfig;
 import io.github.bioplethora.api.world.EntityUtils;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.particles.WindPoofParticleData;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;

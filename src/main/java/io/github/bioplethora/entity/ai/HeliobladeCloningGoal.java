@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.LivingEntity;

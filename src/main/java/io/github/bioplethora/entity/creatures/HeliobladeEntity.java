@@ -1,14 +1,14 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.BPConfig;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.CopyTargetOwnerGoal;
 import io.github.bioplethora.entity.ai.HeliobladeCloningGoal;
 import io.github.bioplethora.entity.ai.HeliobladeQuickShootingGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMeleeGoal;
-import io.github.bioplethora.entity.ai.monster.BPMonsterMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPDamageSources;
@@ -94,8 +94,8 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new BPMonsterMoveToTargetGoal(this, 0.75, 8));
-        this.goalSelector.addGoal(1, new BPMonsterMeleeGoal(this, 20, 0.2, 0.3));
+        this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<>(this, 0.75, 8));
+        this.goalSelector.addGoal(1, new GeckoMeleeGoal<>(this, 20, 0.2, 0.3));
         this.goalSelector.addGoal(2, new HeliobladeQuickShootingGoal(this));
         this.goalSelector.addGoal(3, new HeliobladeCloningGoal(this));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));

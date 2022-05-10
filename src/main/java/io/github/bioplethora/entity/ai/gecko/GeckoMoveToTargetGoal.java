@@ -1,7 +1,7 @@
-package io.github.bioplethora.entity.ai.monster;
+package io.github.bioplethora.entity.ai.gecko;
 
-import io.github.bioplethora.entity.BPMonsterEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.EntityPredicates;
 
 import java.util.EnumSet;
@@ -9,12 +9,12 @@ import java.util.EnumSet;
 /**
  * Credits: WeirdNerd (Permission Granted)
  */
-public class BPMonsterMoveToTargetGoal extends BPMonsterMovableGoal {
+public class GeckoMoveToTargetGoal<E extends MobEntity> extends GeckoMovableGoal<E> {
 
     public final double speedMultiplier;
     public final int checkRate;
 
-    public BPMonsterMoveToTargetGoal(BPMonsterEntity entity, double speedMultiplier, int checkRate) {
+    public GeckoMoveToTargetGoal(E entity, double speedMultiplier, int checkRate) {
         this.entity = entity;
         this.speedMultiplier = speedMultiplier;
         this.checkRate = checkRate;
@@ -38,7 +38,7 @@ public class BPMonsterMoveToTargetGoal extends BPMonsterMovableGoal {
     @Override
     public void start() {
         this.entity.setAggressive(true);
-        this.entity.setMoving(true);
+        ((IGeckoBaseEntity) this.entity).setMoving(true);
         this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
     }
 
@@ -49,7 +49,7 @@ public class BPMonsterMoveToTargetGoal extends BPMonsterMovableGoal {
             this.entity.setTarget(null);
         }
         this.entity.setAggressive(false);
-        this.entity.setMoving(false);
+        ((IGeckoBaseEntity) this.entity).setMoving(false);
         this.entity.getNavigation().stop();
     }
 
