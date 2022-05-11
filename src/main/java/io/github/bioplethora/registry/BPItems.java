@@ -11,7 +11,10 @@ import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.armor.*;
 import io.github.bioplethora.item.extras.AlphanumGemItem;
 import io.github.bioplethora.item.extras.WindyEssenceItem;
-import io.github.bioplethora.item.functionals.*;
+import io.github.bioplethora.item.functionals.SpiritFissionCharmItem;
+import io.github.bioplethora.item.functionals.SpiritManipulationCharmItem;
+import io.github.bioplethora.item.functionals.SpiritStrengtheningCharmItem;
+import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.item.weapons.fleignarite_set.*;
 import io.github.bioplethora.item.weapons.reinforced_fleignarite_set.*;
@@ -128,10 +131,6 @@ public class BPItems {
 
     // Plant Items
     public static  final RegistryObject<Item> SWIVELBLOOM = ITEMS.register("swivelbloom", () -> new Item(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup)));
-
-    // Woodset Helpers
-    public static final RegistryObject<Item> CAERULWOOD_SIGN = ITEMS.register("caerulwood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(BPItemGroup.BioplethoraItemItemGroup), BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()));
-    public static final RegistryObject<Item> CAERULWOOD_BOAT = ITEMS.register("caerulwood_boat", () -> new BPBoatItem(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup), "caerulwood"));
 
     //=================================================================
     //                  BIOPLETHORA SPAWN EGGS

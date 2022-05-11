@@ -96,6 +96,11 @@ public class BPVanillaBiomeFeatureGeneration {
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SMALL_END_ISLANDS)) {
                 if (BPConfig.WORLDGEN.endIcicleIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_ISLANDS_ICICLE_PATCH);
                 if (BPConfig.WORLDGEN.endFrozenIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_FROZEN_ISLAND_DECORATED);
+
+                vegDeco.add(() -> BPConfiguredFeatures.FROSTEM);
+
+                vegDeco.add(() -> BPConfiguredFeatures.SPINXELTHORN);
+                vegDeco.add(() -> BPConfiguredFeatures.GLACYNTH);
             }
         }
     }

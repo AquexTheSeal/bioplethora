@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPEntities;
-import io.github.bioplethora.registry.BPItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.item.Item;
@@ -68,9 +68,9 @@ public class BPBoatEntity extends BoatEntity {
     public Item getDropItem() {
         switch(this.getWoodType()) {
             case "caerulwood":
-                return BPItems.CAERULWOOD_BOAT.get();
+                return BPBlocks.CAERULWOOD_BOAT.get();
             default:
-                return BPItems.CAERULWOOD_BOAT.get();
+                return BPBlocks.CAERULWOOD_BOAT.get();
         }
     }
 

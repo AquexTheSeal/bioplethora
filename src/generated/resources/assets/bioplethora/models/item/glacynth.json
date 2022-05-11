@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "bioplethora:item/caerulwood_boat"
+    "layer0": "bioplethora:block/glacynth_plant"
   }
 }

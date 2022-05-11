@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "bioplethora:item/caerulwood_sign"
-  }
+  "parent": "bioplethora:block/caerulwood_sign"
 }

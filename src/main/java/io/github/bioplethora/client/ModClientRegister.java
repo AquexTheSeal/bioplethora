@@ -100,8 +100,16 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.BYRSS_LANTERN_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.CHORUS_LANTERN_PLANT.get(), RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.FROSTEM.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.SPINXELTHORN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.SPINXELTHORN_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.GLACYNTH.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.GLACYNTH_PLANT.get(), RenderType.cutout());
+
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
+
 
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);

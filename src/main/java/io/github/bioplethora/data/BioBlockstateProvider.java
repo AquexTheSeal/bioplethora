@@ -87,6 +87,14 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.withSidesBlock(BPBlocks.CHORUS_CITRUS_BLOCK.get());
         this.lanternPlantBlock(BPBlocks.CHORUS_LANTERN_PLANT.get());
 
+        this.simpleCrossBlock(BPBlocks.FROSTEM.get());
+
+        this.simpleCrossBlock(BPBlocks.SPINXELTHORN.get());
+        this.simpleCrossBlock(BPBlocks.SPINXELTHORN_PLANT.get());
+
+        this.simpleCrossBlock(BPBlocks.GLACYNTH.get());
+        this.simpleCrossBlock(BPBlocks.GLACYNTH_PLANT.get());
+
         this.woodset("caerulwood",
                 BPBlocks.CAERULWOOD_PLANKS.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
                 BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get(), BPBlocks.CAERULWOOD_LEAVES.get(),

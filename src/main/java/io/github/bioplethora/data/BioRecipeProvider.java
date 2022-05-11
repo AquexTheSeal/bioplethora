@@ -99,7 +99,7 @@ public class BioRecipeProvider extends RecipeProvider {
                 BPBlocks.CAERULWOOD_SAPLING.get(), BPBlocks.CAERULWOOD_FENCE.get(), BPBlocks.CAERULWOOD_FENCE_GATE.get(),
                 BPBlocks.CAERULWOOD_PRESSURE_PLATE.get(), BPBlocks.CAERULWOOD_DOOR.get(), BPBlocks.CAERULWOOD_TRAPDOOR.get(),
                 BPBlocks.CAERULWOOD_BUTTON.get(), BPBlocks.CAERULWOOD_STAIRS.get(), BPBlocks.CAERULWOOD_SLAB.get(),
-                BPItems.CAERULWOOD_SIGN.get(), BPItems.CAERULWOOD_BOAT.get()
+                BPBlocks.CAERULWOOD_SIGN_ITEM.get(), BPBlocks.CAERULWOOD_BOAT.get()
         );
 
         // STONE

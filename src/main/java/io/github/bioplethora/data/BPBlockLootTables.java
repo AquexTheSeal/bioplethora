@@ -16,7 +16,6 @@ import net.minecraft.loot.conditions.BlockStateProperty;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class BPBlockLootTables extends BlockLootTables {
@@ -92,6 +91,14 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.CHORUS_CITRUS_BLOCK.get());
         dropSelf(BPBlocks.CHORUS_LANTERN_PLANT.get());
 
+        add(BPBlocks.FROSTEM.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.FROSTEM.get()));
+
+        dropSelf(BPBlocks.SPINXELTHORN.get());
+        dropOther(BPBlocks.SPINXELTHORN_PLANT.get(), BPBlocks.SPINXELTHORN.get());
+
+        add(BPBlocks.GLACYNTH.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.GLACYNTH.get()));
+        add(BPBlocks.GLACYNTH_PLANT.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.GLACYNTH.get()));
+
         // Potted Plants
         dropPottedContents(BPBlocks.POTTED_LAVA_SPIRE.get());
 
@@ -157,7 +164,7 @@ public class BPBlockLootTables extends BlockLootTables {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return ForgeRegistries.BLOCKS.getValues().stream().filter(b -> Objects.requireNonNull(b.getRegistryName()).getNamespace().equals(Bioplethora.MOD_ID)).collect(Collectors.toList());
+        return ForgeRegistries.BLOCKS.getValues().stream().filter(b -> b.getRegistryName().getNamespace().equals(Bioplethora.MOD_ID)).collect(Collectors.toList());
     }
 
     public void dropMinishroom(Block shroom) {

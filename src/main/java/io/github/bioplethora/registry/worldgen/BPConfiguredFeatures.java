@@ -109,6 +109,22 @@ public class BPConfiguredFeatures {
     ).count(8).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))
     ));
 
+    public static final ConfiguredFeature<?, ?> FROSTEM = register("frostem", makeDecoratedClusterPlants(
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.FROSTEM.get(), new SimpleBlockPlacer(), 48
+    ));
+
+    public static final ConfiguredFeature<?, ?> SPINXELTHORN = register("spinxelthorn", makePendentConfig(
+            Blocks.END_STONE, BPBlocks.SPINXELTHORN_PLANT.get(), BPBlocks.SPINXELTHORN.get(),
+            ImmutableList.of(Blocks.END_STONE),
+            1, 8, 156, 132
+    ));
+
+    public static final ConfiguredFeature<?, ?> GLACYNTH = register("glacynth", makePendentConfig(
+            Blocks.ICE, BPBlocks.GLACYNTH_PLANT.get(), BPBlocks.GLACYNTH.get(),
+            ImmutableList.of(Blocks.ICE, Blocks.BLUE_ICE, Blocks.PACKED_ICE, Blocks.FROSTED_ICE),
+            3, 9, 132, 115
+    ));
+
     //--------------------------------------
     //    CUSTOMIZED FEATURES
     //--------------------------------------

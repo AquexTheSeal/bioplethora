@@ -7,13 +7,12 @@ import io.github.bioplethora.blocks.tile_entities.FleignariteSplotchBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.enums.BioPlantShape;
 import io.github.bioplethora.enums.BioPlantType;
+import io.github.bioplethora.item.functionals.BPBoatItem;
 import io.github.bioplethora.registry.worldgen.BPNBTTrees;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
@@ -135,7 +134,7 @@ public class BPBlocks {
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CAERULWOOD_WOOD = registerBlock("stripped_caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_WOOD.get())), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<LeavesBlock> CAERULWOOD_LEAVES = registerBlock("caerulwood_leaves", () -> new BPLeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<SaplingBlock> CAERULWOOD_SAPLING = registerBlock("caerulwood_sapling", () -> new BPSaplingBlock(BioPlantType.END_HIGHLANDS, new BPNBTTrees.CaerulwoodNBTTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SaplingBlock> CAERULWOOD_SAPLING = registerBlock("caerulwood_sapling", () -> new BPSaplingBlock(BioPlantType.CAERI, new BPNBTTrees.CaerulwoodNBTTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<FenceBlock> CAERULWOOD_FENCE = registerBlock("caerulwood_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<FenceGateBlock> CAERULWOOD_FENCE_GATE = registerBlock("caerulwood_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
@@ -148,17 +147,33 @@ public class BPBlocks {
     public static final RegistryObject<StairsBlock> CAERULWOOD_STAIRS = registerBlock("caerulwood_stairs", () -> new StairsBlock(() -> BPBlocks.CAERULWOOD_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<SlabBlock> CAERULWOOD_SLAB = registerBlock("caerulwood_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
 
+    public static final RegistryObject<Item> CAERULWOOD_SIGN_ITEM = BLOCK_ITEMS.register("caerulwood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(BPItemGroup.BioplethoraItemItemGroup), BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()));
+    public static final RegistryObject<Item> CAERULWOOD_BOAT = BLOCK_ITEMS.register("caerulwood_boat", () -> new BPBoatItem(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup), "caerulwood"));
+
     // End Plants
-    public static final RegistryObject<Block> IRION_GRASS = registerBlock("irion_grass", () -> new BPPlantBlock(BioPlantType.END_HIGHLANDS, BioPlantShape.SIMPLE_PLANT,
+    public static final RegistryObject<Block> IRION_GRASS = registerBlock("irion_grass", () -> new BPPlantBlock(BioPlantType.CAERI, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(Blocks.TALL_GRASS).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<Block> IRION_TALL_GRASS = registerBlock("irion_tall_grass", () -> new BPDoublePlantBlock(BioPlantType.END_HIGHLANDS, BioPlantShape.SIMPLE_PLANT,
+    public static final RegistryObject<Block> IRION_TALL_GRASS = registerBlock("irion_tall_grass", () -> new BPDoublePlantBlock(BioPlantType.CAERI, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.IRION_GRASS.get()).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> AZURLIA = registerBlock("azurlia", () -> new BPReversePlantBlock(BioPlantType.CAERULWOOD_TREE, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 13).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
-    public static final RegistryObject<Block> ARTAIRIUS = registerBlock("artairius", () -> new BPDoublePlantBlock(BioPlantType.END_HIGHLANDS, BioPlantShape.SIMPLE_PLANT,
+    public static final RegistryObject<Block> ARTAIRIUS = registerBlock("artairius", () -> new BPDoublePlantBlock(BioPlantType.CAERI, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.IRION_GRASS.get()).lightLevel((block) -> block.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER ? 13 : 5).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<Block> FROSTEM = registerBlock("frostem", () -> new FrostemBlock(BioPlantType.END_ISLANDS_ICE, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.of(Material.ICE, DyeColor.LIGHT_BLUE).strength(0.25F).sound(SoundType.GLASS).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<Block> SPINXELTHORN = registerBlock("spinxelthorn", () -> new BPVinesTopBlock.SpinxelthornTopBlock(
+            AbstractBlock.Properties.of(Material.STONE, DyeColor.WHITE).strength(0.7F).sound(SoundType.STONE).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> SPINXELTHORN_PLANT = registerBlock("spinxelthorn_plant", () -> new BPVinesBlock.SpinxelthornBlock(
+            AbstractBlock.Properties.of(Material.STONE, DyeColor.WHITE).strength(0.7F).sound(SoundType.STONE).noCollission()), null, false);
+
+    public static final RegistryObject<Block> GLACYNTH = registerBlock("glacynth", () -> new BPVinesTopBlock.GlacynthTopBlock(
+            AbstractBlock.Properties.of(Material.ICE, DyeColor.LIGHT_BLUE).strength(0.25F).sound(SoundType.GLASS).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> GLACYNTH_PLANT = registerBlock("glacynth_plant", () -> new BPVinesBlock.GlacynthBlock(
+            AbstractBlock.Properties.of(Material.ICE, DyeColor.LIGHT_BLUE).strength(0.25F).sound(SoundType.GLASS).noCollission()), null, false);
 
     // End Blocks
     public static final RegistryObject<Block> IRION = registerBlock("irion", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_LIGHT_BLUE)
