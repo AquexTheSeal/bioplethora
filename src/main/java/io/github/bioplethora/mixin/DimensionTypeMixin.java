@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class DimensionTypeMixin {
 
     @Inject(at = @At("HEAD"), method = "defaultNetherGenerator", cancellable = true)
-    private static void IE_netherDimensionInfernalExpansion(Registry<Biome> registry, Registry<DimensionSettings> settings, long seed, CallbackInfoReturnable<ChunkGenerator> cir) {
+    private static void defaultNetherGenerator(Registry<Biome> registry, Registry<DimensionSettings> settings, long seed, CallbackInfoReturnable<ChunkGenerator> cir) {
         cir.setReturnValue(new NoiseChunkGenerator(new BPNetherBiomeProvider(seed, registry, 6), seed, () -> settings.getOrThrow(DimensionSettings.NETHER)));
     }
 }
