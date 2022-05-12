@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity;
 
-import io.github.bioplethora.entity.ai.BPCustomSwimmingGoal;
-import io.github.bioplethora.entity.ai.BPWaterChargingCoal;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
+import io.github.bioplethora.entity.ai.goals.BPCustomSwimmingGoal;
+import io.github.bioplethora.entity.ai.goals.BPWaterChargingCoal;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

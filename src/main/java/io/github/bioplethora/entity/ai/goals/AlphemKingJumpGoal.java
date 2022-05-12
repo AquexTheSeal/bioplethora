@@ -1,4 +1,4 @@
-package io.github.bioplethora.entity.ai;
+package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import net.minecraft.entity.LivingEntity;

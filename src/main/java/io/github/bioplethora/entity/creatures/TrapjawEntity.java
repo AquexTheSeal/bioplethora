@@ -2,9 +2,9 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.*;
-import io.github.bioplethora.entity.ai.WaterFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.goals.WaterFollowOwnerGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.block.BlockState;

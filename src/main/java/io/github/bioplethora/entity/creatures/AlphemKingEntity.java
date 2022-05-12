@@ -6,8 +6,8 @@ import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
-import io.github.bioplethora.entity.ai.*;
 import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.goals.*;
 import io.github.bioplethora.entity.others.AlphanumShardEntity;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPAttributes;
@@ -41,7 +41,6 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.ParticleKeyFrameEvent;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -98,12 +97,12 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<AlphemKingEntity>(this, 1.0F, 12) {
+        this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<AlphemKingEntity>(this, 1.15F, 8) {
             @Override
             public boolean canUse() {
                 if (RANDOM.nextInt(this.checkRate) == 0) return false;
 
-                if (!((AlphemKingEntity) entity).getRoaring()) {
+                if (!entity.getRoaring()) {
                     return this.isExecutable(this, this.entity, this.entity.getTarget());
                 } else {
                     return false;
@@ -112,13 +111,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
             @Override
             public boolean canContinueToUse() {
-                if (RANDOM.nextInt(this.checkRate) == 0) return true;
-
-                if (!((AlphemKingEntity) entity).getRoaring()) {
-                    return this.isExecutable(this, this.entity, this.entity.getTarget());
-                } else {
-                    return false;
-                }
+                return this.canUse();
             }
         });
 
@@ -130,13 +123,13 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(1, new AlphemKingSmashingGoal(this, 120, 0.8, 0.9));
 
         this.goalSelector.addGoal(2, new AlphemKingRangedAttackGoal(this));
-        this.goalSelector.addGoal(3, new AlphemKingJumpGoal(this));
-        this.goalSelector.addGoal(4, new AlphemKingRoarGoal(this));
-        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(5, new SwimGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
+        this.goalSelector.addGoal(4, new AlphemKingJumpGoal(this));
+        this.goalSelector.addGoal(5, new AlphemKingRoarGoal(this));
+        this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(6, new SwimGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
     }
 
@@ -144,10 +137,6 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public void registerControllers(AnimationData data) {
         AnimationController controller = new AnimationController<>(this, "alphem_king_controller", 0, this::predicate);
         data.addAnimationController(controller);
-        controller.registerParticleListener(this::particleListener);
-    }
-
-    private <ENTITY extends IAnimatable> void particleListener(ParticleKeyFrameEvent<ENTITY> event) {
     }
 
     @Override
@@ -159,11 +148,6 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         if (this.isDeadOrDying()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.death", true));
-            return PlayState.CONTINUE;
-        }
-
-        if (this.getRoaring()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.roar", true));
             return PlayState.CONTINUE;
         }
 
@@ -179,6 +163,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         if (this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.attack_0", true));
+            return PlayState.CONTINUE;
+        }
+
+        if (this.getRoaring()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.alphem_king.roar", true));
             return PlayState.CONTINUE;
         }
 

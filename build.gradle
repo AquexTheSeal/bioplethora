@@ -138,7 +138,7 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
     //Geckolib
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${mc_version}:3.0.57")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${mc_version}:3.0.71")
     //Abnormal's Core
     implementation fg.deobf("com.minecraftabnormals:abnormals-core:1.16.5-3.2.0")
 

@@ -1,3 +1,6 @@
 {
-  "parent": "bioplethora:block/caerulwood_sign"
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "bioplethora:item/caerulwood_sign"
+  }
 }

@@ -1,4 +1,4 @@
-package io.github.bioplethora.entity.ai;
+package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;

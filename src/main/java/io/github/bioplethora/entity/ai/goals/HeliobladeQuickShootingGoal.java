@@ -1,4 +1,4 @@
-package io.github.bioplethora.entity.ai;
+package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.creatures.HeliobladeEntity;
 import io.github.bioplethora.entity.projectile.VermilionBladeProjectileEntity;

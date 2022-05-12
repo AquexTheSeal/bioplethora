@@ -2,10 +2,10 @@ package io.github.bioplethora.entity.others;
 
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
-import io.github.bioplethora.entity.ai.PrimordialRingFollowOwnerGoal;
-import io.github.bioplethora.entity.ai.PrimordialRingOwnerHurtByTargetGoal;
-import io.github.bioplethora.entity.ai.PrimordialRingOwnerHurtTargetGoal;
-import io.github.bioplethora.entity.ai.PrimordialRingRangedAttackGoal;
+import io.github.bioplethora.entity.ai.goals.PrimordialRingFollowOwnerGoal;
+import io.github.bioplethora.entity.ai.goals.PrimordialRingOwnerHurtByTargetGoal;
+import io.github.bioplethora.entity.ai.goals.PrimordialRingOwnerHurtTargetGoal;
+import io.github.bioplethora.entity.ai.goals.PrimordialRingRangedAttackGoal;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;

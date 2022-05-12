@@ -3,7 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.ai.CavernFleignarMeleeGoal;
+import io.github.bioplethora.entity.ai.goals.CavernFleignarMeleeGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPEffects;
 import io.github.bioplethora.registry.BPTags;

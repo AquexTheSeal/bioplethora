@@ -1,4 +1,4 @@
-package io.github.bioplethora.entity.ai;
+package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.projectile.CryoblazeEntity;
@@ -31,10 +31,10 @@ public class AlphemKingRangedAttackGoal extends Goal {
 
     public void tick() {
         LivingEntity target = this.king.getTarget();
-        if (target.distanceToSqr(this.king) < 4096.0D && this.king.canSee(target)) {
+        if (target.distanceToSqr(this.king) < 4096.0D && king.canSee(target)) {
             World world = this.king.level;
 
-            this.king.getLookControl().setLookAt(king.getTarget(), 30.0F, 30.0F);
+            this.king.getLookControl().setLookAt(king.getTarget(), 10.0F, 10.0F);
 
             ++this.chargeTime;
 
@@ -56,9 +56,11 @@ public class AlphemKingRangedAttackGoal extends Goal {
                 this.shootBlaze(world, target);
                 this.chargeTime = 0;
             }
-        }
 
-        this.king.setCharging(this.chargeTime > 140);
+            this.king.setCharging(this.chargeTime > 140);
+        } else {
+            this.king.setCharging(false);
+        }
     }
 
     public void shootBlaze(World world, LivingEntity target) {
@@ -77,12 +79,12 @@ public class AlphemKingRangedAttackGoal extends Goal {
         world.addFreshEntity(cryo);
 
         CryoblazeEntity cryoL = new CryoblazeEntity(world, this.king, d1, d2, d3);
-        cryo.setOwner(this.king);
+        cryoL.setOwner(this.king);
         cryoL.setPos(cryoL.getX() + vector3d.z * 4.0D, this.king.getY(0.5D) + 0.5D, cryoL.getZ() + vector3d.z * -4.0D);
         world.addFreshEntity(cryoL);
 
         CryoblazeEntity cryoR = new CryoblazeEntity(world, this.king, d1, d2, d3);
-        cryo.setOwner(this.king);
+        cryoR.setOwner(this.king);
         cryoR.setPos(cryoR.getX() + vector3d.z * -4.0D, this.king.getY(0.5D) + 0.5D, cryoR.getZ() + vector3d.z * 4.0D);
         world.addFreshEntity(cryoR);
     }

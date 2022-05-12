@@ -2,7 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
-import io.github.bioplethora.entity.ai.MyliothanChargeAttackGoal;
+import io.github.bioplethora.entity.ai.goals.MyliothanChargeAttackGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.entity.EntityType;

@@ -5,10 +5,7 @@ import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.ShieldItem;
-import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolItem;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -72,6 +69,7 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.differentModelBlock(BPBlocks.CAERULWOOD_BUTTON, "caerulwood_button_inventory");
         this.differentModelBlock(BPBlocks.CAERULWOOD_TRAPDOOR, "caerulwood_trapdoor_bottom");
         this.differentModelBlock(BPBlocks.CAERULWOOD_FENCE, "caerulwood_fence_inventory");
+        this.defaultItem(BPBlocks.CAERULWOOD_BOAT);
     }
 
     @Nonnull
@@ -101,6 +99,16 @@ public class BioItemModelProvider extends ItemModelProvider {
         }
     }
 
+    public void defaultItem(RegistryObject<Item> item) {
+        String name = item.getId().getPath();
+        Item getItem = item.get();
+        ModelFile.ExistingModelFile modelType = getItem instanceof ToolItem || getItem instanceof SwordItem ?
+                getMcLoc("item/handheld") : getMcLoc("item/generated");
+
+        this.getBuilder(name).parent(modelType).texture("layer0", ITEM_FOLDER + "/" + name);
+        Bioplethora.LOGGER.info("Generate Item Successful: " + item.getId());
+    }
+
     public void defaultBlock(Collection<RegistryObject<Item>> blockItems) {
         for (RegistryObject<Item> blockItem : blockItems) {
             String name = blockItem.getId().getPath();
@@ -110,7 +118,11 @@ public class BioItemModelProvider extends ItemModelProvider {
             if (!existingFileHelper.exists(blockLoc, MODEL) || existingFileHelper.exists(itemLoc, MODEL))
                 continue;
 
-            this.withExistingParent(name, blockLoc);
+            if (blockItem.get() instanceof BoatItem || blockItem.get() instanceof SignItem) {
+                this.getBuilder(name).parent(getMcLoc("item/handheld")).texture("layer0", ITEM_FOLDER + "/" + name);
+            } else {
+                this.withExistingParent(name, blockLoc);
+            }
             Bioplethora.LOGGER.info("Generate Block Item Successful: " + blockItem.getId());
         }
     }

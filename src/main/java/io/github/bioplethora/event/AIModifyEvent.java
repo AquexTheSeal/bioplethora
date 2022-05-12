@@ -1,6 +1,6 @@
 package io.github.bioplethora.event;
 
-import io.github.bioplethora.entity.ai.BPAvoidEntityGoal;
+import io.github.bioplethora.entity.ai.goals.BPAvoidEntityGoal;
 import io.github.bioplethora.entity.creatures.EurydnEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MobEntity;
