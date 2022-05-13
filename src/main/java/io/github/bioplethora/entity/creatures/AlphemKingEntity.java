@@ -77,7 +77,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 16.5 * BPConfig.COMMON.mobArmorMultiplier.get())
-                .add(Attributes.ATTACK_SPEED, 10.5)
+                .add(Attributes.ATTACK_SPEED, 0.001)
                 .add(Attributes.ATTACK_DAMAGE, 30 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 8.0D)
                 .add(Attributes.MAX_HEALTH, 510 * BPConfig.COMMON.mobHealthMultiplier.get())
@@ -214,10 +214,10 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         }
 
         if (this.getTarget() != null) {
-            attackPhase++;
-            if (this.attackPhase == 40) {
+            summonShardTimer++;
+            if (this.summonShardTimer == 40) {
                 summonShard(BPConfig.IN_HELLMODE ? 5 + getRandom().nextInt(6) : 4 + getRandom().nextInt(4));
-                this.attackPhase = 0;
+                this.summonShardTimer = 0;
             }
         }
 

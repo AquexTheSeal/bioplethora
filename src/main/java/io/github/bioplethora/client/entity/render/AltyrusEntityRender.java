@@ -21,6 +21,12 @@ public class AltyrusEntityRender extends GeoEntityRenderer<AltyrusEntity> {
     }
 
     @Override
+    protected void applyRotations(AltyrusEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+        super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+        entityLiving.ageInTicks = ageInTicks;
+    }
+
+    @Override
     public void renderEarly(AltyrusEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }

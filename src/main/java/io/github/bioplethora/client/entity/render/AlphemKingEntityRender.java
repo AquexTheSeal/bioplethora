@@ -23,6 +23,12 @@ public class AlphemKingEntityRender extends GeoEntityRenderer<AlphemKingEntity> 
     }
 
     @Override
+    protected void applyRotations(AlphemKingEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+        super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+        entityLiving.ageInTicks = ageInTicks;
+    }
+
+    @Override
     public void renderEarly(AlphemKingEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }

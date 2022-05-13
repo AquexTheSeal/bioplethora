@@ -6,7 +6,10 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -19,6 +22,12 @@ public abstract class BPMonsterEntity extends MonsterEntity implements IAnimatab
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(BPMonsterEntity.class, DataSerializers.BOOLEAN);
 
+    public int prevHurtTime;
+    public boolean hurtRandomizer;
+
+    @OnlyIn(Dist.CLIENT)
+    public float ageInTicks;
+
     public BPMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
     }
@@ -28,6 +37,18 @@ public abstract class BPMonsterEntity extends MonsterEntity implements IAnimatab
 
     @Override
     abstract public AnimationFactory getFactory();
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        this.hurtRandomizer = this.getRandom().nextBoolean();
+        return super.hurt(pSource, pAmount);
+    }
+
+    @Override
+    public void baseTick() {
+        this.prevHurtTime = hurtTime;
+        super.baseTick();
+    }
 
     @Override
     protected void defineSynchedData() {
