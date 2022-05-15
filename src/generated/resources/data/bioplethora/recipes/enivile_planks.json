@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "bioplethora:enivile_logs"
+    }
+  ],
+  "result": {
+    "item": "bioplethora:enivile_planks",
+    "count": 4
+  }
+}

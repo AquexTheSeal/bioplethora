@@ -6,6 +6,15 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "bioplethora:caerulwood_door",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
           "name": "bioplethora:caerulwood_door"
         }
       ],

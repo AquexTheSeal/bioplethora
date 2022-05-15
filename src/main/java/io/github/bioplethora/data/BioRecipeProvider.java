@@ -93,13 +93,19 @@ public class BioRecipeProvider extends RecipeProvider {
         reinforcing(consumer, BPItems.REINFORCED_FLEIGNARITE_BOOTS.get(), BPItems.FLEIGNARITE_BOOTS.get(), BPItems.BELLOPHITE.get(), Items.NETHERITE_BOOTS, 2);
 
         // WOODSET
+        this.woodset(consumer, BPTags.Items.ENIVILE_LOGS,
+                BPBlocks.ENIVILE_PLANKS.get(), BPBlocks.ENIVILE_LOG.get(), BPBlocks.STRIPPED_ENIVILE_LOG.get(),
+                BPBlocks.ENIVILE_WOOD.get(), BPBlocks.STRIPPED_ENIVILE_WOOD.get(), BPBlocks.ENIVILE_FENCE.get(), 
+                BPBlocks.ENIVILE_FENCE_GATE.get(), BPBlocks.ENIVILE_PRESSURE_PLATE.get(), BPBlocks.ENIVILE_DOOR.get(),
+                BPBlocks.ENIVILE_TRAPDOOR.get(), BPBlocks.ENIVILE_BUTTON.get(), BPBlocks.ENIVILE_STAIRS.get(), 
+                BPBlocks.ENIVILE_SLAB.get(), BPBlocks.ENIVILE_SIGN_ITEM.get(), BPBlocks.ENIVILE_BOAT.get()
+        );
         this.woodset(consumer, BPTags.Items.CAERULWOOD_LOGS,
                 BPBlocks.CAERULWOOD_PLANKS.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
-                BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get(), BPBlocks.CAERULWOOD_LEAVES.get(),
-                BPBlocks.CAERULWOOD_SAPLING.get(), BPBlocks.CAERULWOOD_FENCE.get(), BPBlocks.CAERULWOOD_FENCE_GATE.get(),
-                BPBlocks.CAERULWOOD_PRESSURE_PLATE.get(), BPBlocks.CAERULWOOD_DOOR.get(), BPBlocks.CAERULWOOD_TRAPDOOR.get(),
-                BPBlocks.CAERULWOOD_BUTTON.get(), BPBlocks.CAERULWOOD_STAIRS.get(), BPBlocks.CAERULWOOD_SLAB.get(),
-                BPBlocks.CAERULWOOD_SIGN_ITEM.get(), BPBlocks.CAERULWOOD_BOAT.get()
+                BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get(), BPBlocks.CAERULWOOD_FENCE.get(),
+                BPBlocks.CAERULWOOD_FENCE_GATE.get(), BPBlocks.CAERULWOOD_PRESSURE_PLATE.get(), BPBlocks.CAERULWOOD_DOOR.get(),
+                BPBlocks.CAERULWOOD_TRAPDOOR.get(), BPBlocks.CAERULWOOD_BUTTON.get(), BPBlocks.CAERULWOOD_STAIRS.get(),
+                BPBlocks.CAERULWOOD_SLAB.get(), BPBlocks.CAERULWOOD_SIGN_ITEM.get(), BPBlocks.CAERULWOOD_BOAT.get()
         );
 
         // STONE
@@ -153,7 +159,7 @@ public class BioRecipeProvider extends RecipeProvider {
     }
 
     public void woodset(Consumer<IFinishedRecipe> consumer, ITag<Item> logsTag,
-                        IItemProvider planks, IItemProvider log, IItemProvider strippedLog, IItemProvider wood, IItemProvider strippedWood, IItemProvider leaves, IItemProvider sapling,
+                        IItemProvider planks, IItemProvider log, IItemProvider strippedLog, IItemProvider wood, IItemProvider strippedWood,
                         IItemProvider fence, IItemProvider fenceGate, IItemProvider pressurePlate, IItemProvider door, IItemProvider trapdoor,
                         IItemProvider button, IItemProvider stairs, IItemProvider slab, IItemProvider sign, IItemProvider boat) {
         

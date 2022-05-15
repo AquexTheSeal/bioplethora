@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "bioplethora:pink_enivile_leaves",
+    "bioplethora:red_enivile_leaves",
     "bioplethora:caerulwood_leaves"
   ]
 }

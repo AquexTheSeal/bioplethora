@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
@@ -13,6 +14,44 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
 
     protected BPVinesBlock(AbstractBlock.Properties properties) {
         super(properties, Direction.DOWN, SHAPE, true);
+    }
+
+    public boolean canSurviveOnLeafUtil(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+        BlockPos blockpos = pPos.relative(this.growthDirection.getOpposite());
+        BlockState blockstate = pLevel.getBlockState(blockpos);
+        Block block = blockstate.getBlock();
+        if (!this.canAttachToBlock(block)) {
+            return false;
+        } else {
+            return block == this.getHeadBlock() || block == this.getBodyBlock() || block instanceof LeavesBlock || blockstate.isFaceSturdy(pLevel, blockpos, this.growthDirection);
+        }
+    }
+
+    public static class PinkTwiBlock extends BPVinesBlock {
+        public PinkTwiBlock(Properties properties) {
+            super(properties);
+        }
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.PINK_TWI.get();
+        }
+        @Override
+        public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+            return canSurviveOnLeafUtil(pState, pLevel, pPos);
+        }
+    }
+    public static class RedTwiBlock extends BPVinesBlock {
+        public RedTwiBlock(Properties properties) {
+            super(properties);
+        }
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.RED_TWI.get();
+        }
+        @Override
+        public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+            return canSurviveOnLeafUtil(pState, pLevel, pPos);
+        }
     }
 
     public static class SpiritDanglerBlock extends BPVinesBlock {

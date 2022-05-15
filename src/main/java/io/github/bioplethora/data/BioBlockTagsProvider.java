@@ -114,39 +114,55 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
         // woodset
         tag(BlockTags.LOGS)
+                .add(BPBlocks.ENIVILE_LOG.get())
+                .add(BPBlocks.ENIVILE_WOOD.get())
+                .add(BPBlocks.STRIPPED_ENIVILE_LOG.get())
+                .add(BPBlocks.STRIPPED_ENIVILE_WOOD.get())
+                
                 .add(BPBlocks.CAERULWOOD_LOG.get())
                 .add(BPBlocks.CAERULWOOD_WOOD.get())
                 .add(BPBlocks.STRIPPED_CAERULWOOD_LOG.get())
                 .add(BPBlocks.STRIPPED_CAERULWOOD_WOOD.get())
         ;
         tag(BlockTags.PLANKS)
+                .add(BPBlocks.ENIVILE_PLANKS.get())
                 .add(BPBlocks.CAERULWOOD_PLANKS.get())
         ;
         tag(BlockTags.SAPLINGS)
+                .add(BPBlocks.ENIVILE_SAPLING.get())
                 .add(BPBlocks.CAERULWOOD_SAPLING.get())
         ;
         tag(BlockTags.LEAVES)
+                .add(BPBlocks.ENIVILE_LEAVES_PINK.get())
+                .add(BPBlocks.ENIVILE_LEAVES_RED.get())
                 .add(BPBlocks.CAERULWOOD_LEAVES.get())
         ;
         tag(BlockTags.DOORS)
+                .add(BPBlocks.ENIVILE_DOOR.get())
                 .add(BPBlocks.CAERULWOOD_DOOR.get())
         ;
         tag(BlockTags.WOODEN_PRESSURE_PLATES)
+                .add(BPBlocks.ENIVILE_PRESSURE_PLATE.get())
                 .add(BPBlocks.CAERULWOOD_PRESSURE_PLATE.get())
         ;
         tag(BlockTags.WOODEN_BUTTONS)
+                .add(BPBlocks.ENIVILE_BUTTON.get())
                 .add(BPBlocks.CAERULWOOD_BUTTON.get())
         ;
         tag(BlockTags.WOODEN_STAIRS)
+                .add(BPBlocks.ENIVILE_STAIRS.get())
                 .add(BPBlocks.CAERULWOOD_STAIRS.get())
         ;
         tag(BlockTags.WOODEN_SLABS)
+                .add(BPBlocks.ENIVILE_SLAB.get())
                 .add(BPBlocks.CAERULWOOD_SLAB.get())
         ;
         tag(BlockTags.WOODEN_FENCES)
+                .add(BPBlocks.ENIVILE_FENCE.get())
                 .add(BPBlocks.CAERULWOOD_FENCE.get())
         ;
         tag(BlockTags.FENCE_GATES)
+                .add(BPBlocks.ENIVILE_FENCE_GATE.get())
                 .add(BPBlocks.CAERULWOOD_FENCE_GATE.get())
         ;
         

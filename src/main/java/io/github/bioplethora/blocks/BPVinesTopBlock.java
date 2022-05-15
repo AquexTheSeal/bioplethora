@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -23,6 +24,44 @@ public abstract class BPVinesTopBlock extends AbstractTopPlantBlock {
 
     protected int getBlocksToGrowWhenBonemealed(Random pRandom) {
         return PlantBlockHelper.getBlocksToGrowWhenBonemealed(pRandom);
+    }
+
+    public boolean canSurviveOnLeafUtil(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+        BlockPos blockpos = pPos.relative(this.growthDirection.getOpposite());
+        BlockState blockstate = pLevel.getBlockState(blockpos);
+        Block block = blockstate.getBlock();
+        if (!this.canAttachToBlock(block)) {
+            return false;
+        } else {
+            return block == this.getHeadBlock() || block == this.getBodyBlock() || block instanceof LeavesBlock || blockstate.isFaceSturdy(pLevel, blockpos, this.growthDirection);
+        }
+    }
+
+    public static class PinkTwiTopBlock extends BPVinesTopBlock {
+        public PinkTwiTopBlock(Properties properties) {
+            super(properties);
+        }
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.PINK_TWI_PLANT.get();
+        }
+        @Override
+        public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+            return canSurviveOnLeafUtil(pState, pLevel, pPos);
+        }
+    }
+    public static class RedTwiTopBlock extends BPVinesTopBlock {
+        public RedTwiTopBlock(Properties properties) {
+            super(properties);
+        }
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.RED_TWI_PLANT.get();
+        }
+        @Override
+        public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+            return canSurviveOnLeafUtil(pState, pLevel, pPos);
+        }
     }
 
     public static class SpiritDanglerTopBlock extends BPVinesTopBlock {

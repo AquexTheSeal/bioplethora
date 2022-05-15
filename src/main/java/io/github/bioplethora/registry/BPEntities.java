@@ -86,6 +86,7 @@ public class BPEntities {
 
     //Others
     public static final RegistryObject<EntityType<BPBoatEntity>> CAERULWOOD_BOAT = createBoat("caerulwood");
+    public static final RegistryObject<EntityType<BPBoatEntity>> ENIVILE_BOAT = createBoat("enivile");
 
     public static final RegistryObject<EntityType<PrimordialRingEntity>> PRIMORDIAL_RING = ENTITIES.register("primordial_ring", () -> EntityType.Builder.of(PrimordialRingEntity::new, EntityClassification.MONSTER).sized(3.5f, 2f).build(new ResourceLocation(Bioplethora.MOD_ID, "primordial_ring").toString()));
     public static final RegistryObject<EntityType<AltyrusSummoningEntity>> ALTYRUS_SUMMONING = ENTITIES.register("altyrus_summoning", () -> EntityType.Builder.of(AltyrusSummoningEntity::new, EntityClassification.MISC).sized(2.0F, 2.0F).clientTrackingRange(4)

@@ -2,6 +2,7 @@ package io.github.bioplethora.registry.worldgen;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.world.surfacebuilderconfigs.CarpetedSurfaceBuilderConfig;
 import io.github.bioplethora.world.surfacebuilderconfigs.NoisySurfaceBuilderConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -21,11 +22,11 @@ public class BPConfiguredSurfaceBuilders {
             )));
 
     public static ConfiguredSurfaceBuilder<?> CRYEANUM_SURFACE = register("cryeanum",
-            BPSurfaceBuilders.NOISY.get().configured(new NoisySurfaceBuilderConfig(
-                    BPBlocks.CYRA.get().defaultBlockState(), // Surface Block
-                    Blocks.END_STONE.defaultBlockState(), // Surface Block Uncommon
-                    Blocks.END_STONE.defaultBlockState(), // Underground Block
-                    Blocks.END_STONE.defaultBlockState() // Underwater Block
+            BPSurfaceBuilders.CARPETED.get().configured(new CarpetedSurfaceBuilderConfig(
+                    BPBlocks.CRYEA.get().defaultBlockState(), // Surface Block
+                    BPBlocks.CRYEA_CARPET.get().defaultBlockState(), // Carpet Block
+                    Blocks.NETHERRACK.defaultBlockState(), // Underground Block
+                    Blocks.BLACKSTONE.defaultBlockState() // Underwater Block
             )));
 
     public static ConfiguredSurfaceBuilder<?> CAERI_SURFACE = register("caeri",

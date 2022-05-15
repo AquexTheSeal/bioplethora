@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "bioplethora:block/stripped_enivile_log_side",
+    "end": "bioplethora:block/stripped_enivile_log_side"
+  }
+}

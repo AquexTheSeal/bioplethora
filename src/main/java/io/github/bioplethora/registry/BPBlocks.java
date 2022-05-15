@@ -60,34 +60,43 @@ public class BPBlocks {
             .strength(0.3F).instabreak().sound(SoundType.SLIME_BLOCK).noCollission()
             .lightLevel((block) -> 5)), null, false);
 
-    // Nether Plants
+    // Nether Blocks
+    public static final RegistryObject<Block> CRYEA = registerBlock("cryea", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_PINK)
+            .strength(1.85F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> CRYEA_CARPET = registerBlock("cryea_carpet", () -> new BPFlatBlock(AbstractBlock.Properties.copy(CRYEA.get())), BPItemGroup.BioplethoraItemItemGroup);
 
-    // Mushrooms
+    // Nether Plants
     public static final RegistryObject<Block> SOUL_MINISHROOM = registerBlock("soul_minishroom", () -> new SmallMushroomBlock(BioPlantType.SOUL_SAND_VALLEY,
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.5F).noCollission().lightLevel((block) -> 4 * block.getValue(SmallMushroomBlock.MINISHROOMS))), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> SOUL_BIGSHROOM = registerBlock("soul_bigshroom", () -> new BPPlantBlock(BioPlantType.SOUL_SAND_VALLEY, BioPlantShape.BIG_MUSHROOM,
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.5F).noOcclusion().lightLevel((block) -> 7)), BPItemGroup.BioplethoraItemItemGroup);
 
-    // Extras
     public static final RegistryObject<Block> LAVA_SPIRE = registerBlock("lava_spire", () -> new LavaSpireBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
             .sound(SoundType.NETHER_SPROUTS).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 13)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> WARPED_DANCER = registerBlock("warped_dancer", () -> new BPPlantBlock(BioPlantType.WARPED_FOREST, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.NETHER_SPROUTS).strength(0.3F).instabreak().noCollission().lightLevel((block) -> 3)), BPItemGroup.BioplethoraItemItemGroup);
 
-    // Minor Plants (e.g. Grass, Tallgrass)
     public static final RegistryObject<Block> SOUL_SPROUTS = registerBlock("soul_sprouts", () -> new BPPlantBlock(BioPlantType.SOUL_SAND_VALLEY, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> SOUL_TALL_GRASS = registerBlock("soul_tall_grass", () -> new BPDoublePlantBlock(BioPlantType.SOUL_SAND_VALLEY, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.SOUL_SOIL).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
-    // Nether Vines
+    public static final RegistryObject<Block> PINK_TWI = registerBlock("pink_twi", () -> new BPVinesTopBlock.PinkTwiTopBlock(
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 7)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> PINK_TWI_PLANT = registerBlock("pink_twi_plant", () -> new BPVinesBlock.PinkTwiBlock(
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 15)), null, false);
+
+    public static final RegistryObject<Block> RED_TWI = registerBlock("red_twi", () -> new BPVinesTopBlock.RedTwiTopBlock(
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 7)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> RED_TWI_PLANT = registerBlock("red_twi_plant", () -> new BPVinesBlock.RedTwiBlock(
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 15)), null, false);
+
     public static final RegistryObject<Block> SPIRIT_DANGLER = registerBlock("spirit_dangler", () -> new BPVinesTopBlock.SpiritDanglerTopBlock(
             AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 6)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> SPIRIT_DANGLER_PLANT = registerBlock("spirit_dangler_plant", () -> new BPVinesBlock.SpiritDanglerBlock(
             AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).instabreak().noCollission().lightLevel((block) -> 8)), null, false);
 
-    // Fruitable Nether Vines
     public static final RegistryObject<Block> BASALT_SPELEOTHERM = registerBlock("basalt_speleotherm", () -> new BPFruitableVinesTopBlock.BasaltSpeleothermTopBlock(
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.BASALT).strength(0.3F).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> BASALT_SPELEOTHERM_PLANT = registerBlock("basalt_speleotherm_plant", () -> new BPFruitableVinesBlock.BasaltSpeleothermBlock(
@@ -126,6 +135,31 @@ public class BPBlocks {
     // Potted Plants
     public static final RegistryObject<FlowerPotBlock> POTTED_LAVA_SPIRE = registerBlock("potted_lava_spire", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LAVA_SPIRE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 
+    // Enivile Woodset
+    public static final RegistryObject<Block> ENIVILE_PLANKS = registerBlock("enivile_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> ENIVILE_LOG = registerBlock("enivile_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_ENIVILE_LOG = registerBlock("stripped_enivile_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_LOG.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> ENIVILE_WOOD = registerBlock("enivile_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_ENIVILE_WOOD = registerBlock("stripped_enivile_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_WOOD.get())), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<LeavesBlock> ENIVILE_LEAVES_PINK = registerBlock("pink_enivile_leaves", () -> new BPLeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<LeavesBlock> ENIVILE_LEAVES_RED = registerBlock("red_enivile_leaves", () -> new BPLeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SaplingBlock> ENIVILE_SAPLING = registerBlock("enivile_sapling", () -> new BPSaplingBlock(BioPlantType.CRYEANUM, new BPNBTTrees.CaerulwoodNBTTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<FenceBlock> ENIVILE_FENCE = registerBlock("enivile_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<FenceGateBlock> ENIVILE_FENCE_GATE = registerBlock("enivile_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<StandingSignBlock> ENIVILE_SIGN = registerBlock("enivile_sign", () -> new BPStandingSignBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get()), BPWoodTypes.ENIVILE), null, false);
+    public static final RegistryObject<WallSignBlock> ENIVILE_WALL_SIGN = registerBlock("enivile_wall_sign", () -> new BPWallSignBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get()), BPWoodTypes.ENIVILE), null, false);
+    public static final RegistryObject<PressurePlateBlock> ENIVILE_PRESSURE_PLATE = registerBlock("enivile_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<DoorBlock> ENIVILE_DOOR = registerBlock("enivile_door", () -> new DoorBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<TrapDoorBlock> ENIVILE_TRAPDOOR = registerBlock("enivile_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<WoodButtonBlock> ENIVILE_BUTTON = registerBlock("enivile_button", () -> new WoodButtonBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<StairsBlock> ENIVILE_STAIRS = registerBlock("enivile_stairs", () -> new StairsBlock(() -> BPBlocks.ENIVILE_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<SlabBlock> ENIVILE_SLAB = registerBlock("enivile_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<Item> ENIVILE_SIGN_ITEM = BLOCK_ITEMS.register("enivile_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(BPItemGroup.BioplethoraItemItemGroup), BPBlocks.ENIVILE_SIGN.get(), BPBlocks.ENIVILE_WALL_SIGN.get()));
+    public static final RegistryObject<Item> ENIVILE_BOAT = BLOCK_ITEMS.register("enivile_boat", () -> new BPBoatItem(new Item.Properties().stacksTo(1).tab(BPItemGroup.BioplethoraItemItemGroup), "enivile"));
+
     // Caerulwood Woodset
     public static final RegistryObject<Block> CAERULWOOD_PLANKS = registerBlock("caerulwood_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_LOG = registerBlock("caerulwood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
@@ -148,7 +182,7 @@ public class BPBlocks {
     public static final RegistryObject<SlabBlock> CAERULWOOD_SLAB = registerBlock("caerulwood_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_PLANKS.get())), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Item> CAERULWOOD_SIGN_ITEM = BLOCK_ITEMS.register("caerulwood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(BPItemGroup.BioplethoraItemItemGroup), BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()));
-    public static final RegistryObject<Item> CAERULWOOD_BOAT = BLOCK_ITEMS.register("caerulwood_boat", () -> new BPBoatItem(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup), "caerulwood"));
+    public static final RegistryObject<Item> CAERULWOOD_BOAT = BLOCK_ITEMS.register("caerulwood_boat", () -> new BPBoatItem(new Item.Properties().stacksTo(1).tab(BPItemGroup.BioplethoraItemItemGroup), "caerulwood"));
 
     // End Plants
     public static final RegistryObject<Block> IRION_GRASS = registerBlock("irion_grass", () -> new BPPlantBlock(BioPlantType.CAERI, BioPlantShape.SIMPLE_PLANT,

@@ -16,7 +16,6 @@
 
 package io.github.bioplethora.world.biomes.provider.helper;
 
-import io.github.bioplethora.registry.worldgen.BPBiomes;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -39,9 +38,6 @@ public class BPNetherProviderGatherer {
                 }
             }
         }
-
-        netherWhitelist.add(BPBiomes.getKey(BPBiomes.CAERI_PLAINS.get()));
-        netherWhitelist.add(BPBiomes.getKey(BPBiomes.CAERI_FOREST.get()));
 
         netherWhitelist.sort(Comparator.comparing(key -> key.location().toString()));
         return netherWhitelist;

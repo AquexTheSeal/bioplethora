@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "bioplethora:enivile_stairs",
     "bioplethora:caerulwood_stairs"
   ]
 }

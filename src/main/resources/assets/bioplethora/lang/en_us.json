@@ -183,6 +183,26 @@
   "block.bioplethora.yellow_grylynen_crystal_block": "Yellow Grylynen Crystal Block",
   "block.bioplethora.red_grylynen_crystal_block": "Red Grylynen Crystal Block",
 
+  "block.bioplethora.enivile_button": "Enivile Button",
+  "block.bioplethora.enivile_door": "Enivile Door",
+  "block.bioplethora.enivile_fence": "Enivile Fence",
+  "block.bioplethora.enivile_fence_gate": "Enivile Fence Gate",
+  "block.bioplethora.pink_enivile_leaves": "Pink Enivile Leaves",
+  "block.bioplethora.red_enivile_leaves": "Red Enivile Leaves",
+  "block.bioplethora.enivile_log": "Enivile Log",
+  "block.bioplethora.enivile_planks": "Enivile Planks",
+  "block.bioplethora.enivile_pressure_plate": "Enivile Pressure Plate",
+  "block.bioplethora.enivile_sign": "Enivile Sign",
+  "block.bioplethora.enivile_slab": "Enivile Slab",
+  "block.bioplethora.enivile_stairs": "Enivile Stairs",
+  "block.bioplethora.enivile_trapdoor": "Enivile Trapdoor",
+  "block.bioplethora.enivile_wood": "Enivile Wood",
+  "block.bioplethora.stripped_enivile_log": "Stripped Enivile Log",
+  "block.bioplethora.stripped_enivile_wood": "Stripped Enivile Wood",
+  "block.bioplethora.enivile_sapling": "Enivile Sapling",
+  "item.bioplethora.enivile_boat": "Enivile Boat",
+  "entity.bioplethora.enivile_boat": "Enivile Boat",
+
   "block.bioplethora.caerulwood_button": "Caerulwood Button",
   "block.bioplethora.caerulwood_door": "Caerulwood Door",
   "block.bioplethora.caerulwood_fence": "Caerulwood Fence",
@@ -209,6 +229,9 @@
 
   "item.bioplethora.swivelbloom": "Swivelbloom",
 
+  "block.bioplethora.cryea": "Cryea",
+  "block.bioplethora.cryea_carpet": "Cryea Carpet",
+
   "block.bioplethora.soul_bigshroom": "Soul Bigshroom",
   "block.bioplethora.soul_minishroom": "Soul Minishroom",
 
@@ -219,6 +242,11 @@
   "block.bioplethora.warped_dancer": "Warped Dancer",
 
   "block.bioplethora.potted_lava_spire": "Potted Lava Spire",
+
+  "block.bioplethora.pink_twi": "Pink Twi",
+  "block.bioplethora.pink_twi_plant": "Pink Twi Plant",
+  "block.bioplethora.red_twi": "Red Twi",
+  "block.bioplethora.red_twi_plant": "Red Twi Plant",
 
   "block.bioplethora.spirit_dangler": "Spirit Dangler",
   "block.bioplethora.spirit_dangler_plant": "Spirit Dangler",

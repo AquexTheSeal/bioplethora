@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "bioplethora:enivile_log"
+    }
+  },
+  "result": {
+    "item": "bioplethora:enivile_wood",
+    "count": 3
+  }
+}

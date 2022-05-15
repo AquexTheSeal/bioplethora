@@ -40,6 +40,7 @@ public class BPTags {
     }
 
     public static final class Items {
+        public static final ITag.INamedTag<Item> ENIVILE_LOGS = bioLoc("enivile_logs");
         public static final ITag.INamedTag<Item> CAERULWOOD_LOGS = bioLoc("caerulwood_logs");
 
         public static final ITag.INamedTag<Item> LOGS = mcLoc("logs");

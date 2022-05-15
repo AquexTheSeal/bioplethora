@@ -1,6 +1,5 @@
 package io.github.bioplethora.client;
 
-import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.client.armor.render.AquChestplateRender;
 import io.github.bioplethora.client.block.render.FleignariteSplotchBlockRender;
 import io.github.bioplethora.client.entity.render.*;
@@ -23,22 +22,17 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.client.model.SeparatePerspectiveModel;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
-@Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+//@Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModClientRegister {
 
     @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
+    //@SubscribeEvent
     public static void registerRenderers(final FMLClientSetupEvent event) {
 
         Minecraft mcClient = event.getMinecraftSupplier().get();
@@ -48,6 +42,14 @@ public class ModClientRegister {
         ClientRegistry.bindTileEntityRenderer(BPTileEntities.BP_SIGN.get(), SignTileEntityRenderer::new);
 
         // Woodsets
+        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_DOOR.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_TRAPDOOR.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_LEAVES_PINK.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_LEAVES_RED.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_SIGN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_WALL_SIGN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_SAPLING.get(), RenderType.cutout());
+
         RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_DOOR.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_TRAPDOOR.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_LEAVES.get(), RenderType.cutout());
@@ -66,6 +68,12 @@ public class ModClientRegister {
 
         RenderTypeLookup.setRenderLayer(BPBlocks.LAVA_SPIRE.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.WARPED_DANCER.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.PINK_TWI.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.PINK_TWI_PLANT.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.RED_TWI.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.RED_TWI_PLANT.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(BPBlocks.SPIRIT_DANGLER.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.SPIRIT_DANGLER_PLANT.get(), RenderType.cutout());
@@ -163,6 +171,7 @@ public class ModClientRegister {
 
         //others
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CAERULWOOD_BOAT.get(), BPBoatRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.ENIVILE_BOAT.get(), BPBoatRender::new);
 
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
@@ -182,13 +191,8 @@ public class ModClientRegister {
         BPKeybinds.register(event);
     }
 
-    @SubscribeEvent
-    public static void onModelRegistry(ModelRegistryEvent event) {
-        ModelLoaderRegistry.registerLoader(new ResourceLocation(Bioplethora.MOD_ID, "separate_perspective"), SeparatePerspectiveModel.Loader.INSTANCE);
-    }
-
     @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
+    //@SubscribeEvent
     public static void registerModels(final FMLClientSetupEvent event) {
         //Bellophite Shield
         ItemModelsProperties.register(BPItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);

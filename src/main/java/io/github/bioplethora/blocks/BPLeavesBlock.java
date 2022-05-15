@@ -19,6 +19,13 @@ public class BPLeavesBlock extends LeavesBlock {
     public IParticleData getLeafParticle() {
         if (this == BPBlocks.CAERULWOOD_LEAVES.get()) {
             return BPParticles.CAERULWOOD_LEAF.get();
+
+        } else if (this == BPBlocks.ENIVILE_LEAVES_PINK.get()) {
+            return BPParticles.PINK_ENIVILE_LEAF.get();
+
+        } else if (this == BPBlocks.ENIVILE_LEAVES_RED.get()) {
+            return BPParticles.RED_ENIVILE_LEAF.get();
+
         } else {
             throw new IllegalStateException("Invalid leaf block, make sure to add " + this.getRegistryName().getPath() + " on the getLeafParticle() method.");
         }

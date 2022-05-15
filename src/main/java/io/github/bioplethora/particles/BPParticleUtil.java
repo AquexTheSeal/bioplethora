@@ -23,5 +23,7 @@ public class BPParticleUtil {
         engine.register(BPParticles.TRUE_DEFENSE_CLASH.get(), TrueDefenseClashParticle.Factory::new);
 
         engine.register(BPParticles.CAERULWOOD_LEAF.get(), FallingLeavesParticle.Factory::new);
+        engine.register(BPParticles.PINK_ENIVILE_LEAF.get(), FallingLeavesParticle.Factory::new);
+        engine.register(BPParticles.RED_ENIVILE_LEAF.get(), FallingLeavesParticle.Factory::new);
     }
 }

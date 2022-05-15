@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/netherrack",
+    "up": "bioplethora:block/cryea_top",
+    "north": "bioplethora:block/cryea_side",
+    "south": "bioplethora:block/cryea_side",
+    "east": "bioplethora:block/cryea_side",
+    "west": "bioplethora:block/cryea_side",
+    "particle": "bioplethora:block/cryea_top"
+  }
+}

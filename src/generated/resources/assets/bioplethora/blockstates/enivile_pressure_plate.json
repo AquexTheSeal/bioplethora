@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "bioplethora:block/enivile_pressure_plate"
+    },
+    "powered=true": {
+      "model": "bioplethora:block/enivile_pressure_plate_down"
+    }
+  }
+}

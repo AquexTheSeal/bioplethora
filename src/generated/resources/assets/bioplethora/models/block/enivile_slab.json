@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "bioplethora:block/enivile_planks",
+    "bottom": "bioplethora:block/enivile_planks",
+    "top": "bioplethora:block/enivile_planks"
+  }
+}

@@ -44,6 +44,9 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.flatBlock(BPBlocks.SOUL_SPROUTS, BPBlocks.SOUL_SPROUTS);
         this.flatBlock(BPBlocks.SOUL_TALL_GRASS, "soul_tall_grass_top");
 
+        this.flatBlock(BPBlocks.PINK_TWI, BPBlocks.PINK_TWI_PLANT);
+        this.flatBlock(BPBlocks.RED_TWI, BPBlocks.RED_TWI_PLANT);
+
         this.flatBlock(BPBlocks.SPIRIT_DANGLER, BPBlocks.SPIRIT_DANGLER_PLANT);
 
         this.flatBlock(BPBlocks.BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
@@ -51,6 +54,7 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.flatBlock(BPBlocks.SOUL_ETERN, BPBlocks.SOUL_ETERN_PLANT);
 
         // end plants
+        this.flatBlock(BPBlocks.IRION_GRASS, BPBlocks.IRION_GRASS);
         this.flatBlock(BPBlocks.IRION_TALL_GRASS, "irion_tall_grass_top");
 
         this.flatBlock(BPBlocks.AZURLIA, BPBlocks.AZURLIA);
@@ -64,6 +68,13 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.flatBlock(BPBlocks.GLACYNTH, BPBlocks.GLACYNTH_PLANT);
 
         // woodset
+        this.flatBlock(BPBlocks.ENIVILE_SAPLING, "enivile_sapling");
+        this.flatBlock(BPBlocks.ENIVILE_DOOR, "enivile_door", ITEM_FOLDER);
+        this.differentModelBlock(BPBlocks.ENIVILE_BUTTON, "enivile_button_inventory");
+        this.differentModelBlock(BPBlocks.ENIVILE_TRAPDOOR, "enivile_trapdoor_bottom");
+        this.differentModelBlock(BPBlocks.ENIVILE_FENCE, "enivile_fence_inventory");
+        this.defaultItem(BPBlocks.ENIVILE_BOAT);
+        
         this.flatBlock(BPBlocks.CAERULWOOD_SAPLING, "caerulwood_sapling");
         this.flatBlock(BPBlocks.CAERULWOOD_DOOR, "caerulwood_door", ITEM_FOLDER);
         this.differentModelBlock(BPBlocks.CAERULWOOD_BUTTON, "caerulwood_button_inventory");

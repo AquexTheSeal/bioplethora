@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bioplethora:enivile_planks"
+    }
+  },
+  "result": {
+    "item": "bioplethora:enivile_boat"
+  }
+}

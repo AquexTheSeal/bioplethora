@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "bioplethora:block/enivile_slab_top"
+    },
+    "type=bottom": {
+      "model": "bioplethora:block/enivile_slab"
+    },
+    "type=double": {
+      "model": "bioplethora:block/enivile_planks"
+    }
+  }
+}

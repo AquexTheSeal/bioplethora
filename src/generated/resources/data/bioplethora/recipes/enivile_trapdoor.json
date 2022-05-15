@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bioplethora:enivile_planks"
+    }
+  },
+  "result": {
+    "item": "bioplethora:enivile_trapdoor",
+    "count": 2
+  }
+}

@@ -20,6 +20,9 @@ public enum BioPlantType {
     WARPED_FOREST(() -> ImmutableList.of(
             Blocks.NETHERRACK, Blocks.WARPED_NYLIUM, Blocks.WARPED_WART_BLOCK
     )),
+    CRYEANUM(() -> ImmutableList.of(
+            Blocks.NETHERRACK
+    )),
 
     //----------------- END ----------------
     END_STONE(() -> ImmutableList.of(

@@ -7,6 +7,7 @@ import io.github.bioplethora.registry.BPItems;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.loot.ConstantRange;
 import net.minecraft.loot.ItemLootEntry;
@@ -14,6 +15,7 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.conditions.BlockStateProperty;
 import net.minecraft.loot.functions.SetCount;
+import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.stream.Collectors;
@@ -40,6 +42,9 @@ public class BPBlockLootTables extends BlockLootTables {
         dropOther(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), BPItems.FLEIGNARITE_SCALES.get());
 
         // Nether Plants
+        dropSelf(BPBlocks.CRYEA.get());
+        add(BPBlocks.CRYEA_CARPET.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CRYEA_CARPET.get()));
+
         dropMinishroom(BPBlocks.SOUL_MINISHROOM.get());
 
         dropSelf(BPBlocks.SOUL_BIGSHROOM.get());
@@ -49,6 +54,11 @@ public class BPBlockLootTables extends BlockLootTables {
 
         add(BPBlocks.SOUL_SPROUTS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.SOUL_SPROUTS.get()));
         add(BPBlocks.SOUL_TALL_GRASS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.SOUL_TALL_GRASS.get()));
+
+        dropSelf(BPBlocks.PINK_TWI.get());
+        dropOther(BPBlocks.PINK_TWI_PLANT.get(), BPBlocks.PINK_TWI.get());
+        dropSelf(BPBlocks.RED_TWI.get());
+        dropOther(BPBlocks.RED_TWI_PLANT.get(), BPBlocks.RED_TWI.get());
 
         dropSelf(BPBlocks.SPIRIT_DANGLER.get());
         dropOther(BPBlocks.SPIRIT_DANGLER_PLANT.get(), BPBlocks.SPIRIT_DANGLER.get());
@@ -86,10 +96,10 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.ARTAIRIUS.get());
 
         dropSelf(BPBlocks.BYRSS_FRUIT_BLOCK.get());
-        dropSelf(BPBlocks.BYRSS_LANTERN_PLANT.get());
+        add(BPBlocks.BYRSS_LANTERN_PLANT.get(), BPBlockLootTables::createLanternTable);
 
         dropSelf(BPBlocks.CHORUS_CITRUS_BLOCK.get());
-        dropSelf(BPBlocks.CHORUS_LANTERN_PLANT.get());
+        add(BPBlocks.CHORUS_LANTERN_PLANT.get(), BPBlockLootTables::createLanternTable);
 
         add(BPBlocks.FROSTEM.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.FROSTEM.get()));
 
@@ -102,7 +112,28 @@ public class BPBlockLootTables extends BlockLootTables {
         // Potted Plants
         dropPottedContents(BPBlocks.POTTED_LAVA_SPIRE.get());
 
-        // Caerulwood set
+        // Enivile woodset
+        dropSelf(BPBlocks.ENIVILE_LOG.get());
+        dropSelf(BPBlocks.ENIVILE_WOOD.get());
+        dropSelf(BPBlocks.STRIPPED_ENIVILE_LOG.get());
+        dropSelf(BPBlocks.STRIPPED_ENIVILE_WOOD.get());
+        dropSelf(BPBlocks.ENIVILE_PLANKS.get());
+        add(BPBlocks.ENIVILE_LEAVES_RED.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.ENIVILE_LEAVES_RED.get()));
+        add(BPBlocks.ENIVILE_LEAVES_PINK.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.ENIVILE_LEAVES_PINK.get()));
+        dropSelf(BPBlocks.ENIVILE_SAPLING.get());
+
+        dropSelf(BPBlocks.ENIVILE_FENCE.get());
+        dropSelf(BPBlocks.ENIVILE_FENCE_GATE.get());
+        dropSelf(BPBlocks.ENIVILE_SLAB.get());
+        dropSelf(BPBlocks.ENIVILE_PRESSURE_PLATE.get());
+        dropSelf(BPBlocks.ENIVILE_STAIRS.get());
+        dropSelf(BPBlocks.ENIVILE_BUTTON.get());
+        dropSelf(BPBlocks.ENIVILE_SIGN.get());
+        dropSelf(BPBlocks.ENIVILE_WALL_SIGN.get());
+        add(BPBlocks.ENIVILE_DOOR.get(), BlockLootTables::createDoorTable);
+        dropSelf(BPBlocks.ENIVILE_TRAPDOOR.get());
+        
+        // Caerulwood woodset
         dropSelf(BPBlocks.CAERULWOOD_LOG.get());
         dropSelf(BPBlocks.CAERULWOOD_WOOD.get());
         dropSelf(BPBlocks.STRIPPED_CAERULWOOD_LOG.get());
@@ -119,7 +150,7 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.CAERULWOOD_BUTTON.get());
         dropSelf(BPBlocks.CAERULWOOD_SIGN.get());
         dropSelf(BPBlocks.CAERULWOOD_WALL_SIGN.get());
-        dropSelf(BPBlocks.CAERULWOOD_DOOR.get());
+        add(BPBlocks.CAERULWOOD_DOOR.get(), BlockLootTables::createDoorTable);
         dropSelf(BPBlocks.CAERULWOOD_TRAPDOOR.get());
         
         // Alphanum Stone Set
@@ -185,5 +216,9 @@ public class BPBlockLootTables extends BlockLootTables {
                                 ))
                         )
         );
+    }
+
+    public static LootTable.Builder createLanternTable(Block p_239829_0_) {
+        return createSinglePropConditionTable(p_239829_0_, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER);
     }
 }

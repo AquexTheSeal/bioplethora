@@ -18,6 +18,8 @@ public class BPParticles {
     public static final RegistryObject<BasicParticleType> TRUE_DEFENSE_CLASH = PARTICLES.register("true_defense_clash", () -> new BasicParticleType(true));
 
     // Falling Leaves
+    public static final RegistryObject<BasicParticleType> PINK_ENIVILE_LEAF = PARTICLES.register("pink_enivile_leaf", () -> new BasicParticleType(true));
+    public static final RegistryObject<BasicParticleType> RED_ENIVILE_LEAF = PARTICLES.register("red_enivile_leaf", () -> new BasicParticleType(true));
     public static final RegistryObject<BasicParticleType> CAERULWOOD_LEAF = PARTICLES.register("caerulwood_leaf", () -> new BasicParticleType(true));
 
 }

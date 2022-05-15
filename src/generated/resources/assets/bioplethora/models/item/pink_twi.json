@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:block/pink_twi_plant"
+  }
+}

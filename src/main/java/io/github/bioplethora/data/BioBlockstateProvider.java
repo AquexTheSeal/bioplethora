@@ -47,6 +47,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.FLEIGNARITE_VINES_PLANT.get());
 
         // Nether Plants
+        this.wsabbSoilMCResLoc(BPBlocks.CRYEA.get(), Blocks.NETHERRACK);
+        this.simpleCarpetBlock(BPBlocks.CRYEA_CARPET.get(), bioResLoc("cryea_top"));
+
         this.smallMushroomBlock(BPBlocks.SOUL_MINISHROOM.get());
 
         this.bigMushroomBlock(BPBlocks.SOUL_BIGSHROOM.get());
@@ -56,6 +59,11 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         this.simpleCrossBlock(BPBlocks.SOUL_SPROUTS.get());
         this.doubleCropPlantBlock(BPBlocks.SOUL_TALL_GRASS.get());
+
+        this.simpleCrossBlock(BPBlocks.PINK_TWI.get());
+        this.simpleCrossBlock(BPBlocks.PINK_TWI_PLANT.get());
+        this.simpleCrossBlock(BPBlocks.RED_TWI.get());
+        this.simpleCrossBlock(BPBlocks.RED_TWI_PLANT.get());
 
         this.simpleCrossBlock(BPBlocks.SPIRIT_DANGLER.get());
         this.simpleCrossBlock(BPBlocks.SPIRIT_DANGLER_PLANT.get());
@@ -95,6 +103,14 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.GLACYNTH.get());
         this.simpleCrossBlock(BPBlocks.GLACYNTH_PLANT.get());
 
+        this.multiLeafWoodset("enivile",
+                BPBlocks.ENIVILE_PLANKS.get(), BPBlocks.ENIVILE_LOG.get(), BPBlocks.STRIPPED_ENIVILE_LOG.get(),
+                BPBlocks.ENIVILE_WOOD.get(), BPBlocks.STRIPPED_ENIVILE_WOOD.get(), BPBlocks.ENIVILE_LEAVES_PINK.get(), BPBlocks.ENIVILE_LEAVES_RED.get(),
+                BPBlocks.ENIVILE_SAPLING.get(), BPBlocks.ENIVILE_FENCE.get(), BPBlocks.ENIVILE_FENCE_GATE.get(),
+                BPBlocks.ENIVILE_PRESSURE_PLATE.get(), BPBlocks.ENIVILE_DOOR.get(), BPBlocks.ENIVILE_TRAPDOOR.get(),
+                BPBlocks.ENIVILE_BUTTON.get(), BPBlocks.ENIVILE_STAIRS.get(), BPBlocks.ENIVILE_SLAB.get(),
+                BPBlocks.ENIVILE_SIGN.get(), BPBlocks.ENIVILE_WALL_SIGN.get()
+        );
         this.woodset("caerulwood",
                 BPBlocks.CAERULWOOD_PLANKS.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
                 BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get(), BPBlocks.CAERULWOOD_LEAVES.get(),
@@ -102,7 +118,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
                 BPBlocks.CAERULWOOD_PRESSURE_PLATE.get(), BPBlocks.CAERULWOOD_DOOR.get(), BPBlocks.CAERULWOOD_TRAPDOOR.get(),
                 BPBlocks.CAERULWOOD_BUTTON.get(), BPBlocks.CAERULWOOD_STAIRS.get(), BPBlocks.CAERULWOOD_SLAB.get(),
                 BPBlocks.CAERULWOOD_SIGN.get(), BPBlocks.CAERULWOOD_WALL_SIGN.get()
-                );
+        );
 
         // Alphanum stone set
         this.simpleBlock(BPBlocks.ALPHANUM.get());
@@ -178,6 +194,14 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.doorBlock((DoorBlock) door, bioResLoc(woodType + "_door_lower"), bioResLoc(woodType + "_door_upper"));
         this.trapdoorBlock((TrapDoorBlock) trapdoor, bioResLoc(woodType + "_trapdoor"), false);
         this.signBlock(sign, wallSign, bioResLoc(woodType + "_planks"));
+    }
+
+    public void multiLeafWoodset(String woodType,
+                        Block planks, Block log, Block strippedLog, Block wood, Block strippedWood, Block leaves, Block leaves2, Block sapling,
+                        Block fence, Block fenceGate, Block pressurePlate, Block door, Block trapdoor,
+                        Block button, Block stairs, Block slab, Block sign, Block wallSign) {
+        woodset(woodType, planks, log, strippedLog, wood, strippedWood, leaves, sapling, fence, fenceGate, pressurePlate, door, trapdoor, button, stairs, slab, sign, wallSign);
+        this.simpleBlock(leaves2);
     }
 
     public void signBlock(Block sign, Block wallSign, ResourceLocation texture) {
@@ -280,6 +304,21 @@ public class BioBlockstateProvider extends BlockStateProvider {
                 .modelForState().modelFile(upper).addModel();
     }
 
+    public void wsabbSoilMCResLoc(Block topAndSides, Block soil) {
+        getVariantBuilder(topAndSides).partialState().setModels(
+                new ConfiguredModel(models()
+                        .cube(topAndSides.getRegistryName().getPath(),
+                                mcResLoc(soil.getRegistryName().getPath()),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_top"),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_side"),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_side"),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_side"),
+                                bioResLoc(topAndSides.getRegistryName().getPath() + "_side")
+                        ).texture("particle", bioResLoc(topAndSides.getRegistryName().getPath() + "_top"))
+                )
+        );
+    }
+
     public void withSidesAndBottomBlock(Block topAndSides, Block soil) {
         getVariantBuilder(topAndSides).partialState().setModels(
                 new ConfiguredModel(models()
@@ -312,6 +351,10 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
     public void simpleCarpetBlock(Block block) {
         getVariantBuilder(block).partialState().setModels(new ConfiguredModel(models().carpet(block.getRegistryName().getPath(), blockTexture(block))));
+    }
+
+    public void simpleCarpetBlock(Block block, ResourceLocation textureLocation) {
+        getVariantBuilder(block).partialState().setModels(new ConfiguredModel(models().carpet(block.getRegistryName().getPath(), textureLocation)));
     }
 
     public void simpleCrossBlock(Block block) {

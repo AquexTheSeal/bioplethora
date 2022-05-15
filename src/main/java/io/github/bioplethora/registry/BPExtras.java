@@ -24,7 +24,9 @@ public class BPExtras {
         // Compostables
         addCompostableBlock(BPBlocks.FLEIGNARITE_VINES.get(), 0.4F);
 
-        addCompostableBlock(BPBlocks.CAERULWOOD_LEAVES.get(), 0.3F);
+        addCompostableBlock(BPBlocks.ENIVILE_LEAVES_PINK.get(), 0.3F);
+        addCompostableBlock(BPBlocks.ENIVILE_LEAVES_RED.get(), 0.3F);
+        addCompostableBlock(BPBlocks.CAERULWOOD_LEAVES.get(), 0.45F);
         //addCompostableBlock(BPBlocks.PETRAWOOD_LEAVES.get(), 0.3F);
 
         addCompostableBlock(BPBlocks.SOUL_SPROUTS.get(), 0.45F);
@@ -35,6 +37,9 @@ public class BPExtras {
 
         // Stripables
 
+        addStripableBlock(BPBlocks.ENIVILE_LOG.get(), BPBlocks.STRIPPED_ENIVILE_LOG.get());
+        addStripableBlock(BPBlocks.ENIVILE_WOOD.get(), BPBlocks.STRIPPED_ENIVILE_WOOD.get());
+        
         addStripableBlock(BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get());
         addStripableBlock(BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_WOOD.get());
 

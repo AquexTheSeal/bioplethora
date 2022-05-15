@@ -25,7 +25,6 @@ public class BPAttributes {
 
         if (event.getEntity() instanceof LivingEntity) {
             LivingEntity victim = (LivingEntity) event.getEntity();
-            LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
 
             if (victim.getAttribute(TRUE_DEFENSE.get()) != null) {
 

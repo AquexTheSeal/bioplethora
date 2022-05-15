@@ -42,6 +42,16 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("fleignarite_vines_plant", bioResLoc("fleignarite_vines_plant"));
 
         // Nether Plants
+        this.cube("cryea",
+                mcResLoc("netherrack"),
+                bioResLoc("cryea_top"),
+                bioResLoc("cryea_side"),
+                bioResLoc("cryea_side"),
+                bioResLoc("cryea_side"),
+                bioResLoc("cryea_side")
+        );
+        this.carpet("cryea_carpet", bioResLoc("cryea_top"));
+
         this.smallMushroom("soul_minishroom", bioResLoc("soul_minishroom"));
 
         this.bigMushroom("soul_bigshroom", bioResLoc("soul_bigshroom"));
@@ -51,6 +61,11 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.cross("soul_sprouts", bioResLoc("soul_sprouts"));
         this.doubleCropPlant("soul_tall_grass", bioResLoc("soul_tall_grass_bottom"), bioResLoc("soul_tall_grass_top"));
+
+        this.cross("pink_twi", bioResLoc("pink_twi"));
+        this.cross("pink_twi_plant", bioResLoc("pink_twi_plant"));
+        this.cross("red_twi", bioResLoc("red_twi"));
+        this.cross("red_twi_plant", bioResLoc("red_twi_plant"));
 
         this.cross("spirit_dangler", bioResLoc("spirit_dangler"));
         this.cross("spirit_dangler_plant", bioResLoc("spirit_dangler_plant"));
@@ -113,6 +128,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeColumnHorizontal("alphanum_pillar", bioResLoc("alphanum_pillar"), bioResLoc("alphanum_pillar_top"));
         this.cubeColumnHorizontal("alphanum_nucleus", bioResLoc("alphanum_nucleus"), bioResLoc("alphanum_pillar_top"));
 
+        this.simpleMultiLeafWoodSet("enivile", "pink", "red");
         this.simpleWoodSet("caerulwood");
     }
 
@@ -146,14 +162,23 @@ public class BioBlockModelProvider extends BlockModelProvider {
     private ResourceLocation mcResLoc(String texture) {
         return new ResourceLocation("minecraft", BLOCK_FOLDER + "/" + texture);
     }
-    
+
     public void simpleWoodSet(String woodType) {
+        woodSetBase(woodType);
+        this.cubeAll(woodType + "_leaves", bioResLoc(woodType + "_leaves"));
+    }
+
+    public void simpleMultiLeafWoodSet(String woodType, String leafExtension1, String leafExtension2) {
+        woodSetBase(woodType);
+        this.cubeAll(leafExtension1 + "_" + woodType + "_leaves", bioResLoc(leafExtension2 + "_" + woodType + "_leaves"));
+    }
+    
+    public void woodSetBase(String woodType) {
         this.cubeColumnHorizontal(woodType + "_log", bioResLoc(woodType + "_log_side"), bioResLoc(woodType + "_log_top"));
         this.cubeAll(woodType + "_wood", bioResLoc(woodType + "_log_side"));
         this.cubeColumnHorizontal("stripped_" + woodType + "_log", bioResLoc("stripped_" + woodType + "_log_side"), bioResLoc("stripped_" + woodType + "_log_top"));
         this.cubeAll("stripped_" + woodType + "_wood", bioResLoc("stripped_" + woodType + "_log_side"));
         this.cubeAll(woodType + "_planks", bioResLoc(woodType + "_planks"));
-        this.cubeAll(woodType + "_leaves", bioResLoc(woodType + "_leaves"));
         this.cross(woodType + "_sapling", bioResLoc(woodType + "_sapling"));
 
         this.fencePost(woodType + "_fence_post", bioResLoc(woodType + "_planks"));

@@ -6,6 +6,15 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "bioplethora:chorus_lantern_plant",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
           "name": "bioplethora:chorus_lantern_plant"
         }
       ],
