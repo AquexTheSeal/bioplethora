@@ -38,10 +38,17 @@ public class BPConfiguredFeatures {
     ));
 
     // Nether Grasses
+    public static final ConfiguredFeature<?, ?> KYRIA = register("kyria", makeDecoratedClusterPlants(
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.KYRIA.get(), new SimpleBlockPlacer(), 55
+    ));
+    public static final ConfiguredFeature<?, ?> KYRIA_BELINE = register("kyria_beline", makeNoProjectionClusterPlants(
+            Feature.RANDOM_PATCH, BPBlocks.KYRIA_BELINE.get(), new DoublePlantBlockPlacer()
+    ).count(19).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))
+    ));
+
     public static final ConfiguredFeature<?, ?> SOUL_SPROUTS = register("soul_sprouts", makeDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_SPROUTS.get(), new SimpleBlockPlacer(), 26
     ));
-
     public static final ConfiguredFeature<?, ?> SOUL_TALL_GRASS = register("soul_tall_grass", makeNoProjectionClusterPlants(
             Feature.RANDOM_PATCH, BPBlocks.SOUL_TALL_GRASS.get(), new DoublePlantBlockPlacer()
     ).count(22).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))

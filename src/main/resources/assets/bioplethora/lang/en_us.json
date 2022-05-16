@@ -3,6 +3,7 @@
   "item.bioplethora.test_item": "A Random Experimental Item",
 
   "biome.bioplethora.rocky_woodlands": "Rocky Woodlands",
+  "biome.bioplethora.cryeanum_plains": "Cryeanum Plains",
   "biome.bioplethora.caeri_plains": "Caeri Plains",
   "biome.bioplethora.caeri_forest": "Caeri Forest",
 
@@ -231,6 +232,8 @@
 
   "block.bioplethora.cryea": "Cryea",
   "block.bioplethora.cryea_carpet": "Cryea Carpet",
+  "block.bioplethora.kyria": "Kyria",
+  "block.bioplethora.kyria_beline": "Kyria Beline",
 
   "block.bioplethora.soul_bigshroom": "Soul Bigshroom",
   "block.bioplethora.soul_minishroom": "Soul Minishroom",

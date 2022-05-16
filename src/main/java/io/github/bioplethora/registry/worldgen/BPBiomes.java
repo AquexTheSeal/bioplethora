@@ -46,6 +46,7 @@ public class BPBiomes {
     );
 
     public static final class Type {
+        public static final BiomeDictionary.Type CRYEANUM = BiomeDictionary.Type.getType("CRYEANUM");
         public static final BiomeDictionary.Type CAERI = BiomeDictionary.Type.getType("CAERI");
         public static final BiomeDictionary.Type CAERI_PLAINS = BiomeDictionary.Type.getType("CAERI_PLAINS");
         public static final BiomeDictionary.Type CAERI_FOREST = BiomeDictionary.Type.getType("CAERI_FOREST");
@@ -64,9 +65,9 @@ public class BPBiomes {
 
             // Nether
             BiomeDictionary.addTypes(getKey(CRYEANUM_PLAINS.get()),
-                    BiomeDictionary.Type.NETHER, BiomeDictionary.Type.PLAINS,
-                    BiomeDictionary.Type.DENSE, BiomeDictionary.Type.HOT,
-                    BiomeDictionary.Type.WET, BiomeDictionary.Type.MAGICAL
+                    BiomeDictionary.Type.NETHER, Type.CRYEANUM,
+                    BiomeDictionary.Type.PLAINS,  BiomeDictionary.Type.DENSE,
+                    BiomeDictionary.Type.HOT, BiomeDictionary.Type.MAGICAL
             );
 
             // End

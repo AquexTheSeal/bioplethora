@@ -33,6 +33,12 @@ public class BPCustomBiomeFeatureGeneration {
 
         List<Supplier<ConfiguredCarver<?>>> test = event.getGeneration().getCarvers(GenerationStage.Carving.AIR);
 
+        if (BiomeDictionary.hasType(key, BPBiomes.Type.CRYEANUM)) {
+
+            vegDeco.add(() -> BPConfiguredFeatures.KYRIA);
+            vegDeco.add(() -> BPConfiguredFeatures.KYRIA_BELINE);
+        }
+
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_PLAINS)) {
 
             vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_PLAINS_TREES);

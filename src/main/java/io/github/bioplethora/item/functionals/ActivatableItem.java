@@ -1,7 +1,6 @@
 package io.github.bioplethora.item.functionals;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,9 +9,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public class ActivatableItem extends Item implements ICurioItem {
+public class ActivatableItem extends Item {
 
     public String getFullActivatedText = "is_activated";
     public boolean isCurios;
@@ -83,18 +81,5 @@ public class ActivatableItem extends Item implements ICurioItem {
     @Override
     public boolean isFoil(ItemStack pStack) {
         return this.getActivated(pStack);
-    }
-
-    @Override
-    public boolean hasCurioCapability(ItemStack stack) {
-        return this.isCurios;
-    }
-
-    @Override
-    public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-
-        if (this.getActivated(stack)) {
-            this.activatedTick(stack, livingEntity.level, livingEntity);
-        }
     }
 }

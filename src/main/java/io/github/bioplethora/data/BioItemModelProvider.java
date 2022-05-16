@@ -36,6 +36,9 @@ public class BioItemModelProvider extends ItemModelProvider {
         // nether plants
         this.flatBlock(BPBlocks.FLEIGNARITE_VINES, BPBlocks.FLEIGNARITE_VINES_PLANT);
 
+        this.flatBlock(BPBlocks.KYRIA, BPBlocks.KYRIA);
+        this.flatBlock(BPBlocks.KYRIA_BELINE, "kyria_beline_top");
+
         this.flatBlock(BPBlocks.SOUL_MINISHROOM, "soul_minishroom", ITEM_FOLDER);
 
         this.flatBlock(BPBlocks.LAVA_SPIRE, BPBlocks.LAVA_SPIRE);

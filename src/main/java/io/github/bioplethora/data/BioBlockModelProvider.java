@@ -52,6 +52,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
         );
         this.carpet("cryea_carpet", bioResLoc("cryea_top"));
 
+        this.cross("kyria", bioResLoc("kyria"));
+        this.doubleCropPlant("kyria_beline", bioResLoc("kyria_beline_bottom"), bioResLoc("kyria_beline_top"));
+
         this.smallMushroom("soul_minishroom", bioResLoc("soul_minishroom"));
 
         this.bigMushroom("soul_bigshroom", bioResLoc("soul_bigshroom"));

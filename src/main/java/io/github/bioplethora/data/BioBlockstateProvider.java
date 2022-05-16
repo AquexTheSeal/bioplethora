@@ -50,7 +50,8 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.wsabbSoilMCResLoc(BPBlocks.CRYEA.get(), Blocks.NETHERRACK);
         this.simpleCarpetBlock(BPBlocks.CRYEA_CARPET.get(), bioResLoc("cryea_top"));
 
-        this.smallMushroomBlock(BPBlocks.SOUL_MINISHROOM.get());
+        this.simpleCrossBlock(BPBlocks.KYRIA.get());
+        this.doubleCropPlantBlock(BPBlocks.KYRIA_BELINE.get());
 
         this.bigMushroomBlock(BPBlocks.SOUL_BIGSHROOM.get());
 

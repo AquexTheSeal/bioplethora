@@ -21,7 +21,7 @@ public enum BioPlantType {
             Blocks.NETHERRACK, Blocks.WARPED_NYLIUM, Blocks.WARPED_WART_BLOCK
     )),
     CRYEANUM(() -> ImmutableList.of(
-            Blocks.NETHERRACK
+            Blocks.NETHERRACK, BPBlocks.CRYEA.get()
     )),
 
     //----------------- END ----------------

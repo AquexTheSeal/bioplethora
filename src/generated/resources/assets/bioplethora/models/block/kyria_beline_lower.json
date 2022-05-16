@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "bioplethora:block/kyria_beline_bottom"
+  }
+}

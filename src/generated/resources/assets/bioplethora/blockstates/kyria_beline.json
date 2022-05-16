@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "bioplethora:block/kyria_beline_upper"
+    },
+    "half=lower": {
+      "model": "bioplethora:block/kyria_beline_lower"
+    }
+  }
+}

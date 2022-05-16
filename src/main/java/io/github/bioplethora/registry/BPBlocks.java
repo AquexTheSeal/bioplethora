@@ -63,9 +63,15 @@ public class BPBlocks {
     // Nether Blocks
     public static final RegistryObject<Block> CRYEA = registerBlock("cryea", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_PINK)
             .strength(1.85F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<Block> CRYEA_CARPET = registerBlock("cryea_carpet", () -> new BPFlatBlock(AbstractBlock.Properties.copy(CRYEA.get())), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> CRYEA_CARPET = registerBlock("cryea_carpet", () -> new BPFlatBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT, MaterialColor.COLOR_PINK)
+            .strength(1.85F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS)), BPItemGroup.BioplethoraItemItemGroup);
 
     // Nether Plants
+    public static final RegistryObject<Block> KYRIA = registerBlock("kyria", () -> new BPPlantBlock(BioPlantType.CRYEANUM, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> KYRIA_BELINE = registerBlock("kyria_beline", () -> new BPDoublePlantBlock(BioPlantType.CRYEANUM, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
     public static final RegistryObject<Block> SOUL_MINISHROOM = registerBlock("soul_minishroom", () -> new SmallMushroomBlock(BioPlantType.SOUL_SAND_VALLEY,
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SOUL_SOIL).strength(0.5F).noCollission().lightLevel((block) -> 4 * block.getValue(SmallMushroomBlock.MINISHROOMS))), BPItemGroup.BioplethoraItemItemGroup);
 

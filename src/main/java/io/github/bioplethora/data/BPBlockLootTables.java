@@ -45,6 +45,9 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.CRYEA.get());
         add(BPBlocks.CRYEA_CARPET.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CRYEA_CARPET.get()));
 
+        add(BPBlocks.KYRIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.KYRIA.get()));
+        add(BPBlocks.KYRIA_BELINE.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.KYRIA_BELINE.get()));
+
         dropMinishroom(BPBlocks.SOUL_MINISHROOM.get());
 
         dropSelf(BPBlocks.SOUL_BIGSHROOM.get());

@@ -10,6 +10,7 @@ import io.github.bioplethora.item.armor.AquChestplateItem;
 import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.network.keybindings.BPKeybinds;
 import io.github.bioplethora.registry.*;
+import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
@@ -41,27 +42,27 @@ public class ModClientRegister {
         ClientRegistry.bindTileEntityRenderer(BPTileEntities.FLEIGNARITE_SPLOTCH.get(), FleignariteSplotchBlockRender::new);
         ClientRegistry.bindTileEntityRenderer(BPTileEntities.BP_SIGN.get(), SignTileEntityRenderer::new);
 
-        // Woodsets
-        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_DOOR.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_TRAPDOOR.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_LEAVES_PINK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_LEAVES_RED.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_SIGN.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_WALL_SIGN.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.ENIVILE_SAPLING.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_DOOR.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_TRAPDOOR.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_LEAVES.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_SIGN.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_WALL_SIGN.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.CAERULWOOD_SAPLING.get(), RenderType.cutout());
+        // Automatic Entry
+        for (RegistryObject<Block> block : BPBlocks.BLOCKS.getEntries()) {
+            if (
+                    block.get() instanceof DoorBlock ||
+                    block.get() instanceof TrapDoorBlock ||
+                    block.get() instanceof LeavesBlock ||
+                    block.get() instanceof AbstractSignBlock ||
+                    block.get() instanceof SaplingBlock
+            ) {
+                RenderTypeLookup.setRenderLayer(block.get(), RenderType.cutout());
+            }
+        }
 
         // Plants
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_SPLOTCH.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(BPBlocks.KYRIA.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.KYRIA_BELINE.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_SPROUTS.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_TALL_GRASS.get(), RenderType.cutout());
