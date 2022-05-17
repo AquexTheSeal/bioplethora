@@ -15,8 +15,12 @@ public class EffectUtils {
     }
 
     public static void addCircleParticleForm(World world, Entity entity, IParticleData particle, int count, double offsetCircle, double speed) {
+        addCircleParticleForm(world, entity, particle, count, offsetCircle, speed, 0);
+    }
+
+    public static void addCircleParticleForm(World world, Entity entity, IParticleData particle, int count, double offsetCircle, double speed, double yOffset) {
         if (!world.isClientSide()) {
-            ((ServerWorld) world).sendParticles(particle, entity.getX(), entity.getY(), entity.getZ(), count, offsetCircle, offsetCircle, offsetCircle, speed);
+            ((ServerWorld) world).sendParticles(particle, entity.getX(), entity.getY() + yOffset, entity.getZ(), count, offsetCircle, offsetCircle, offsetCircle, speed);
         }
     }
 

@@ -1,6 +1,7 @@
 package io.github.bioplethora.data;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.blocks.BPIdeFanBlock;
 import io.github.bioplethora.blocks.SmallMushroomBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.registry.BPBlocks;
@@ -52,7 +53,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         this.simpleCrossBlock(BPBlocks.KYRIA.get());
         this.doubleCropPlantBlock(BPBlocks.KYRIA_BELINE.get());
+        this.ideFanBlock(BPBlocks.KYRIA_IDE_FAN.get());
 
+        this.smallMushroomBlock(BPBlocks.SOUL_MINISHROOM.get());
         this.bigMushroomBlock(BPBlocks.SOUL_BIGSHROOM.get());
 
         this.simpleCrossBlock(BPBlocks.LAVA_SPIRE.get());
@@ -268,6 +271,19 @@ public class BioBlockstateProvider extends BlockStateProvider {
                 .modelForState().modelFile(all).rotationY(180).addModel()
                 .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.EAST)
                 .modelForState().modelFile(all).rotationY(270).addModel();
+    }
+
+    public void ideFanBlock(Block block) {
+        String defTexture = block.getRegistryName().getPath();
+        BlockModelBuilder def = models().singleTexture(defTexture, bioResLoc("ide_fan"), "0", blockTexture(block)).texture("particle", blockTexture(block));
+        String buddedTexture = block.getRegistryName().getPath() + "_top";
+        BlockModelBuilder budded = models().singleTexture(buddedTexture, bioResLoc("ide_fan_budded"), "0", blockTexture(block)).texture("particle", blockTexture(block));
+
+        getVariantBuilder(block)
+                .partialState().with(BPIdeFanBlock.BUDDED, false)
+                .modelForState().modelFile(def).addModel()
+                .partialState().with(BPIdeFanBlock.BUDDED, true)
+                .modelForState().modelFile(budded).addModel();
     }
 
     public void lanternPlantBlock(Block block) {

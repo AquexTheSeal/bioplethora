@@ -59,6 +59,7 @@ public class BPItems {
     public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF_BASE = ITEMS.register("infernal_quarterstaff_base", () -> new Item(new Item.Properties().stacksTo(16).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF_BLADE = ITEMS.register("infernal_quarterstaff_blade", () -> new Item(new Item.Properties().stacksTo(16).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF_DEACTIVATED = ITEMS.register("deactivated_infernal_quarterstaff", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> CRYEANUM_PEARL = ITEMS.register("cryeanum_pearl", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     // Vanilla mobs custom Weapons
     public static final RegistryObject<Item> PHANTOM_CHIME = ITEMS.register("phantom_chime", () -> new PhantomChimeItem(new Item.Properties().stacksTo(1).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
@@ -153,6 +154,7 @@ public class BPItems {
     public static final RegistryObject<Item> DWARF_MOSSADILE_SPAWN_EGG = ITEMS.register("dwarf_mossadile_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.DWARF_MOSSADILE, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> TRAPJAW_SPAWN_EGG = ITEMS.register("trapjaw_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.TRAPJAW, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> TERRAITH_SPAWN_EGG = ITEMS.register("terraith_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.TERRAITH, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> MYUTHINE_SPAWN_EGG = ITEMS.register("myuthine_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.MYUTHINE, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
 
     public static final RegistryObject<Item> WOODEN_GRYLYNEN_SPAWN_EGG = ITEMS.register("wooden_grylynen_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.WOODEN_GRYLYNEN, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> STONE_GRYLYNEN_SPAWN_EGG = ITEMS.register("stone_grylynen_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.STONE_GRYLYNEN, BPEntityClasses.DANGERUM, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));

@@ -3,6 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.goals.MyliothanChargeAttackGoal;
+import io.github.bioplethora.entity.others.part.BPPartEntity;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.entity.EntityType;
@@ -33,6 +34,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import net.minecraftforge.entity.PartEntity;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -41,14 +44,28 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
 public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBioClassification {
 
+    public final BPPartEntity[] subEntities;
+    public final BPPartEntity head;
+    public final BPPartEntity tail;
+    public final BPPartEntity leftWing;
+    public final BPPartEntity rightWing;
+    public final BPPartEntity leftWingTip;
+    public final BPPartEntity rightWingTip;
+
+    public Vector3d moveTargetPoint = Vector3d.ZERO;
+    public BlockPos anchorPoint = BlockPos.ZERO;
+    private final double[][] positions = new double[64][3];
+    private int posPointer = -1;
+    private float yRotA;
+
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(MyliothanEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
-    public Vector3d moveTargetPoint = Vector3d.ZERO;
 
     public MyliothanEntity(EntityType<? extends WaterMobEntity> type, World worldIn) {
         super(type, worldIn);
@@ -56,6 +73,34 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
         this.lookControl = new DolphinLookController(this, 10);
         this.setPathfindingMalus(PathNodeType.WATER, 0.0F);
         this.noCulling = true;
+
+        head = new BPPartEntity<>(this, "head", 9.5f, 3.2f);
+        tail = new BPPartEntity<>(this, "tail", 9f, 3.0f);
+        leftWing = new BPPartEntity<>(this, "wing", 12.5f, 2.5f);
+        rightWing = new BPPartEntity<>(this, "wing", 12.5f, 2.5f);
+        leftWingTip = new BPPartEntity<>(this, "wing", 9.5f, 2.3f);
+        rightWingTip = new BPPartEntity<>(this, "wing", 9.5f, 2.3f);
+        subEntities = new BPPartEntity[]{head, tail, leftWing, rightWing, leftWingTip, rightWingTip};
+
+    }
+
+    public static void summonParts(EntityJoinWorldEvent event) {
+        /*
+        if (event.getEntity() instanceof MyliothanEntity) {
+            event.getWorld().addFreshEntity(((MyliothanEntity) event.getEntity()).leftWing);
+            event.getWorld().addFreshEntity(((MyliothanEntity) event.getEntity()).rightWing);
+        }*/
+    }
+
+    @Nullable
+    @Override
+    public PartEntity<?>[] getParts() {
+        return subEntities;
+    }
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
     }
 
     @Override
@@ -72,6 +117,74 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                 .add(Attributes.MAX_HEALTH, 385 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.MOVEMENT_SPEED, 1.2 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (posPointer < 0) {
+            for (int i = 0; i < positions.length; ++i) {
+                positions[i][0] = getViewYRot(1.0F);
+                positions[i][1] = getY();
+            }
+        }
+
+        if (++posPointer == positions.length) {
+            posPointer = 0;
+        }
+
+        double tpdx = moveTargetPoint.x - getX(), tpdz = moveTargetPoint.z - getZ();
+
+        if (Math.abs(tpdx) > (double) 1.0E-5F || Math.abs(tpdz) > (double) 1.0E-5F) {
+            float yRotAModifier = MathHelper.clamp(
+                    MathHelper.wrapDegrees(180.0F - (float) MathHelper.atan2(tpdx, tpdz) *
+                            (180F / (float) Math.PI) - getViewYRot(1.0F)),
+                    -10.0F, 10.0F);
+
+            yRotA *= 0.8F;
+            yRotA += yRotAModifier * getTurnSpeed();
+        }
+
+        float posLatency = (float) (getLatencyPos(5, 1.0F)[1]
+                - getLatencyPos(10, 1.0F)[1]) * 10.0F * ((float) Math.PI / 180F);
+        float cosLatency = MathHelper.cos(posLatency);
+        float sinLatency = MathHelper.sin(posLatency);
+        float sinRotMod = MathHelper.sin(getViewYRot(1.0F) * ((float) Math.PI / 180F) - yRotA * 0.01F);
+        float cosRotMod = MathHelper.cos(getViewYRot(1.0F) * ((float) Math.PI / 180F) - yRotA * 0.01F);
+        float yHeadOffset = getHeadYOffset();
+
+        float yRadians = getViewYRot(1.0F) * ((float) Math.PI / 180F);
+        float wingXOffset = MathHelper.cos(yRadians);
+        float wingZOffset = MathHelper.sin(yRadians);
+
+        tickPart(head, (-sinRotMod * (8f * getScale() * 0.8f) * cosLatency),
+                (yHeadOffset + sinLatency * 6.5f),
+                (cosRotMod * (8f * getScale() * 0.8f) * cosLatency));
+
+        tickPart(tail, (sinRotMod * (10f * getScale() * 0.8f) * cosLatency),
+                (yHeadOffset + sinLatency * 6.5f),
+                (-cosRotMod * (10f * getScale() * 0.8f) * cosLatency));
+
+        tickPart(leftWing, wingXOffset * 6f, 0.5f, wingZOffset * 6f);
+        tickPart(rightWing, wingXOffset * -6f, 0.5f, wingZOffset * -6f);
+        tickPart(leftWingTip, wingXOffset * 16f, 0.0f, wingZOffset * 16f);
+        tickPart(rightWingTip, wingXOffset * -16f, 0.0f, wingZOffset * -16f);
+
+        Vector3d[] subVec = new Vector3d[subEntities.length];
+
+        for (int i = 0; i < subEntities.length; ++i) {
+            subVec[i] = new Vector3d(subEntities[i].getX(), subEntities[i].getY(), subEntities[i].getZ());
+        }
+
+        for (int i = 0; i < subEntities.length; ++i) {
+            subEntities[i].xo = subVec[i].x;
+            subEntities[i].yo = subVec[i].y;
+            subEntities[i].zo = subVec[i].z;
+            subEntities[i].xOld = subVec[i].x;
+            subEntities[i].yOld = subVec[i].y;
+            subEntities[i].zOld = subVec[i].z;
+        }
     }
 
     @Override
@@ -257,5 +370,40 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
 
     public void setCharging(boolean charging) {
         this.entityData.set(DATA_IS_CHARGING, charging);
+    }
+
+    private void tickPart(BPPartEntity pPart, double offsetX, double offsetY, double offsetZ) {
+        pPart.setPos(getX() + offsetX, getY() + offsetY, getZ() + offsetZ);
+    }
+
+    private float getHeadYOffset() {
+        double[] latencyPos = getLatencyPos(5, 1.0F);
+        double[] latencyPos1 = getLatencyPos(0, 1.0F);
+        return (float) (latencyPos[1] - latencyPos1[1]);
+    }
+
+    public double[] getLatencyPos(int pointer, float multiplier) {
+        if (isDeadOrDying()) {
+            multiplier = 0.0F;
+        }
+
+        multiplier = 1.0F - multiplier;
+        int item = posPointer - pointer & 63;
+        int previousItem = posPointer - pointer - 1 & 63;
+        double[] latencyPos = new double[3];
+        double yawOffset = positions[item][0];
+        double yOffsetMinusYawOffset = MathHelper.wrapDegrees(positions[previousItem][0] - yawOffset);
+        latencyPos[0] = yawOffset + yOffsetMinusYawOffset * (double) multiplier;
+        yawOffset = positions[item][1];
+        yOffsetMinusYawOffset = positions[previousItem][1] - yawOffset;
+        latencyPos[1] = yawOffset + yOffsetMinusYawOffset * (double) multiplier;
+        latencyPos[2] = MathHelper.lerp(multiplier, positions[item][2], positions[previousItem][2]);
+        return latencyPos;
+    }
+
+    public float getTurnSpeed() {
+        float deltaDistance = (float) (getDeltaMovement().length() + 1.0F);
+        float min = Math.min(deltaDistance, 40.0F);
+        return 0.7F / min / deltaDistance;
     }
 }

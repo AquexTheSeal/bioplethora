@@ -11,6 +11,7 @@
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "QuickChargeEnchantmentMixin",
+    "ServerPlayNetHandlerMixin",
     "ServerWorldInfoMiixn"
   ],
   "injectors": {

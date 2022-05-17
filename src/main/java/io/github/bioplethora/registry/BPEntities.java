@@ -36,6 +36,8 @@ public class BPEntities {
     public static final RegistryObject<EntityType<GaugalemEntity>> GAUGALEM = ENTITIES.register("gaugalem", () -> EntityType.Builder.of(GaugalemEntity::new, EntityClassification.MONSTER).sized(1.2f, 4.0f).build(new ResourceLocation(Bioplethora.MOD_ID, "gaugalem").toString()));
     public static final RegistryObject<EntityType<DwarfMossadileEntity>> DWARF_MOSSADILE = ENTITIES.register("dwarf_mossadile", () -> EntityType.Builder.of(DwarfMossadileEntity::new, EntityClassification.MONSTER).sized(1.4f, 0.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "dwarf_mossadile").toString()));
     public static final RegistryObject<EntityType<TrapjawEntity>> TRAPJAW = ENTITIES.register("trapjaw", () -> EntityType.Builder.of(TrapjawEntity::new, EntityClassification.MONSTER).sized(2.2f, 1.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "trapjaw").toString()));
+    public static final RegistryObject<EntityType<TerraithEntity>> TERRAITH = ENTITIES.register("terraith", () -> EntityType.Builder.of(TerraithEntity::new, EntityClassification.MONSTER).sized(1.5F, 1.8F).build(new ResourceLocation(Bioplethora.MOD_ID, "terraith").toString()));
+    public static final RegistryObject<EntityType<MyuthineEntity>> MYUTHINE = ENTITIES.register("myuthine", () -> EntityType.Builder.of(MyuthineEntity::new, EntityClassification.MONSTER).sized(1.0F, 3.2F).build(new ResourceLocation(Bioplethora.MOD_ID, "myuthine").toString()));
 
     public static final RegistryObject<EntityType<GrylynenEntity>> WOODEN_GRYLYNEN = ENTITIES.register("wooden_grylynen", () -> EntityType.Builder.of((EntityType.IFactory<GrylynenEntity>) (type, world) ->
                     new GrylynenEntity(type, world, BPGrylynenTier.WOODEN), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "wooden_grylynen").toString()));
@@ -49,7 +51,6 @@ public class BPEntities {
             new GrylynenEntity(type, world, BPGrylynenTier.DIAMOND), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "diamond_grylynen").toString()));
     public static final RegistryObject<EntityType<GrylynenEntity>> NETHERITE_GRYLYNEN = ENTITIES.register("netherite_grylynen", () -> EntityType.Builder.of((EntityType.IFactory<GrylynenEntity>) (type, world) ->
             new GrylynenEntity(type, world, BPGrylynenTier.NETHERITE), EntityClassification.MONSTER).sized(1f, 1.8f).build(new ResourceLocation(Bioplethora.MOD_ID, "netherite_grylynen").toString()));
-    public static final RegistryObject<EntityType<TerraithEntity>> TERRAITH = ENTITIES.register("terraith", () -> EntityType.Builder.of(TerraithEntity::new, EntityClassification.MONSTER).sized(1.5F, 1.8F).build(new ResourceLocation(Bioplethora.MOD_ID, "terraith").toString()));
 
     //Hellsent
     public static final RegistryObject<EntityType<CrephoxlEntity>> CREPHOXL = ENTITIES.register("crephoxl", () -> EntityType.Builder.of(CrephoxlEntity::new, EntityClassification.MONSTER).sized(3.5f, 5f).build(new ResourceLocation(Bioplethora.MOD_ID, "crephoxl").toString()));
@@ -59,7 +60,7 @@ public class BPEntities {
 
     //Elderia
     public static final RegistryObject<EntityType<AltyrusEntity>> ALTYRUS = ENTITIES.register("altyrus", () -> EntityType.Builder.of(AltyrusEntity::new, EntityClassification.MONSTER).sized(3.5f, 4.75f).build(new ResourceLocation(Bioplethora.MOD_ID, "altyrus").toString()));
-    public static final RegistryObject<EntityType<MyliothanEntity>> MYLIOTHAN = ENTITIES.register("myliothan", () -> EntityType.Builder.of(MyliothanEntity::new, EntityClassification.MONSTER).sized(20.5f, 5.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "myliothan").toString()));
+    public static final RegistryObject<EntityType<MyliothanEntity>> MYLIOTHAN = ENTITIES.register("myliothan", () -> EntityType.Builder.of(MyliothanEntity::new, EntityClassification.MONSTER).sized(14.5f, 5.5f).build(new ResourceLocation(Bioplethora.MOD_ID, "myliothan").toString()));
     public static final RegistryObject<EntityType<AlphemKingEntity>> ALPHEM_KING = ENTITIES.register("alphem_king", () -> EntityType.Builder.of(AlphemKingEntity::new, EntityClassification.MONSTER).sized(3.5f, 4.75f).build(new ResourceLocation(Bioplethora.MOD_ID, "alphem_king").toString()));
 
     //Projectiles

@@ -67,6 +67,8 @@ public class BPBoatEntity extends BoatEntity {
     @Override
     public Item getDropItem() {
         switch(this.getWoodType()) {
+            case "enivile":
+                return BPBlocks.ENIVILE_BOAT.get();
             case "caerulwood":
                 return BPBlocks.CAERULWOOD_BOAT.get();
             default:

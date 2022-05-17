@@ -25,6 +25,7 @@ public class MyliothanEntityRender extends GeoEntityRenderer<MyliothanEntity> {
         float f = 1;
         f = (float) ((double) f * 6.0D);
         stackIn.scale(f, f, f);
+        stackIn.translate(0, 0, 0.75);
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

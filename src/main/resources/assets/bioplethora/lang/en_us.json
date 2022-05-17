@@ -26,6 +26,7 @@
   "entity.bioplethora.soul_eurydn": "Soul Eurydn",
   "entity.bioplethora.fiery_eurydn": "Fiery Eurydn",
   "entity.bioplethora.onofish": "Onofish",
+  "entity.bioplethora.myuthine": "Myuthine",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -81,6 +82,7 @@
   "item.bioplethora.fiery_eurydn_spawn_egg": "Fiery Eurydn Spawn Egg",
   "item.bioplethora.soul_eurydn_spawn_egg": "Soul Eurydn Spawn Egg",
   "item.bioplethora.onofish_spawn_egg": "Onofish Spawn Egg",
+  "item.bioplethora.myuthine_spawn_egg": "Myuthine Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",
@@ -140,6 +142,7 @@
   "item.bioplethora.green_crystal_shield": "Green Crystal Shield",
   "item.bioplethora.yellow_crystal_shield": "Yellow Crystal Shield",
   "item.bioplethora.red_crystal_shield": "Red Crystal Shield",
+  "item.bioplethora.cryeanum_pearl": "Cryeanum Pearl",
 
   "item.bioplethora.alphanum_obliterator": "Alphanum Obliterator",
   "item.bioplethora.infernal_quarterstaff": "Infernal Quarterstaff",
@@ -234,6 +237,7 @@
   "block.bioplethora.cryea_carpet": "Cryea Carpet",
   "block.bioplethora.kyria": "Kyria",
   "block.bioplethora.kyria_beline": "Kyria Beline",
+  "block.bioplethora.kyria_ide_fan": "Kyria Ide Fan",
 
   "block.bioplethora.soul_bigshroom": "Soul Bigshroom",
   "block.bioplethora.soul_minishroom": "Soul Minishroom",

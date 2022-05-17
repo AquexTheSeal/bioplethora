@@ -47,6 +47,7 @@ public class BPBlockLootTables extends BlockLootTables {
 
         add(BPBlocks.KYRIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.KYRIA.get()));
         add(BPBlocks.KYRIA_BELINE.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.KYRIA_BELINE.get()));
+        add(BPBlocks.KYRIA_IDE_FAN.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.KYRIA_IDE_FAN.get()));
 
         dropMinishroom(BPBlocks.SOUL_MINISHROOM.get());
 

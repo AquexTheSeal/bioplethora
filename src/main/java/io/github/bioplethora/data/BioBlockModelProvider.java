@@ -54,6 +54,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.cross("kyria", bioResLoc("kyria"));
         this.doubleCropPlant("kyria_beline", bioResLoc("kyria_beline_bottom"), bioResLoc("kyria_beline_top"));
+        this.ideFan("kyria_ide_fan", bioResLoc("kyria_ide_fan"));
 
         this.smallMushroom("soul_minishroom", bioResLoc("soul_minishroom"));
 
@@ -156,6 +157,11 @@ public class BioBlockModelProvider extends BlockModelProvider {
         singleTexture(name + "_one", bioResLoc("small_mushroom_one"), "0", all).texture("particle", all);
         singleTexture(name + "_two", bioResLoc("small_mushroom_two"), "0", all).texture("particle", all);
         singleTexture(name + "_three", bioResLoc("small_mushroom_three"), "0", all).texture("particle", all);
+    }
+
+    public void ideFan(String name, ResourceLocation all) {
+        singleTexture(name, bioResLoc("ide_fan"), "0", all).texture("particle", all);
+        singleTexture(name + "_budded", bioResLoc("ide_fan_budded"), "0", all).texture("particle", all);
     }
 
     private ResourceLocation bioResLoc(String texture) {

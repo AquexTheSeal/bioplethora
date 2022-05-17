@@ -32,6 +32,7 @@ public class BPEntityAttributes {
         event.put(BPEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntity.setCustomAttributes().build());
         event.put(BPEntities.TRAPJAW.get(), TrapjawEntity.setCustomAttributes().build());
         event.put(BPEntities.TERRAITH.get(), TerraithEntity.setCustomAttributes().build());
+        event.put(BPEntities.MYUTHINE.get(), MyuthineEntity.setCustomAttributes().build());
 
         event.put(BPEntities.WOODEN_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.WOODEN).build());
         event.put(BPEntities.STONE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.STONE).build());

@@ -1,6 +1,7 @@
 package io.github.bioplethora.registry.worldgen;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.world.blockplacers.IdeFanBlockPlacer;
 import io.github.bioplethora.world.blockplacers.LavaEdgeBlockPlacer;
 import io.github.bioplethora.world.blockplacers.MinishroomBlockPlacer;
 import net.minecraft.world.gen.blockplacer.BlockPlacerType;
@@ -13,4 +14,6 @@ public class BPBlockPlacers {
 
     public static final RegistryObject<BlockPlacerType<?>> LAVA_EDGE_PLACER = BLOCK_PLACERS.register("lava_edge_placer", () -> new BlockPlacerType<>(LavaEdgeBlockPlacer.CODEC));
     public static final RegistryObject<BlockPlacerType<?>> MINISHROOM_PLACER = BLOCK_PLACERS.register("minishroom_placer", () -> new BlockPlacerType<>(MinishroomBlockPlacer.CODEC));
+    public static final RegistryObject<BlockPlacerType<?>> IDE_FAN_PLACER = BLOCK_PLACERS.register("ide_fan_placer", () -> new BlockPlacerType<>(IdeFanBlockPlacer.CODEC));
+
 }

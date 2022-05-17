@@ -1,0 +1,228 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.myuthine.idle": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"bodybot": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 2", 0, 0]
+					},
+					"position": {
+						"vector": [0, -27, 4]
+					}
+				},
+				"bodytop": {
+					"scale": {
+						"vector": ["1 + math.cos(query.anim_time * 180) * -0.02", "1 + math.cos(query.anim_time * 180) * -0.02", "1 + math.cos(query.anim_time * 180) * -0.02"]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [55, 0, 0]
+					}
+				},
+				"arml": {
+					"rotation": {
+						"vector": ["55 + math.cos(query.anim_time * 180) * 5", 0, 0]
+					}
+				},
+				"arml2": {
+					"rotation": {
+						"vector": [170, 0, 0]
+					}
+				},
+				"armr": {
+					"rotation": {
+						"vector": ["55 + math.cos(query.anim_time * 180) * 5", 0, 0]
+					}
+				},
+				"armr2": {
+					"rotation": {
+						"vector": [170, 0, 0]
+					}
+				},
+				"legl": {
+					"rotation": {
+						"vector": [90, 0, 0]
+					},
+					"position": {
+						"vector": [0, -27, -20]
+					}
+				},
+				"legr": {
+					"rotation": {
+						"vector": [90, 0, 0]
+					},
+					"position": {
+						"vector": [0, -27, -20]
+					}
+				}
+			}
+		},
+		"animation.myuthine.walk": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"bodybot": {
+					"rotation": {
+						"vector": [0, 0, "math.cos(query.anim_time * 180) * 10"]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [0, 0, 0],
+						"easing": "easeInOutBack",
+						"easingArgs": [2]
+					}
+				},
+				"arml": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 25", 0, 0]
+					}
+				},
+				"arml2": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * -15", 0, 0]
+					}
+				},
+				"armr": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -25", 0, 0]
+					}
+				},
+				"armr2": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * 15", 0, 0]
+					}
+				},
+				"legl": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * -25", 0, 0]
+					},
+					"position": {
+						"vector": [0, "math.sin(query.anim_time * 180) * 2", "math.cos(query.anim_time * 180) * 2"]
+					}
+				},
+				"legr": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 180) * 25", 0, 0]
+					},
+					"position": {
+						"vector": [0, "math.sin(query.anim_time * 180) * -2", "math.cos(query.anim_time * 180) * -2"]
+					}
+				}
+			}
+		},
+		"animation.myuthine.attack": {
+			"loop": true,
+			"animation_length": 1,
+			"override_previous_animation": true,
+			"bones": {
+				"bodybot": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-90, 0, 0],
+							"easing": "easeInOutBack"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutBack"
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 7, 0],
+							"easing": "easeInOutBack"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutBack"
+						}
+					}
+				},
+				"arml": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-160, 0, 0],
+							"easing": "easeInOutBack"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutBack"
+						}
+					}
+				},
+				"arml2": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-110, 0, 0],
+							"easing": "easeInOutBack"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutBack"
+						}
+					}
+				},
+				"armr": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-160, 0, 0],
+							"easing": "easeInOutBack"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutBack"
+						}
+					}
+				},
+				"armr2": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-110, 0, 0],
+							"easing": "easeInOutBack"
+						},
+						"1.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutBack"
+						}
+					}
+				},
+				"legl": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, -6]
+					}
+				},
+				"legr": {
+					"rotation": {
+						"vector": [0, 0, 10]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

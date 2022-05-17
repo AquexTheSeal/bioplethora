@@ -1,5 +1,9 @@
 package io.github.bioplethora.client;
 
+import io.github.bioplethora.blocks.BPIdeFanBlock;
+import io.github.bioplethora.blocks.BPLanternPlantBlock;
+import io.github.bioplethora.blocks.BPVinesBlock;
+import io.github.bioplethora.blocks.BPVinesTopBlock;
 import io.github.bioplethora.client.armor.render.AquChestplateRender;
 import io.github.bioplethora.client.block.render.FleignariteSplotchBlockRender;
 import io.github.bioplethora.client.entity.render.*;
@@ -45,11 +49,11 @@ public class ModClientRegister {
         // Automatic Entry
         for (RegistryObject<Block> block : BPBlocks.BLOCKS.getEntries()) {
             if (
-                    block.get() instanceof DoorBlock ||
-                    block.get() instanceof TrapDoorBlock ||
-                    block.get() instanceof LeavesBlock ||
-                    block.get() instanceof AbstractSignBlock ||
-                    block.get() instanceof SaplingBlock
+                    block.get() instanceof DoorBlock || block.get() instanceof TrapDoorBlock ||
+                    block.get() instanceof LeavesBlock || block.get() instanceof AbstractSignBlock ||
+                    block.get() instanceof SaplingBlock || block.get() instanceof BPLanternPlantBlock ||
+                    block.get() instanceof BPIdeFanBlock || block.get() instanceof BPVinesTopBlock ||
+                    block.get() instanceof BPVinesBlock
             ) {
                 RenderTypeLookup.setRenderLayer(block.get(), RenderType.cutout());
             }
@@ -57,8 +61,6 @@ public class ModClientRegister {
 
         // Plants
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_SPLOTCH.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(BPBlocks.KYRIA.get(), RenderType.cutout());
@@ -70,35 +72,6 @@ public class ModClientRegister {
         RenderTypeLookup.setRenderLayer(BPBlocks.LAVA_SPIRE.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.WARPED_DANCER.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(BPBlocks.PINK_TWI.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.PINK_TWI_PLANT.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.RED_TWI.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.RED_TWI_PLANT.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.SPIRIT_DANGLER.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.SPIRIT_DANGLER_PLANT.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.BASALT_SPELEOTHERM_PLANT.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.FIERY_BASALT_SPELEOTHERM.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.THONTUS_THISTLE.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.THONTUS_THISTLE_PLANT.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.BERRIED_THONTUS_THISTLE.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.TURQUOISE_PENDENT.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.TURQUOISE_PENDENT_PLANT.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.CERISE_IVY.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.CERISE_IVY_PLANT.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.SEEDED_CERISE_IVY.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_ETERN.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.SOUL_ETERN_PLANT.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.FLOURISHED_SOUL_ETERN.get(), RenderType.cutout());
-
         RenderTypeLookup.setRenderLayer(BPBlocks.IRION_GRASS.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.IRION_TALL_GRASS.get(), RenderType.cutout());
 
@@ -106,15 +79,7 @@ public class ModClientRegister {
 
         RenderTypeLookup.setRenderLayer(BPBlocks.ARTAIRIUS.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(BPBlocks.BYRSS_LANTERN_PLANT.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.CHORUS_LANTERN_PLANT.get(), RenderType.cutout());
-
         RenderTypeLookup.setRenderLayer(BPBlocks.FROSTEM.get(), RenderType.cutout());
-
-        RenderTypeLookup.setRenderLayer(BPBlocks.SPINXELTHORN.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.SPINXELTHORN_PLANT.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.GLACYNTH.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BPBlocks.GLACYNTH_PLANT.get(), RenderType.cutout());
 
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
@@ -137,6 +102,8 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.GAUGALEM.get(), GaugalemEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.DWARF_MOSSADILE.get(), DwarfMossadileEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.TRAPJAW.get(), TrapjawEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.TERRAITH.get(), TerraithEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.MYUTHINE.get(), MyuthineEntityRender::new);
 
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.WOODEN_GRYLYNEN.get(), GrylynenEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.STONE_GRYLYNEN.get(), GrylynenEntityRender::new);
@@ -144,8 +111,6 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.IRON_GRYLYNEN.get(), GrylynenEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.DIAMOND_GRYLYNEN.get(), GrylynenEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.NETHERITE_GRYLYNEN.get(), GrylynenEntityRender::new);
-
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.TERRAITH.get(), TerraithEntityRender::new);
 
         //Hellsent
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CREPHOXL.get(), CrephoxlEntityRender::new);

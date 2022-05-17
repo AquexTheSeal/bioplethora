@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.world.BPVanillaBiomeFeatureGeneration;
+import io.github.bioplethora.world.blockplacers.IdeFanBlockPlacer;
 import io.github.bioplethora.world.blockplacers.LavaEdgeBlockPlacer;
 import io.github.bioplethora.world.blockplacers.MinishroomBlockPlacer;
 import io.github.bioplethora.world.featureconfigs.ExpandedLakeFeatureConfig;
@@ -44,6 +45,10 @@ public class BPConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> KYRIA_BELINE = register("kyria_beline", makeNoProjectionClusterPlants(
             Feature.RANDOM_PATCH, BPBlocks.KYRIA_BELINE.get(), new DoublePlantBlockPlacer()
     ).count(19).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))
+    ));
+    public static final ConfiguredFeature<?, ?> KYRIA_IDE_FAN = register("kyria_ide_fan", makeNoProjectionClusterPlants(
+            Feature.RANDOM_PATCH, BPBlocks.KYRIA_IDE_FAN.get(), new IdeFanBlockPlacer()
+    ).count(12).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 4, 7))
     ));
 
     public static final ConfiguredFeature<?, ?> SOUL_SPROUTS = register("soul_sprouts", makeDecoratedClusterPlants(
@@ -259,6 +264,10 @@ public class BPConfiguredFeatures {
     }
 
     public static ConfiguredFeature<?, ?> makeNoProjectionClusterPlants(Feature<BlockClusterFeatureConfig> feature, Block block, BlockPlacer placer) {
+        return feature.configured(new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(block.defaultBlockState()), placer).noProjection().tries(64).build());
+    }
+
+    public static ConfiguredFeature<?, ?> makeIdeFanClusterPlants(Feature<BlockClusterFeatureConfig> feature, Block block, BlockPlacer placer) {
         return feature.configured(new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(block.defaultBlockState()), placer).noProjection().tries(64).build());
     }
 

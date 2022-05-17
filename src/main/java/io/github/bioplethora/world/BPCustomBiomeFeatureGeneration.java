@@ -37,6 +37,7 @@ public class BPCustomBiomeFeatureGeneration {
 
             vegDeco.add(() -> BPConfiguredFeatures.KYRIA);
             vegDeco.add(() -> BPConfiguredFeatures.KYRIA_BELINE);
+            vegDeco.add(() -> BPConfiguredFeatures.KYRIA_IDE_FAN);
         }
 
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_PLAINS)) {

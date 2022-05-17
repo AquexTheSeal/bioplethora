@@ -4,6 +4,7 @@ import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.goals.CavernFleignarMeleeGoal;
+import io.github.bioplethora.entity.others.part.BPPartEntity;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPEffects;
 import io.github.bioplethora.registry.BPTags;
@@ -45,10 +46,67 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     public boolean isHuge;
     public boolean finalize = false;
 
+    //public final BPPartEntity[] subEntities;
+    //public final BPPartEntity testPart;
+
     public CavernFleignarEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
+
+        //testPart = new BPPartEntity<>(this, "test", 0.8f, 4.5f);
+        //subEntities = new BPPartEntity[]{testPart};
     }
+
+    /*
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public PartEntity<?>[] getParts() {
+        return subEntities;
+    }*/
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.hasEffect(Effects.POISON)) {
+            this.removeEffect(Effects.POISON);
+        }
+
+        //tickPart(testPart, 3, 0, 3);
+
+        if (!finalize) {
+            if (Math.random() <= 0.5) {
+                this.isHuge = true;
+            }
+            finalize = true;
+        }
+
+        /*
+        Vector3d[] subVec = new Vector3d[subEntities.length];
+
+        for (int i = 0; i < subEntities.length; ++i) {
+            subVec[i] = new Vector3d(subEntities[i].getX(), subEntities[i].getY(), subEntities[i].getZ());
+        }
+
+        for (int i = 0; i < subEntities.length; ++i) {
+            subEntities[i].xo = subVec[i].x;
+            subEntities[i].yo = subVec[i].y;
+            subEntities[i].zo = subVec[i].z;
+            subEntities[i].xOld = subVec[i].x;
+            subEntities[i].yOld = subVec[i].y;
+            subEntities[i].zOld = subVec[i].z;
+        }*/
+    }
+
+    private void tickPart(BPPartEntity pPart, double offsetX, double offsetY, double offsetZ) {
+        pPart.setPos(getX() + offsetX, getY() + offsetY, getZ() + offsetZ);
+    }
+
 
     @Override
     public BPEntityClasses getBioplethoraClass() {
@@ -139,22 +197,6 @@ public class CavernFleignarEntity extends BPMonsterEntity implements IAnimatable
     @Override
     protected float getVoicePitch() {
         return 0.5F;
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        if (this.hasEffect(Effects.POISON)) {
-            this.removeEffect(Effects.POISON);
-        }
-
-        if (!finalize) {
-            if (Math.random() <= 0.5) {
-                this.isHuge = true;
-            }
-            finalize = true;
-        }
     }
 
     public boolean doHurtTarget(Entity entity) {
