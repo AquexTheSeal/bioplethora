@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:item/myuthine_spawn_egg"
+  }
+}
