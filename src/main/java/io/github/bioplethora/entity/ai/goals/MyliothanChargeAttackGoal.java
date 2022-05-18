@@ -35,7 +35,7 @@ public class MyliothanChargeAttackGoal extends Goal {
 
             ++this.chargeTime;
 
-            if (this.chargeTime >= 200) {
+            if (this.chargeTime >= 300) {
 
                 this.myliothan.lookAt(target, 30.0F, 30.0F);
 
@@ -52,11 +52,11 @@ public class MyliothanChargeAttackGoal extends Goal {
                 }
             }
 
-            if (this.chargeTime == 400) {
+            if (this.chargeTime >= 600) {
                 this.chargeTime = 0;
             }
         }
 
-        this.myliothan.setCharging(this.chargeTime > 200);
+        this.myliothan.setCharging(this.chargeTime > 300);
     }
 }

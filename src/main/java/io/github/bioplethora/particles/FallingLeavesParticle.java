@@ -57,7 +57,7 @@ public class FallingLeavesParticle extends SpriteTexturedParticle {
     }
 
     public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_LIT;
+        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @OnlyIn(Dist.CLIENT)

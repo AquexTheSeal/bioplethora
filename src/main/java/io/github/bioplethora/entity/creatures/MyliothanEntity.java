@@ -6,10 +6,10 @@ import io.github.bioplethora.entity.ai.goals.MyliothanChargeAttackGoal;
 import io.github.bioplethora.entity.others.part.BPPartEntity;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPSoundEvents;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.DolphinLookController;
@@ -23,19 +23,21 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.entity.PartEntity;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -45,8 +47,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 
 public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBioClassification {
 
@@ -63,6 +65,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
     private final double[][] positions = new double[64][3];
     private int posPointer = -1;
     private float yRotA;
+    public boolean inWall;
 
     private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(MyliothanEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -82,14 +85,6 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
         rightWingTip = new BPPartEntity<>(this, "wing", 9.5f, 2.3f);
         subEntities = new BPPartEntity[]{head, tail, leftWing, rightWing, leftWingTip, rightWingTip};
 
-    }
-
-    public static void summonParts(EntityJoinWorldEvent event) {
-        /*
-        if (event.getEntity() instanceof MyliothanEntity) {
-            event.getWorld().addFreshEntity(((MyliothanEntity) event.getEntity()).leftWing);
-            event.getWorld().addFreshEntity(((MyliothanEntity) event.getEntity()).rightWing);
-        }*/
     }
 
     @Nullable
@@ -116,6 +111,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                 .add(Attributes.ATTACK_DAMAGE, 34 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.MAX_HEALTH, 385 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.MOVEMENT_SPEED, 1.2 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.KNOCKBACK_RESISTANCE, 10D)
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }
 
@@ -188,6 +184,40 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
     }
 
     @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.inWall) {
+            this.move(MoverType.SELF, this.getDeltaMovement().scale(0.8F));
+        } else {
+            this.move(MoverType.SELF, this.getDeltaMovement());
+        }
+
+        if (!this.level.isClientSide) {
+            this.inWall = this.checkWalls(this.getBoundingBox()) |
+                    this.checkWalls(this.head.getBoundingBox()) | this.checkWalls(this.leftWing.getBoundingBox()) |
+                            this.checkWalls(this.rightWing.getBoundingBox()) | this.checkWalls(this.rightWingTip.getBoundingBox()) |
+                                    this.checkWalls(this.leftWingTip.getBoundingBox()) | this.checkWalls(this.tail.getBoundingBox());
+        }
+
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity pEntity) {
+        if (pEntity instanceof PlayerEntity) {
+            PlayerEntity entity = (PlayerEntity) pEntity;
+            if (entity.getUseItem().isShield(entity)) {
+                entity.getCooldowns().addCooldown(entity.getUseItem().getItem(), 300);
+            }
+        }
+        return super.doHurtTarget(pEntity);
+    }
+
+    @Override
+    protected void handleAirSupply(int pAirSupply) {
+        this.setAirSupply(300);
+    }
+
+    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FindWaterGoal(this));
@@ -200,16 +230,46 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
+    private boolean checkWalls(AxisAlignedBB pArea) {
+        int i = MathHelper.floor(pArea.minX);
+        int j = MathHelper.floor(pArea.minY);
+        int k = MathHelper.floor(pArea.minZ);
+        int l = MathHelper.floor(pArea.maxX);
+        int i1 = MathHelper.floor(pArea.maxY);
+        int j1 = MathHelper.floor(pArea.maxZ);
+        boolean flag = false;
+        boolean flag1 = false;
+
+        for(int k1 = i; k1 <= l; ++k1) {
+            for(int l1 = j; l1 <= i1; ++l1) {
+                for(int i2 = k; i2 <= j1; ++i2) {
+                    BlockPos blockpos = new BlockPos(k1, l1, i2);
+                    BlockState blockstate = this.level.getBlockState(blockpos);
+                    Block block = blockstate.getBlock();
+                    if (!blockstate.isAir(this.level, blockpos) && blockstate.getMaterial() != Material.FIRE) {
+                        if (net.minecraftforge.common.ForgeHooks.canEntityDestroy(this.level, blockpos, this) && !BlockTags.DRAGON_IMMUNE.contains(block)) {
+                            flag1 = this.level.removeBlock(blockpos, false) || flag1;
+                        } else {
+                            flag = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (flag1) {
+            BlockPos blockpos1 = new BlockPos(i + this.random.nextInt(l - i + 1), j + this.random.nextInt(i1 - j + 1), k + this.random.nextInt(j1 - k + 1));
+            this.level.levelEvent(2008, blockpos1, 0);
+        }
+
+        return flag;
+    }
+
     // TODO: 26/01/2022 - Better Myliothan charging animation.
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 
         if (this.isCharging()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myliothan.charging", true));
-            return PlayState.CONTINUE;
-        }
-
-        if (event.isMoving() && this.isInWaterOrBubble()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myliothan.swimming", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myliothan.charge", true));
             return PlayState.CONTINUE;
         }
 
@@ -219,7 +279,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "myliothan_controller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "myliothan_controller", 5, this::predicate));
     }
 
     @Override
@@ -227,17 +287,19 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
         return this.factory;
     }
 
-    @Override
-    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
-        return super.checkSpawnRules(world, reason) && MyliothanEntity.checkMyliothanSpawnRules(level, blockPosition());
-    }
-
-    public static boolean checkMyliothanSpawnRules(IWorld world, BlockPos pos) {
+    public static boolean checkMyliothanSpawnRules(EntityType<MyliothanEntity> myliothan, IWorld world, SpawnReason pSpawnType, BlockPos pos, Random pRandom) {
         if (pos.getY() > 45 && pos.getY() < world.getSeaLevel()) {
             Optional<RegistryKey<Biome>> optional = world.getBiomeName(pos);
-            return (Objects.equals(optional, Optional.of(Biomes.OCEAN)) || !Objects.equals(optional, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);
+            return BiomeDictionary.hasType(optional.get(), BiomeDictionary.Type.OCEAN) && world.getFluidState(pos).is(FluidTags.WATER);
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public void checkDespawn() {
+        if (this.level.getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
+            this.remove();
         }
     }
 
@@ -296,14 +358,14 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                 float f = (float) (this.myliothan.moveTargetPoint.x - this.myliothan.getX());
                 float f1 = (float) (this.myliothan.moveTargetPoint.y - this.myliothan.getY());
                 float f2 = (float) (this.myliothan.moveTargetPoint.z - this.myliothan.getZ());
-                double d0 = (double) MathHelper.sqrt(f * f + f2 * f2);
+                double d0 = MathHelper.sqrt(f * f + f2 * f2);
                 double d1 = 1.0D - (double) MathHelper.abs(f1 * 0.7F) / d0;
                 f = (float) ((double) f * d1);
                 f2 = (float) ((double) f2 * d1);
-                d0 = (double) MathHelper.sqrt(f * f + f2 * f2);
-                double d2 = (double) MathHelper.sqrt(f * f + f2 * f2 + f1 * f1);
+                d0 = MathHelper.sqrt(f * f + f2 * f2);
+                double d2 = MathHelper.sqrt(f * f + f2 * f2 + f1 * f1);
                 float f3 = this.myliothan.yRot;
-                float f4 = (float) MathHelper.atan2((double) f2, (double) f);
+                float f4 = (float) MathHelper.atan2(f2, f);
                 float f5 = MathHelper.wrapDegrees(this.myliothan.yRot + 90.0F);
                 float f6 = MathHelper.wrapDegrees(f4 * (180F / (float) Math.PI));
                 this.myliothan.yRot = MathHelper.approachDegrees(f5, f6, 4.0F) - 90.0F;
@@ -339,7 +401,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                     float f1 = (float)(this.speedModifier * this.myliothan.getAttributeValue(Attributes.MOVEMENT_SPEED));
                     if (this.myliothan.isInWater()) {
                         this.myliothan.setSpeed(f1 * 0.02F);
-                        float f2 = -((float)(MathHelper.atan2(d1, (double)MathHelper.sqrt(d0 * d0 + d2 * d2)) * (double)(180F / (float)Math.PI)));
+                        float f2 = -((float)(MathHelper.atan2(d1, MathHelper.sqrt(d0 * d0 + d2 * d2)) * (double)(180F / (float)Math.PI)));
                         f2 = MathHelper.clamp(MathHelper.wrapDegrees(f2), -85.0F, 85.0F);
                         this.myliothan.xRot = this.rotlerp(this.myliothan.xRot, f2, 5.0F);
                         float f3 = MathHelper.cos(this.myliothan.xRot * ((float)Math.PI / 180F));

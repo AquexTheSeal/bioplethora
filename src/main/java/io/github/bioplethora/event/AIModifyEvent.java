@@ -2,7 +2,6 @@ package io.github.bioplethora.event;
 
 import io.github.bioplethora.entity.ai.goals.BPAvoidEntityGoal;
 import io.github.bioplethora.entity.creatures.EurydnEntity;
-import io.github.bioplethora.entity.creatures.MyliothanEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.ZombifiedPiglinEntity;
@@ -26,7 +25,5 @@ public class AIModifyEvent {
         if (mob instanceof ZombifiedPiglinEntity) {
             mob.goalSelector.addGoal(2, new BPAvoidEntityGoal<>(mob, EurydnEntity.class, 6.0F, 1.0D, 1.2D));
         }
-
-        MyliothanEntity.summonParts(event);
     }
 }

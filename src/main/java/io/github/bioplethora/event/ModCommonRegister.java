@@ -3,6 +3,7 @@ package io.github.bioplethora.event;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.CuttlefishEntity;
 import io.github.bioplethora.entity.creatures.GaugalemEntity;
+import io.github.bioplethora.entity.creatures.MyliothanEntity;
 import io.github.bioplethora.entity.creatures.OnofishEntity;
 import io.github.bioplethora.entity.projectile.BellophiteArrowEntity;
 import io.github.bioplethora.entity.projectile.MagmaBombEntity;
@@ -70,5 +71,7 @@ public class ModCommonRegister {
 
         EntitySpawnPlacementRegistry.register(BPEntities.DWARF_MOSSADILE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
         EntitySpawnPlacementRegistry.register(BPEntities.GAUGALEM.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GaugalemEntity::checkGaugalemSpawnRules);
+
+        EntitySpawnPlacementRegistry.register(BPEntities.MYLIOTHAN.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MyliothanEntity::checkMyliothanSpawnRules);
     }
 }

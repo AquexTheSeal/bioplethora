@@ -40,6 +40,7 @@ public class BPCommonConfig {
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnGaugalem;
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnDwarfMossadile;
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnTrapjaw;
+    public final ForgeConfigSpec.ConfigValue<Boolean> spawnMyuthine;
 
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnWoodenGrylynen;
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnStoneGrylynen;
@@ -127,6 +128,7 @@ public class BPCommonConfig {
         spawnGaugalem = builder.define("Enable mob spawning for Gaugalems", true);
         spawnDwarfMossadile = builder.define("Enable mob spawning for Dwarf Mossadiles", true);
         spawnTrapjaw = builder.define("Enable mob spawning for Trapjaws", true);
+        spawnMyuthine = builder.define("Enable mob spawning for Myuthines", true);
 
         spawnWoodenGrylynen = builder.define("Enable mob spawning for Wooden Grylynens", true);
         spawnStoneGrylynen = builder.define("Enable mob spawning for Stone Grylynens", true);

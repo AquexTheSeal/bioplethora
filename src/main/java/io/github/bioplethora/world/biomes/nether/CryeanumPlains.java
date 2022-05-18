@@ -1,5 +1,7 @@
 package io.github.bioplethora.world.biomes.nether;
 
+import io.github.bioplethora.config.BPConfig;
+import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPParticles;
 import net.minecraft.client.audio.BackgroundMusicTracks;
 import net.minecraft.entity.EntityClassification;
@@ -21,11 +23,19 @@ public class CryeanumPlains {
         double d0 = 0.7D;
         double d1 = 0.15D;
         MobSpawnInfo.Builder spawnInfoBuilder = new MobSpawnInfo.Builder();
-        spawnInfoBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.SKELETON, 20, 5, 5));
+
+        if (BPConfig.COMMON.spawnMyuthine.get()) {
+            spawnInfoBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(BPEntities.MYUTHINE.get(), 15, 5, 5));
+        }
+
         spawnInfoBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.GHAST, 50, 4, 4));
         spawnInfoBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.ENDERMAN, 1, 4, 4));
         spawnInfoBuilder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.STRIDER, 60, 1, 2));
-        spawnInfoBuilder.addMobCharge(EntityType.SKELETON, 0.7D, 0.15D);
+
+        if (BPConfig.COMMON.spawnMyuthine.get()) {
+            spawnInfoBuilder.addMobCharge(BPEntities.MYUTHINE.get(), 0.7D, 0.15D);
+        }
+
         spawnInfoBuilder.addMobCharge(EntityType.GHAST, 0.7D, 0.15D);
         spawnInfoBuilder.addMobCharge(EntityType.ENDERMAN, 0.7D, 0.15D);
         spawnInfoBuilder.addMobCharge(EntityType.STRIDER, 0.7D, 0.15D);
@@ -60,15 +70,15 @@ public class CryeanumPlains {
         builder1.biomeCategory(Biome.Category.NETHER);
         builder1.depth(0.1F);
         builder1.scale(0.2F);
-        builder1.temperature(1.5F);
+        builder1.temperature(1.0F);
         builder1.downfall(0.0F);
 
         builder1.specialEffects((new BiomeAmbience.Builder())
                 .waterColor(4159204)
                 .waterFogColor(329011)
                 .fogColor(1787717)
-                .skyColor(calculateSkyColor(1.5F))
-                .ambientParticle(new ParticleEffectAmbience(BPParticles.PINK_ENIVILE_LEAF.get(), 0.00625F))
+                .skyColor(calculateSkyColor(1.0F))
+                .ambientParticle(new ParticleEffectAmbience(BPParticles.PINK_ENIVILE_LEAF.get(), 0.00225F))
                 .ambientLoopSound(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
                 .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0D))
                 .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS, 0.0111D))

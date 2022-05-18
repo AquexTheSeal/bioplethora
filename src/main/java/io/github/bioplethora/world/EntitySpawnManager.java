@@ -18,13 +18,16 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/**
+ * Used for spawning Bioplethora's mobs in vanilla biomes, spawning in Bioplethora's biomes will be handled inside the biome class itself.
+ */
 public class EntitySpawnManager {
 
     public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
         BioplethoraMobSpawns.acceptMobSpawns(event);
     }
 
-    private static class BioplethoraMobSpawns {
+    public static class BioplethoraMobSpawns {
 
         static Integer spawnMultiplier = BPConfig.COMMON.mobSpawnWeightMultiplier.get();
         static EntityClassification creature = EntityClassification.CREATURE;
@@ -33,14 +36,14 @@ public class EntitySpawnManager {
         static EntityClassification waterCreature = EntityClassification.WATER_CREATURE;
         static EntityClassification waterAmbient = EntityClassification.WATER_AMBIENT;
 
-        private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> OVERWORLD_ENTITIES = (builder) -> {
             // Cavern Fleignar
             if (BPConfig.COMMON.spawnCavernFleignar.get()) {
                 builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.CAVERN_FLEIGNAR.get(), 120 * spawnMultiplier, 4, 6));
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> DESERT_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> DESERT_ENTITIES = (builder) -> {
             // Nandbri
             if(BPConfig.COMMON.spawnNandbri.get()) {
                 builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.NANDBRI.get(), 3 * spawnMultiplier, 1, 1));
@@ -48,7 +51,7 @@ public class EntitySpawnManager {
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> SWAMP_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> SWAMP_ENTITIES = (builder) -> {
             // Trapjaw
             if (BPConfig.COMMON.spawnTrapjaw.get()) {
                 builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.TRAPJAW.get(), 5 * spawnMultiplier, 1, 1));
@@ -56,7 +59,7 @@ public class EntitySpawnManager {
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> FOREST_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> FOREST_ENTITIES = (builder) -> {
             //Crephoxl
             if (BPConfig.COMMON.spawnCrephoxl.get()) {
                 builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
@@ -70,7 +73,7 @@ public class EntitySpawnManager {
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> JUNGLE_ENTITIES = (builder) -> {
             //Crephoxl
             if (BPConfig.COMMON.spawnCrephoxl.get()) {
                 builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.CREPHOXL.get(), 10 * spawnMultiplier, 1, 1));
@@ -78,7 +81,7 @@ public class EntitySpawnManager {
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
             //Bellophgolem
             if (BPConfig.COMMON.spawnBellophgolem.get()) {
                 builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
@@ -96,7 +99,7 @@ public class EntitySpawnManager {
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> ICY_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> ICY_ENTITIES = (builder) -> {
             //Bellophgolem
             if (BPConfig.COMMON.spawnBellophgolem.get()) {
                 builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
@@ -108,7 +111,7 @@ public class EntitySpawnManager {
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> SAVANNA_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> SAVANNA_ENTITIES = (builder) -> {
             //Alphem
             if (BPConfig.COMMON.spawnAlphem.get()) {
                 builder.addSpawn(creature, new MobSpawnInfo.Spawners(BPEntities.ALPHEM.get(), 18 * spawnMultiplier, 4, 10));
@@ -127,7 +130,7 @@ public class EntitySpawnManager {
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
             //Cuttlefish
             if (BPConfig.COMMON.spawnCuttlefish.get()) {
                 builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BPEntities.CUTTLEFISH.get(), 40 * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
@@ -135,36 +138,36 @@ public class EntitySpawnManager {
 
             //Myliothan
             if (BPConfig.COMMON.spawnMyliothan.get()) {
-                builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BPEntities.MYLIOTHAN.get(), BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 3));
+                builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BPEntities.MYLIOTHAN.get(), 5 * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 1));
             }
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> BASALT_DELTAS_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> BASALT_DELTAS_ENTITIES = (builder) -> {
             //Fiery Eurydn
             createSpawn(builder, monster, BPEntities.FIERY_EURYDN, 8, 1, 3, BPConfig.COMMON.spawnFieryEurydn);
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> NETHER_WASTES_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> NETHER_WASTES_ENTITIES = (builder) -> {
             //Dwarf Mossadile
             createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 45, 2, 3, BPConfig.COMMON.spawnDwarfMossadile);
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> WARPED_FOREST_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> WARPED_FOREST_ENTITIES = (builder) -> {
             //Dwarf Mossadile
             createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 1, 1, 2, BPConfig.COMMON.spawnDwarfMossadile);
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> CRIMSON_FOREST_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> CRIMSON_FOREST_ENTITIES = (builder) -> {
             //Dwarf Mossadile
             createSpawn(builder, monster, BPEntities.DWARF_MOSSADILE, 4, 1, 3, BPConfig.COMMON.spawnDwarfMossadile);
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> SOUL_SAND_VALLEY_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> SOUL_SAND_VALLEY_ENTITIES = (builder) -> {
             //Soul Eurydn
             createSpawn(builder, monster, BPEntities.SOUL_EURYDN, 6, 1, 3, BPConfig.COMMON.spawnSoulEurydn);
         };
 
-        private static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
             //Gaugalem
             createSpawn(builder, monster, BPEntities.GAUGALEM, 2, 1, 1, BPConfig.COMMON.spawnGaugalem);
 

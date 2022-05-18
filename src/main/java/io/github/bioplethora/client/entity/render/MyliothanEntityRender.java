@@ -31,7 +31,7 @@ public class MyliothanEntityRender extends GeoEntityRenderer<MyliothanEntity> {
 
     @Override
     public RenderType getRenderType(MyliothanEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityCutoutNoCull(getTextureLocation(animatable));
     }
 
     @Override
