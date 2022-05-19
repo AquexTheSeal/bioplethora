@@ -61,6 +61,8 @@ public class ModClientRegister {
 
         // Plants
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_SPLOTCH.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(BPBlocks.KYRIA.get(), RenderType.cutout());
@@ -126,6 +128,7 @@ public class ModClientRegister {
         //projectiles
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.MAGMA_BOMB.get(), (rendererManager) -> new SpriteRenderer<>(rendererManager, mcClient.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.WINDY_ESSENCE.get(), (rendererManager) -> new SpriteRenderer<>(rendererManager, mcClient.getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.ABYSSAL_SCALES.get(), (rendererManager) -> new AbyssalScalesRenderer<>(rendererManager, mcClient.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_CLUSTER.get(), BellophiteClusterRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_ARROW.get(), BellophiteArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.WINDBLAZE.get(), WindBlazeRender::new);
@@ -146,11 +149,12 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_SHARD.get(), AlphanumShardRender::new);
 
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CREPHOXL_HAMMER_SMASH.get(), BPEffectRender::new);
-
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_SLASH.get(), BPEffectRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_SOUL_PURGE.get(), BPEffectRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_AIR_JUMP.get(), BPEffectRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_FLAMING_SNIPE.get(), BPEffectRender::new);
+
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.MYLIOTHAN_ROAR.get(), BPEffectRender::new);
 
         ScreenManager.register(BPContainerTypes.REINFORCING_TABLE_CONTAINER.get(), ReinforcingTableScreen::new);
 

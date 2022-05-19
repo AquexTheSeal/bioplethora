@@ -84,6 +84,8 @@ public class BPEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "alphanum_obliterator_spear").toString()));
     public static final RegistryObject<EntityType<WindyEssenceEntity>> WINDY_ESSENCE = ENTITIES.register("windy_essence", () -> EntityType.Builder.of(WindyEssenceEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "windy_essence").toString()));
+    public static final RegistryObject<EntityType<AbyssalScalesEntity>> ABYSSAL_SCALES = ENTITIES.register("abyssal_scales", () -> EntityType.Builder.<AbyssalScalesEntity>of(AbyssalScalesEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(4)
+            .build(new ResourceLocation(Bioplethora.MOD_ID, "abyssal_scales").toString()));
 
     //Others
     public static final RegistryObject<EntityType<BPBoatEntity>> CAERULWOOD_BOAT = createBoat("caerulwood");
@@ -100,11 +102,12 @@ public class BPEntities {
             .build(new ResourceLocation(Bioplethora.MOD_ID, "alphanum_shard").toString()));
 
     public static final RegistryObject<EntityType<BPEffectEntity>> CREPHOXL_HAMMER_SMASH = createEffectEntity("crephoxl_hammer_smash", BPEffectTypes.AERIAL_SHOCKWAVE);
-
     public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_SLASH = createEffectEntity("infernal_quarterstaff_slash", BPEffectTypes.FLAMING_SLASH);
     public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_SOUL_PURGE = createEffectEntity("infernal_quarterstaff_soul_purge", BPEffectTypes.SOUL_PURGE);
     public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_AIR_JUMP = createEffectEntity("infernal_quarterstaff_air_jump", BPEffectTypes.AIR_JUMP);
     public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_FLAMING_SNIPE = createEffectEntity("infernal_quarterstaff_flaming_snipe", BPEffectTypes.FLAMING_SNIPE);
+
+    public static final RegistryObject<EntityType<BPEffectEntity>> MYLIOTHAN_ROAR = createEffectEntity("myliothan_roar", BPEffectTypes.MYLIOTHAN_ROAR);
 
     //============================
     //       HELPERS

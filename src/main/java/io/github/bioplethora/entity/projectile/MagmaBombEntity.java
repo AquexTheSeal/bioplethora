@@ -13,8 +13,8 @@ import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -81,10 +81,15 @@ public class MagmaBombEntity extends ProjectileItemEntity {
         Entity entity = result.getEntity();
         entity.hurt(DamageSource.thrown(this, this.getOwner()), 3);
         this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), this.explosionPower, Explosion.Mode.BREAK);
+        if (!this.level.isClientSide) {
+            this.level.broadcastEntityEvent(this, (byte)3);
+            this.remove();
+        }
     }
 
-    protected void onHit(RayTraceResult result) {
-        super.onHit(result);
+    @Override
+    protected void onHitBlock(BlockRayTraceResult pResult) {
+        super.onHitBlock(pResult);
         this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), this.explosionPower, Explosion.Mode.BREAK);
         if (!this.level.isClientSide) {
             this.level.broadcastEntityEvent(this, (byte)3);

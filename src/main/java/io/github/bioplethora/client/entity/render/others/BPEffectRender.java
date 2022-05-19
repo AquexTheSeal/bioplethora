@@ -29,6 +29,10 @@ public class BPEffectRender extends GeoProjectilesRenderer<BPEffectEntity> {
 
     @Override
     public void renderEarly(BPEffectEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+        float f = 1;
+        f = (float) ((double) f * animatable.effectType.getScale());
+        stackIn.scale(f, f, f);
+        stackIn.translate(0, 0 - (animatable.effectType.getScale() / 4), 0);
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

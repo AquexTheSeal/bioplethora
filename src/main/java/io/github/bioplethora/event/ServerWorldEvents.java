@@ -62,6 +62,16 @@ import net.minecraftforge.items.ItemHandlerHelper;
 public class ServerWorldEvents {
 
     @SubscribeEvent
+    public static void playerTickDebug(TickEvent.PlayerTickEvent event) {
+        /*
+        if (event.player.getMainHandItem().getItem() == BPItems.TEST_ITEM.get()) {
+            event.player.displayClientMessage(new StringTextComponent("xRot: " + event.player.xRot), true);
+        } else {
+            event.player.displayClientMessage(new StringTextComponent("yRot: " + event.player.yRot), true);
+        }*/
+    }
+
+    @SubscribeEvent
     public static void onPlayerLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
 
         hitHandler(event.getPlayer(), event.getItemStack());

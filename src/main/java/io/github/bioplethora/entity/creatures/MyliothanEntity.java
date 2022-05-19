@@ -3,6 +3,7 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.ai.goals.MyliothanChargeAttackGoal;
+import io.github.bioplethora.entity.ai.goals.MyliothanShakeGoal;
 import io.github.bioplethora.entity.others.part.BPPartEntity;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPSoundEvents;
@@ -61,13 +62,13 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
     public final BPPartEntity rightWingTip;
 
     public Vector3d moveTargetPoint = Vector3d.ZERO;
-    public BlockPos anchorPoint = BlockPos.ZERO;
     private final double[][] positions = new double[64][3];
     private int posPointer = -1;
     private float yRotA;
     public boolean inWall;
 
-    private static final DataParameter<Boolean> DATA_IS_CHARGING = EntityDataManager.defineId(MyliothanEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHAKING = EntityDataManager.defineId(MyliothanEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CHARGING = EntityDataManager.defineId(MyliothanEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public MyliothanEntity(EntityType<? extends WaterMobEntity> type, World worldIn) {
@@ -105,11 +106,11 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 15 * BPConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, (BPConfig.IN_HELLMODE ? 15 : 12) * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 10D)
-                .add(Attributes.ATTACK_DAMAGE, 34 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, 385 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, (BPConfig.IN_HELLMODE ? 32 : 27) * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.MAX_HEALTH, (BPConfig.IN_HELLMODE ? 385 : 335) * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.MOVEMENT_SPEED, 1.2 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10D)
                 .add(Attributes.FOLLOW_RANGE, 64D);
@@ -130,6 +131,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
             posPointer = 0;
         }
 
+        // Target Point Deltas
         double tpdx = moveTargetPoint.x - getX(), tpdz = moveTargetPoint.z - getZ();
 
         if (Math.abs(tpdx) > (double) 1.0E-5F || Math.abs(tpdz) > (double) 1.0E-5F) {
@@ -222,6 +224,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
         super.registerGoals();
         this.goalSelector.addGoal(0, new FindWaterGoal(this));
         this.goalSelector.addGoal(1, new MyliothanChargeAttackGoal(this));
+        this.goalSelector.addGoal(2, new MyliothanShakeGoal(this));
         this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 1.6, 8));
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
@@ -423,15 +426,24 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_IS_CHARGING, false);
+        this.entityData.define(SHAKING, false);
+        this.entityData.define(CHARGING, false);
+    }
+
+    public boolean isShaking() {
+        return this.entityData.get(SHAKING);
+    }
+
+    public void setShaking(boolean shaking) {
+        this.entityData.set(SHAKING, shaking);
     }
 
     public boolean isCharging() {
-        return this.entityData.get(DATA_IS_CHARGING);
+        return this.entityData.get(CHARGING);
     }
 
     public void setCharging(boolean charging) {
-        this.entityData.set(DATA_IS_CHARGING, charging);
+        this.entityData.set(CHARGING, charging);
     }
 
     private void tickPart(BPPartEntity pPart, double offsetX, double offsetY, double offsetZ) {
