@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * Credits: WeirdNerd (Permission Granted)
  */
-public abstract class BPTameableGoal<E extends MobEntity> extends Goal {
+public abstract class GeckoGoal<E extends MobEntity> extends Goal {
 
     protected static final Random RANDOM = new Random();
     public E entity;

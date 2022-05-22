@@ -6,7 +6,6 @@ import io.github.bioplethora.registry.BPItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -36,14 +35,12 @@ public class MyliothanShakeGoal extends Goal {
     public void tick() {
         LivingEntity target = this.myliothan.getTarget();
         if (target.distanceToSqr(this.myliothan) < 4096.0D /*&& this.myliothan.canSee(target)*/) {
-            World world = this.myliothan.level;
-
             ++this.chargeTime;
 
             if (this.chargeTime >= 200) {
                 ++this.shootTime;
-                if (this.shootTime >= 5) {
-                    this.shootScaleAtXRot(-33.75F);
+                if (this.shootTime >= 7) {
+                    this.shootScaleAtXRot(-45.0F);
                     this.shootScaleAtXRot(-22.5F);
                     this.shootScaleAtXRot(-11.25F);
                     this.shootScaleAtXRot(-5.625F);
@@ -53,6 +50,7 @@ public class MyliothanShakeGoal extends Goal {
 
             if (this.chargeTime >= 300) {
                 this.chargeTime = -myliothan.getRandom().nextInt(100);
+                this.shootTime = 0;
             }
         }
 
@@ -75,6 +73,7 @@ public class MyliothanShakeGoal extends Goal {
         if (!myliothan.level.isClientSide) {
             AbyssalScalesEntity scales = new AbyssalScalesEntity(myliothan.level, myliothan);
             scales.setItem(new ItemStack(BPItems.ABYSSAL_SCALES.get()));
+            scales.setOwner(myliothan);
             scales.shootFromRotation(myliothan, xRot, yRot + (new Random().nextFloat() * 22.5F), 0.0F, 1.5F + myliothan.getRandom().nextFloat(), 1.0F);
             myliothan.level.addFreshEntity(scales);
         }

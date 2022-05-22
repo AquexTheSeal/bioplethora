@@ -106,7 +106,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, (BPConfig.IN_HELLMODE ? 15 : 12) * BPConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, (BPConfig.IN_HELLMODE ? 16 : 14) * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 10D)
                 .add(Attributes.ATTACK_DAMAGE, (BPConfig.IN_HELLMODE ? 32 : 27) * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
@@ -201,6 +201,11 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                                     this.checkWalls(this.leftWingTip.getBoundingBox()) | this.checkWalls(this.tail.getBoundingBox());
         }
 
+        if (this.getTarget() != null) {
+            if (this.getTarget().isInWater()) {
+                this.getTarget().setDeltaMovement(0, 0.5, 0);
+            }
+        }
     }
 
     @Override

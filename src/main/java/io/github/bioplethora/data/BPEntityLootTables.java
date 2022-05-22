@@ -1,5 +1,6 @@
 package io.github.bioplethora.data;
 
+import io.github.bioplethora.loot.conditions.InHellmode;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;
@@ -167,9 +168,17 @@ public class BPEntityLootTables extends EntityLootTables {
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(BPItems.ABYSSAL_SCALES.get())
-                                .apply(SetCount.setCount(RandomValueRange.between(0F, 4F)))
+                                .apply(SetCount.setCount(RandomValueRange.between(6F, 9F)))
                                 .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.5F)))
                                 .when(KilledByPlayer.killedByPlayer())
+                        ))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(BPItems.ABYSSAL_SCALES.get())
+                                .apply(SetCount.setCount(RandomValueRange.between(0F, 3F)))
+                                .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0F, 1.5F)))
+                                .when(KilledByPlayer.killedByPlayer())
+                                .when(InHellmode.inHellMode())
                         ))
         );
 

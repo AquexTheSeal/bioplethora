@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.entity.projectile.MagmaBombEntity;
 import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.entity.projectile.MagmaBombEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;

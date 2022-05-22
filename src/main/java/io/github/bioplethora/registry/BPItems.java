@@ -2,6 +2,9 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.config.BPConfig;
+import io.github.bioplethora.entity.projectile.CryeanumGaidiusEntity;
+import io.github.bioplethora.entity.projectile.EchoGaidiusEntity;
+import io.github.bioplethora.entity.projectile.NetheriteObsidianGaidiusEntity;
 import io.github.bioplethora.enums.BPArmorMaterials;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.enums.BPItemTier;
@@ -85,6 +88,19 @@ public class BPItems {
     public static final RegistryObject<Item> RED_CRYSTAL_SHIELD = ITEMS.register("red_crystal_shield", () -> new GrylynenShieldRedItem(new Item.Properties().durability(18575).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> ALPHANUM_OBLITERATOR = ITEMS.register("alphanum_obliterator", () -> new AlphanumObliteratorItem(new Item.Properties().durability(11500).rarity(BPRarityTypes.BOSS_WEAPON).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF = ITEMS.register("infernal_quarterstaff", () -> new InfernalQuarterstaffItem(ItemTier.NETHERITE, hellConfig ? 12 - BPItems.netheriteDMG : 8 - BPItems.netheriteDMG, -2.5f, new Item.Properties().durability(5200).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
+
+    public static final RegistryObject<Item> CRYEANUM_GAIDIUS = ITEMS.register("cryeanum_gaidius", () -> new GaidiusBaseItem(ItemTier.NETHERITE, hellConfig ? 8 - BPItems.netheriteDMG : 7 - BPItems.netheriteDMG, -3.0f,
+            new GaidiusBaseItem.ItemProps().projectile(CryeanumGaidiusEntity::new).inaccuracy(1.5F).velocity(1.5F),
+            new Item.Properties().durability(2240).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)
+    ));
+    public static final RegistryObject<Item> NETHERITE_OBSIDIAN_GAIDIUS = ITEMS.register("netherite_obsidian_gaidius", () -> new GaidiusBaseItem(ItemTier.NETHERITE, hellConfig ? 14 - BPItems.netheriteDMG : 12 - BPItems.netheriteDMG, -2.8f,
+            new GaidiusBaseItem.ItemProps().projectile(NetheriteObsidianGaidiusEntity::new).inaccuracy(2.0F).velocity(1.2F),
+            new Item.Properties().durability(4255).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)
+    ));
+    public static final RegistryObject<Item> ECHO_GAIDIUS = ITEMS.register("echo_gaidius", () -> new GaidiusBaseItem(ItemTier.NETHERITE, 7 - BPItems.netheriteDMG, -2.6f,
+            new GaidiusBaseItem.ItemProps().projectile(EchoGaidiusEntity::new).inaccuracy(0.5F).velocity(2.5F),
+            new Item.Properties().durability(1985).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)
+    ));
 
     // Tool sets
     public static final RegistryObject<Item> FLEIGNARITE_SWORD = ITEMS.register("fleignarite_sword", () -> new FleignariteSwordItem(BPItemTier.FLEIGNARITE, 7 - BPItems.netheriteDMG, -2.4F, new Item.Properties().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));

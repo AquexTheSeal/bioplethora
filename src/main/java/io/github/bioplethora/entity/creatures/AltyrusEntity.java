@@ -6,7 +6,7 @@ import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
-import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoDodgeableMeleeGoal;
 import io.github.bioplethora.entity.ai.goals.AltyrusRangedAttackGoal;
 import io.github.bioplethora.entity.ai.goals.AltyrusSummonGolemGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
@@ -87,7 +87,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
         super.registerGoals();
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
         this.goalSelector.addGoal(3, new AltyrusEntity.ChargeAttackGoal());
-        this.goalSelector.addGoal(3, new GeckoMeleeGoal<>(this, 60, 0.5, 0.6));
+        this.goalSelector.addGoal(3, new GeckoDodgeableMeleeGoal<>(this, 60, 0.5, 0.6));
         this.goalSelector.addGoal(4, new AltyrusEntity.MoveRandomGoal());
         this.goalSelector.addGoal(4, new AltyrusRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new AltyrusSummonGolemGoal(this));

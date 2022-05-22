@@ -4,6 +4,8 @@ import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.api.extras.IntegrationUtils;
 import io.github.bioplethora.api.world.ItemUtils;
+import io.github.bioplethora.entity.projectile.AbyssalScalesEntity;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -102,6 +104,14 @@ public class AbyssalBladeItem extends SwordItem implements IReachWeapon {
                 }
             }
         }
+    }
+
+    public void shootHandler(PlayerEntity entity, ItemStack stack, float yRotAddition) {
+        AbyssalScalesEntity scales = new AbyssalScalesEntity(entity.level, entity);
+        scales.setItem(new ItemStack(BPItems.ABYSSAL_SCALES.get()));
+        scales.setOwner(entity);
+        scales.shootFromRotation(entity, entity.xRot, entity.yRot + yRotAddition, 0.0F, 2.0F, 1.0F);
+        entity.level.addFreshEntity(scales);
     }
 
     @OnlyIn(Dist.CLIENT)

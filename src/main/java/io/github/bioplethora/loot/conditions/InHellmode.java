@@ -36,6 +36,10 @@ public class InHellmode implements ILootCondition {
         return BPConfig.IN_HELLMODE;
     }
 
+    public static ILootCondition.IBuilder inHellMode() {
+        return () -> INSTANCE;
+    }
+
     public static class Serializer implements ILootSerializer<InHellmode> {
 
         public void serialize(JsonObject pJson, InHellmode pValue, JsonSerializationContext pSerializationContext) {

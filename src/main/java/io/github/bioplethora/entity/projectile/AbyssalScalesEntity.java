@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.IPacket;
@@ -45,14 +46,16 @@ public class AbyssalScalesEntity extends ProjectileItemEntity {
         Entity entity = result.getEntity();
         entity.hurt(DamageSource.thrown(this, this.getOwner()), 6);
         this.playSound(SoundEvents.GLASS_BREAK, 1.2F, 0.8F);
-        if (entity instanceof LivingEntity) {
+        if (entity instanceof LivingEntity && entity != this.getOwner()) {
             LivingEntity living = (LivingEntity) entity;
-            living.invulnerableTime = 0;
+            if (!(this.getOwner() instanceof PlayerEntity)) {
+                living.invulnerableTime = 0;
+            }
             living.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 200, 6));
             living.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 200, 3));
         }
         if (!this.level.isClientSide) {
-            this.level.broadcastEntityEvent(this, (byte)3);
+            this.level.broadcastEntityEvent(this, (byte) 3);
             this.remove();
         }
     }

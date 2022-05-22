@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 /**
  * Credits: WeirdNerd (Permission Granted)
  */
-public class GeckoMeleeGoal<E extends MobEntity> extends BPTameableGoal<E> {
+public class GeckoMeleeGoal<E extends MobEntity> extends GeckoGoal<E> {
     public double animationLength;
     public BiFunction<Double, Double, Boolean> attackPredicate;
     public boolean hasHit;
@@ -32,7 +32,7 @@ public class GeckoMeleeGoal<E extends MobEntity> extends BPTameableGoal<E> {
                 return false;
             }
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= BPTameableGoal.getAttackReachSq(attacker, target)) return true;
+            if (distance <= GeckoGoal.getAttackReachSq(attacker, target)) return true;
         }
         ((IGeckoBaseEntity) attacker).setAttacking(false);
         return false;

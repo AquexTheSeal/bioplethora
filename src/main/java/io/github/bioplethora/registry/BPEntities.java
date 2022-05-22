@@ -87,6 +87,13 @@ public class BPEntities {
     public static final RegistryObject<EntityType<AbyssalScalesEntity>> ABYSSAL_SCALES = ENTITIES.register("abyssal_scales", () -> EntityType.Builder.<AbyssalScalesEntity>of(AbyssalScalesEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "abyssal_scales").toString()));
 
+    public static final RegistryObject<EntityType<CryeanumGaidiusEntity>> CRYEANUM_GAIDIUS = ENTITIES.register("cryeanum_gaidius", () -> EntityType.Builder.<CryeanumGaidiusEntity>of(CryeanumGaidiusEntity::new, EntityClassification.MISC)
+            .sized(1.5F, 1.5F).build(new ResourceLocation(Bioplethora.MOD_ID, "cryeanum_gaidius").toString()));
+        public static final RegistryObject<EntityType<NetheriteObsidianGaidiusEntity>> NETHERITE_OBSIDIAN_GAIDIUS = ENTITIES.register("netherite_obsidian_gaidius", () -> EntityType.Builder.<NetheriteObsidianGaidiusEntity>of(NetheriteObsidianGaidiusEntity::new, EntityClassification.MISC)
+            .sized(1.5F, 1.5F).build(new ResourceLocation(Bioplethora.MOD_ID, "netherite_obsidian_gaidius").toString()));
+    public static final RegistryObject<EntityType<EchoGaidiusEntity>> ECHO_GAIDIUS = ENTITIES.register("echo_gaidius", () -> EntityType.Builder.<EchoGaidiusEntity>of(EchoGaidiusEntity::new, EntityClassification.MISC)
+            .sized(1.5F, 1.5F).build(new ResourceLocation(Bioplethora.MOD_ID, "echo_gaidius").toString()));
+
     //Others
     public static final RegistryObject<EntityType<BPBoatEntity>> CAERULWOOD_BOAT = createBoat("caerulwood");
     public static final RegistryObject<EntityType<BPBoatEntity>> ENIVILE_BOAT = createBoat("enivile");
@@ -114,6 +121,10 @@ public class BPEntities {
     //============================
     public static RegistryObject<EntityType<BPBoatEntity>> createBoat(String woodType) {
         return ENTITIES.register(woodType + "_boat", () -> EntityType.Builder.<BPBoatEntity>of(BPBoatEntity::new, EntityClassification.MISC).sized(1.375F, 0.5625F).build(new ResourceLocation(Bioplethora.MOD_ID, woodType + "_boat").toString()));
+    }
+
+    public static RegistryObject<EntityType<? extends GaidiusBaseEntity>> createGaidius(String name, EntityType.IFactory<? extends GaidiusBaseEntity> gaidius) {
+        return ENTITIES.register(name, () -> EntityType.Builder.of(gaidius, EntityClassification.MISC).sized(2.0F, 2.0F).build(new ResourceLocation(Bioplethora.MOD_ID, name).toString()));
     }
 
     public static RegistryObject<EntityType<BPEffectEntity>> createEffectEntity(String registryName, BPEffectTypes effectType) {

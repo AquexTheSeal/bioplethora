@@ -1,5 +1,6 @@
-package io.github.bioplethora.enchantments;
+package io.github.bioplethora.enchantments.alphanum_obliterator;
 
+import io.github.bioplethora.enchantments.BPEnchantmentHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.AxeItem;

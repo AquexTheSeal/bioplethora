@@ -4,6 +4,7 @@ import io.github.bioplethora.entity.SummonableMonsterEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -38,6 +39,18 @@ public class EntityUtils {
                 x + (xzRad / 2d), y + (yRad / 2d), z + (xzRad / 2d)
                 )
         );
+    }
+
+    public static EquipmentSlotType getSlotTypeFromItem(ItemStack stack, LivingEntity living) {
+        if (living.getMainHandItem() == stack) {
+            return EquipmentSlotType.MAINHAND;
+
+        } else if (living.getOffhandItem() == stack) {
+            return EquipmentSlotType.OFFHAND;
+
+        } else {
+            return EquipmentSlotType.MAINHAND;
+        }
     }
 
     public static void swingAHand(ItemStack stack, LivingEntity living) {

@@ -138,6 +138,10 @@ public class ModClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CRYOBLAZE.get(), CryoblazeRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_OBLITERATOR_SPEAR.get(), AlphanumObliteratorSpearRender::new);
 
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.CRYEANUM_GAIDIUS.get(), (rendererManager) -> new GaidiusBaseRenderer<>(rendererManager, mcClient.getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.NETHERITE_OBSIDIAN_GAIDIUS.get(), (rendererManager) -> new GaidiusBaseRenderer<>(rendererManager, mcClient.getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.ECHO_GAIDIUS.get(), (rendererManager) -> new GaidiusBaseRenderer<>(rendererManager, mcClient.getItemRenderer()));
+
         //others
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CAERULWOOD_BOAT.get(), BPBoatRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ENIVILE_BOAT.get(), BPBoatRender::new);

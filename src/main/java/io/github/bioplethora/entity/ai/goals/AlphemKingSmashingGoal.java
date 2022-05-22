@@ -12,6 +12,20 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
         super(entity, animationLength, attackBegin, attackEnd);
     }
 
+    @Override
+    public int attackPhaseReq() {
+        return 2;
+    }
+
+    @Override
+    public void doCIV(AlphemKingEntity attacker) {
+        king.setSmashing(false);
+    }
+
+    public double reachSq(AlphemKingEntity attacker, LivingEntity target) {
+        return getAttackReachSq(attacker, target);
+    }
+
     public static boolean checkIfValid(AlphemKingSmashingGoal goal, AlphemKingEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
@@ -48,14 +62,8 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
     }
 
     @Override
-    public boolean canContinueToUse() {
-        if (Math.random() <= 0.1) return true;
-
-        return AlphemKingSmashingGoal.checkIfValid(this, king, this.king.getTarget());
-    }
-
-    @Override
     public void start() {
+        isInAttackState = true;
         this.king.setSmashing(true);
         this.king.setAggressive(true);
         this.animationProgress = 0;
@@ -63,6 +71,7 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
 
     @Override
     public void stop() {
+        isInAttackState = false;
         LivingEntity target = this.king.getTarget();
         if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             this.king.setTarget(null);

@@ -3,7 +3,6 @@ package io.github.bioplethora.entity.ai.goals;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 
 public class AlphemKingSecondMeeleeGoal extends AlphemKingMeeleeGoal {
@@ -12,28 +11,18 @@ public class AlphemKingSecondMeeleeGoal extends AlphemKingMeeleeGoal {
         super(entity, animationLength, attackBegin, attackEnd);
     }
 
-    public static boolean checkIfValid(AlphemKingSecondMeeleeGoal goal, AlphemKingEntity attacker, LivingEntity target) {
-        if (target == null) return false;
-        if (target.isAlive() && !target.isSpectator()) {
+    @Override
+    public int attackPhaseReq() {
+        return 1;
+    }
 
-            if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
-                attacker.setAttacking2(false);
-                return false;
-            }
+    @Override
+    public void doCIV(AlphemKingEntity attacker) {
+        king.setAttacking2(false);
+    }
 
-            if (attacker.attackPhase != 1) {
-                return false;
-            }
-
-            if (attacker.getRoaring()) {
-                return false;
-            }
-
-            double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= AlphemKingSecondMeeleeGoal.getAttackReachSq(attacker, target)) return true;
-        }
-        attacker.setAttacking2(false);
-        return false;
+    public double reachSq(AlphemKingEntity attacker, LivingEntity target) {
+        return getAttackReachSq(attacker, target);
     }
 
     protected static double getAttackReachSq(BPMonsterEntity attacker, LivingEntity target) {
@@ -48,14 +37,8 @@ public class AlphemKingSecondMeeleeGoal extends AlphemKingMeeleeGoal {
     }
 
     @Override
-    public boolean canContinueToUse() {
-        if (Math.random() <= 0.1) return true;
-
-        return AlphemKingSecondMeeleeGoal.checkIfValid(this, king, this.king.getTarget());
-    }
-
-    @Override
     public void start() {
+        isInAttackState = true;
         this.king.setAttacking2(true);
         this.king.setAggressive(true);
         this.animationProgress = 0;
@@ -63,6 +46,7 @@ public class AlphemKingSecondMeeleeGoal extends AlphemKingMeeleeGoal {
 
     @Override
     public void stop() {
+        isInAttackState = false;
         LivingEntity target = this.king.getTarget();
         if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             this.king.setTarget(null);

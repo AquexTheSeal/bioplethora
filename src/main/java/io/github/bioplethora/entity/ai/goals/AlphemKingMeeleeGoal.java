@@ -1,14 +1,14 @@
 package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.BPMonsterEntity;
-import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoDodgeableMeleeGoal;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
 
-public class AlphemKingMeeleeGoal extends GeckoMeleeGoal<AlphemKingEntity> {
+public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEntity> {
     
     public AlphemKingEntity king = entity;
 
@@ -16,16 +16,28 @@ public class AlphemKingMeeleeGoal extends GeckoMeleeGoal<AlphemKingEntity> {
         super(entity, animationLength, attackBegin, attackEnd);
     }
 
+    public int attackPhaseReq() {
+        return 0;
+    }
+
+    public void doCIV(AlphemKingEntity attacker) {
+        attacker.setAttacking(false);
+    }
+
+    public double reachSq(AlphemKingEntity attacker, LivingEntity target) {
+        return getAttackReachSq(attacker, target);
+    }
+
     public static boolean checkIfValid(AlphemKingMeeleeGoal goal, AlphemKingEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
-                attacker.setAttacking(false);
+                goal.doCIV(attacker);
                 return false;
             }
 
-            if (attacker.attackPhase != 0) {
+            if (attacker.attackPhase != goal.attackPhaseReq()) {
                 return false;
             }
 
@@ -34,9 +46,9 @@ public class AlphemKingMeeleeGoal extends GeckoMeleeGoal<AlphemKingEntity> {
             }
             
             double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= AlphemKingMeeleeGoal.getAttackReachSq(attacker, target)) return true;
+            if (distance <= goal.reachSq(attacker, target)) return true;
         }
-        attacker.setAttacking(false);
+        goal.doCIV(attacker);
         return false;
     }
 
@@ -48,18 +60,12 @@ public class AlphemKingMeeleeGoal extends GeckoMeleeGoal<AlphemKingEntity> {
     public boolean canUse() {
         if (Math.random() <= 0.1) return false;
 
-        return AlphemKingMeeleeGoal.checkIfValid(this, king, this.king.getTarget());
-    }
-
-    @Override
-    public boolean canContinueToUse() {
-        if (Math.random() <= 0.1) return true;
-
-        return AlphemKingMeeleeGoal.checkIfValid(this, king, this.king.getTarget());
+        return checkIfValid(this, king, this.king.getTarget());
     }
 
     @Override
     public void start() {
+        isInAttackState = true;
         this.king.setAttacking(true);
         this.king.setAggressive(true);
         this.animationProgress = 0;
@@ -67,6 +73,7 @@ public class AlphemKingMeeleeGoal extends GeckoMeleeGoal<AlphemKingEntity> {
 
     @Override
     public void stop() {
+        isInAttackState = false;
         LivingEntity target = this.king.getTarget();
         if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             this.king.setTarget(null);
@@ -96,15 +103,18 @@ public class AlphemKingMeeleeGoal extends GeckoMeleeGoal<AlphemKingEntity> {
             if (this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
                 this.king.lookAt(target, 30.0F, 30.0F);
                 this.king.swing(Hand.MAIN_HAND);
-                this.king.doHurtTarget(target);
+                if (canReachTarget()) {
+                    this.king.doHurtTarget(target);
+                }
                 this.hasHit = true;
             }
 
             if (this.animationProgress > this.animationLength) {
                 this.animationProgress = 0;
                 this.hasHit = false;
-
                 switchPhase();
+
+                this.isInAttackState = false;
             }
         }
     }

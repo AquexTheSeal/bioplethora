@@ -28,10 +28,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.*;
@@ -276,6 +273,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         }
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+    }
+
     public void summonShard(int amount) {
         for (int i = 0; i < amount; i++) {
 
@@ -313,67 +315,76 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         ((IPlayerEntityMixin) player).setAlphanumCurse(false);
     }
 
-    public void phaseAttack(LivingEntity entity, World world) {
+    public void phaseAttack(World world) {
 
         float f1 = ((float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK) / 2);
+        double d0 = -MathHelper.sin(this.yRot * ((float)Math.PI / 180F)) * 2.5;
+        double d1 = MathHelper.cos(this.yRot * ((float)Math.PI / 180F)) * 2.5;
+        BlockPos areaPos = new BlockPos(getX() + d0, getY(), getZ() + d1);
 
-        for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(5, 0.5, 5))) {
+        for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(5, 0.5, 5).move(areaPos))) {
 
             if (areaEnt != this) {
                 areaEnt.knockback(f1 * 0.5F, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
-                areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 1.5 - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
+                areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 1.5 - areaEnt.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
             }
         }
 
         this.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
-        BlockUtils.knockUpRandomNearbyBlocks(world, 0.3D, entity.blockPosition().below(), 3, 1, 3, false, true);
+        BlockUtils.knockUpRandomNearbyBlocks(world, 0.3D, areaPos.below(), 3, 1, 3, false, true);
 
         if (world instanceof ServerWorld) {
-            ((ServerWorld) world).sendParticles(ParticleTypes.POOF, entity.getX(), entity.getY(), entity.getZ(),
+            ((ServerWorld) world).sendParticles(ParticleTypes.POOF,areaPos.getX(), areaPos.getY(), areaPos.getZ(),
                     25, 0.45, 0.45, 0.45, 0.01);
         }
     }
 
-    public void phaseAttack2(LivingEntity entity, World world) {
+    public void phaseAttack2(World world) {
 
         float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
+        double d0 = -MathHelper.sin(this.yRot * ((float)Math.PI / 180F)) * 2.5;
+        double d1 = MathHelper.cos(this.yRot * ((float)Math.PI / 180F)) * 2.5;
+        BlockPos areaPos = new BlockPos(getX() + d0, getY(), getZ() + d1);
 
-        for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(10, 0.5, 10))) {
+        for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(10, 0.5, 10).move(areaPos))) {
 
             if (areaEnt != this) {
                 areaEnt.hurt(DamageSource.mobAttack(this), BPConfig.IN_HELLMODE ? 23 : 20);
                 areaEnt.knockback(f1, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
-                areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 0.5 - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
+                areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 0.5 - areaEnt.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
             }
         }
 
         if (world instanceof ServerWorld) {
-            ((ServerWorld) world).sendParticles(ParticleTypes.CLOUD, entity.getX(), entity.getY(), entity.getZ(),
+            ((ServerWorld) world).sendParticles(ParticleTypes.CLOUD, areaPos.getX(), areaPos.getY(), areaPos.getZ(),
                     55, 0.75, 0.75, 0.75, 0.01);
         }
     }
 
-    public void phaseSmashing(LivingEntity entity, World world) {
+    public void phaseSmashing(World world) {
 
         float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
+        double d0 = -MathHelper.sin(this.yRot * ((float)Math.PI / 180F)) * 2.5;
+        double d1 = MathHelper.cos(this.yRot * ((float)Math.PI / 180F)) * 2.5;
+        BlockPos areaPos = new BlockPos(getX() + d0, getY(), getZ() + d1);
 
-        for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(15, 0.5, 15))) {
+        for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(15, 0.5, 15).move(areaPos))) {
 
             if (areaEnt != this) {
                 areaEnt.knockback(f1 * 0.5F, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
-                areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 1.5 - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
+                areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 1.5 -areaEnt.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
             }
         }
 
-        world.explode(this, entity.getX(), entity.getY(), entity.getZ(), 3.0F, Explosion.Mode.NONE);
+        world.explode(this, areaPos.getX(), areaPos.getY(), areaPos.getZ(), 3.0F, Explosion.Mode.NONE);
         this.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
-        BlockUtils.knockUpRandomNearbyBlocks(world, 0.5D, entity.blockPosition().below(), 6, 2, 6, false, true);
+        BlockUtils.knockUpRandomNearbyBlocks(world, 0.5D, areaPos.below(), 6, 2, 6, false, true);
 
         if (world instanceof ServerWorld) {
-            ((ServerWorld) world).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, entity.getX(), entity.getY(), entity.getZ(),
+            ((ServerWorld) world).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, areaPos.getX(), areaPos.getY(), areaPos.getZ(),
                     75, 0.4, 1.5, 0.4, 0.001);
         }
     }
@@ -409,26 +420,27 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         }
     }
 
+    @Override
+    public void swing(Hand pHand, boolean pUpdateSelf) {
+        super.swing(pHand, pUpdateSelf);
+        World world = level;
+
+        if (this.attackPhase == 0) {
+            this.phaseAttack(world);
+        }
+
+        if (this.attackPhase == 1) {
+            this.phaseAttack2(world);
+        }
+
+        if (this.attackPhase == 2) {
+            this.phaseSmashing( world);
+        }
+    }
+
     public boolean doHurtTarget(Entity entity) {
         boolean flag = super.doHurtTarget(entity);
         World world = entity.level;
-
-        if (entity instanceof LivingEntity) {
-
-            entity.invulnerableTime = 0;
-
-            if (this.attackPhase == 0) {
-                this.phaseAttack((LivingEntity) entity, world);
-            }
-
-            if (this.attackPhase == 1) {
-                this.phaseAttack2((LivingEntity) entity, world);
-            }
-
-            if (this.attackPhase == 2) {
-                this.phaseSmashing((LivingEntity) entity, world);
-            }
-        }
 
         return flag;
     }

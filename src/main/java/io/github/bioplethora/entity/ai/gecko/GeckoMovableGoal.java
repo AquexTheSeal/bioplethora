@@ -8,7 +8,7 @@ import net.minecraft.pathfinding.Path;
 /**
  * Credits: WeirdNerd (Permission Granted)
  */
-public abstract class GeckoMovableGoal<E extends MobEntity> extends BPTameableGoal<E> {
+public abstract class GeckoMovableGoal<E extends MobEntity> extends GeckoGoal<E> {
 
     protected Path path;
 
@@ -23,7 +23,7 @@ public abstract class GeckoMovableGoal<E extends MobEntity> extends BPTameableGo
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
             goal.path = attacker.getNavigation().createPath(target, 0);
 
-            return attacker.getSensing().canSee(target) && distance >= BPTameableGoal.getAttackReachSq(attacker, target);
+            return attacker.getSensing().canSee(target) && distance >= GeckoGoal.getAttackReachSq(attacker, target);
         }
         return false;
     }

@@ -4,7 +4,7 @@ import io.github.bioplethora.api.advancements.AdvancementUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
-import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoDodgeableMeleeGoal;
 import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.goals.BellophgolemRangedAttackGoal;
 import io.github.bioplethora.entity.ai.goals.CopyTargetOwnerGoal;
@@ -24,9 +24,11 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IServerWorld;
@@ -80,7 +82,7 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         this.goalSelector.addGoal(3, new LookAtGoal(this, AlphemEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new GeckoMoveToTargetGoal<>(this, 1.6, 8));
         //this.goalSelector.addGoal(1, new BellophgolemAnimatedSmashingGoal(this));
-        this.goalSelector.addGoal(2, new GeckoMeleeGoal<>(this, 60, 0.6, 0.7));
+        this.goalSelector.addGoal(2, new GeckoDodgeableMeleeGoal<>(this, 60, 0.6, 0.7));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new BellophgolemRangedAttackGoal(this));
@@ -146,23 +148,34 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         this.playSound(SoundEvents.IRON_GOLEM_STEP, 0.15f, 1);
     }
 
+    @Override
+    public void swing(Hand pHand, boolean pUpdateSelf) {
+        super.swing(pHand, pUpdateSelf);
 
-    public boolean doHurtTarget (Entity entity) {
-        boolean flag = super.doHurtTarget(entity);
-        /*f (flag && entity instanceof LivingEntity)*/
-        if (this.getHealth() <= 100 && BPConfig.COMMON.hellMode.get()) {
-            if (this.level instanceof ServerWorld) {
-                ((World) this.level).explode(null, (int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ(), (float) 2, Explosion.Mode.BREAK);
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), (int) 40, 0.75, 0.75,
-                        0.75, 0.1);
-            }
-        } else {
-            if (this.level instanceof ServerWorld) {
-                ((World) this.level).explode(null, (int) getTarget().getX(), (int) getTarget().getY(), (int) getTarget().getZ(), (float) 1.2, Explosion.Mode.NONE);
-                ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (getTarget().getX()), (getTarget().getY()), (getTarget().getZ()), (int) 20, 0.4, 0.4,
-                        0.4, 0.1);
+        double d0 = -MathHelper.sin(this.yRot * ((float)Math.PI / 180F)) * 2.5;
+        double d1 = MathHelper.cos(this.yRot * ((float)Math.PI / 180F)) * 2.5;
+
+        if (!level.isClientSide()) {
+            if (this.getHealth() <= 100 && BPConfig.IN_HELLMODE) {
+                if (this.level instanceof ServerWorld) {
+                    this.level.explode(null, getX() + d0, getY(), getZ() + d1, 2F, Explosion.Mode.BREAK);
+                    ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, getX() + d0, getY(), getZ() + d1, 40, 0.75, 0.75,
+                            0.75, 0.1);
+                }
+            } else {
+                if (this.level instanceof ServerWorld) {
+                    this.level.explode(null, getX() + d0, getY(), getZ() + d1, 1.2F, Explosion.Mode.NONE);
+                    ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, getX() + d0, getY(), getZ() + d1, 20, 0.4, 0.4,
+                            0.4, 0.1);
+                }
             }
         }
+    }
+
+    public boolean doHurtTarget(Entity entity) {
+        boolean flag = super.doHurtTarget(entity);
+        /*f (flag && entity instanceof LivingEntity)*/
+
         this.doEnchantDamageEffects(this, entity);
         return flag;
     }

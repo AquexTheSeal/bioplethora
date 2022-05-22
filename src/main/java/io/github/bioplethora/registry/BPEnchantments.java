@@ -2,7 +2,10 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.enchantments.AntibioEnchantment;
-import io.github.bioplethora.enchantments.DevastatingBlastEnchantment;
+import io.github.bioplethora.enchantments.alphanum_obliterator.DevastatingBlastEnchantment;
+import io.github.bioplethora.enchantments.gaidius.RackingEdgeEnchantment;
+import io.github.bioplethora.enchantments.gaidius.SheerEnchantment;
+import io.github.bioplethora.enchantments.gaidius.SoftshootingEnchantment;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -29,6 +32,13 @@ public class BPEnchantments {
 
     public static final RegistryObject<Enchantment> DEVASTATING_BLAST = ENCHANTMENTS.register("devastating_blast", () ->
             new DevastatingBlastEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND));
+
+    public static final RegistryObject<Enchantment> RACKING_EDGE = ENCHANTMENTS.register("racking_edge", () ->
+            new RackingEdgeEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND));
+    public static final RegistryObject<Enchantment> SHEER = ENCHANTMENTS.register("sheer", () ->
+            new SheerEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND));
+    public static final RegistryObject<Enchantment> SOFTSHOOTING = ENCHANTMENTS.register("softshooting", () ->
+            new SoftshootingEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND));
 
     //public static final RegistryObject<Enchantment> HONED = ENCHANTMENTS.register("honed", () -> new HonedEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlotType.MAINHAND));
 
