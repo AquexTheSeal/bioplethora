@@ -47,6 +47,10 @@
   "entity.bioplethora.alphanum_obliterator_spear": "Alphanum Obliterator Spear",
   "entity.bioplethora.windy_essence": "Windy Essence",
   "entity.bioplethora.alphanum_shard": "Alphanum Shard",
+  "entity.bioplethora.abyssal_scales": "Abyssal Scales",
+  "entity.bioplethora.cryeanum_gaidius": "Cryeanum Gaidius",
+  "entity.bioplethora.echo_gaidius": "Echo Gaidius",
+  "entity.bioplethora.netherite_obsidian_gaidius": "Netherite Obsidian Gaidius",
 
   "entity.bioplethora.altyrus_summoning": "Altyrus Summoning Core",
   "entity.bioplethora.grylynen_core_bomb": "Grylynen Core Bomb",
@@ -56,6 +60,7 @@
   "entity.bioplethora.infernal_quarterstaff_slash": "Infernal Quarterstaff Slash",
   "entity.bioplethora.infernal_quarterstaff_soul_purge": "Infernal Quarterstaff Soul Purge",
   "entity.bioplethora.crephoxl_hammer_smash": "Crephoxl Hammer Smash",
+  "entity.bioplethora.myliothan_roar": "Myliothan Roar",
 
   "enchantment.bioplethora.antibio_ecoharmless": "Antibio: Ecoharmless",
   "enchantment.bioplethora.antibio_plethoneutral": "Antibio: Plethoneutral",
@@ -63,6 +68,9 @@
   "enchantment.bioplethora.antibio_hellsent": "Antibio: Hellsent",
   "enchantment.bioplethora.antibio_elderia": "Antibio: Elderia",
   "enchantment.bioplethora.devastating_blast": "Devastating Blast",
+  "enchantment.bioplethora.racking_edge": "Racking Edge",
+  "enchantment.bioplethora.sheer": "Sheer",
+  "enchantment.bioplethora.softshooting": "Softshooting",
 
   "item.bioplethora.crephoxl_spawn_egg": "Crephoxl Spawn Egg",
   "item.bioplethora.alphem_spawn_egg": "Alphem Spawn Egg",
@@ -110,6 +118,9 @@
   "item.bioplethora.infernal_quarterstaff_base": "Infernal Quarterstaff Base",
   "item.bioplethora.infernal_quarterstaff_blade": "Infernal Quarterstaff Blade",
   "item.bioplethora.deactivated_infernal_quarterstaff": "Deactivated Infernal Quarterstaff",
+  "item.bioplethora.cryeanum_gaidius": "Cryeanum Gaidius",
+  "item.bioplethora.echo_gaidius": "Echo Gaidius",
+  "item.bioplethora.netherite_obsidian_gaidius": "Netherite Obsidian Gaidius",
 
   "item.bioplethora.green_grylynen_crystal": "Green Grylynen Crystal",
   "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
