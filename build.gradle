@@ -158,19 +158,27 @@ dependencies {
     //Curios
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios}")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios}:api")
-    //FTB Chunks
-    implementation fg.deobf("curse.maven:ftb-chunks-forge-314906:3603374")
-    //Architectury API
-    implementation fg.deobf("curse.maven:architectury-forge-419699:3705903")
-    //FTB Library
-    implementation fg.deobf("curse.maven:ftb-library-forge-404465:3553840")
-    //FTB Teams
-    implementation fg.deobf("curse.maven:ftb-teams-forge-404468:3535953")
 
     //Damage Indicators
     implementation fg.deobf("curse.maven:damage-indicator-mod-for-forge-557596:3680500")
     //Critical Lib
     implementation fg.deobf("curse.maven:forge-criticalib-560696:3644558")
+
+    // Rubidium
+    implementation fg.deobf("curse.maven:rubidium-574856:3769736")
+    // Oculus
+    implementation fg.deobf("curse.maven:oculus-581495:3821219")
+
+    /*
+    //FTB Chunks
+    implementation fg.deobf("curse.maven:ftb-chunks-forge-314906:3603374")
+    //Architectury API
+    mplementation fg.deobf("curse.maven:architectury-forge-419699:3705903")
+    //FTB Library
+    implementation fg.deobf("curse.maven:ftb-library-forge-404465:3553840")
+    //FTB Teams
+    implementation fg.deobf("curse.maven:ftb-teams-forge-404468:3535953")
+    */
 
     //End's Phantasm
     //implementation fg.deobf("curse.maven:phantasm-565254:3613232")

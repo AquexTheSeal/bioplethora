@@ -30,18 +30,18 @@ public class BPConfiguredFeatures {
     //--------------------------------
 
     // Nether Mushrooms
-    public static final ConfiguredFeature<?, ?> SOUL_MINISHROOM = register("soul_minishroom", makeDecoratedClusterPlants(
+    public static final ConfiguredFeature<?, ?> SOUL_MINISHROOM = register("soul_minishroom", makeNoProjectionDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_MINISHROOM.get(), new MinishroomBlockPlacer(), 15
     ));
     
-    public static final ConfiguredFeature<?, ?> SOUL_BIGSHROOM = register("soul_bigshroom", makeDecoratedClusterPlants(
+    public static final ConfiguredFeature<?, ?> SOUL_BIGSHROOM = register("soul_bigshroom", makeNoProjectionDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_BIGSHROOM.get(), new SimpleBlockPlacer(), 12
     ));
 
     // Nether Grasses
     public static final ConfiguredFeature<?, ?> KYRIA = register("kyria", makeDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.KYRIA.get(), new SimpleBlockPlacer(), 55
-    ));
+    ).count(18));
     public static final ConfiguredFeature<?, ?> KYRIA_BELINE = register("kyria_beline", makeNoProjectionClusterPlants(
             Feature.RANDOM_PATCH, BPBlocks.KYRIA_BELINE.get(), new DoublePlantBlockPlacer()
     ).count(19).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))
@@ -49,7 +49,7 @@ public class BPConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> KYRIA_IDE_FAN = register("kyria_ide_fan", makeNoProjectionClusterPlants(
             Feature.RANDOM_PATCH, BPBlocks.KYRIA_IDE_FAN.get(), new IdeFanBlockPlacer()
     ).count(12).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 4, 7))
-    ));
+    ).count(30));
 
     public static final ConfiguredFeature<?, ?> SOUL_SPROUTS = register("soul_sprouts", makeDecoratedClusterPlants(
             new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.SOUL_SPROUTS.get(), new SimpleBlockPlacer(), 26
@@ -267,11 +267,11 @@ public class BPConfiguredFeatures {
         return feature.configured(new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(block.defaultBlockState()), placer).noProjection().tries(64).build());
     }
 
-    public static ConfiguredFeature<?, ?> makeIdeFanClusterPlants(Feature<BlockClusterFeatureConfig> feature, Block block, BlockPlacer placer) {
-        return feature.configured(new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(block.defaultBlockState()), placer).noProjection().tries(64).build());
-    }
-
     public static ConfiguredFeature<?, ?> makeDecoratedClusterPlants(Feature<BlockClusterFeatureConfig> feature, Block block, BlockPlacer placer, int count) {
         return makeClusterPlants(feature, block, placer).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(count);
+    }
+
+    public static ConfiguredFeature<?, ?> makeNoProjectionDecoratedClusterPlants(Feature<BlockClusterFeatureConfig> feature, Block block, BlockPlacer placer, int count) {
+        return makeNoProjectionClusterPlants(feature, block, placer).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(count);
     }
 }
