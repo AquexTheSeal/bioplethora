@@ -15,6 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -62,6 +64,7 @@ public class ReinforcedFleignariteAbilities {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void abilityTooltip(List<ITextComponent> tooltip) {
         BPItemSettings.sacredLevelText(tooltip);
 

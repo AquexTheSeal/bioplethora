@@ -20,6 +20,6 @@ public class BPTreeConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> CAERI_FOREST_TREES = Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(CAERULWOOD_TREE_CONFIG.weighted(0.6666667F)), CAERULWOOD_TREE_CONFIG))
             .decorated(Features.Placements.HEIGHTMAP_SQUARE)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(10, 0.1F, 1))
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(7, 0.15F, 1))
             );
 }

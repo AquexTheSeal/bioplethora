@@ -183,7 +183,7 @@ public class BPConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_FOREST_PATCH = register("byrss_lantern_forest_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(BYRSS_LANTERN_PLANT.weighted(0.4446667F)), BYRSS_LANTERN_PLANT))
             .range(110).squared().count(5)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.025F, 1))
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.0175F, 1))
             ));
 
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE = register("end_land_spike", BPFeatures.END_LAND_SPIKE.get()
@@ -199,12 +199,12 @@ public class BPConfiguredFeatures {
             .configured(new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(BPBlocks.CHORUS_LANTERN_PLANT.get().defaultBlockState()), new DoublePlantBlockPlacer()).build())
             .decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             ));
-    public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_HIGHLANDS_PATCH = register("byrss_lantern_highlands_patch", Feature.RANDOM_SELECTOR
+    public static final ConfiguredFeature<?, ?> CHORUS_LANTERN_HIGHLANDS_PATCH = register("chorus_lantern_highlands_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHORUS_LANTERN_PLANT.weighted(0.4022667F)), CHORUS_LANTERN_PLANT))
             .range(BPConfig.WORLDGEN.chorusLanternHighlandsAmount.get()).squared().count(4)
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.035F, 1))
             ));
-    public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_MIDLANDS_PATCH = register("byrss_lantern_midlands_patch", Feature.RANDOM_SELECTOR
+    public static final ConfiguredFeature<?, ?> CHORUS_LANTERN_MIDLANDS_PATCH = register("chorus_lantern_midlands_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHORUS_LANTERN_PLANT.weighted(0.4224447F)), CHORUS_LANTERN_PLANT))
             .range(BPConfig.WORLDGEN.chorusLanternMidlandsAmount.get()).squared().count(3)
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.035F, 1))
@@ -224,7 +224,7 @@ public class BPConfiguredFeatures {
             ));
     public static final ConfiguredFeature<?, ?> END_FROZEN_ISLAND_DECORATED = register("end_frozen_island_decorated",
             END_FROZEN_ISLAND.range(BPConfig.WORLDGEN.endFrozenIslandsAmount.get()).squared().count(1)
-                    .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.035F, 1))
+                    .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.015F, 1))
                     ));
 
     //---------------------------

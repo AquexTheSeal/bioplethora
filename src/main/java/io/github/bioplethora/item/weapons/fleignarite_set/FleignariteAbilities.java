@@ -12,6 +12,8 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -53,6 +55,7 @@ public class FleignariteAbilities {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void abilityTooltip(List<ITextComponent> tooltip) {
         BPItemSettings.sacredLevelText(tooltip);
 

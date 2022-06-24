@@ -31,6 +31,7 @@ public class NandbricArmorItem extends ArmorItem {
         return slot == EquipmentSlotType.LEGS ? legTexture : defaultTexture;
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static <A extends BipedModel<?>> A matchingModel(LivingEntity entity, EquipmentSlotType slot, A defaultModel) {
         boolean crouching = entity.isCrouching();
         boolean riding = defaultModel.riding;

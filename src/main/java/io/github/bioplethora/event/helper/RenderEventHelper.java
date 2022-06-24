@@ -28,7 +28,7 @@ public class RenderEventHelper {
     public static void onRenderingPlayer(RenderPlayerEvent event) {
 
         if (event.getPlayer().getMainHandItem().getItem() instanceof InfernalQuarterstaffItem) {
-            renderInfernalQuarterstaff(event);
+            //renderInfernalQuarterstaff(event);
         }
     }
 

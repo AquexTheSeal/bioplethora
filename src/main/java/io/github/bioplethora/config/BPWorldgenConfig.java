@@ -51,7 +51,7 @@ public class BPWorldgenConfig {
         endIcicleIslandsAmount = builder.define(genAmount("End Icicles", "Small End Islands"), 10);
 
         endFrozenIslands = builder.define(shouldGen("Frozen End Islands", "Small End Islands"), true);
-        endFrozenIslandsAmount = builder.define(genAmount("Frozen End Islands", "Small End Islands"), 12);
+        endFrozenIslandsAmount = builder.define(genAmount("Frozen End Islands", "Small End Islands"), 8);
     }
 
     protected String shouldGen(String feature, String place) {

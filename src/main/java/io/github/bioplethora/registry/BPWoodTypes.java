@@ -6,9 +6,12 @@ import net.minecraft.client.renderer.Atlases;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
+@Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class BPWoodTypes {
     public static final WoodType ENIVILE = WoodType.create(new ResourceLocation(Bioplethora.MOD_ID, "enivile").toString());
     public static final WoodType CAERULWOOD = WoodType.create(new ResourceLocation(Bioplethora.MOD_ID, "caerulwood").toString());
@@ -23,6 +26,7 @@ public class BPWoodTypes {
     }
 
     @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
     public static void registerWoodTypeClient(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             Atlases.addWoodType(ENIVILE);

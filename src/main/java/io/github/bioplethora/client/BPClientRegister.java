@@ -1,5 +1,6 @@
 package io.github.bioplethora.client;
 
+import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.BPIdeFanBlock;
 import io.github.bioplethora.blocks.BPLanternPlantBlock;
 import io.github.bioplethora.blocks.BPVinesBlock;
@@ -26,18 +27,18 @@ import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
-//@Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModClientRegister {
+@Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public class BPClientRegister {
 
-    @OnlyIn(Dist.CLIENT)
-    //@SubscribeEvent
+    @SubscribeEvent
     public static void registerRenderers(final FMLClientSetupEvent event) {
 
         Minecraft mcClient = event.getMinecraftSupplier().get();
@@ -165,8 +166,7 @@ public class ModClientRegister {
         BPKeybinds.register(event);
     }
 
-    @OnlyIn(Dist.CLIENT)
-    //@SubscribeEvent
+    @SubscribeEvent
     public static void registerModels(final FMLClientSetupEvent event) {
         //Bellophite Shield
         ItemModelsProperties.register(BPItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);

@@ -12,7 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class ReinforcingTableScreen extends ContainerScreen<AbstractReinforcingContainer> implements IContainerListener {
     private final ResourceLocation GUI = new ResourceLocation(Bioplethora.MOD_ID, "textures/gui/container/reinforcing_table.png");
 

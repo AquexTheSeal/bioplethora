@@ -1,6 +1,5 @@
 package io.github.bioplethora;
 
-import io.github.bioplethora.client.ModClientRegister;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.data.*;
 import io.github.bioplethora.integration.BPCompatTOP;
@@ -40,11 +39,7 @@ public class Bioplethora {
         instance = this;
         final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        bus.addListener(ModClientRegister::registerRenderers);
-        bus.addListener(ModClientRegister::registerModels);
-
         bus.addListener(BPWoodTypes::registerWoodType);
-        bus.addListener(BPWoodTypes::registerWoodTypeClient);
 
         /* final step of registering elements like Items, Entities, etc. */
         BPItems.ITEMS.register(bus);
