@@ -192,38 +192,33 @@ public class ServerWorldEvents {
             ItemStack getUseItem = ((PlayerEntity) defendantEnt).getUseItem();
             Item getItem = getUseItem.getItem();
 
-            // Checks if damage source is from Fire
-            boolean notFireDS = (event.getSource() != DamageSource.IN_FIRE);
-            // Checks if damage source is from Lava (yes, they have different damage sources)
-            boolean notLavaDS = (event.getSource() != DamageSource.LAVA);
-            // Checks if damage source is from Cactus
-            boolean notCactusDS = (event.getSource() != DamageSource.CACTUS);
-            // Checks if damage source is from the Void, a.k.a. "out of the world".
-            boolean notVoidDS = (event.getSource() != DamageSource.OUT_OF_WORLD);
+            boolean[] dmgEx = new boolean[]{
+                    event.getSource() != DamageSource.IN_FIRE,
+                    event.getSource() != DamageSource.LAVA,
+                    event.getSource() != DamageSource.CACTUS,
+                    event.getSource() != DamageSource.OUT_OF_WORLD
+            };
 
-            if (notFireDS && notLavaDS && notCactusDS && notVoidDS) {
+            if (dmgEx[0] && dmgEx[1] && dmgEx[2] && dmgEx[3]) {
                 if (getItem instanceof BellophiteShieldItem) {
                     ((BellophiteShieldItem) getItem).executeSkill(getUseItem, (LivingEntity) defendantEnt, defendantEnt.level);
                 }
 
-                // Checks if the defendant player is using an item that has GrylynenShieldBaseItem as it's superclass
                 if (getItem instanceof GrylynenShieldBaseItem) {
 
                     int recoveryAmount = ((GrylynenShieldBaseItem) getItem).getArmorBonus();
                     LivingEntity defendantLiving = (LivingEntity) defendantEnt;
 
-                    // Executes the blocking skill for GrylynenShieldBaseItem
                     ((GrylynenShieldBaseItem) getItem).blockingSkill(getUseItem, defendantLiving, attackerEnt, event.getEntity().level);
 
-                    // Regenerates durability by each armor the player has respectively
                     defendantLiving.getItemBySlot(EquipmentSlotType.HEAD)
-                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.HEAD).getDamageValue() + recoveryAmount);
+                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.HEAD).getDamageValue() - recoveryAmount);
                     defendantLiving.getItemBySlot(EquipmentSlotType.CHEST)
-                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.CHEST).getDamageValue() + recoveryAmount);
+                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.CHEST).getDamageValue() - recoveryAmount);
                     defendantLiving.getItemBySlot(EquipmentSlotType.LEGS)
-                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.LEGS).getDamageValue() + recoveryAmount);
+                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.LEGS).getDamageValue() - recoveryAmount);
                     defendantLiving.getItemBySlot(EquipmentSlotType.FEET)
-                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.FEET).getDamageValue() + recoveryAmount);
+                            .setDamageValue(defendantLiving.getItemBySlot(EquipmentSlotType.FEET).getDamageValue() - recoveryAmount);
                 }
             }
         }

@@ -28,7 +28,7 @@ public class GrylynenShieldYellowItem extends GrylynenShieldBaseItem {
 
     @Override
     public int getArmorBonus() {
-        return 4;
+        return 2;
     }
 
     @Override

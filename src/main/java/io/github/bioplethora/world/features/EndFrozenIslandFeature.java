@@ -21,7 +21,9 @@ public class EndFrozenIslandFeature extends Feature<NoFeatureConfig> {
     @Override
     public boolean place(ISeedReader world, ChunkGenerator chunkGen, Random rand, BlockPos pos, NoFeatureConfig config) {
 
-        pos = new BlockPos(pos.getX(), EndIcicleFeature.clampRandom(rand, 60, 40), pos.getZ());
+        if (rand.nextInt(3) != 1) return false;
+
+        pos = new BlockPos((pos.getX() - 10) + rand.nextInt(20), 40 + rand.nextInt(20), (pos.getZ() - 10) + rand.nextInt(20));
 
         this.placeLayer(rand.nextInt(7) + 5, Blocks.ICE, world, rand, true,
                 pos.offset(-3 + rand.nextInt(6), 0, -3 + rand.nextInt(6)));

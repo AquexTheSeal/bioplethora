@@ -29,7 +29,7 @@ public class GrylynenShieldRedItem extends GrylynenShieldBaseItem {
 
     @Override
     public int getArmorBonus() {
-        return 5;
+        return 3;
     }
 
     @Override
