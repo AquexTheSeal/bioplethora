@@ -46,6 +46,7 @@ public class BPEntityAttributes {
         event.put(BPEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());
         event.put(BPEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
         event.put(BPEntities.TELEMREYE.get(), TelemreyeEntity.setCustomAttributes().build());
+        event.put(BPEntities.VOIDJAW.get(), VoidjawEntity.setCustomAttributes().build());
 
         //Elderia
         event.put(BPEntities.ALTYRUS.get(), AltyrusEntity.setCustomAttributes().build());
