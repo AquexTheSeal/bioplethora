@@ -63,9 +63,9 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 4 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.35D)
                 .add(Attributes.ATTACK_DAMAGE, 7 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, 25 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 18 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.MOVEMENT_SPEED, 0.25 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }

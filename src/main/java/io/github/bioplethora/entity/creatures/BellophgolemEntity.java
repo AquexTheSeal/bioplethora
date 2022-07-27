@@ -67,11 +67,11 @@ public class BellophgolemEntity extends SummonableMonsterEntity implements IAnim
         return MobEntity.createLivingAttributes()
                 .add(Attributes.ARMOR, 10 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
-                .add(Attributes.ATTACK_DAMAGE, 23 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.ATTACK_KNOCKBACK, 7D)
-                .add(Attributes.MAX_HEALTH, 220 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.ATTACK_DAMAGE, 18.5 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
+                .add(Attributes.ATTACK_KNOCKBACK, 6D)
+                .add(Attributes.MAX_HEALTH, 205 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
-                .add(Attributes.MOVEMENT_SPEED, 0.2 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
+                .add(Attributes.MOVEMENT_SPEED, 0.23 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D);
     }
 

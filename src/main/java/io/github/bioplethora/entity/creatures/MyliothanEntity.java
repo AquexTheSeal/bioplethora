@@ -110,7 +110,7 @@ public class MyliothanEntity extends WaterMobEntity implements IAnimatable, IBio
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_KNOCKBACK, 10D)
                 .add(Attributes.ATTACK_DAMAGE, (BPConfig.IN_HELLMODE ? 32 : 27) * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
-                .add(Attributes.MAX_HEALTH, (BPConfig.IN_HELLMODE ? 385 : 335) * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, (BPConfig.IN_HELLMODE ? 355 : 305) * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.MOVEMENT_SPEED, 1.2 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10D)
                 .add(Attributes.FOLLOW_RANGE, 64D);

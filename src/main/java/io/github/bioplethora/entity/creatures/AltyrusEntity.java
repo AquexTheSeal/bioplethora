@@ -70,11 +70,11 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.ARMOR, 22.5 * BPConfig.COMMON.mobArmorMultiplier.get())
+                .add(Attributes.ARMOR, 20 * BPConfig.COMMON.mobArmorMultiplier.get())
                 .add(Attributes.ATTACK_SPEED, 10)
                 .add(Attributes.ATTACK_DAMAGE, 35 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 7D)
-                .add(Attributes.MAX_HEALTH, 495 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 430 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 1.5F * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FLYING_SPEED, 1.5F * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
