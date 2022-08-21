@@ -2,9 +2,13 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
+import io.github.bioplethora.entity.FloatingMonsterEntity;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
+import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.goals.BPCustomSwimmingGoal;
 import io.github.bioplethora.entity.ai.goals.BPWaterChargingCoal;
+import io.github.bioplethora.entity.ai.goals.WaterFollowOwnerGoal;
 import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
 import io.github.bioplethora.enums.BPEntityClasses;
 import net.minecraft.block.BlockState;
@@ -14,7 +18,8 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.math.BlockPos;
@@ -35,6 +40,7 @@ public class VoidjawEntity extends TrapjawEntity {
 
     public VoidjawEntity(EntityType<? extends BPAnimalEntity> type, World worldIn) {
         super(type, worldIn);
+        this.moveControl = new VoidjawEntity.MoveHelperController(this);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -45,7 +51,7 @@ public class VoidjawEntity extends TrapjawEntity {
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.MAX_HEALTH, 135 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.MOVEMENT_SPEED, 0.30D * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
-                .add(Attributes.FOLLOW_RANGE, 32D);
+                .add(Attributes.FOLLOW_RANGE, 64D);
     }
 
     @Override
@@ -71,22 +77,24 @@ public class VoidjawEntity extends TrapjawEntity {
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.addGoal(1, new ChargeAttackGoal());
-        this.goalSelector.addGoal(2, new MoveRandomGoal());
+        this.goalSelector.addGoal(2, new SitGoal(this));
+        this.goalSelector.addGoal(3, new VoidjawEntity.ChargeAttackGoal());
+        this.goalSelector.addGoal(4, new VoidjawEntity.MoveRandomGoal());
+        this.goalSelector.addGoal(4, new GeckoMeleeGoal<>(this, 30, 0.5, 0.6));
+        this.goalSelector.addGoal(5, new WaterFollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, true));
+        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, true));
+        this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.2, 8));
+        this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(11, new LookRandomlyGoal(this));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+        this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.targetSelector.addGoal(1, new NonTamedTargetGoal<>(this, LivingEntity.class, false, PREY_SELECTOR));
     }
 
     @Override
     public void switchNavigator(boolean onLand) {
-        if (onLand) {
-            this.moveControl = new VoidjawEntity.MoveHelperController(this);
-            this.navigation = new GroundPathNavigator(this, level);
-            this.isLandNavigator = true;
-        } else {
-            this.moveControl = new WaterMoveController(this, 1.2F);
-            this.navigation = new WaterAndLandPathNavigator(this, level);
-            this.isLandNavigator = false;
-        }
     }
 
     public void readAdditionalSaveData(CompoundNBT pCompound) {

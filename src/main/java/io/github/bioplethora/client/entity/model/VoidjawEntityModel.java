@@ -1,12 +1,16 @@
 package io.github.bioplethora.client.entity.model;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.api.IAdvancedGeoModel;
+import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.TrapjawEntity;
 import io.github.bioplethora.entity.creatures.VoidjawEntity;
 import net.minecraft.util.ResourceLocation;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class VoidjawEntityModel extends AnimatedGeoModel<VoidjawEntity> {
+public class VoidjawEntityModel extends AnimatedGeoModel<VoidjawEntity> implements IAdvancedGeoModel<VoidjawEntity> {
 
     @Override
     public ResourceLocation getModelLocation(VoidjawEntity entity) {
@@ -29,5 +33,12 @@ public class VoidjawEntityModel extends AnimatedGeoModel<VoidjawEntity> {
     @Override
     public ResourceLocation getAnimationFileLocation(VoidjawEntity entity) {
         return new ResourceLocation(Bioplethora.MOD_ID, "animations/voidjaw.animation.json");
+    }
+
+    @Override
+    public void setLivingAnimations(VoidjawEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent event) {
+        super.setLivingAnimations(entity, uniqueID, event);
+        EntityModelData extraData = (EntityModelData) event.getExtraDataOfType(EntityModelData.class).get(0);
+        adaptHeadOnLook(extraData, getAnimationProcessor().getBone("trapjaw"));
     }
 }
