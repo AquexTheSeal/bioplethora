@@ -439,10 +439,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     }
 
     public boolean doHurtTarget(Entity entity) {
-        boolean flag = super.doHurtTarget(entity);
-        World world = entity.level;
-
-        return flag;
+        return super.doHurtTarget(entity);
     }
 
     @Override

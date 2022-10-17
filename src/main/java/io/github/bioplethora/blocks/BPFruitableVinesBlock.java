@@ -245,7 +245,7 @@ public abstract class BPFruitableVinesBlock extends BPVinesBlock {
             int i = 2 + pLevel.random.nextInt(2);
             pLevel.setBlock(pPos, getBodyBlock().defaultBlockState(), 2);
             pLevel.playSound(null, pPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
-            popResource(pLevel, pPos, new ItemStack(Items.SWEET_BERRIES, i));
+            popResource(pLevel, pPos, new ItemStack(BPItems.WARPED_GRAPES.get(), i));
             return ActionResultType.sidedSuccess(pLevel.isClientSide);
         }
     }

@@ -41,6 +41,14 @@ public class AbyssalScalesEntity extends ProjectileItemEntity {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (this.isInWaterRainOrBubble()) {
+            this.setDeltaMovement(this.getDeltaMovement().scale(1.5D));
+        }
+    }
+
+    @Override
     protected void onHitEntity(EntityRayTraceResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();

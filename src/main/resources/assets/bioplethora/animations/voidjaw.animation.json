@@ -709,8 +709,92 @@
 				}
 			}
 		},
-		"animation.voidjaw.jump": {
-			"loop": true
+		"animation.voidjaw.swim": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"trapjaw": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * -10", 0, 0]
+					},
+					"position": {
+						"vector": [0, "math.sin(query.anim_time * 180) * 3", 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * 10", 0, 0]
+					}
+				},
+				"rleg": {
+					"rotation": {
+						"vector": ["85 + math.sin(query.anim_time * 180) * 10", 0, 0]
+					}
+				},
+				"lleg": {
+					"rotation": {
+						"vector": ["85 + math.sin(query.anim_time * 180) * -10", 0, 0]
+					}
+				},
+				"rleg2": {
+					"rotation": {
+						"vector": ["90 + math.sin(query.anim_time * 180) * -10", 0, 0]
+					}
+				},
+				"lleg2": {
+					"rotation": {
+						"vector": ["90 + math.sin(query.anim_time * 180) * 10", 0, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * -5", 0, 0]
+					}
+				}
+			}
+		},
+		"animation.voidjaw.sit": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": ["-35 + math.sin(query.anim_time * 180) * 5", 0, 0]
+					},
+					"position": {
+						"vector": [0, -4, -9]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": ["30 + math.cos(query.anim_time * 180) * -10", "math.sin(query.anim_time * 180) * -10", 0]
+					}
+				},
+				"rleg2": {
+					"rotation": {
+						"vector": ["-45 + math.sin(query.anim_time * 180) * 10", 0, 0]
+					},
+					"position": {
+						"vector": [0, -12, 0]
+					}
+				},
+				"lleg2": {
+					"rotation": {
+						"vector": ["-45 + math.sin(query.anim_time * 180) * -10", 0, 0]
+					},
+					"position": {
+						"vector": [0, -8, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 180) * -10", "math.sin(query.anim_time * 180) * -10", 0]
+					},
+					"position": {
+						"vector": [0, 0, " + math.sin(query.anim_time * 180) * -2"]
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

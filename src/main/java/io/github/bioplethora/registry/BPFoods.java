@@ -7,6 +7,7 @@ import net.minecraft.potion.Effects;
 public class BPFoods {
     public static final Food FIERY_SAP_BOTTLE = new Food.Builder().nutrition(3).saturationMod(0.2F).effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 200, 0), 1.0F).fast().build();
     public static final Food SOUL_SAP_BOTTLE = new Food.Builder().nutrition(6).saturationMod(0.4F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 200, 0), 1.0F).build();
+    public static final Food WARPED_GRAPES = new Food.Builder().nutrition(5).saturationMod(0.4F).build();
 
     public static final Food RAW_CUTTLEFISH_MEAT = new Food.Builder().nutrition(3).saturationMod(0.2F).meat().fast().build();
     public static final Food COOKED_CUTTLEFISH_MEAT = new Food.Builder().nutrition(6).saturationMod(0.5F).meat().fast().build();
