@@ -191,21 +191,16 @@ public class VoidjawEntity extends TrapjawEntity {
         if (this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.attack", true));
             return PlayState.CONTINUE;
-        }
-        if (this.isInSittingPose()) {
+        } else if (this.isOrderedToSit() || !this.isVehicle()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.sit", true));
             return PlayState.CONTINUE;
-        }
-        if ((event.isMoving() && this.getTarget() != null) || (!this.isInWater() && this.isVehicle() && event.isMoving())) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.run", true));
+        } else if (event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.float", true));
+            return PlayState.CONTINUE;
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.idle", true));
             return PlayState.CONTINUE;
         }
-        if (event.isMoving() && this.getTarget() == null) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.walk", true));
-            return PlayState.CONTINUE;
-        }
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.idle", true));
-        return PlayState.CONTINUE;
     }
 
     public class ChargeAttackGoal extends Goal {
