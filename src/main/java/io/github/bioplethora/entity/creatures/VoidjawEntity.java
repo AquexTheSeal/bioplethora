@@ -189,16 +189,16 @@ public class VoidjawEntity extends TrapjawEntity {
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (this.getAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.attack", true));
+            event.getController().setAnimation(new AnimationBuilder().loop("animation.voidjaw.attack"));
             return PlayState.CONTINUE;
-        } else if (this.isOrderedToSit() || !this.isVehicle()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.sit", true));
+        } else if (this.isOrderedToSit() && !this.isVehicle()) {
+            event.getController().setAnimation(new AnimationBuilder().loop("animation.voidjaw.sit"));
             return PlayState.CONTINUE;
         } else if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.float", true));
+            event.getController().setAnimation(new AnimationBuilder().loop("animation.voidjaw.float"));
             return PlayState.CONTINUE;
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.voidjaw.idle", true));
+            event.getController().setAnimation(new AnimationBuilder().loop("animation.voidjaw.idle"));
             return PlayState.CONTINUE;
         }
     }
