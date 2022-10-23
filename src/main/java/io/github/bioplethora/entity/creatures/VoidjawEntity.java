@@ -25,8 +25,10 @@ import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.pathfinding.WalkNodeProcessor;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -47,6 +49,7 @@ import java.util.EnumSet;
 
 public class VoidjawEntity extends TrapjawEntity {
     public boolean inWall;
+    public int particleTime;
 
     public VoidjawEntity(EntityType<? extends BPAnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -114,6 +117,17 @@ public class VoidjawEntity extends TrapjawEntity {
 
         if (!this.level.isClientSide) {
             this.inWall = this.checkWalls(this.getBoundingBox());
+        }
+
+        if (this.getDeltaMovement().x() > 0.2D || this.getDeltaMovement().y() > 0.2D || this.getDeltaMovement().z() > 0.2D) {
+            ++this.particleTime;
+            if (this.particleTime == 10) {
+                double d0 = this.random.nextGaussian() * 0.02D;
+                double d1 = this.random.nextGaussian() * 0.02D;
+                double d2 = this.random.nextGaussian() * 0.02D;
+                this.level.addParticle(ParticleTypes.FIREWORK, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), d0, d1, d2);
+                particleTime = 0;
+            }
         }
     }
 
@@ -191,7 +205,7 @@ public class VoidjawEntity extends TrapjawEntity {
         if (this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().loop("animation.voidjaw.attack"));
             return PlayState.CONTINUE;
-        } else if (this.isOrderedToSit() && !this.isVehicle()) {
+        } else if (this.isInSittingPose()) {
             event.getController().setAnimation(new AnimationBuilder().loop("animation.voidjaw.sit"));
             return PlayState.CONTINUE;
         } else if (event.isMoving()) {
@@ -255,16 +269,13 @@ public class VoidjawEntity extends TrapjawEntity {
         }
 
         public boolean canUse() {
-            float startDistance = 6.0F;
             if (VoidjawEntity.this.isOrderedToSit()) {
                 return false;
             } else if (VoidjawEntity.this.isVehicle()) {
                 return false;
             } else if (VoidjawEntity.this.getOwner() == null) {
                 return false;
-            } else if (VoidjawEntity.this.getTarget() != null) {
-                return false;
-            } else return (VoidjawEntity.this.distanceToSqr(VoidjawEntity.this.getOwner()) <= (double) (startDistance * startDistance));
+            } else return VoidjawEntity.this.getTarget() == null;
         }
 
         public boolean canContinueToUse() {
@@ -273,9 +284,6 @@ public class VoidjawEntity extends TrapjawEntity {
 
         public void start() {
             this.timeToRecalcPath = 0;
-            LivingEntity livingentity = VoidjawEntity.this.getOwner();
-            Vector3d vector3d = livingentity.getEyePosition(1.0F);
-            VoidjawEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
         }
 
         public void stop() {
@@ -292,7 +300,7 @@ public class VoidjawEntity extends TrapjawEntity {
                     if (VoidjawEntity.this.distanceToSqr(VoidjawEntity.this.getOwner()) >= 144.0D) {
                         this.teleportToOwner();
                     } else {
-                        Vector3d vector3d = livingentity.getEyePosition(1.0F);
+                        Vector3d vector3d = VoidjawEntity.this.getEyePosition(1.0F);
                         VoidjawEntity.this.moveControl.setWantedPosition(vector3d.x + rand, vector3d.y, vector3d.z + rand2, 1.0D);
                     }
                 }
@@ -328,7 +336,7 @@ public class VoidjawEntity extends TrapjawEntity {
 
         private boolean canTeleportTo(BlockPos pPos) {
             PathNodeType pathnodetype = WalkNodeProcessor.getBlockPathTypeStatic(VoidjawEntity.this.level, pPos.mutable());
-            if (pathnodetype != PathNodeType.WALKABLE) {
+            if (pathnodetype != PathNodeType.WALKABLE && pathnodetype != PathNodeType.WATER  && pathnodetype != PathNodeType.OPEN) {
                 return false;
             } else {
                 BlockPos blockpos = pPos.subtract(VoidjawEntity.this.blockPosition());
@@ -354,7 +362,7 @@ public class VoidjawEntity extends TrapjawEntity {
                     this.operation = MovementController.Action.WAIT;
                     VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().scale(0.5D));
                 } else {
-                    VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().add(vector3d.scale(this.speedModifier * 0.05D / d0)));
+                    VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().add(vector3d.scale((this.speedModifier * 0.05D / d0) * (VoidjawEntity.this.isInWater() ? 2.2 : 1))));
                     if (VoidjawEntity.this.getTarget() == null) {
                         Vector3d vector3d1 = VoidjawEntity.this.getDeltaMovement();
                         VoidjawEntity.this.yRot = -((float) MathHelper.atan2(vector3d1.x, vector3d1.z)) * (180F / (float)Math.PI);
@@ -375,7 +383,7 @@ public class VoidjawEntity extends TrapjawEntity {
         }
 
         public boolean canUse() {
-            return !VoidjawEntity.this.getMoveControl().hasWanted() && VoidjawEntity.this.random.nextInt(5) == 0;
+            return !VoidjawEntity.this.getMoveControl().hasWanted() && VoidjawEntity.this.getOwner() == null && VoidjawEntity.this.random.nextInt(5) == 0;
         }
 
         public boolean canContinueToUse() {

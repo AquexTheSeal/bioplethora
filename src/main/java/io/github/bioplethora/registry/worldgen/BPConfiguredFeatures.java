@@ -74,6 +74,17 @@ public class BPConfiguredFeatures {
             ImmutableList.of(Blocks.SOUL_SOIL, Blocks.SOUL_SAND, Blocks.NETHERRACK, Blocks.BLACKSTONE),
             1, 8, 132, 115
     ));
+
+    public static final ConfiguredFeature<?, ?> RED_TWI = register("red_twi", makePendentConfig(
+            BPBlocks.ENIVILE_LEAVES_RED.get(), BPBlocks.RED_TWI_PLANT.get(), BPBlocks.RED_TWI.get(),
+            ImmutableList.of(Blocks.SOUL_SOIL, Blocks.SOUL_SAND, Blocks.NETHERRACK, Blocks.BLACKSTONE),
+            1, 8, 120, 105
+    ));
+    public static final ConfiguredFeature<?, ?> PINK_TWI = register("pink_twi", makePendentConfig(
+            BPBlocks.ENIVILE_LEAVES_PINK.get(), BPBlocks.PINK_TWI_PLANT.get(), BPBlocks.PINK_TWI.get(),
+            ImmutableList.of(Blocks.SOUL_SOIL, Blocks.SOUL_SAND, Blocks.NETHERRACK, Blocks.BLACKSTONE),
+            1, 6, 132, 115
+    ));
     
     // Nether Fruitable Vines
     public static final ConfiguredFeature<?, ?> BASALT_SPELEOTHERM = register("basalt_speleotherm", makeFruitablePendentConfig(

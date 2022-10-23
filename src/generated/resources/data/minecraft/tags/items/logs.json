@@ -4,6 +4,10 @@
     "bioplethora:caerulwood_log",
     "bioplethora:caerulwood_wood",
     "bioplethora:stripped_caerulwood_log",
-    "bioplethora:stripped_caerulwood_wood"
+    "bioplethora:stripped_caerulwood_wood",
+    "bioplethora:enivile_log",
+    "bioplethora:enivile_wood",
+    "bioplethora:stripped_enivile_log",
+    "bioplethora:stripped_enivile_wood"
   ]
 }

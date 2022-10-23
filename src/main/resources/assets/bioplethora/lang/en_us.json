@@ -27,6 +27,7 @@
   "entity.bioplethora.fiery_eurydn": "Fiery Eurydn",
   "entity.bioplethora.onofish": "Onofish",
   "entity.bioplethora.myuthine": "Myuthine",
+  "entity.bioplethora.voidjaw": "Voidjaw",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -91,6 +92,7 @@
   "item.bioplethora.soul_eurydn_spawn_egg": "Soul Eurydn Spawn Egg",
   "item.bioplethora.onofish_spawn_egg": "Onofish Spawn Egg",
   "item.bioplethora.myuthine_spawn_egg": "Myuthine Spawn Egg",
+  "item.bioplethora.voidjaw_spawn_egg": "Voidjaw Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",

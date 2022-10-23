@@ -38,6 +38,11 @@ public class BPCustomBiomeFeatureGeneration {
             vegDeco.add(() -> BPConfiguredFeatures.KYRIA);
             vegDeco.add(() -> BPConfiguredFeatures.KYRIA_BELINE);
             vegDeco.add(() -> BPConfiguredFeatures.KYRIA_IDE_FAN);
+
+            vegDeco.add(() -> BPConfiguredFeatures.RED_TWI);
+            vegDeco.add(() -> BPConfiguredFeatures.PINK_TWI);
+
+            vegDeco.add(() -> BPTreeConfiguredFeatures.CRYEANUM_FOREST_TREES);
         }
 
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_PLAINS)) {

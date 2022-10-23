@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "bioplethora:caerulwood_sapling"
+    "bioplethora:caerulwood_sapling",
+    "bioplethora:enivile_sapling"
   ]
 }

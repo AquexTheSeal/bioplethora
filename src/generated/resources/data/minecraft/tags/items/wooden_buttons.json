@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "bioplethora:caerulwood_button"
+    "bioplethora:caerulwood_button",
+    "bioplethora:enivile_button"
   ]
 }

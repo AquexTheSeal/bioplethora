@@ -72,6 +72,10 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.SPIRIT_DANGLER.get());
         this.simpleCrossBlock(BPBlocks.SPIRIT_DANGLER_PLANT.get());
 
+        this.simpleCrossBlock(BPBlocks.TURQUOISE_PENDENT.get());
+        this.simpleCrossBlock(BPBlocks.TURQUOISE_PENDENT_PLANT.get());
+        this.simpleCrossBlock(BPBlocks.BLOSSOMING_TURQUOISE_PENDENT.get());
+
         this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM.get());
         this.simpleCrossBlock(BPBlocks.BASALT_SPELEOTHERM_PLANT.get());
         this.simpleCrossBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM.get());

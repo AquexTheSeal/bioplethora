@@ -1,3 +1,6 @@
 {
-  "parent": "bioplethora:block/turquoise_pendent"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:block/turquoise_pendent_plant"
+  }
 }

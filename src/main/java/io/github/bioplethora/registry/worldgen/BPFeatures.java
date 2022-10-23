@@ -7,6 +7,7 @@ import io.github.bioplethora.world.featureconfigs.NBTFeatureConfig;
 import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
 import io.github.bioplethora.world.features.*;
 import io.github.bioplethora.world.features.treefeatures.CaerulwoodTreeFeature;
+import io.github.bioplethora.world.features.treefeatures.EnivileTreeFeature;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -29,6 +30,6 @@ public class BPFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> END_FROZEN_ISLAND = FEATURES.register("end_frozen_island", () -> new EndFrozenIslandFeature(NoFeatureConfig.CODEC));
 
     // Trees
+    public static final RegistryObject<Feature<NoFeatureConfig>> ENIVILE_TREE = FEATURES.register("enivile_tree", () -> new EnivileTreeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> CAERULWOOD_TREE = FEATURES.register("caerulwood_tree", () -> new CaerulwoodTreeFeature(NoFeatureConfig.CODEC));
-
 }

@@ -18,12 +18,11 @@ public class SpiritManipulationEffect extends Effect {
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
         ++armorRegenTimer;
         if (armorRegenTimer == 60) {
-            pLivingEntity.getItemBySlot(EquipmentSlotType.HEAD).setDamageValue(pLivingEntity.getItemBySlot(EquipmentSlotType.HEAD).getDamageValue() + 2);
-            pLivingEntity.getItemBySlot(EquipmentSlotType.CHEST).setDamageValue(pLivingEntity.getItemBySlot(EquipmentSlotType.CHEST).getDamageValue() + 2);
-            pLivingEntity.getItemBySlot(EquipmentSlotType.LEGS).setDamageValue(pLivingEntity.getItemBySlot(EquipmentSlotType.LEGS).getDamageValue() + 2);
-            pLivingEntity.getItemBySlot(EquipmentSlotType.FEET).setDamageValue(pLivingEntity.getItemBySlot(EquipmentSlotType.FEET).getDamageValue() + 2);
-
-            System.out.println("regen test working! Test helmet durability: " + pLivingEntity.getItemBySlot(EquipmentSlotType.HEAD).getDamageValue());
+            for (EquipmentSlotType type : EquipmentSlotType.values()) {
+                if (type != EquipmentSlotType.MAINHAND && type != EquipmentSlotType.OFFHAND) {
+                    pLivingEntity.getItemBySlot(type).setDamageValue(pLivingEntity.getItemBySlot(type).getDamageValue() + 2);
+                }
+            }
 
             armorRegenTimer = 0;
         }

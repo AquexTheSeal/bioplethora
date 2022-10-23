@@ -71,6 +71,9 @@ public class ModCommonRegister {
 
         EntitySpawnPlacementRegistry.register(BPEntities.DWARF_MOSSADILE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
         EntitySpawnPlacementRegistry.register(BPEntities.GAUGALEM.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GaugalemEntity::checkGaugalemSpawnRules);
+        EntitySpawnPlacementRegistry.register(BPEntities.MYUTHINE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
+
+        EntitySpawnPlacementRegistry.register(BPEntities.CREPHOXL.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
 
         EntitySpawnPlacementRegistry.register(BPEntities.MYLIOTHAN.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MyliothanEntity::checkMyliothanSpawnRules);
     }

@@ -52,6 +52,7 @@ public class BPCommonConfig {
     //Hellsent
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnCrephoxl;
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnBellophgolem;
+    public final ForgeConfigSpec.ConfigValue<Boolean> spawnVoidjaw;
 
     //Elderia
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnMyliothan;
@@ -108,6 +109,7 @@ public class BPCommonConfig {
         //          MOB SPAWNS
         //===================================
         builder.push("Mob Spawns");
+
         //Ecoharmless
         builder.push("Ecoharmless Mobs");
         spawnCuttlefish = builder.define("Enable mob spawning for Cuttlefishes", true);
@@ -116,12 +118,14 @@ public class BPCommonConfig {
         spawnSoulEurydn = builder.define("Enable mob spawning for Soul Eurydnia", true);
         spawnFieryEurydn = builder.define("Enable mob spawning for Fiery Eurydnia", true);
         builder.pop();
+
         //Plethoneutral
         builder.push("Plethoneutral Mobs");
         spawnPeaguin = builder.define("Enable mob spawning for Peaguins", true);
         spawnCavernFleignar = builder.define("Enable mob spawning for Cavern Fleignars", true);
         spawnNandbri = builder.define("Enable mob spawning for Nandbris", true);
         builder.pop();
+
         //Dangerum
         builder.push("Dangerum Mobs");
         spawnAlphem = builder.define("Enable mob spawning for Alphems", true);
@@ -137,11 +141,14 @@ public class BPCommonConfig {
         spawnDiamondGrylynen = builder.define("Enable mob spawning for Diamond Grylynens", true);
         spawnNetheriteGrylynen = builder.define("Enable mob spawning for Netherite Grylynens", true);
         builder.pop();
+
         //Hellsent
         builder.push("Hellsent Mobs");
         spawnCrephoxl = builder.define("Enable mob spawning for Crephoxls", true);
         spawnBellophgolem = builder.define("Enable mob spawning for Bellophgolems", true);
+        spawnVoidjaw = builder.define("Enable mob spawning for Voidjaws", true);
         builder.pop();
+
         //Elderia
         builder.push("Elderia Mobs");
         spawnMyliothan = builder.define("Enable mob spawning for Myliothans", true);

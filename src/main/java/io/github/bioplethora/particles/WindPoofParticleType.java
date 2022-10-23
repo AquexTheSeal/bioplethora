@@ -11,7 +11,7 @@ import net.minecraft.util.registry.Registry;
  */
 public class WindPoofParticleType extends ParticleType<WindPoofParticleData> implements IParticleData {
 
-    private static boolean ALWAYS_SHOW_REGARDLESS_OF_DISTANCE_FROM_PLAYER = false;
+    private static final boolean ALWAYS_SHOW_REGARDLESS_OF_DISTANCE_FROM_PLAYER = false;
 
     public WindPoofParticleType() {
         super(ALWAYS_SHOW_REGARDLESS_OF_DISTANCE_FROM_PLAYER, WindPoofParticleData.DESERIALIZER);

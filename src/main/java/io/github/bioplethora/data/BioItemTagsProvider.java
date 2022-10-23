@@ -43,6 +43,13 @@ public class BioItemTagsProvider extends ItemTagsProvider {
         ;
 
         // Woodset
+        tag(BPTags.Items.ENIVILE_LOGS)
+                .add(BPBlocks.ENIVILE_LOG.get().asItem())
+                .add(BPBlocks.ENIVILE_WOOD.get().asItem())
+                .add(BPBlocks.STRIPPED_ENIVILE_LOG.get().asItem())
+                .add(BPBlocks.STRIPPED_ENIVILE_WOOD.get().asItem())
+        ;
+        
         tag(BPTags.Items.CAERULWOOD_LOGS)
                 .add(BPBlocks.CAERULWOOD_LOG.get().asItem())
                 .add(BPBlocks.CAERULWOOD_WOOD.get().asItem())
@@ -55,33 +62,47 @@ public class BioItemTagsProvider extends ItemTagsProvider {
                 .add(BPBlocks.CAERULWOOD_WOOD.get().asItem())
                 .add(BPBlocks.STRIPPED_CAERULWOOD_LOG.get().asItem())
                 .add(BPBlocks.STRIPPED_CAERULWOOD_WOOD.get().asItem())
+                .add(BPBlocks.ENIVILE_LOG.get().asItem())
+                .add(BPBlocks.ENIVILE_WOOD.get().asItem())
+                .add(BPBlocks.STRIPPED_ENIVILE_LOG.get().asItem())
+                .add(BPBlocks.STRIPPED_ENIVILE_WOOD.get().asItem())
         ;
         tag(ItemTags.PLANKS)
                 .add(BPBlocks.CAERULWOOD_PLANKS.get().asItem())
+                .add(BPBlocks.ENIVILE_PLANKS.get().asItem())
         ;
         tag(ItemTags.SAPLINGS)
                 .add(BPBlocks.CAERULWOOD_SAPLING.get().asItem())
+                .add(BPBlocks.ENIVILE_SAPLING.get().asItem())
         ;
         tag(ItemTags.LEAVES)
                 .add(BPBlocks.CAERULWOOD_LEAVES.get().asItem())
+                .add(BPBlocks.ENIVILE_LEAVES_RED.get().asItem())
+                .add(BPBlocks.ENIVILE_LEAVES_PINK.get().asItem())
         ;
         tag(ItemTags.DOORS)
                 .add(BPBlocks.CAERULWOOD_DOOR.get().asItem())
+                .add(BPBlocks.ENIVILE_DOOR.get().asItem())
         ;
         tag(ItemTags.WOODEN_PRESSURE_PLATES)
                 .add(BPBlocks.CAERULWOOD_PRESSURE_PLATE.get().asItem())
+                .add(BPBlocks.ENIVILE_PRESSURE_PLATE.get().asItem())
         ;
         tag(ItemTags.WOODEN_BUTTONS)
                 .add(BPBlocks.CAERULWOOD_BUTTON.get().asItem())
+                .add(BPBlocks.ENIVILE_BUTTON.get().asItem())
         ;
         tag(ItemTags.WOODEN_STAIRS)
                 .add(BPBlocks.CAERULWOOD_STAIRS.get().asItem())
+                .add(BPBlocks.ENIVILE_STAIRS.get().asItem())
         ;
         tag(ItemTags.WOODEN_SLABS)
                 .add(BPBlocks.CAERULWOOD_SLAB.get().asItem())
+                .add(BPBlocks.ENIVILE_SLAB.get().asItem())
         ;
         tag(ItemTags.WOODEN_FENCES)
                 .add(BPBlocks.CAERULWOOD_FENCE.get().asItem())
+                .add(BPBlocks.ENIVILE_FENCE.get().asItem())
         ;
     }
 }

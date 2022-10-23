@@ -55,6 +55,7 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.flatBlock(BPBlocks.BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
         this.flatBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
         this.flatBlock(BPBlocks.SOUL_ETERN, BPBlocks.SOUL_ETERN_PLANT);
+        this.flatBlock(BPBlocks.TURQUOISE_PENDENT, BPBlocks.TURQUOISE_PENDENT_PLANT);
 
         // end plants
         this.flatBlock(BPBlocks.IRION_GRASS, BPBlocks.IRION_GRASS);
