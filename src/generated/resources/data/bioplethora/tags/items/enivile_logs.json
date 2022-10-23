@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "bioplethora:enivile_log",
+    "bioplethora:enivile_wood",
+    "bioplethora:stripped_enivile_log",
+    "bioplethora:stripped_enivile_wood"
+  ]
+}
