@@ -4,8 +4,10 @@ import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
 import io.github.bioplethora.entity.FloatingMonsterEntity;
 import io.github.bioplethora.entity.ai.controller.WaterMoveController;
+import io.github.bioplethora.entity.ai.gecko.GeckoGoal;
 import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
+import io.github.bioplethora.entity.ai.gecko.IGeckoBaseEntity;
 import io.github.bioplethora.entity.ai.goals.BPCustomSwimmingGoal;
 import io.github.bioplethora.entity.ai.goals.BPWaterChargingCoal;
 import io.github.bioplethora.entity.ai.goals.WaterFollowOwnerGoal;
@@ -24,6 +26,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.GroundPathNavigator;
@@ -93,7 +96,7 @@ public class VoidjawEntity extends TrapjawEntity {
         this.goalSelector.addGoal(2, new SitGoal(this));
         this.goalSelector.addGoal(3, new VoidjawEntity.ChargeAttackGoal());
         this.goalSelector.addGoal(4, new VoidjawEntity.MoveRandomGoal());
-        this.goalSelector.addGoal(4, new GeckoMeleeGoal<>(this, 30, 0.5, 0.6));
+        this.goalSelector.addGoal(4, new VoidjawMeleeGoal<>(this, 30, 0.5, 0.6));
         this.goalSelector.addGoal(5, new WaterFollowOwnerGoal(this, 1.2D, 10.0F, 2.0F, true));
         this.goalSelector.addGoal(5, new VoidjawEntity.FollowOwnerGoal());
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
@@ -217,6 +220,84 @@ public class VoidjawEntity extends TrapjawEntity {
         }
     }
 
+    public static class VoidjawMeleeGoal<E extends MobEntity> extends GeckoMeleeGoal<E> {
+
+        public VoidjawMeleeGoal(E entity, double animationLength, double attackBegin, double attackEnd) {
+            super(entity, animationLength, attackBegin, attackEnd);
+        }
+
+        public boolean checkIfValid2(GeckoMeleeGoal goal, MobEntity attacker, LivingEntity target) {
+            if (target == null) return false;
+            if (target.isAlive() && !target.isSpectator()) {
+                if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
+                    ((IGeckoBaseEntity) attacker).setAttacking(false);
+                    return false;
+                }
+                double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
+                if (distance <= getAttackReachSq2(attacker, target)) return true;
+            }
+            ((IGeckoBaseEntity) attacker).setAttacking(false);
+            return false;
+        }
+
+        protected double getAttackReachSq2(LivingEntity attacker, LivingEntity target) {
+            return attacker.getBbWidth() * 4.5F * attacker.getBbWidth() * 4.5F + target.getBbWidth();
+        }
+
+        @Override
+        public boolean canUse() {
+            if (Math.random() <= 0.1) return false;
+
+            return checkIfValid2(this, entity, this.entity.getTarget());
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            if (Math.random() <= 0.1) return true;
+
+            return checkIfValid2(this, entity, this.entity.getTarget());
+        }
+
+
+    }
+
+    public class MoveHelperController extends MovementController {
+        public MoveHelperController(VoidjawEntity floatingMob) {
+            super(floatingMob);
+        }
+
+        public void tick() {
+            VoidjawEntity voidjaw = VoidjawEntity.this;
+            if (voidjaw.isOrderedToSit() && !voidjaw.isInSittingPose()) {
+                double changeY = 20;
+                for (double yItr = getY(); voidjaw.level.getBlockState(new BlockPos(voidjaw.getX(), yItr, voidjaw.getZ())).isAir(); yItr--) {
+                    changeY = yItr;
+                }
+                this.setWantedPosition(this.getWantedX(), changeY, this.getWantedZ(), 2);
+            }
+
+            if (this.operation == MovementController.Action.MOVE_TO && (!voidjaw.isVehicle()) && (!voidjaw.isInSittingPose())) {
+                Vector3d vector3d = new Vector3d(this.wantedX - voidjaw.getX(), this.wantedY - voidjaw.getY(), this.wantedZ - voidjaw.getZ());
+                double d0 = vector3d.length();
+                if (d0 < voidjaw.getBoundingBox().getSize()) {
+                    this.operation = MovementController.Action.WAIT;
+                    voidjaw.setDeltaMovement(voidjaw.getDeltaMovement().scale(0.5D));
+                } else {
+                    voidjaw.setDeltaMovement(voidjaw.getDeltaMovement().add(vector3d.scale((this.speedModifier * 0.05D / d0) * (voidjaw.isInWater() ? 2.2 : 1))));
+                    if (voidjaw.getTarget() == null) {
+                        Vector3d vector3d1 = voidjaw.getDeltaMovement();
+                        voidjaw.yRot = -((float) MathHelper.atan2(vector3d1.x, vector3d1.z)) * (180F / (float)Math.PI);
+                    } else {
+                        double d2 = voidjaw.getTarget().getX() - voidjaw.getX();
+                        double d1 = voidjaw.getTarget().getZ() - voidjaw.getZ();
+                        voidjaw.yRot = -((float) MathHelper.atan2(d2, d1)) * (180F / (float)Math.PI);
+                    }
+                    voidjaw.yBodyRot = voidjaw.yRot;
+                }
+            }
+        }
+    }
+
     public class ChargeAttackGoal extends Goal {
         public ChargeAttackGoal() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
@@ -269,7 +350,7 @@ public class VoidjawEntity extends TrapjawEntity {
         }
 
         public boolean canUse() {
-            if (VoidjawEntity.this.isOrderedToSit()) {
+            if (VoidjawEntity.this.isInSittingPose()) {
                 return false;
             } else if (VoidjawEntity.this.isVehicle()) {
                 return false;
@@ -290,7 +371,6 @@ public class VoidjawEntity extends TrapjawEntity {
         }
 
         public void tick() {
-            LivingEntity livingentity = VoidjawEntity.this.getOwner();
             int rand = VoidjawEntity.this.getRandom().nextBoolean() ? -5 : 5;
             int rand2 = VoidjawEntity.this.getRandom().nextBoolean() ? 5 : -5;
             VoidjawEntity.this.getLookControl().setLookAt(VoidjawEntity.this.getOwner(), 10.0F, (float)VoidjawEntity.this.getMaxHeadXRot());
@@ -300,8 +380,12 @@ public class VoidjawEntity extends TrapjawEntity {
                     if (VoidjawEntity.this.distanceToSqr(VoidjawEntity.this.getOwner()) >= 144.0D) {
                         this.teleportToOwner();
                     } else {
-                        Vector3d vector3d = VoidjawEntity.this.getEyePosition(1.0F);
-                        VoidjawEntity.this.moveControl.setWantedPosition(vector3d.x + rand, vector3d.y, vector3d.z + rand2, 1.0D);
+                        Vector3d vector3d = VoidjawEntity.this.getOwner().getEyePosition(1.0F);
+                        if (VoidjawEntity.this.isFood(VoidjawEntity.this.getOwner().getMainHandItem()) || VoidjawEntity.this.getOwner().getMainHandItem().getItem() == Items.SADDLE) {
+                            VoidjawEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
+                        } else {
+                            VoidjawEntity.this.moveControl.setWantedPosition(vector3d.x + rand, vector3d.y, vector3d.z + rand2, 1.0D);
+                        }
                     }
                 }
             }
@@ -346,34 +430,6 @@ public class VoidjawEntity extends TrapjawEntity {
 
         private int randomIntInclusive(int pMin, int pMax) {
             return VoidjawEntity.this.getRandom().nextInt(pMax - pMin + 1) + pMin;
-        }
-    }
-
-    public class MoveHelperController extends MovementController {
-        public MoveHelperController(VoidjawEntity floatingMob) {
-            super(floatingMob);
-        }
-
-        public void tick() {
-            if (this.operation == MovementController.Action.MOVE_TO && (!VoidjawEntity.this.isVehicle()) && (!VoidjawEntity.this.isOrderedToSit())) {
-                Vector3d vector3d = new Vector3d(this.wantedX - VoidjawEntity.this.getX(), this.wantedY - VoidjawEntity.this.getY(), this.wantedZ - VoidjawEntity.this.getZ());
-                double d0 = vector3d.length();
-                if (d0 < VoidjawEntity.this.getBoundingBox().getSize()) {
-                    this.operation = MovementController.Action.WAIT;
-                    VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().scale(0.5D));
-                } else {
-                    VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().add(vector3d.scale((this.speedModifier * 0.05D / d0) * (VoidjawEntity.this.isInWater() ? 2.2 : 1))));
-                    if (VoidjawEntity.this.getTarget() == null) {
-                        Vector3d vector3d1 = VoidjawEntity.this.getDeltaMovement();
-                        VoidjawEntity.this.yRot = -((float) MathHelper.atan2(vector3d1.x, vector3d1.z)) * (180F / (float)Math.PI);
-                    } else {
-                        double d2 = VoidjawEntity.this.getTarget().getX() - VoidjawEntity.this.getX();
-                        double d1 = VoidjawEntity.this.getTarget().getZ() - VoidjawEntity.this.getZ();
-                        VoidjawEntity.this.yRot = -((float) MathHelper.atan2(d2, d1)) * (180F / (float)Math.PI);
-                    }
-                    VoidjawEntity.this.yBodyRot = VoidjawEntity.this.yRot;
-                }
-            }
         }
     }
 

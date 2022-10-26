@@ -14,10 +14,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class BioBlockstateProvider extends BlockStateProvider {
@@ -36,6 +33,8 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(BPBlocks.NANDBRI_SCALE_BLOCK.get());
 
         this.simpleBlock(BPBlocks.MIRESTONE.get());
+
+        this.reinforcingTableBlock(BPBlocks.REINFORCING_TABLE.get());
 
         this.simpleBlock(BPBlocks.GREEN_GRYLYNEN_CRYSTAL_BLOCK.get());
         this.simpleBlock(BPBlocks.YELLOW_GRYLYNEN_CRYSTAL_BLOCK.get());
@@ -258,25 +257,6 @@ public class BioBlockstateProvider extends BlockStateProvider {
         }
     }
 
-    public void reinforcingTableBlock(ReinforcingTableBlock block) {
-        ModelFile all = models().orientableWithBottom(block.getRegistryName().getPath(),
-                bioResLoc(block.getRegistryName().getPath() + "_side"),
-                bioResLoc(block.getRegistryName().getPath() + "_side"),
-                bioResLoc(block.getRegistryName().getPath() + "_bottom"),
-                bioResLoc(block.getRegistryName().getPath() + "_top")
-        );
-
-        getVariantBuilder(block)
-                .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.SOUTH)
-                .modelForState().modelFile(all).addModel()
-                .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.WEST)
-                .modelForState().modelFile(all).rotationY(90).addModel()
-                .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.NORTH)
-                .modelForState().modelFile(all).rotationY(180).addModel()
-                .partialState().with(ReinforcingTableBlock.FACING_DIRECTION, Direction.EAST)
-                .modelForState().modelFile(all).rotationY(270).addModel();
-    }
-
     public void ideFanBlock(Block block) {
         String defTexture = block.getRegistryName().getPath();
         BlockModelBuilder def = models().singleTexture(defTexture, bioResLoc("ide_fan"), "0", blockTexture(block)).texture("particle", blockTexture(block));
@@ -366,6 +346,15 @@ public class BioBlockstateProvider extends BlockStateProvider {
                                 bioResLoc(block.getRegistryName().getPath() + "_side"),
                                 bioResLoc(block.getRegistryName().getPath() + "_side")
                         ).texture("particle", bioResLoc(block.getRegistryName().getPath() + "_top"))
+                )
+        );
+    }
+
+    public void reinforcingTableBlock(Block block) {
+        getVariantBuilder(block).partialState().addModels(
+                new ConfiguredModel(models()
+                        .singleTexture(block.getRegistryName().getPath(), bioResLoc("reinforcing_table_base"), "1", blockTexture(block))
+                        .texture("particle", blockTexture(block))
                 )
         );
     }

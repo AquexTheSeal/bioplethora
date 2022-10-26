@@ -184,6 +184,8 @@ public class BPItems {
     public static final RegistryObject<Item> CREPHOXL_SPAWN_EGG = ITEMS.register("crephoxl_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.CREPHOXL, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> BELLOPHGOLEM_SPAWN_EGG = ITEMS.register("bellophgolem_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.BELLOPHGOLEM, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> HELIOBLADE_SPAWN_EGG = ITEMS.register("helioblade_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.HELIOBLADE, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> VOIDJAW_SPAWN_EGG = ITEMS.register("voidjaw_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.VOIDJAW, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+
     /** @ELDERIA **/
     public static final RegistryObject<Item> ALTYRUS_SPAWN_EGG = ITEMS.register("altyrus_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.ALTYRUS, BPEntityClasses.ELDERIA, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> MYLIOTHAN_SPAWN_EGG = ITEMS.register("myliothan_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.MYLIOTHAN, BPEntityClasses.ELDERIA, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));

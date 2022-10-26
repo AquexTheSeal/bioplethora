@@ -1,9 +1,7 @@
 {
-  "parent": "minecraft:block/orientable_with_bottom",
+  "parent": "bioplethora:block/reinforcing_table_base",
   "textures": {
-    "side": "bioplethora:block/reinforcing_table_side",
-    "front": "bioplethora:block/reinforcing_table_side",
-    "bottom": "bioplethora:block/reinforcing_table_bottom",
-    "top": "bioplethora:block/reinforcing_table_top"
+    "1": "bioplethora:block/reinforcing_table",
+    "particle": "bioplethora:block/reinforcing_table"
   }
 }

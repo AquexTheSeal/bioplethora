@@ -60,6 +60,8 @@ public class BPClientRegister {
             }
         }
 
+        RenderTypeLookup.setRenderLayer(BPBlocks.REINFORCING_TABLE.get(), RenderType.cutout());
+
         // Plants
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_REMAINS.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(BPBlocks.FLEIGNARITE_VINES_PLANT.get(), RenderType.cutout());

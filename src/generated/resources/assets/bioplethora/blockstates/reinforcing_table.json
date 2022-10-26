@@ -1,19 +1,12 @@
 {
   "variants": {
-    "facing=north": {
-      "model": "bioplethora:block/reinforcing_table",
-      "y": 180
-    },
-    "facing=south": {
-      "model": "bioplethora:block/reinforcing_table"
-    },
-    "facing=west": {
-      "model": "bioplethora:block/reinforcing_table",
-      "y": 90
-    },
-    "facing=east": {
-      "model": "bioplethora:block/reinforcing_table",
-      "y": 270
-    }
+    "": [
+      {
+        "model": "bioplethora:block/reinforcing_table"
+      },
+      {
+        "model": "bioplethora:block/reinforcing_table"
+      }
+    ]
   }
 }

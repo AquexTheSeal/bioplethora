@@ -31,11 +31,11 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.cubeAll("mirestone", bioResLoc("mirestone"));
 
+        this.reinforcingTable("reinforcing_table", bioResLoc("reinforcing_table"));
+
         this.cubeAll("green_grylynen_crystal_block", bioResLoc("green_grylynen_crystal_block"));
         this.cubeAll("yellow_grylynen_crystal_block", bioResLoc("yellow_grylynen_crystal_block"));
         this.cubeAll("red_grylynen_crystal_block", bioResLoc("red_grylynen_crystal_block"));
-
-        this.orientableWithBottom("reinforcing_table", bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_side"), bioResLoc("reinforcing_table_bottom"), bioResLoc("reinforcing_table_top"));
 
         this.carpet("fleignarite_remains", bioResLoc("fleignarite_remains"));
         this.cross("fleignarite_vines", bioResLoc("fleignarite_vines"));
@@ -166,6 +166,10 @@ public class BioBlockModelProvider extends BlockModelProvider {
     public void ideFan(String name, ResourceLocation all) {
         singleTexture(name, bioResLoc("ide_fan"), "0", all).texture("particle", all);
         singleTexture(name + "_budded", bioResLoc("ide_fan_budded"), "0", all).texture("particle", all);
+    }
+
+    public void reinforcingTable(String name, ResourceLocation all) {
+        singleTexture(name, bioResLoc("reinforcing_table_base"), "1", all).texture("particle",all);
     }
 
     private ResourceLocation bioResLoc(String texture) {
