@@ -14,11 +14,13 @@ public class BPKeybinds {
     public static KeyBinding verticalMountDown;
 
     public static void register(final FMLClientSetupEvent event) {
+        /*
         verticalMountUp = create("vertical_up", GLFW.GLFW_KEY_SPACE);
         ClientRegistry.registerKeyBinding(verticalMountUp);
 
         verticalMountDown = create("vertical_down", GLFW.GLFW_KEY_LEFT_CONTROL);
         ClientRegistry.registerKeyBinding(verticalMountDown);
+        */
     }
 
     private static KeyBinding create(String name,  int key) {
