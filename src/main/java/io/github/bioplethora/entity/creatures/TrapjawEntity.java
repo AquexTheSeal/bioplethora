@@ -51,7 +51,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatable, IBioClassification, IRideable, IVerticalMount, ISaddleable {
+public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatable, IBioClassification, IRideable, ISaddleable {
 
     private static final DataParameter<Boolean> CARDINAL = EntityDataManager.defineId(TrapjawEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HAS_SADDLE = EntityDataManager.defineId(TrapjawEntity.class, DataSerializers.BOOLEAN);
@@ -538,6 +538,13 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
                 this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED));
                 float forward = ((LivingEntity) entity).zza;
                 float strafe = ((LivingEntity) entity).xxa;
+
+                double d3 = this.getOwner().getLookAngle().y;
+                Vector3d vector3d1 = this.getDeltaMovement();
+                double d4 = d3 < -0.2D ? 0.085D : 0.06D;
+                if (shouldVerticalMove()) {
+                    this.setDeltaMovement(vector3d1.add(0.0D, (d3 - vector3d1.y) * d4, 0.0D));
+                }
                 super.travel(new Vector3d(strafe, 0, forward));
             }
             this.animationSpeedOld = this.animationSpeed;
@@ -574,7 +581,6 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
         return 1.0F;
     }
 
-    @Override
     public boolean shouldVerticalMove() {
         return this.isInWater();
     }

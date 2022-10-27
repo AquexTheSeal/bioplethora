@@ -2,6 +2,7 @@ package io.github.bioplethora.network.keybindings;
 
 import io.github.bioplethora.entity.IVerticalMount;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
@@ -9,6 +10,7 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
+// Unused
 public class VerticalMountUpPacket {
 
     public int key;

@@ -12,12 +12,13 @@ import net.minecraftforge.fml.common.Mod;
 public class InputEvents {
 
     private static void onInput(Minecraft mc, int key, int action) {
+        /*
         if (mc.screen == null && BPKeybinds.verticalMountUp.consumeClick()) {
             BPNetwork.CHANNEL.sendToServer(new VerticalMountUpPacket(key));
         }
         if (mc.screen == null && BPKeybinds.verticalMountDown.consumeClick()) {
             BPNetwork.CHANNEL.sendToServer(new VerticalMountDownPacket(key));
-        }
+        }*/
     }
 
     @SubscribeEvent

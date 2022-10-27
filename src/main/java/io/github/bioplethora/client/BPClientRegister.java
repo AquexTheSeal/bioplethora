@@ -89,7 +89,6 @@ public class BPClientRegister {
         // Armor
         GeoArmorRenderer.registerArmorRenderer(AquChestplateItem.class, new AquChestplateRender());
 
-
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ONOFISH.get(), OnofishRenderer::new);

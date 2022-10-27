@@ -19,8 +19,8 @@ public class BPNetwork {
                     version -> version.equals(NETWORK_VERSION), version -> version.equals(NETWORK_VERSION));
 
     public static void initializeNetwork() {
-        CHANNEL.registerMessage(packetIndex++, VerticalMountUpPacket.class, VerticalMountUpPacket::encode, VerticalMountUpPacket::decode, VerticalMountUpPacket::verticalUp);
-        CHANNEL.registerMessage(packetIndex++, VerticalMountDownPacket.class, VerticalMountDownPacket::encode, VerticalMountDownPacket::decode, VerticalMountDownPacket::verticalDown);
+        //CHANNEL.registerMessage(packetIndex++, VerticalMountUpPacket.class, VerticalMountUpPacket::encode, VerticalMountUpPacket::decode, VerticalMountUpPacket::verticalUp);
+        //CHANNEL.registerMessage(packetIndex++, VerticalMountDownPacket.class, VerticalMountDownPacket::encode, VerticalMountDownPacket::decode, VerticalMountDownPacket::verticalDown);
 
         CHANNEL.registerMessage(packetIndex++, LeftSwingPacket.class, LeftSwingPacket::encode, LeftSwingPacket::decode, LeftSwingPacket::leftClickTrigger);
         CHANNEL.registerMessage(packetIndex++, RightSwingPacket.class, RightSwingPacket::encode, RightSwingPacket::decode, RightSwingPacket::rightClickTrigger);

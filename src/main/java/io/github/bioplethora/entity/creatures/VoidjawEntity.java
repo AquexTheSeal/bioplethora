@@ -1,5 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
+import io.github.bioplethora.api.world.EffectUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
 import io.github.bioplethora.entity.FloatingMonsterEntity;
@@ -17,6 +18,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -34,6 +36,7 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.pathfinding.WalkNodeProcessor;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -269,13 +272,8 @@ public class VoidjawEntity extends TrapjawEntity {
         public void tick() {
             VoidjawEntity voidjaw = VoidjawEntity.this;
             if (voidjaw.isOrderedToSit() && !voidjaw.isInSittingPose()) {
-                double changeY = 20;
-                for (double yItr = getY(); voidjaw.level.getBlockState(new BlockPos(voidjaw.getX(), yItr, voidjaw.getZ())).isAir(); yItr--) {
-                    changeY = yItr;
-                }
-                this.setWantedPosition(this.getWantedX(), changeY, this.getWantedZ(), 2);
+                VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().add(0, -2, 0));
             }
-
             if (this.operation == MovementController.Action.MOVE_TO && (!voidjaw.isVehicle()) && (!voidjaw.isInSittingPose())) {
                 Vector3d vector3d = new Vector3d(this.wantedX - voidjaw.getX(), this.wantedY - voidjaw.getY(), this.wantedZ - voidjaw.getZ());
                 double d0 = vector3d.length();
@@ -286,11 +284,11 @@ public class VoidjawEntity extends TrapjawEntity {
                     voidjaw.setDeltaMovement(voidjaw.getDeltaMovement().add(vector3d.scale((this.speedModifier * 0.05D / d0) * (voidjaw.isInWater() ? 2.2 : 1))));
                     if (voidjaw.getTarget() == null) {
                         Vector3d vector3d1 = voidjaw.getDeltaMovement();
-                        voidjaw.yRot = -((float) MathHelper.atan2(vector3d1.x, vector3d1.z)) * (180F / (float)Math.PI);
+                        voidjaw.yRot = -((float) MathHelper.atan2(vector3d1.x, vector3d1.z)) * (180F / (float) Math.PI);
                     } else {
                         double d2 = voidjaw.getTarget().getX() - voidjaw.getX();
                         double d1 = voidjaw.getTarget().getZ() - voidjaw.getZ();
-                        voidjaw.yRot = -((float) MathHelper.atan2(d2, d1)) * (180F / (float)Math.PI);
+                        voidjaw.yRot = -((float) MathHelper.atan2(d2, d1)) * (180F / (float) Math.PI);
                     }
                     voidjaw.yBodyRot = voidjaw.yRot;
                 }
@@ -373,14 +371,23 @@ public class VoidjawEntity extends TrapjawEntity {
         public void tick() {
             int rand = VoidjawEntity.this.getRandom().nextBoolean() ? -5 : 5;
             int rand2 = VoidjawEntity.this.getRandom().nextBoolean() ? 5 : -5;
+            Vector3d vector3d = VoidjawEntity.this.getOwner().getEyePosition(1.0F);
             VoidjawEntity.this.getLookControl().setLookAt(VoidjawEntity.this.getOwner(), 10.0F, (float)VoidjawEntity.this.getMaxHeadXRot());
+
+            if (VoidjawEntity.this.getOwner().fallDistance > 5.0F && VoidjawEntity.this.isSaddled() && !VoidjawEntity.this.isVehicle() && !VoidjawEntity.this.getOwner().isPassenger()) {
+                VoidjawEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y - 1, vector3d.z, 6D);
+                EffectUtils.addCircleParticleForm(VoidjawEntity.this.level, VoidjawEntity.this, ParticleTypes.CAMPFIRE_COSY_SMOKE, 15, 0.5, 0.01);
+                if (VoidjawEntity.this.getBoundingBox().intersects(VoidjawEntity.this.getOwner().getBoundingBox())) {
+                    VoidjawEntity.this.getOwner().startRiding(VoidjawEntity.this);
+                }
+            }
+
             if (--this.timeToRecalcPath <= 0) {
                 this.timeToRecalcPath = 10;
                 if (!VoidjawEntity.this.isLeashed() && !VoidjawEntity.this.isPassenger()) {
                     if (VoidjawEntity.this.distanceToSqr(VoidjawEntity.this.getOwner()) >= 144.0D) {
                         this.teleportToOwner();
                     } else {
-                        Vector3d vector3d = VoidjawEntity.this.getOwner().getEyePosition(1.0F);
                         if (VoidjawEntity.this.isFood(VoidjawEntity.this.getOwner().getMainHandItem()) || VoidjawEntity.this.getOwner().getMainHandItem().getItem() == Items.SADDLE) {
                             VoidjawEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
                         } else {
