@@ -78,7 +78,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
                 .add(Attributes.ATTACK_SPEED, 0.001)
                 .add(Attributes.ATTACK_DAMAGE, 30 * BPConfig.COMMON.mobMeeleeDamageMultiplier.get())
                 .add(Attributes.ATTACK_KNOCKBACK, 7.0D)
-                .add(Attributes.MAX_HEALTH, 455 * BPConfig.COMMON.mobHealthMultiplier.get())
+                .add(Attributes.MAX_HEALTH, 395 * BPConfig.COMMON.mobHealthMultiplier.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.25F * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64.0D)

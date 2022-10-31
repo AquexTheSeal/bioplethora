@@ -81,7 +81,7 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.65 * BPConfig.COMMON.mobMovementSpeedMultiplier.get())
                 .add(Attributes.FOLLOW_RANGE, 64D)
-                .add(BPAttributes.TRUE_DEFENSE.get(), 5D);
+                .add(BPAttributes.TRUE_DEFENSE.get(), 1D);
     }
 
     @Override
