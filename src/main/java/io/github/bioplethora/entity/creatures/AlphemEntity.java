@@ -77,7 +77,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, BellophgolemEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AltyrusEntity.class, 24.0F));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, HeliobladeEntity.class, 24.0F));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, ShachathEntity.class, 24.0F));
         this.goalSelector.addGoal(2, new GeckoMoveToTargetGoal<>(this, 1.6, 8));
         this.goalSelector.addGoal(2, new GeckoMeleeGoal<>(this, 40, 0.5, 0.6));
         this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 1.2));
@@ -90,7 +90,7 @@ public class AlphemEntity extends SummonableMonsterEntity implements IAnimatable
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, HeliobladeEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, ShachathEntity.class, true));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, AlphemKingEntity.class).setAlertOthers(AlphemEntity.class));
     }
 

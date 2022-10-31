@@ -173,8 +173,8 @@ public class BPEntityLootTables extends EntityLootTables {
                         ))
         );
 
-        // Helioblade
-        add(BPEntities.HELIOBLADE.get(), LootTable.lootTable()
+        // Shachath
+        add(BPEntities.SHACHATH.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(BPItems.TOTEM_OF_SWERVING.get())

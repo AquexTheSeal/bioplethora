@@ -97,9 +97,9 @@ public class BioLanguageProvider extends LanguageProvider {
         add(mobSubtitlesFormat(BPEntities.BELLOPHGOLEM, "hurt"), "Bellophgolem Hurts");
         add(mobSubtitlesFormat(BPEntities.BELLOPHGOLEM, "death"), "Bellophgolem Dies");
 
-        add(mobSubtitlesFormat(BPEntities.HELIOBLADE, "idle"), "Helioblade Grunts");
-        add(mobSubtitlesFormat(BPEntities.HELIOBLADE, "hurt"), "Helioblade Hurts");
-        add(mobSubtitlesFormat(BPEntities.HELIOBLADE, "death"), "Helioblade Dies");
+        add(mobSubtitlesFormat(BPEntities.SHACHATH, "idle"), "Shachath Grunts");
+        add(mobSubtitlesFormat(BPEntities.SHACHATH, "hurt"), "Shachath Hurts");
+        add(mobSubtitlesFormat(BPEntities.SHACHATH, "death"), "Shachath Dies");
 
         add(mobSubtitlesFormat(BPEntities.ALTYRUS, "idle"), "Altyrus Groans");
         add(mobSubtitlesFormat(BPEntities.ALTYRUS, "charge"), "Altyrus Charges");

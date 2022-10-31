@@ -7,7 +7,7 @@ import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
-import io.github.bioplethora.entity.creatures.HeliobladeEntity;
+import io.github.bioplethora.entity.creatures.ShachathEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.*;
 import io.github.bioplethora.item.ExperimentalItem;
@@ -266,14 +266,14 @@ public class ServerWorldEvents {
             }
         }
 
-        if (event.getEntity() instanceof HeliobladeEntity) {
+        if (event.getEntity() instanceof ShachathEntity) {
 
-            HeliobladeEntity helioblade = (HeliobladeEntity) event.getEntity();
-            int shouldDodge = helioblade.getRandom().nextInt(3);
+            ShachathEntity shachath = (ShachathEntity) event.getEntity();
+            int shouldDodge = shachath.getRandom().nextInt(3);
 
             if (!dsFire && !dsVoid && !dsFire2) {
                 if ((shouldDodge == 1) || (shouldDodge == 2)) {
-                    helioblade.teleportRandomly();
+                    shachath.teleportRandomly();
                     event.setCanceled(true);
                 }
             }
@@ -388,11 +388,11 @@ public class ServerWorldEvents {
                 }
             }
 
-            boolean targetIsHelioblade = ((EntityRayTraceResult) result).getEntity() instanceof HeliobladeEntity;
+            boolean targetIsShachath = ((EntityRayTraceResult) result).getEntity() instanceof ShachathEntity;
 
-            if (!projectile.level.isClientSide && targetIsHelioblade) {
-                HeliobladeEntity helioblade = ((HeliobladeEntity) ((EntityRayTraceResult) result).getEntity());
-                int shouldDodge = helioblade.getRandom().nextInt(3);
+            if (!projectile.level.isClientSide && targetIsShachath) {
+                ShachathEntity shachath = ((ShachathEntity) ((EntityRayTraceResult) result).getEntity());
+                int shouldDodge = shachath.getRandom().nextInt(3);
 
                 if (projectile instanceof AbstractArrowEntity) {
                     ((AbstractArrowEntity) projectile).setPierceLevel((byte) 0);
@@ -401,9 +401,9 @@ public class ServerWorldEvents {
                 if ((shouldDodge == 1) || (shouldDodge == 2)) {
 
                     Vector3d projectilePos = event.getEntity().position();
-                    Vector3d rVec = helioblade.getLookAngle().yRot(0.5F + (float) Math.PI).add(helioblade.position());
-                    Vector3d lVec = helioblade.getLookAngle().yRot(0.5F + (float) Math.PI).add(helioblade.position());
-                    BlockPos pos = new BlockPos((int) helioblade.getX(), (int) helioblade.getY(), (int) helioblade.getZ());
+                    Vector3d rVec = shachath.getLookAngle().yRot(0.5F + (float) Math.PI).add(shachath.position());
+                    Vector3d lVec = shachath.getLookAngle().yRot(0.5F + (float) Math.PI).add(shachath.position());
+                    BlockPos pos = new BlockPos((int) shachath.getX(), (int) shachath.getY(), (int) shachath.getZ());
 
                     boolean rDir;
 
@@ -412,12 +412,12 @@ public class ServerWorldEvents {
                     } else if (projectilePos.distanceTo(rVec) > projectilePos.distanceTo(lVec)) {
                         rDir = false;
                     } else {
-                        rDir = helioblade.getRandom().nextBoolean();
+                        rDir = shachath.getRandom().nextBoolean();
                     }
 
                     Vector3d vectorThingy = event.getEntity().getDeltaMovement().yRot((float) ((rDir ? 0.5F : -0.5F) * Math.PI)).normalize();
 
-                    helioblade.setDeltaMovement(helioblade.getDeltaMovement().add(vectorThingy.x() * 1F, 0, vectorThingy.z() * 1F));
+                    shachath.setDeltaMovement(shachath.getDeltaMovement().add(vectorThingy.x() * 1F, 0, vectorThingy.z() * 1F));
 
                     event.setCanceled(true);
                 }

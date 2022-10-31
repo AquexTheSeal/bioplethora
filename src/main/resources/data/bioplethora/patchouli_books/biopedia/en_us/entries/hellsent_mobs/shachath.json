@@ -1,0 +1,16 @@
+{
+  "name": "Shachath",
+  "icon": "bioplethora:shachath_spawn_egg",
+  "category": "hellsent_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+        "text": "$(l)INFORMATION: $(br)$()The Shachath is a very very fast masked entity that has a huge experience on ninja-like techniques. Along with it's Vermilion Blade, it could be unstoppable on most circumstances. It'd be really hard to land a hit on it due to the extreme speed it has."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:shachath",
+      "text": "---"
+    }
+  ]
+}

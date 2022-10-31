@@ -42,7 +42,7 @@ public class BPEntityAttributes {
         event.put(BPEntities.NETHERITE_GRYLYNEN.get(), GrylynenEntity.setCustomAttributes(BPGrylynenTier.NETHERITE).build());
 
         //Hellsent
-        event.put(BPEntities.HELIOBLADE.get(), HeliobladeEntity.setCustomAttributes().build());
+        event.put(BPEntities.SHACHATH.get(), ShachathEntity.setCustomAttributes().build());
         event.put(BPEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());
         event.put(BPEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
         event.put(BPEntities.TELEMREYE.get(), TelemreyeEntity.setCustomAttributes().build());

@@ -54,22 +54,22 @@
       "bioplethora:altyrus_charge"
     ]
   },
-  "helioblade_idle": {
-    "subtitle": "subtitles.bioplethora.helioblade.idle",
+  "shachath_idle": {
+    "subtitle": "subtitles.bioplethora.shachath.idle",
     "sounds": [
-      "bioplethora:helioblade_idle"
+      "bioplethora:shachath_idle"
     ]
   },
-  "helioblade_hurt": {
-    "subtitle": "subtitles.bioplethora.helioblade.hurt",
+  "shachath_hurt": {
+    "subtitle": "subtitles.bioplethora.shachath.hurt",
     "sounds": [
-      "bioplethora:helioblade_hurt"
+      "bioplethora:shachath_hurt"
     ]
   },
-  "helioblade_death": {
-    "subtitle": "subtitles.bioplethora.helioblade.death",
+  "shachath_death": {
+    "subtitle": "subtitles.bioplethora.shachath.death",
     "sounds": [
-      "bioplethora:helioblade_death"
+      "bioplethora:shachath_death"
     ]
   },
   "alphem_step": {

@@ -4,7 +4,7 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.creatures.DwarfMossadileEntity;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
-import io.github.bioplethora.entity.creatures.HeliobladeEntity;
+import io.github.bioplethora.entity.creatures.ShachathEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.entity.Entity;
@@ -51,8 +51,8 @@ public class BPCompatTOP {
                         }
                     }
 
-                    if (entity instanceof HeliobladeEntity) {
-                        boolean isClone = ((HeliobladeEntity) entity).isClone();
+                    if (entity instanceof ShachathEntity) {
+                        boolean isClone = ((ShachathEntity) entity).isClone();
                         if (isClone) {
                             iProbeInfo.text(CompoundText.createLabelInfo(var, "Clone"));
                         }

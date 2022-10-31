@@ -7,8 +7,8 @@ import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.goals.CopyTargetOwnerGoal;
-import io.github.bioplethora.entity.ai.goals.HeliobladeCloningGoal;
-import io.github.bioplethora.entity.ai.goals.HeliobladeQuickShootingGoal;
+import io.github.bioplethora.entity.ai.goals.ShachathCloningGoal;
+import io.github.bioplethora.entity.ai.goals.ShachathQuickShootingGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPDamageSources;
@@ -51,11 +51,11 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimatable, IBioClassification, IMobCappedEntity {
-    private static final DataParameter<Boolean> DATA_IS_QUICKSHOOTING = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DATA_IS_CLONE = EntityDataManager.defineId(HeliobladeEntity.class, DataSerializers.BOOLEAN);
+public class ShachathEntity extends SummonableMonsterEntity implements IAnimatable, IBioClassification, IMobCappedEntity {
+    private static final DataParameter<Boolean> DATA_IS_QUICKSHOOTING = EntityDataManager.defineId(ShachathEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DATA_IS_CLONE = EntityDataManager.defineId(ShachathEntity.class, DataSerializers.BOOLEAN);
 
-    private final TranslationTextComponent cloneProgText = new TranslationTextComponent("bossbar.bioplethora.helioblade.clone_progress");
+    private final TranslationTextComponent cloneProgText = new TranslationTextComponent("bossbar.bioplethora.shachath.clone_progress");
 
     private final ServerBossInfo bossInfo = new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
     private final ServerBossInfo cloneProgress = new ServerBossInfo(cloneProgText, BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
@@ -65,7 +65,7 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
     public int cloneChargeTime;
     public int tpTimer;
 
-    public HeliobladeEntity(EntityType<? extends MonsterEntity> type, World world) {
+    public ShachathEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
         this.noCulling = true;
         this.tpTimer = 0;
@@ -96,12 +96,12 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<>(this, 0.75, 8));
         this.goalSelector.addGoal(1, new GeckoMeleeGoal<>(this, 20, 0.2, 0.3));
-        this.goalSelector.addGoal(2, new HeliobladeQuickShootingGoal(this));
-        this.goalSelector.addGoal(3, new HeliobladeCloningGoal(this));
+        this.goalSelector.addGoal(2, new ShachathQuickShootingGoal(this));
+        this.goalSelector.addGoal(3, new ShachathCloningGoal(this));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this, HeliobladeEntity.class).setAlertOthers());
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this, ShachathEntity.class).setAlertOthers());
         this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this));
 
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
@@ -112,7 +112,7 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "helioblade_controller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "shachath_controller", 0, this::predicate));
     }
 
     @Override
@@ -123,21 +123,21 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
     private <E extends IAnimatable>PlayState predicate(AnimationEvent<E> event) {
 
         if(this.isQuickShooting()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.helioblade.quick_shooting", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.quick_shooting", true));
             return PlayState.CONTINUE;
         }
 
         if(this.getAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.helioblade.attacking", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.attacking", true));
             return PlayState.CONTINUE;
         }
 
         if(event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.helioblade.running", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.running", true));
             return PlayState.CONTINUE;
         }
 
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.helioblade.idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.idle", true));
         return PlayState.CONTINUE;
     }
 
@@ -288,21 +288,21 @@ public class HeliobladeEntity extends SummonableMonsterEntity implements IAnimat
 
     @Override
     public net.minecraft.util.SoundEvent getAmbientSound() {
-        return BPSoundEvents.HELIOBLADE_IDLE.get();
+        return BPSoundEvents.SHACHATH_IDLE.get();
     }
 
     @Override
     public net.minecraft.util.SoundEvent getHurtSound(DamageSource damageSource) {
-        return BPSoundEvents.HELIOBLADE_HURT.get();
+        return BPSoundEvents.SHACHATH_HURT.get();
     }
 
     @Override
     public net.minecraft.util.SoundEvent getDeathSound() {
-        return BPSoundEvents.HELIOBLADE_DEATH.get();
+        return BPSoundEvents.SHACHATH_DEATH.get();
     }
 
     @Override
     public int getMaxDamageCap() {
-        return BPConfig.COMMON.heliobladeMobCap.get();
+        return BPConfig.COMMON.shachathMobCap.get();
     }
 }

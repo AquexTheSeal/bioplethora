@@ -59,7 +59,7 @@ public class BPCommonConfig {
 
     //Mob Caps
     public final ForgeConfigSpec.ConfigValue<Integer> altyrusMobCap;
-    public final ForgeConfigSpec.ConfigValue<Integer> heliobladeMobCap;
+    public final ForgeConfigSpec.ConfigValue<Integer> shachathMobCap;
     public final ForgeConfigSpec.ConfigValue<Integer> alphemKingMobCap;
 
     //Weapon Mechanics
@@ -158,7 +158,7 @@ public class BPCommonConfig {
         //Mob Cap Limits
         builder.push("Mob Damage Limits (Only applies if Mob Caps are enabled)");
         altyrusMobCap = builder.define("Damage Limit of the Altyrus", 40);
-        heliobladeMobCap = builder.define("Damage Limit of the Helioblade", 30);
+        shachathMobCap = builder.define("Damage Limit of the Shachath", 30);
         alphemKingMobCap = builder.define("Damage Limit of the Alphem King", 30);
         builder.pop();
     }

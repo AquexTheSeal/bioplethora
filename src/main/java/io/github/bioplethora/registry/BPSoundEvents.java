@@ -20,9 +20,9 @@ public class BPSoundEvents {
 
     public static final RegistryObject<SoundEvent> MYLIOTHAN_IDLE = SOUNDS.register("myliothan_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "myliothan_idle")));
     
-    public static final RegistryObject<SoundEvent> HELIOBLADE_IDLE = SOUNDS.register("helioblade_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "helioblade_idle")));
-    public static final RegistryObject<SoundEvent> HELIOBLADE_HURT = SOUNDS.register("helioblade_hurt", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "helioblade_hurt")));
-    public static final RegistryObject<SoundEvent> HELIOBLADE_DEATH = SOUNDS.register("helioblade_death", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "helioblade_death")));
+    public static final RegistryObject<SoundEvent> SHACHATH_IDLE = SOUNDS.register("shachath_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "shachath_idle")));
+    public static final RegistryObject<SoundEvent> SHACHATH_HURT = SOUNDS.register("shachath_hurt", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "shachath_hurt")));
+    public static final RegistryObject<SoundEvent> SHACHATH_DEATH = SOUNDS.register("shachath_death", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "shachath_death")));
 
     public static final RegistryObject<SoundEvent> ALTYRUS_IDLE = SOUNDS.register("altyrus_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_idle")));
     public static final RegistryObject<SoundEvent> ALTYRUS_CHARGE = SOUNDS.register("altyrus_charge", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_charge")));

@@ -119,7 +119,7 @@ public class BPClientRegister {
         //Hellsent
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHGOLEM.get(), BellophgolemEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.HELIOBLADE.get(), HeliobladeEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.SHACHATH.get(), ShachathEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.TELEMREYE.get(), TelemreyeEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.VOIDJAW.get(), VoidjawEntityRender::new);
 
