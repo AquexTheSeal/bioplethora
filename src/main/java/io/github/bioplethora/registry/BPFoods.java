@@ -15,4 +15,6 @@ public class BPFoods {
     public static final Food COOKED_FLENTAIR = new Food.Builder().nutrition(7).saturationMod(0.7F).meat().build();
     public static final Food RAW_MOSILE = new Food.Builder().nutrition(3).saturationMod(0.3F).meat().fast().build();
     public static final Food COOKED_MOSILE = new Food.Builder().nutrition(5).saturationMod(0.5F).meat().fast().build();
+    public static final Food RAW_JAWFLESH = new Food.Builder().nutrition(3).saturationMod(0.4F).meat().build();
+    public static final Food COOKED_JAWFLESH = new Food.Builder().nutrition(7).saturationMod(0.9F).meat().build();
 }

@@ -120,9 +120,9 @@
   "item.bioplethora.infernal_quarterstaff_base": "Infernal Quarterstaff Base",
   "item.bioplethora.infernal_quarterstaff_blade": "Infernal Quarterstaff Blade",
   "item.bioplethora.deactivated_infernal_quarterstaff": "Deactivated Infernal Quarterstaff",
-  "item.bioplethora.cryeanum_gaidius": "Cryeanum Gaidius",
-  "item.bioplethora.echo_gaidius": "Echo Gaidius",
-  "item.bioplethora.netherite_obsidian_gaidius": "Netherite Obsidian Gaidius",
+  "item.bioplethora.cryeanum_pearl": "Cryeanum Pearl",
+  "item.bioplethora.trapjaw_scales": "Trapjaw Scales",
+  "item.bioplethora.voidjaw_scales": "Voidjaw Scales",
 
   "item.bioplethora.green_grylynen_crystal": "Green Grylynen Crystal",
   "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
@@ -136,6 +136,8 @@
   "item.bioplethora.cooked_flentair": "Cooked Flentair",
   "item.bioplethora.raw_mosile": "Raw Mosile",
   "item.bioplethora.cooked_mosile": "Cooked Mosile",
+  "item.bioplethora.raw_jawflesh": "Raw Jawflesh",
+  "item.bioplethora.cooked_jawflesh": "Cooked Jawflesh",
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
   "item.bioplethora.bellophite_shield": "Bellophite Shield",
@@ -155,7 +157,9 @@
   "item.bioplethora.green_crystal_shield": "Green Crystal Shield",
   "item.bioplethora.yellow_crystal_shield": "Yellow Crystal Shield",
   "item.bioplethora.red_crystal_shield": "Red Crystal Shield",
-  "item.bioplethora.cryeanum_pearl": "Cryeanum Pearl",
+  "item.bioplethora.cryeanum_gaidius": "Cryeanum Gaidius",
+  "item.bioplethora.echo_gaidius": "Echo Gaidius",
+  "item.bioplethora.netherite_obsidian_gaidius": "Netherite Obsidian Gaidius",
 
   "item.bioplethora.alphanum_obliterator": "Alphanum Obliterator",
   "item.bioplethora.infernal_quarterstaff": "Infernal Quarterstaff",

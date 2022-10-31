@@ -30,6 +30,9 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
@@ -37,6 +40,7 @@ import net.minecraft.pathfinding.PathType;
 import net.minecraft.pathfinding.WalkNodeProcessor;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -54,6 +58,8 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class VoidjawEntity extends TrapjawEntity {
+
+    private static final DataParameter<Boolean> IS_SAVING = EntityDataManager.defineId(VoidjawEntity.class, DataSerializers.BOOLEAN);
     public boolean inWall;
     public int particleTime;
 
@@ -135,6 +141,20 @@ public class VoidjawEntity extends TrapjawEntity {
                 particleTime = 0;
             }
         }
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(IS_SAVING, false);
+    }
+
+    public boolean isSaving() {
+        return this.entityData.get(IS_SAVING);
+    }
+
+    public void setSaving(boolean saving) {
+        this.entityData.set(IS_SAVING, saving);
     }
 
     private boolean checkWalls(AxisAlignedBB pArea) {
@@ -296,6 +316,14 @@ public class VoidjawEntity extends TrapjawEntity {
         }
     }
 
+    @Override
+    public void move(MoverType pType, Vector3d pPos) {
+        super.move(pType, pPos);
+        if (this.isSaving() || !this.level.isEmptyBlock(this.blockPosition())) {
+            this.checkInsideBlocks();
+        }
+    }
+
     public class ChargeAttackGoal extends Goal {
         public ChargeAttackGoal() {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
@@ -375,11 +403,19 @@ public class VoidjawEntity extends TrapjawEntity {
             VoidjawEntity.this.getLookControl().setLookAt(VoidjawEntity.this.getOwner(), 10.0F, (float)VoidjawEntity.this.getMaxHeadXRot());
 
             if (VoidjawEntity.this.getOwner().fallDistance > 5.0F && VoidjawEntity.this.isSaddled() && !VoidjawEntity.this.isVehicle() && !VoidjawEntity.this.getOwner().isPassenger()) {
+                VoidjawEntity.this.setSaving(true);
+                VoidjawEntity.this.getOwner().playSound(SoundEvents.ELDER_GUARDIAN_HURT, 1.0F, 1.75F);
+                VoidjawEntity.this.playSound(VoidjawEntity.this.getHurtSound(DamageSource.GENERIC), 1.5F, 1.3F);
                 VoidjawEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y - 1, vector3d.z, 6D);
                 EffectUtils.addCircleParticleForm(VoidjawEntity.this.level, VoidjawEntity.this, ParticleTypes.CAMPFIRE_COSY_SMOKE, 15, 0.5, 0.01);
                 if (VoidjawEntity.this.getBoundingBox().intersects(VoidjawEntity.this.getOwner().getBoundingBox())) {
                     VoidjawEntity.this.getOwner().startRiding(VoidjawEntity.this);
+                    VoidjawEntity.this.getOwner().playSound(SoundEvents.ANVIL_PLACE, 1.0F, 1.0F);
+                    EffectUtils.addCircleParticleForm(VoidjawEntity.this.level, VoidjawEntity.this, ParticleTypes.FIREWORK, 30, 0.75, 0.105);
+                    VoidjawEntity.this.setSaving(false);
                 }
+            } else {
+                VoidjawEntity.this.setSaving(false);
             }
 
             if (--this.timeToRecalcPath <= 0) {

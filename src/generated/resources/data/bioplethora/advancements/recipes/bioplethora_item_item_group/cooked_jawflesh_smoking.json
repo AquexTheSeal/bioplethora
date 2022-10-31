@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bioplethora:cooked_jawflesh_smoking"
+    ]
+  },
+  "criteria": {
+    "has_raw_jawflesh": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:raw_jawflesh"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bioplethora:cooked_jawflesh_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_jawflesh",
+      "has_the_recipe"
+    ]
+  ]
+}

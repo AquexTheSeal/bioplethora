@@ -390,7 +390,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
 
     @Override
     public double getPassengersRidingOffset() {
-        return super.getPassengersRidingOffset() * 1.75;
+        return super.getPassengersRidingOffset() * (1.75 + (this.getOwner().getLookAngle().y / 100));
     }
 
     protected int getExperienceReward(PlayerEntity playerEntity) {

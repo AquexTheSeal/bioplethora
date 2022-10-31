@@ -63,6 +63,8 @@ public class BPItems {
     public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF_BLADE = ITEMS.register("infernal_quarterstaff_blade", () -> new Item(new Item.Properties().stacksTo(16).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> INFERNAL_QUARTERSTAFF_DEACTIVATED = ITEMS.register("deactivated_infernal_quarterstaff", () -> new Item(new Item.Properties().stacksTo(1).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> CRYEANUM_PEARL = ITEMS.register("cryeanum_pearl", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> TRAPJAW_SCALES = ITEMS.register("trapjaw_scales", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> VOIDJAW_SCALES = ITEMS.register("voidjaw_scales", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     // Vanilla mobs custom Weapons
     public static final RegistryObject<Item> PHANTOM_CHIME = ITEMS.register("phantom_chime", () -> new PhantomChimeItem(new Item.Properties().stacksTo(1).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
@@ -146,6 +148,8 @@ public class BPItems {
     public static final RegistryObject<Item> COOKED_FLENTAIR = ITEMS.register("cooked_flentair", () -> new Item(new Item.Properties().food(BPFoods.COOKED_FLENTAIR).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> RAW_MOSILE = ITEMS.register("raw_mosile", () -> new Item(new Item.Properties().food(BPFoods.RAW_MOSILE).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> COOKED_MOSILE = ITEMS.register("cooked_mosile", () -> new Item(new Item.Properties().food(BPFoods.COOKED_MOSILE).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> RAW_JAWFLESH = ITEMS.register("raw_jawflesh", () -> new Item(new Item.Properties().food(BPFoods.RAW_JAWFLESH).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> COOKED_JAWFLESH = ITEMS.register("cooked_jawflesh", () -> new Item(new Item.Properties().food(BPFoods.COOKED_JAWFLESH).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     // Plant Items
     public static  final RegistryObject<Item> SWIVELBLOOM = ITEMS.register("swivelbloom", () -> new Item(new Item.Properties().tab(BPItemGroup.BioplethoraItemItemGroup)));

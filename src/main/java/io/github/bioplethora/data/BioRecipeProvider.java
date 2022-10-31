@@ -45,6 +45,7 @@ public class BioRecipeProvider extends RecipeProvider {
         foodCooking(consumer, BPItems.RAW_CUTTLEFISH_MEAT.get(), BPItems.COOKED_CUTTLEFISH_MEAT.get(), 0.30F, 200);
         foodCooking(consumer, BPItems.RAW_FLENTAIR.get(), BPItems.COOKED_FLENTAIR.get(), 0.40F, 300);
         foodCooking(consumer, BPItems.RAW_MOSILE.get(), BPItems.COOKED_MOSILE.get(), 0.30F, 200);
+        foodCooking(consumer, BPItems.RAW_JAWFLESH.get(), BPItems.COOKED_JAWFLESH.get(), 0.40F, 300);
 
         // TOOLS
         toolSetHelper(consumer,  BPItems.FLEIGNARITE_SCALES.get(), BPItems.FLEIGNARITE_SCALES.get(),

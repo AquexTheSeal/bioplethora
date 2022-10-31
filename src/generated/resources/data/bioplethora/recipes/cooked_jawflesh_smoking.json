@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "bioplethora:raw_jawflesh"
+  },
+  "result": "bioplethora:cooked_jawflesh",
+  "experience": 0.4,
+  "cookingtime": 150
+}
