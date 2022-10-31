@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bioplethora:frostbite_metal_block"
+    }
+  ],
+  "result": {
+    "item": "bioplethora:frostbite_metal",
+    "count": 9
+  }
+}

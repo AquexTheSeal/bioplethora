@@ -1,0 +1,40 @@
+{
+  "parent": "bioplethora:bioplethora_startup",
+  "display": {
+    "icon": {
+      "item": "bioplethora:frostbite_golem_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.frostbite_golem_kill.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.frostbite_golem_kill.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "bioplethora:textures/block/frostbite_metal_core_block.png"
+  },
+  "criteria": {
+    "frostbite_golem": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "catType": "bioplethora:frostbite_golem"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "frostbite_golem"
+    ]
+  ]
+}

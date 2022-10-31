@@ -43,6 +43,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
@@ -485,6 +486,11 @@ public class ServerWorldEvents {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         RenderEventHelper.onPlayerTick(event);
+    }
+
+    @SubscribeEvent
+    public static void onCameraSetup(EntityViewRenderEvent.CameraSetup event) {
+        RenderEventHelper.onCameraSetup(event);
     }
 
     @SubscribeEvent

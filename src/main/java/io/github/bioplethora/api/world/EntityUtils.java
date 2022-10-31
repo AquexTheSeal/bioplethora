@@ -1,9 +1,11 @@
 package io.github.bioplethora.api.world;
 
+import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
@@ -28,6 +30,17 @@ public class EntityUtils {
             }
         };
     }
+
+    public static void shakeNearbyPlayersScreen(LivingEntity mob, int radius, int timeInTicks) {
+        double x = mob.getX(), y = mob.getY(), z = mob.getZ();
+        AxisAlignedBB area = new AxisAlignedBB(x - (radius / 2d), y, z - (radius / 2d), x + (radius / 2d), y + (radius / 2d), z + (radius / 2d));
+        World world = mob.level;
+
+        for (PlayerEntity entityIterator : world.getEntitiesOfClass(PlayerEntity.class, area)) {
+            ((IPlayerEntityMixin) entityIterator).setScreenShaking(timeInTicks);
+        }
+    }
+
 
     public static void knockbackAwayFromUser(float force, LivingEntity user, LivingEntity target) {
         target.knockback(force, MathHelper.sin(user.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(user.yRot * ((float) Math.PI / 180F)));

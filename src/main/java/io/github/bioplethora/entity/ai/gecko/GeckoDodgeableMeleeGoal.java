@@ -17,7 +17,7 @@ public class GeckoDodgeableMeleeGoal<E extends MobEntity> extends GeckoMeleeGoal
 
     @Override
     public boolean canContinueToUse() {
-        return isInAttackState;
+        return isInAttackState && this.entity.getTarget() != null;
     }
 
     @Override
@@ -28,7 +28,9 @@ public class GeckoDodgeableMeleeGoal<E extends MobEntity> extends GeckoMeleeGoal
 
     @Override
     public void stop() {
-        isInAttackState = false;
+        this.animationProgress = 0;
+        this.hasHit = false;
+        this.isInAttackState = false;
         super.stop();
     }
 

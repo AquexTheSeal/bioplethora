@@ -102,7 +102,7 @@ public class VoidjawEntity extends TrapjawEntity {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new SitGoal(this));
+        //this.goalSelector.addGoal(2, new SitGoal(this));
         this.goalSelector.addGoal(3, new VoidjawEntity.ChargeAttackGoal());
         this.goalSelector.addGoal(4, new VoidjawEntity.MoveRandomGoal());
         this.goalSelector.addGoal(4, new VoidjawMeleeGoal<>(this, 30, 0.5, 0.6));
@@ -292,9 +292,13 @@ public class VoidjawEntity extends TrapjawEntity {
         public void tick() {
             VoidjawEntity voidjaw = VoidjawEntity.this;
             if (voidjaw.isOrderedToSit() && !voidjaw.isInSittingPose()) {
-                VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().add(0, -2, 0));
+                VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().add(0, -0.25, 0));
+                VoidjawEntity.this.setInSittingPose(true);
+            } else if (!voidjaw.isOrderedToSit() && voidjaw.isInSittingPose()) {
+                VoidjawEntity.this.setDeltaMovement(VoidjawEntity.this.getDeltaMovement().add(0, 0.25, 0));
+                VoidjawEntity.this.setInSittingPose(false);
             }
-            if (this.operation == MovementController.Action.MOVE_TO && (!voidjaw.isVehicle()) && (!voidjaw.isInSittingPose())) {
+            if (this.operation == MovementController.Action.MOVE_TO && !voidjaw.isVehicle() && !voidjaw.isInSittingPose()) {
                 Vector3d vector3d = new Vector3d(this.wantedX - voidjaw.getX(), this.wantedY - voidjaw.getY(), this.wantedZ - voidjaw.getZ());
                 double d0 = vector3d.length();
                 if (d0 < voidjaw.getBoundingBox().getSize()) {
@@ -330,9 +334,12 @@ public class VoidjawEntity extends TrapjawEntity {
         }
 
         public boolean canUse() {
-            if (VoidjawEntity.this.getTarget() != null &&
-                    !VoidjawEntity.this.getMoveControl().hasWanted() &&
-                    VoidjawEntity.this.random.nextInt(3) == 0) {
+            if (VoidjawEntity.this.getOwner() != null) {
+                if (!(VoidjawEntity.this.distanceToSqr(VoidjawEntity.this.getOwner()) <= 1024D)) {
+                    return false;
+                }
+            }
+            if (VoidjawEntity.this.getTarget() != null && !VoidjawEntity.this.getMoveControl().hasWanted() && VoidjawEntity.this.random.nextInt(3) == 0) {
 
                 return VoidjawEntity.this.distanceToSqr(VoidjawEntity.this.getTarget()) > 2.0D;
             } else {
@@ -341,9 +348,12 @@ public class VoidjawEntity extends TrapjawEntity {
         }
 
         public boolean canContinueToUse() {
-            return VoidjawEntity.this.getMoveControl().hasWanted() &&
-                    VoidjawEntity.this.getTarget() != null &&
-                    VoidjawEntity.this.getTarget().isAlive();
+            if (VoidjawEntity.this.getOwner() != null) {
+                if (!(VoidjawEntity.this.distanceToSqr(VoidjawEntity.this.getOwner()) <= 1024D)) {
+                    return false;
+                }
+            }
+            return VoidjawEntity.this.getMoveControl().hasWanted() && VoidjawEntity.this.getTarget() != null && VoidjawEntity.this.getTarget().isAlive();
         }
 
         public void start() {
@@ -462,8 +472,7 @@ public class VoidjawEntity extends TrapjawEntity {
         }
 
         private boolean canTeleportTo(BlockPos pPos) {
-            PathNodeType pathnodetype = WalkNodeProcessor.getBlockPathTypeStatic(VoidjawEntity.this.level, pPos.mutable());
-            if (pathnodetype != PathNodeType.WALKABLE && pathnodetype != PathNodeType.WATER  && pathnodetype != PathNodeType.OPEN) {
+            if (!VoidjawEntity.this.level.isEmptyBlock(pPos)) {
                 return false;
             } else {
                 BlockPos blockpos = pPos.subtract(VoidjawEntity.this.blockPosition());

@@ -1,6 +1,8 @@
 package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.api.advancements.AdvancementUtils;
+import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
@@ -11,6 +13,7 @@ import io.github.bioplethora.entity.ai.goals.CopyTargetOwnerGoal;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -27,6 +30,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
@@ -170,6 +174,8 @@ public class FrostbiteGolemEntity extends SummonableMonsterEntity implements IAn
                 }
             }
         }
+
+        EntityUtils.shakeNearbyPlayersScreen(this, 28, 5);
     }
 
     public boolean doHurtTarget(Entity entity) {

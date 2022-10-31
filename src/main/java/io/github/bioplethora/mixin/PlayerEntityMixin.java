@@ -33,6 +33,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerE
     @Shadow public abstract CooldownTracker getCooldowns();
 
     private static final DataParameter<Boolean> ALPHANUM_CURSE = EntityDataManager.defineId(PlayerEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> SCREEN_SHAKING = EntityDataManager.defineId(PlayerEntity.class, DataSerializers.INT);
 
     //===========================================
     //          DUMMY CONSTRUCTOR
@@ -49,6 +50,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerE
     @Inject(at = @At("TAIL"), method = ("Lnet/minecraft/entity/player/PlayerEntity;defineSynchedData()V"))
     protected void defineSynchedData(CallbackInfo cbi) {
         this.entityData.define(ALPHANUM_CURSE, false);
+        this.entityData.define(SCREEN_SHAKING, 0);
+    }
+
+    @Inject(at = @At("TAIL"), method = ("tick"))
+    public void tick(CallbackInfo cbi) {
+        if (!this.level.isClientSide()) {
+            if (getScreenShaking() > 0) {
+                setScreenShaking(getScreenShaking() - 1);
+            }
+        }
     }
 
     @Override
@@ -59,6 +70,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerE
     @Override
     public void setAlphanumCurse(boolean value) {
         this.entityData.set(ALPHANUM_CURSE, value);
+    }
+
+    @Override
+    public int getScreenShaking() {
+        return this.entityData.get(SCREEN_SHAKING);
+    }
+
+    @Override
+    public void setScreenShaking(int value) {
+        this.entityData.set(SCREEN_SHAKING, value);
     }
 
     //===============================================

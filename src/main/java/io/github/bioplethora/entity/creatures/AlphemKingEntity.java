@@ -2,6 +2,7 @@ package io.github.bioplethora.entity.creatures;
 
 import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
 import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
@@ -338,6 +339,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             ((ServerWorld) world).sendParticles(ParticleTypes.POOF,areaPos.getX(), areaPos.getY(), areaPos.getZ(),
                     25, 0.45, 0.45, 0.45, 0.01);
         }
+
+        EntityUtils.shakeNearbyPlayersScreen(this, 32, 5);
     }
 
     public void phaseAttack2(World world) {
@@ -387,6 +390,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             ((ServerWorld) world).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, areaPos.getX(), areaPos.getY(), areaPos.getZ(),
                     75, 0.4, 1.5, 0.4, 0.001);
         }
+
+        EntityUtils.shakeNearbyPlayersScreen(this, 32, 10);
     }
 
     @Override

@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
@@ -26,31 +27,6 @@ public class RenderEventHelper {
     public static double curseAlpha;
 
     public static void onRenderingPlayer(RenderPlayerEvent event) {
-
-        if (event.getPlayer().getMainHandItem().getItem() instanceof InfernalQuarterstaffItem) {
-            //renderInfernalQuarterstaff(event);
-        }
-    }
-
-    public static void renderInfernalQuarterstaff(RenderPlayerEvent event) {
-        ClientPlayerEntity player = ((ClientPlayerEntity) event.getPlayer());
-        MatrixStack stack = event.getMatrixStack();
-        PlayerModel<AbstractClientPlayerEntity> model = event.getRenderer().getModel();
-
-        /*
-        model.rightArm.xRot = 55F; model.rightArm.yRot = 22.5F;
-
-        model.leftArm.setPos(-7F, 11F, -4F);
-        model.leftArm.xRot = -60F; model.leftArm.yRot = -17F; model.leftArm.zRot = -10F;
-
-        model.body.setPos(-4F, 11F, -6F);
-        model.body.xRot = -22.5F;
-
-        model.head.setPos(-4, 23, -10);
-
-         */
-
-        //event.getRenderer().render(player, player.yRot, event.getPartialRenderTick(), stack, event.getBuffers(), event.getLight());
     }
 
     public static void onRenderingOverlay(RenderGameOverlayEvent.Pre event) {
@@ -64,6 +40,21 @@ public class RenderEventHelper {
             if (EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(player)) {
                 renderAlphanumCurse(getWidth, getHeight);
             }
+        }
+    }
+
+    public static void onCameraSetup(EntityViewRenderEvent.CameraSetup event) {
+        PlayerEntity player = Minecraft.getInstance().player;
+        IPlayerEntityMixin playermx = (IPlayerEntityMixin) player;
+        float delta = Minecraft.getInstance().getFrameTime();
+        float ticksExistedDelta = player.tickCount + delta;
+        float shakeAmplitude;
+        if (playermx.getScreenShaking() > 0 && !Minecraft.getInstance().isPaused() && player.level.isClientSide()) {
+            shakeAmplitude = 0.05F;
+            event.setPitch((float) (event.getPitch() + shakeAmplitude * Math.cos(ticksExistedDelta * 3 + 2) * 25));
+            event.setYaw((float) (event.getYaw() + shakeAmplitude * Math.cos(ticksExistedDelta * 5 + 1) * 25));
+            event.setRoll((float) (event.getRoll() + shakeAmplitude * Math.cos(ticksExistedDelta * 4) * 25));
+            playermx.setScreenShaking(playermx.getScreenShaking() - 1);
         }
     }
 
