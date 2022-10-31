@@ -17,23 +17,23 @@
       "bioplethora:crephoxl_death"
     ]
   },
-  "bellophgolem_idle": {
-    "subtitle": "subtitles.bioplethora.bellophgolem.idle",
+  "frostbite_golem_idle": {
+    "subtitle": "subtitles.bioplethora.frostbite_golem.idle",
     "sounds": [
-      "bioplethora:bellophgolem_idle_0",
-      "bioplethora:bellophgolem_idle_1"
+      "bioplethora:frostbite_golem_idle_0",
+      "bioplethora:frostbite_golem_idle_1"
     ]
   },
-  "bellophgolem_hurt": {
-    "subtitle": "subtitles.bioplethora.bellophgolem.hurt",
+  "frostbite_golem_hurt": {
+    "subtitle": "subtitles.bioplethora.frostbite_golem.hurt",
     "sounds": [
-      "bioplethora:bellophgolem_hurt"
+      "bioplethora:frostbite_golem_hurt"
     ]
   },
-  "bellophgolem_death": {
-    "subtitle": "subtitles.bioplethora.bellophgolem.death",
+  "frostbite_golem_death": {
+    "subtitle": "subtitles.bioplethora.frostbite_golem.death",
     "sounds": [
-      "bioplethora:bellophgolem_death"
+      "bioplethora:frostbite_golem_death"
     ]
   },
   "myliothan_idle": {

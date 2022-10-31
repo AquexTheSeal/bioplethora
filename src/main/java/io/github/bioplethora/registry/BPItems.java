@@ -43,10 +43,10 @@ public class BPItems {
     public static final RegistryObject<Item> CREPHOXL_STICK = ITEMS.register("crephoxl_stick", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> NANDBRI_SCALES = ITEMS.register("nandbri_scales", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> NANDBRI_FANG = ITEMS.register("nandbri_fang", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
-    public static final RegistryObject<Item> BELLOPHITE = ITEMS.register("bellophite", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> BELLOPHITE = ITEMS.register("frostbite_metal", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> PEAGUIN_SCALES = ITEMS.register("peaguin_scales", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> ABYSSAL_SCALES = ITEMS.register("abyssal_scales", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
-    public static final RegistryObject<Item> BELLOPHITE_CORE_FRAGMENT = ITEMS.register("bellophite_core_fragment", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> BELLOPHITE_CORE_FRAGMENT = ITEMS.register("frostbite_metal_core_fragment", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> PRIMORDIAL_FRAGMENT = ITEMS.register("primordial_fragment", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> WINDPIECE = ITEMS.register("windpiece", () -> new Item(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> WINDY_ESSENCE = ITEMS.register("windy_essence", () -> new WindyEssenceItem(new Item.Properties().stacksTo(64).fireResistant().tab(BPItemGroup.BioplethoraItemItemGroup)));
@@ -72,8 +72,8 @@ public class BPItems {
 
     // Bioplethora mobs Weapons
     public static final RegistryObject<Item> CREPHOXL_HAMMER = ITEMS.register("crephoxl_hammer", () -> new CrephoxlHammerItem(ItemTier.NETHERITE, hellConfig ? 12 - BPItems.netheriteDMG : 10 - BPItems.netheriteDMG, -3.30f, new Item.Properties().fireResistant().rarity(BPRarityTypes.SACRED).durability(4508).tab(BPItemGroup.BioplethoraItemItemGroup)));
-    public static final RegistryObject<Item> BELLOPHITE_SHIELD = ITEMS.register("bellophite_shield", () -> new BellophiteShieldItem(new Item.Properties().fireResistant().rarity(BPRarityTypes.SACRED).durability(5000).tab(BPItemGroup.BioplethoraItemItemGroup)));
-    public static final RegistryObject<Item> BELLOPHITE_ARROW = ITEMS.register("bellophite_arrow", () -> new BellophiteArrowItem(new Item.Properties().fireResistant().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> BELLOPHITE_SHIELD = ITEMS.register("frostbite_metal_shield", () -> new FrostbiteMetalShieldItem(new Item.Properties().fireResistant().rarity(BPRarityTypes.SACRED).durability(5000).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> BELLOPHITE_ARROW = ITEMS.register("frostbite_metal_arrow", () -> new FrostbiteMetalArrowItem(new Item.Properties().fireResistant().rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> NANDBRIC_SHORTSWORD = ITEMS.register("nandbric_shortsword", () -> new NandbricShortswordItem(ItemTier.DIAMOND, 1, -2F, new Item.Properties().rarity(BPRarityTypes.SACRED).durability(964).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> STELLAR_SCYTHE = ITEMS.register("stellar_scythe", () -> new StellarScytheItem(ItemTier.NETHERITE, hellConfig ? 11 - BPItems.netheriteDMG : 9 - BPItems.netheriteDMG, -2.5f, new Item.Properties().fireResistant().rarity(BPRarityTypes.SACRED).durability(4508).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> ARBITRARY_BALLISTA = ITEMS.register("arbitrary_ballista", () -> new ArbitraryBallistaItem(new Item.Properties().fireResistant().rarity(BPRarityTypes.SACRED).durability(640).tab(BPItemGroup.BioplethoraItemItemGroup)));
@@ -186,7 +186,7 @@ public class BPItems {
 
     /** @HELLSENT **/
     public static final RegistryObject<Item> CREPHOXL_SPAWN_EGG = ITEMS.register("crephoxl_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.CREPHOXL, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
-    public static final RegistryObject<Item> BELLOPHGOLEM_SPAWN_EGG = ITEMS.register("bellophgolem_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.BELLOPHGOLEM, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> FROSTBITE_GOLEM_SPAWN_EGG = ITEMS.register("frostbite_golem_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.FROSTBITE_GOLEM, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> SHACHATH_SPAWN_EGG = ITEMS.register("shachath_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.SHACHATH, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> VOIDJAW_SPAWN_EGG = ITEMS.register("voidjaw_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.VOIDJAW, BPEntityClasses.HELLSENT, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
 

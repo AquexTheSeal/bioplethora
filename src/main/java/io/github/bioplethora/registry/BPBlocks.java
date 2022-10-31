@@ -30,9 +30,9 @@ public class BPBlocks {
 
     public static final RegistryObject<Block> NANDBRI_SCALE_BLOCK = registerBlock("nandbri_scale_block", () -> new Block(AbstractBlock.Properties.of(Material.WOOL, MaterialColor.COLOR_LIGHT_GRAY)
             .strength(0.8F, 0.8F).harvestTool(ToolType.AXE).harvestLevel(3).sound(SoundType.BONE_BLOCK)), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<Block> BELLOPHITE_BLOCK = registerFireResBlock("bellophite_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL).requiresCorrectToolForDrops()
+    public static final RegistryObject<Block> BELLOPHITE_BLOCK = registerFireResBlock("frostbite_metal_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL).requiresCorrectToolForDrops()
             .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHERITE_BLOCK).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<Block> BELLOPHITE_CORE_BLOCK = registerFireResBlock("bellophite_core_block", () -> new BellophiteCoreBlock(AbstractBlock.Properties.of(Material.GLASS)
+    public static final RegistryObject<Block> BELLOPHITE_CORE_BLOCK = registerFireResBlock("frostbite_metal_core_block", () -> new FrostbiteMetalCoreBlock(AbstractBlock.Properties.of(Material.GLASS)
             .strength(0.3F).sound(SoundType.GLASS).noOcclusion().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> GREEN_GRYLYNEN_CRYSTAL_BLOCK = registerFireResBlock("green_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS)

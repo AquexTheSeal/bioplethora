@@ -125,7 +125,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(6, new SwimGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FrostbiteGolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
     }
@@ -444,7 +444,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
     @Override
     public SoundEvent getAmbientSound() {
-        return BPSoundEvents.BELLOPHGOLEM_IDLE.get();
+        return BPSoundEvents.FROSTBITE_GOLEM_IDLE.get();
     }
 
     @Override

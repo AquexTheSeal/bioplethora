@@ -1,11 +1,11 @@
 {
   "name": "The Altyrus Altar",
-  "icon": "bioplethora:bellophite_core_block",
+  "icon": "bioplethora:frostbite_metal_core_block",
   "category": "others",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(l)INFORMATION: $(br)$()This is the Altyrus' Altar. This altar is used to summon the ultimate boss, which is the Altyrus. Building this altar requires a moderate amount of grinding with the Bellophgolems."
+      "text": "$(l)INFORMATION: $(br)$()This is the Altyrus' Altar. This altar is used to summon the ultimate boss, which is the Altyrus. Building this altar requires a moderate amount of grinding with the Frostbite Golems."
     },
     {
       "type": "patchouli:multiblock",
@@ -18,9 +18,9 @@
         ],
         "mapping": {
           " ": "ANY",
-          "0": "bioplethora:bellophite_block",
-          "B": "bioplethora:bellophite_block",
-          "A": "bioplethora:bellophite_core_block",
+          "0": "bioplethora:frostbite_metal_block",
+          "B": "bioplethora:frostbite_metal_block",
+          "A": "bioplethora:frostbite_metal_core_block",
           "X": "minecraft:chain[axis=x]",
           "Y": "minecraft:chain[axis=y]",
           "Z": "minecraft:chain[axis=z]"
@@ -29,7 +29,7 @@
         "offset"     : [0, 0, 0],
         "view_offset": [0, 0, 0]
       },
-      "text": "$(l)Requirements: $(br)$()x10 Bellophite Blocks, x1 Bellophite Core, x12 chains, x1 Bellophite (activator)"
+      "text": "$(l)Requirements: $(br)$()x10 Frostbite Metal Blocks, x1 Frostbite Metal Core, x12 chains, x1 Frostbite Metal (activator)"
     }
   ]
 }

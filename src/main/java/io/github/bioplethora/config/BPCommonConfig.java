@@ -51,7 +51,7 @@ public class BPCommonConfig {
 
     //Hellsent
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnCrephoxl;
-    public final ForgeConfigSpec.ConfigValue<Boolean> spawnBellophgolem;
+    public final ForgeConfigSpec.ConfigValue<Boolean> spawnFrostbiteGolem;
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnVoidjaw;
 
     //Elderia
@@ -145,7 +145,7 @@ public class BPCommonConfig {
         //Hellsent
         builder.push("Hellsent Mobs");
         spawnCrephoxl = builder.define("Enable mob spawning for Crephoxls", true);
-        spawnBellophgolem = builder.define("Enable mob spawning for Bellophgolems", true);
+        spawnFrostbiteGolem = builder.define("Enable mob spawning for FrostbiteGolems", true);
         spawnVoidjaw = builder.define("Enable mob spawning for Voidjaws", true);
         builder.pop();
 

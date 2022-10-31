@@ -36,7 +36,7 @@ public class BioEntityTagsProvider extends EntityTypeTagsProvider {
                 .add(BPEntities.ALPHEM.get())
                 .add(BPEntities.DWARF_MOSSADILE.get())
                 .add(BPEntities.GAUGALEM.get())
-                .add(BPEntities.BELLOPHGOLEM.get())
+                .add(BPEntities.FROSTBITE_GOLEM.get())
                 .add(BPEntities.WOODEN_GRYLYNEN.get())
                 .add(BPEntities.STONE_GRYLYNEN.get())
                 .add(BPEntities.GOLDEN_GRYLYNEN.get())
@@ -46,7 +46,7 @@ public class BioEntityTagsProvider extends EntityTypeTagsProvider {
                 .add(BPEntities.TRAPJAW.get())
         ;
         tag(BPTags.Entities.AUTOMATON_TYPE)
-                .add(BPEntities.BELLOPHGOLEM.get())
+                .add(BPEntities.FROSTBITE_GOLEM.get())
                 .add(BPEntities.ALTYRUS.get())
                 .add(BPEntities.ALPHEM_KING.get())
         ;

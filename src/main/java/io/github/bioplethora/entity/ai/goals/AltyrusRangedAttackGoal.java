@@ -4,7 +4,7 @@ import io.github.bioplethora.entity.SummonableMonsterEntity;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
-import io.github.bioplethora.entity.projectile.UltimateBellophiteClusterEntity;
+import io.github.bioplethora.entity.projectile.UltimateFrostbiteMetalClusterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -103,10 +103,10 @@ public class AltyrusRangedAttackGoal extends Goal {
                 double d2 = targetCandidates.getX() - (this.altyrus.getX() + vector3d.x * 4.0D);
                 double d3 = targetCandidates.getY(0.5D) - (0.5D + this.altyrus.getY(0.5D));
                 double d4 = targetCandidates.getZ() - (this.altyrus.getZ() + vector3d.z * 4.0D);
-                UltimateBellophiteClusterEntity ultimateBellophiteClusterEntity = new UltimateBellophiteClusterEntity(world, this.altyrus, d2, d3, d4);
-                ultimateBellophiteClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateBellophiteClusterEntity.getZ() + vector3d.z * 4.0D);
+                UltimateFrostbiteMetalClusterEntity ultimateFrostbiteMetalClusterEntity = new UltimateFrostbiteMetalClusterEntity(world, this.altyrus, d2, d3, d4);
+                ultimateFrostbiteMetalClusterEntity.setPos(this.altyrus.getX() + vector3d.x * 4.0D, this.altyrus.getY(0.5D) + 0.5D, ultimateFrostbiteMetalClusterEntity.getZ() + vector3d.z * 4.0D);
 
-                world.addFreshEntity(ultimateBellophiteClusterEntity);
+                world.addFreshEntity(ultimateFrostbiteMetalClusterEntity);
             }
         }
     }

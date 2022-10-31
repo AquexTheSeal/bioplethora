@@ -13,7 +13,7 @@ import io.github.bioplethora.event.helper.*;
 import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.AbyssalBladeItem;
-import io.github.bioplethora.item.weapons.BellophiteShieldItem;
+import io.github.bioplethora.item.weapons.FrostbiteMetalShieldItem;
 import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
 import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import io.github.bioplethora.network.BPNetwork;
@@ -200,8 +200,8 @@ public class ServerWorldEvents {
             };
 
             if (dmgEx[0] && dmgEx[1] && dmgEx[2] && dmgEx[3]) {
-                if (getItem instanceof BellophiteShieldItem) {
-                    ((BellophiteShieldItem) getItem).executeSkill(getUseItem, (LivingEntity) defendantEnt, defendantEnt.level);
+                if (getItem instanceof FrostbiteMetalShieldItem) {
+                    ((FrostbiteMetalShieldItem) getItem).executeSkill(getUseItem, (LivingEntity) defendantEnt, defendantEnt.level);
                 }
 
                 if (getItem instanceof GrylynenShieldBaseItem) {

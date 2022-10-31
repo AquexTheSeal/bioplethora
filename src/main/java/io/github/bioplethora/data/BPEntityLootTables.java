@@ -74,8 +74,8 @@ public class BPEntityLootTables extends EntityLootTables {
                         ))
         );
 
-        // Bellophgolem
-        add(BPEntities.BELLOPHGOLEM.get(), LootTable.lootTable()
+        // FrostbiteGolem
+        add(BPEntities.FROSTBITE_GOLEM.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(BPItems.BELLOPHITE.get())

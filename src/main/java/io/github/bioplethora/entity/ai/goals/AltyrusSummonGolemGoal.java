@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
-import io.github.bioplethora.entity.creatures.BellophgolemEntity;
+import io.github.bioplethora.entity.creatures.FrostbiteGolemEntity;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -42,26 +42,26 @@ public class AltyrusSummonGolemGoal extends Goal {
             if (this.summonTime == 400) {
                 BlockPos blockpos = this.altyrus.blockPosition();
 
-                BellophgolemEntity bellophgolemEntity = BPEntities.BELLOPHGOLEM.get().create(world);
-                bellophgolemEntity.moveTo(blockpos, 0.0F, 0.0F);
-                bellophgolemEntity.setOwner(this.altyrus);
-                bellophgolemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
+                FrostbiteGolemEntity frostbite_golemEntity = BPEntities.FROSTBITE_GOLEM.get().create(world);
+                frostbite_golemEntity.moveTo(blockpos, 0.0F, 0.0F);
+                frostbite_golemEntity.setOwner(this.altyrus);
+                frostbite_golemEntity.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
 
-                bellophgolemEntity.setHasLimitedLife(true);
-                bellophgolemEntity.setExplodeOnExpiry(true);
-                bellophgolemEntity.setLifeLimitBeforeDeath(200);
+                frostbite_golemEntity.setHasLimitedLife(true);
+                frostbite_golemEntity.setExplodeOnExpiry(true);
+                frostbite_golemEntity.setLifeLimitBeforeDeath(200);
 
-                serverworld.addFreshEntity(bellophgolemEntity);
+                serverworld.addFreshEntity(frostbite_golemEntity);
 
-                BellophgolemEntity bellophgolemEntity2 = BPEntities.BELLOPHGOLEM.get().create(world);
-                bellophgolemEntity2.moveTo(blockpos, 0.0F, 0.0F);
-                bellophgolemEntity2.setOwner(this.altyrus);
-                bellophgolemEntity2.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
+                FrostbiteGolemEntity frostbite_golemEntity2 = BPEntities.FROSTBITE_GOLEM.get().create(world);
+                frostbite_golemEntity2.moveTo(blockpos, 0.0F, 0.0F);
+                frostbite_golemEntity2.setOwner(this.altyrus);
+                frostbite_golemEntity2.finalizeSpawn(serverworld, world.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
 
-                bellophgolemEntity2.setHasLimitedLife(true);
-                bellophgolemEntity2.setExplodeOnExpiry(true);
-                bellophgolemEntity2.setLifeLimitBeforeDeath(200);
-                serverworld.addFreshEntity(bellophgolemEntity2);
+                frostbite_golemEntity2.setHasLimitedLife(true);
+                frostbite_golemEntity2.setExplodeOnExpiry(true);
+                frostbite_golemEntity2.setLifeLimitBeforeDeath(200);
+                serverworld.addFreshEntity(frostbite_golemEntity2);
 
                 this.summonTime = 0;
             }

@@ -1,6 +1,6 @@
 package io.github.bioplethora.mixin;
 
-import io.github.bioplethora.item.weapons.BellophiteShieldItem;
+import io.github.bioplethora.item.weapons.FrostbiteMetalShieldItem;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ public abstract class MobEntityMixin {
     @Inject(at = @At("HEAD"), method = ("maybeDisableShield"), cancellable = true)
     private void maybeDisableShield(PlayerEntity player, ItemStack attackerAxe, ItemStack defendantShield, CallbackInfo ci) {
 
-        if (defendantShield.getItem() instanceof BellophiteShieldItem) {
+        if (defendantShield.getItem() instanceof FrostbiteMetalShieldItem) {
             ci.cancel();
         }
     }

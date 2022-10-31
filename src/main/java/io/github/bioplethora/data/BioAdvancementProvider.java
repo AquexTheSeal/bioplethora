@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 public class BioAdvancementProvider extends AdvancementProvider {
 
     // TODO: 01/02/2022 W.I.P. Datagenerator
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Bioplethora.MOD_ID, "textures/block/bellophite_core_block.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Bioplethora.MOD_ID, "textures/block/frostbite_metal_core_block.png");
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
     private final DataGenerator datagen;
 
@@ -51,8 +51,8 @@ public class BioAdvancementProvider extends AdvancementProvider {
                 PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"))))).save(t, id("bioplethora_startup"));
 
         // ENTITY KILL
-        Advancement bellophgolemKill = entityKillAdvancement(BPEntities.BELLOPHGOLEM, BPItems.BELLOPHGOLEM_SPAWN_EGG, FrameType.GOAL, bioStartup, t);
-        Advancement altyrusKill = entityKillAdvancement(BPEntities.ALTYRUS, BPItems.ALTYRUS_SPAWN_EGG, FrameType.CHALLENGE, bellophgolemKill, t);
+        Advancement frostbite_golemKill = entityKillAdvancement(BPEntities.FROSTBITE_GOLEM, BPItems.FROSTBITE_GOLEM_SPAWN_EGG, FrameType.GOAL, bioStartup, t);
+        Advancement altyrusKill = entityKillAdvancement(BPEntities.ALTYRUS, BPItems.ALTYRUS_SPAWN_EGG, FrameType.CHALLENGE, frostbite_golemKill, t);
 
         Advancement alphemKill = entityKillAdvancement(BPEntities.ALPHEM, BPItems.ALPHEM_SPAWN_EGG, FrameType.TASK, bioStartup, t);
         Advancement alphemKingKill = entityKillAdvancement(BPEntities.ALPHEM_KING, BPItems.ALPHEM_KING_SPAWN_EGG, FrameType.CHALLENGE, alphemKill, t);

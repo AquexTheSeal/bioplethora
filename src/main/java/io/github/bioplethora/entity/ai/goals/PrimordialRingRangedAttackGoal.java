@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
-import io.github.bioplethora.entity.projectile.BellophiteClusterEntity;
+import io.github.bioplethora.entity.projectile.FrostbiteMetalClusterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundEvents;
@@ -50,7 +50,7 @@ public class PrimordialRingRangedAttackGoal extends Goal {
                     this.ring.level.playSound(null, this.ring.getX(), this.ring.getY(), this.ring.getZ(), SoundEvents.SHULKER_SHOOT, this.ring.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
                 }
 
-                BellophiteClusterEntity cluster = new BellophiteClusterEntity(world, this.ring, d1, d2, d3);
+                FrostbiteMetalClusterEntity cluster = new FrostbiteMetalClusterEntity(world, this.ring, d1, d2, d3);
                 cluster.setPos(this.ring.getX(), this.ring.getY(0.5D) + 0.5D, cluster.getZ());
                 world.addFreshEntity(cluster);
             }

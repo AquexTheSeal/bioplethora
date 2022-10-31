@@ -5,7 +5,7 @@ import io.github.bioplethora.entity.creatures.CuttlefishEntity;
 import io.github.bioplethora.entity.creatures.GaugalemEntity;
 import io.github.bioplethora.entity.creatures.MyliothanEntity;
 import io.github.bioplethora.entity.creatures.OnofishEntity;
-import io.github.bioplethora.entity.projectile.BellophiteArrowEntity;
+import io.github.bioplethora.entity.projectile.FrostbiteMetalArrowEntity;
 import io.github.bioplethora.entity.projectile.MagmaBombEntity;
 import io.github.bioplethora.entity.projectile.WindArrowEntity;
 import io.github.bioplethora.item.BioplethoraSpawnEggItem;
@@ -48,7 +48,7 @@ public class ModCommonRegister {
         });
         DispenserBlock.registerBehavior(BPItems.BELLOPHITE_ARROW.get(), new ProjectileDispenseBehavior() {
             protected ProjectileEntity getProjectile(World pLevel, IPosition pPosition, ItemStack pStack) {
-                BellophiteArrowEntity arrowentity = new BellophiteArrowEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
+                FrostbiteMetalArrowEntity arrowentity = new FrostbiteMetalArrowEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
                 arrowentity.pickup = AbstractArrowEntity.PickupStatus.ALLOWED;
                 return arrowentity;
             }

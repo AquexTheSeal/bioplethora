@@ -19,7 +19,7 @@ public class BPCompatJER {
         registerLoot(BPEntities.CREPHOXL.get().create(world), "loot_tables/entities/crephoxl.json");
         registerLoot(BPEntities.NANDBRI.get().create(world), "loot_tables/entities/nandbri.json");
         registerLoot(BPEntities.CUTTLEFISH.get().create(world), "loot_tables/entities/cuttlefish.json");
-        registerLoot(BPEntities.BELLOPHGOLEM.get().create(world), "loot_tables/entities/bellophgolem.json");
+        registerLoot(BPEntities.FROSTBITE_GOLEM.get().create(world), "loot_tables/entities/frostbite_golem.json");
         registerLoot(BPEntities.ALTYRUS.get().create(world), "loot_tables/entities/altyrus.json");
         registerLoot(BPEntities.PEAGUIN.get().create(world), "loot_tables/entities/alphanum_mausoleum.json");
     }

@@ -1,0 +1,16 @@
+{
+  "name": "Frostbite Metal Arrow",
+  "icon": "bioplethora:frostbite_metal_arrow",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:frostbite_metal_arrow",
+      "text": "$(l)DESCRIPTION: $(br)$()This arrow can destroy the target's enemies due to it's enormous damage and freezing area attack. This weapon is known to be crafted with the extremely rigid Frostbite Metal."
+    },
+    {
+      "type": "crafting",
+      "recipe":"bioplethora:frostbite_metal_arrow"
+    }
+  ]
+}

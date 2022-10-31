@@ -82,9 +82,9 @@ public class EntitySpawnManager {
         };
 
         public static final Consumer<MobSpawnInfoBuilder> TAIGA_ENTITIES = (builder) -> {
-            //Bellophgolem
-            if (BPConfig.COMMON.spawnBellophgolem.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
+            //FrostbiteGolem
+            if (BPConfig.COMMON.spawnFrostbiteGolem.get()) {
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.FROSTBITE_GOLEM.get(), 5 * spawnMultiplier, 1, 1));
             }
 
             //Crephoxl
@@ -100,9 +100,9 @@ public class EntitySpawnManager {
         };
 
         public static final Consumer<MobSpawnInfoBuilder> ICY_ENTITIES = (builder) -> {
-            //Bellophgolem
-            if (BPConfig.COMMON.spawnBellophgolem.get()) {
-                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.BELLOPHGOLEM.get(), 5 * spawnMultiplier, 1, 1));
+            //FrostbiteGolem
+            if (BPConfig.COMMON.spawnFrostbiteGolem.get()) {
+                builder.addSpawn(monster, new MobSpawnInfo.Spawners(BPEntities.FROSTBITE_GOLEM.get(), 5 * spawnMultiplier, 1, 1));
             }
 
             //Peaguin

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bioplethora:bellophite",
+          "name": "bioplethora:frostbite_metal",
           "functions": [
             {
               "function": "minecraft:set_count",

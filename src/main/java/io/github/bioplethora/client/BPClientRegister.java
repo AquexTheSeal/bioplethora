@@ -118,7 +118,7 @@ public class BPClientRegister {
 
         //Hellsent
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CREPHOXL.get(), CrephoxlEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHGOLEM.get(), BellophgolemEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.FROSTBITE_GOLEM.get(), FrostbiteGolemEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.SHACHATH.get(), ShachathEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.TELEMREYE.get(), TelemreyeEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.VOIDJAW.get(), VoidjawEntityRender::new);
@@ -132,10 +132,10 @@ public class BPClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.MAGMA_BOMB.get(), (rendererManager) -> new SpriteRenderer<>(rendererManager, mcClient.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.WINDY_ESSENCE.get(), (rendererManager) -> new SpriteRenderer<>(rendererManager, mcClient.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ABYSSAL_SCALES.get(), (rendererManager) -> new AbyssalScalesRenderer<>(rendererManager, mcClient.getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_CLUSTER.get(), BellophiteClusterRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_ARROW.get(), BellophiteArrowRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_CLUSTER.get(), FrostbiteMetalClusterRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_ARROW.get(), FrostbiteMetalArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.WINDBLAZE.get(), WindBlazeRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateBellophiteClusterRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateFrostbiteMetalClusterRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.VERMILION_BLADE_PROJECTILE.get(), VermilionBladeProjectileRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.WIND_ARROW.get(), WindArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CRYOBLAZE.get(), CryoblazeRender::new);
@@ -151,7 +151,7 @@ public class BPClientRegister {
 
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.PRIMORDIAL_RING.get(), PrimordialRingEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALTYRUS_SUMMONING.get(), AltyrusSummoningRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_SHIELD_WAVE.get(), BellophiteShieldWaveRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_SHIELD_WAVE.get(), FrostbiteMetalShieldWaveRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.GRYLYNEN_CORE_BOMB.get(), GrylynenCoreBombRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_SHARD.get(), AlphanumShardRender::new);
 
@@ -170,9 +170,9 @@ public class BPClientRegister {
 
     @SubscribeEvent
     public static void registerModels(final FMLClientSetupEvent event) {
-        //Bellophite Shield
+        //FrostbiteMetal Shield
         ItemModelsProperties.register(BPItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, clientWorld, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == itemStack ? 1.0F : 0.0F);
-        ItemModelsProperties.register(BPItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("charged"), (itemStack, clientWorld, entity) -> entity != null && ((BellophiteShieldItem) itemStack.getItem()).getCorePoints() == 3 ? 1.0F : 0.0F);
+        ItemModelsProperties.register(BPItems.BELLOPHITE_SHIELD.get(), new ResourceLocation("charged"), (itemStack, clientWorld, entity) -> entity != null && ((FrostbiteMetalShieldItem) itemStack.getItem()).getCorePoints() == 3 ? 1.0F : 0.0F);
 
         //Infernal Quarterstaff
         ItemModelsProperties.register(BPItems.INFERNAL_QUARTERSTAFF.get(), new ResourceLocation("reverse"), (itemStack, clientWorld, entity) -> entity != null && InfernalQuarterstaffItem.isReversed(itemStack) ? 1.0F : 0.0F);

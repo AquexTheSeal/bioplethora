@@ -44,7 +44,7 @@ public class BPEntityAttributes {
         //Hellsent
         event.put(BPEntities.SHACHATH.get(), ShachathEntity.setCustomAttributes().build());
         event.put(BPEntities.CREPHOXL.get(), CrephoxlEntity.setCustomAttributes().build());
-        event.put(BPEntities.BELLOPHGOLEM.get(), BellophgolemEntity.setCustomAttributes().build());
+        event.put(BPEntities.FROSTBITE_GOLEM.get(), FrostbiteGolemEntity.setCustomAttributes().build());
         event.put(BPEntities.TELEMREYE.get(), TelemreyeEntity.setCustomAttributes().build());
         event.put(BPEntities.VOIDJAW.get(), VoidjawEntity.setCustomAttributes().build());
 

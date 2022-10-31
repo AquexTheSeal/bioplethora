@@ -1,0 +1,16 @@
+{
+  "name": "Frostbite Golem",
+  "icon": "bioplethora:frostbite_golem_spawn_egg",
+  "category": "hellsent_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()The Frostbite Golems are one of the very dangerous monsters out there, they shoot out clusters that freezes and debuffs it's targets, and their smashes are very destructive. Heck, they can also go berserk when it has low health, making them a ton stronger and difficult to deal with."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:frostbite_golem",
+      "text": "Frostbite Golems usually spawn in cold forests or taigas."
+    }
+  ]
+}

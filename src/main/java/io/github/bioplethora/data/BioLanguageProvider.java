@@ -93,9 +93,9 @@ public class BioLanguageProvider extends LanguageProvider {
         add(mobSubtitlesFormat(BPEntities.CREPHOXL, "hurt"), "Crephoxl Hurts");
         add(mobSubtitlesFormat(BPEntities.CREPHOXL, "death"), "Crephoxl Dies");
 
-        add(mobSubtitlesFormat(BPEntities.BELLOPHGOLEM, "idle"), "Bellophgolem Grunts");
-        add(mobSubtitlesFormat(BPEntities.BELLOPHGOLEM, "hurt"), "Bellophgolem Hurts");
-        add(mobSubtitlesFormat(BPEntities.BELLOPHGOLEM, "death"), "Bellophgolem Dies");
+        add(mobSubtitlesFormat(BPEntities.FROSTBITE_GOLEM, "idle"), "FrostbiteGolem Grunts");
+        add(mobSubtitlesFormat(BPEntities.FROSTBITE_GOLEM, "hurt"), "FrostbiteGolem Hurts");
+        add(mobSubtitlesFormat(BPEntities.FROSTBITE_GOLEM, "death"), "FrostbiteGolem Dies");
 
         add(mobSubtitlesFormat(BPEntities.SHACHATH, "idle"), "Shachath Grunts");
         add(mobSubtitlesFormat(BPEntities.SHACHATH, "hurt"), "Shachath Hurts");
@@ -117,10 +117,10 @@ public class BioLanguageProvider extends LanguageProvider {
         addSkilledItem(BPItems.CREPHOXL_HAMMER, "deathsweep", "Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.");
         addSkilledItem(BPItems.CREPHOXL_HAMMER, "aerial_shockwave", "On right click on the ground, this weapon creates a damaging shockwave on block right-click position, dealing 9 damage to nearby entities & sending them flying into the air. 3-second cooldown.");
 
-        addSkilledItem(BPItems.BELLOPHITE_ARROW, "sharper_tip", "The Bellophgolem arrow deals more damage than the regular arrow.");
+        addSkilledItem(BPItems.BELLOPHITE_ARROW, "sharper_tip", "The FrostbiteGolem arrow deals more damage than the regular arrow.");
         addSkilledItem(BPItems.BELLOPHITE_ARROW, "core_energy", "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.");
 
-        addSkilledItem(BPItems.BELLOPHITE_SHIELD, "recovery_bulwark", "The Bellophite shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.");
+        addSkilledItem(BPItems.BELLOPHITE_SHIELD, "recovery_bulwark", "The FrostbiteMetal shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.");
         addSkilledItem(BPItems.BELLOPHITE_SHIELD, "core_impulse", "This shield stacks core points every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.");
 
         addManualSkilledItem(BPItems.ARBITRARY_BALLISTA, "heavy_duty_ballista", "Heavy-Duty Ballista", "This giant crossbow greatly enhances the shooting projectile's speed and power. When shooting, the crossbow causes a small explosion that recoils the user backwards.");
@@ -130,7 +130,7 @@ public class BioLanguageProvider extends LanguageProvider {
         // Armor/Weapon set tooltips
         addManualItemSkilledTooltip("fleignarite_weapon", "gooey_stun", "The fleignarite scales allows this weapon to slowly regenerate it's durability. When the target is hurt using this item, the fleignarite scales used for this item causes a quick stun that gives nausea and slowness for a short duration.");
 
-        addManualItemSkilledTooltip("reinforced_fleignarite_weapon", "deadly_blow", "The fleignarite scales allows this weapon to slowly regenerate it's durability. This weapon can cause a very damaging blow that deals extra damage which pierces armor and gives large amounts of debuffs every now and then thanks to it's bellophite attachment.");
+        addManualItemSkilledTooltip("reinforced_fleignarite_weapon", "deadly_blow", "The fleignarite scales allows this weapon to slowly regenerate it's durability. This weapon can cause a very damaging blow that deals extra damage which pierces armor and gives large amounts of debuffs every now and then thanks to it's frostbite_metal attachment.");
 
         add("item.bioplethora.ecoharmless_spawn_egg.desc", "ECOHARMLESS");
         add("item.bioplethora.plethoneutral_spawn_egg.desc", "PLETHONEUTRAL");

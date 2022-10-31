@@ -14,9 +14,9 @@ public class BPSoundEvents {
     public static final RegistryObject<SoundEvent> CREPHOXL_HURT = SOUNDS.register("crephoxl_hurt", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "crephoxl_hurt")));
     public static final RegistryObject<SoundEvent> CREPHOXL_DEATH = SOUNDS.register("crephoxl_death", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "crephoxl_death")));
     
-    public static final RegistryObject<SoundEvent> BELLOPHGOLEM_IDLE = SOUNDS.register("bellophgolem_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "bellophgolem_idle")));
-    public static final RegistryObject<SoundEvent> BELLOPHGOLEM_HURT = SOUNDS.register("bellophgolem_hurt", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "bellophgolem_hurt")));
-    public static final RegistryObject<SoundEvent> BELLOPHGOLEM_DEATH = SOUNDS.register("bellophgolem_death", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "bellophgolem_death")));
+    public static final RegistryObject<SoundEvent> FROSTBITE_GOLEM_IDLE = SOUNDS.register("frostbite_golem_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "frostbite_golem_idle")));
+    public static final RegistryObject<SoundEvent> FROSTBITE_GOLEM_HURT = SOUNDS.register("frostbite_golem_hurt", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "frostbite_golem_hurt")));
+    public static final RegistryObject<SoundEvent> FROSTBITE_GOLEM_DEATH = SOUNDS.register("frostbite_golem_death", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "frostbite_golem_death")));
 
     public static final RegistryObject<SoundEvent> MYLIOTHAN_IDLE = SOUNDS.register("myliothan_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "myliothan_idle")));
     

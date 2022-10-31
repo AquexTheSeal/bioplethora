@@ -1,0 +1,16 @@
+{
+  "name": "Frostbite Metal Shield",
+  "icon": "bioplethora:frostbite_metal_shield",
+  "category": "weapons",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bioplethora:frostbite_metal_shield",
+      "text": "$(l)DESCRIPTION: $(br)$()This shield is the ultimate weapon used against huge crowds, as it can eradicate them slowly with the core's power from the core attached to this shield. It is also known to be tough in terms of durability!"
+    },
+    {
+      "type": "crafting",
+      "recipe":"bioplethora:frostbite_metal_shield"
+    }
+  ]
+}

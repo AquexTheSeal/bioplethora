@@ -105,7 +105,7 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
         this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this));
 
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AltyrusEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BellophgolemEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FrostbiteGolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AlphemKingEntity.class, true));
     }
@@ -169,7 +169,7 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
             for (LivingEntity entityIterator : world.getEntitiesOfClass(LivingEntity.class, area)) {
 
                 if (entityIterator == this.getTarget()) {
-                    entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
+                    entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 1.5F);
                     ++this.tpTimer;
                     if (this.tpTimer == 40) {
                         this.teleportRandomly();
@@ -178,7 +178,7 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
                 }
                 if ((entityIterator instanceof MobEntity)) {
                     if (((MobEntity) entityIterator).getTarget() == this) {
-                        entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 3.5F);
+                        entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 1.5F);
                     }
                 }
             }

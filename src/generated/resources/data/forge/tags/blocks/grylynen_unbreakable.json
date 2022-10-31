@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "bioplethora:bellophite_block",
-    "bioplethora:bellophite_core_block",
+    "bioplethora:frostbite_metal_block",
+    "bioplethora:frostbite_metal_core_block",
     "minecraft:beacon",
     "minecraft:obsidian",
     "minecraft:crying_obsidian",

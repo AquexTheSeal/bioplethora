@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "bioplethora:item/bellophite_core_fragment"
-  }
-}

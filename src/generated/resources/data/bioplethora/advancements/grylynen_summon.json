@@ -14,7 +14,7 @@
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false,
-    "background": "bioplethora:textures/block/bellophite_core_block.png"
+    "background": "bioplethora:textures/block/frostbite_metal_core_block.png"
   },
   "criteria": {
     "grylynen_summon": {

@@ -253,7 +253,7 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
 
     @Override
     public SoundEvent getDeathSound() {
-        return BPSoundEvents.BELLOPHGOLEM_DEATH.get();
+        return BPSoundEvents.FROSTBITE_GOLEM_DEATH.get();
     }
 
     public SoundEvent getDodgeSound() {

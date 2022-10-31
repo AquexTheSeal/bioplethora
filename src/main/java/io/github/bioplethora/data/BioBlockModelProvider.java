@@ -25,8 +25,8 @@ public class BioBlockModelProvider extends BlockModelProvider {
      */
     @Override
     protected void registerModels() {
-        this.cubeAll("bellophite_block", bioResLoc("bellophite_block"));
-        this.cubeAll("bellophite_core_block", bioResLoc("bellophite_core_block"));
+        this.cubeAll("frostbite_metal_block", bioResLoc("frostbite_metal_block"));
+        this.cubeAll("frostbite_metal_core_block", bioResLoc("frostbite_metal_core_block"));
         this.cubeAll("nandbri_scale_block", bioResLoc("nandbri_scale_block"));
 
         this.cubeAll("mirestone", bioResLoc("mirestone"));

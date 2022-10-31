@@ -2,7 +2,7 @@
   "display": {
     "background": "minecraft:textures/block/stone.png",
     "icon": {
-      "item": "bioplethora:bellophite_core_block"
+      "item": "bioplethora:frostbite_metal_core_block"
     },
     "title": {
       "translate": "advancements.bioplethora.altyrus_summoning.title"
@@ -23,5 +23,5 @@
   "rewards": {
     "experience": 5
   },
-  "parent": "bioplethora:bellophite_core_block_obtain"
+  "parent": "bioplethora:frostbite_metal_core_block_obtain"
 }

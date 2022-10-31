@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "item": "bioplethora:frostbite_metal_arrow"
+    },
+    "title": {
+      "translate": "advancements.bioplethora.frostbite_metal_arrow_obtain.title"
+    },
+    "description": {
+      "translate": "advancements.bioplethora.frostbite_metal_arrow_obtain.desc"
+    },
+    "frame": "goal",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "frostbite_metal_arrow_obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bioplethora:frostbite_metal_arrow",
+            "count": {
+              "min": 1,
+              "max": 999999
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 1
+  },
+  "parent": "bioplethora:frostbite_golem_kill"
+}
