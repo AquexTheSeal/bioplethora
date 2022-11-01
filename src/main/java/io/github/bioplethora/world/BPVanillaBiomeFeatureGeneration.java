@@ -85,7 +85,7 @@ public class BPVanillaBiomeFeatureGeneration {
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
                 if (BPConfig.WORLDGEN.chorusLanternHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_HIGHLANDS_PATCH);
-                if (BPConfig.WORLDGEN.endSpikeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH);
+                if (BPConfig.WORLDGEN.endSpongeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH);
             }
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS)) {

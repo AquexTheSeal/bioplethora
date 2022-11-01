@@ -197,13 +197,13 @@ public class BPConfiguredFeatures {
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.0175F, 1))
             ));
 
-    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE = register("end_land_spike", BPFeatures.END_LAND_SPIKE.get()
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE = register("end_land_sponge", BPFeatures.END_LAND_SPONGE.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             ));
-    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_PATCH = register("end_land_spike_patch", Feature.RANDOM_SELECTOR
-            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPIKE.weighted(0.4446667F)), END_LAND_SPIKE))
-            .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpikeHighlandsAmount.get()).squared().count(2)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(4, 0.075F, 1))
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH = register("end_land_sponge_patch", Feature.RANDOM_SELECTOR
+            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE.weighted(0.4446667F)), END_LAND_SPONGE))
+            .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpongeHighlandsAmount.get()).squared().count(1)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.15F, 1))
             ));
 
     public static final ConfiguredFeature<?, ?> CHORUS_LANTERN_PLANT = register("chorus_lantern_plant", BPFeatures.SINGULAR_BLOCK.get()

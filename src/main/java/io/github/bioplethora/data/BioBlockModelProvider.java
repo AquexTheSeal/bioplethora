@@ -87,6 +87,14 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("blossoming_turquoise_pendent", bioResLoc("blossoming_turquoise_pendent"));
 
         // End Plants
+        this.cube("endurion",
+                mcResLoc("end_stone"),
+                bioResLoc("endurion_top"),
+                bioResLoc("endurion_side"),
+                bioResLoc("endurion_side"),
+                bioResLoc("endurion_side"),
+                bioResLoc("endurion_side")
+        );
         this.cube("irion",
                 bioResLoc("cryosoil"),
                 bioResLoc("irion_top"),

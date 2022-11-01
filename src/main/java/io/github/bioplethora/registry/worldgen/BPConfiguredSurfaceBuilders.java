@@ -21,6 +21,13 @@ public class BPConfiguredSurfaceBuilders {
                     Blocks.STONE.defaultBlockState() // Underwater Block
             )));
 
+    public static ConfiguredSurfaceBuilder<?> ENDURION_SURFACE = register("endurion",
+            SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
+                    BPBlocks.ENDURION.get().defaultBlockState(), // Surface Block
+                    Blocks.END_STONE.defaultBlockState(), // Underground Block
+                    Blocks.END_STONE.defaultBlockState() // Underwater Block
+            )));
+
     public static ConfiguredSurfaceBuilder<?> CRYEANUM_SURFACE = register("cryeanum",
             BPSurfaceBuilders.CARPETED.get().configured(new CarpetedSurfaceBuilderConfig(
                     BPBlocks.CRYEA.get().defaultBlockState(), // Surface Block

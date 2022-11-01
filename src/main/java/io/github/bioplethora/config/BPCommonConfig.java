@@ -23,6 +23,8 @@ public class BPCommonConfig {
     public final ForgeConfigSpec.ConfigValue<Boolean> announceAlphemKing;
     public final ForgeConfigSpec.ConfigValue<Boolean> alphemCurseOverlay;
 
+    public final ForgeConfigSpec.ConfigValue<Boolean> changeEndBiomeSurfaces;
+
     //Ecoharmless
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnCuttlefish;
 
@@ -96,13 +98,20 @@ public class BPCommonConfig {
 
         builder.push("Other Mechanics");
         grylynenIsOnlyHellmode = builder.define("Enable Grylynens only in hellmode?", true);
-        enableCustomModelPositions = builder.define("Should the player model change arm positions when holding specific items? (Has risk of crash)", true);
-        enableCustomModelAnimations = builder.define("Should the player model have custom animations when using specific items? (Has risk of crash)", true);
+        enableCustomModelPositions = builder.comment("Has risk of crash").define("Should the player model change arm positions when holding specific items?", true);
+        enableCustomModelAnimations = builder.comment("Has risk of crash").define("Should the player model have custom animations when using specific items?", true);
         allowMobCaps = builder.define("Should specific mobs, especially bosses, have a damage limit?", true);
         replaceCreativeTabBackground = builder.define("Replace the Bioplethora's creative tabs' background images with a custom one?", false);
         antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used on a single weapon together?", true);
         announceAlphemKing = builder.define("Announce the summon of the Alphem King to all players in the world?", true);
-        alphemCurseOverlay = builder.define("Enable the Alphem Curse overlay when fighting the Alphem King? (The overlay can conceal your health, hunger, and armor bars)", false);
+        alphemCurseOverlay = builder.comment("The overlay can conceal your health, hunger, and armor bars").define("Enable the Alphem Curse overlay when fighting the Alphem King", false);
+        builder.pop();
+
+        //======================================
+        //          BIOME MODIFICATIONS
+        //======================================
+        builder.push("Biome Modifications");
+        changeEndBiomeSurfaces = builder.comment("Suggested to disable only if you have other End mods that modify the vanilla End biomes").define("Modify surface for End Biomes?", true);
         builder.pop();
 
         //===================================

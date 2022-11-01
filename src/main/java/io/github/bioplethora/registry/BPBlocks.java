@@ -218,6 +218,8 @@ public class BPBlocks {
             AbstractBlock.Properties.of(Material.ICE, DyeColor.LIGHT_BLUE).strength(0.25F).sound(SoundType.GLASS).noCollission()), null, false);
 
     // End Blocks
+    public static final RegistryObject<Block> ENDURION = registerBlock("endurion", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_MAGENTA)
+            .strength(1.6F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> IRION = registerBlock("irion", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_LIGHT_BLUE)
             .strength(1.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> CRYOSOIL = registerBlock("cryosoil", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_BROWN)

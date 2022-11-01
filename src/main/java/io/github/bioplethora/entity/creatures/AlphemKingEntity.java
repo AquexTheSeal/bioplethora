@@ -59,7 +59,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     protected static final DataParameter<Boolean> BARRIERED = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> BERSERKED = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
 
-    private final ServerBossInfo bossInfo = new ServerBossInfo(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS);
+    private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS).setCreateWorldFog(true).setPlayBossMusic(true));
     private final AnimationFactory factory = new AnimationFactory(this);
     public boolean explodedOnDeath = false;
     public double healthRegenTimer = 0;
