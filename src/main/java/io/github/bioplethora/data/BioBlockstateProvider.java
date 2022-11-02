@@ -84,7 +84,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.FLOURISHED_SOUL_ETERN.get());
 
         // End Plants
-        this.mcWithSidesAndBottomBlock(BPBlocks.ENDURION.get(), Blocks.END_STONE);
+        this.simpleBlock(BPBlocks.ENDURION.get());
         this.withSidesAndBottomBlock(BPBlocks.IRION.get(), BPBlocks.CRYOSOIL.get());
         this.simpleBlock(BPBlocks.CRYOSOIL.get());
 

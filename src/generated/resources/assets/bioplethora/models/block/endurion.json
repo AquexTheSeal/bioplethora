@@ -1,12 +1,6 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "down": "minecraft:block/end_stone",
-    "up": "bioplethora:block/endurion_top",
-    "north": "bioplethora:block/endurion_side",
-    "south": "bioplethora:block/endurion_side",
-    "east": "bioplethora:block/endurion_side",
-    "west": "bioplethora:block/endurion_side",
-    "particle": "bioplethora:block/endurion_top"
+    "all": "bioplethora:block/endurion"
   }
 }

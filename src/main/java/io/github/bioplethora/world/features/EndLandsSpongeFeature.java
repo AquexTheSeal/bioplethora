@@ -1,8 +1,10 @@
 package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
+import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -13,21 +15,35 @@ import java.util.Random;
 
 public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
 
-    public EndLandsSpongeFeature(Codec<NoFeatureConfig> pCodec) {
+    final boolean isHighlands;
+
+    public EndLandsSpongeFeature(Codec<NoFeatureConfig> pCodec, boolean isHighlands) {
         super(pCodec);
+        this.isHighlands = isHighlands;
     }
 
     @Override
     public boolean place(ISeedReader world, ChunkGenerator chunkGen, Random rand, BlockPos pos, NoFeatureConfig config) {
 
-        if (rand.nextInt(3) != 1) return false;
+        if (isHighlands) {
+            if (rand.nextInt(3) != 1) return false;
 
-        this.placeSponge(5, 16, world, rand, pos);
-        this.placeSponge(2, 7, world, rand, pos.offset(-8 + rand.nextInt(5), -2, -8 + rand.nextInt(5)));
-        this.placeSponge(3, 9, world, rand, pos.offset(8 - rand.nextInt(6), -2, 8 - rand.nextInt(6)));
-        this.placeSponge(1, 8, world, rand, pos.offset(8 + rand.nextInt(4), -2, 8 + rand.nextInt(7)));
-        this.placeSponge(2, 7, world, rand, pos.offset(-8 - rand.nextInt(3), -2, -8 - rand.nextInt(8)));
-        return true;
+            this.placeSponge(4, 9, world, rand, pos);
+            this.placeSponge(2, 4, world, rand, pos.offset(-8 + rand.nextInt(5), -4, -8 + rand.nextInt(5)));
+            this.placeSponge(3, 3, world, rand, pos.offset(8 - rand.nextInt(6), -5, 8 - rand.nextInt(6)));
+            this.placeSponge(1, 4, world, rand, pos.offset(8 + rand.nextInt(4), -5, 8 + rand.nextInt(7)));
+            this.placeSponge(2, 5, world, rand, pos.offset(-8 - rand.nextInt(3), -4, -8 - rand.nextInt(8)));
+            return true;
+        } else {
+            if (rand.nextInt(2) != 1) return false;
+
+            this.placeSponge(7, 4, world, rand, pos);
+            this.placeSponge(4, 3, world, rand, pos.offset(-8 + rand.nextInt(5), -1, -8 + rand.nextInt(5)));
+            this.placeSponge(3, 2, world, rand, pos.offset(8 - rand.nextInt(6), 0, 8 - rand.nextInt(6)));
+            this.placeSponge(4, 2, world, rand, pos.offset(8 + rand.nextInt(4), 0, 8 + rand.nextInt(7)));
+            this.placeSponge(2, 2, world, rand, pos.offset(-8 - rand.nextInt(3), -1, -8 - rand.nextInt(8)));
+            return true;
+        }
     }
 
     public void placeSponge(int radius, int randomYHeight, ISeedReader world, Random rand, BlockPos pos) {
@@ -37,24 +53,33 @@ public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
             for (int sy = -yRand; sy <= yRand; sy++) {
                 radHelper += 0.5D;
                 radius = (int) Math.abs(radHelper);
-                addCircle(radius, world, rand, pos, sy, yRand);
+                addCircle(radius, world, rand, pos, sy, -yRand);
             }
         }
     }
 
-    public void addCircle(int radius, ISeedReader world, Random rand, BlockPos pos, int sy, int maxY) {
+    public void addCircle(int radius, ISeedReader world, Random rand, BlockPos pos, int sy, int minY) {
         for (int sx = -radius; sx <= radius; sx++) {
             for (int sz = -radius; sz <= radius; sz++) {
                 if (sx * sx + sz * sz <= radius * radius) {
                     BlockPos.Mutable newPos = pos.offset(sx, sy, sz).mutable();
-                    if (sy < maxY - 7) {
-                        if (sx * sx + sy * sy + sz * sz <= radius * 7) {
-                            setBlock(world, newPos, Blocks.WATER.defaultBlockState());
-                        } else {
-                            if (world.isEmptyBlock(newPos)) {
-                                setBlock(world, newPos, Blocks.END_STONE.defaultBlockState());
-                            }
+                    if (world.isEmptyBlock(newPos) || world.getBlockState(newPos).getBlock() instanceof LeavesBlock) {
+                        setBlock(world, newPos, BPBlocks.ENDURION.get().defaultBlockState());
+                    }
+                }
+            }
+        }
+        int rad2 = (radius - 1);
+        for (int sx = -rad2; sx <= rad2; sx++) {
+            for (int sz = -rad2; sz <= rad2; sz++) {
+                if (sx * sx + sz * sz <= rad2 * rad2) {
+                    BlockPos.Mutable newPos2 = pos.offset(sx, sy, sz).mutable();
+                    if (sy == minY) {
+                        if (world.isEmptyBlock(newPos2) || world.getBlockState(newPos2).getBlock() instanceof LeavesBlock) {
+                            setBlock(world, newPos2, BPBlocks.ENDURION.get().defaultBlockState());
                         }
+                    } else {
+                        setBlock(world, newPos2, Blocks.WATER.defaultBlockState());
                     }
                 }
             }
@@ -62,7 +87,7 @@ public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
     }
 
     public boolean checkPlacement(ISeedReader world, BlockPos pos) {
-        int checkRad = 2;
+        int checkRad = 1;
         for (int x = -checkRad; x < checkRad; x++) {
             for (int z = -checkRad; z < checkRad; z++) {
                 BlockPos.Mutable checkPos = pos.mutable().move(x, -1, z);
@@ -71,13 +96,14 @@ public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
                 }
             }
         }
-        for (int x = -1; x < 1; x++) {
-            for (int z = -1; z < 1; z++) {
+        for (int x = -3; x < 3; x++) {
+            for (int z = -3; z < 3; z++) {
                 if (!world.hasChunk(world.getChunk(pos).getPos().x + x, world.getChunk(pos).getPos().z + z)) {
                     return false;
                 }
             }
         }
-        return true;
+        return world.getBlockState(pos.offset(0, -1, 0)).getBlock() == Blocks.END_STONE ||
+                world.getBlockState(pos.offset(0, -1, 0)).getBlock() == BPBlocks.ENDURION.get();
     }
 }

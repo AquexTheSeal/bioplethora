@@ -188,22 +188,31 @@ public class BPConfiguredFeatures {
             ));
     public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_PLANT_PATCH = register("byrss_lantern_plant_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(BYRSS_LANTERN_PLANT.weighted(0.4222667F)), BYRSS_LANTERN_PLANT))
-            .range(85).squared().count(2)
+            .range(55).squared().count(2)
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.025F, 1))
             ));
     public static final ConfiguredFeature<?, ?> BYRSS_LANTERN_FOREST_PATCH = register("byrss_lantern_forest_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(BYRSS_LANTERN_PLANT.weighted(0.4446667F)), BYRSS_LANTERN_PLANT))
-            .range(110).squared().count(5)
+            .range(60).squared().count(5)
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.0175F, 1))
             ));
 
-    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE = register("end_land_sponge", BPFeatures.END_LAND_SPONGE.get()
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_HL = register("end_land_sponge_hl", BPFeatures.END_LAND_SPONGE_HL.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             ));
-    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH = register("end_land_sponge_patch", Feature.RANDOM_SELECTOR
-            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE.weighted(0.4446667F)), END_LAND_SPONGE))
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_HL = register("end_land_sponge_patch_hl", Feature.RANDOM_SELECTOR
+            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE_HL.weighted(0.4446667F)), END_LAND_SPONGE_HL))
             .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpongeHighlandsAmount.get()).squared().count(1)
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.15F, 1))
+            ));
+
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_ML = register("end_land_sponge_ml", BPFeatures.END_LAND_SPONGE_ML.get()
+            .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
+            ));
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_ML = register("end_land_sponge_patch_ml", Feature.RANDOM_SELECTOR
+            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE_ML.weighted(0.4446667F)), END_LAND_SPONGE_ML))
+            .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpongeMidlandsAmount.get()).squared().count(1)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.45F, 1))
             ));
 
     public static final ConfiguredFeature<?, ?> CHORUS_LANTERN_PLANT = register("chorus_lantern_plant", BPFeatures.SINGULAR_BLOCK.get()
@@ -212,12 +221,12 @@ public class BPConfiguredFeatures {
             ));
     public static final ConfiguredFeature<?, ?> CHORUS_LANTERN_HIGHLANDS_PATCH = register("chorus_lantern_highlands_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHORUS_LANTERN_PLANT.weighted(0.4022667F)), CHORUS_LANTERN_PLANT))
-            .range(BPConfig.WORLDGEN.chorusLanternHighlandsAmount.get()).squared().count(4)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.035F, 1))
+            .range(BPConfig.WORLDGEN.chorusLanternHighlandsAmount.get()).squared().count(2)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.035F, 1))
             ));
     public static final ConfiguredFeature<?, ?> CHORUS_LANTERN_MIDLANDS_PATCH = register("chorus_lantern_midlands_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHORUS_LANTERN_PLANT.weighted(0.4224447F)), CHORUS_LANTERN_PLANT))
-            .range(BPConfig.WORLDGEN.chorusLanternMidlandsAmount.get()).squared().count(3)
+            .range(BPConfig.WORLDGEN.chorusLanternMidlandsAmount.get()).squared().count(1)
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.035F, 1))
             ));
 

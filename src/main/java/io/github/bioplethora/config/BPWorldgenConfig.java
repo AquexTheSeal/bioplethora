@@ -21,6 +21,8 @@ public class BPWorldgenConfig {
 
     public final ForgeConfigSpec.ConfigValue<Boolean> endSpongeHighlands;
     public final ForgeConfigSpec.ConfigValue<Integer> endSpongeHighlandsAmount;
+    public final ForgeConfigSpec.ConfigValue<Boolean> endSpongeMidlands;
+    public final ForgeConfigSpec.ConfigValue<Integer> endSpongeMidlandsAmount;
 
     public final ForgeConfigSpec.ConfigValue<Boolean> chorusLanternMidlands;
     public final ForgeConfigSpec.ConfigValue<Integer> chorusLanternMidlandsAmount;
@@ -39,13 +41,16 @@ public class BPWorldgenConfig {
         cyraLakesEndAmount = builder.define(genAmount("Cyra Lakes", "End"), 60);
 
         chorusLanternHighlands = builder.define(shouldGen("Chorus Lantern Plants", "End Highlands"), true);
-        chorusLanternHighlandsAmount = builder.define(genAmount("Chorus Lantern Plants", "End Highlands"), 95);
+        chorusLanternHighlandsAmount = builder.define(genAmount("Chorus Lantern Plants", "End Highlands"), 65);
 
         endSpongeHighlands = builder.define(shouldGen("End Sponges", "End Highlands"), true);
         endSpongeHighlandsAmount = builder.define(genAmount("End Sponges", "End Highlands"), 3);
 
+        endSpongeMidlands = builder.define(shouldGen("End Sponges", "End Midlands"), true);
+        endSpongeMidlandsAmount = builder.define(genAmount("End Sponges", "End Midlands"), 5);
+
         chorusLanternMidlands = builder.define(shouldGen("Chorus Lantern Plants", "End Midlands"), true);
-        chorusLanternMidlandsAmount = builder.define(genAmount("Chorus Lantern Plants", "End Midlands"), 75);
+        chorusLanternMidlandsAmount = builder.define(genAmount("Chorus Lantern Plants", "End Midlands"), 55);
 
         endIcicleIslands = builder.define(shouldGen("End Icicles", "Small End Islands"), true);
         endIcicleIslandsAmount = builder.define(genAmount("End Icicles", "Small End Islands"), 10);

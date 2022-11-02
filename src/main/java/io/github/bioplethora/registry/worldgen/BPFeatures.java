@@ -27,7 +27,8 @@ public class BPFeatures {
     public static final RegistryObject<Feature<NBTFeatureConfig>> NBT_DRIVEN = FEATURES.register("nbt_driven", () -> new NBTFeature(NBTFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_ICICLE = FEATURES.register("end_icicle", () -> new EndIcicleFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_FROZEN_ISLAND = FEATURES.register("end_frozen_island", () -> new EndFrozenIslandFeature(NoFeatureConfig.CODEC));
-    public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPONGE = FEATURES.register("end_land_sponge", () -> new EndLandsSpongeFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPONGE_HL = FEATURES.register("end_land_sponge_hl", () -> new EndLandsSpongeFeature(NoFeatureConfig.CODEC, true));
+    public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPONGE_ML = FEATURES.register("end_land_sponge_ml", () -> new EndLandsSpongeFeature(NoFeatureConfig.CODEC, false));
 
     // Trees
     public static final RegistryObject<Feature<NoFeatureConfig>> ENIVILE_TREE = FEATURES.register("enivile_tree", () -> new EnivileTreeFeature(NoFeatureConfig.CODEC));
