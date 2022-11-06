@@ -95,6 +95,9 @@ public class BPBlockLootTables extends BlockLootTables {
         add(BPBlocks.IRION_GRASS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.IRION_GRASS.get()));
         add(BPBlocks.IRION_TALL_GRASS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.IRION_TALL_GRASS.get()));
 
+        add(BPBlocks.CHORUS_IDON.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CHORUS_IDON.get()));
+        add(BPBlocks.CHORUS_IDE_FAN.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CHORUS_IDE_FAN.get()));
+
         add(BPBlocks.CYRA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CYRA.get()));
 
         add(BPBlocks.AZURLIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.AZURLIA.get()));

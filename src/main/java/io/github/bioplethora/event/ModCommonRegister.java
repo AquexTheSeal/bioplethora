@@ -1,10 +1,7 @@
 package io.github.bioplethora.event;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.entity.creatures.CuttlefishEntity;
-import io.github.bioplethora.entity.creatures.GaugalemEntity;
-import io.github.bioplethora.entity.creatures.MyliothanEntity;
-import io.github.bioplethora.entity.creatures.OnofishEntity;
+import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.entity.projectile.FrostbiteMetalArrowEntity;
 import io.github.bioplethora.entity.projectile.MagmaBombEntity;
 import io.github.bioplethora.entity.projectile.WindArrowEntity;
@@ -14,9 +11,7 @@ import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.ProjectileDispenseBehavior;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -27,6 +22,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(modid = Bioplethora.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModCommonRegister {
@@ -40,21 +36,21 @@ public class ModCommonRegister {
     public static void registerDispenserBehaviors(FMLCommonSetupEvent event) {
 
         DispenserBlock.registerBehavior(BPItems.WIND_ARROW.get(), new ProjectileDispenseBehavior() {
-            protected ProjectileEntity getProjectile(World pLevel, IPosition pPosition, ItemStack pStack) {
+            protected @NotNull ProjectileEntity getProjectile(@NotNull World pLevel, @NotNull IPosition pPosition, @NotNull ItemStack pStack) {
                 WindArrowEntity arrowentity = new WindArrowEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
                 arrowentity.pickup = AbstractArrowEntity.PickupStatus.ALLOWED;
                 return arrowentity;
             }
         });
         DispenserBlock.registerBehavior(BPItems.BELLOPHITE_ARROW.get(), new ProjectileDispenseBehavior() {
-            protected ProjectileEntity getProjectile(World pLevel, IPosition pPosition, ItemStack pStack) {
+            protected @NotNull ProjectileEntity getProjectile(@NotNull World pLevel, @NotNull IPosition pPosition, @NotNull ItemStack pStack) {
                 FrostbiteMetalArrowEntity arrowentity = new FrostbiteMetalArrowEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
                 arrowentity.pickup = AbstractArrowEntity.PickupStatus.ALLOWED;
                 return arrowentity;
             }
         });
         DispenserBlock.registerBehavior(BPItems.MAGMA_BOMB.get(), new ProjectileDispenseBehavior() {
-            protected ProjectileEntity getProjectile(World pLevel, IPosition pPosition, ItemStack pStack) {
+            protected @NotNull ProjectileEntity getProjectile(@NotNull World pLevel, @NotNull IPosition pPosition, @NotNull ItemStack pStack) {
                 return Util.make(new MagmaBombEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z()), (p_218408_1_) -> {
                 });
             }

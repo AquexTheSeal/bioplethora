@@ -175,7 +175,7 @@ public class EntitySpawnManager {
             createSpawn(builder, monster, BPEntities.ONOFISH, 6, 1, 2, BPConfig.COMMON.spawnOnofish);
 
             //Voidjaw
-            createSpawn(builder, monster, BPEntities.VOIDJAW, 3, 1, 1, BPConfig.COMMON.spawnOnofish);
+            createSpawn(builder, monster, BPEntities.VOIDJAW, 3, 1, 1, BPConfig.COMMON.spawnVoidjaw);
         };
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {

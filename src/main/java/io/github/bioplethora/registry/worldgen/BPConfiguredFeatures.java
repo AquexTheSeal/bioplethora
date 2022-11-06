@@ -127,6 +127,15 @@ public class BPConfiguredFeatures {
     ).count(13).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))
     ));
 
+    public static final ConfiguredFeature<?, ?> CHORUS_IDON = register("chorus_idon", makeDecoratedClusterPlants(
+            new DefaultFlowersFeature(BlockClusterFeatureConfig.CODEC), BPBlocks.CHORUS_IDON.get(), new SimpleBlockPlacer(), 32
+    ));
+
+    public static final ConfiguredFeature<?, ?> CHORUS_IDE_FAN = register("chorus_ide_fan", makeNoProjectionClusterPlants(
+            Feature.RANDOM_PATCH, BPBlocks.CHORUS_IDE_FAN.get(), new IdeFanBlockPlacer()
+    ).count(12).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 4, 7))
+    ));
+
     public static final ConfiguredFeature<?, ?> ARTAIRIUS = register("artairius", makeNoProjectionClusterPlants(
             Feature.RANDOM_PATCH, BPBlocks.ARTAIRIUS.get(), new DoublePlantBlockPlacer()
     ).count(8).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))
@@ -212,7 +221,25 @@ public class BPConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_ML = register("end_land_sponge_patch_ml", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE_ML.weighted(0.4446667F)), END_LAND_SPONGE_ML))
             .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpongeMidlandsAmount.get()).squared().count(1)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.45F, 1))
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.45F, 2))
+            ));
+
+    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_HL = register("end_land_spike_hl", BPFeatures.END_LAND_SPIKE_HL.get()
+            .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
+            ));
+    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_PATCH_HL = register("end_land_spike_patch_hl", Feature.RANDOM_SELECTOR
+            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPIKE_HL.weighted(0.4446667F)), END_LAND_SPIKE_HL))
+            .range(BPConfig.WORLDGEN.endSpikeHighlandsAmount.get()).squared().count(13)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(3, 0.15F, 3))
+            ));
+
+    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_ML = register("end_land_spike_ml", BPFeatures.END_LAND_SPIKE_ML.get()
+            .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
+            ));
+    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_PATCH_ML = register("end_land_spike_patch_ml", Feature.RANDOM_SELECTOR
+            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPIKE_ML.weighted(0.4446667F)), END_LAND_SPIKE_ML))
+            .range(BPConfig.WORLDGEN.endSpikeMidlandsAmount.get()).squared().count(11)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.45F, 3))
             ));
 
     public static final ConfiguredFeature<?, ?> CHORUS_LANTERN_PLANT = register("chorus_lantern_plant", BPFeatures.SINGULAR_BLOCK.get()

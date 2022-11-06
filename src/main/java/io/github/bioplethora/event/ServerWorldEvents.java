@@ -502,4 +502,9 @@ public class ServerWorldEvents {
     public static void onRenderingOverlay(RenderGameOverlayEvent.Pre event) {
         RenderEventHelper.onRenderingOverlay(event);
     }
+
+    @SubscribeEvent
+    public static void onFogDensity(EntityViewRenderEvent.FogDensity event) {
+        RenderEventHelper.onFogDensity(event);
+    }
 }

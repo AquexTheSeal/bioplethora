@@ -3,51 +3,20 @@ package io.github.bioplethora.particles;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Random;
+
 @OnlyIn(Dist.CLIENT)
-public class NightGazeParticle extends SpriteTexturedParticle {
+public class NightGazeParticle extends RisingParticle {
 
-    private final IAnimatedSprite sprites;
-
-    private NightGazeParticle(ClientWorld clientWorld, double p_i232384_2_, double p_i232384_4_, double p_i232384_6_, double p_i232384_8_, double p_i232384_10_, double p_i232384_12_, IAnimatedSprite sprite) {
-        super(clientWorld, p_i232384_2_, p_i232384_4_, p_i232384_6_);
-        this.sprites = sprite;
-        this.lifetime = 20;
-        float f = 1.0F;
-        this.rCol = f;
-        this.gCol = f;
-        this.bCol = f;
-        this.xd = p_i232384_8_ + (Math.random() * 2.0D - 1.0D) * (double)0.05F;
-        this.yd = p_i232384_10_ + (Math.random() * 2.0D - 1.0D) * (double)0.05F;
-        this.zd = p_i232384_12_ + (Math.random() * 2.0D - 1.0D) * (double)0.05F;
-        this.quadSize = 0.5F;
-        this.setSpriteFromAge(sprite);
-    }
-
-    public int getLightColor(float pPartialTick) {
-        return 15728880;
-    }
-
-    public void tick() {
-        this.xo = this.x;
-        this.yo = this.y;
-        this.zo = this.z;
-        if (this.age++ >= this.lifetime) {
-            this.remove();
-        } else {
-            this.setSpriteFromAge(this.sprites);
-            this.yd += 0.004D;
-            this.move(this.xd, this.yd, this.zd);
-            this.xd *= 0.9F;
-            this.yd *= 0.9F;
-            this.zd *= 0.9F;
-            if (this.onGround) {
-                this.xd *= 0.7F;
-                this.zd *= 0.7F;
-            }
-        }
+    protected NightGazeParticle(ClientWorld pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, float pQuadSizeMultiplier, IAnimatedSprite pSprites) {
+        super(pLevel, pX, pY, pZ, 0.1F, -0.1F, 0.1F, pXSpeed, pYSpeed, pZSpeed, pQuadSizeMultiplier, pSprites, 0.0F, 20, -5.0E-4D, false);
+        this.rCol = 0.7294118F;
+        this.gCol = 0.69411767F;
+        this.bCol = 0.7607843F;
     }
 
     public IParticleRenderType getRenderType() {
@@ -63,9 +32,11 @@ public class NightGazeParticle extends SpriteTexturedParticle {
         }
 
         public Particle createParticle(BasicParticleType pType, ClientWorld pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            NightGazeParticle nightGazeParticle = new NightGazeParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, this.sprites);
-            nightGazeParticle.setColor(1.0f, 1.0f, 1.0f);
-            return nightGazeParticle;
+            Random random = pLevel.random;
+            double d0 = (double)random.nextFloat() * -1.9D * (double)random.nextFloat() * 0.1D;
+            double d1 = (double)random.nextFloat() * -0.5D * (double)random.nextFloat() * 0.1D * 5.0D;
+            double d2 = (double)random.nextFloat() * -1.9D * (double)random.nextFloat() * 0.1D;
+            return new NightGazeParticle(pLevel, pX, pY, pZ, d0, d1, d2, 0.75F, this.sprites);
         }
     }
 }

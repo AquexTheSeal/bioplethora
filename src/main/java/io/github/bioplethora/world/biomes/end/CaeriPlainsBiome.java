@@ -19,6 +19,6 @@ public class CaeriPlainsBiome {
         biomeGenSettings.addStructureStart(StructureFeatures.END_CITY);
         biomeGenSettings.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Features.END_GATEWAY);
 
-        return BPBiomeSettings.baseEndBiome(biomeGenSettings);
+        return BPBiomeSettings.caeriEndBiome(biomeGenSettings);
     }
 }

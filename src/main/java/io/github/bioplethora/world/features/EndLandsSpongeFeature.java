@@ -2,11 +2,18 @@ package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
 import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.worldgen.BPBiomes;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.client.Minecraft;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -26,32 +33,27 @@ public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
     public boolean place(ISeedReader world, ChunkGenerator chunkGen, Random rand, BlockPos pos, NoFeatureConfig config) {
 
         if (isHighlands) {
-            if (rand.nextInt(3) != 1) return false;
-
-            this.placeSponge(4, 9, world, rand, pos);
-            this.placeSponge(2, 4, world, rand, pos.offset(-8 + rand.nextInt(5), -4, -8 + rand.nextInt(5)));
-            this.placeSponge(3, 3, world, rand, pos.offset(8 - rand.nextInt(6), -5, 8 - rand.nextInt(6)));
-            this.placeSponge(1, 4, world, rand, pos.offset(8 + rand.nextInt(4), -5, 8 + rand.nextInt(7)));
-            this.placeSponge(2, 5, world, rand, pos.offset(-8 - rand.nextInt(3), -4, -8 - rand.nextInt(8)));
-            return true;
+            this.placeSponge(14, 15, world, rand, pos);
+            this.placeSponge(8, 7, world, rand, pos.offset(-6 + rand.nextInt(5), -(8 - rand.nextInt(3)), -8 + rand.nextInt(5)));
+            this.placeSponge(7, 5, world, rand, pos.offset(6 - rand.nextInt(6), -(5 - rand.nextInt(2)), 8 - rand.nextInt(6)));
+            this.placeSponge(6, 7, world, rand, pos.offset(6 + rand.nextInt(4), -(5 - rand.nextInt(3)), 8 + rand.nextInt(7)));
+            this.placeSponge(8, 5, world, rand, pos.offset(-6 - rand.nextInt(3), -(8 - rand.nextInt(3)), -8 - rand.nextInt(8)));
         } else {
-            if (rand.nextInt(2) != 1) return false;
-
-            this.placeSponge(7, 4, world, rand, pos);
-            this.placeSponge(4, 3, world, rand, pos.offset(-8 + rand.nextInt(5), -1, -8 + rand.nextInt(5)));
-            this.placeSponge(3, 2, world, rand, pos.offset(8 - rand.nextInt(6), 0, 8 - rand.nextInt(6)));
-            this.placeSponge(4, 2, world, rand, pos.offset(8 + rand.nextInt(4), 0, 8 + rand.nextInt(7)));
-            this.placeSponge(2, 2, world, rand, pos.offset(-8 - rand.nextInt(3), -1, -8 - rand.nextInt(8)));
-            return true;
+            this.placeSponge(18, 5, world, rand, pos);
+            this.placeSponge(12, 2, world, rand, pos.offset(-8 + rand.nextInt(5), -(1 + rand.nextInt(3)), -8 + rand.nextInt(5)));
+            this.placeSponge(10, 3, world, rand, pos.offset(8 - rand.nextInt(6), -(1 + rand.nextInt(2)), 8 - rand.nextInt(6)));
+            this.placeSponge(12, 2, world, rand, pos.offset(8 + rand.nextInt(4), -(2 + rand.nextInt(1)), 8 + rand.nextInt(7)));
+            this.placeSponge(10, 3, world, rand, pos.offset(-8 - rand.nextInt(3), -(2 + rand.nextInt(2)), -8 - rand.nextInt(8)));
         }
+        return true;
     }
 
     public void placeSponge(int radius, int randomYHeight, ISeedReader world, Random rand, BlockPos pos) {
         if (checkPlacement(world, pos)) {
             int yRand = 4 + rand.nextInt(randomYHeight);
             double radHelper = radius;
-            for (int sy = -yRand; sy <= yRand; sy++) {
-                radHelper += 0.5D;
+            for (int sy = -yRand; sy <= 0; sy++) {
+                radHelper -= 0.5D;
                 radius = (int) Math.abs(radHelper);
                 addCircle(radius, world, rand, pos, sy, -yRand);
             }
@@ -96,14 +98,14 @@ public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
                 }
             }
         }
-        for (int x = -3; x < 3; x++) {
-            for (int z = -3; z < 3; z++) {
-                if (!world.hasChunk(world.getChunk(pos).getPos().x + x, world.getChunk(pos).getPos().z + z)) {
+        if (BPBiomes.getKey(world.getBiome(pos)) == Biomes.SMALL_END_ISLANDS) {
+            for (int y = -7; y < 0; y++) {
+                if (world.getBlockState(pos.offset(0, y, 0)).isAir()) {
                     return false;
                 }
             }
         }
-        return world.getBlockState(pos.offset(0, -1, 0)).getBlock() == Blocks.END_STONE ||
-                world.getBlockState(pos.offset(0, -1, 0)).getBlock() == BPBlocks.ENDURION.get();
+        return (world.getBlockState(pos.offset(0, -1, 0)).getBlock() == Blocks.END_STONE ||
+                world.getBlockState(pos.offset(0, -1, 0)).getBlock() == BPBlocks.ENDURION.get());
     }
 }

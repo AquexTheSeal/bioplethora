@@ -5,6 +5,9 @@
   "refmap": "bioplethora.refmap.json",
   "mixins": [
     "AbstractArrowEntityMixin",
+    "ChorusFlowerBlockMixin",
+    "ChorusPlantBlockMixin",
+    "ChorusPlantFeatureMixin",
     "DimensionGeneratorSettingsMixin",
     "DimensionTypeMixin",
     "ItemEntityMixin",

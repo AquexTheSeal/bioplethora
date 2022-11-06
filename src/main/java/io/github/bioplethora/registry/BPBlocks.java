@@ -198,6 +198,11 @@ public class BPBlocks {
     public static final RegistryObject<Block> IRION_TALL_GRASS = registerBlock("irion_tall_grass", () -> new BPDoublePlantBlock(BioPlantType.CAERI, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.IRION_GRASS.get()).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
+    public static final RegistryObject<Block> CHORUS_IDON = registerBlock("chorus_idon", () -> new BPPlantBlock(BioPlantType.CHORUS, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).lightLevel(b -> 7).emissiveRendering((a, b, c) -> true).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> CHORUS_IDE_FAN = registerBlock("chorus_ide_fan", () -> new BPIdeFanBlock(BioPlantType.CHORUS, BioPlantShape.IDE_FAN,
+            AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().lightLevel(b -> b.getValue(BPIdeFanBlock.BUDDED) ? 2 : 4).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
     public static final RegistryObject<Block> AZURLIA = registerBlock("azurlia", () -> new BPReversePlantBlock(BioPlantType.CAERULWOOD_TREE, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 12).noCollission().emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 

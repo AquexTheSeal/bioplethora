@@ -83,17 +83,32 @@ public class BPVanillaBiomeFeatureGeneration {
         if (types.contains(BiomeDictionary.Type.END)) {
             if (BPConfig.WORLDGEN.cyraLakesEnd.get()) undergroundDeco.add(() -> BPConfiguredFeatures.CYRA_LAKE);
 
-            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
-                if (BPConfig.WORLDGEN.chorusLanternHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_HIGHLANDS_PATCH);
-                if (BPConfig.WORLDGEN.endSpongeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_HL);
-            }
+            if (!BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
+                if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
+                    if (BPConfig.WORLDGEN.chorusLanternHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_HIGHLANDS_PATCH);
+                    if (BPConfig.WORLDGEN.endSpongeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_HL);
+                    if (BPConfig.WORLDGEN.endSpikeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_HL);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDON);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDE_FAN);
+                }
 
-            if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS)) {
-                if (BPConfig.WORLDGEN.chorusLanternMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_MIDLANDS_PATCH);
-                if (BPConfig.WORLDGEN.endSpongeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_ML);
+                if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS) || WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_BARRENS)) {
+                    if (BPConfig.WORLDGEN.chorusLanternMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_MIDLANDS_PATCH);
+                    if (BPConfig.WORLDGEN.endSpongeMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_ML);
+                    if (BPConfig.WORLDGEN.endSpikeMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_ML);
+                    if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDON);
+                    if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDE_FAN);
+                }
             }
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SMALL_END_ISLANDS)) {
+                if (!BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
+                    if (BPConfig.WORLDGEN.endSpongeMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_ML);
+                    if (BPConfig.WORLDGEN.endSpikeMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_ML);
+                    if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDON);
+                    if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDE_FAN);
+                }
+
                 if (BPConfig.WORLDGEN.endIcicleIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_ISLANDS_ICICLE_PATCH);
                 if (BPConfig.WORLDGEN.endFrozenIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_FROZEN_ISLAND_DECORATED);
 

@@ -23,8 +23,6 @@ public class BPCommonConfig {
     public final ForgeConfigSpec.ConfigValue<Boolean> announceAlphemKing;
     public final ForgeConfigSpec.ConfigValue<Boolean> alphemCurseOverlay;
 
-    public final ForgeConfigSpec.ConfigValue<Boolean> changeEndBiomeSurfaces;
-
     //Ecoharmless
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnCuttlefish;
 
@@ -105,13 +103,6 @@ public class BPCommonConfig {
         antibioCompatibility = builder.define("Can all Anti-bio Enchantments be used on a single weapon together?", true);
         announceAlphemKing = builder.define("Announce the summon of the Alphem King to all players in the world?", true);
         alphemCurseOverlay = builder.comment("The overlay can conceal your health, hunger, and armor bars").define("Enable the Alphem Curse overlay when fighting the Alphem King", false);
-        builder.pop();
-
-        //======================================
-        //          BIOME MODIFICATIONS
-        //======================================
-        builder.push("Biome Modifications");
-        changeEndBiomeSurfaces = builder.comment("Suggested to disable only if you have other End mods that modify the vanilla End biomes").define("Modify surface for End Biomes?", true);
         builder.pop();
 
         //===================================

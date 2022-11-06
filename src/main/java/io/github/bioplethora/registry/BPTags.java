@@ -2,6 +2,7 @@ package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
@@ -16,6 +17,7 @@ public class BPTags {
         public static final ITag.INamedTag<Block> CAERULWOOD_LOGS = bioLoc("caerulwood_logs");
 
         public static final ITag.INamedTag<Block> GRYLYNEN_UNBREAKABLE = forgeLoc("grylynen_unbreakable");
+        public static final ITag.INamedTag<Block> CHORUS_GROWABLE = forgeLoc("chorus_growable");
 
         public static final ITag.INamedTag<Block> WOODEN_GRYLYNEN_SPAWNABLE = forgeLoc("wooden_grylynen_spawnable");
         public static final ITag.INamedTag<Block> STONE_GRYLYNEN_SPAWNABLE = forgeLoc("stone_grylynen_spawnable");

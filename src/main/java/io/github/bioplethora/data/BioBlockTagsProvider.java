@@ -48,6 +48,11 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
                 .add(BPBlocks.POLISHED_ALPHANUM_SLAB.get())
         ;
 
+        tag(BPTags.Blocks.CHORUS_GROWABLE)
+                .add(BPBlocks.ENDURION.get())
+                .add(Blocks.END_STONE)
+        ;
+
         tag(BPTags.Blocks.GRYLYNEN_UNBREAKABLE)
                 .add(BPBlocks.BELLOPHITE_BLOCK.get())
                 .add(BPBlocks.BELLOPHITE_CORE_BLOCK.get())

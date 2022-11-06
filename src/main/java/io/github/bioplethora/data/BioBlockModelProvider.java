@@ -119,6 +119,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
         );
         this.lanternPlant("chorus_lantern_plant", bioResLoc("chorus_lantern_plant_bottom"), bioResLoc("chorus_lantern_plant_top"));
 
+        this.cross("chorus_idon", bioResLoc("chorus_idon"));
+        this.ideFan("chorus_ide_fan", bioResLoc("chorus_ide_fan"));
+
         this.cross("frostem", bioResLoc("frostem"));
 
         this.cross("spinxelthorn", bioResLoc("spinxelthorn"));

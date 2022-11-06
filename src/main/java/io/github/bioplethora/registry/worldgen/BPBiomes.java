@@ -2,8 +2,10 @@ package io.github.bioplethora.registry.worldgen;
 
 import com.minecraftabnormals.abnormals_core.core.util.BiomeUtil;
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.world.biomes.end.CaeriForestBiome;
 import io.github.bioplethora.world.biomes.end.CaeriPlainsBiome;
+import io.github.bioplethora.world.biomes.end.configurable.LavenderLakesBiome;
 import io.github.bioplethora.world.biomes.nether.CryeanumPlains;
 import io.github.bioplethora.world.biomes.overworld.RockyWoodlandBiome;
 import net.minecraft.util.RegistryKey;
@@ -45,11 +47,17 @@ public class BPBiomes {
             () -> CaeriForestBiome.make(() -> BPConfiguredSurfaceBuilders.CAERI_SURFACE)
     );
 
+    // End (Configurable)
+    public static final RegistryObject<Biome> LAVENDER_LAKES = BIOMES.register("lavender_lakes",
+            () -> LavenderLakesBiome.make(() -> BPConfiguredSurfaceBuilders.ENDURION_SURFACE)
+    );
+
     public static final class Type {
         public static final BiomeDictionary.Type CRYEANUM = BiomeDictionary.Type.getType("CRYEANUM");
         public static final BiomeDictionary.Type CAERI = BiomeDictionary.Type.getType("CAERI");
         public static final BiomeDictionary.Type CAERI_PLAINS = BiomeDictionary.Type.getType("CAERI_PLAINS");
         public static final BiomeDictionary.Type CAERI_FOREST = BiomeDictionary.Type.getType("CAERI_FOREST");
+        public static final BiomeDictionary.Type LAVENDER_LAKE = BiomeDictionary.Type.getType("LAVENDE_LAKE");
     }
 
     //==============================================
@@ -83,12 +91,23 @@ public class BPBiomes {
                     BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET,
                     BiomeDictionary.Type.MAGICAL
             );
+
+            // End (Configurable)
+            BiomeDictionary.addTypes(getKey(LAVENDER_LAKES.get()),
+                    Type.LAVENDER_LAKE, BiomeDictionary.Type.END, BiomeDictionary.Type.LUSH,
+                    BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET,
+                    BiomeDictionary.Type.MAGICAL
+            );
         }
 
         @SubscribeEvent
         public static void addEndBiomes(RegistryEvent.Register<Biome> event) {
-            register(CAERI_PLAINS.get(), CAERI_PLAINS.getId(), 6, 6, event);
-            register(CAERI_FOREST.get(), CAERI_FOREST.getId(), 8, 8, event);
+            register(CAERI_PLAINS.get(), CAERI_PLAINS.getId(), 6, event);
+            register(CAERI_FOREST.get(), CAERI_FOREST.getId(), 8, event);
+
+            if (BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
+                register(LAVENDER_LAKES.get(), LAVENDER_LAKES.getId(), 13, event);
+            }
         }
     }
 
@@ -102,7 +121,7 @@ public class BPBiomes {
         return BP_BIOMES.values().toArray(new Biome[0]);
     }
 
-    private static void register(Biome biome, ResourceLocation registryName, float weight, float weightRange, RegistryEvent.Register<Biome> event) {
+    private static void register(Biome biome, ResourceLocation registryName, float weight, RegistryEvent.Register<Biome> event) {
         BiomeUtil.addEndBiome(RegistryKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(biome.getRegistryName())), MathHelper.floor(weight));
         BP_BIOMES.put(registryName, ForgeRegistries.BIOMES.getValue(registryName));
     }

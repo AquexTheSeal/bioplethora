@@ -15,7 +15,12 @@ import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Dimension;
+import net.minecraft.world.DimensionType;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -55,6 +60,17 @@ public class RenderEventHelper {
             event.setYaw((float) (event.getYaw() + shakeAmplitude * Math.cos(ticksExistedDelta * 5 + 1) * 25));
             event.setRoll((float) (event.getRoll() + shakeAmplitude * Math.cos(ticksExistedDelta * 4) * 25));
             playermx.setScreenShaking(playermx.getScreenShaking() - 1);
+        }
+    }
+
+    public static void onFogDensity(EntityViewRenderEvent.FogDensity event) {
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.clientLevel.dimension() == World.END && Minecraft.getInstance().player.isUnderWater()) {
+            if (Minecraft.getInstance().level.getBiome(Minecraft.getInstance().player.blockPosition()).getRegistryName().getPath().equals("small_end_islands")) {
+                event.setDensity(0.065F);
+            } else {
+                event.setDensity(0.01F);
+            }
+            event.setCanceled(true);
         }
     }
 

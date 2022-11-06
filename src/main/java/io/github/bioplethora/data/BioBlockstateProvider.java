@@ -93,6 +93,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.IRION_GRASS.get());
         this.doubleCrossPlantBlock(BPBlocks.IRION_TALL_GRASS.get());
 
+        this.simpleCrossBlock(BPBlocks.CHORUS_IDON.get());
+        this.ideFanBlock(BPBlocks.CHORUS_IDE_FAN.get());
+
         this.simpleCrossBlock(BPBlocks.AZURLIA.get());
 
         this.doubleCrossPlantBlock(BPBlocks.ARTAIRIUS.get());

@@ -3,26 +3,15 @@ package io.github.bioplethora.entity.creatures;
 import io.github.bioplethora.api.world.EffectUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
-import io.github.bioplethora.entity.FloatingMonsterEntity;
-import io.github.bioplethora.entity.ai.controller.WaterMoveController;
-import io.github.bioplethora.entity.ai.gecko.GeckoGoal;
 import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
-import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.gecko.IGeckoBaseEntity;
-import io.github.bioplethora.entity.ai.goals.BPCustomSwimmingGoal;
-import io.github.bioplethora.entity.ai.goals.BPWaterChargingCoal;
 import io.github.bioplethora.entity.ai.goals.WaterFollowOwnerGoal;
-import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
 import io.github.bioplethora.enums.BPEntityClasses;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.MoverType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
@@ -34,10 +23,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.GroundPathNavigator;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.pathfinding.WalkNodeProcessor;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
@@ -45,8 +30,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import org.lwjgl.system.CallbackI;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -56,6 +42,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.Random;
+import java.util.UUID;
 
 public class VoidjawEntity extends TrapjawEntity {
 
@@ -98,6 +86,10 @@ public class VoidjawEntity extends TrapjawEntity {
     }
 
     protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+    }
+
+    public static boolean checkMobSpawnRules(EntityType<? extends MobEntity> pType, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
+        return true;
     }
 
     @Override
@@ -220,6 +212,17 @@ public class VoidjawEntity extends TrapjawEntity {
     @Nullable
     public BlockPos getBoundOrigin() {
         return this.boundOrigin;
+    }
+
+    @Override
+    public AgeableEntity getBreedOffspring(ServerWorld serverWorld, AgeableEntity entity) {
+        VoidjawEntity voidjaw = BPEntities.VOIDJAW.get().create(serverWorld);
+        UUID uuid = this.getOwnerUUID();
+        if (uuid != null) {
+            voidjaw.setOwnerUUID(uuid);
+            voidjaw.setTame(true);
+        }
+        return voidjaw;
     }
 
     @Override
