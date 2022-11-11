@@ -1,6 +1,7 @@
 package io.github.bioplethora.item;
 
 import io.github.bioplethora.api.IReachWeapon;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -8,11 +9,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -32,7 +32,10 @@ public class ExperimentalItem extends Item implements IReachWeapon {
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        return false; //IReachWeapon.super.onEntitySwing(stack, entity);
+        Minecraft mc = Minecraft.getInstance();
+        BlockPos blockpos = Minecraft.getInstance().getCameraEntity().blockPosition();
+        entity.sendMessage(new StringTextComponent(mc.level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(mc.level.getBiome(blockpos)).toString()), mc.player.getUUID());
+        return true;
     }
 
     @Override

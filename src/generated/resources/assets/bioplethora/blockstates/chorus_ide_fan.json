@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "budded=false": {
+      "model": "bioplethora:block/chorus_ide_fan"
+    },
+    "budded=true": {
+      "model": "bioplethora:block/chorus_ide_fan_top"
+    }
+  }
+}

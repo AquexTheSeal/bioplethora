@@ -53,9 +53,10 @@ public class BioItemModelProvider extends ItemModelProvider {
         this.flatBlock(BPBlocks.SPIRIT_DANGLER, BPBlocks.SPIRIT_DANGLER_PLANT);
 
         this.flatBlock(BPBlocks.BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
-        this.flatBlock(BPBlocks.FIERY_BASALT_SPELEOTHERM, BPBlocks.BASALT_SPELEOTHERM_PLANT);
         this.flatBlock(BPBlocks.SOUL_ETERN, BPBlocks.SOUL_ETERN_PLANT);
         this.flatBlock(BPBlocks.TURQUOISE_PENDENT, BPBlocks.TURQUOISE_PENDENT_PLANT);
+        this.flatBlock(BPBlocks.CERISE_IVY, BPBlocks.CERISE_IVY_PLANT);
+        this.flatBlock(BPBlocks.THONTUS_THISTLE, BPBlocks.THONTUS_THISTLE_PLANT);
 
         // end plants
         this.flatBlock(BPBlocks.IRION_GRASS, BPBlocks.IRION_GRASS);
@@ -66,6 +67,13 @@ public class BioItemModelProvider extends ItemModelProvider {
 
         this.flatBlock(BPBlocks.BYRSS_LANTERN_PLANT, "byrss_lantern_plant", ITEM_FOLDER);
         this.flatBlock(BPBlocks.CHORUS_LANTERN_PLANT, "chorus_lantern_plant", ITEM_FOLDER);
+
+        this.flatBlock(BPBlocks.ENREDE_KELP, BPBlocks.ENREDE_KELP_PLANT);
+
+        this.flatBlock(BPBlocks.ENREDE_CORSASCILE, "enrede_corsascile", ITEM_FOLDER);
+        this.flatBlock(BPBlocks.OCHAIM_PURPLE);
+        this.flatBlock(BPBlocks.OCHAIM_RED);
+        this.flatBlock(BPBlocks.OCHAIM_GREEN);
 
         this.flatBlock(BPBlocks.FROSTEM, BPBlocks.FROSTEM);
         this.flatBlock(BPBlocks.SPINXELTHORN, BPBlocks.SPINXELTHORN_PLANT);
@@ -188,6 +196,10 @@ public class BioItemModelProvider extends ItemModelProvider {
         if (!existingFileHelper.exists(blockLoc, MODEL) || existingFileHelper.exists(itemLoc, MODEL)) {
             this.withExistingParent(name, new ResourceLocation(Bioplethora.MOD_ID, "block/" + parent));
         }
+    }
+
+    public void flatBlock(RegistryObject<? extends Block> block) {
+        this.flatBlock(block, block);
     }
 
     public void flatBlock(RegistryObject<? extends Block> block, RegistryObject<? extends Block> textureBlock) {

@@ -141,6 +141,8 @@ public class BPItems {
     public static final RegistryObject<Item> FIERY_SAP_BOTTLE = ITEMS.register("fiery_sap_bottle", () -> new HoneyBottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).food(BPFoods.FIERY_SAP_BOTTLE).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> SOUL_SAP_BOTTLE = ITEMS.register("soul_sap_bottle", () -> new HoneyBottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).food(BPFoods.SOUL_SAP_BOTTLE).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> WARPED_GRAPES = ITEMS.register("warped_grapes", () -> new Item(new Item.Properties().food(BPFoods.WARPED_GRAPES).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> CRIMSON_BITTERSWEET_SEEDS = ITEMS.register("crimson_bittersweet_seeds", () -> new Item(new Item.Properties().food(BPFoods.CRIMSON_BITTERSWEET_SEEDS).tab(BPItemGroup.BioplethoraItemItemGroup)));
+    public static final RegistryObject<Item> THONTUS_BERRIES = ITEMS.register("thontus_berries", () -> new Item(new Item.Properties().food(BPFoods.THONTUS_BERRIES).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     public static final RegistryObject<Item> RAW_CUTTLEFISH_MEAT = ITEMS.register("raw_cuttlefish_meat", () -> new Item(new Item.Properties().food(BPFoods.RAW_CUTTLEFISH_MEAT).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> COOKED_CUTTLEFISH_MEAT = ITEMS.register("cooked_cuttlefish_meat", () -> new Item(new Item.Properties().food(BPFoods.COOKED_CUTTLEFISH_MEAT).tab(BPItemGroup.BioplethoraItemItemGroup)));

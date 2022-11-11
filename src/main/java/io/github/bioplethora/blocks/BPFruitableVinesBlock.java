@@ -198,7 +198,7 @@ public abstract class BPFruitableVinesBlock extends BPVinesBlock {
             int i = pLevel.random.nextBoolean() ? 2 : 3;
             pLevel.setBlock(pPos, getBodyBlock().defaultBlockState(), 2);
             pLevel.playSound(null, pPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
-            popResource(pLevel, pPos, new ItemStack(Items.SWEET_BERRIES, i));
+            popResource(pLevel, pPos, new ItemStack(BPItems.THONTUS_BERRIES.get(), i));
             return ActionResultType.sidedSuccess(pLevel.isClientSide);
         }
     }
@@ -292,7 +292,7 @@ public abstract class BPFruitableVinesBlock extends BPVinesBlock {
             int i = 3 + pLevel.random.nextInt(5);
             pLevel.setBlock(pPos, getBodyBlock().defaultBlockState(), 2);
             pLevel.playSound(null, pPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
-            popResource(pLevel, pPos, new ItemStack(Items.SWEET_BERRIES, i));
+            popResource(pLevel, pPos, new ItemStack(BPItems.CRIMSON_BITTERSWEET_SEEDS.get(), i));
             return ActionResultType.sidedSuccess(pLevel.isClientSide);
         }
     }

@@ -1,11 +1,12 @@
 package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
+import io.github.bioplethora.blocks.specific.EnredeKelpBlock;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.worldgen.BPBiomes;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -19,6 +20,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
+
+import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
 
@@ -81,7 +84,15 @@ public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
                             setBlock(world, newPos2, BPBlocks.ENDURION.get().defaultBlockState());
                         }
                     } else {
-                        setBlock(world, newPos2, Blocks.WATER.defaultBlockState());
+                        if (world.getBlockState(newPos2).getBlock() instanceof ILiquidContainer) {
+                            ((ILiquidContainer) world.getBlockState(newPos2).getBlock()).placeLiquid(world, pos, world.getBlockState(newPos2), Fluids.WATER.getSource(false));
+                        } else {
+                            if (world.getBlockState(newPos2.above()).getBlock() instanceof EnredeKelpBlock) {
+                                setBlock(world, newPos2, BPBlocks.ENREDE_KELP_PLANT.get().defaultBlockState());
+                            } else {
+                                setBlock(world, newPos2, Blocks.WATER.defaultBlockState());
+                            }
+                        }
                     }
                 }
             }

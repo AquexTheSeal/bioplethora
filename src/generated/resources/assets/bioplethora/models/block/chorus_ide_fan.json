@@ -1,0 +1,7 @@
+{
+  "parent": "bioplethora:block/ide_fan",
+  "textures": {
+    "0": "bioplethora:block/chorus_ide_fan",
+    "particle": "bioplethora:block/chorus_ide_fan"
+  }
+}

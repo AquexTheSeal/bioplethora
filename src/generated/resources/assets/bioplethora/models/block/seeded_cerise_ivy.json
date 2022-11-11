@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bioplethora:block/seeded_cerise_ivy"
+  }
+}

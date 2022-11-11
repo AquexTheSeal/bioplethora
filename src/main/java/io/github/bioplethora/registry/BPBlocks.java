@@ -203,6 +203,18 @@ public class BPBlocks {
     public static final RegistryObject<Block> CHORUS_IDE_FAN = registerBlock("chorus_ide_fan", () -> new BPIdeFanBlock(BioPlantType.CHORUS, BioPlantShape.IDE_FAN,
             AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).instabreak().lightLevel(b -> b.getValue(BPIdeFanBlock.BUDDED) ? 2 : 4).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
 
+    public static final RegistryObject<Block> ENREDE_CORSASCILE = registerBlock("enrede_corsascile", () -> new BPWaterDoublePlantBlock(BioPlantType.CHORUS, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.copy(BPBlocks.CHORUS_IDON.get()).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> OCHAIM_PURPLE = registerBlock("ochaim_purple", () -> new BPWaterPlantBlock(BioPlantType.CHORUS, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).lightLevel(b -> 6).emissiveRendering((a, b, c) -> true).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> OCHAIM_RED = registerBlock("ochaim_red", () -> new BPWaterPlantBlock(BioPlantType.CHORUS, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).lightLevel(b -> 6).emissiveRendering((a, b, c) -> true).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> OCHAIM_GREEN = registerBlock("ochaim_green", () -> new BPWaterPlantBlock(BioPlantType.CHORUS, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT).sound(SoundType.TWISTING_VINES).strength(0.3F).lightLevel(b -> 6).emissiveRendering((a, b, c) -> true).instabreak().noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+
+    public static final RegistryObject<Block> ENREDE_KELP = registerBlock("enrede_kelp", () -> new EnredeKelpTopBlock(AbstractBlock.Properties.copy(Blocks.KELP).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> ENREDE_KELP_PLANT = registerBlock("enrede_kelp_plant", () -> new EnredeKelpBlock(AbstractBlock.Properties.copy(Blocks.KELP_PLANT).noCollission()), null, false);
+
     public static final RegistryObject<Block> AZURLIA = registerBlock("azurlia", () -> new BPReversePlantBlock(BioPlantType.CAERULWOOD_TREE, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 12).noCollission().emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 

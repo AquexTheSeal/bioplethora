@@ -21,6 +21,7 @@ public class LavenderLakesBiome {
 
         biomeGenSettings.addStructureStart(StructureFeatures.END_CITY);
         biomeGenSettings.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Features.END_GATEWAY);
+        biomeGenSettings.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.CHORUS_PLANT);
 
         return(new Biome.Builder())
                 .precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.THEEND).depth(0.1F).scale(0.2F)

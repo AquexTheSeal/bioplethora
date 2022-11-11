@@ -9,6 +9,7 @@ import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.gui.overlay.DebugOverlayGui;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.model.PlayerModel;
@@ -17,10 +18,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Dimension;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biomes;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -64,12 +69,13 @@ public class RenderEventHelper {
     }
 
     public static void onFogDensity(EntityViewRenderEvent.FogDensity event) {
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.clientLevel.dimension() == World.END && Minecraft.getInstance().player.isUnderWater()) {
-            if (Minecraft.getInstance().level.getBiome(Minecraft.getInstance().player.blockPosition()).getRegistryName().getPath().equals("small_end_islands")) {
-                event.setDensity(0.065F);
-            } else {
-                event.setDensity(0.01F);
-            }
+        Minecraft mc = Minecraft.getInstance();
+        BlockPos blockpos = Minecraft.getInstance().getCameraEntity().blockPosition();
+        if (mc.level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(mc.level.getBiome(blockpos)).toString().equals("minecraft:small_end_islands")) {
+            event.setDensity(0.2F);
+            event.setCanceled(true);
+        } else if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.clientLevel.dimension() == World.END && Minecraft.getInstance().player.isUnderWater()) {
+            event.setDensity(0.03F);
             event.setCanceled(true);
         }
     }
@@ -78,7 +84,6 @@ public class RenderEventHelper {
         if (!reverseCurseAlpha) { curseAlpha += 0.001; if (curseAlpha >= 0.10) { reverseCurseAlpha = true; }
         } else { curseAlpha -= 0.001; if (curseAlpha <= 0) { reverseCurseAlpha = false; }}
     }
-
 
     protected static void renderAlphanumCurse(double width, double height) {
         if (BPConfig.COMMON.alphemCurseOverlay.get()) {

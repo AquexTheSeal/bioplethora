@@ -53,8 +53,8 @@ public class BPClientRegister {
                     block.get() instanceof DoorBlock || block.get() instanceof TrapDoorBlock ||
                     block.get() instanceof LeavesBlock || block.get() instanceof AbstractSignBlock ||
                     block.get() instanceof SaplingBlock || block.get() instanceof BPLanternPlantBlock ||
-                    block.get() instanceof BPIdeFanBlock || block.get() instanceof BPVinesTopBlock ||
-                    block.get() instanceof BPVinesBlock || block.get() instanceof BushBlock
+                    block.get() instanceof BPIdeFanBlock || block.get() instanceof AbstractBodyPlantBlock ||
+                    block.get() instanceof AbstractTopPlantBlock || block.get() instanceof BushBlock
             ) {
                 RenderTypeLookup.setRenderLayer(block.get(), RenderType.cutout());
             }

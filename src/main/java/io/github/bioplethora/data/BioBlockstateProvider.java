@@ -3,7 +3,6 @@ package io.github.bioplethora.data;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.BPIdeFanBlock;
 import io.github.bioplethora.blocks.SmallMushroomBlock;
-import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
@@ -12,7 +11,6 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -83,6 +81,14 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.simpleCrossBlock(BPBlocks.SOUL_ETERN_PLANT.get());
         this.simpleCrossBlock(BPBlocks.FLOURISHED_SOUL_ETERN.get());
 
+        this.simpleCrossBlock(BPBlocks.CERISE_IVY.get());
+        this.simpleCrossBlock(BPBlocks.CERISE_IVY_PLANT.get());
+        this.simpleCrossBlock(BPBlocks.SEEDED_CERISE_IVY.get());
+
+        this.simpleCrossBlock(BPBlocks.THONTUS_THISTLE.get());
+        this.simpleCrossBlock(BPBlocks.THONTUS_THISTLE_PLANT.get());
+        this.simpleCrossBlock(BPBlocks.BERRIED_THONTUS_THISTLE.get());
+
         // End Plants
         this.simpleBlock(BPBlocks.ENDURION.get());
         this.withSidesAndBottomBlock(BPBlocks.IRION.get(), BPBlocks.CRYOSOIL.get());
@@ -102,6 +108,15 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         this.simpleBlock(BPBlocks.BYRSS_FRUIT_BLOCK.get());
         this.lanternPlantBlock(BPBlocks.BYRSS_LANTERN_PLANT.get());
+
+        this.simpleCrossBlock(BPBlocks.ENREDE_KELP.get());
+        this.simpleCrossBlock(BPBlocks.ENREDE_KELP_PLANT.get());
+
+        this.corsascileBlock(BPBlocks.ENREDE_CORSASCILE.get());
+
+        this.simpleCrossBlock(BPBlocks.OCHAIM_PURPLE.get());
+        this.simpleCrossBlock(BPBlocks.OCHAIM_RED.get());
+        this.simpleCrossBlock(BPBlocks.OCHAIM_GREEN.get());
 
         this.withSidesBlock(BPBlocks.CHORUS_CITRUS_BLOCK.get());
         this.lanternPlantBlock(BPBlocks.CHORUS_LANTERN_PLANT.get());
@@ -279,6 +294,18 @@ public class BioBlockstateProvider extends BlockStateProvider {
         BlockModelBuilder bottom = models().singleTexture(bottomTexture, bioResLoc("lantern_plant_bottom"), "0", extend(blockTexture(block), "_bottom")).texture("particle", extend(blockTexture(block), "_bottom"));
         String topTexture = block.getRegistryName().getPath() + "_top";
         BlockModelBuilder top = models().singleTexture(topTexture, bioResLoc("lantern_plant_top"), "0", extend(blockTexture(block), "_top")).texture("particle", extend(blockTexture(block), "_top"));
+
+        getVariantBuilder(block)
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(bottom).addModel()
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(top).addModel();
+    }
+
+    public void corsascileBlock(Block block) {
+        String texture = block.getRegistryName().getPath();
+        BlockModelBuilder bottom = models().singleTexture(texture + "bottom", bioResLoc("corsascile_bottom"), "0", blockTexture(block)).texture("particle", blockTexture(block));
+        BlockModelBuilder top = models().singleTexture(texture + "top", bioResLoc("corsascile_top"), "0", blockTexture(block)).texture("particle", blockTexture(block));
 
         getVariantBuilder(block)
                 .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)

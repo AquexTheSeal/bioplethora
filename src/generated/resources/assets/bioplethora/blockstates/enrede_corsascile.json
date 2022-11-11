@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "bioplethora:block/enrede_corsasciletop"
+    },
+    "half=lower": {
+      "model": "bioplethora:block/enrede_corsascilebottom"
+    }
+  }
+}

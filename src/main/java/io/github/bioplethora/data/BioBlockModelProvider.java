@@ -86,6 +86,14 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cross("turquoise_pendent_plant", bioResLoc("turquoise_pendent_plant"));
         this.cross("blossoming_turquoise_pendent", bioResLoc("blossoming_turquoise_pendent"));
 
+        this.cross("cerise_ivy", bioResLoc("cerise_ivy"));
+        this.cross("cerise_ivy_plant", bioResLoc("cerise_ivy_plant"));
+        this.cross("seeded_cerise_ivy", bioResLoc("seeded_cerise_ivy"));
+
+        this.cross("thontus_thistle", bioResLoc("thontus_thistle"));
+        this.cross("thontus_thistle_plant", bioResLoc("thontus_thistle_plant"));
+        this.cross("berried_thontus_thistle", bioResLoc("berried_thontus_thistle"));
+
         // End Plants
         this.cubeAll("endurion", bioResLoc("endurion"));
         this.cube("irion",
@@ -108,6 +116,11 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.cubeAll("byrss_fruit_block", bioResLoc("byrss_fruit_block"));
         this.lanternPlant("byrss_lantern_plant", bioResLoc("byrss_lantern_plant_bottom"), bioResLoc("byrss_lantern_plant_top"));
+
+        this.corsascile("enrede_corsascile", bioResLoc("enrede_corsascile"));
+        this.crop("ochaim_purple", bioResLoc("ochaim_purple"));
+        this.crop("ochaim_red", bioResLoc("ochaim_red"));
+        this.crop("ochaim_green", bioResLoc("ochaim_green"));
 
         this.cube("chorus_citrus_block",
                 bioResLoc("chorus_citrus_block_top"),
@@ -155,6 +168,11 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
     public void lanternPlantTop(String name, ResourceLocation all) {
         singleTexture(name, bioResLoc("lantern_plant_top"), "0", all).texture("particle", all);
+    }
+
+    public void corsascile(String name, ResourceLocation all) {
+        singleTexture(name + "_bottom", bioResLoc("corsascile_bottom"), "0", all).texture("particle", all);
+        singleTexture(name + "_top", bioResLoc("corsascile_top"), "0", all).texture("particle", all);
     }
 
     public void bigMushroom(String name, ResourceLocation all) {

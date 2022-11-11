@@ -13,10 +13,11 @@ import java.util.Random;
 public class NightGazeParticle extends RisingParticle {
 
     protected NightGazeParticle(ClientWorld pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, float pQuadSizeMultiplier, IAnimatedSprite pSprites) {
-        super(pLevel, pX, pY, pZ, 0.1F, -0.1F, 0.1F, pXSpeed, pYSpeed, pZSpeed, pQuadSizeMultiplier, pSprites, 0.0F, 20, -5.0E-4D, false);
+        super(pLevel, pX, pY, pZ, 0.1F, -0.1F, 0.1F, pXSpeed, pYSpeed, pZSpeed, pQuadSizeMultiplier, pSprites, 0.0F, 20, -5.0E-3D, false);
         this.rCol = 0.7294118F;
         this.gCol = 0.69411767F;
         this.bCol = 0.7607843F;
+        this.lifetime = 80;
     }
 
     public IParticleRenderType getRenderType() {

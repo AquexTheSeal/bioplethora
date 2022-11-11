@@ -109,6 +109,13 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.CHORUS_CITRUS_BLOCK.get());
         add(BPBlocks.CHORUS_LANTERN_PLANT.get(), BPBlockLootTables::createLanternTable);
 
+        add(BPBlocks.ENREDE_CORSASCILE.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.ENREDE_CORSASCILE.get()));
+        dropSelf(BPBlocks.ENREDE_KELP.get());
+        dropOther(BPBlocks.ENREDE_KELP_PLANT.get(), BPBlocks.ENREDE_KELP.get());
+        add(BPBlocks.OCHAIM_PURPLE.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.OCHAIM_PURPLE.get()));
+        add(BPBlocks.OCHAIM_RED.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.OCHAIM_RED.get()));
+        add(BPBlocks.OCHAIM_GREEN.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.OCHAIM_GREEN.get()));
+
         add(BPBlocks.FROSTEM.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.FROSTEM.get()));
 
         dropSelf(BPBlocks.SPINXELTHORN.get());

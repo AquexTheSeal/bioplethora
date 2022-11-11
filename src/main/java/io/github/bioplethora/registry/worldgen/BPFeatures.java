@@ -8,9 +8,7 @@ import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
 import io.github.bioplethora.world.features.*;
 import io.github.bioplethora.world.features.treefeatures.CaerulwoodTreeFeature;
 import io.github.bioplethora.world.features.treefeatures.EnivileTreeFeature;
-import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,6 +29,10 @@ public class BPFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPONGE_ML = FEATURES.register("end_land_sponge_ml", () -> new EndLandsSpongeFeature(NoFeatureConfig.CODEC.stable(), false));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPIKE_HL = FEATURES.register("end_land_spike_hl", () -> new EndLandsSpikeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPIKE_ML = FEATURES.register("end_land_spike_ml", () -> new EndLandsSpikeFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<BlockStateFeatureConfig>> WATER_PLANT = FEATURES.register("water_plant", () -> new WaterPlantFeature(BlockStateFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> ENREDE_KELP = FEATURES.register("enrede_kelp", () -> new EnredeKelpFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<ProbabilityConfig>> CORSASCILE = FEATURES.register("corsascile", () -> new CorsascileFeature(ProbabilityConfig.CODEC));
+
     // Trees
     public static final RegistryObject<Feature<NoFeatureConfig>> ENIVILE_TREE = FEATURES.register("enivile_tree", () -> new EnivileTreeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> CAERULWOOD_TREE = FEATURES.register("caerulwood_tree", () -> new CaerulwoodTreeFeature(NoFeatureConfig.CODEC));

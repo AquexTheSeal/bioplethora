@@ -257,6 +257,25 @@ public class BPConfiguredFeatures {
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.035F, 1))
             ));
 
+    public static final ConfiguredFeature<?, ?> ENREDE_KELP = register("enrede_kelp",
+            BPFeatures.ENREDE_KELP.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP).squared()
+                    .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)).count(8)
+                    )
+    );
+
+    public static final ConfiguredFeature<?, ?> ENREDE_CORSASCILE = register("enrede_corsascile",
+            BPFeatures.CORSASCILE.get().configured(new ProbabilityConfig(0.3F)).count(80).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE)
+    );
+    public static final ConfiguredFeature<?, ?> OCHAIM_PURPLE = register("ochaim_purple",
+            BPFeatures.WATER_PLANT.get().configured(new BlockStateFeatureConfig(BPBlocks.OCHAIM_PURPLE.get().defaultBlockState())).count(50).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE)
+    );
+    public static final ConfiguredFeature<?, ?> OCHAIM_RED = register("ochaim_red",
+            BPFeatures.WATER_PLANT.get().configured(new BlockStateFeatureConfig(BPBlocks.OCHAIM_RED.get().defaultBlockState())).count(50).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE)
+    );
+    public static final ConfiguredFeature<?, ?> OCHAIM_GREEN = register("ochaim_green",
+            BPFeatures.WATER_PLANT.get().configured(new BlockStateFeatureConfig(BPBlocks.OCHAIM_GREEN.get().defaultBlockState())).count(50).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE)
+    );
+
     public static final ConfiguredFeature<?, ?> END_ISLANDS_ICICLE = register("end_islands_icicle", BPFeatures.END_ICICLE.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             ));

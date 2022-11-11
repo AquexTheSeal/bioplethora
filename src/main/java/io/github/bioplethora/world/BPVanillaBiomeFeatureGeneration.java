@@ -90,6 +90,11 @@ public class BPVanillaBiomeFeatureGeneration {
                     if (BPConfig.WORLDGEN.endSpikeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_HL);
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDON);
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDE_FAN);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_CORSASCILE);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_PURPLE);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_RED);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_GREEN);
                 }
 
                 if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS) || WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_BARRENS)) {
@@ -98,6 +103,11 @@ public class BPVanillaBiomeFeatureGeneration {
                     if (BPConfig.WORLDGEN.endSpikeMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_ML);
                     if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDON);
                     if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDE_FAN);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_CORSASCILE);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_PURPLE);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_RED);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_GREEN);
                 }
             }
 
@@ -107,6 +117,11 @@ public class BPVanillaBiomeFeatureGeneration {
                     if (BPConfig.WORLDGEN.endSpikeMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_ML);
                     if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDON);
                     if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDE_FAN);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_CORSASCILE);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_PURPLE);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_RED);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_GREEN);
                 }
 
                 if (BPConfig.WORLDGEN.endIcicleIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_ISLANDS_ICICLE_PATCH);
