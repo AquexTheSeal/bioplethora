@@ -44,6 +44,10 @@ public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEnti
             if (attacker.getRoaring()) {
                 return false;
             }
+
+            if (attacker.isPursuit()) {
+                return false;
+            }
             
             double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
             if (distance <= goal.reachSq(attacker, target)) return true;

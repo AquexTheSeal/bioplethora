@@ -7,6 +7,7 @@ import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -57,7 +58,7 @@ public class BlockUtils {
                     BlockState blockState = world.getBlockState(pos);
                     Block block = blockState.getBlock();
 
-                    if ((blockState.getMaterial().isSolid()) && (blockState.getBlock() != Blocks.BEDROCK)) {
+                    if (!BlockTags.DRAGON_IMMUNE.contains(block)) {
                         if (Math.random() <= 0.3) {
                             FallingBlockEntity blockEntity = new FallingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, blockState);
                             if (randomYDelta) {

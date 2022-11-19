@@ -21,6 +21,8 @@
     "defaultRequire": 1
   },
   "client": [
-    "BipedModelMixin"
+    "BipedModelMixin",
+    "accessors.ParticleAccessor",
+    "accessors.SpriteTexturedParticleAccessor"
   ]
 }

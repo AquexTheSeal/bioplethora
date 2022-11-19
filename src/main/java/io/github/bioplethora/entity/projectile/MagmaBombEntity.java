@@ -83,8 +83,8 @@ public class MagmaBombEntity extends ProjectileItemEntity {
         this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), this.explosionPower, Explosion.Mode.BREAK);
         if (!this.level.isClientSide) {
             this.level.broadcastEntityEvent(this, (byte)3);
-            this.remove();
         }
+        this.remove();
     }
 
     @Override

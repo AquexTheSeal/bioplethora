@@ -1,9 +1,11 @@
 package io.github.bioplethora.entity.ai.goals;
 
+import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPParticles;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -20,17 +22,19 @@ public class AlphemKingRoarGoal extends Goal {
 
     private final AlphemKingEntity king;
     public int roarTime;
+    public int particleRel;
 
     public AlphemKingRoarGoal(AlphemKingEntity kingEntity) {
         this.king = kingEntity;
     }
 
     public boolean canUse() {
-        return (this.king.getTarget() != null);
+        return this.king.getTarget() != null;
     }
 
     public void start() {
         this.roarTime = 0;
+        this.particleRel = 0;
     }
 
     public void stop() {
@@ -38,7 +42,7 @@ public class AlphemKingRoarGoal extends Goal {
     }
 
     public boolean canContinueToUse() {
-        return this.king.getTarget() != null;
+        return this.king.getTarget() != null && !this.king.isPursuit();
     }
 
     public void tick() {
@@ -59,14 +63,21 @@ public class AlphemKingRoarGoal extends Goal {
                 for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, this.king.getBoundingBox().inflate(15, 1.5, 15))) {
 
                     if (areaEnt != this.king) {
-                        areaEnt.knockback((float) areaEnt.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE) * 0.5F,
-                                MathHelper.sin(this.king.yRot * ((float) Math.PI / 180F)),
-                                -MathHelper.cos(this.king.yRot * ((float) Math.PI / 180F)));
+                        king.knockbackNoRes(areaEnt, 1.2F, king.getX() - areaEnt.getX(), this.king.getZ() - areaEnt.getZ());
+                    }
+
+                    if (areaEnt instanceof IPlayerEntityMixin) {
+                        IPlayerEntityMixin ent = (IPlayerEntityMixin) areaEnt;
+                        ent.setScreenShaking(5);
                     }
                 }
 
-                if (world instanceof ServerWorld) {
-                    ((ServerWorld) world).sendParticles(ParticleTypes.CLOUD, this.king.getX(), this.king.getY(), this.king.getZ(), 30, 5, 2, 5, 0.01);
+                ++particleRel;
+                if (particleRel >= 10) {
+                    if (world instanceof ServerWorld) {
+                        ((ServerWorld) world).sendParticles(BPParticles.KINGS_ROAR.get(), this.king.getX(), this.king.getY() + 0.5D, this.king.getZ(), 1, 0, 0, 0, 0);
+                    }
+                    particleRel = 0;
                 }
             }
 

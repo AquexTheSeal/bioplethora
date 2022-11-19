@@ -58,7 +58,7 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
         this.setDeltaMovement(this.getDeltaMovement().add(0, 0.5, 0));
 
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (this.getX()), (this.getY()), (this.getZ()), (int) 5, 1, 1, 1, 0.1);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (this.getX()), (this.getY()), (this.getZ()), 5, 1, 1, 1, 0.1);
             //this.summonParticleBarrier((ServerWorld) this.level);
         }
 
@@ -70,11 +70,11 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
                 ServerWorld serverworld = (ServerWorld)this.level;
                 BlockPos blockpos = (new BlockPos(this.getX(), this.getY(), this.getZ()));
 
-                this.grantBirthAdvancement(32);
+                //this.grantBirthAdvancement(32);
 
                 AltyrusEntity altyrusEntity = BPEntities.ALTYRUS.get().create(this.level);
                 altyrusEntity.moveTo(blockpos, 0.0F, 0.0F);
-                altyrusEntity.finalizeSpawn(serverworld, this.level.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, (ILivingEntityData)null, (CompoundNBT)null);
+                altyrusEntity.finalizeSpawn(serverworld, this.level.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
 
                 serverworld.addFreshEntity(altyrusEntity);
 

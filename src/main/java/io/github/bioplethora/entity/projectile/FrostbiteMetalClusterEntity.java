@@ -121,13 +121,13 @@ public class FrostbiteMetalClusterEntity extends DamagingProjectileEntity implem
                     if (this.getOwner() != null) {
                         //hell mode + berserk
                         if (((LivingEntity) this.getOwner()).getHealth() <= 100 && BPConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(castration, (float) 13.5);
+                            entityArea.hurt(castration, (float) 10.5);
                             //berserk only
                         } else if (((LivingEntity) this.getOwner()).getHealth() <= 100 && !BPConfig.COMMON.hellMode.get()) {
-                            entityArea.hurt(castration, (float) 10);
+                            entityArea.hurt(castration, (float) 7);
                             //default
                         } else {
-                            entityArea.hurt(castration, (float) 5.5);
+                            entityArea.hurt(castration, (float) 3.5);
                         }
                     }
 
