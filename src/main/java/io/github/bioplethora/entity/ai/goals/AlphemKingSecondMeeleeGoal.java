@@ -31,8 +31,6 @@ public class AlphemKingSecondMeeleeGoal extends AlphemKingMeeleeGoal {
 
     @Override
     public boolean canUse() {
-        if (Math.random() <= 0.1) return false;
-
         return AlphemKingSecondMeeleeGoal.checkIfValid(this, king, this.king.getTarget());
     }
 

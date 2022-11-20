@@ -17,6 +17,7 @@ public class BPParticles {
     public static final RegistryObject<BasicParticleType> ANTIBIO_SPELL = PARTICLES.register("antibio_spell", () -> new BasicParticleType(true));
     public static final RegistryObject<BasicParticleType> TRUE_DEFENSE_CLASH = PARTICLES.register("true_defense_clash", () -> new BasicParticleType(true));
     public static final RegistryObject<BasicParticleType> KINGS_ROAR = PARTICLES.register("kings_roar", () -> new BasicParticleType(true));
+    public static final RegistryObject<BasicParticleType> FROSTBITE_EYE = PARTICLES.register("frostbite_eye", () -> new BasicParticleType(true));
 
     // Falling Leaves
     public static final RegistryObject<BasicParticleType> PINK_ENIVILE_LEAF = PARTICLES.register("pink_enivile_leaf", () -> new BasicParticleType(true));

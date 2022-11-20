@@ -3,6 +3,7 @@ package io.github.bioplethora.registry;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.*;
 import io.github.bioplethora.blocks.specific.*;
+import io.github.bioplethora.blocks.tile_entities.AlphanumNucleusBlock;
 import io.github.bioplethora.blocks.tile_entities.FleignariteSplotchBlock;
 import io.github.bioplethora.blocks.tile_entities.ReinforcingTableBlock;
 import io.github.bioplethora.enums.BioPlantShape;
@@ -266,7 +267,7 @@ public class BPBlocks {
             new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get())), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<RotatedPillarBlock> ALPHANUM_NUCLEUS = registerBlock("alphanum_nucleus", () ->
-            new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get()).lightLevel((block) -> 8)), BPItemGroup.BioplethoraItemItemGroup);
+            new AlphanumNucleusBlock(AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get()).lightLevel((block) -> 8).emissiveRendering((t, s, a) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<StairsBlock> ALPHANUM_STAIRS = registerBlock("alphanum_stairs", () ->
             new StairsBlock(BPBlocks.ALPHANUM.get().defaultBlockState(), AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get())), BPItemGroup.BioplethoraItemItemGroup);

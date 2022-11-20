@@ -22,6 +22,7 @@ public class BPParticleUtil {
         engine.register(BPParticles.ANTIBIO_SPELL.get(), AntibioSpellParticle.Factory::new);
         engine.register(BPParticles.TRUE_DEFENSE_CLASH.get(), TrueDefenseClashParticle.Factory::new);
         engine.register(BPParticles.KINGS_ROAR.get(), KingsRoarParticle.Factory::new);
+        engine.register(BPParticles.FROSTBITE_EYE.get(), FrostbiteEyeParticle.Factory::new);
 
         engine.register(BPParticles.CAERULWOOD_LEAF.get(), FallingLeavesParticle.Factory::new);
         engine.register(BPParticles.PINK_ENIVILE_LEAF.get(), FallingLeavesParticle.Factory::new);

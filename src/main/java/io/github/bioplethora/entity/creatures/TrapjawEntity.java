@@ -57,7 +57,7 @@ public class TrapjawEntity extends WaterAndLandAnimalEntity implements IAnimatab
     private static final DataParameter<Boolean> HAS_SADDLE = EntityDataManager.defineId(TrapjawEntity.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = new AnimationFactory(this);
     public static final Predicate<LivingEntity> PREY_SELECTOR = (entity) ->
-            entity instanceof PlayerEntity || (entity instanceof AnimalEntity && !(entity instanceof TrapjawEntity));
+            entity instanceof PlayerEntity ||  entity instanceof AlphemKingEntity || (entity instanceof AnimalEntity && !(entity instanceof TrapjawEntity));
 
     public TrapjawEntity(EntityType<? extends BPAnimalEntity> type, World worldIn) {
         super(type, worldIn);

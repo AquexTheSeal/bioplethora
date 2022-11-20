@@ -23,4 +23,7 @@ public class BPTileEntities {
 
     public static final RegistryObject<TileEntityType<FleignariteSplotchTileEntity>> FLEIGNARITE_SPLOTCH = TILE_ENTITIES.register("fleignarite_splotch",
             () -> TileEntityType.Builder.of(FleignariteSplotchTileEntity::new, BPBlocks.FLEIGNARITE_SPLOTCH.get()).build(null));
+
+    public static final RegistryObject<TileEntityType<FleignariteSplotchTileEntity>> ALPHANUM_NUCLEUS = TILE_ENTITIES.register("alphanum_nucleus",
+            () -> TileEntityType.Builder.of(FleignariteSplotchTileEntity::new, BPBlocks.ALPHANUM_NUCLEUS.get()).build(null));
 }

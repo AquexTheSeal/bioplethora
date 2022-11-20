@@ -30,6 +30,7 @@ public class AlphemKingRangedAttackGoal extends Goal {
     }
 
     public void tick() {
+        int chargeCap = 300;
         LivingEntity target = this.king.getTarget();
         if (target.distanceToSqr(this.king) < 4096.0D && king.canSee(target)) {
             World world = this.king.level;
@@ -38,26 +39,26 @@ public class AlphemKingRangedAttackGoal extends Goal {
 
             ++this.chargeTime;
 
-            if (this.chargeTime == 160 && !this.king.isSilent()) {
+            if (this.chargeTime == chargeCap && !this.king.isSilent()) {
                 this.king.level.playSound(null, this.king.getX(), this.king.getY(), this.king.getZ(), SoundEvents.BEACON_ACTIVATE, this.king.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
             }
 
-            if (this.chargeTime == 180) this.shootBlaze(world, target);
+            if (this.chargeTime == chargeCap + 20) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 190) this.shootBlaze(world, target);
+            if (this.chargeTime == chargeCap + 30) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 200) this.shootBlaze(world, target);
+            if (this.chargeTime == chargeCap + 40) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 210) this.shootBlaze(world, target);
+            if (this.chargeTime == chargeCap + 50) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 220) this.shootBlaze(world, target);
+            if (this.chargeTime == chargeCap + 60) this.shootBlaze(world, target);
 
             if (this.chargeTime == 230) {
                 this.shootBlaze(world, target);
                 this.chargeTime = 0;
             }
 
-            this.king.setCharging(this.chargeTime > 140);
+            this.king.setCharging(this.chargeTime > chargeCap - 20);
         } else {
             this.king.setCharging(false);
         }

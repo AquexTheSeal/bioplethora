@@ -19,7 +19,7 @@ public class AlphemKingJumpGoal extends Goal {
     }
 
     public boolean canUse() {
-        return this.king.getTarget() != null;
+        return this.king.getTarget() != null && !this.king.isPursuit() && !this.king.isPursuit() && !this.king.getAttacking() && !this.king.getAttacking2() && !this.king.getSmashing();
     }
 
     public void start() {

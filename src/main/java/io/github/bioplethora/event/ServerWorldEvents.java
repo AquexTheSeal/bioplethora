@@ -362,7 +362,7 @@ public class ServerWorldEvents {
                 AltyrusEntity altyrus = ((AltyrusEntity) ((EntityRayTraceResult) result).getEntity());
                 int shouldDodge = altyrus.getRandom().nextInt(3);
 
-                if ((shouldDodge == 1) || (shouldDodge == 2)) {
+                if (shouldDodge == 1 && !altyrus.isCharging() && !altyrus.isSummoning()) {
 
                     Vector3d projectilePos = event.getEntity().position();
                     Vector3d rVec = altyrus.getLookAngle().yRot(0.5F + (float) Math.PI).add(altyrus.position());

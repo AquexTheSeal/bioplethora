@@ -106,7 +106,6 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
         this.goalSelector.addGoal(1, new AlphemKingRoarGoal(this));
-        this.goalSelector.addGoal(2, new AlphemKingPursuitGoal(this));
         this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<AlphemKingEntity>(this, 1.15F, 8) {
             @Override
             public boolean canUse() {
@@ -125,11 +124,12 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             }
         });
         // 1st phase meelee
-        this.goalSelector.addGoal(3, new AlphemKingMeeleeGoal(this, 80, 0.5, 0.6));
+        this.goalSelector.addGoal(2, new AlphemKingMeeleeGoal(this, 80, 0.5, 0.6));
         // 2nd phase meelee
-        this.goalSelector.addGoal(3, new AlphemKingSecondMeeleeGoal(this, 80, 0.5, 0.6));
+        this.goalSelector.addGoal(2, new AlphemKingSecondMeeleeGoal(this, 80, 0.5, 0.6));
         // 3rd phase meelee
-        this.goalSelector.addGoal(3, new AlphemKingSmashingGoal(this, 120, 0.8, 0.9));
+        this.goalSelector.addGoal(2, new AlphemKingSmashingGoal(this, 120, 0.8, 0.9));
+        this.goalSelector.addGoal(3, new AlphemKingPursuitGoal(this));
         this.goalSelector.addGoal(4, new AlphemKingRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new AlphemKingJumpGoal(this));
         this.goalSelector.addGoal(6, new LookRandomlyGoal(this));

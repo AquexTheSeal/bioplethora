@@ -30,7 +30,7 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
 
-            if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
+            if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
                 attacker.setSmashing(false);
                 return false;
             }
@@ -43,6 +43,10 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
                 return false;
             }
 
+            if (attacker.isPursuit()) {
+                return false;
+            }
+
             double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
             if (distance <= AlphemKingSmashingGoal.getAttackReachSq(attacker, target)) return true;
         }
@@ -51,13 +55,11 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
     }
 
     public static double getAttackReachSq(BPMonsterEntity attacker, LivingEntity target) {
-        return attacker.getBbWidth() * 3F * attacker.getBbWidth() * 3F + target.getBbWidth();
+        return attacker.getBbWidth() * 3.5F * attacker.getBbWidth() * 3.5F + target.getBbWidth();
     }
 
     @Override
     public boolean canUse() {
-        if (Math.random() <= 0.1) return false;
-
         return AlphemKingSmashingGoal.checkIfValid(this, king, this.king.getTarget());
     }
 

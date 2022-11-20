@@ -46,11 +46,15 @@ public class AlphemKingPursuitGoal extends Goal {
 
     public void stop() {
         this.king.setPursuit(false);
-        this.king.setNoGravity(false);
+        if (targetPos != null) {
+            smashDown();
+        } else {
+            pursTime = 0;
+        }
     }
 
     public boolean canContinueToUse() {
-        return this.king.getTarget() != null && !this.king.getRoaring();
+        return this.canUse();
     }
 
     public void tick() {
@@ -61,55 +65,62 @@ public class AlphemKingPursuitGoal extends Goal {
         if ((target.distanceToSqr(this.king) >= 48.0D || target.getY() > king.getY() + 8) && !hasRaised) {
             ++pursTime;
             if (pursTime == 60) {
-                teleportWithEffect(target.getX(), target.getY() + 5, target.getZ());
-                targetPos = new BlockPos(target.getX(), king.getGroundPos(king.level, (int) target.getX(), (int) target.getZ()).getY(), target.getZ());
-                this.king.setNoGravity(true);
+                if (king.getRandom().nextBoolean()) {
+                    teleportWithEffect(target.getX(), target.getY() + 5, target.getZ());
+                    targetPos = new BlockPos(target.getX(), king.getGroundPos(king.level, (int) target.getX(), (int) target.getZ()).getY(), target.getZ());
+                    this.king.setNoGravity(true);
 
-                hasRaised = true;
+                    hasRaised = true;
+                } else {
+                    pursTime = 0;
+                }
             }
         }
         if (hasRaised && targetPos != null) {
             ++pursTime;
-            if (pursTime == 80) {
-
-                int areaint = 5;
-                int wsHeight = king.getGroundPos(king.level, (int) king.getX(), (int) king.getZ()).getY();
-                AxisAlignedBB aabb = new AxisAlignedBB(king.getX() - areaint, (king.getY() - areaint) - (king.getY() - wsHeight), king.getZ() - areaint, king.getX() + areaint, king.getY(), king.getZ() + areaint);
-                for (LivingEntity areaEnt : king.level.getEntitiesOfClass(LivingEntity.class, aabb)) {
-                    if (areaEnt != this.king) {
-                        areaEnt.moveTo(areaEnt.getX(), targetPos.getY(), areaEnt.getZ());
-                        areaEnt.hurt(DamageSource.explosion(this.king), 5.0F);
-                    }
-                }
-
-                teleportWithEffect(targetPos.getX(), targetPos.getY(), targetPos.getZ());
-
-                for (LivingEntity areaEnt : king.level.getEntitiesOfClass(LivingEntity.class, king.getBoundingBox().inflate(7, 1, 7).move(targetPos))) {
-                    if (areaEnt != this.king) {
-                        areaEnt.hurt(DamageSource.explosion(this.king), 7.0F);
-                        areaEnt.knockback(2F, this.king.getX() - areaEnt.getX(), this.king.getZ() - areaEnt.getZ());
-                        areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
-                    }
-                }
-
-                this.king.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
-                BlockUtils.knockUpRandomNearbyBlocks(king.level, 0.3D, targetPos.below(), 3, 1, 3, false, true);
-
-                if (king.level instanceof ServerWorld) {
-                    ((ServerWorld) king.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, targetPos.getX(), targetPos.getY(), targetPos.getZ(),
-                            25, 0.45, 0.45, 0.45, 0.001);
-                    ((ServerWorld) king.level).sendParticles(ParticleTypes.POOF, targetPos.getX(), targetPos.getY(), targetPos.getZ(),
-                            25, 0.45, 0.45, 0.45, 0.001);
-                }
-
-                EntityUtils.shakeNearbyPlayersScreen(this.king, 32, 10);
-
-                this.king.setNoGravity(false);
-
-                pursTime = 0;
-                hasRaised = false;
+            if (pursTime == 90) {
+                smashDown();
             }
         }
+    }
+
+    public void smashDown() {
+        int areaint = 5;
+        int wsHeight = king.getGroundPos(king.level, (int) king.getX(), (int) king.getZ()).getY();
+        AxisAlignedBB aabb = new AxisAlignedBB(king.getX() - areaint, (king.getY() - areaint) - (king.getY() - wsHeight), king.getZ() - areaint, king.getX() + areaint, king.getY(), king.getZ() + areaint);
+        for (LivingEntity areaEnt : king.level.getEntitiesOfClass(LivingEntity.class, aabb)) {
+            if (areaEnt != this.king) {
+                areaEnt.moveTo(areaEnt.getX(), targetPos.getY(), areaEnt.getZ());
+                areaEnt.hurt(DamageSource.explosion(this.king), 5.0F);
+            }
+        }
+
+        teleportWithEffect(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+
+        for (LivingEntity areaEnt : king.level.getEntitiesOfClass(LivingEntity.class, king.getBoundingBox().inflate(7, 1, 7).move(targetPos))) {
+            if (areaEnt != this.king) {
+                areaEnt.hurt(DamageSource.explosion(this.king), 7.0F);
+                areaEnt.knockback(2F, this.king.getX() - areaEnt.getX(), this.king.getZ() - areaEnt.getZ());
+                areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
+            }
+        }
+
+        this.king.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
+        BlockUtils.knockUpRandomNearbyBlocks(king.level, 0.3D, targetPos.below(), 3, 1, 3, false, true);
+
+        if (king.level instanceof ServerWorld) {
+            ((ServerWorld) king.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, targetPos.getX(), targetPos.getY(), targetPos.getZ(),
+                    25, 0.45, 0.45, 0.45, 0.001);
+            ((ServerWorld) king.level).sendParticles(ParticleTypes.POOF, targetPos.getX(), targetPos.getY(), targetPos.getZ(),
+                    25, 0.45, 0.45, 0.45, 0.001);
+        }
+
+        EntityUtils.shakeNearbyPlayersScreen(this.king, 32, 10);
+
+        this.king.setNoGravity(false);
+
+        pursTime = 0;
+        hasRaised = false;
     }
 
     public void teleportWithEffect(double xLoc, double yLoc, double zLoc) {

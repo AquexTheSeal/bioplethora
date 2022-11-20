@@ -32,7 +32,7 @@ public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEnti
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             
-            if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
+            if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
                 goal.doCIV(attacker);
                 return false;
             }
@@ -57,13 +57,11 @@ public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEnti
     }
 
     protected static double getAttackReachSq(BPMonsterEntity attacker, LivingEntity target) {
-        return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
+        return attacker.getBbWidth() * 3F * attacker.getBbWidth() * 3F + target.getBbWidth();
     }
 
     @Override
     public boolean canUse() {
-        if (Math.random() <= 0.1) return false;
-
         return checkIfValid(this, king, this.king.getTarget());
     }
 

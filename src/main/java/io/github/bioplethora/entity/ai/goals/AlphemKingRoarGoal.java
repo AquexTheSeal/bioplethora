@@ -48,7 +48,7 @@ public class AlphemKingRoarGoal extends Goal {
     public void tick() {
         LivingEntity target = this.king.getTarget();
 
-        if (target != null && target.distanceToSqr(this.king) < 4096.0D /*&& this.king.canSee(target)*/) {
+        if (target != null) {
 
             ++this.roarTime;
 
