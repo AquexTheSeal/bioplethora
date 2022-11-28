@@ -1,6 +1,7 @@
 package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.BPMonsterEntity;
+import io.github.bioplethora.entity.ai.gecko.IGeckoBaseEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.EntityPredicates;
@@ -30,11 +31,6 @@ public class AlphemKingSecondMeeleeGoal extends AlphemKingMeeleeGoal {
     }
 
     @Override
-    public boolean canUse() {
-        return AlphemKingSecondMeeleeGoal.checkIfValid(this, king, this.king.getTarget());
-    }
-
-    @Override
     public void start() {
         isInAttackState = true;
         this.king.setAttacking2(true);
@@ -44,33 +40,22 @@ public class AlphemKingSecondMeeleeGoal extends AlphemKingMeeleeGoal {
 
     @Override
     public void stop() {
-        isInAttackState = false;
-        LivingEntity target = this.king.getTarget();
-        if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-            this.king.setTarget(null);
-        }
-        this.king.setAttacking2(false);
-        this.king.setAggressive(false);
-
         if (this.hasHit) {
             switchPhase();
+            this.hasHit = false;
         }
-
-        this.hasHit = false;
         this.animationProgress = 0;
+        this.isInAttackState = false;
+        LivingEntity target = this.entity.getTarget();
+        if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
+            this.entity.setTarget(null);
+        }
+        king.setAttacking2(false);
+        this.entity.setAggressive(false);
     }
 
     @Override
     public void switchPhase() {
-        if (this.king.attackPhase == 1) {
-            this.king.attackPhase = 2;
-        } else {
-            this.king.attackPhase = 0;
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
+        this.king.attackPhase = 2;
     }
 }

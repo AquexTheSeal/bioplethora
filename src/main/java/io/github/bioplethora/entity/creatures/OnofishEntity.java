@@ -110,7 +110,7 @@ public class OnofishEntity extends FloatingCreatureEntity implements IAnimatable
     }
 
     public static boolean checkOnofishSpawnRules(EntityType<OnofishEntity> onofishEntityEntityType, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
-        return pPos.getY() > 40 && pRandom.nextInt(7) == 1;
+        return pPos.getY() > 30 && pRandom.nextInt(4) == 1;
     }
 
     @Nullable

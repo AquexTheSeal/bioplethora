@@ -1,9 +1,9 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.api.BPItemSettings;
-import io.github.bioplethora.api.IReachWeapon;
-import io.github.bioplethora.api.extras.IntegrationUtils;
-import io.github.bioplethora.api.world.ItemUtils;
+import io.github.bioplethora.blocks.api.BPItemSettings;
+import io.github.bioplethora.blocks.api.IReachWeapon;
+import io.github.bioplethora.blocks.api.extras.IntegrationUtils;
+import io.github.bioplethora.blocks.api.world.ItemUtils;
 import io.github.bioplethora.entity.projectile.AbyssalScalesEntity;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.client.gui.screen.Screen;

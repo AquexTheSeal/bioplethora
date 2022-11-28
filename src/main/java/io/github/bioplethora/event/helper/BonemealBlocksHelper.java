@@ -1,7 +1,7 @@
 package io.github.bioplethora.event.helper;
 
 import com.google.common.collect.ImmutableList;
-import io.github.bioplethora.api.world.EntityUtils;
+import io.github.bioplethora.blocks.api.world.EntityUtils;
 import io.github.bioplethora.blocks.SmallMushroomBlock;
 import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.Block;

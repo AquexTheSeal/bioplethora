@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.armor;
 
-import io.github.bioplethora.api.IHurtSkillArmor;
-import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.blocks.api.IHurtSkillArmor;
+import io.github.bioplethora.blocks.api.BPItemSettings;
 import io.github.bioplethora.registry.BPDamageSources;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;

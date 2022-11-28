@@ -1,6 +1,5 @@
 package io.github.bioplethora.world.biomes.end.configurable;
 
-import io.github.bioplethora.api.BPBiomeSettings;
 import io.github.bioplethora.registry.BPParticles;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.biome.*;

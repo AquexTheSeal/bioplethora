@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.armor;
 
-import io.github.bioplethora.api.world.EffectUtils;
+import io.github.bioplethora.blocks.api.world.EffectUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;

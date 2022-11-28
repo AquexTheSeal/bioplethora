@@ -1,6 +1,6 @@
 package io.github.bioplethora.mixin;
 
-import io.github.bioplethora.api.mixin.IAbstractArrowMixin;
+import io.github.bioplethora.blocks.api.mixin.IAbstractArrowMixin;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import org.spongepowered.asm.mixin.Mixin;
 

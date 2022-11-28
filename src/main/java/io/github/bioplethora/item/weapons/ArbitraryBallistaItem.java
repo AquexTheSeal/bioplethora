@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.api.BPItemSettings;
-import io.github.bioplethora.api.mixin.IAbstractArrowMixin;
+import io.github.bioplethora.blocks.api.BPItemSettings;
+import io.github.bioplethora.blocks.api.mixin.IAbstractArrowMixin;
 import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screen.Screen;

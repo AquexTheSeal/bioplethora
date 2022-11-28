@@ -1,20 +1,16 @@
 package io.github.bioplethora.particles;
 
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.bioplethora.api.extras.ClientUtils;
+import io.github.bioplethora.blocks.api.extras.ClientUtils;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.function.Consumer;
 
 public class KingsRoarParticle extends SpriteTexturedParticle {
     private static final Vector3f ROTATION_VECTOR = Util.make(new Vector3f(0.5F, 0.5F, 0.5F), Vector3f::normalize);

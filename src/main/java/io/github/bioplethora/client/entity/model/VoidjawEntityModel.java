@@ -1,9 +1,7 @@
 package io.github.bioplethora.client.entity.model;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.api.IAdvancedGeoModel;
-import io.github.bioplethora.entity.creatures.AltyrusEntity;
-import io.github.bioplethora.entity.creatures.TrapjawEntity;
+import io.github.bioplethora.blocks.api.IAdvancedGeoModel;
 import io.github.bioplethora.entity.creatures.VoidjawEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;

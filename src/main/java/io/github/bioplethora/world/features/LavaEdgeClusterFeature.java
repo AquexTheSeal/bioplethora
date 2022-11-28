@@ -1,7 +1,7 @@
 package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
-import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.blocks.api.world.BlockUtils;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;

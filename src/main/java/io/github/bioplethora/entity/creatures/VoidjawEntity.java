@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.api.world.EffectUtils;
+import io.github.bioplethora.blocks.api.world.EffectUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPAnimalEntity;
 import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
@@ -70,6 +70,10 @@ public class VoidjawEntity extends TrapjawEntity {
     @Override
     public BPEntityClasses getBioplethoraClass() {
         return BPEntityClasses.HELLSENT;
+    }
+
+    public static boolean checkVoidjawSpawnRules(EntityType<VoidjawEntity> voidjaw, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
+        return pPos.getY() > 40;
     }
 
     @Override

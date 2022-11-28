@@ -20,6 +20,7 @@ public class BPEntities {
     //Ecoharmless
     public static final RegistryObject<EntityType<CuttlefishEntity>> CUTTLEFISH = ENTITIES.register("cuttlefish", () -> EntityType.Builder.of(CuttlefishEntity::new, EntityClassification.WATER_CREATURE).sized(0.75f, 0.6f).build(new ResourceLocation(Bioplethora.MOD_ID, "cuttlefish").toString()));
     public static final RegistryObject<EntityType<OnofishEntity>> ONOFISH = ENTITIES.register("onofish", () -> EntityType.Builder.of(OnofishEntity::new, EntityClassification.CREATURE).sized(0.75f, 0.85f).build(new ResourceLocation(Bioplethora.MOD_ID, "onofish").toString()));
+    public static final RegistryObject<EntityType<TriggerfishEntity>> TRIGGERFISH = ENTITIES.register("triggerfish", () -> EntityType.Builder.of(TriggerfishEntity::new, EntityClassification.CREATURE).sized(0.75f, 0.85f).build(new ResourceLocation(Bioplethora.MOD_ID, "triggerfish").toString()));
 
     public static final RegistryObject<EntityType<EurydnEntity>> SOUL_EURYDN = ENTITIES.register("soul_eurydn", () -> EntityType.Builder.of((EntityType.IFactory<EurydnEntity>) (type, world) ->
             new EurydnEntity(type, world, EurydnEntity.Variant.SOUL), EntityClassification.CREATURE).sized(1.8f, 1.1f).build(new ResourceLocation(Bioplethora.MOD_ID, "oul_eurydn").toString()));

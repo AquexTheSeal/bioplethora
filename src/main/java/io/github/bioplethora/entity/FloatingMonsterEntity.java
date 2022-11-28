@@ -77,9 +77,7 @@ public abstract class FloatingMonsterEntity extends BPMonsterEntity implements I
         }
 
         public boolean canUse() {
-            if (FloatingMonsterEntity.this.getTarget() != null &&
-                    !FloatingMonsterEntity.this.getMoveControl().hasWanted() &&
-                    FloatingMonsterEntity.this.random.nextInt(3) == 0) {
+            if (FloatingMonsterEntity.this.getTarget() != null && FloatingMonsterEntity.this.random.nextInt(2) == 0) {
 
                 return FloatingMonsterEntity.this.distanceToSqr(FloatingMonsterEntity.this.getTarget()) > 2.0D;
             } else {
@@ -88,9 +86,7 @@ public abstract class FloatingMonsterEntity extends BPMonsterEntity implements I
         }
 
         public boolean canContinueToUse() {
-            return FloatingMonsterEntity.this.getMoveControl().hasWanted() &&
-                    FloatingMonsterEntity.this.getTarget() != null &&
-                    FloatingMonsterEntity.this.getTarget().isAlive();
+            return FloatingMonsterEntity.this.getTarget() != null && FloatingMonsterEntity.this.getTarget().isAlive();
         }
 
         public void start() {
@@ -132,13 +128,12 @@ public abstract class FloatingMonsterEntity extends BPMonsterEntity implements I
                     if (FloatingMonsterEntity.this.getTarget() == null) {
                         Vector3d vector3d1 = FloatingMonsterEntity.this.getDeltaMovement();
                         FloatingMonsterEntity.this.yRot = -((float) MathHelper.atan2(vector3d1.x, vector3d1.z)) * (180F / (float)Math.PI);
-                        FloatingMonsterEntity.this.yBodyRot = FloatingMonsterEntity.this.yRot;
                     } else {
                         double d2 = FloatingMonsterEntity.this.getTarget().getX() - FloatingMonsterEntity.this.getX();
                         double d1 = FloatingMonsterEntity.this.getTarget().getZ() - FloatingMonsterEntity.this.getZ();
                         FloatingMonsterEntity.this.yRot = -((float)MathHelper.atan2(d2, d1)) * (180F / (float)Math.PI);
-                        FloatingMonsterEntity.this.yBodyRot = FloatingMonsterEntity.this.yRot;
                     }
+                    FloatingMonsterEntity.this.yBodyRot = FloatingMonsterEntity.this.yRot;
                 }
             }
         }

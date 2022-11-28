@@ -1,6 +1,6 @@
 package io.github.bioplethora.registry.worldgen;
 
-import io.github.bioplethora.api.world.WorldgenUtils;
+import io.github.bioplethora.blocks.api.world.WorldgenUtils;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 import java.util.Random;

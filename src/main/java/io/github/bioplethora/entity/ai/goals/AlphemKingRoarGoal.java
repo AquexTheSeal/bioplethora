@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai.goals;
 
-import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.blocks.api.mixin.IPlayerEntityMixin;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
@@ -8,12 +8,10 @@ import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPParticles;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;

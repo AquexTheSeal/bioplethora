@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.api.BPItemSettings;
-import io.github.bioplethora.api.world.EntityUtils;
+import io.github.bioplethora.blocks.api.BPItemSettings;
+import io.github.bioplethora.blocks.api.world.EntityUtils;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

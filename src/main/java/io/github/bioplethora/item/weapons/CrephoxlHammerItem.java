@@ -1,10 +1,10 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.api.BPItemSettings;
-import io.github.bioplethora.api.world.BlockUtils;
-import io.github.bioplethora.api.world.EffectUtils;
-import io.github.bioplethora.api.world.EntityUtils;
-import io.github.bioplethora.api.world.ItemUtils;
+import io.github.bioplethora.blocks.api.BPItemSettings;
+import io.github.bioplethora.blocks.api.world.BlockUtils;
+import io.github.bioplethora.blocks.api.world.EffectUtils;
+import io.github.bioplethora.blocks.api.world.EntityUtils;
+import io.github.bioplethora.blocks.api.world.ItemUtils;
 import io.github.bioplethora.entity.others.BPEffectEntity;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.gui.screen.Screen;

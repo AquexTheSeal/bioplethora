@@ -1,18 +1,13 @@
 package io.github.bioplethora.world.blockplacers;
 
 import com.mojang.serialization.Codec;
-import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.registry.worldgen.BPBlockPlacers;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.blockplacer.BlockPlacer;
 import net.minecraft.world.gen.blockplacer.BlockPlacerType;
-import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
 
 import java.util.Random;
 

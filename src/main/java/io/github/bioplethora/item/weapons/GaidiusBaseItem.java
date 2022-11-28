@@ -1,7 +1,7 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.api.IReachWeapon;
-import io.github.bioplethora.api.world.EntityUtils;
+import io.github.bioplethora.blocks.api.IReachWeapon;
+import io.github.bioplethora.blocks.api.world.EntityUtils;
 import io.github.bioplethora.entity.projectile.CryeanumGaidiusEntity;
 import io.github.bioplethora.entity.projectile.GaidiusBaseEntity;
 import io.github.bioplethora.registry.BPEnchantments;

@@ -21,10 +21,6 @@ public class RockyWoodlandBiome {
 
         spawnInfo.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(BPEntities.ALPHEM.get(), 50, 2, 6));
-        spawnInfo.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(BPEntities.WOODEN_GRYLYNEN.get(), 60, 1, 4));
-        spawnInfo.addSpawn(EntityClassification.MONSTER,
-                new MobSpawnInfo.Spawners(BPEntities.STONE_GRYLYNEN.get(), 5, 1, 2));
 
         BiomeGenerationSettings.Builder biomeGenSettings = (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
 

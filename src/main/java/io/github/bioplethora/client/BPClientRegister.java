@@ -92,6 +92,7 @@ public class BPClientRegister {
         //Ecoharmless
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CUTTLEFISH.get(), CuttlefishEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ONOFISH.get(), OnofishRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.TRIGGERFISH.get(), TriggerfishRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.SOUL_EURYDN.get(), EurydnEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.FIERY_EURYDN.get(), EurydnEntityRender::new);

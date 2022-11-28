@@ -1,6 +1,6 @@
 package io.github.bioplethora.world;
 
-import io.github.bioplethora.api.world.WorldgenUtils;
+import io.github.bioplethora.blocks.api.world.WorldgenUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.EntityClassification;
@@ -130,10 +130,17 @@ public class EntitySpawnManager {
             }
         };
 
-        public static final Consumer<MobSpawnInfoBuilder> WATER_ENTITIES = (builder) -> {
+        public static final Consumer<MobSpawnInfoBuilder> RIVER_ENTITIES = (builder) -> {
             //Cuttlefish
             if (BPConfig.COMMON.spawnCuttlefish.get()) {
                 builder.addSpawn(waterCreature, new MobSpawnInfo.Spawners(BPEntities.CUTTLEFISH.get(), 40 * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 4));
+            }
+        };
+
+        public static final Consumer<MobSpawnInfoBuilder> OCEAN_ENTITIES = (builder) -> {
+            //Triggerfish
+            if (BPConfig.COMMON.spawnTriggerfish.get()) {
+                builder.addSpawn(waterAmbient, new MobSpawnInfo.Spawners(BPEntities.TRIGGERFISH.get(), 15 * BPConfig.COMMON.mobSpawnWeightMultiplier.get(), 1, 5));
             }
 
             //Myliothan
@@ -168,14 +175,17 @@ public class EntitySpawnManager {
         };
 
         public static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
+            //Voidjaw
+            createSpawn(builder, monster, BPEntities.VOIDJAW, 6, 1, 1, BPConfig.COMMON.spawnVoidjaw);
+
             //Gaugalem
-            createSpawn(builder, monster, BPEntities.GAUGALEM, 2, 1, 1, BPConfig.COMMON.spawnGaugalem);
+            createSpawn(builder, monster, BPEntities.GAUGALEM, 5, 1, 1, BPConfig.COMMON.spawnGaugalem);
 
             //Onofish
-            createSpawn(builder, monster, BPEntities.ONOFISH, 6, 1, 2, BPConfig.COMMON.spawnOnofish);
+            createSpawn(builder, monster, BPEntities.ONOFISH, 8, 2, 2, BPConfig.COMMON.spawnOnofish);
 
-            //Voidjaw
-            createSpawn(builder, monster, BPEntities.VOIDJAW, 3, 1, 1, BPConfig.COMMON.spawnVoidjaw);
+            //Triggerfish
+            createSpawn(builder, monster, BPEntities.TRIGGERFISH, 10, 1, 6, BPConfig.COMMON.spawnTriggerfish);
         };
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {
@@ -209,9 +219,12 @@ public class EntitySpawnManager {
                 case SAVANNA:
                     if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA))
                         SAVANNA_ENTITIES.accept(spawnInfoBuilder);
+                case RIVER:
+                    if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
+                        RIVER_ENTITIES.accept(spawnInfoBuilder);
                 case OCEAN:
-                    if (hasOverworldType || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
-                        WATER_ENTITIES.accept(spawnInfoBuilder);
+                    if (hasOverworldType && BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN))
+                        OCEAN_ENTITIES.accept(spawnInfoBuilder);
                 case NETHER:
                     if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.BASALT_DELTAS)) {
                         BASALT_DELTAS_ENTITIES.accept(spawnInfoBuilder);

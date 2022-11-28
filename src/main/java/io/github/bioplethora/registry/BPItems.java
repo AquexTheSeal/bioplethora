@@ -21,6 +21,8 @@ import io.github.bioplethora.item.functionals.SwervingTotemItem;
 import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.item.weapons.fleignarite_set.*;
 import io.github.bioplethora.item.weapons.reinforced_fleignarite_set.*;
+import net.minecraft.block.Blocks;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
@@ -65,6 +67,9 @@ public class BPItems {
     public static final RegistryObject<Item> CRYEANUM_PEARL = ITEMS.register("cryeanum_pearl", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> TRAPJAW_SCALES = ITEMS.register("trapjaw_scales", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
     public static final RegistryObject<Item> VOIDJAW_SCALES = ITEMS.register("voidjaw_scales", () -> new Item(new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
+
+    // Bioplethora Fish Buckets
+    public static final RegistryObject<Item> TRIGGERFISH_BUCKET = ITEMS.register("triggerfish_bucket", () -> new FishBucketItem(BPEntities.TRIGGERFISH, () -> Fluids.WATER, new Item.Properties().stacksTo(64).tab(BPItemGroup.BioplethoraItemItemGroup)));
 
     // Vanilla mobs custom Weapons
     public static final RegistryObject<Item> PHANTOM_CHIME = ITEMS.register("phantom_chime", () -> new PhantomChimeItem(new Item.Properties().stacksTo(1).rarity(BPRarityTypes.SACRED).tab(BPItemGroup.BioplethoraItemItemGroup)));
@@ -162,6 +167,7 @@ public class BPItems {
     /** @ECOHARMLESS **/
     public static final RegistryObject<Item> CUTTLEFISH_SPAWN_EGG = ITEMS.register("cuttlefish_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.CUTTLEFISH, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> ONOFISH_SPAWN_EGG = ITEMS.register("onofish_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.ONOFISH, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
+    public static final RegistryObject<Item> TRIGGERFISH_SPAWN_EGG = ITEMS.register("triggerfish_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.TRIGGERFISH, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
 
     public static final RegistryObject<Item> FIERY_EURYDN_SPAWN_EGG = ITEMS.register("fiery_eurydn_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.FIERY_EURYDN, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));
     public static final RegistryObject<Item> SOUL_EURYDN_SPAWN_EGG = ITEMS.register("soul_eurydn_spawn_egg", () -> new BioplethoraSpawnEggItem(BPEntities.SOUL_EURYDN, BPEntityClasses.ECOHARMLESS, new Item.Properties().tab(BPItemGroup.BioplethoraSpawnEggsItemGroup)));

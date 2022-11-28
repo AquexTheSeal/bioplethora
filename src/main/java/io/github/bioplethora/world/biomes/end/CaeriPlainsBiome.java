@@ -1,6 +1,6 @@
 package io.github.bioplethora.world.biomes.end;
 
-import io.github.bioplethora.api.BPBiomeSettings;
+import io.github.bioplethora.blocks.api.BPBiomeSettings;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.gen.GenerationStage;

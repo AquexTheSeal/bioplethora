@@ -2,8 +2,8 @@ package io.github.bioplethora.item.weapons;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import io.github.bioplethora.api.BPItemSettings;
-import io.github.bioplethora.api.IReachWeapon;
+import io.github.bioplethora.blocks.api.BPItemSettings;
+import io.github.bioplethora.blocks.api.IReachWeapon;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.projectile.AlphanumObliteratorSpearEntity;
 import io.github.bioplethora.registry.BPEnchantments;

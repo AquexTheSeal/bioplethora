@@ -25,6 +25,7 @@ public class BPCommonConfig {
 
     //Ecoharmless
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnCuttlefish;
+    public final ForgeConfigSpec.ConfigValue<Boolean> spawnTriggerfish;
 
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnSoulEurydn;
     public final ForgeConfigSpec.ConfigValue<Boolean> spawnFieryEurydn;
@@ -114,6 +115,7 @@ public class BPCommonConfig {
         builder.push("Ecoharmless Mobs");
         spawnCuttlefish = builder.define("Enable mob spawning for Cuttlefishes", true);
         spawnOnofish = builder.define("Enable mob spawning for Onofishes", true);
+        spawnTriggerfish = builder.define("Enable mob spawning for Triggerfishes", true);
 
         spawnSoulEurydn = builder.define("Enable mob spawning for Soul Eurydnia", true);
         spawnFieryEurydn = builder.define("Enable mob spawning for Fiery Eurydnia", true);

@@ -1,9 +1,9 @@
 package io.github.bioplethora.event;
 
-import io.github.bioplethora.api.IHurtSkillArmor;
-import io.github.bioplethora.api.IReachWeapon;
-import io.github.bioplethora.api.advancements.AdvancementUtils;
-import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.blocks.api.IHurtSkillArmor;
+import io.github.bioplethora.blocks.api.IReachWeapon;
+import io.github.bioplethora.blocks.api.advancements.AdvancementUtils;
+import io.github.bioplethora.blocks.api.world.BlockUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
@@ -24,8 +24,10 @@ import io.github.bioplethora.registry.BPEffects;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.entity.EnderDragonRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -489,21 +491,25 @@ public class ServerWorldEvents {
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public static void onCameraSetup(EntityViewRenderEvent.CameraSetup event) {
         RenderEventHelper.onCameraSetup(event);
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public static void onRenderingPlayer(RenderPlayerEvent event) {
         RenderEventHelper.onRenderingPlayer(event);
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public static void onRenderingOverlay(RenderGameOverlayEvent.Pre event) {
         RenderEventHelper.onRenderingOverlay(event);
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public static void onFogDensity(EntityViewRenderEvent.FogDensity event) {
         RenderEventHelper.onFogDensity(event);
     }

@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.others;
 
-import io.github.bioplethora.api.advancements.AdvancementUtils;
+import io.github.bioplethora.blocks.api.advancements.AdvancementUtils;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.*;
@@ -9,6 +9,7 @@ import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -55,11 +56,10 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
         ++birthTime;
 
-        this.setDeltaMovement(this.getDeltaMovement().add(0, 0.5, 0));
+        this.move(MoverType.SELF, new Vector3d(0.0D, 0.15F, 0.0D));
 
         if (this.level instanceof ServerWorld) {
             ((ServerWorld) this.level).sendParticles(ParticleTypes.POOF, (this.getX()), (this.getY()), (this.getZ()), 5, 1, 1, 1, 0.1);
-            //this.summonParticleBarrier((ServerWorld) this.level);
         }
 
         if (this.birthTime >= 100) {
@@ -70,8 +70,6 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
                 ServerWorld serverworld = (ServerWorld)this.level;
                 BlockPos blockpos = (new BlockPos(this.getX(), this.getY(), this.getZ()));
 
-                //this.grantBirthAdvancement(32);
-
                 AltyrusEntity altyrusEntity = BPEntities.ALTYRUS.get().create(this.level);
                 altyrusEntity.moveTo(blockpos, 0.0F, 0.0F);
                 altyrusEntity.finalizeSpawn(serverworld, this.level.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
@@ -80,20 +78,6 @@ public class AltyrusSummoningEntity extends Entity implements IAnimatable {
 
                 this.remove();
             }
-        }
-    }
-
-    public void summonParticleBarrier(ServerWorld serverWorld) {
-
-        int loop = 0; int particleAmount = 10; int xRad = 3; int zRad = 3;
-
-        if (loop < particleAmount) {
-            serverWorld.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,
-                    this.getX() + 0.5 + Math.cos(((Math.PI * 2) / particleAmount) * loop) * xRad,
-                    this.getY(),
-                    this.getZ() + 0.5 + Math.sin(((Math.PI * 2) / particleAmount) * loop) * zRad,
-                    0.0, 1.0, 0.0);
-            ++loop;
         }
     }
 

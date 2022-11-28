@@ -1,6 +1,6 @@
 package io.github.bioplethora.item;
 
-import io.github.bioplethora.api.IReachWeapon;
+import io.github.bioplethora.blocks.api.IReachWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -12,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

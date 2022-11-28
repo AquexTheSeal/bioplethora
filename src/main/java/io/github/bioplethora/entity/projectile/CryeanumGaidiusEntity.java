@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.api.world.EffectUtils;
+import io.github.bioplethora.blocks.api.world.EffectUtils;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;
 import io.github.bioplethora.registry.BPParticles;

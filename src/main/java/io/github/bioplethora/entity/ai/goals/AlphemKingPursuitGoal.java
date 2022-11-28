@@ -1,15 +1,9 @@
 package io.github.bioplethora.entity.ai.goals;
 
-import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
-import io.github.bioplethora.api.world.BlockUtils;
-import io.github.bioplethora.api.world.EntityUtils;
-import io.github.bioplethora.config.BPConfig;
-import io.github.bioplethora.entity.creatures.AlphemEntity;
+import io.github.bioplethora.blocks.api.world.BlockUtils;
+import io.github.bioplethora.blocks.api.world.EntityUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
-import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
@@ -19,10 +13,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 
 public class AlphemKingPursuitGoal extends Goal {

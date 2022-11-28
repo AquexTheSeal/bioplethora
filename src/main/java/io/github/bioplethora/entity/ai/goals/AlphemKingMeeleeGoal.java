@@ -2,6 +2,8 @@ package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.ai.gecko.GeckoDodgeableMeleeGoal;
+import io.github.bioplethora.entity.ai.gecko.GeckoGoal;
+import io.github.bioplethora.entity.ai.gecko.IGeckoBaseEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,24 +33,19 @@ public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEnti
     public static boolean checkIfValid(AlphemKingMeeleeGoal goal, AlphemKingEntity attacker, LivingEntity target) {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
-            
-            if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
+            if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
                 goal.doCIV(attacker);
                 return false;
             }
-
             if (attacker.attackPhase != goal.attackPhaseReq()) {
                 return false;
             }
-
             if (attacker.getRoaring()) {
                 return false;
             }
-
             if (attacker.isPursuit()) {
                 return false;
             }
-            
             double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
             if (distance <= goal.reachSq(attacker, target)) return true;
         }
@@ -66,6 +63,11 @@ public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEnti
     }
 
     @Override
+    public boolean canContinueToUse() {
+        return isInAttackState && this.entity.getTarget() != null;
+    }
+
+    @Override
     public void start() {
         isInAttackState = true;
         this.king.setAttacking(true);
@@ -75,26 +77,22 @@ public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEnti
 
     @Override
     public void stop() {
-        isInAttackState = false;
-        LivingEntity target = this.king.getTarget();
-        if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-            this.king.setTarget(null);
-        }
-        this.king.setAttacking(false);
-        this.king.setAggressive(false);
-
         if (this.hasHit) {
             switchPhase();
+            this.hasHit = false;
         }
-
-        this.hasHit = false;
         this.animationProgress = 0;
+        this.isInAttackState = false;
+        LivingEntity target = this.entity.getTarget();
+        if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
+            this.entity.setTarget(null);
+        }
+        king.setAttacking(false);
+        this.entity.setAggressive(false);
     }
 
     public void switchPhase() {
-        if (this.king.attackPhase == 0) {
-            this.king.attackPhase = 1;
-        }
+        this.king.attackPhase = 1;
     }
 
     @Override
@@ -112,12 +110,23 @@ public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEnti
             }
 
             if (this.animationProgress > this.animationLength) {
+                switchPhase();
                 this.animationProgress = 0;
                 this.hasHit = false;
-                switchPhase();
-
                 this.isInAttackState = false;
             }
         }
+    }
+
+    @Override
+    public boolean canReachTarget() {
+        LivingEntity target = entity.getTarget();
+        if (target == null) return false;
+
+        if (target.isAlive() && !target.isSpectator()) {
+            double distance = entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
+            return distance <= reachSq(entity, target);
+        }
+        return false;
     }
 }

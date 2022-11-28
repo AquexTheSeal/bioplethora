@@ -1,8 +1,7 @@
 package io.github.bioplethora.world;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.api.world.WorldgenUtils;
-import io.github.bioplethora.config.BPCommonConfig;
+import io.github.bioplethora.blocks.api.world.WorldgenUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.BPParticles;
 import io.github.bioplethora.registry.worldgen.BPConfiguredSurfaceBuilders;
@@ -11,7 +10,6 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.registry.MutableRegistry;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;

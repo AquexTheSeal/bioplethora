@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.api.advancements.AdvancementUtils;
-import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.blocks.api.advancements.AdvancementUtils;
+import io.github.bioplethora.blocks.api.world.BlockUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
@@ -13,7 +13,6 @@ import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.gui.overlay.BossOverlayGui;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -36,7 +35,6 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -87,7 +85,6 @@ public class AltyrusEntity extends BPMonsterEntity implements IAnimatable, IFlyi
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.2));
         this.goalSelector.addGoal(3, new AltyrusEntity.ChargeAttackGoal());
         this.goalSelector.addGoal(3, new GeckoDodgeableMeleeGoal<>(this, 60, 0.5, 0.6));
         this.goalSelector.addGoal(4, new AltyrusEntity.MoveRandomGoal());

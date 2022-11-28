@@ -1,10 +1,10 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.api.BPItemSettings;
-import io.github.bioplethora.api.IReachWeapon;
-import io.github.bioplethora.api.world.EffectUtils;
-import io.github.bioplethora.api.world.EntityUtils;
-import io.github.bioplethora.api.world.ItemUtils;
+import io.github.bioplethora.blocks.api.BPItemSettings;
+import io.github.bioplethora.blocks.api.IReachWeapon;
+import io.github.bioplethora.blocks.api.world.EffectUtils;
+import io.github.bioplethora.blocks.api.world.EntityUtils;
+import io.github.bioplethora.blocks.api.world.ItemUtils;
 import io.github.bioplethora.entity.others.BPEffectEntity;
 import io.github.bioplethora.registry.BPDamageSources;
 import io.github.bioplethora.registry.BPEntities;

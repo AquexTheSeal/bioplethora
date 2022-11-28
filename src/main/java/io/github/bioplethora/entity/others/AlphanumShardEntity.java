@@ -45,6 +45,11 @@ public class AlphanumShardEntity extends Entity implements IAnimatable {
                 ServerWorld serverworld = (ServerWorld)this.level;
                 BlockPos blockpos = new BlockPos(getX(), getY(), getZ());
                 AlphemEntity alphem = BPEntities.ALPHEM.get().create(this.level);
+
+                alphem.setHasLimitedLife(true);
+                alphem.setExplodeOnExpiry(false);
+                alphem.setLifeLimitBeforeDeath(200);
+
                 alphem.finalizeSpawn(serverworld, this.level.getCurrentDifficultyAt(blockpos), SpawnReason.MOB_SUMMONED, null, null);
                 alphem.moveTo(blockpos, 0.0F, 0.0F);
                 if (this.target != null) {

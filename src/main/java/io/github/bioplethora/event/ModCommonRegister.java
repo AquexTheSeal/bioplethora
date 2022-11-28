@@ -12,6 +12,7 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.entity.*;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -62,6 +63,7 @@ public class ModCommonRegister {
     public static void registerEntityPlacements(FMLCommonSetupEvent event) {
         EntitySpawnPlacementRegistry.register(BPEntities.CUTTLEFISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CuttlefishEntity::checkCuttlefishSpawnRules);
         EntitySpawnPlacementRegistry.register(BPEntities.ONOFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, OnofishEntity::checkOnofishSpawnRules);
+        EntitySpawnPlacementRegistry.register(BPEntities.TRIGGERFISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AbstractFishEntity::checkFishSpawnRules);
         EntitySpawnPlacementRegistry.register(BPEntities.FIERY_EURYDN.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
         EntitySpawnPlacementRegistry.register(BPEntities.SOUL_EURYDN.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
 
@@ -70,6 +72,7 @@ public class ModCommonRegister {
         EntitySpawnPlacementRegistry.register(BPEntities.MYUTHINE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
 
         EntitySpawnPlacementRegistry.register(BPEntities.CREPHOXL.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
+        EntitySpawnPlacementRegistry.register(BPEntities.VOIDJAW.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, VoidjawEntity::checkVoidjawSpawnRules);
 
         EntitySpawnPlacementRegistry.register(BPEntities.MYLIOTHAN.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MyliothanEntity::checkMyliothanSpawnRules);
     }

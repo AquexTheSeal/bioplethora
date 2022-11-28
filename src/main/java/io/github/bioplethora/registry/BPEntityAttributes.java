@@ -4,6 +4,7 @@ import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.entity.creatures.*;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.enums.BPGrylynenTier;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,6 +18,7 @@ public class BPEntityAttributes {
         //Ecoharmless
         event.put(BPEntities.CUTTLEFISH.get(), CuttlefishEntity.setCustomAttributes().build());
         event.put(BPEntities.ONOFISH.get(), OnofishEntity.setCustomAttributes().build());
+        event.put(BPEntities.TRIGGERFISH.get(), AbstractFishEntity.createAttributes().build());
 
         event.put(BPEntities.SOUL_EURYDN.get(), EurydnEntity.setCustomAttributes().build());
         event.put(BPEntities.FIERY_EURYDN.get(), EurydnEntity.setCustomAttributes().build());

@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.api.world.EntityUtils;
+import io.github.bioplethora.blocks.api.world.EntityUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.particles.WindPoofParticleData;
 import io.github.bioplethora.registry.BPEntities;
@@ -35,7 +35,7 @@ import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
 
-import static io.github.bioplethora.api.extras.MathUtils.*;
+import static io.github.bioplethora.blocks.api.extras.MathUtils.*;
 
 /**
  * @credits

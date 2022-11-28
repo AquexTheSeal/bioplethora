@@ -28,6 +28,7 @@
   "entity.bioplethora.onofish": "Onofish",
   "entity.bioplethora.myuthine": "Myuthine",
   "entity.bioplethora.voidjaw": "Voidjaw",
+  "entity.bioplethora.triggerfish": "Triggerfish",
 
   "entity.bioplethora.wooden_grylynen": "Wooden Grylynen",
   "entity.bioplethora.stone_grylynen": "Stone Grylynen",
@@ -93,6 +94,7 @@
   "item.bioplethora.onofish_spawn_egg": "Onofish Spawn Egg",
   "item.bioplethora.myuthine_spawn_egg": "Myuthine Spawn Egg",
   "item.bioplethora.voidjaw_spawn_egg": "Voidjaw Spawn Egg",
+  "item.bioplethora.triggerfish_spawn_egg": "Triggerfish Spawn Egg",
 
   "item.bioplethora.wooden_grylynen_spawn_egg": "Wooden Grylynen Spawn Egg",
   "item.bioplethora.stone_grylynen_spawn_egg": "Stone Grylynen Spawn Egg",
@@ -123,6 +125,9 @@
   "item.bioplethora.cryeanum_pearl": "Cryeanum Pearl",
   "item.bioplethora.trapjaw_scales": "Trapjaw Scales",
   "item.bioplethora.voidjaw_scales": "Voidjaw Scales",
+  "item.bioplethora.triggerfish_bucket": "Triggerfish Bucket",
+  "item.bioplethora.warped_grapes": "Warped Grapes",
+  "item.bioplethora.triggerfish": "Triggerfish",
 
   "item.bioplethora.green_grylynen_crystal": "Green Grylynen Crystal",
   "item.bioplethora.yellow_grylynen_crystal": "Yellow Grylynen Crystal",
@@ -138,6 +143,8 @@
   "item.bioplethora.cooked_mosile": "Cooked Mosile",
   "item.bioplethora.raw_jawflesh": "Raw Jawflesh",
   "item.bioplethora.cooked_jawflesh": "Cooked Jawflesh",
+  "item.bioplethora.crimson_bittersweet_seeds": "Crimson Bittersweet Seeds",
+  "item.bioplethora.thontus_berries": "Thontus Berries",
 
   "item.bioplethora.crephoxl_hammer": "Crephoxl Hammer",
   "item.bioplethora.frostbite_metal_shield": "Frostbite Metal Shield",
@@ -292,6 +299,12 @@
   "block.bioplethora.spinxelthorn_plant": "Spinxelthorn",
   "block.bioplethora.glacynth": "Glacynth",
   "block.bioplethora.glacynth_plant": "Glacynth",
+  "block.bioplethora.enrede_corsascile": "Enrede Corsascile",
+  "block.bioplethora.enrede_kelp": "Enrede Kelp",
+  "block.bioplethora.enrede_kelp_plant": "Enrede Kelp Plant",
+  "block.bioplethora.ochaim_green": "Ochaim Green",
+  "block.bioplethora.ochaim_purple": "Ochaim Purple",
+  "block.bioplethora.ochaim_red": "Ochaim Red",
 
   "block.bioplethora.basalt_speleotherm": "Basalt Speleotherm",
   "block.bioplethora.basalt_speleotherm_plant": "Basalt Speleotherm",

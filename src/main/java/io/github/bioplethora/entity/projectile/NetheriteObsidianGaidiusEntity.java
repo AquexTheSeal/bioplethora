@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.projectile;
 
-import io.github.bioplethora.api.world.BlockUtils;
-import io.github.bioplethora.api.world.EffectUtils;
+import io.github.bioplethora.blocks.api.world.BlockUtils;
+import io.github.bioplethora.blocks.api.world.EffectUtils;
 import io.github.bioplethora.registry.BPEntities;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.material.Material;
