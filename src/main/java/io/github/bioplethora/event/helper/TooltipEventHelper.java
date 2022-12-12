@@ -1,7 +1,7 @@
 package io.github.bioplethora.event.helper;
 
-import io.github.bioplethora.blocks.api.BPItemSettings;
-import io.github.bioplethora.blocks.api.IReachWeapon;
+import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.IReachWeapon;
 import io.github.bioplethora.registry.BPEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.util.text.TranslationTextComponent;

@@ -23,6 +23,7 @@ public class BPSoundEvents {
     public static final RegistryObject<SoundEvent> SHACHATH_IDLE = SOUNDS.register("shachath_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "shachath_idle")));
     public static final RegistryObject<SoundEvent> SHACHATH_HURT = SOUNDS.register("shachath_hurt", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "shachath_hurt")));
     public static final RegistryObject<SoundEvent> SHACHATH_DEATH = SOUNDS.register("shachath_death", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "shachath_death")));
+    public static final RegistryObject<SoundEvent> SHACHATH_SLASH = SOUNDS.register("shachath_slash", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "shachath_slash")));
 
     public static final RegistryObject<SoundEvent> ALTYRUS_IDLE = SOUNDS.register("altyrus_idle", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_idle")));
     public static final RegistryObject<SoundEvent> ALTYRUS_CHARGE = SOUNDS.register("altyrus_charge", () -> new SoundEvent(new ResourceLocation(Bioplethora.MOD_ID, "altyrus_charge")));

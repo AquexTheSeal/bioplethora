@@ -1,7 +1,7 @@
 package io.github.bioplethora.particles;
 
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.bioplethora.blocks.api.extras.ClientUtils;
+import io.github.bioplethora.api.extras.ClientUtils;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.world.ClientWorld;

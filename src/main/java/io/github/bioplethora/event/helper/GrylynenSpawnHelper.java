@@ -1,7 +1,7 @@
 package io.github.bioplethora.event.helper;
 
-import io.github.bioplethora.blocks.api.advancements.AdvancementUtils;
-import io.github.bioplethora.blocks.api.events.BPHooks;
+import io.github.bioplethora.api.advancements.AdvancementUtils;
+import io.github.bioplethora.api.events.BPHooks;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.GrylynenEntity;
 import io.github.bioplethora.entity.others.GrylynenCoreBombEntity;

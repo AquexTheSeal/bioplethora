@@ -1,8 +1,8 @@
 package io.github.bioplethora.registry;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.blocks.api.events.BPHooks;
-import io.github.bioplethora.blocks.api.world.EffectUtils;
+import io.github.bioplethora.api.events.BPHooks;
+import io.github.bioplethora.api.world.EffectUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;

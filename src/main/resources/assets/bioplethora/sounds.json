@@ -72,6 +72,12 @@
       "bioplethora:shachath_death"
     ]
   },
+  "shachath_slash": {
+    "subtitle": "subtitles.bioplethora.shachath.slash",
+    "sounds": [
+      "bioplethora:shachath_slash"
+    ]
+  },
   "alphem_step": {
     "subtitle": "subtitles.bioplethora.alphem.step",
     "sounds": [

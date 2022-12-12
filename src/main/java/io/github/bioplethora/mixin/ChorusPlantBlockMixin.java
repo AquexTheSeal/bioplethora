@@ -23,14 +23,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
-@Mixin(ChorusPlantBlock.class)
+@Mixin(value = ChorusPlantBlock.class, priority = 100)
 public abstract class ChorusPlantBlockMixin extends SixWayBlock {
 
     public ChorusPlantBlockMixin(float p_i48355_1_, Properties pProperties) {
         super(p_i48355_1_, pProperties);
     }
 
-    @Inject(method = "getStateForPlacement*", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getStateForPlacement(Lnet/minecraft/item/BlockItemUseContext;)Lnet/minecraft/block/BlockState;", at = @At("RETURN"), cancellable = true)
     public void getStateForPlacement(BlockItemUseContext ctx, CallbackInfoReturnable<BlockState> info) {
         BlockPos pos = ctx.getClickedPos();
         World world = ctx.getLevel();
@@ -40,7 +40,7 @@ public abstract class ChorusPlantBlockMixin extends SixWayBlock {
         }
     }
 
-    @Inject(method = "getStateForPlacement*", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getStateForPlacement(Lnet/minecraft/world/IBlockReader;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;", at = @At("RETURN"), cancellable = true)
     private void getStateForPlacementX(IBlockReader world, BlockPos pos, CallbackInfoReturnable<BlockState> info)
     {
         BlockState plant = info.getReturnValue();

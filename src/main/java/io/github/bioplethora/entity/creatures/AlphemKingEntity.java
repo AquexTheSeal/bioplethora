@@ -1,8 +1,8 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.blocks.api.mixin.IPlayerEntityMixin;
-import io.github.bioplethora.blocks.api.world.BlockUtils;
-import io.github.bioplethora.blocks.api.world.EntityUtils;
+import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;
@@ -10,7 +10,9 @@ import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
 import io.github.bioplethora.entity.ai.goals.*;
 import io.github.bioplethora.entity.others.AlphanumShardEntity;
+import io.github.bioplethora.entity.others.BPEffectEntity;
 import io.github.bioplethora.entity.others.part.BPPartEntity;
+import io.github.bioplethora.enums.BPEffectTypes;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.BPAttributes;
 import io.github.bioplethora.registry.BPEntities;
@@ -19,13 +21,15 @@ import io.github.bioplethora.registry.BPSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.FireworkParticle;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -33,6 +37,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -45,7 +50,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.entity.PartEntity;
+import software.bernie.example.client.model.entity.BikeModel;
+import software.bernie.example.client.renderer.entity.BikeGeoRenderer;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -71,7 +77,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     protected static final DataParameter<Boolean> BERSERKED = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> PURSUIT = EntityDataManager.defineId(AlphemKingEntity.class, DataSerializers.BOOLEAN);
 
-    private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS).setCreateWorldFog(true).setPlayBossMusic(true));
+    private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS).setDarkenScreen(true).setPlayBossMusic(true));
     private final AnimationFactory factory = new AnimationFactory(this);
     public boolean explodedOnDeath = false;
     public double healthRegenTimer = 0;
@@ -82,6 +88,9 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public float vecOfTarget;
     public boolean inWall;
     public int dyingExpTimer;
+
+    // Extras - For modded mobs that picks up mobs.
+    public int pickupTimer;
 
     /*
     public final KingPartEntity[] subEntities;
@@ -111,19 +120,6 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
                 .add(BPAttributes.TRUE_DEFENSE.get(), 2D);
     }
 
-    /*
-    @Nullable
-    @Override
-    public PartEntity<?>[] getParts() {
-        return subEntities;
-    }
-
-    @Override
-    public boolean isMultipartEntity() {
-        return true;
-    }
-    */
-
     @Override
     public BPEntityClasses getBioplethoraClass() {
         return BPEntityClasses.ELDERIA;
@@ -139,17 +135,28 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             @Override
             public boolean canUse() {
                 if (RANDOM.nextInt(this.checkRate) == 0) return false;
-
-                if (!entity.getRoaring()) {
+                if (!entity.isBusy()) {
                     return this.isExecutable(this, this.entity, this.entity.getTarget());
                 } else {
                     return false;
                 }
             }
-
             @Override
             public boolean canContinueToUse() {
                 return this.canUse();
+            }
+            @Override
+            public void moveToTarget() {
+                Vector3d vector3d = RandomPositionGenerator.getPosAvoid(entity, 16, 7, entity.getTarget().position());
+                Path pathT = null;
+                if (vector3d != null) {
+                    pathT = entity.getNavigation().createPath(vector3d.x, vector3d.y, vector3d.z, 0);
+                }
+                if (this.entity.isCharging() && pathT != null) {
+                    entity.getNavigation().moveTo(pathT, this.speedMultiplier);
+                } else {
+                    super.moveToTarget();
+                }
             }
         });
         // 1st phase meelee
@@ -173,6 +180,10 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     public void registerControllers(AnimationData data) {
         AnimationController controller = new AnimationController<>(this, "alphem_king_controller", 0, this::predicate);
         data.addAnimationController(controller);
+    }
+
+    public boolean isBusy() {
+        return this.getAttacking() || this.getAttacking() || this.getAttacking2() || this.getSmashing() || this.isPursuit();
     }
 
     @Override
@@ -256,7 +267,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             if (wakeTimer == 50) {
                 this.playSound(SoundEvents.ANVIL_LAND, 1.0F, 1.0F);
             }
-            if (wakeTimer == 100) {
+            if (wakeTimer == 90) {
                 this.playSound(SoundEvents.ELDER_GUARDIAN_CURSE, 1.0F, 0.5F);
                 if (level instanceof ServerWorld) {
                     ((ServerWorld) level).sendParticles(BPParticles.KINGS_ROAR.get(), getX(), getY() + 0.5D, getZ(), 1, 0, 0, 0, 0);
@@ -267,19 +278,64 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
                 this.setWaking(false);
             }
         }
+
+        int areaint = 32;
+        AxisAlignedBB aabb = new AxisAlignedBB(
+                this.getX() - areaint, this.getY() - areaint, this.getZ() - areaint,
+                this.getX() + areaint, this.getY() + areaint, this.getZ() + areaint
+        );
+
+        for (AlphemEntity alphem : level.getEntitiesOfClass(AlphemEntity.class, aabb)) {
+            if (!(alphem.getOwner() instanceof AlphemKingEntity)) {
+                alphem.kill();
+            }
+        }
+        for (CavernFleignarEntity cavernFleignar : level.getEntitiesOfClass(CavernFleignarEntity.class, aabb)) {
+            cavernFleignar.kill();
+        }
     }
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (this.getWaking()) {
-            this.playSound(SoundEvents.ANVIL_LAND, 1.0F, 1.5F);
-            return false;
+        float moveVector = (float) Math.toRadians(this.vecOfTarget + 90 + this.getRandom().nextFloat() * 150 - 75);
+        Vector3d getVector = this.getDeltaMovement().add(1.75F * Math.cos(moveVector), 0, 1.75F * Math.sin(moveVector));
+        if (pSource != DamageSource.OUT_OF_WORLD) {
+            if (this.getWaking()) {
+                this.playSound(SoundEvents.ANVIL_LAND, 1.0F, 1.5F);
+                return false;
+            }
+            if (this.isBarriered()) {
+                this.playSound(SoundEvents.GLASS_BREAK, 1.5F, 1.0F);
+                this.setBarriered(false);
+                return false;
+            }
+        }
+        if (!this.getAttacking() && !this.getAttacking2() && !this.getSmashing()) {
+            this.setDeltaMovement(getVector.x(), 0.5, getVector.z());
         }
         return super.hurt(pSource, pAmount);
     }
 
     public void aiStep() {
         super.aiStep();
+
+        // Extras - For modded mobs that picks up mobs.
+        float moveVector = (float) Math.toRadians(this.vecOfTarget + 90 + this.getRandom().nextFloat() * 150 - 75);
+        Vector3d getVector = this.getDeltaMovement().add(2.5F * Math.cos(moveVector), 0, 2.5F * Math.sin(moveVector));
+        if (this.isPassenger()) {
+            ++pickupTimer;
+            if (pickupTimer == 40) {
+                this.heal(10.0F);
+                this.playSound(SoundEvents.ANVIL_LAND, 1.5F, 0.75F);
+                level.explode(this, getX(), getY(), getZ(), 3.0F, Explosion.Mode.NONE);
+                this.stopRiding();
+                this.setDeltaMovement(getVector.x(), 1.35, getVector.z());
+                pickupTimer = 0;
+            }
+        } else {
+            pickupTimer = 0;
+        }
+
         World world = this.level;
 
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
@@ -322,7 +378,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
             if (!(this.getHealth() <= 5)) {
                 ++healthRegenTimer;
-                if (healthRegenTimer == 40) {
+                if (healthRegenTimer == 20) {
                     this.heal( 2 + this.getRandom().nextInt(2));
                     healthRegenTimer = 0;
                 }
@@ -449,14 +505,19 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         ((IPlayerEntityMixin) player).setAlphanumCurse(false);
     }
 
+    public float hurtScalable(LivingEntity ent, float val, float hmVal) {
+        return (float) ((BPConfig.IN_HELLMODE ? 11 : 7) + (Math.sqrt(ent.getMaxHealth() * 1.25)));
+    }
+
     public void phaseAttack(World world) {
         double d0 = -MathHelper.sin(this.yRot * ((float)Math.PI / 180F)) * 4;
         double d1 = MathHelper.cos(this.yRot * ((float)Math.PI / 180F)) * 4;
         BlockPos areaPos = new BlockPos(getX() + d0, getY(), getZ() + d1);
 
         for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(5, 0.5, 5).move(areaPos))) {
-
             if (areaEnt != this) {
+                areaEnt.hurt(DamageSource.mobAttack(this), hurtScalable(areaEnt, 9, 11));
+                areaEnt.hurt(DamageSource.explosion(this), hurtScalable(areaEnt, 9, 11));
                 this.knockbackNoRes(areaEnt, 1.0F, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
                 areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 1.5 - areaEnt.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
@@ -477,7 +538,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         BlockPos areaPos = new BlockPos(getX() + d0, getY(), getZ() + d1);
         for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(10, 0.5, 10).move(areaPos))) {
             if (areaEnt != this) {
-                areaEnt.hurt(DamageSource.mobAttack(this), BPConfig.IN_HELLMODE ? 23 : 18);
+                areaEnt.hurt(DamageSource.mobAttack(this), hurtScalable(areaEnt, 7, 10));
+                areaEnt.hurt(DamageSource.explosion(this), hurtScalable(areaEnt, 7, 10));
                 this.knockbackNoRes(areaEnt, 2.5F, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
                 areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 0.75, 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
@@ -497,8 +559,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         BlockPos areaPos = new BlockPos(getX() + d0, getY(), getZ() + d1);
 
         for (LivingEntity areaEnt : world.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(15, 0.5, 15).move(areaPos))) {
-
             if (areaEnt != this) {
+                areaEnt.hurt(DamageSource.mobAttack(this), hurtScalable(areaEnt, 13, 17));
                 this.knockbackNoRes(areaEnt, f1 * 0.5F, MathHelper.sin(this.yRot * ((float) Math.PI / 180F)), -MathHelper.cos(this.yRot * ((float) Math.PI / 180F)));
                 areaEnt.setDeltaMovement(this.getDeltaMovement().add(0, 1.5, 0));
                 areaEnt.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 2));
@@ -536,6 +598,12 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         ++this.deathTime;
 
+        int areaint = 256;
+        AxisAlignedBB aabb = new AxisAlignedBB(
+                this.getX() - areaint, this.getY() - areaint, this.getZ() - areaint,
+                this.getX() + areaint, this.getY() + areaint, this.getZ() + areaint
+        );
+
         if (this.dyingExpTimer++ == 6) {
             this.dropExperience(MathHelper.floor((float)12000 * 0.08F));
             dyingExpTimer = 0;
@@ -552,6 +620,11 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
                 this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, 1.0F);
 
                 explodedOnDeath = true;
+            }
+            for (BPEffectEntity effect : level.getLoadedEntitiesOfClass(BPEffectEntity.class, aabb)) {
+                if (effect.getEffectType() == BPEffectTypes.ALPHANUM_FIRE && effect.getOwner() == this) {
+                    effect.remove();
+                }
             }
             this.remove();
 
@@ -575,6 +648,16 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         }
     }
 
+    public void addAKEffect(BPEffectTypes effectTypes) {
+        BPEffectEntity slash = BPEntities.BP_EFFECT.get().create(this.level);
+        slash.setEffectType(effectTypes);
+        slash.setOwner(this);
+        slash.moveTo(this.blockPosition(), this.yBodyRot, 0.0F);
+        slash.yRot = this.yRot;
+        slash.yRotO = this.yRot;
+        this.level.addFreshEntity(slash);
+    }
+
     @Override
     public void swing(Hand pHand, boolean pUpdateSelf) {
         super.swing(pHand, pUpdateSelf);
@@ -594,6 +677,10 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     }
 
     public boolean doHurtTarget(Entity entity) {
+        if (entity instanceof LivingEntity) {
+            float healValue = isBerserked() ? hurtScalable(((LivingEntity) entity), 17, 20) : hurtScalable(((LivingEntity) entity), 10, 14);
+            this.heal(healValue);
+        }
         return super.doHurtTarget(entity);
     }
 

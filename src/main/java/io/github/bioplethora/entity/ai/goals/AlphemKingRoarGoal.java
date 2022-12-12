@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.ai.goals;
 
-import io.github.bioplethora.blocks.api.mixin.IPlayerEntityMixin;
+import io.github.bioplethora.api.mixin.IPlayerEntityMixin;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;

@@ -1,7 +1,7 @@
 package io.github.bioplethora.world.blockplacers;
 
 import com.mojang.serialization.Codec;
-import io.github.bioplethora.blocks.api.world.BlockUtils;
+import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.registry.worldgen.BPBlockPlacers;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.FluidTags;

@@ -110,13 +110,8 @@ public class BPEntities {
     public static final RegistryObject<EntityType<AlphanumShardEntity>> ALPHANUM_SHARD = ENTITIES.register("alphanum_shard", () -> EntityType.Builder.of(AlphanumShardEntity::new, EntityClassification.MISC).sized(0.8F, 1.5F).clientTrackingRange(4)
             .build(new ResourceLocation(Bioplethora.MOD_ID, "alphanum_shard").toString()));
 
-    public static final RegistryObject<EntityType<BPEffectEntity>> CREPHOXL_HAMMER_SMASH = createEffectEntity("crephoxl_hammer_smash", BPEffectTypes.AERIAL_SHOCKWAVE);
-    public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_SLASH = createEffectEntity("infernal_quarterstaff_slash", BPEffectTypes.FLAMING_SLASH);
-    public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_SOUL_PURGE = createEffectEntity("infernal_quarterstaff_soul_purge", BPEffectTypes.SOUL_PURGE);
-    public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_AIR_JUMP = createEffectEntity("infernal_quarterstaff_air_jump", BPEffectTypes.AIR_JUMP);
-    public static final RegistryObject<EntityType<BPEffectEntity>> INFERNAL_QUARTERSTAFF_FLAMING_SNIPE = createEffectEntity("infernal_quarterstaff_flaming_snipe", BPEffectTypes.FLAMING_SNIPE);
-
-    public static final RegistryObject<EntityType<BPEffectEntity>> MYLIOTHAN_ROAR = createEffectEntity("myliothan_roar", BPEffectTypes.MYLIOTHAN_ROAR);
+    public static final RegistryObject<EntityType<BPEffectEntity>> BP_EFFECT = ENTITIES.register("bp_effect", () -> EntityType.Builder.of(BPEffectEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(16)
+            .build(new ResourceLocation(Bioplethora.MOD_ID, "bp_effect").toString()));
 
     //============================
     //       HELPERS
@@ -127,12 +122,5 @@ public class BPEntities {
 
     public static RegistryObject<EntityType<? extends GaidiusBaseEntity>> createGaidius(String name, EntityType.IFactory<? extends GaidiusBaseEntity> gaidius) {
         return ENTITIES.register(name, () -> EntityType.Builder.of(gaidius, EntityClassification.MISC).sized(2.0F, 2.0F).build(new ResourceLocation(Bioplethora.MOD_ID, name).toString()));
-    }
-
-    public static RegistryObject<EntityType<BPEffectEntity>> createEffectEntity(String registryName, BPEffectTypes effectType) {
-        return ENTITIES.register(registryName, () -> EntityType.Builder.of((EntityType.IFactory<BPEffectEntity>) (type, world) ->
-                        new BPEffectEntity(type, world, effectType), EntityClassification.MISC).sized(0.5F, 0.5F).clientTrackingRange(4)
-                .build(new ResourceLocation(Bioplethora.MOD_ID, registryName).toString()));
-
     }
 }

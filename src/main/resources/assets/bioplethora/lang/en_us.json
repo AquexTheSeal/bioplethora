@@ -475,6 +475,15 @@
 
   "message.bioplethora.biopedia.patchouli_notif": "Install the Patchouli mod to read this book!",
   "message.bioplethora.alphem_king.summon": "An instance of the Alphem King is summoned by %s at coordinates %s, %s, and %s",
+  "message.bioplethora.shachath_curse_1": "No matter how kind you are, there will always be fools in this unruly world.",
+  "message.bioplethora.shachath_curse_2": "Chaos is the law of nature; Order is the dream of man.",
+  "message.bioplethora.shachath_curse_3": "In this cruel world, goodwill is certainly an perilous virtue.",
+  "message.bioplethora.shachath_curse_4": "Despite all, what you're doing is dangerous. Cut it.",
+  "message.bioplethora.shachath_curse_5": "Why? What is your motive in all of this?",
+  "message.bioplethora.shachath_curse_6": "What makes you want to make countless lives suffer?",
+  "message.bioplethora.shachath_curse_7": "Nevertheless, this is your last chance.",
+  "message.bioplethora.shachath_curse_8": "So be it.",
+  "message.bioplethora.shachath_curse_0": "...",
 
   "advancements.bioplethora.bioplethora_startup.title": "Welcome to Bioplethora!",
   "advancements.bioplethora.bioplethora_startup.desc": "Thank you for installing Bioplethora! Feel free to tame, kill, and farm these creatures!",

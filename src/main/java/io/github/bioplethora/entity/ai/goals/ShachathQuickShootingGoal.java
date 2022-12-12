@@ -28,7 +28,6 @@ public class ShachathQuickShootingGoal extends Goal {
 
     public void stop() {
         this.shachath.setQuickShooting(false);
-        this.shachath.setNoGravity(false);
     }
 
     public void tick() {
@@ -41,7 +40,6 @@ public class ShachathQuickShootingGoal extends Goal {
             ++this.chargeTime;
             if (this.chargeTime == 160) {
                 this.shachath.teleportWithEffect(this.shachath.getX(), this.shachath.getY() + 5, this.shachath.getZ());
-                this.shachath.setNoGravity(true);
             }
             if (this.chargeTime == 180) {
                 this.shachath.level.playSound(null, this.shachath.getX(), this.shachath.getY(), this.shachath.getZ(), SoundEvents.BLAZE_SHOOT, this.shachath.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
@@ -57,7 +55,6 @@ public class ShachathQuickShootingGoal extends Goal {
                     this.shachath.setDeltaMovement(0, -3, 0);
                 }
 
-                this.shachath.setNoGravity(false);
                 this.chargeTime = 0;
             }
         } else {

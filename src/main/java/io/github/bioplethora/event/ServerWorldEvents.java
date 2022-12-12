@@ -1,11 +1,10 @@
 package io.github.bioplethora.event;
 
-import io.github.bioplethora.blocks.api.IHurtSkillArmor;
-import io.github.bioplethora.blocks.api.IReachWeapon;
-import io.github.bioplethora.blocks.api.advancements.AdvancementUtils;
-import io.github.bioplethora.blocks.api.world.BlockUtils;
+import io.github.bioplethora.api.IHurtSkillArmor;
+import io.github.bioplethora.api.IReachWeapon;
+import io.github.bioplethora.api.advancements.AdvancementUtils;
+import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.config.BPConfig;
-import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.entity.creatures.ShachathEntity;
 import io.github.bioplethora.entity.others.PrimordialRingEntity;
@@ -24,10 +23,8 @@ import io.github.bioplethora.registry.BPEffects;
 import io.github.bioplethora.registry.BPItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.entity.EnderDragonRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -51,6 +48,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -157,11 +155,11 @@ public class ServerWorldEvents {
                 CompoundNBT playerData = event.getPlayer().getPersistentData();
                 CompoundNBT data = playerData.getCompound(PlayerEntity.PERSISTED_NBT_TAG);
 
-                if (!data.getBoolean("has_biopedia")) {
+                if (!data.getBoolean("bioplethora.has_biopedia")) {
                     ItemStack stack = new ItemStack(BPItems.BIOPEDIA.get());
                     stack.setCount(1);
                     ItemHandlerHelper.giveItemToPlayer(eventEntity, stack);
-                    data.putBoolean("has_biopedia", true);
+                    data.putBoolean("bioplethora.has_biopedia", true);
                     playerData.put(PlayerEntity.PERSISTED_NBT_TAG, data);
                 }
             }
@@ -228,6 +226,11 @@ public class ServerWorldEvents {
     }
 
     @SubscribeEvent
+    public static void onLivingDeath(LivingDeathEvent event) {
+        ShachathCurseHelper.onLivingDeath(event);
+    }
+
+    @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
 
         boolean dsFire = (event.getSource() == DamageSource.IN_FIRE);
@@ -278,24 +281,6 @@ public class ServerWorldEvents {
                 if ((shouldDodge == 1) || (shouldDodge == 2)) {
                     shachath.teleportRandomly();
                     event.setCanceled(true);
-                }
-            }
-        }
-
-        if (event.getEntity() instanceof AlphemKingEntity) {
-
-            AlphemKingEntity king = (AlphemKingEntity) event.getEntity();
-
-            if (!dsVoid) {
-                if (king.isBarriered()) {
-                    king.playSound(SoundEvents.GLASS_BREAK, 1.5F, 1.0F);
-                    king.setBarriered(false);
-                    event.setCanceled(true);
-
-                    if (!king.level.isClientSide()) {
-                        ((ServerWorld) king.level).sendParticles(ParticleTypes.ASH, king.getX(), king.getY() + 1, king.getZ(),
-                                30, 0.75, 0.75, 0.75, 0.01);
-                    }
                 }
             }
         }

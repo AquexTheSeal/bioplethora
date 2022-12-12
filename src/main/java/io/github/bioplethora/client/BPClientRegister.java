@@ -156,13 +156,7 @@ public class BPClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.GRYLYNEN_CORE_BOMB.get(), GrylynenCoreBombRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_SHARD.get(), AlphanumShardRender::new);
 
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.CREPHOXL_HAMMER_SMASH.get(), BPEffectRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_SLASH.get(), BPEffectRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_SOUL_PURGE.get(), BPEffectRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_AIR_JUMP.get(), BPEffectRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.INFERNAL_QUARTERSTAFF_FLAMING_SNIPE.get(), BPEffectRender::new);
-
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.MYLIOTHAN_ROAR.get(), BPEffectRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.BP_EFFECT.get(), BPEffectRender::new);
 
         ScreenManager.register(BPContainerTypes.REINFORCING_TABLE_CONTAINER.get(), ReinforcingTableScreen::new);
 

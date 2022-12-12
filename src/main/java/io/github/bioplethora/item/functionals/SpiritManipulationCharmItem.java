@@ -1,6 +1,6 @@
 package io.github.bioplethora.item.functionals;
 
-import io.github.bioplethora.blocks.api.BPItemSettings;
+import io.github.bioplethora.api.BPItemSettings;
 import io.github.bioplethora.registry.BPEffects;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;

@@ -28,13 +28,13 @@ public class GeckoMeleeGoal<E extends MobEntity> extends GeckoGoal<E> {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
-                ((IGeckoBaseEntity) attacker).setAttacking(false);
+                goal.setWhat((IGeckoBaseEntity) attacker, false);
                 return false;
             }
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
             if (distance <= GeckoGoal.getAttackReachSq(attacker, target)) return true;
         }
-        ((IGeckoBaseEntity) attacker).setAttacking(false);
+        goal.setWhat((IGeckoBaseEntity) attacker, false);
         return false;
     }
 
@@ -54,7 +54,7 @@ public class GeckoMeleeGoal<E extends MobEntity> extends GeckoGoal<E> {
 
     @Override
     public void start() {
-        ((IGeckoBaseEntity) this.entity).setAttacking(true);
+        setWhat((IGeckoBaseEntity) this.entity, true);
         this.entity.setAggressive(true);
         this.animationProgress = 0;
     }
@@ -65,7 +65,7 @@ public class GeckoMeleeGoal<E extends MobEntity> extends GeckoGoal<E> {
         if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             this.entity.setTarget(null);
         }
-        ((IGeckoBaseEntity) this.entity).setAttacking(false);
+        setWhat((IGeckoBaseEntity) this.entity, false);
         this.entity.setAggressive(false);
         this.hasHit = false;
         this.animationProgress = 0;
@@ -88,5 +88,9 @@ public class GeckoMeleeGoal<E extends MobEntity> extends GeckoGoal<E> {
                 this.hasHit = false;
             }
         }
+    }
+
+    public void setWhat(IGeckoBaseEntity entity, boolean value) {
+        entity.setAttacking(value);
     }
 }

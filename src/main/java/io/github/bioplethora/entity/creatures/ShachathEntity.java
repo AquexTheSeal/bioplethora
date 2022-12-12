@@ -4,20 +4,20 @@ import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
 import io.github.bioplethora.entity.SummonableMonsterEntity;
+import io.github.bioplethora.entity.ai.controller.WaterMoveController;
 import io.github.bioplethora.entity.ai.gecko.GeckoMeleeGoal;
 import io.github.bioplethora.entity.ai.gecko.GeckoMoveToTargetGoal;
-import io.github.bioplethora.entity.ai.goals.CopyTargetOwnerGoal;
-import io.github.bioplethora.entity.ai.goals.ShachathCloningGoal;
-import io.github.bioplethora.entity.ai.goals.ShachathQuickShootingGoal;
+import io.github.bioplethora.entity.ai.goals.*;
+import io.github.bioplethora.entity.ai.navigator.WaterAndLandPathNavigator;
+import io.github.bioplethora.entity.others.BPEffectEntity;
+import io.github.bioplethora.enums.BPEffectTypes;
 import io.github.bioplethora.enums.BPEntityClasses;
-import io.github.bioplethora.registry.BPAttributes;
-import io.github.bioplethora.registry.BPDamageSources;
-import io.github.bioplethora.registry.BPItems;
-import io.github.bioplethora.registry.BPSoundEvents;
+import io.github.bioplethora.registry.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,11 +29,16 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.GroundPathNavigator;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.DifficultyInstance;
@@ -50,8 +55,11 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 
 public class ShachathEntity extends SummonableMonsterEntity implements IAnimatable, IBioClassification, IMobCappedEntity {
+    protected static final DataParameter<Boolean> ATTACKING2 = EntityDataManager.defineId(ShachathEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> STRIKING = EntityDataManager.defineId(ShachathEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_QUICKSHOOTING = EntityDataManager.defineId(ShachathEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_CLONE = EntityDataManager.defineId(ShachathEntity.class, DataSerializers.BOOLEAN);
 
@@ -60,13 +68,17 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
     private final ServerBossInfo bossInfo = new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
     private final ServerBossInfo cloneProgress = new ServerBossInfo(cloneProgText, BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
     private final AnimationFactory factory = new AnimationFactory(this);
+    public BlockPos boundOrigin;
     protected int tpParticleAmount = 30;
     protected double tpParticleRadius = 0.3;
     public int cloneChargeTime;
+    public int attackPhase;
     public int tpTimer;
+    public int jumpTimer;
 
     public ShachathEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
+        this.moveControl = new ShachathEntity.NonGroundController(this);
         this.noCulling = true;
         this.tpTimer = 0;
     }
@@ -93,13 +105,14 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
-        this.goalSelector.addGoal(1, new GeckoMoveToTargetGoal<>(this, 0.75, 8));
-        this.goalSelector.addGoal(1, new GeckoMeleeGoal<>(this, 20, 0.2, 0.3));
-        this.goalSelector.addGoal(2, new ShachathQuickShootingGoal(this));
+        this.goalSelector.addGoal(1, new ShachathEntity.NonGroundMoveRandomGoal());
+        this.goalSelector.addGoal(2, new ShachathEntity.NonGroundMoveToTargetGoal());
+        this.goalSelector.addGoal(2, new ShachathAttackWaveGoal.Wave1(this, 30, 0.5, 0.6));
+        this.goalSelector.addGoal(2, new ShachathAttackWaveGoal.Wave2(this, 35, 0.6, 0.7));
+        this.goalSelector.addGoal(2, new ShachathEntityStrikeGoal(this));
+        this.goalSelector.addGoal(3, new ShachathQuickShootingGoal(this));
         this.goalSelector.addGoal(3, new ShachathCloningGoal(this));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(5, new SwimGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this, ShachathEntity.class).setAlertOthers());
         this.targetSelector.addGoal(1, new CopyTargetOwnerGoal(this));
@@ -127,8 +140,23 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
             return PlayState.CONTINUE;
         }
 
+        if(this.getStriking()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.striking", true));
+            return PlayState.CONTINUE;
+        }
+
+        if(this.getAttacking2()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.attacking2", true));
+            return PlayState.CONTINUE;
+        }
+
         if(this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.attacking", true));
+            return PlayState.CONTINUE;
+        }
+
+        if (isInWater() || level.isEmptyBlock(blockPosition().below())) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.swim", true));
             return PlayState.CONTINUE;
         }
 
@@ -169,7 +197,7 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
             for (LivingEntity entityIterator : world.getEntitiesOfClass(LivingEntity.class, area)) {
 
                 if (entityIterator == this.getTarget()) {
-                    entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 1.5F);
+                    //entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 1.5F);
                     ++this.tpTimer;
                     if (this.tpTimer == 40) {
                         this.teleportRandomly();
@@ -178,11 +206,57 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
                 }
                 if ((entityIterator instanceof MobEntity)) {
                     if (((MobEntity) entityIterator).getTarget() == this) {
-                        entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 1.5F);
+                        //entityIterator.hurt(BPDamageSources.helioSlashed(this, this), this.isClone() ? 1F : 1.5F);
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public boolean isNoGravity() {
+        return true;
+    }
+
+    @Override
+    public void swing(Hand pHand) {
+        super.swing(pHand);
+        if (attackPhase == 0) {
+            addSHEffect(BPEffectTypes.SHACHATH_SLASH_FLAT);
+            this.playSound(BPSoundEvents.SHACHATH_SLASH.get(), 0.75F, 0.75F + random.nextFloat());
+            for (LivingEntity entities : level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.4, 0, 2.4))) {
+                if (entities != this) {
+                    double xa = entities.getX(), ya = entities.getY() + 1, za = entities.getZ();
+                    entities.hurt(DamageSource.mobAttack(this), this.isClone() ? 7F : 10F);
+                    level.addParticle(BPParticles.SHACHATH_CLASH_INNER.get(), xa, ya, za, 0, 0, 0);
+                    level.addParticle(BPParticles.SHACHATH_CLASH_OUTER.get(), xa, ya, za, 0, 0, 0);
+                }
+            }
+        }
+        double d0 = -MathHelper.sin(this.yRot * ((float)Math.PI / 180F)) * 6;
+        double d1 = MathHelper.cos(this.yRot * ((float)Math.PI / 180F)) * 6;
+        if (attackPhase == 1) {
+            addSHEffect(BPEffectTypes.SHACHATH_SLASH_FRONT);
+            this.playSound(BPSoundEvents.SHACHATH_SLASH.get(), 0.75F, 0.75F + random.nextFloat());
+            for (LivingEntity entities : level.getEntitiesOfClass(LivingEntity.class, new AxisAlignedBB(getX() - d0, getY() - 2.5, getZ() - d1, getX() + d0, getY() + 2.5, getZ() + d1))) {
+                if (entities != this) {
+                    double xa = entities.getX(), ya = entities.getY() + 1, za = entities.getZ();
+                    entities.hurt(DamageSource.mobAttack(this), this.isClone() ? 8F : 12F);
+                    level.addParticle(BPParticles.SHACHATH_CLASH_INNER.get(), xa, ya, za, 0, 0, 0);
+                    level.addParticle(BPParticles.SHACHATH_CLASH_OUTER.get(), xa, ya, za, 0, 0, 0);
+                }
+            }
+        }
+    }
+
+    public void addSHEffect(BPEffectTypes effectTypes) {
+        BPEffectEntity slash = BPEntities.BP_EFFECT.get().create(this.level);
+        slash.setEffectType(effectTypes);
+        slash.setOwner(this);
+        slash.moveTo(this.blockPosition(), 0.0F, 0.0F);
+        slash.yRot = this.yRot;
+        slash.yRotO = this.yRot;
+        this.level.addFreshEntity(slash);
     }
 
     @Override
@@ -213,8 +287,26 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
 
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(STRIKING, false);
+        this.entityData.define(ATTACKING2, false);
         this.entityData.define(DATA_IS_QUICKSHOOTING, false);
         this.entityData.define(DATA_IS_CLONE, false);
+    }
+
+    public boolean getStriking() {
+        return this.entityData.get(STRIKING);
+    }
+
+    public void setStriking(boolean striking) {
+        this.entityData.set(STRIKING, striking);
+    }
+
+    public boolean getAttacking2() {
+        return this.entityData.get(ATTACKING2);
+    }
+
+    public void setAttacking2(boolean attacking2) {
+        this.entityData.set(ATTACKING2, attacking2);
     }
 
     public boolean isQuickShooting() {
@@ -278,12 +370,21 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
     public void addAdditionalSaveData(CompoundNBT compoundNBT) {
         super.addAdditionalSaveData(compoundNBT);
         compoundNBT.putBoolean("isClone", entityData.get(DATA_IS_CLONE));
+
+        if (this.boundOrigin != null) {
+            compoundNBT.putInt("BoundX", this.boundOrigin.getX());
+            compoundNBT.putInt("BoundY", this.boundOrigin.getY());
+            compoundNBT.putInt("BoundZ", this.boundOrigin.getZ());
+        }
     }
 
     @Override
     public void readAdditionalSaveData(CompoundNBT compoundNBT) {
         super.readAdditionalSaveData(compoundNBT);
         this.setClone(compoundNBT.getBoolean("isClone"));
+        if (compoundNBT.contains("BoundX")) {
+            this.boundOrigin = new BlockPos(compoundNBT.getInt("BoundX"), compoundNBT.getInt("BoundY"), compoundNBT.getInt("BoundZ"));
+        }
     }
 
     @Override
@@ -304,5 +405,120 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
     @Override
     public int getMaxDamageCap() {
         return BPConfig.COMMON.shachathMobCap.get();
+    }
+
+    public void setBoundOrigin(@Nullable BlockPos pBoundOrigin) {
+        this.boundOrigin = pBoundOrigin;
+    }
+
+    @Nullable
+    public BlockPos getBoundOrigin() {
+        return this.boundOrigin;
+    }
+
+    public class NonGroundController extends MovementController {
+        public NonGroundController(ShachathEntity floatingMob) {
+            super(floatingMob);
+        }
+
+        public void tick() {
+            ShachathEntity shachath = ShachathEntity.this;
+            if (this.operation == MovementController.Action.MOVE_TO && !shachath.isVehicle()) {
+                Vector3d vector3d = new Vector3d(this.wantedX - shachath.getX(), this.wantedY - shachath.getY(), this.wantedZ - shachath.getZ());
+                double d0 = vector3d.length();
+                if (d0 < shachath.getBoundingBox().getSize()) {
+                    this.operation = MovementController.Action.WAIT;
+                    shachath.setDeltaMovement(shachath.getDeltaMovement().scale(0.5D));
+                } else {
+                    shachath.setDeltaMovement(shachath.getDeltaMovement().add(vector3d.scale((this.speedModifier * 0.05D / d0) * (shachath.isInWater() ? 2.2 : 1))));
+                    if (shachath.getTarget() == null) {
+                        Vector3d vector3d1 = shachath.getDeltaMovement();
+                        shachath.yRot = -((float) MathHelper.atan2(vector3d1.x, vector3d1.z)) * (180F / (float) Math.PI);
+                    } else {
+                        double d2 = shachath.getTarget().getX() - shachath.getX();
+                        double d1 = shachath.getTarget().getZ() - shachath.getZ();
+                        shachath.yRot = -((float) MathHelper.atan2(d2, d1)) * (180F / (float) Math.PI);
+                    }
+                    shachath.yBodyRot = shachath.yRot;
+                }
+            }
+        }
+    }
+    
+    public class NonGroundMoveToTargetGoal extends Goal {
+        public NonGroundMoveToTargetGoal() {
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+        }
+
+        public boolean canUse() {
+
+            if (ShachathEntity.this.getTarget() != null) {
+                return ShachathEntity.this.distanceToSqr(ShachathEntity.this.getTarget()) > 2.0D;
+            } else {
+                return false;
+            }
+        }
+
+        public boolean canContinueToUse() {
+            if (ShachathEntity.this.getOwner() != null) {
+                if (!(ShachathEntity.this.distanceToSqr(ShachathEntity.this.getOwner()) <= 1024D)) {
+                    return false;
+                }
+            }
+            return ShachathEntity.this.getMoveControl().hasWanted() && ShachathEntity.this.getTarget() != null && ShachathEntity.this.getTarget().isAlive();
+        }
+
+        public void start() {
+            LivingEntity livingentity = ShachathEntity.this.getTarget();
+            Vector3d vector3d = livingentity.getEyePosition(1.0F);
+            ShachathEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.75D);
+        }
+
+        public void stop() {
+        }
+
+        public void tick() {
+            LivingEntity livingentity = ShachathEntity.this.getTarget();
+
+            if (!ShachathEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
+                double d0 = ShachathEntity.this.distanceToSqr(livingentity);
+                if (d0 < 9.0D) {
+                    Vector3d vector3d = livingentity.getEyePosition(1.0F);
+                    ShachathEntity.this.moveControl.setWantedPosition(vector3d.x, vector3d.y, vector3d.z, 1.0D);
+                }
+            }
+        }
+    }
+
+    public class NonGroundMoveRandomGoal extends Goal {
+        public NonGroundMoveRandomGoal() {
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+        }
+
+        public boolean canUse() {
+            return !ShachathEntity.this.getMoveControl().hasWanted() && ShachathEntity.this.getOwner() == null && ShachathEntity.this.random.nextInt(5) == 0;
+        }
+
+        public boolean canContinueToUse() {
+            return false;
+        }
+
+        public void tick() {
+            BlockPos blockpos = ShachathEntity.this.getBoundOrigin();
+            if (blockpos == null) {
+                blockpos = ShachathEntity.this.blockPosition();
+            }
+
+            for(int i = 0; i < 3; ++i) {
+                BlockPos blockpos1 = blockpos.offset(ShachathEntity.this.random.nextInt(15) - 7, ShachathEntity.this.random.nextInt(11) - 5, ShachathEntity.this.random.nextInt(15) - 7);
+                if (ShachathEntity.this.level.isEmptyBlock(blockpos1)) {
+                    ShachathEntity.this.moveControl.setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
+                    if (ShachathEntity.this.getTarget() == null) {
+                        ShachathEntity.this.getLookControl().setLookAt((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
+                    }
+                    break;
+                }
+            }
+        }
     }
 }

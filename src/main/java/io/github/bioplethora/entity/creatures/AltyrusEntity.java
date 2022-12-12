@@ -1,7 +1,7 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.blocks.api.advancements.AdvancementUtils;
-import io.github.bioplethora.blocks.api.world.BlockUtils;
+import io.github.bioplethora.api.advancements.AdvancementUtils;
+import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;

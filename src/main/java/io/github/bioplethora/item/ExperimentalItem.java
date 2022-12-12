@@ -1,6 +1,6 @@
 package io.github.bioplethora.item;
 
-import io.github.bioplethora.blocks.api.IReachWeapon;
+import io.github.bioplethora.api.IReachWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

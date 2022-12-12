@@ -27,29 +27,6 @@ public class AlphemKingSmashingGoal extends AlphemKingMeeleeGoal {
         return getAttackReachSq(attacker, target);
     }
 
-    public static boolean checkIfValid(AlphemKingSmashingGoal goal, AlphemKingEntity attacker, LivingEntity target) {
-        if (target == null) return false;
-        if (target.isAlive() && !target.isSpectator()) {
-            if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-                attacker.setSmashing(false);
-                return false;
-            }
-            if (attacker.attackPhase != goal.attackPhaseReq()) {
-                return false;
-            }
-            if (attacker.getRoaring()) {
-                return false;
-            }
-            if (attacker.isPursuit()) {
-                return false;
-            }
-            double distance = goal.king.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= goal.reachSq(attacker, target)) return true;
-        }
-        attacker.setSmashing(false);
-        return false;
-    }
-
     public static double getAttackReachSq(BPMonsterEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 3.5F * attacker.getBbWidth() * 3.5F + target.getBbWidth();
     }

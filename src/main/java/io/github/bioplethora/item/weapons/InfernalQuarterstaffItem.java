@@ -1,11 +1,12 @@
 package io.github.bioplethora.item.weapons;
 
-import io.github.bioplethora.blocks.api.BPItemSettings;
-import io.github.bioplethora.blocks.api.IReachWeapon;
-import io.github.bioplethora.blocks.api.world.EffectUtils;
-import io.github.bioplethora.blocks.api.world.EntityUtils;
-import io.github.bioplethora.blocks.api.world.ItemUtils;
+import io.github.bioplethora.api.BPItemSettings;
+import io.github.bioplethora.api.IReachWeapon;
+import io.github.bioplethora.api.world.EffectUtils;
+import io.github.bioplethora.api.world.EntityUtils;
+import io.github.bioplethora.api.world.ItemUtils;
 import io.github.bioplethora.entity.others.BPEffectEntity;
+import io.github.bioplethora.enums.BPEffectTypes;
 import io.github.bioplethora.registry.BPDamageSources;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.client.gui.screen.Screen;
@@ -13,7 +14,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -54,8 +54,9 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
         return 6.5;
     }
 
-    public void addIQEffect(LivingEntity entity, EntityType<? extends BPEffectEntity> slashEntity) {
-        BPEffectEntity slash = slashEntity.create(entity.level);
+    public void addIQEffect(LivingEntity entity, BPEffectTypes effectTypes) {
+        BPEffectEntity slash = BPEntities.BP_EFFECT.get().create(entity.level);
+        slash.setEffectType(effectTypes);
         slash.setOwner(entity);
         slash.moveTo(entity.blockPosition(), entity.yBodyRot, 0.0F);
         slash.setYBodyRot(entity.yRot);
@@ -83,7 +84,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                 }
             }
         }
-        addIQEffect(entity, BPEntities.INFERNAL_QUARTERSTAFF_SLASH.get());
+        addIQEffect(entity, BPEffectTypes.FLAMING_SLASH);
     }
 
     @Override
@@ -122,7 +123,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
         pTarget.setSecondsOnFire(7);
         setMarkedEntity(pTarget);
         setReversed(pStack, true);
-        addIQEffect(pAttacker, BPEntities.INFERNAL_QUARTERSTAFF_SLASH.get());
+        addIQEffect(pAttacker, BPEffectTypes.FLAMING_SLASH);
 
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
@@ -153,7 +154,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                 }
             }
         }
-        addIQEffect(pAttacker, BPEntities.INFERNAL_QUARTERSTAFF_SOUL_PURGE.get());
+        addIQEffect(pAttacker, BPEffectTypes.SOUL_PURGE);
     }
 
     @Override
@@ -181,7 +182,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                 player.playSound(SoundEvents.GENERIC_BURN, 2.0F, 0.8F);
                 result.getEntity().hurt(DamageSource.indirectMagic(player, player), hasWeaponInOppositeHand ? 7.5F : 4F);
                 result.getEntity().setSecondsOnFire(hasWeaponInOppositeHand ? 10 : 7);
-                addIQEffect(player, BPEntities.INFERNAL_QUARTERSTAFF_FLAMING_SNIPE.get());
+                addIQEffect(player, BPEffectTypes.FLAMING_SNIPE);
                 ItemUtils.setStackOnCooldown(player, player.getItemInHand(hand), hasWeaponInOppositeHand ? 40 : 100, true);
             }
         }
@@ -201,7 +202,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
             entity.swing(hand);
             world.playSound(entity, pos, SoundEvents.SHULKER_SHOOT, SoundCategory.PLAYERS, 1.3F, 1.75F);
             world.playSound(entity, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
-            addIQEffect(entity, BPEntities.INFERNAL_QUARTERSTAFF_AIR_JUMP.get());
+            addIQEffect(entity, BPEffectTypes.AIR_JUMP);
             ItemUtils.setStackOnCooldown(entity, stack, 20, true);
             
             return ActionResultType.SUCCESS;

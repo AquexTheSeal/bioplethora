@@ -35,6 +35,9 @@ public class AlphemKingJumpGoal extends Goal {
     }
 
     public void tick() {
+        float moveVector = (float) Math.toRadians(this.king.vecOfTarget + 90 + this.king.getRandom().nextFloat() * 150 - 75);
+        Vector3d getVector = this.king.getDeltaMovement().add(2.0F * Math.cos(moveVector), 0, 2.0F * Math.sin(moveVector));
+
         LivingEntity target = this.king.getTarget();
 
         if (target != null && target.distanceToSqr(this.king) < 4096.0D && this.king.canSee(target)) {
@@ -46,9 +49,6 @@ public class AlphemKingJumpGoal extends Goal {
             if (this.jumpTime == 520) {
 
                 this.king.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
-
-                float moveVector = (float) Math.toRadians(this.king.vecOfTarget + 90 + this.king.getRandom().nextFloat() * 150 - 75);
-                Vector3d getVector = this.king.getDeltaMovement().add(2.0F * Math.cos(moveVector), 0, 2.0F * Math.sin(moveVector));
                 this.king.setDeltaMovement(getVector.x(), 1.0, getVector.z());
 
                 if (world instanceof ServerWorld) {

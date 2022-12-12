@@ -1,6 +1,6 @@
 package io.github.bioplethora.blocks;
 
-import io.github.bioplethora.blocks.api.world.WorldgenUtils;
+import io.github.bioplethora.api.world.WorldgenUtils;
 import io.github.bioplethora.enums.BioPlantType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SaplingBlock;

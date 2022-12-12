@@ -59,6 +59,11 @@ public class GeckoMoveToTargetGoal<E extends MobEntity> extends GeckoMovableGoal
         if (target == null) return;
 
         this.entity.getLookControl().setLookAt(target, 30F, 30F);
+        this.moveToTarget();
+    }
+
+    public void moveToTarget() {
+        LivingEntity target = this.entity.getTarget();
         this.entity.getNavigation().moveTo(target, this.speedMultiplier);
     }
 }

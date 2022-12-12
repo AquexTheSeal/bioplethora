@@ -2,6 +2,7 @@ package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.creatures.MyliothanEntity;
 import io.github.bioplethora.entity.others.BPEffectEntity;
+import io.github.bioplethora.enums.BPEffectTypes;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -54,7 +55,8 @@ public class MyliothanChargeAttackGoal extends Goal {
                     for (LivingEntity targets : myliothan.level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(8, 3, 8))) {
 
                         if (targets != this.myliothan) {
-                            BPEffectEntity effect = BPEntities.MYLIOTHAN_ROAR.get().create(myliothan.level);
+                            BPEffectEntity effect = BPEntities.BP_EFFECT.get().create(myliothan.level);
+                            effect.setEffectType(BPEffectTypes.MYLIOTHAN_ROAR);
                             effect.setOwner(myliothan);
                             effect.moveTo(target.blockPosition().offset(0, 2, 0), target.yBodyRot, 0.0F);
                             myliothan.level.addFreshEntity(effect);

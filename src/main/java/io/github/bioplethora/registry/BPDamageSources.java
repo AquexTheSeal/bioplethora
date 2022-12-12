@@ -17,7 +17,7 @@ public class BPDamageSources {
     }
 
     public static DamageSource helioSlashed(Entity entity, @Nullable Entity source) {
-        return new BioplethoraIndirectDamageSource("helioSlashed", entity, source).bypassArmor().setMagic();
+        return new BioplethoraIndirectDamageSource("helioSlashed", entity, source);
     }
 
     public static DamageSource antibio(Entity entity, @Nullable Entity source) {

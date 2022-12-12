@@ -1,8 +1,9 @@
 package io.github.bioplethora.entity.ai.goals;
 
-import io.github.bioplethora.blocks.api.world.BlockUtils;
-import io.github.bioplethora.blocks.api.world.EntityUtils;
+import io.github.bioplethora.api.world.BlockUtils;
+import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
+import io.github.bioplethora.enums.BPEffectTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.ParticleTypes;
@@ -13,6 +14,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.server.ServerWorld;
 
 public class AlphemKingPursuitGoal extends Goal {
@@ -27,7 +29,7 @@ public class AlphemKingPursuitGoal extends Goal {
     }
 
     public boolean canUse() {
-        return this.king.getTarget() != null && !this.king.getRoaring();
+        return this.king.getTarget() != null && !this.king.getRoaring() && !this.king.isCharging();
     }
 
     public void start() {
@@ -37,7 +39,12 @@ public class AlphemKingPursuitGoal extends Goal {
     public void stop() {
         this.king.setPursuit(false);
         if (targetPos != null) {
-            smashDown();
+            this.king.setNoGravity(false);
+            float moveVector = (float) Math.toRadians(this.king.vecOfTarget + 90 + this.king.getRandom().nextFloat() * 150 - 75);
+            Vector3d getVector = this.king.getDeltaMovement().add(1.5F * Math.cos(moveVector), 0, 1.5F * Math.sin(moveVector));
+            this.king.setDeltaMovement(getVector.x(), 1.0, getVector.z());
+            pursTime = 0;
+            hasRaised = false;
         } else {
             pursTime = 0;
         }
@@ -53,7 +60,13 @@ public class AlphemKingPursuitGoal extends Goal {
         this.king.setPursuit(hasRaised);
 
         if ((target.distanceToSqr(this.king) >= 48.0D || target.getY() > king.getY() + 8) && !hasRaised) {
-            ++pursTime;
+            if (pursTime < 60) {
+                if (!king.getAttacking() && !king.getAttacking2() && !king.getSmashing()) {
+                    ++pursTime;
+                }
+            } else {
+                ++pursTime;
+            }
             if (pursTime == 60) {
                 if (king.getRandom().nextBoolean()) {
                     teleportWithEffect(target.getX(), target.getY() + 5, target.getZ());
@@ -87,6 +100,7 @@ public class AlphemKingPursuitGoal extends Goal {
 
         teleportWithEffect(targetPos.getX(), targetPos.getY(), targetPos.getZ());
 
+        king.addAKEffect(BPEffectTypes.ALPHEM_KING_IMPACT);
         for (LivingEntity areaEnt : king.level.getEntitiesOfClass(LivingEntity.class, king.getBoundingBox().inflate(7, 1, 7).move(targetPos))) {
             if (areaEnt != this.king) {
                 areaEnt.hurt(DamageSource.explosion(this.king), 7.0F);

@@ -2,6 +2,7 @@ package io.github.bioplethora.entity.ai.goals;
 
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import io.github.bioplethora.entity.projectile.CryoblazeEntity;
+import io.github.bioplethora.enums.BPEffectTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundEvents;
@@ -53,7 +54,7 @@ public class AlphemKingRangedAttackGoal extends Goal {
 
             if (this.chargeTime == chargeCap + 60) this.shootBlaze(world, target);
 
-            if (this.chargeTime == 230) {
+            if (this.chargeTime == chargeCap + 70) {
                 this.shootBlaze(world, target);
                 this.chargeTime = 0;
             }
@@ -73,6 +74,8 @@ public class AlphemKingRangedAttackGoal extends Goal {
         if (!this.king.isSilent()) {
             this.king.level.playSound(null, this.king.getX(), this.king.getY(), this.king.getZ(), SoundEvents.SHULKER_SHOOT, this.king.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
         }
+
+        king.addAKEffect(BPEffectTypes.ALPHEM_KING_BREATH);
 
         CryoblazeEntity cryo = new CryoblazeEntity(world, this.king, d1, d2, d3);
         cryo.setOwner(this.king);

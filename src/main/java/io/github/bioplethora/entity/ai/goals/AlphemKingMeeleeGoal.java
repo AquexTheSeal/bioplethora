@@ -64,7 +64,7 @@ public class AlphemKingMeeleeGoal extends GeckoDodgeableMeleeGoal<AlphemKingEnti
 
     @Override
     public boolean canContinueToUse() {
-        return isInAttackState && this.entity.getTarget() != null;
+        return isInAttackState && this.entity.getTarget() != null && !this.entity.isPursuit();
     }
 
     @Override

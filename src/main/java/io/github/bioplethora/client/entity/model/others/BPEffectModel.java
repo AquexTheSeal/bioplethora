@@ -9,16 +9,15 @@ public class BPEffectModel extends AnimatedGeoModel<BPEffectEntity> {
 
     @Override
     public ResourceLocation getModelLocation(BPEffectEntity entity) {
-        return new ResourceLocation(Bioplethora.MOD_ID, "geo/others/bp_effect.geo.json");
+        return new ResourceLocation(Bioplethora.MOD_ID, "geo/others/" + entity.getEffectType().getModel().getModelString() + ".geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(BPEffectEntity entity) {
-        if (entity.getEffectType() != null) {
-            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/others/" + entity.getEffectType().getTexture() + ".png");
+        if (entity.getEffectType().getFrames() > 0) {
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/others/" + entity.getEffectType().getTexture() + "_" + entity.getFrameLevel() + ".png");
         } else {
-            Bioplethora.LOGGER.info("EffectType for BPEffectEntity is null!");
-            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/others/infernal_quarterstaff_slash.png");
+            return new ResourceLocation(Bioplethora.MOD_ID, "textures/entity/others/" + entity.getEffectType().getTexture() + ".png");
         }
     }
 

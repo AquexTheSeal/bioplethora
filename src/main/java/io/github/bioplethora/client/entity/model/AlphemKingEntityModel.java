@@ -1,7 +1,7 @@
 package io.github.bioplethora.client.entity.model;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.blocks.api.IAdvancedGeoModel;
+import io.github.bioplethora.api.IAdvancedGeoModel;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;

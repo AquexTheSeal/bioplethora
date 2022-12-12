@@ -12,6 +12,7 @@
     "DimensionTypeMixin",
     "ItemEntityMixin",
     "LivingEntityMixin",
+    "MobSpawnerTileEntityMixin",
     "MonsterEntityMixin",
     "PlayerEntityMixin",
     "QuickChargeEnchantmentMixin",

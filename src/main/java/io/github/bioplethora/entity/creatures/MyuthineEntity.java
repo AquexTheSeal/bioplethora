@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.creatures;
 
-import io.github.bioplethora.blocks.api.world.EffectUtils;
+import io.github.bioplethora.api.world.EffectUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.BPMonsterEntity;
 import io.github.bioplethora.entity.IBioClassification;

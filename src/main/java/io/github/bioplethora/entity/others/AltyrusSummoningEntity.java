@@ -1,6 +1,6 @@
 package io.github.bioplethora.entity.others;
 
-import io.github.bioplethora.blocks.api.advancements.AdvancementUtils;
+import io.github.bioplethora.api.advancements.AdvancementUtils;
 import io.github.bioplethora.entity.creatures.AltyrusEntity;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.*;

@@ -18,6 +18,8 @@ public class BPParticles {
     public static final RegistryObject<BasicParticleType> TRUE_DEFENSE_CLASH = PARTICLES.register("true_defense_clash", () -> new BasicParticleType(true));
     public static final RegistryObject<BasicParticleType> KINGS_ROAR = PARTICLES.register("kings_roar", () -> new BasicParticleType(true));
     public static final RegistryObject<BasicParticleType> FROSTBITE_EYE = PARTICLES.register("frostbite_eye", () -> new BasicParticleType(true));
+    public static final RegistryObject<BasicParticleType> SHACHATH_CLASH_INNER = PARTICLES.register("shachath_clash_inner", () -> new BasicParticleType(true));
+    public static final RegistryObject<BasicParticleType> SHACHATH_CLASH_OUTER = PARTICLES.register("shachath_clash_outer", () -> new BasicParticleType(true));
 
     // Falling Leaves
     public static final RegistryObject<BasicParticleType> PINK_ENIVILE_LEAF = PARTICLES.register("pink_enivile_leaf", () -> new BasicParticleType(true));

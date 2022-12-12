@@ -45,38 +45,18 @@ public class ShachathEntityRender extends GeoEntityRenderer<ShachathEntity> {
 
     @Override
     public void renderRecursively(GeoBone bone, MatrixStack stack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        IVertexBuilder smCutout = rtb.getBuffer(RenderType.entitySmoothCutout(whTexture));
 
-        if (bone.getName().equals("RightHand")) {
-            if (!bone.isHidden) {
-                stack.pushPose();
-                //position / translation
-                stack.translate(0.3D, 0.75D, -0.05D);
-                //rotation
-                stack.mulPose(Vector3f.XP.rotationDegrees(-75));
-                stack.mulPose(Vector3f.YP.rotationDegrees(0));
-                stack.mulPose(Vector3f.ZP.rotationDegrees(0));
-                //size / scale
-                stack.scale(1.0f, 1.0f, 1.0f);
-                Minecraft.getInstance().getItemRenderer().renderStatic(this.mainHand.getStack(), ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, packedLightIn, packedOverlayIn, stack, this.rtb);
-                stack.popPose();
-                bufferIn = smCutout;
-            }
-        }
         if (bone.getName().equals("LeftHand")) {
             if (!bone.isHidden) {
                 stack.pushPose();
-                //position / translation
                 stack.translate(-0.3D, 0.75D, -0.05D);
-                //rotation
                 stack.mulPose(Vector3f.XP.rotationDegrees(-75));
                 stack.mulPose(Vector3f.YP.rotationDegrees(0));
                 stack.mulPose(Vector3f.ZP.rotationDegrees(0));
-                //size / scale
                 stack.scale(1.0f, 1.0f, 1.0f);
-                Minecraft.getInstance().getItemRenderer().renderStatic(this.offHand.getStack(), ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, packedLightIn, packedOverlayIn, stack, this.rtb);
+                Minecraft.getInstance().getItemRenderer().renderStatic(this.mainHand.getStack(), ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, packedLightIn, packedOverlayIn, stack, this.rtb);
                 stack.popPose();
-                bufferIn = smCutout;
+                bufferIn = rtb.getBuffer(RenderType.entitySmoothCutout(whTexture));
             }
         }
 
