@@ -14,15 +14,18 @@ import io.github.bioplethora.enums.BPEffectTypes;
 import io.github.bioplethora.enums.BPEntityClasses;
 import io.github.bioplethora.registry.*;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.entity.LightningBoltRenderer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.FireworkRocketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -35,15 +38,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.structure.StrongholdStructure;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -135,37 +138,44 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
 
     private <E extends IAnimatable>PlayState predicate(AnimationEvent<E> event) {
 
-        if(this.isQuickShooting()) {
+        if (this.isQuickShooting()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.quick_shooting", true));
+            event.getController().transitionLengthTicks = 0;
             return PlayState.CONTINUE;
         }
 
-        if(this.getStriking()) {
+        if (this.getStriking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.striking", true));
+            event.getController().transitionLengthTicks = 0;
             return PlayState.CONTINUE;
         }
 
-        if(this.getAttacking2()) {
+        if (this.getAttacking2()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.attacking2", true));
+            event.getController().transitionLengthTicks = 0;
             return PlayState.CONTINUE;
         }
 
-        if(this.getAttacking()) {
+        if (this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.attacking", true));
+            event.getController().transitionLengthTicks = 0;
             return PlayState.CONTINUE;
         }
 
         if (isInWater() || level.isEmptyBlock(blockPosition().below())) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.swim", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.float", true));
+            event.getController().transitionLengthTicks = 5;
             return PlayState.CONTINUE;
         }
 
-        if(event.isMoving()) {
+        if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.running", true));
+            event.getController().transitionLengthTicks = 5;
             return PlayState.CONTINUE;
         }
 
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shachath.idle", true));
+        event.getController().transitionLengthTicks = 5;
         return PlayState.CONTINUE;
     }
 
@@ -222,7 +232,7 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
     public void swing(Hand pHand) {
         super.swing(pHand);
         if (attackPhase == 0) {
-            addSHEffect(BPEffectTypes.SHACHATH_SLASH_FLAT);
+            BPEffectEntity.createInstance(this, BPEffectTypes.SHACHATH_SLASH_FLAT);
             this.playSound(BPSoundEvents.SHACHATH_SLASH.get(), 0.75F, 0.75F + random.nextFloat());
             for (LivingEntity entities : level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.4, 0, 2.4))) {
                 if (entities != this) {
@@ -236,7 +246,7 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
         double d0 = -MathHelper.sin(this.yRot * ((float)Math.PI / 180F)) * 6;
         double d1 = MathHelper.cos(this.yRot * ((float)Math.PI / 180F)) * 6;
         if (attackPhase == 1) {
-            addSHEffect(BPEffectTypes.SHACHATH_SLASH_FRONT);
+            BPEffectEntity.createInstance(this, BPEffectTypes.SHACHATH_SLASH_FRONT);
             this.playSound(BPSoundEvents.SHACHATH_SLASH.get(), 0.75F, 0.75F + random.nextFloat());
             for (LivingEntity entities : level.getEntitiesOfClass(LivingEntity.class, new AxisAlignedBB(getX() - d0, getY() - 2.5, getZ() - d1, getX() + d0, getY() + 2.5, getZ() + d1))) {
                 if (entities != this) {
@@ -247,16 +257,6 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
                 }
             }
         }
-    }
-
-    public void addSHEffect(BPEffectTypes effectTypes) {
-        BPEffectEntity slash = BPEntities.BP_EFFECT.get().create(this.level);
-        slash.setEffectType(effectTypes);
-        slash.setOwner(this);
-        slash.moveTo(this.blockPosition(), 0.0F, 0.0F);
-        slash.yRot = this.yRot;
-        slash.yRotO = this.yRot;
-        this.level.addFreshEntity(slash);
     }
 
     @Override
@@ -337,16 +337,38 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
 
         BlockPos blockpos = new BlockPos(this.getX() + (isNegVal ? tpLoc : -tpLoc), this.getY(), this.getZ() + (isNegVal ? tpLoc : -tpLoc));
 
-        if (!this.level.getBlockState(blockpos).getMaterial().blocksMotion()) {
-            this.moveTo(blockpos, 0.0F, 0.0F);
+        if (!this.level.getBlockState(blockpos).getMaterial().blocksMotion() && this.canSeePos(blockpos)) {
+            this.teleportWithEffect(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+        }
+    }
+
+    public boolean canSeePos(BlockPos pEntity) {
+        Vector3d vector3d = new Vector3d(this.getX(), this.getEyeY(), this.getZ());
+        Vector3d vector3d1 = new Vector3d(pEntity.getX(), pEntity.getY(), pEntity.getZ());
+        if (vector3d1.distanceToSqr(vector3d) > 128.0D * 128.0D) return false; //Forge Backport MC-209819
+        return this.level.clip(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
+    }
+
+    public void createFirePowerup() {
+        for (int i = level.getMaxBuildHeight(); i > getY(); i--) {
+            for (int c = 0; c < 45; c++) {
+                level.addParticle(ParticleTypes.FLAME, getX(), i + 0.5, getZ(), Math.sin(c) * 0.5, 0.1, Math.cos(c) * 0.5);
+            }
+        }
+    }
+
+    public void descendEffect() {
+        for (int i = level.getHeight(); i > getY(); i--) {
+            for (int c = 0; c < 90; c++) {
+                level.addParticle(ParticleTypes.FLAME, getX(), i + 0.5, getZ(), Math.sin(c), 0.01, Math.cos(c));
+            }
         }
     }
 
     public void teleportWithEffect(double xLoc, double yLoc, double zLoc) {
-
         this.level.playSound(null, xLoc, yLoc, zLoc, this.getTeleportSound(), SoundCategory.HOSTILE, (float) 1, (float) 1);
         if (this.level instanceof ServerWorld) {
-            ((ServerWorld) this.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, xLoc, yLoc, zLoc, this.tpParticleAmount, this.tpParticleRadius, this.tpParticleRadius, this.tpParticleRadius, 0.1);
+            ((ServerWorld) this.level).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, xLoc, yLoc, zLoc, this.tpParticleAmount, this.tpParticleRadius, this.tpParticleRadius, this.tpParticleRadius, 0.01);
         }
         this.moveTo(xLoc, yLoc, zLoc);
     }

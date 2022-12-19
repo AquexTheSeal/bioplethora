@@ -129,7 +129,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.5F));
+        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0F));
         this.goalSelector.addGoal(1, new AlphemKingRoarGoal(this));
         this.goalSelector.addGoal(2, new GeckoMoveToTargetGoal<AlphemKingEntity>(this, 1.15F, 8) {
             @Override
@@ -254,6 +254,13 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             this.setNoAi(true);
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+    }
+
+    @Override
+    public void push(double pX, double pY, double pZ) {
+        if (!this.isPursuit()) {
+            super.push(pX, pY, pZ);
+        }
     }
 
     @Override
@@ -477,8 +484,8 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
         }
     }
 
-    public BlockPos getGroundPos(IWorldReader pLevel, int pX, int pZ) {
-        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(pX, level.getMaxBuildHeight(), pZ);
+    public static BlockPos getGroundPos(IWorldReader pLevel, int pX, int pZ) {
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(pX, pLevel.getMaxBuildHeight(), pZ);
         do {
             blockpos$mutable.move(Direction.DOWN);
         } while(pLevel.getBlockState(blockpos$mutable).isAir() && blockpos$mutable.getY() > 0);
@@ -506,7 +513,20 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
     }
 
     public float hurtScalable(LivingEntity ent, float val, float hmVal) {
-        return (float) ((BPConfig.IN_HELLMODE ? 11 : 7) + (Math.sqrt(ent.getMaxHealth() * 1.25)));
+        return (float) ((BPConfig.IN_HELLMODE ? hmVal : val) + (Math.sqrt(ent.getMaxHealth() * 1.25)));
+    }
+
+    public void createAttackParticleEffect(BlockPos pos, int flag) {
+        for (int i = 0; i < 90; i++) {
+            if (flag == 0) {
+                level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY() + 0.5, pos.getZ(), Math.sin(i) / 8, 0, Math.cos(i) / 8);
+                level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.getX(), pos.getY() + 0.75, pos.getZ(), Math.sin(i) / 4, 0, Math.cos(i) / 4);
+            }
+            if (flag == 1) {
+                level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY() + 0.5, pos.getZ(), Math.sin(i) / 4, 0, Math.cos(i) / 4);
+                level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.getX(), pos.getY() + 0.75, pos.getZ(), Math.sin(i) / 2, 0, Math.cos(i) / 2);
+            }
+        }
     }
 
     public void phaseAttack(World world) {
@@ -524,6 +544,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             }
         }
         this.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
+        this.createAttackParticleEffect(areaPos, 0);
         BlockUtils.knockUpRandomNearbyBlocks(world, 0.3D, areaPos.below(), 3, 1, 3, false, true);
         if (world instanceof ServerWorld) {
             ((ServerWorld) world).sendParticles(ParticleTypes.POOF,areaPos.getX(), areaPos.getY(), areaPos.getZ(),
@@ -569,6 +590,7 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
 
         world.explode(this, areaPos.getX(), areaPos.getY(), areaPos.getZ(), 3.0F, Explosion.Mode.NONE);
         this.playSound(SoundEvents.WITHER_BREAK_BLOCK, 1.0F, 1.0F);
+        this.createAttackParticleEffect(areaPos, 1);
         BlockUtils.knockUpRandomNearbyBlocks(world, 0.5D, areaPos.below(), 6, 2, 6, false, true);
 
         if (world instanceof ServerWorld) {
@@ -646,16 +668,6 @@ public class AlphemKingEntity extends BPMonsterEntity implements IAnimatable, IB
             pAmount -= i;
             this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), i));
         }
-    }
-
-    public void addAKEffect(BPEffectTypes effectTypes) {
-        BPEffectEntity slash = BPEntities.BP_EFFECT.get().create(this.level);
-        slash.setEffectType(effectTypes);
-        slash.setOwner(this);
-        slash.moveTo(this.blockPosition(), this.yBodyRot, 0.0F);
-        slash.yRot = this.yRot;
-        slash.yRotO = this.yRot;
-        this.level.addFreshEntity(slash);
     }
 
     @Override

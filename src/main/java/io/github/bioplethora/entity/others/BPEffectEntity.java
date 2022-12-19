@@ -5,15 +5,18 @@ import io.github.bioplethora.client.entity.render.others.BPEffectRender;
 import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.enums.BPEffectTypes;
 import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
+import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
@@ -77,6 +80,18 @@ public class BPEffectEntity extends Entity implements IAnimatable {
 
     public void setLifespan(int value) {
         lifespan = value;
+    }
+
+    public static void createInstance(Entity owner, BPEffectTypes effectTypes) {
+        BPEffectEntity slash = BPEntities.BP_EFFECT.get().create(owner.level);
+        slash.setEffectType(effectTypes);
+        if (owner instanceof LivingEntity) {
+            slash.setOwner((LivingEntity) owner);
+        }
+        slash.moveTo(owner.getX(), owner.getY() - 0.25, owner.getZ());
+        slash.yRot = owner.yRot;
+        slash.yRotO = owner.yRotO;
+        owner.level.addFreshEntity(slash);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {

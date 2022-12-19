@@ -3,6 +3,7 @@ package io.github.bioplethora.entity.ai.goals;
 import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.api.world.EntityUtils;
 import io.github.bioplethora.entity.creatures.AlphemKingEntity;
+import io.github.bioplethora.entity.others.BPEffectEntity;
 import io.github.bioplethora.enums.BPEffectTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -78,6 +79,9 @@ public class AlphemKingPursuitGoal extends Goal {
                     pursTime = 0;
                 }
             }
+            if (pursTime >= 60 && pursTime < 90 && hasRaised) {
+                king.moveTo(target.getX(), target.getY() + 5, target.getZ());
+            }
         }
         if (hasRaised && targetPos != null) {
             ++pursTime;
@@ -100,7 +104,7 @@ public class AlphemKingPursuitGoal extends Goal {
 
         teleportWithEffect(targetPos.getX(), targetPos.getY(), targetPos.getZ());
 
-        king.addAKEffect(BPEffectTypes.ALPHEM_KING_IMPACT);
+        BPEffectEntity.createInstance(king, BPEffectTypes.ALPHEM_KING_IMPACT);
         for (LivingEntity areaEnt : king.level.getEntitiesOfClass(LivingEntity.class, king.getBoundingBox().inflate(7, 1, 7).move(targetPos))) {
             if (areaEnt != this.king) {
                 areaEnt.hurt(DamageSource.explosion(this.king), 7.0F);
@@ -120,6 +124,12 @@ public class AlphemKingPursuitGoal extends Goal {
         }
 
         EntityUtils.shakeNearbyPlayersScreen(this.king, 32, 10);
+        for (int i = 0; i < 90; i++) {
+            king.level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, targetPos.getX(), targetPos.getY() + 0.5, targetPos.getZ(), Math.sin(i) / 8, 0, Math.cos(i) / 8);
+            king.level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, targetPos.getX(), targetPos.getY() + 0.75, targetPos.getZ(), Math.sin(i) / 4, 0, Math.cos(i) / 4);
+            king.level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, targetPos.getX(), targetPos.getY() + 1, targetPos.getZ(), Math.sin(i) / 8, 0, Math.cos(i) / 8);
+            king.level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, targetPos.getX(), targetPos.getY() + 1.25, targetPos.getZ(), Math.sin(i) / 4, 0, Math.cos(i) / 4);
+        }
 
         this.king.setNoGravity(false);
 

@@ -11,10 +11,7 @@ import io.github.bioplethora.entity.others.PrimordialRingEntity;
 import io.github.bioplethora.event.helper.*;
 import io.github.bioplethora.item.ExperimentalItem;
 import io.github.bioplethora.item.functionals.SwervingTotemItem;
-import io.github.bioplethora.item.weapons.AbyssalBladeItem;
-import io.github.bioplethora.item.weapons.FrostbiteMetalShieldItem;
-import io.github.bioplethora.item.weapons.GrylynenShieldBaseItem;
-import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
+import io.github.bioplethora.item.weapons.*;
 import io.github.bioplethora.network.BPNetwork;
 import io.github.bioplethora.network.functions.LeftSwingPacket;
 import io.github.bioplethora.network.functions.RightSwingPacket;
@@ -123,6 +120,9 @@ public class ServerWorldEvents {
             if (result == null) {
                 if (stack.getItem() instanceof InfernalQuarterstaffItem) {
                     ((InfernalQuarterstaffItem) stack.getItem()).emptySwingHandler(stack, entity);
+                }
+                if (stack.getItem() instanceof VermilionBladeItem) {
+                    ((VermilionBladeItem) stack.getItem()).emptySwingHandler(stack, entity);
                 }
             }
 

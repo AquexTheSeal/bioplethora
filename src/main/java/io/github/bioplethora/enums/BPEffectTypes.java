@@ -13,7 +13,7 @@ public enum BPEffectTypes {
 
     // Entities
     MYLIOTHAN_ROAR("myliothan_roar", Model.FLAT, Animation.SPIN, 10.0),
-    ALPHEM_KING_IMPACT("alphem_king_impact", Model.IMPACT, Animation.NONE_10, 4, 3, 4.0),
+    ALPHEM_KING_IMPACT("alphem_king_impact", Model.IMPACT, Animation.NONE_10, 4, 3, 3.0),
     ALPHANUM_FIRE("alphanum_fire", Model.IMPACT, Animation.SLOW_ROTATION, 3, 5, 55.0),
     ALPHEM_KING_BREATH("alphem_king_breath", Model.FLAT_VERTICAL, Animation.NONE_10, 7, 2, 3.0),
     SHACHATH_SLASH_FLAT("shachath_slash_flat", "shachath_slash", Model.FLAT, Animation.NONE_10, 10, 2, 2.5),

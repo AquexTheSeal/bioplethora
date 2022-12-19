@@ -54,16 +54,6 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
         return 6.5;
     }
 
-    public void addIQEffect(LivingEntity entity, BPEffectTypes effectTypes) {
-        BPEffectEntity slash = BPEntities.BP_EFFECT.get().create(entity.level);
-        slash.setEffectType(effectTypes);
-        slash.setOwner(entity);
-        slash.moveTo(entity.blockPosition(), entity.yBodyRot, 0.0F);
-        slash.setYBodyRot(entity.yRot);
-        slash.setYHeadRot(entity.yRot);
-        entity.level.addFreshEntity(slash);
-    }
-
     public void emptySwingHandler(ItemStack stack, LivingEntity entity) {
 
         double d0 = -MathHelper.sin(entity.yRot * ((float) Math.PI / 180F));
@@ -84,7 +74,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                 }
             }
         }
-        addIQEffect(entity, BPEffectTypes.FLAMING_SLASH);
+        BPEffectEntity.createInstance(entity, BPEffectTypes.FLAMING_SLASH);
     }
 
     @Override
@@ -123,7 +113,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
         pTarget.setSecondsOnFire(7);
         setMarkedEntity(pTarget);
         setReversed(pStack, true);
-        addIQEffect(pAttacker, BPEffectTypes.FLAMING_SLASH);
+        BPEffectEntity.createInstance(pAttacker, BPEffectTypes.FLAMING_SLASH);
 
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
@@ -154,7 +144,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                 }
             }
         }
-        addIQEffect(pAttacker, BPEffectTypes.SOUL_PURGE);
+        BPEffectEntity.createInstance(pAttacker, BPEffectTypes.SOUL_PURGE);
     }
 
     @Override
@@ -182,7 +172,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
                 player.playSound(SoundEvents.GENERIC_BURN, 2.0F, 0.8F);
                 result.getEntity().hurt(DamageSource.indirectMagic(player, player), hasWeaponInOppositeHand ? 7.5F : 4F);
                 result.getEntity().setSecondsOnFire(hasWeaponInOppositeHand ? 10 : 7);
-                addIQEffect(player, BPEffectTypes.FLAMING_SNIPE);
+                BPEffectEntity.createInstance(player, BPEffectTypes.FLAMING_SNIPE);
                 ItemUtils.setStackOnCooldown(player, player.getItemInHand(hand), hasWeaponInOppositeHand ? 40 : 100, true);
             }
         }
@@ -202,7 +192,7 @@ public class InfernalQuarterstaffItem extends SwordItem implements IReachWeapon 
             entity.swing(hand);
             world.playSound(entity, pos, SoundEvents.SHULKER_SHOOT, SoundCategory.PLAYERS, 1.3F, 1.75F);
             world.playSound(entity, pos, SoundEvents.PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1);
-            addIQEffect(entity, BPEffectTypes.AIR_JUMP);
+            BPEffectEntity.createInstance(entity, BPEffectTypes.AIR_JUMP);
             ItemUtils.setStackOnCooldown(entity, stack, 20, true);
             
             return ActionResultType.SUCCESS;

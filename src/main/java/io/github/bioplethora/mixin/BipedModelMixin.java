@@ -4,6 +4,7 @@ import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.renderer.entity.model.PiglinModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -83,6 +84,8 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
                         float f1 = MathHelper.sin(f * (float) Math.PI);
                         float f2 = MathHelper.sin(this.attackTime * (float) Math.PI) * -(this.head.xRot - 0.7F) * 0.75F;
 
+                        this.body.yRot = -MathHelper.sin(this.attackTime * (float) Math.PI) * 360;
+                        this.head.yRot = MathHelper.cos(this.attackTime * (float) Math.PI) * 360;
                         modelrenderer.xRot = (float) ((double) modelrenderer.xRot - ((double) f1 * 1.2D + (double) f2)) * 2;
                         modelrenderer.xRot += MathHelper.sin(this.attackTime * (float) Math.PI) * 0.75F;
                     }

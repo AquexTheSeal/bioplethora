@@ -137,11 +137,11 @@ public class BPClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.BELLOPHITE_ARROW.get(), FrostbiteMetalArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.WINDBLAZE.get(), WindBlazeRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ULTIMATE_BELLOPHITE_CLUSTER.get(), UltimateFrostbiteMetalClusterRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(BPEntities.VERMILION_BLADE_PROJECTILE.get(), VermilionBladeProjectileRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.WIND_ARROW.get(), WindArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CRYOBLAZE.get(), CryoblazeRender::new);
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ALPHANUM_OBLITERATOR_SPEAR.get(), AlphanumObliteratorSpearRender::new);
 
+        RenderingRegistry.registerEntityRenderingHandler(BPEntities.VERMILION_BLADE_PROJECTILE.get(), (rendererManager) -> new VermilionBladeProjectileRender<>(rendererManager, mcClient.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.CRYEANUM_GAIDIUS.get(), (rendererManager) -> new GaidiusBaseRenderer<>(rendererManager, mcClient.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.NETHERITE_OBSIDIAN_GAIDIUS.get(), (rendererManager) -> new GaidiusBaseRenderer<>(rendererManager, mcClient.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BPEntities.ECHO_GAIDIUS.get(), (rendererManager) -> new GaidiusBaseRenderer<>(rendererManager, mcClient.getItemRenderer()));

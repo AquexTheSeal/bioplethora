@@ -66,10 +66,8 @@ public class ShachathCurseHelper {
         effect.setTarget(player);
         player.level.addFreshEntity(effect);
 
+        effect.descendEffect();
         Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(SoundEvents.BLAZE_SHOOT, 0.9F));
-        if (!player.level.isClientSide()) {
-            ((ServerWorld) player.level).sendParticles(ParticleTypes.FLAME, summonPos.getX(), summonPos.getY() + 0.5D, summonPos.getZ(), 360, 1.5, 50, 1.5, 0.01);
-        }
     }
 
     private static IFormattableTextComponent shachathMessage(int level) {

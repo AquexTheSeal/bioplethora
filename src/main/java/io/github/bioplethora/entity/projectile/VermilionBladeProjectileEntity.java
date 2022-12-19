@@ -2,10 +2,13 @@ package io.github.bioplethora.entity.projectile;
 
 import io.github.bioplethora.registry.BPDamageSources;
 import io.github.bioplethora.registry.BPEntities;
+import io.github.bioplethora.registry.BPItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
@@ -23,7 +26,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class VermilionBladeProjectileEntity extends DamagingProjectileEntity implements IAnimatable {
+public class VermilionBladeProjectileEntity extends DamagingProjectileEntity implements IAnimatable, IRendersAsItem {
 
     private final AnimationFactory factory = new AnimationFactory(this);
     public double lifespan = 0;
@@ -37,14 +40,9 @@ public class VermilionBladeProjectileEntity extends DamagingProjectileEntity imp
         super(BPEntities.VERMILION_BLADE_PROJECTILE.get(), entity, v, v1, v2, world);
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.vermilion_blade_projectile.idle", true));
-        return PlayState.CONTINUE;
-    }
-
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "vermilion_blade_projectile_controller", 0, this::predicate));
+
     }
 
     @Override
@@ -108,5 +106,10 @@ public class VermilionBladeProjectileEntity extends DamagingProjectileEntity imp
 
     protected boolean shouldBurn() {
         return false;
+    }
+
+    @Override
+    public ItemStack getItem() {
+        return new ItemStack(BPItems.VERMILION_BLADE.get());
     }
 }
