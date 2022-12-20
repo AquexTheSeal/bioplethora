@@ -64,10 +64,10 @@ public class BPWorldgenConfig {
         chorusLanternMidlandsAmount = builder.define(genAmount("Chorus Lantern Plants", "End Midlands"), 55);
 
         endSpongeHighlands = builder.define(shouldGen("End Sponges", "End Highlands"), true);
-        endSpongeHighlandsAmount = builder.define(genAmount("End Sponges", "End Highlands"), 3);
+        endSpongeHighlandsAmount = builder.define(genAmount("End Sponges", "End Highlands"), 233);
 
         endSpongeMidlands = builder.define(shouldGen("End Sponges", "End Midlands"), true);
-        endSpongeMidlandsAmount = builder.define(genAmount("End Sponges", "End Midlands"), 5);
+        endSpongeMidlandsAmount = builder.define(genAmount("End Sponges", "End Midlands"), 275);
 
         endSpikeHighlands = builder.define(shouldGen("End Spikes", "End Highlands"), true);
         endSpikeHighlandsAmount = builder.define(genAmount("End Spikes", "End Highlands"), 135);

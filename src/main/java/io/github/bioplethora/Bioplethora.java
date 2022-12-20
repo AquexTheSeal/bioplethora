@@ -6,9 +6,7 @@ import io.github.bioplethora.integration.BPCompatTOP;
 import io.github.bioplethora.network.BPNetwork;
 import io.github.bioplethora.registry.*;
 import io.github.bioplethora.registry.worldgen.*;
-import io.github.bioplethora.world.BPBiomeGeneration;
 import io.github.bioplethora.world.EntitySpawnManager;
-import io.github.bioplethora.world.biomes.provider.BPNetherBiomeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -42,15 +40,15 @@ public class Bioplethora {
         bus.addListener(BPWoodTypes::registerWoodType);
 
         /* final step of registering elements like Items, Entities, etc. */
+
+        BPEntities.ENTITIES.register(bus);
         BPItems.ITEMS.register(bus);
         BPBlocks.BLOCKS.register(bus);
         BPBlocks.BLOCK_ITEMS.register(bus);
-        BPEntities.ENTITIES.register(bus);
-
+        BPBiomes.BIOMES.register(bus);
         BPFeatures.FEATURES.register(bus);
         BPSoundEvents.SOUNDS.register(bus);
         BPParticles.PARTICLES.register(bus);
-        BPBiomes.BIOMES.register(bus);
         BPEffects.EFFECTS.register(bus);
         BPEnchantments.ENCHANTMENTS.register(bus);
         BPStructures.STRUCTURES.register(bus);
@@ -89,12 +87,11 @@ public class Bioplethora {
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("Setting up [" + MOD_NAME + "], thank you for using this mod!");
 
-        event.enqueueWork(BPNetherBiomeProvider::registerBiomeProvider);
+        event.enqueueWork(BPBiomes::generateBiomes);
 
         BPLootConditions.registerConditions();
 
         BPNetwork.initializeNetwork();
-        BPBiomeGeneration.generateBiomes();
         BPStructures.setupStructures();
         BPExtras.addExtras();
     }

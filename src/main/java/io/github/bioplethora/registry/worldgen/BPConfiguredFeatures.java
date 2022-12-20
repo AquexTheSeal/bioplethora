@@ -212,7 +212,7 @@ public class BPConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_HL = register("end_land_sponge_patch_hl", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE_HL.weighted(0.4446667F)), END_LAND_SPONGE_HL))
             .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpongeHighlandsAmount.get()).squared().count(1)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.15F, 1))
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.15F, 0))
             ));
 
     public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_ML = register("end_land_sponge_ml", BPFeatures.END_LAND_SPONGE_ML.get()
@@ -221,7 +221,7 @@ public class BPConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_ML = register("end_land_sponge_patch_ml", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE_ML.weighted(0.4446667F)), END_LAND_SPONGE_ML))
             .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpongeMidlandsAmount.get()).squared().count(1)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.45F, 2))
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.45F, 0))
             ));
 
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_HL = register("end_land_spike_hl", BPFeatures.END_LAND_SPIKE_HL.get()
@@ -229,8 +229,8 @@ public class BPConfiguredFeatures {
             ));
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_PATCH_HL = register("end_land_spike_patch_hl", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPIKE_HL.weighted(0.4446667F)), END_LAND_SPIKE_HL))
-            .range(BPConfig.WORLDGEN.endSpikeHighlandsAmount.get()).squared().count(13)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(3, 0.15F, 3))
+            .range(BPConfig.WORLDGEN.endSpikeHighlandsAmount.get()).squared().count(1)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(3, 0.15F, 1))
             ));
 
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_ML = register("end_land_spike_ml", BPFeatures.END_LAND_SPIKE_ML.get()

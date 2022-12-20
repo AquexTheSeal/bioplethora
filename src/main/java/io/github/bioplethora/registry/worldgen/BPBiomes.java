@@ -1,6 +1,5 @@
 package io.github.bioplethora.registry.worldgen;
 
-import com.minecraftabnormals.abnormals_core.core.util.BiomeUtil;
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.world.biomes.end.CaeriForestBiome;
@@ -8,49 +7,70 @@ import io.github.bioplethora.world.biomes.end.CaeriPlainsBiome;
 import io.github.bioplethora.world.biomes.end.configurable.LavenderLakesBiome;
 import io.github.bioplethora.world.biomes.nether.CryeanumPlains;
 import io.github.bioplethora.world.biomes.overworld.RockyWoodlandBiome;
+import net.fabricmc.fabric.api.biome.v1.NetherBiomes;
+import net.fabricmc.fabric.api.biome.v1.OverworldBiomes;
+import net.fabricmc.fabric.api.biome.v1.OverworldClimate;
+import net.fabricmc.fabric.api.biome.v1.TheEndBiomes;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class BPBiomes {
-
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Bioplethora.MOD_ID);
 
+    public static void initialize() {
+    }
+
     // Overworld
-    public static final RegistryObject<Biome> ROCKY_WOODLANDS = BIOMES.register("rocky_woodlands",
-            () -> RockyWoodlandBiome.make(() -> BPConfiguredSurfaceBuilders.ROCKY_WOODLANDS_SURFACE, 0.15f, 1.4f)
-    );
+    public static final RegistryKey<Biome> ROCKY_WOODLANDS =
+            add("rocky_woodlands", () -> RockyWoodlandBiome.make(() -> BPConfiguredSurfaceBuilders.ROCKY_WOODLANDS_SURFACE, 0.15f, 1.4f));
 
     // Nether
-    public static final RegistryObject<Biome> CRYEANUM_PLAINS = BIOMES.register("cryeanum_plains",
-            () -> CryeanumPlains.make(() -> BPConfiguredSurfaceBuilders.CRYEANUM_SURFACE)
-    );
+    public static final RegistryKey<Biome> CRYEANUM_PLAINS =
+            add("cryeanum_plains", () -> CryeanumPlains.make(() -> BPConfiguredSurfaceBuilders.CRYEANUM_SURFACE),
+                    BiomeDictionary.Type.NETHER, Type.CRYEANUM, BiomeDictionary.Type.PLAINS,  BiomeDictionary.Type.DENSE, BiomeDictionary.Type.HOT, BiomeDictionary.Type.MAGICAL
+            );
 
     // End
-    public static final RegistryObject<Biome> CAERI_PLAINS = BIOMES.register("caeri_plains",
-            () -> CaeriPlainsBiome.make(() -> BPConfiguredSurfaceBuilders.CAERI_SURFACE)
-    );
-    public static final RegistryObject<Biome> CAERI_FOREST = BIOMES.register("caeri_forest",
-            () -> CaeriForestBiome.make(() -> BPConfiguredSurfaceBuilders.CAERI_SURFACE)
-    );
+    public static final RegistryKey<Biome> CAERI_PLAINS =
+            add("caeri_plains", () -> CaeriPlainsBiome.make(() -> BPConfiguredSurfaceBuilders.CAERI_SURFACE),
+                    Type.CAERI, BiomeDictionary.Type.END, Type.CAERI_PLAINS, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET, BiomeDictionary.Type.MAGICAL
+            );
+    public static final RegistryKey<Biome> CAERI_FOREST =
+            add("caeri_forest", () -> CaeriForestBiome.make(() -> BPConfiguredSurfaceBuilders.CAERI_SURFACE),
+                    Type.CAERI, BiomeDictionary.Type.END, Type.CAERI_FOREST, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET,BiomeDictionary.Type.MAGICAL
+            );
 
     // End (Configurable)
-    public static final RegistryObject<Biome> LAVENDER_LAKES = BIOMES.register("lavender_lakes",
-            () -> LavenderLakesBiome.make(() -> BPConfiguredSurfaceBuilders.ENDURION_SURFACE)
-    );
+    public static final RegistryKey<Biome> LAVENDER_LAKES =
+            add("lavender_lakes", () -> LavenderLakesBiome.make(() -> BPConfiguredSurfaceBuilders.ENDURION_SURFACE),
+                    Type.LAVENDER_LAKE, BiomeDictionary.Type.END, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET, BiomeDictionary.Type.MAGICAL
+            );
+
+    public static void generateBiomes() {
+        OverworldBiomes.addContinentalBiome(BPBiomes.ROCKY_WOODLANDS, OverworldClimate.COOL, 7);
+
+        NetherBiomes.addNetherBiome(BPBiomes.CRYEANUM_PLAINS, CryeanumPlains.ATTRIBUTE);
+
+        TheEndBiomes.addHighlandsBiome(BPBiomes.CAERI_FOREST, 7);
+        TheEndBiomes.addMidlandsBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 20);
+        TheEndBiomes.addBarrensBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 15);
+
+        if (BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
+            TheEndBiomes.addHighlandsBiome(BPBiomes.LAVENDER_LAKES, 16);
+            TheEndBiomes.addMidlandsBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_LAKES, 22);
+            TheEndBiomes.addBarrensBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_LAKES, 16);
+        }
+    }
 
     public static final class Type {
         public static final BiomeDictionary.Type CRYEANUM = BiomeDictionary.Type.getType("CRYEANUM");
@@ -63,66 +83,17 @@ public class BPBiomes {
     //==============================================
     //                OTHERS
     //==============================================
-    private static final HashMap<ResourceLocation, Biome> BP_BIOMES = new HashMap<>();
-
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = Bioplethora.MOD_ID)
-    public static class RegistryEvents {
-
-        @SubscribeEvent
-        public static void addBiomeDictionary(FMLCommonSetupEvent event) {
-
-            // Nether
-            BiomeDictionary.addTypes(getKey(CRYEANUM_PLAINS.get()),
-                    BiomeDictionary.Type.NETHER, Type.CRYEANUM,
-                    BiomeDictionary.Type.PLAINS,  BiomeDictionary.Type.DENSE,
-                    BiomeDictionary.Type.HOT, BiomeDictionary.Type.MAGICAL
-            );
-
-            // End
-            BiomeDictionary.addTypes(getKey(CAERI_PLAINS.get()),
-                    Type.CAERI, BiomeDictionary.Type.END,
-                    Type.CAERI_PLAINS, BiomeDictionary.Type.PLAINS,
-                    BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET,
-                    BiomeDictionary.Type.MAGICAL
-            );
-            BiomeDictionary.addTypes(getKey(CAERI_FOREST.get()),
-                    Type.CAERI, BiomeDictionary.Type.END,
-                    Type.CAERI_FOREST, BiomeDictionary.Type.FOREST,
-                    BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET,
-                    BiomeDictionary.Type.MAGICAL
-            );
-
-            // End (Configurable)
-            BiomeDictionary.addTypes(getKey(LAVENDER_LAKES.get()),
-                    Type.LAVENDER_LAKE, BiomeDictionary.Type.END, BiomeDictionary.Type.LUSH,
-                    BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET,
-                    BiomeDictionary.Type.MAGICAL
-            );
-        }
-
-        @SubscribeEvent
-        public static void addEndBiomes(RegistryEvent.Register<Biome> event) {
-            register(CAERI_PLAINS.get(), CAERI_PLAINS.getId(), 6, event);
-            register(CAERI_FOREST.get(), CAERI_FOREST.getId(), 8, event);
-
-            if (BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
-                register(LAVENDER_LAKES.get(), LAVENDER_LAKES.getId(), 13, event);
-            }
-        }
+    private static RegistryKey<Biome> add(String name, Supplier<Biome> biome, BiomeDictionary.Type... types) {
+        ResourceLocation id = new ResourceLocation(Bioplethora.MOD_ID, name);
+        RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, id);
+        BiomeDictionary.addTypes(key, types);
+        BIOMES.register(name, biome);
+        return key;
     }
 
     public static RegistryKey<Biome> getKey(Biome biome) {
         ResourceLocation keyRL = ForgeRegistries.BIOMES.getKey(biome);
         assert keyRL != null;
         return RegistryKey.create(ForgeRegistries.Keys.BIOMES, keyRL);
-    }
-
-    public static Biome[] getBiomes() {
-        return BP_BIOMES.values().toArray(new Biome[0]);
-    }
-
-    private static void register(Biome biome, ResourceLocation registryName, float weight, RegistryEvent.Register<Biome> event) {
-        BiomeUtil.addEndBiome(RegistryKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(biome.getRegistryName())), MathHelper.floor(weight));
-        BP_BIOMES.put(registryName, ForgeRegistries.BIOMES.getValue(registryName));
     }
 }

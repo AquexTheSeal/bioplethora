@@ -25,7 +25,7 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
 
-    final boolean isHighlands;
+    public boolean isHighlands;
 
     public EndLandsSpongeFeature(Codec<NoFeatureConfig> pCodec, boolean isHighlands) {
         super(pCodec);
@@ -34,26 +34,17 @@ public class EndLandsSpongeFeature extends Feature<NoFeatureConfig> {
 
     @Override
     public boolean place(ISeedReader world, ChunkGenerator chunkGen, Random rand, BlockPos pos, NoFeatureConfig config) {
-
         if (isHighlands) {
-            this.placeSponge(14, 15, world, rand, pos);
-            this.placeSponge(8, 7, world, rand, pos.offset(-6 + rand.nextInt(5), -(8 - rand.nextInt(3)), -8 + rand.nextInt(5)));
-            this.placeSponge(7, 5, world, rand, pos.offset(6 - rand.nextInt(6), -(5 - rand.nextInt(2)), 8 - rand.nextInt(6)));
-            this.placeSponge(6, 7, world, rand, pos.offset(6 + rand.nextInt(4), -(5 - rand.nextInt(3)), 8 + rand.nextInt(7)));
-            this.placeSponge(8, 5, world, rand, pos.offset(-6 - rand.nextInt(3), -(8 - rand.nextInt(3)), -8 - rand.nextInt(8)));
+            this.placeSponge(19 + rand.nextInt(12), 15, world, rand, pos);
         } else {
-            this.placeSponge(18, 5, world, rand, pos);
-            this.placeSponge(12, 2, world, rand, pos.offset(-8 + rand.nextInt(5), -(1 + rand.nextInt(3)), -8 + rand.nextInt(5)));
-            this.placeSponge(10, 3, world, rand, pos.offset(8 - rand.nextInt(6), -(1 + rand.nextInt(2)), 8 - rand.nextInt(6)));
-            this.placeSponge(12, 2, world, rand, pos.offset(8 + rand.nextInt(4), -(2 + rand.nextInt(1)), 8 + rand.nextInt(7)));
-            this.placeSponge(10, 3, world, rand, pos.offset(-8 - rand.nextInt(3), -(2 + rand.nextInt(2)), -8 - rand.nextInt(8)));
+            this.placeSponge(15 + rand.nextInt(9), 7, world, rand, pos);
         }
         return true;
     }
 
     public void placeSponge(int radius, int randomYHeight, ISeedReader world, Random rand, BlockPos pos) {
         if (checkPlacement(world, pos)) {
-            int yRand = 4 + rand.nextInt(randomYHeight);
+            int yRand = 8 + rand.nextInt(randomYHeight);
             double radHelper = radius;
             for (int sy = -yRand; sy <= 0; sy++) {
                 radHelper -= 0.5D;

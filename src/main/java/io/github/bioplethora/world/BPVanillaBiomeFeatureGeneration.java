@@ -112,18 +112,6 @@ public class BPVanillaBiomeFeatureGeneration {
             }
 
             if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.SMALL_END_ISLANDS)) {
-                if (!BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
-                    if (BPConfig.WORLDGEN.endSpongeMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_ML);
-                    if (BPConfig.WORLDGEN.endSpikeMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_ML);
-                    if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDON);
-                    if (BPConfig.WORLDGEN.chorusVegetationMidlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDE_FAN);
-                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
-                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_CORSASCILE);
-                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_PURPLE);
-                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_RED);
-                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_GREEN);
-                }
-
                 if (BPConfig.WORLDGEN.endIcicleIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_ISLANDS_ICICLE_PATCH);
                 if (BPConfig.WORLDGEN.endFrozenIslands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_FROZEN_ISLAND_DECORATED);
 

@@ -8,8 +8,6 @@
     "ChorusFlowerBlockMixin",
     "ChorusPlantBlockMixin",
     "ChorusPlantFeatureMixin",
-    "DimensionGeneratorSettingsMixin",
-    "DimensionTypeMixin",
     "ItemEntityMixin",
     "LivingEntityMixin",
     "MobSpawnerTileEntityMixin",

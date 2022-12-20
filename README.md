@@ -8,7 +8,7 @@ Main download: Bioplethora currently has NO downloads at the moment. There aren'
 
 Dependency [GeckoLib Forge 1.16 - 3.0.0 or above]: This mod requires GeckoLib to run mob animations! Here is the link: https://www.curseforge.com/minecraft/mc-mods/geckolib
 
-Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for the Biopedia, which is a guide to help you learn about the added mobs. Here is the link: https://www.curseforge.com/minecraft/mc-mods/patchouli
+Dependency [Fabric's Biome API Reforged 1.16 - 1.0.5 or above]: This mod requires 
 
 # FAQ
 ### Q: Who are the creators/developers of this mod?
@@ -27,13 +27,13 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 **A:** This mod is not made with the MCreator program. If you dislike the program in general, I suggest you read https://docs.google.com/document/d/1e7tN5vZgWEmMylNshZ9h6l0kXH8Ypqw-oJHL1qu0tgY/edit (documented by Toma400)
 
 # The Development Team
-**Lead Developer/s:** Sajevius, Aqu.
+**Lead Developer/s:** Aqu., Sajevius
 
-**Coders** Sajevius, Aqu., Toma400
+**Coders** Aqu., Sajevius, Toma400
 
 **Texturers:** Sajevius, Aqu., SeagullBoi, Dylanvhs, Lyof
 
-**Modellers:** Sajevius, Aqu.s, SeagullBoi, Dylanvhs, Lyof
+**Modellers:** Sajevius, Aqu., SeagullBoi, Dylanvhs, Lyof
 
 **Extras (Animation, SFX, Music, etc.):** Aqu., Sajevius
 
@@ -63,19 +63,19 @@ Dependency [Patchouli Forge 1.16 - 42 or above]: This mod requires Patchouli for
 ### REQUIRED DEPENDENCY
 
 - GeckoLib: https://www.curseforge.com/minecraft/mc-mods/geckolib
-- Abnormal's Core (or Blueprint): 
+- Fabric's Biome API Reforged:  https://www.curseforge.com/minecraft/mc-mods/fabrics-biome-api-reforged
 
-### FINISHED / CURRENT
+### CURRENT OPTIONAL DEPENDENCY
 
 - Patchouli: https://www.curseforge.com/minecraft/mc-mods/patchouli
 - The One Probe: https://www.curseforge.com/minecraft/mc-mods/the-one-probe
 - Wastelands of Baedoor: https://www.curseforge.com/minecraft/mc-mods/wastelands-of-baedoor
 - Enchantment Descriptions: https://www.curseforge.com/minecraft/mc-mods/enchantment-descriptions
 - FTB Chunks: https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge
-- Just Enough Items: 
-- Curios: 
+- Just Enough Items: https://www.curseforge.com/minecraft/mc-mods/jei
+- Curios: https://www.curseforge.com/minecraft/mc-mods/curios
 
-### PLANNED
+### PLANNED OPTIONAL DEPENDENCY
 
 - Tetra: https://www.curseforge.com/minecraft/mc-mods/tetra
 - Cloth Config: https://www.curseforge.com/minecraft/mc-mods/cloth-config-forge

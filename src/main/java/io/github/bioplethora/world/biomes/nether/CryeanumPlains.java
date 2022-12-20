@@ -18,6 +18,7 @@ import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import java.util.function.Supplier;
 
 public class CryeanumPlains {
+    public static final Biome.Attributes ATTRIBUTE = new Biome.Attributes(-0.35F, 0.0F, 0.0F, 0.0F, 0.0F);
 
     public static Biome make(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder) {
         double d0 = 0.7D;
