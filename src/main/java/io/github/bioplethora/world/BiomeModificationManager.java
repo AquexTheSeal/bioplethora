@@ -57,17 +57,6 @@ public class BiomeModificationManager {
                     .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0D))
                     .build());
         }
-        if (WorldgenUtils.getBiomeFromEvent(event, "small_end_islands")) {
-            event.setEffects(new BiomeAmbience.Builder()
-                    .waterColor(-14271360)
-                    .waterFogColor(-13348438)
-                    .fogColor(-14791063)
-                    .skyColor(-14791063)
-                    .ambientParticle(new ParticleEffectAmbience(ParticleTypes.WHITE_ASH, 0.25F))
-                    .ambientLoopSound(SoundEvents.AMBIENT_BASALT_DELTAS_LOOP)
-                    .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 6000, 8, 2.0D))
-                    .build());
-        }
     }
 
     public static void changeSurfaceBuilder(MutableRegistry<Biome> mutable, RegistryKey<Biome> biome, Supplier<ConfiguredSurfaceBuilder<?>> surface) {

@@ -1,6 +1,8 @@
 package io.github.bioplethora.world.surfacebuilders;
 
 import com.mojang.serialization.Codec;
+import io.github.bioplethora.registry.BPBlocks;
+import io.github.bioplethora.registry.BPTags;
 import io.github.bioplethora.world.surfacebuilderconfigs.NoisySurfaceBuilderConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -89,6 +91,5 @@ public class NoisySurfaceBuilder extends SurfaceBuilder<NoisySurfaceBuilderConfi
                 }
             }
         }
-
     }
-}
+ }

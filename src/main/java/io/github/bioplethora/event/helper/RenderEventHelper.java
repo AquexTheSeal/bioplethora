@@ -59,13 +59,6 @@ public class RenderEventHelper {
     public static void onFogDensity(EntityViewRenderEvent.FogDensity event) {
         Minecraft mc = Minecraft.getInstance();
         BlockPos blockpos = Minecraft.getInstance().getCameraEntity().blockPosition();
-        if (mc.level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(mc.level.getBiome(blockpos)).toString().equals("minecraft:small_end_islands")) {
-            event.setDensity(0.2F);
-            event.setCanceled(true);
-        } else if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.clientLevel.dimension() == World.END && Minecraft.getInstance().player.isUnderWater()) {
-            event.setDensity(0.03F);
-            event.setCanceled(true);
-        }
     }
 
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {

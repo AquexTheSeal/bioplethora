@@ -185,7 +185,7 @@ public class EntitySpawnManager {
             createSpawn(builder, monster, BPEntities.ONOFISH, 8, 2, 2, BPConfig.COMMON.spawnOnofish);
 
             //Triggerfish
-            createSpawn(builder, monster, BPEntities.TRIGGERFISH, 10, 1, 6, BPConfig.COMMON.spawnTriggerfish);
+            createSpawn(builder, monster, BPEntities.TRIGGERFISH, 5, 1, 5, BPConfig.COMMON.spawnTriggerfish);
         };
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {

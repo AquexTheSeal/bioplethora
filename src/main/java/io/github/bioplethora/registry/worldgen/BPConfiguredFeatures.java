@@ -1,6 +1,7 @@
 package io.github.bioplethora.registry.worldgen;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.world.BPVanillaBiomeFeatureGeneration;
@@ -13,6 +14,7 @@ import io.github.bioplethora.world.featureconfigs.PendentBlocksFeatureConfig;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.GenerationStage;
@@ -206,23 +208,24 @@ public class BPConfiguredFeatures {
             .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.0175F, 1))
             ));
 
-    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_HL = register("end_land_sponge_hl", BPFeatures.END_LAND_SPONGE_HL.get()
-            .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_ML = register("end_land_sponge_patch_ml", BPFeatures.END_LAND_SPONGE.get()
+            .configured(new BasaltDeltasFeature(Blocks.WATER.defaultBlockState(), BPBlocks.ENDURION.get().defaultBlockState(),
+                    FeatureSpread.of(5, 11), FeatureSpread.of(0, 2)))
+            .decorated(Placement.COUNT_MULTILAYER.configured(new FeatureSpreadConfig(50))
             ));
-    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_HL = register("end_land_sponge_patch_hl", Feature.RANDOM_SELECTOR
-            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE_HL.weighted(0.4446667F)), END_LAND_SPONGE_HL))
-            .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpongeHighlandsAmount.get()).squared().count(1)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.15F, 0))
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_HL = register("end_land_sponge_patch_ml", BPFeatures.END_LAND_SPONGE.get()
+            .configured(new BasaltDeltasFeature(Blocks.WATER.defaultBlockState(), BPBlocks.ENDURION.get().defaultBlockState(),
+                    FeatureSpread.of(7, 15), FeatureSpread.of(0, 2)))
+            .decorated(Placement.COUNT_MULTILAYER.configured(new FeatureSpreadConfig(40))
             ));
 
-    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_ML = register("end_land_sponge_ml", BPFeatures.END_LAND_SPONGE_ML.get()
+    public static final ConfiguredFeature<?, ?> END_LANDS_CAVERN = register("end_lands_cavern", BPFeatures.END_LANDS_CAVERN.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             ));
-    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_ML = register("end_land_sponge_patch_ml", Feature.RANDOM_SELECTOR
-            .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPONGE_ML.weighted(0.4446667F)), END_LAND_SPONGE_ML))
-            .decorated(Features.Placements.HEIGHTMAP_SQUARE).range(BPConfig.WORLDGEN.endSpongeMidlandsAmount.get()).squared().count(1)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.45F, 0))
-            ));
+    public static final ConfiguredFeature<?, ?> END_LANDS_CAVERN_DECORATED = register("end_lands_cavern_decorated",
+            END_LANDS_CAVERN.range(5).squared().count(1)
+                    .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.015F, 1))
+                    ));
 
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_HL = register("end_land_spike_hl", BPFeatures.END_LAND_SPIKE_HL.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)

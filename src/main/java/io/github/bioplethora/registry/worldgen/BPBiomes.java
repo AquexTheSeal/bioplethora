@@ -49,11 +49,19 @@ public class BPBiomes {
             add("caeri_forest", () -> CaeriForestBiome.make(() -> BPConfiguredSurfaceBuilders.CAERI_SURFACE),
                     Type.CAERI, BiomeDictionary.Type.END, Type.CAERI_FOREST, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET,BiomeDictionary.Type.MAGICAL
             );
+    public static final RegistryKey<Biome> WINTERFEST =
+            add("winterfest", () -> CaeriForestBiome.make(() -> BPConfiguredSurfaceBuilders.ENDURION_SURFACE),
+                    Type.WINTERFEST, BiomeDictionary.Type.END, BiomeDictionary.Type.COLD, BiomeDictionary.Type.WET, BiomeDictionary.Type.MAGICAL
+            );
 
     // End (Configurable)
     public static final RegistryKey<Biome> LAVENDER_LAKES =
             add("lavender_lakes", () -> LavenderLakesBiome.make(() -> BPConfiguredSurfaceBuilders.ENDURION_SURFACE),
                     Type.LAVENDER_LAKE, BiomeDictionary.Type.END, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET, BiomeDictionary.Type.MAGICAL
+            );
+    public static final RegistryKey<Biome> LAVENDER_PONDS =
+            add("lavender_lakes", () -> LavenderLakesBiome.make(() -> BPConfiguredSurfaceBuilders.ENDURION_SURFACE),
+                    Type.LAVENDER_POND, BiomeDictionary.Type.END, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.WET, BiomeDictionary.Type.MAGICAL
             );
 
     public static void generateBiomes() {
@@ -61,14 +69,15 @@ public class BPBiomes {
 
         NetherBiomes.addNetherBiome(BPBiomes.CRYEANUM_PLAINS, CryeanumPlains.ATTRIBUTE);
 
-        TheEndBiomes.addHighlandsBiome(BPBiomes.CAERI_FOREST, 7);
+        TheEndBiomes.addHighlandsBiome(BPBiomes.CAERI_FOREST, 5);
         TheEndBiomes.addMidlandsBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 20);
         TheEndBiomes.addBarrensBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 15);
+        TheEndBiomes.addSmallIslandsBiome(BPBiomes.WINTERFEST, 5);
 
         if (BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
             TheEndBiomes.addHighlandsBiome(BPBiomes.LAVENDER_LAKES, 16);
-            TheEndBiomes.addMidlandsBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_LAKES, 22);
-            TheEndBiomes.addBarrensBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_LAKES, 16);
+            TheEndBiomes.addMidlandsBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 22);
+            TheEndBiomes.addBarrensBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 16);
         }
     }
 
@@ -77,7 +86,9 @@ public class BPBiomes {
         public static final BiomeDictionary.Type CAERI = BiomeDictionary.Type.getType("CAERI");
         public static final BiomeDictionary.Type CAERI_PLAINS = BiomeDictionary.Type.getType("CAERI_PLAINS");
         public static final BiomeDictionary.Type CAERI_FOREST = BiomeDictionary.Type.getType("CAERI_FOREST");
+        public static final BiomeDictionary.Type WINTERFEST = BiomeDictionary.Type.getType("WINTERFEST");
         public static final BiomeDictionary.Type LAVENDER_LAKE = BiomeDictionary.Type.getType("LAVENDE_LAKE");
+        public static final BiomeDictionary.Type LAVENDER_POND = BiomeDictionary.Type.getType("LAVENDE_POND");
     }
 
     //==============================================
