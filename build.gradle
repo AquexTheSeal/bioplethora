@@ -197,9 +197,9 @@ dependencies {
     /*implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:4.14.54")*/
 
     //Huge Structure Blocks
-    /*implementation fg.deobf("curse.maven:huge-structure-blocks-474114:3318279")*/
+    implementation fg.deobf("curse.maven:huge-structure-blocks-474114:3318279")
     //WorldEdit
-    /*implementation fg.deobf("curse.maven:worldedit-225608:3283693")*/
+    implementation fg.deobf("curse.maven:worldedit-225608:3283693")
 
     //Enchantment Descriptions
     /*implementation fg.deobf("curse.maven:enchantment-descriptions-250419:3358861")*/

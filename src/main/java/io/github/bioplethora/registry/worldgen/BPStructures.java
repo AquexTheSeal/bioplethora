@@ -23,7 +23,7 @@ public class BPStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> ALPHANUM_MAUSOLEUM = STRUCTURES.register("alphanum_mausoleum", () -> (new AlphanumMausoleumStructure(NoFeatureConfig.CODEC)));
 
     public static void setupStructures() {
-        setupMapSpacingAndLand(ALPHANUM_MAUSOLEUM.get(), new StructureSeparationSettings(820,50, 1234567890), true);
+        setupMapSpacingAndLand(ALPHANUM_MAUSOLEUM.get(), new StructureSeparationSettings(230,30, 1234567890), true);
     }
 
     public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {

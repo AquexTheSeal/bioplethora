@@ -92,7 +92,7 @@ public class BPVanillaBiomeFeatureGeneration {
 
                     if (BPConfig.WORLDGEN.endSpongeHighlands.get()) liqCarver.add(() -> BPConfiguredWorldCarvers.END_SPRINGS_CARVER);
                     if (BPConfig.WORLDGEN.endSpongeHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_HL);
-                    if (BPConfig.WORLDGEN.endSpongeHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.END_LANDS_CAVERN_DECORATED);
+                    if (BPConfig.WORLDGEN.endSpongeHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.END_LANDS_CAVERN);
 
                     if (BPConfig.WORLDGEN.chorusLanternHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_HIGHLANDS_PATCH);
                     if (BPConfig.WORLDGEN.endSpikeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_HL);

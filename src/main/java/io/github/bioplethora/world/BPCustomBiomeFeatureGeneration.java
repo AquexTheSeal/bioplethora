@@ -28,13 +28,12 @@ public class BPCustomBiomeFeatureGeneration {
     public static void generateFeatures(final BiomeLoadingEvent event) {
         RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
+        List<Supplier<ConfiguredCarver<?>>> airCarver = event.getGeneration().getCarvers(GenerationStage.Carving.AIR);
         List<Supplier<ConfiguredCarver<?>>> liqCarver = event.getGeneration().getCarvers(GenerationStage.Carving.LIQUID);
 
         List<Supplier<ConfiguredFeature<?, ?>>> topLayerDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.TOP_LAYER_MODIFICATION);
         List<Supplier<ConfiguredFeature<?, ?>>> undergroundDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION);
         List<Supplier<ConfiguredFeature<?, ?>>> vegDeco = event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
-
-        List<Supplier<ConfiguredCarver<?>>> test = event.getGeneration().getCarvers(GenerationStage.Carving.AIR);
 
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CRYEANUM)) {
             vegDeco.add(() -> BPConfiguredFeatures.KYRIA);
@@ -51,6 +50,8 @@ public class BPCustomBiomeFeatureGeneration {
             vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_PLANT_PATCH);
         }
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_FOREST)) {
+            undergroundDeco.add(() -> BPConfiguredFeatures.CAERI_CAVERN);
+
             vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_FOREST_TREES);
             vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS);
             vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS);
@@ -67,7 +68,7 @@ public class BPCustomBiomeFeatureGeneration {
         if (BiomeDictionary.hasType(key, BPBiomes.Type.LAVENDER_LAKE)) {
             if (BPConfig.WORLDGEN.endSpongeHighlands.get()) liqCarver.add(() -> BPConfiguredWorldCarvers.END_SPRINGS_CARVER);
             if (BPConfig.WORLDGEN.endSpongeHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_HL);
-            if (BPConfig.WORLDGEN.endSpongeHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.END_LANDS_CAVERN_DECORATED);
+            if (BPConfig.WORLDGEN.endSpongeHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.END_LANDS_CAVERN);
 
             if (BPConfig.WORLDGEN.chorusLanternHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_HIGHLANDS_PATCH);
             if (BPConfig.WORLDGEN.endSpikeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_HL);

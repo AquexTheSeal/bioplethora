@@ -219,11 +219,13 @@ public class BPConfiguredFeatures {
             .decorated(Placement.COUNT_MULTILAYER.configured(new FeatureSpreadConfig(40))
             ));
 
-    public static final ConfiguredFeature<?, ?> END_LANDS_CAVERN = register("end_lands_cavern", BPFeatures.END_LANDS_CAVERN.get()
-            .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
-            ));
-    public static final ConfiguredFeature<?, ?> END_LANDS_CAVERN_DECORATED = register("end_lands_cavern_decorated",
-            END_LANDS_CAVERN.range(5).squared().count(1)
+    public static final ConfiguredFeature<?, ?> END_LANDS_CAVERN = register("end_lands_cavern",
+            BPFeatures.END_LANDS_CAVERN.get().configured(new NoFeatureConfig()).range(5).squared().count(1)
+                    .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.015F, 1))
+                    ));
+
+    public static final ConfiguredFeature<?, ?> CAERI_CAVERN = register("caeri_cavern",
+            BPFeatures.CAERI_CAVERN.get().configured(new NoFeatureConfig()).range(7).squared().count(1)
                     .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.015F, 1))
                     ));
 

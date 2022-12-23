@@ -29,6 +29,7 @@ public class BPFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPIKE_HL = FEATURES.register("end_land_spike_hl", () -> new EndLandsSpikeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPIKE_ML = FEATURES.register("end_land_spike_ml", () -> new EndLandsSpikeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LANDS_CAVERN = FEATURES.register("end_lands_cavern", () -> new EndLandsCavernFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> CAERI_CAVERN = FEATURES.register("caeri_cavern", () -> new CaeriCavernFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<BlockStateFeatureConfig>> WATER_PLANT = FEATURES.register("water_plant", () -> new WaterPlantFeature(BlockStateFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> ENREDE_KELP = FEATURES.register("enrede_kelp", () -> new EnredeKelpFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<ProbabilityConfig>> CORSASCILE = FEATURES.register("corsascile", () -> new CorsascileFeature(ProbabilityConfig.CODEC));
