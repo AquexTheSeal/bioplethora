@@ -50,6 +50,7 @@ public class BPCustomBiomeFeatureGeneration {
             vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_PLANT_PATCH);
         }
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_FOREST)) {
+            airCarver.add(() -> BPConfiguredWorldCarvers.CAERI_FORMERS);
             undergroundDeco.add(() -> BPConfiguredFeatures.CAERI_CAVERN);
 
             vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_FOREST_TREES);

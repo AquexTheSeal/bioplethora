@@ -43,25 +43,35 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
             if (living instanceof PlayerEntity) {
                 if (!(living.getUseItem().getItem() instanceof ShieldItem)) {
 
-                    if ((IQMainHandR && !IQOffHandL) || IQBothHands) {
-                        rightArm.xRot = -1F;
-                        rightArm.zRot = 1F;
-
-                        leftArm.xRot = -40F;
-                        leftArm.yRot = -22.5F;
-                        leftArm.zRot = -22.5F;
-
-                    } else if (IQOffHandL) {
-                        leftArm.xRot = -1F;
-                        leftArm.zRot = 1F;
-
-                        rightArm.xRot = -40F;
-                        rightArm.yRot = -22.5F;
-                        rightArm.zRot = -22.5F;
+                    if (IQMainHandR && !IQOffHandL) {
+                        rightArm.xRot = rotateBone(69.5243F);
+                        rightArm.yRot = rotateBone(24.6598F);
+                        rightArm.zRot = rotateBone(44.0413F);
+                        leftArm.zRot = rotateBone(72.2469F);
+                        leftArm.zRot = rotateBone(9.5327F);
+                        leftArm.zRot = rotateBone(3.0351F);
+                    } else if (!IQMainHandR && IQOffHandL) {
+                        leftArm.xRot = 69.5243F * ((float)Math.PI / 180F);
+                        leftArm.yRot = 24.6598F * ((float)Math.PI / 180F);
+                        leftArm.zRot = 44.0413F * ((float)Math.PI / 180F);
+                        rightArm.xRot = -(72.2469F * ((float)Math.PI / 180F));
+                        rightArm.yRot = 9.5327F * ((float)Math.PI / 180F);
+                        rightArm.zRot = 3.0351F * ((float)Math.PI / 180F);
+                    } else if (IQBothHands) {
+                        leftArm.xRot = 69.5243F * ((float)Math.PI / 180F);
+                        leftArm.yRot = 24.6598F * ((float)Math.PI / 180F);
+                        leftArm.zRot = 44.0413F * ((float)Math.PI / 180F);
+                        rightArm.xRot = 69.5243F * ((float)Math.PI / 180F);
+                        rightArm.yRot = 24.6598F * ((float)Math.PI / 180F);
+                        rightArm.zRot = 44.0413F * ((float)Math.PI / 180F);
                     }
                 }
             }
         }
+    }
+
+    public float rotateBone(float degrees) {
+       return degrees * ((float)Math.PI / 180F);
     }
 
     @Inject(method = "Lnet/minecraft/client/renderer/entity/model/BipedModel;setupAttackAnimation(Lnet/minecraft/entity/LivingEntity;F)V", at = @At("HEAD"))
@@ -84,8 +94,6 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
                         float f1 = MathHelper.sin(f * (float) Math.PI);
                         float f2 = MathHelper.sin(this.attackTime * (float) Math.PI) * -(this.head.xRot - 0.7F) * 0.75F;
 
-                        this.body.yRot = -MathHelper.sin(this.attackTime * (float) Math.PI) * 360;
-                        this.head.yRot = MathHelper.cos(this.attackTime * (float) Math.PI) * 360;
                         modelrenderer.xRot = (float) ((double) modelrenderer.xRot - ((double) f1 * 1.2D + (double) f2)) * 2;
                         modelrenderer.xRot += MathHelper.sin(this.attackTime * (float) Math.PI) * 0.75F;
                     }

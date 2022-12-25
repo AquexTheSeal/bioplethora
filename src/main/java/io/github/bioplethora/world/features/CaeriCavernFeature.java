@@ -20,7 +20,7 @@ public class CaeriCavernFeature extends Feature<NoFeatureConfig> {
 
     @Override
     public boolean place(ISeedReader world, ChunkGenerator chunkGen, Random rand, BlockPos pos, NoFeatureConfig config) {
-        pos = new BlockPos(pos.getX(), 20 + rand.nextInt(35), pos.getZ());
+        pos = new BlockPos(pos.getX(), 20 + rand.nextInt(25), pos.getZ());
         int radius = 6 + rand.nextInt(9);
         for (int sx = -radius; sx <= radius; sx++) {
             for (int sy = -radius; sy <= radius; sy++) {

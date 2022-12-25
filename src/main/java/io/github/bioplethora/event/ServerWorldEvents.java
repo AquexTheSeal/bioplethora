@@ -121,9 +121,10 @@ public class ServerWorldEvents {
                 if (stack.getItem() instanceof InfernalQuarterstaffItem) {
                     ((InfernalQuarterstaffItem) stack.getItem()).emptySwingHandler(stack, entity);
                 }
-                if (stack.getItem() instanceof VermilionBladeItem) {
-                    ((VermilionBladeItem) stack.getItem()).emptySwingHandler(stack, entity);
-                }
+            }
+
+            if (stack.getItem() instanceof VermilionBladeItem) {
+                ((VermilionBladeItem) stack.getItem()).emptySwingHandler(stack, entity);
             }
 
             if (stack.getItem() instanceof AbyssalBladeItem) {

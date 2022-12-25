@@ -1,6 +1,7 @@
 package io.github.bioplethora.registry.worldgen;
 
 import io.github.bioplethora.Bioplethora;
+import io.github.bioplethora.world.worldcarvers.CaeriFormersWorldCarver;
 import io.github.bioplethora.world.worldcarvers.EndSpringWorldCarver;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.*;
@@ -12,5 +13,6 @@ public class BPWorldCarvers {
     public static final DeferredRegister<WorldCarver<?>> WORLD_CARVERS = DeferredRegister.create(ForgeRegistries.WORLD_CARVERS, Bioplethora.MOD_ID);
 
     public static final RegistryObject<WorldCarver<ProbabilityConfig>> END_SPRINGS = WORLD_CARVERS.register("end_springs", () -> new EndSpringWorldCarver(ProbabilityConfig.CODEC));
+    public static final RegistryObject<WorldCarver<ProbabilityConfig>> CAERI_FORMERS = WORLD_CARVERS.register("caeri_formers", () -> new CaeriFormersWorldCarver(ProbabilityConfig.CODEC));
 
 }

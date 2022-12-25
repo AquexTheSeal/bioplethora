@@ -48,9 +48,9 @@ public class AlphemKingEntityModel extends AnimatedGeoModel<AlphemKingEntity> im
         float tickCountNeg = entity.ageInTicks - (float) entity.tickCount;
         float lerpHelper = MathHelper.lerp(tickCountNeg, entity.prevHurtTime, entity.hurtTime) / entity.hurtDuration;
         float pi = (float) Math.PI;
-        float rotationScale = entity.isBerserked() ? 0.65f : 0.45f;
+        float rotationScale = entity.isBerserked() ? 0.5f : 0.25f;
 
-        if (entity.isCharging()) {
+        if (entity.isCharging() && !entity.getAttacking() && !entity.getAttacking() && !entity.getAttacking2() && !entity.getSmashing() && !entity.isPursuit()) {
             arml.setRotationX(70);
             armr.setRotationX(70);
         }

@@ -113,6 +113,7 @@ public class VermilionBladeItem extends SwordItem implements IReachWeapon {
 
         if (ItemUtils.checkCooldownUsable(entity, stack)) {
             VermilionBladeProjectileEntity projectile = new VermilionBladeProjectileEntity(world, entity, ItemUtils.projAngleX(entity), ItemUtils.projAngleY(entity), ItemUtils.projAngleZ(entity));
+            projectile.setBladeSize(this.bladeSize);
             ItemUtils.shootWithItemBreakable(entity, projectile, world, stack, 1);
 
             entity.playSound(SoundEvents.BLAZE_SHOOT, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
