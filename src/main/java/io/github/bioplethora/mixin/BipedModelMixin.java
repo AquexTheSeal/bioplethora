@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BipedModel.class)
 public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableModel<T> {
 
+    /**
     @Shadow public ModelRenderer rightArm;
     @Shadow public ModelRenderer leftArm;
     @Shadow public ModelRenderer head;
@@ -51,12 +52,51 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
                         leftArm.zRot = rotateBone(9.5327F);
                         leftArm.zRot = rotateBone(3.0351F);
                     } else if (!IQMainHandR && IQOffHandL) {
+                        leftArm.xRot = rotateBone(69.5243F);
+                        leftArm.yRot = rotateBone(24.6598F);
+                        leftArm.zRot = rotateBone(44.0413F);
+                        rightArm.xRot = rotateBone(72.2469F);
+                        rightArm.yRot = rotateBone(9.5327F);
+                        rightArm.zRot = rotateBone(3.0351F);
+                    } else if (IQBothHands) {
                         leftArm.xRot = 69.5243F * ((float)Math.PI / 180F);
                         leftArm.yRot = 24.6598F * ((float)Math.PI / 180F);
                         leftArm.zRot = 44.0413F * ((float)Math.PI / 180F);
-                        rightArm.xRot = -(72.2469F * ((float)Math.PI / 180F));
-                        rightArm.yRot = 9.5327F * ((float)Math.PI / 180F);
-                        rightArm.zRot = 3.0351F * ((float)Math.PI / 180F);
+                        rightArm.xRot = 69.5243F * ((float)Math.PI / 180F);
+                        rightArm.yRot = 24.6598F * ((float)Math.PI / 180F);
+                        rightArm.zRot = 44.0413F * ((float)Math.PI / 180F);
+                    }
+                }
+            }
+        }
+    }
+
+    @Inject(method = "Lnet/minecraft/client/renderer/entity/model/BipedModel;poseLeftArm(Lnet/minecraft/entity/LivingEntity;)V", at = @At(value = "HEAD"))
+    private void poseLeft(T living, CallbackInfo ci) {
+
+        if (BPConfig.COMMON.enableCustomModelPositions.get()) {
+
+            boolean IQMainHandR = living.getMainHandItem().getItem() instanceof InfernalQuarterstaffItem;
+            boolean IQOffHandL = living.getOffhandItem().getItem() instanceof InfernalQuarterstaffItem;
+            boolean IQBothHands = IQMainHandR && IQOffHandL;
+
+            if (living instanceof PlayerEntity) {
+                if (!(living.getUseItem().getItem() instanceof ShieldItem)) {
+
+                    if (IQMainHandR && !IQOffHandL) {
+                        rightArm.xRot = rotateBone(69.5243F);
+                        rightArm.yRot = rotateBone(24.6598F);
+                        rightArm.zRot = rotateBone(44.0413F);
+                        leftArm.zRot = rotateBone(72.2469F);
+                        leftArm.zRot = rotateBone(9.5327F);
+                        leftArm.zRot = rotateBone(3.0351F);
+                    } else if (!IQMainHandR && IQOffHandL) {
+                        leftArm.xRot = rotateBone(69.5243F);
+                        leftArm.yRot = rotateBone(24.6598F);
+                        leftArm.zRot = rotateBone(44.0413F);
+                        rightArm.xRot = rotateBone(72.2469F);
+                        rightArm.yRot = rotateBone(9.5327F);
+                        rightArm.zRot = rotateBone(3.0351F);
                     } else if (IQBothHands) {
                         leftArm.xRot = 69.5243F * ((float)Math.PI / 180F);
                         leftArm.yRot = 24.6598F * ((float)Math.PI / 180F);
@@ -71,7 +111,8 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
     }
 
     public float rotateBone(float degrees) {
-       return degrees * ((float)Math.PI / 180F);
+       //return degrees * ((float)Math.PI / 180F);
+        return (float) Math.toRadians(degrees);
     }
 
     @Inject(method = "Lnet/minecraft/client/renderer/entity/model/BipedModel;setupAttackAnimation(Lnet/minecraft/entity/LivingEntity;F)V", at = @At("HEAD"))
@@ -100,5 +141,5 @@ public abstract class BipedModelMixin<T extends LivingEntity> extends AgeableMod
                 }
             }
         }
-    }
+    }**/
 }

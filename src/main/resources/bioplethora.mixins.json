@@ -15,7 +15,7 @@
     "PlayerEntityMixin",
     "QuickChargeEnchantmentMixin",
     "ServerPlayNetHandlerMixin",
-    "ServerWorldInfoMiixn"
+    "ServerWorldInfoMixin"
   ],
   "injectors": {
     "defaultRequire": 1

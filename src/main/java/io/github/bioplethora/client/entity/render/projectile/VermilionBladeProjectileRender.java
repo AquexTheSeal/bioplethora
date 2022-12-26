@@ -2,13 +2,8 @@ package io.github.bioplethora.client.entity.render.projectile;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.client.entity.model.projectile.VermilionBladeProjectileModel;
 import io.github.bioplethora.entity.projectile.VermilionBladeProjectileEntity;
-import io.github.bioplethora.registry.BPItems;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
@@ -16,13 +11,10 @@ import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IRendersAsItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
-import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
 
 public class VermilionBladeProjectileRender<T extends Entity & IRendersAsItem> extends EntityRenderer<T> {
 

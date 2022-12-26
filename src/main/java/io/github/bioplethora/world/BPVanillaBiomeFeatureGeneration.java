@@ -7,6 +7,7 @@ import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.worldgen.BPConfiguredFeatures;
 import io.github.bioplethora.registry.worldgen.BPConfiguredWorldCarvers;
 import io.github.bioplethora.registry.worldgen.BPWorldCarvers;
+import net.fabricmc.fabric.mixin.biome.MixinTheEndBiomeSource;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -98,7 +99,7 @@ public class BPVanillaBiomeFeatureGeneration {
                     if (BPConfig.WORLDGEN.endSpikeHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_HL);
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDON);
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_IDE_FAN);
-                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
+                    if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) undergroundDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.ENREDE_CORSASCILE);
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_PURPLE);
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.OCHAIM_RED);

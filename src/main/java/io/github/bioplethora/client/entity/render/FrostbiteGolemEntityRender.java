@@ -18,7 +18,7 @@ public class FrostbiteGolemEntityRender extends GeoEntityRenderer<FrostbiteGolem
 
     public FrostbiteGolemEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new FrostbiteGolemEntityModel());
-        this.addLayer(new FrostbiteGolemEntityGlowLayer (this));
+        this.addLayer(new FrostbiteGolemEntityGlowLayer(this));
         this.shadowRadius = 2.2F;
     }
 

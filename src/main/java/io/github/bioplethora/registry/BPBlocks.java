@@ -32,19 +32,19 @@ public class BPBlocks {
     public static final RegistryObject<Block> NANDBRI_SCALE_BLOCK = registerBlock("nandbri_scale_block", () -> new Block(AbstractBlock.Properties.of(Material.WOOL, MaterialColor.COLOR_LIGHT_GRAY)
             .strength(0.8F, 0.8F).harvestTool(ToolType.AXE).harvestLevel(3).sound(SoundType.BONE_BLOCK)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> BELLOPHITE_BLOCK = registerFireResBlock("frostbite_metal_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL).requiresCorrectToolForDrops()
-            .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHERITE_BLOCK).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).harvestLevel(3).sound(SoundType.NETHERITE_BLOCK)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> BELLOPHITE_CORE_BLOCK = registerFireResBlock("frostbite_metal_core_block", () -> new FrostbiteMetalCoreBlock(AbstractBlock.Properties.of(Material.GLASS)
             .strength(0.3F).sound(SoundType.GLASS).noOcclusion().hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> GREEN_GRYLYNEN_CRYSTAL_BLOCK = registerFireResBlock("green_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS)
-            .strength(0.3F).sound(SoundType.NETHER_GOLD_ORE).noOcclusion().lightLevel((block) -> 7).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(0.3F).sound(SoundType.NETHER_GOLD_ORE).lightLevel((block) -> 7).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> YELLOW_GRYLYNEN_CRYSTAL_BLOCK = registerFireResBlock("yellow_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS)
-            .strength(0.4F).sound(SoundType.NETHER_GOLD_ORE).noOcclusion().lightLevel((block) -> 9).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(0.4F).sound(SoundType.NETHER_GOLD_ORE).lightLevel((block) -> 9).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> RED_GRYLYNEN_CRYSTAL_BLOCK = registerFireResBlock("red_grylynen_crystal_block", () -> new Block(AbstractBlock.Properties.of(Material.GLASS)
-            .strength(0.5F).sound(SoundType.NETHER_GOLD_ORE).noOcclusion().lightLevel((block) -> 12).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(0.5F).sound(SoundType.NETHER_GOLD_ORE).lightLevel((block) -> 12).hasPostProcess((bs, br, bp) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> MIRESTONE = registerBlock("mirestone", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
-            .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.GRAVEL).noOcclusion().hasPostProcess((bs, br, bp) -> true)), null);
+            .strength(1.2F, 4.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.GRAVEL)), null);
 
     // Fleignarite Blocks
     public static final RegistryObject<Block> FLEIGNARITE_REMAINS = registerBlock("fleignarite_remains", () -> new FleignariteRemainsBlock(AbstractBlock.Properties.of(Material.PLANT)
@@ -63,7 +63,7 @@ public class BPBlocks {
 
     // Nether Blocks
     public static final RegistryObject<Block> CRYEA = registerBlock("cryea", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_PINK)
-            .strength(1.85F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(1.85F).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHER_SPROUTS)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> CRYEA_CARPET = registerBlock("cryea_carpet", () -> new BPFlatBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT, MaterialColor.COLOR_PINK)
             .strength(1.85F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS)), BPItemGroup.BioplethoraItemItemGroup);
     // Nether Plants
@@ -145,10 +145,10 @@ public class BPBlocks {
     public static final RegistryObject<FlowerPotBlock> POTTED_LAVA_SPIRE = registerBlock("potted_lava_spire", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LAVA_SPIRE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 
     // Enivile Woodset
-    public static final RegistryObject<Block> ENIVILE_PLANKS = registerBlock("enivile_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<RotatedPillarBlock> ENIVILE_LOG = registerBlock("enivile_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> ENIVILE_PLANKS = registerBlock("enivile_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> ENIVILE_LOG = registerBlock("enivile_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_ENIVILE_LOG = registerBlock("stripped_enivile_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_LOG.get())), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<RotatedPillarBlock> ENIVILE_WOOD = registerBlock("enivile_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> ENIVILE_WOOD = registerBlock("enivile_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_ENIVILE_WOOD = registerBlock("stripped_enivile_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.ENIVILE_WOOD.get())), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<LeavesBlock> ENIVILE_LEAVES_PINK = registerBlock("pink_enivile_leaves", () -> new BPLeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
@@ -170,10 +170,10 @@ public class BPBlocks {
     public static final RegistryObject<Item> ENIVILE_BOAT = BLOCK_ITEMS.register("enivile_boat", () -> new BPBoatItem(new Item.Properties().stacksTo(1).tab(BPItemGroup.BioplethoraItemItemGroup), "enivile"));
 
     // Caerulwood Woodset
-    public static final RegistryObject<Block> CAERULWOOD_PLANKS = registerBlock("caerulwood_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_LOG = registerBlock("caerulwood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> CAERULWOOD_PLANKS = registerBlock("caerulwood_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.CRIMSON_PLANKS).strength(2.4F).sound(SoundType.WOOD)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_LOG = registerBlock("caerulwood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CAERULWOOD_LOG = registerBlock("stripped_caerulwood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LOG.get())), BPItemGroup.BioplethoraItemItemGroup);
-    public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_WOOD = registerBlock("caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> CAERULWOOD_WOOD = registerBlock("caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.CRIMSON_HYPHAE).strength(2.4F).sound(SoundType.WOOD)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CAERULWOOD_WOOD = registerBlock("stripped_caerulwood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_WOOD.get())), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<LeavesBlock> CAERULWOOD_LEAVES = registerBlock("caerulwood_leaves", () -> new BPLeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES).sound(SoundType.GRASS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
@@ -237,14 +237,14 @@ public class BPBlocks {
 
     // End Blocks
     public static final RegistryObject<Block> ENDURION = registerBlock("endurion", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_MAGENTA)
-            .strength(1.6F).harvestTool(ToolType.PICKAXE).sound(SoundType.GILDED_BLACKSTONE).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(1.6F).harvestTool(ToolType.PICKAXE).sound(SoundType.GILDED_BLACKSTONE)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> IRION = registerBlock("irion", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_LIGHT_BLUE)
-            .strength(1.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(1.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> CRYOSOIL = registerBlock("cryosoil", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_BROWN)
-            .strength(1.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.GRAVEL).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(1.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.GRAVEL)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> CYRA = registerBlock("cyra", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_BLUE)
-            .strength(1.0F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(1.0F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> BYRSS_FRUIT_BLOCK = registerBlock("byrss_fruit_block", () -> new Block(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.COLOR_LIGHT_BLUE)
             .strength(1.8F).harvestTool(ToolType.AXE).sound(SoundType.WOOD).noOcclusion().lightLevel((block) -> 10).emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);
@@ -258,7 +258,7 @@ public class BPBlocks {
 
     // Alphanum Set
     public static final RegistryObject<Block> ALPHANUM = registerBlock("alphanum", () -> new Block(AbstractBlock.Properties.of(Material.STONE)
-            .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHER_GOLD_ORE).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(50.0F, 1200.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHER_GOLD_ORE)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> ALPHANUM_BRICKS = registerBlock("alphanum_bricks", () ->
             new Block(AbstractBlock.Properties.copy(BPBlocks.ALPHANUM.get())), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> POLISHED_ALPHANUM = registerBlock("polished_alphanum", () ->

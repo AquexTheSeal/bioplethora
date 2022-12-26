@@ -22,6 +22,18 @@ public class CaeriCavernFeature extends Feature<NoFeatureConfig> {
     public boolean place(ISeedReader world, ChunkGenerator chunkGen, Random rand, BlockPos pos, NoFeatureConfig config) {
         pos = new BlockPos(pos.getX(), 20 + rand.nextInt(25), pos.getZ());
         int radius = 6 + rand.nextInt(9);
+        for (int sx = -(radius + 2); sx <= (radius + 2); sx++) {
+            for (int sy = -(radius + 2); sy <= (radius + 2); sy++) {
+                for (int sz = -(radius + 2); sz <= (radius + 2); sz++) {
+                    if (sx * sx + sy * sy + sz * sz <= (radius + 2) *(radius + 2)) {
+                        BlockPos.Mutable tPos = pos.offset(sx, sy, sz).mutable();
+                        if (world.getBlockState(tPos).getBlock() == Blocks.END_STONE) {
+                            this.setBlock(world, tPos, Blocks.BLACKSTONE.defaultBlockState());
+                        }
+                    }
+                }
+            }
+        }
         for (int sx = -radius; sx <= radius; sx++) {
             for (int sy = -radius; sy <= radius; sy++) {
                 for (int sz = -radius; sz <= radius; sz++) {

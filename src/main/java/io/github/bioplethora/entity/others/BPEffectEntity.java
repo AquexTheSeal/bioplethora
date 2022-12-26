@@ -1,25 +1,18 @@
 package io.github.bioplethora.entity.others;
 
 import io.github.bioplethora.Bioplethora;
-import io.github.bioplethora.client.entity.render.others.BPEffectRender;
-import io.github.bioplethora.entity.creatures.AlphemEntity;
 import io.github.bioplethora.enums.BPEffectTypes;
-import io.github.bioplethora.item.weapons.InfernalQuarterstaffItem;
 import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;

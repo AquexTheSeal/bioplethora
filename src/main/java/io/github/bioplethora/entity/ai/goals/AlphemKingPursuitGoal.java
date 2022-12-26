@@ -37,6 +37,11 @@ public class AlphemKingPursuitGoal extends Goal {
         this.pursTime = 0;
     }
 
+    @Override
+    public boolean isInterruptable() {
+        return false;
+    }
+
     public void stop() {
         this.king.setPursuit(false);
         if (targetPos != null) {
@@ -79,12 +84,10 @@ public class AlphemKingPursuitGoal extends Goal {
                     pursTime = 0;
                 }
             }
-            if (pursTime >= 60 && pursTime < 90 && hasRaised) {
-                king.moveTo(target.getX(), target.getY() + 5, target.getZ());
-            }
         }
         if (hasRaised && targetPos != null) {
             ++pursTime;
+            king.moveTo(target.getX(), target.getY() + 5, target.getZ());
             if (pursTime == 90) {
                 smashDown();
             }
@@ -93,7 +96,7 @@ public class AlphemKingPursuitGoal extends Goal {
 
     public void smashDown() {
         int areaint = 5;
-        int wsHeight = king.getGroundPos(king.level, (int) king.getX(), (int) king.getZ()).getY();
+        int wsHeight = AlphemKingEntity.getGroundPos(king.level, (int) king.getX(), (int) king.getZ()).getY();
         AxisAlignedBB aabb = new AxisAlignedBB(king.getX() - areaint, (king.getY() - areaint) - (king.getY() - wsHeight), king.getZ() - areaint, king.getX() + areaint, king.getY(), king.getZ() + areaint);
         for (LivingEntity areaEnt : king.level.getEntitiesOfClass(LivingEntity.class, aabb)) {
             if (areaEnt != this.king) {

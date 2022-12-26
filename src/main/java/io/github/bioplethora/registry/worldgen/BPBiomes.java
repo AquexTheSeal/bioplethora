@@ -72,7 +72,7 @@ public class BPBiomes {
         TheEndBiomes.addHighlandsBiome(BPBiomes.CAERI_FOREST, 5);
         TheEndBiomes.addMidlandsBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 20);
         TheEndBiomes.addBarrensBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 15);
-        TheEndBiomes.addSmallIslandsBiome(BPBiomes.WINTERFEST, 5);
+        TheEndBiomes.addSmallIslandsBiome(BPBiomes.WINTERFEST, 3);
 
         if (BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
             TheEndBiomes.addHighlandsBiome(BPBiomes.LAVENDER_LAKES, 16);

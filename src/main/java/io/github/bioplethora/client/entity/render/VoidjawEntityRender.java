@@ -2,11 +2,8 @@ package io.github.bioplethora.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.bioplethora.client.entity.model.TrapjawEntityModel;
 import io.github.bioplethora.client.entity.model.VoidjawEntityModel;
-import io.github.bioplethora.client.entity.render.layer.EurydnEntityGlowLayer;
 import io.github.bioplethora.client.entity.render.layer.VoidjawImpulseLayer;
-import io.github.bioplethora.entity.creatures.TrapjawEntity;
 import io.github.bioplethora.entity.creatures.VoidjawEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

@@ -135,6 +135,10 @@ repositories {
         name = 'Github'
         url = "https://jitpack.io"
     }
+    maven {
+        name "KosmX's maven"
+        url 'https://maven.kosmx.dev/'
+    }
     mavenCentral()
 }
 
@@ -165,6 +169,9 @@ dependencies {
     implementation fg.deobf("curse.maven:damage-indicator-mod-for-forge-557596:3680500")
     //Critical Lib
     implementation fg.deobf("curse.maven:forge-criticalib-560696:3644558")
+
+    // Player Animations Library
+    implementation fg.deobf("curse.maven:playeranimator-658587:4111516")
 
     //Rubidium
     //implementation fg.deobf("curse.maven:rubidium-574856:3769736")

@@ -1,0 +1,16 @@
+{
+  "name": "Triggerfish",
+  "icon": "bioplethora:triggerfish_spawn_egg",
+  "category": "ecoharmless_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()Triggerfishes are little and harmless fish creatures that roams around the place like peaceful creatures."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:triggerfish",
+      "text": "Triggerfishes spawns commonly on water areas in the Overworld and in the End."
+    }
+  ]
+}

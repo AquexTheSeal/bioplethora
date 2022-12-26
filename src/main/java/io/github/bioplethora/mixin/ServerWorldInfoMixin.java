@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerWorldInfo.class)
-public class ServerWorldInfoMiixn {
+public class ServerWorldInfoMixin {
 
     @Inject(at = @At("HEAD"), method = "worldGenSettingsLifecycle", cancellable = true)
     private void forceStableLifeCycle(CallbackInfoReturnable<Lifecycle> cir) {
