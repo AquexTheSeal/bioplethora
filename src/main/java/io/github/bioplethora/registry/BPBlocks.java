@@ -235,9 +235,16 @@ public class BPBlocks {
     public static final RegistryObject<Block> GLACYNTH_PLANT = registerBlock("glacynth_plant", () -> new BPVinesBlock.GlacynthBlock(
             AbstractBlock.Properties.of(Material.ICE, DyeColor.LIGHT_BLUE).strength(0.25F).sound(SoundType.GLASS).noCollission()), null, false);
 
+    public static final RegistryObject<Block> CELESTIA_BUD = registerBlock("celestia_bud", () -> new BPVinesTopBlock.CelestiaBudTopBlock(
+            AbstractBlock.Properties.of(Material.STONE, DyeColor.LIGHT_BLUE).strength(0.25F).sound(SoundType.GILDED_BLACKSTONE).noOcclusion()), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> CELESTIA_BUD_PLANT = registerBlock("celestia_bud_plant", () -> new BPVinesBlock.CelestiaBudBlock(
+            AbstractBlock.Properties.of(Material.STONE, DyeColor.LIGHT_BLUE).strength(0.25F).sound(SoundType.GILDED_BLACKSTONE).noCollission()), null, false);
+
     // End Blocks
     public static final RegistryObject<Block> ENDURION = registerBlock("endurion", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_MAGENTA)
             .strength(1.6F).harvestTool(ToolType.PICKAXE).sound(SoundType.GILDED_BLACKSTONE)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> TENEDEBRIS = registerBlock("tenedebris", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK)
+            .strength(1.8F).harvestTool(ToolType.PICKAXE).sound(SoundType.GILDED_BLACKSTONE)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> IRION = registerBlock("irion", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_LIGHT_BLUE)
             .strength(1.8F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS)), BPItemGroup.BioplethoraItemItemGroup);
     public static final RegistryObject<Block> CRYOSOIL = registerBlock("cryosoil", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_BROWN)

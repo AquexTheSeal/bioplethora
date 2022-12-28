@@ -89,6 +89,7 @@ public class BPBlockLootTables extends BlockLootTables {
 
         // End Plants
         dropSelf(BPBlocks.ENDURION.get());
+        dropSelf(BPBlocks.TENEDEBRIS.get());
         dropSelf(BPBlocks.CRYOSOIL.get());
         add(BPBlocks.IRION.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.CRYOSOIL.get()));
 
@@ -123,6 +124,9 @@ public class BPBlockLootTables extends BlockLootTables {
 
         add(BPBlocks.GLACYNTH.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.GLACYNTH.get()));
         add(BPBlocks.GLACYNTH_PLANT.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.GLACYNTH.get()));
+
+        add(BPBlocks.CELESTIA_BUD.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.CELESTIA_BUD.get()));
+        add(BPBlocks.CELESTIA_BUD_PLANT.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.CELESTIA_BUD.get()));
 
         // Potted Plants
         dropPottedContents(BPBlocks.POTTED_LAVA_SPIRE.get());

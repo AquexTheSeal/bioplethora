@@ -268,6 +268,12 @@ public class BPConfiguredFeatures {
                     )
     );
 
+    public static final ConfiguredFeature<?, ?> CELESTIA_BUD = register("celestia_bud",
+            BPFeatures.CELESTIA_BUD.get().configured(IFeatureConfig.NONE).count(128).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 4, 8)).count(6)
+                    )
+    );
+
     public static final ConfiguredFeature<?, ?> ENREDE_CORSASCILE = register("enrede_corsascile",
             BPFeatures.CORSASCILE.get().configured(new ProbabilityConfig(0.3F)).count(80).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE)
     );

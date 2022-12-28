@@ -91,6 +91,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         // End Plants
         this.simpleBlock(BPBlocks.ENDURION.get());
+        this.simpleBlock(BPBlocks.TENEDEBRIS.get());
         this.withSidesAndBottomBlock(BPBlocks.IRION.get(), BPBlocks.CRYOSOIL.get());
         this.simpleBlock(BPBlocks.CRYOSOIL.get());
 
@@ -128,6 +129,9 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
         this.simpleCrossBlock(BPBlocks.GLACYNTH.get());
         this.simpleCrossBlock(BPBlocks.GLACYNTH_PLANT.get());
+
+        this.ideFanSingularBlock(BPBlocks.CELESTIA_BUD.get());
+        this.simpleCrossBlock(BPBlocks.CELESTIA_BUD_PLANT.get());
 
         this.multiLeafWoodset("enivile",
                 BPBlocks.ENIVILE_PLANKS.get(), BPBlocks.ENIVILE_LOG.get(), BPBlocks.STRIPPED_ENIVILE_LOG.get(),
@@ -199,10 +203,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
 
     // Custom Generators
 
-    public void woodset(String woodType,
-            Block planks, Block log, Block strippedLog, Block wood, Block strippedWood, Block leaves, Block sapling,
-            Block fence, Block fenceGate, Block pressurePlate, Block door, Block trapdoor,
-                        Block button, Block stairs, Block slab, Block sign, Block wallSign) {
+    public void woodset(String woodType, Block planks, Block log, Block strippedLog, Block wood, Block strippedWood, Block leaves, Block sapling, Block fence, Block fenceGate, Block pressurePlate, Block door, Block trapdoor, Block button, Block stairs, Block slab, Block sign, Block wallSign) {
         this.fixedLogBlock((RotatedPillarBlock) log);
         this.woodBlock((RotatedPillarBlock) wood, bioResLoc(woodType + "_log_side"));
         this.fixedLogBlock((RotatedPillarBlock) strippedLog);
@@ -222,10 +223,7 @@ public class BioBlockstateProvider extends BlockStateProvider {
         this.signBlock(sign, wallSign, bioResLoc(woodType + "_planks"));
     }
 
-    public void multiLeafWoodset(String woodType,
-                        Block planks, Block log, Block strippedLog, Block wood, Block strippedWood, Block leaves, Block leaves2, Block sapling,
-                        Block fence, Block fenceGate, Block pressurePlate, Block door, Block trapdoor,
-                        Block button, Block stairs, Block slab, Block sign, Block wallSign) {
+    public void multiLeafWoodset(String woodType, Block planks, Block log, Block strippedLog, Block wood, Block strippedWood, Block leaves, Block leaves2, Block sapling, Block fence, Block fenceGate, Block pressurePlate, Block door, Block trapdoor, Block button, Block stairs, Block slab, Block sign, Block wallSign) {
         woodset(woodType, planks, log, strippedLog, wood, strippedWood, leaves, sapling, fence, fenceGate, pressurePlate, door, trapdoor, button, stairs, slab, sign, wallSign);
         this.simpleBlock(leaves2);
     }
@@ -274,6 +272,11 @@ public class BioBlockstateProvider extends BlockStateProvider {
             case NORTH: return 180;
             case EAST: return 270;
         }
+    }
+
+    public void ideFanSingularBlock(Block block) {
+        BlockModelBuilder fan = models().singleTexture(block.getRegistryName().getPath(), bioResLoc("ide_fan"), "0", blockTexture(block)).texture("particle", blockTexture(block));
+        getVariantBuilder(block).partialState().setModels(new ConfiguredModel(fan));
     }
 
     public void ideFanBlock(Block block) {

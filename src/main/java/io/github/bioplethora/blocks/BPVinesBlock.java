@@ -16,6 +16,10 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
         super(properties, Direction.DOWN, SHAPE, true);
     }
 
+    protected BPVinesBlock(AbstractBlock.Properties properties, Direction direction) {
+        super(properties, direction, SHAPE, true);
+    }
+
     public boolean canSurviveOnLeafUtil(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
         BlockPos blockpos = pPos.relative(this.growthDirection.getOpposite());
         BlockState blockstate = pLevel.getBlockState(blockpos);
@@ -23,7 +27,7 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
         if (!this.canAttachToBlock(block)) {
             return false;
         } else {
-            return block == this.getHeadBlock() || block == this.getBodyBlock() || block instanceof LeavesBlock || blockstate.isFaceSturdy(pLevel, blockpos, this.growthDirection);
+            return block == this.getBodyBlock() || block instanceof LeavesBlock || blockstate.isFaceSturdy(pLevel, blockpos, this.growthDirection);
         }
     }
 
@@ -53,7 +57,6 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
             return canSurviveOnLeafUtil(pState, pLevel, pPos);
         }
     }
-
     public static class SpiritDanglerBlock extends BPVinesBlock {
         public SpiritDanglerBlock(Properties properties) {
             super(properties);
@@ -85,6 +88,19 @@ public abstract class BPVinesBlock extends AbstractBodyPlantBlock {
         public void entityInside(BlockState p_196262_1_, World p_196262_2_, BlockPos p_196262_3_, Entity p_196262_4_) {
             super.entityInside(p_196262_1_, p_196262_2_, p_196262_3_, p_196262_4_);
             p_196262_2_.destroyBlock(p_196262_3_, false);
+        }
+    }
+    public static class CelestiaBudBlock extends BPVinesBlock {
+        public CelestiaBudBlock(Properties properties) {
+            super(properties, Direction.UP);
+        }
+        @Override
+        protected AbstractTopPlantBlock getHeadBlock() {
+            return (AbstractTopPlantBlock) BPBlocks.CELESTIA_BUD.get();
+        }
+        @Override
+        public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+            return canSurviveOnLeafUtil(pState, pLevel, pPos);
         }
     }
 }

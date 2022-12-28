@@ -6,6 +6,9 @@
   "biome.bioplethora.cryeanum_plains": "Cryeanum Plains",
   "biome.bioplethora.caeri_plains": "Caeri Plains",
   "biome.bioplethora.caeri_forest": "Caeri Forest",
+  "biome.bioplethora.lavender_lakes": "Lavender Lakes",
+  "biome.bioplethora.lavender_ponds": "Lavender Ponds",
+  "biome.bioplethora.winterfest": "Winterfest",
 
   "entity.bioplethora.crephoxl": "Crephoxl",
   "entity.bioplethora.alphem": "Alphem",
@@ -283,6 +286,7 @@
   "block.bioplethora.spirit_dangler_plant": "Spirit Dangler",
 
   "block.bioplethora.endurion": "Endurion",
+  "block.bioplethora.tenedebris": "Tenedebris",
   "block.bioplethora.cryosoil": "Cryosoil",
   "block.bioplethora.irion": "Irion",
   "block.bioplethora.irion_grass": "Irion Grass",
@@ -293,6 +297,10 @@
   "block.bioplethora.byrss_lantern_plant": "Byrss Lantern Plant",
   "block.bioplethora.chorus_citrus_block": "Chorus Citrus Block",
   "block.bioplethora.chorus_lantern_plant": "Chorus Lantern Plant",
+  "block.bioplethora.celestia_bud": "Celestia Bud",
+  "block.bioplethora.celestia_bud_plant": "Celestia Bud Plant",
+  "block.bioplethora.chorus_ide_fan": "Chorus Ide Fan",
+  "block.bioplethora.chorus_idon": "Chorus Idon",
 
   "block.bioplethora.frostem": "Frostem",
   "block.bioplethora.spinxelthorn": "Spinxelthorn",

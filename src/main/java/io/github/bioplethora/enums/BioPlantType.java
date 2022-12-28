@@ -31,6 +31,9 @@ public enum BioPlantType {
     CAERI(() -> ImmutableList.of(
             BPBlocks.CRYOSOIL.get(), BPBlocks.IRION.get(), BPBlocks.CYRA.get(), Blocks.END_STONE
     )),
+    TENEDEBRIS(() -> ImmutableList.of(
+            BPBlocks.TENEDEBRIS.get()
+    )),
     CHORUS(() -> ImmutableList.of(
             Blocks.END_STONE, BPBlocks.ENDURION.get()
     )),

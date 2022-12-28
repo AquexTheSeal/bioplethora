@@ -96,6 +96,7 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         // End Plants
         this.cubeAll("endurion", bioResLoc("endurion"));
+        this.cubeAll("tenedebris", bioResLoc("tenedebris"));
         this.cube("irion",
                 bioResLoc("cryosoil"),
                 bioResLoc("irion_top"),
@@ -139,6 +140,9 @@ public class BioBlockModelProvider extends BlockModelProvider {
 
         this.cross("spinxelthorn", bioResLoc("spinxelthorn"));
         this.cross("spinxelthorn_plant", bioResLoc("spinxelthorn_plant"));
+
+        this.ideFanSingular("celestia_bud", bioResLoc("celestia_bud"));
+        this.cross("celestia_bud_plant", bioResLoc("celestia_bud_plant"));
 
         // Alphanum stone set
         this.cubeAll("alphanum", bioResLoc("alphanum"));
@@ -186,8 +190,12 @@ public class BioBlockModelProvider extends BlockModelProvider {
     }
 
     public void ideFan(String name, ResourceLocation all) {
-        singleTexture(name, bioResLoc("ide_fan"), "0", all).texture("particle", all);
+        ideFanSingular(name, all);
         singleTexture(name + "_budded", bioResLoc("ide_fan_budded"), "0", all).texture("particle", all);
+    }
+
+    public void ideFanSingular(String name, ResourceLocation all) {
+        singleTexture(name, bioResLoc("ide_fan"), "0", all).texture("particle", all);
     }
 
     public void reinforcingTable(String name, ResourceLocation all) {

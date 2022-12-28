@@ -43,7 +43,7 @@ public class EnredeKelpFeature extends Feature<NoFeatureConfig> {
                     }
                 } else if (l > 0) {
                     BlockPos blockpos1 = blockpos.below();
-                    if (blockstate.canSurvive(world, blockpos1) && !world.getBlockState(blockpos1.below()).is(Blocks.KELP)) {
+                    if (blockstate.canSurvive(world, blockpos1) && !world.getBlockState(blockpos1.below()).is(BPBlocks.ENREDE_KELP.get())) {
                         world.setBlock(blockpos1, blockstate.setValue(KelpTopBlock.AGE, rand.nextInt(4) + 20), 2);
                         ++i;
                     }

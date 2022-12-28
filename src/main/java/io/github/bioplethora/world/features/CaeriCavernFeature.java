@@ -28,7 +28,7 @@ public class CaeriCavernFeature extends Feature<NoFeatureConfig> {
                     if (sx * sx + sy * sy + sz * sz <= (radius + 2) *(radius + 2)) {
                         BlockPos.Mutable tPos = pos.offset(sx, sy, sz).mutable();
                         if (world.getBlockState(tPos).getBlock() == Blocks.END_STONE) {
-                            this.setBlock(world, tPos, Blocks.BLACKSTONE.defaultBlockState());
+                            this.setBlock(world, tPos, BPBlocks.TENEDEBRIS.get().defaultBlockState());
                         }
                     }
                 }
@@ -39,8 +39,8 @@ public class CaeriCavernFeature extends Feature<NoFeatureConfig> {
                 for (int sz = -radius; sz <= radius; sz++) {
                     if (sx * sx + sy * sy + sz * sz <= radius * radius) {
                         BlockPos.Mutable tPos = pos.offset(sx, sy, sz).mutable();
-                        if (replaceWithEndStone(world, tPos)) {
-                            this.setBlock(world, tPos, BPBlocks.CRYOSOIL.get().defaultBlockState());
+                        if (replaceWithStone(world, tPos)) {
+                            this.setBlock(world, tPos, BPBlocks.TENEDEBRIS.get().defaultBlockState());
                         } else {
                             this.setBlock(world, tPos, Blocks.AIR.defaultBlockState());
                         }
@@ -51,7 +51,7 @@ public class CaeriCavernFeature extends Feature<NoFeatureConfig> {
         return true;
     }
 
-    public boolean replaceWithEndStone(ISeedReader world, BlockPos pos) {
+    public boolean replaceWithStone(ISeedReader world, BlockPos pos) {
         return world.getBlockState(pos.offset(1, 0, 0)).getBlock() == Blocks.WATER ||
                 world.getBlockState(pos.offset(0, 0, 1)).getBlock() == Blocks.WATER ||
                 world.getBlockState(pos.offset(-1, 0, 0)).getBlock() == Blocks.WATER ||

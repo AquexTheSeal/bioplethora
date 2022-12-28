@@ -1,0 +1,7 @@
+{
+  "parent": "bioplethora:block/ide_fan",
+  "textures": {
+    "0": "bioplethora:block/celestia_bud",
+    "particle": "bioplethora:block/celestia_bud"
+  }
+}

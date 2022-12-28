@@ -16,7 +16,9 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -26,9 +28,6 @@ import java.util.function.Supplier;
 
 public class BPBiomes {
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Bioplethora.MOD_ID);
-
-    public static void initialize() {
-    }
 
     // Overworld
     public static final RegistryKey<Biome> ROCKY_WOODLANDS =
@@ -65,19 +64,20 @@ public class BPBiomes {
             );
 
     public static void generateBiomes() {
-        OverworldBiomes.addContinentalBiome(BPBiomes.ROCKY_WOODLANDS, OverworldClimate.COOL, 7);
+        OverworldBiomes.addContinentalBiome(BPBiomes.ROCKY_WOODLANDS, OverworldClimate.COOL, 1);
 
         NetherBiomes.addNetherBiome(BPBiomes.CRYEANUM_PLAINS, CryeanumPlains.ATTRIBUTE);
 
-        TheEndBiomes.addHighlandsBiome(BPBiomes.CAERI_FOREST, 5);
-        TheEndBiomes.addMidlandsBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 20);
-        TheEndBiomes.addBarrensBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 15);
-        TheEndBiomes.addSmallIslandsBiome(BPBiomes.WINTERFEST, 3);
+        TheEndBiomes.addHighlandsBiome(BPBiomes.CAERI_FOREST, 1);
+        TheEndBiomes.addMidlandsBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 1);
+        TheEndBiomes.addBarrensBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 1);
+
+        TheEndBiomes.addSmallIslandsBiome(BPBiomes.WINTERFEST, 1);
 
         if (BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
-            TheEndBiomes.addHighlandsBiome(BPBiomes.LAVENDER_LAKES, 16);
-            TheEndBiomes.addMidlandsBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 22);
-            TheEndBiomes.addBarrensBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 16);
+            TheEndBiomes.addHighlandsBiome(BPBiomes.LAVENDER_LAKES, 1.0);
+            TheEndBiomes.addMidlandsBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 1);
+            TheEndBiomes.addBarrensBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 1);
         }
     }
 

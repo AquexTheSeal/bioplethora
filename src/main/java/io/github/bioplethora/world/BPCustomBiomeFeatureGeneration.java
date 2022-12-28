@@ -53,6 +53,8 @@ public class BPCustomBiomeFeatureGeneration {
             airCarver.add(() -> BPConfiguredWorldCarvers.CAERI_FORMERS);
             undergroundDeco.add(() -> BPConfiguredFeatures.CAERI_CAVERN);
 
+            vegDeco.add(() -> BPConfiguredFeatures.CELESTIA_BUD);
+
             vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_FOREST_TREES);
             vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS);
             vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS);

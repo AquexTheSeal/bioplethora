@@ -15,7 +15,15 @@ public abstract class BPVinesTopBlock extends AbstractTopPlantBlock {
     protected static final VoxelShape SHAPE = Block.box(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
     public BPVinesTopBlock(AbstractBlock.Properties properties) {
-        super(properties, Direction.DOWN, SHAPE, true, 0.1D);
+        this(properties, Direction.DOWN);
+    }
+
+    protected BPVinesTopBlock(AbstractBlock.Properties properties, Direction direction) {
+        this(properties, direction, SHAPE);
+    }
+
+    protected BPVinesTopBlock(AbstractBlock.Properties properties, Direction direction, VoxelShape shape) {
+        super(properties, direction, shape, true, 0.1D);
     }
 
     protected boolean canGrowInto(BlockState pState) {
@@ -63,7 +71,6 @@ public abstract class BPVinesTopBlock extends AbstractTopPlantBlock {
             return canSurviveOnLeafUtil(pState, pLevel, pPos);
         }
     }
-
     public static class SpiritDanglerTopBlock extends BPVinesTopBlock {
         public SpiritDanglerTopBlock(Properties properties) {
             super(properties);
@@ -95,6 +102,15 @@ public abstract class BPVinesTopBlock extends AbstractTopPlantBlock {
         public void entityInside(BlockState p_196262_1_, World p_196262_2_, BlockPos p_196262_3_, Entity p_196262_4_) {
             super.entityInside(p_196262_1_, p_196262_2_, p_196262_3_, p_196262_4_);
             p_196262_2_.destroyBlock(p_196262_3_, false);
+        }
+    }
+    public static class CelestiaBudTopBlock extends BPVinesTopBlock {
+        public CelestiaBudTopBlock(Properties properties) {
+            super(properties, Direction.UP, Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D));
+        }
+        @Override
+        protected Block getBodyBlock() {
+            return BPBlocks.CELESTIA_BUD_PLANT.get();
         }
     }
 }
