@@ -68,16 +68,16 @@ public class BPBiomes {
 
         NetherBiomes.addNetherBiome(BPBiomes.CRYEANUM_PLAINS, CryeanumPlains.ATTRIBUTE);
 
-        TheEndBiomes.addHighlandsBiome(BPBiomes.CAERI_FOREST, 1);
-        TheEndBiomes.addMidlandsBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 1);
-        TheEndBiomes.addBarrensBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 1);
+        TheEndBiomes.addHighlandsBiome(BPBiomes.CAERI_FOREST, 5.0);
+        TheEndBiomes.addMidlandsBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 5);
+        TheEndBiomes.addBarrensBiome(BPBiomes.CAERI_FOREST, BPBiomes.CAERI_PLAINS, 5);
 
         TheEndBiomes.addSmallIslandsBiome(BPBiomes.WINTERFEST, 1);
 
         if (BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
-            TheEndBiomes.addHighlandsBiome(BPBiomes.LAVENDER_LAKES, 1.0);
-            TheEndBiomes.addMidlandsBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 1);
-            TheEndBiomes.addBarrensBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 1);
+            TheEndBiomes.addHighlandsBiome(BPBiomes.LAVENDER_LAKES, 5);
+            TheEndBiomes.addMidlandsBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 5);
+            TheEndBiomes.addBarrensBiome(BPBiomes.LAVENDER_LAKES, BPBiomes.LAVENDER_PONDS, 5);
         }
     }
 

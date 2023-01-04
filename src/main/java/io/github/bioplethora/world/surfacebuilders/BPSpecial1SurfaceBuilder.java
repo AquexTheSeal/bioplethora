@@ -5,6 +5,7 @@ import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.DefaultSurfaceBuilder;
@@ -24,11 +25,11 @@ public class BPSpecial1SurfaceBuilder extends DefaultSurfaceBuilder {
         BlockState blockstate1 = p_206967_12_;
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
         int i = -1;
-        int j = (int) (p_206967_7_ / 3.0D + 3.0D + p_206967_1_.nextDouble() * 0.25D);
+        int j = (int)(p_206967_7_ / 3.0D + 3.0D + p_206967_1_.nextDouble() * 0.25D);
         int k = p_206967_4_ & 15;
         int l = p_206967_5_ & 15;
 
-        for (int i1 = p_206967_6_; i1 >= 0; --i1) {
+        for(int i1 = p_206967_6_; i1 >= 0; --i1) {
             blockpos$mutable.set(k, i1, l);
             BlockState blockstate2 = p_206967_2_.getBlockState(blockpos$mutable);
             if (blockstate2.isAir()) {
@@ -44,55 +45,43 @@ public class BPSpecial1SurfaceBuilder extends DefaultSurfaceBuilder {
                     }
 
                     if (i1 < p_206967_14_ && blockstate.isAir()) {
-                        if (p_206967_3_.getTemperature(blockpos$mutable.set(p_206967_4_, i1, p_206967_5_)) < 0.15F) {
-                            blockstate = Blocks.ICE.defaultBlockState();
-                        } else {
-                            blockstate = p_206967_10_;
-                        }
-
+                        blockstate = p_206967_10_;
                         blockpos$mutable.set(k, i1, l);
                     }
 
                     i = j;
                     if (i1 >= p_206967_14_ - 1) {
-                        if (checkIfReplaceable(p_206967_2_, blockpos$mutable)) {
-                            p_206967_2_.setBlockState(blockpos$mutable, Blocks.OBSIDIAN.defaultBlockState(), false);
-                        } else {
-                            p_206967_2_.setBlockState(blockpos$mutable, blockstate, false);
-                        }
+                        p_206967_2_.setBlockState(blockpos$mutable, blockstate, false);
+                        clearBelow(p_206967_2_, blockpos$mutable, blockstate, blockstate1);
                     } else if (i1 < p_206967_14_ - 7 - j) {
                         blockstate = Blocks.AIR.defaultBlockState();
                         blockstate1 = p_206967_9_;
-                        if (checkIfReplaceable(p_206967_2_, blockpos$mutable)) {
-                            p_206967_2_.setBlockState(blockpos$mutable, Blocks.OBSIDIAN.defaultBlockState(), false);
-                        } else {
-                            p_206967_2_.setBlockState(blockpos$mutable, p_206967_13_, false);
-                        }
+                        p_206967_2_.setBlockState(blockpos$mutable, p_206967_13_, false);
+                        clearBelow(p_206967_2_, blockpos$mutable, blockstate, blockstate1);
                     } else {
                         p_206967_2_.setBlockState(blockpos$mutable, blockstate1, false);
-                    }
-                } else if (i > 0) {
-                    --i;
-                    p_206967_2_.setBlockState(blockpos$mutable, blockstate1, false);
-                    if (i == 0 && blockstate1.is(Blocks.SAND) && j > 1) {
-                        i = p_206967_1_.nextInt(4) + Math.max(0, i1 - 63);
-                        blockstate1 = blockstate1.is(Blocks.RED_SAND) ? Blocks.RED_SANDSTONE.defaultBlockState() : Blocks.SANDSTONE.defaultBlockState();
+                        clearBelow(p_206967_2_, blockpos$mutable, blockstate, blockstate1);
                     }
                 }
             }
         }
     }
 
-    public boolean checkIfReplaceable(IChunk chunk, BlockPos pos) {
-        for (int radY = pos.getY() - 1; radY <= pos.getY() + 1; radY++) {
-            for (int radX = pos.getX() - 1; radX <= pos.getX() + 1; radX++) {
-                for (int radZ = pos.getZ() - 1; radZ <= pos.getZ() + 1; radZ++) {
-                    if (chunk.getBlockState(pos).getBlock() == BPBlocks.IRION.get() || chunk.getBlockState(pos).getBlock() == BPBlocks.CRYOSOIL.get()) {
-                        return true;
-                    }
-                }
+    public void clearBelow(IChunk p_206967_2_, BlockPos.Mutable  blockpos$mutable, BlockState solid, BlockState liquid) {
+        for (int yf = -1; yf > -20; yf--) {
+            BlockPos blockpos = blockpos$mutable.offset(0, yf, 0);
+                if (replaceWithWater(p_206967_2_, blockpos)) {
+                p_206967_2_.setBlockState(blockpos$mutable, liquid, false);
+            } else {
+                p_206967_2_.setBlockState(blockpos$mutable, solid, false);
             }
         }
-        return false;
+    }
+
+    public boolean replaceWithWater(IChunk world, BlockPos pos) {
+        if (world.getBlockState(pos.offset(1, 0, 0)).isAir() || world.getBlockState(pos.offset(0, 0, 1)).isAir() || world.getBlockState(pos.offset(-1, 0, 0)).isAir() || world.getBlockState(pos.offset(0, 0, -1)).isAir() || world.getBlockState(pos.offset(0, -1, 0)).isAir()) {
+            return false;
+        }
+        return true;
     }
 }

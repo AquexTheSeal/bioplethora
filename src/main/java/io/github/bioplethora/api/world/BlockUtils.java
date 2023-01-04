@@ -1,5 +1,6 @@
 package io.github.bioplethora.api.world;
 
+import com.google.common.collect.AbstractIterator;
 import io.github.bioplethora.registry.BPTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -27,6 +28,24 @@ public class BlockUtils {
 
     public static boolean checkBlock(IWorld world, BlockPos pos, Block requiredBlock) {
         return checkBlockstate(world, pos, requiredBlock.defaultBlockState());
+    }
+
+    public static Iterable<BlockPos> positionsWithinCircle(BlockPos point, int radius) {
+        return () -> new AbstractIterator<BlockPos>() {
+            protected BlockPos computeNext() {
+                BlockPos blockpos = point;
+                for (int sx = -radius; sx <= radius; sx++) {
+                    for (int sy = -radius; sy <= radius; sy++) {
+                        for (int sz = -radius; sz <= radius; sz++) {
+                            if (sx * sx + sy * sy + sz * sz <= radius * radius) {
+                                blockpos = point.offset(sx, sy, sz);
+                            }
+                        }
+                    }
+                }
+                return blockpos;
+            }
+        };
     }
 
     public static boolean checkNearestTaggedFluid(AxisAlignedBB pBb, IWorldReader level, ITag<Fluid> tag) {

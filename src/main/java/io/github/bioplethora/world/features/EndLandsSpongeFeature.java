@@ -2,7 +2,10 @@ package io.github.bioplethora.world.features;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
+import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.*;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -15,7 +18,7 @@ import net.minecraft.world.gen.feature.structure.BasaltDeltasStructure;
 import java.util.Random;
 
 public class EndLandsSpongeFeature extends BasaltDeltasStructure {
-    private static final ImmutableList<Block> CANNOT_REPLACE = ImmutableList.of(Blocks.BEDROCK, Blocks.NETHER_BRICKS, Blocks.NETHER_BRICK_FENCE, Blocks.NETHER_BRICK_STAIRS, Blocks.NETHER_WART, Blocks.CHEST, Blocks.SPAWNER);
+    private static final ImmutableList<Block> CANNOT_REPLACE = ImmutableList.of(Blocks.BEDROCK);
     private static final Direction[] DIRECTIONS = Direction.values();
 
     public EndLandsSpongeFeature(Codec<BasaltDeltasFeature> pCodec) {
@@ -31,8 +34,9 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
         boolean flag2 = flag1 && i != 0 && j != 0;
         int k = config.size().sample(rand);
         int l = config.size().sample(rand);
+        int m = config.size().sample(rand);
         int i1 = Math.max(k, l);
-        for (BlockPos blockpos : BlockPos.withinManhattan(pos, k, 0, l)) {
+        for (BlockPos blockpos : BlockPos.withinManhattan(pos, k, l, m)) {
             if (blockpos.distManhattan(pos) > i1) {
                 break;
             }
@@ -41,27 +45,40 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
                 if (flag2) {
                     flag = true;
                     this.setBlock(level, blockpos, config.rim());
+                    this.carveOpenings(level, blockpos, config);
                 }
 
                 BlockPos blockpos1 = blockpos.offset(i, 0, j);
                 if (isClearer(level, blockpos1, config)) {
                     flag = true;
-                    this.setBlock(level, blockpos1, config.contents());
-                }
-
-                for (int yf = -1; yf > -14; yf--) {
-
-                    BlockPos blockpos2 = blockpos.offset(0, yf, 0);
-                    if (isClear(level, blockpos2, config)) {
-                        this.setBlock(level, blockpos2, config.contents());
-                    } else {
-                        this.setBlock(level, blockpos2, config.rim());
-                    }
+                    this.carveOpenings(level, blockpos1, config);
                 }
             }
         }
 
         return flag;
+    }
+
+    public void carveOpenings(IWorld pLevel, BlockPos pPos, BasaltDeltasFeature config) {
+        if (isClearOptimized(pLevel, pPos)) {
+            if (pLevel.getBlockState(pPos.above()).is(BPBlocks.ENREDE_KELP.get()) || pLevel.getBlockState(pPos.above()).is(BPBlocks.ENREDE_KELP_PLANT.get())) {
+                this.setBlock(pLevel, pPos, BPBlocks.ENREDE_KELP_PLANT.get().defaultBlockState());
+            } else {
+                this.setBlock(pLevel, pPos, config.contents());
+            }
+        }
+        /*
+        for (int sy = -15; sy <= -1; sy++) {
+            BlockPos.Mutable tPos = pPos.offset(0, sy, 0).mutable();
+            if (isClearOptimized(pLevel, tPos)) {
+                if (pLevel.getBlockState(tPos.above()).is(BPBlocks.ENREDE_KELP.get()) || pLevel.getBlockState(tPos.above()).is(BPBlocks.ENREDE_KELP_PLANT.get())) {
+                    this.setBlock(pLevel, tPos, BPBlocks.ENREDE_KELP_PLANT.get().defaultBlockState());
+                } else {
+                    this.setBlock(pLevel, tPos, config.contents());
+                }
+            }
+        }
+        */
     }
 
     private static boolean isClearer(IWorld pLevel, BlockPos pPos, BasaltDeltasFeature pConfig) {
@@ -88,7 +105,7 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
             return false;
         } else {
             for(Direction direction : DIRECTIONS) {
-                boolean flag = pLevel.getBlockState(pPos.relative(direction)).isAir();
+                boolean flag = pLevel.isEmptyBlock(pPos.relative(direction));
                 if (flag && direction != Direction.UP) {
                     return false;
                 }
@@ -96,5 +113,10 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
 
             return true;
         }
+    }
+
+    private static boolean isClearOptimized(IWorld world, BlockPos pos) {
+        boolean flag = world.isEmptyBlock(pos.east()) || world.isEmptyBlock(pos.west()) || world.isEmptyBlock(pos.south()) || world.isEmptyBlock(pos.north()) || world.isEmptyBlock(pos.below());
+        return !flag;
     }
 }

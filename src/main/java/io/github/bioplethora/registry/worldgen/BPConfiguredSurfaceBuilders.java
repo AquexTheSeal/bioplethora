@@ -22,7 +22,7 @@ public class BPConfiguredSurfaceBuilders {
             )));
 
     public static ConfiguredSurfaceBuilder<?> ENDURION_SURFACE = register("endurion",
-            BPSurfaceBuilders.SPECIAL_1.get().configured(new SurfaceBuilderConfig(
+            SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
                     BPBlocks.ENDURION.get().defaultBlockState(), // Surface Block
                     BPBlocks.ENDURION.get().defaultBlockState(), // Underground Block
                     BPBlocks.ENDURION.get().defaultBlockState() // Underwater Block

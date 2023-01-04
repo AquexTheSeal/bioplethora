@@ -25,7 +25,7 @@ public class EndSpringWorldCarver extends CaveWorldCarver {
 
     public EndSpringWorldCarver(Codec<ProbabilityConfig> p_i231921_1_) {
         super(p_i231921_1_, 256);
-        this.replaceableBlocks = ImmutableSet.of(Blocks.END_STONE, BPBlocks.ENDURION.get(), BPBlocks.CRYOSOIL.get(), BPBlocks.IRION.get());
+        this.replaceableBlocks = ImmutableSet.of(Blocks.WATER);
     }
 
     @Override
@@ -53,29 +53,15 @@ public class EndSpringWorldCarver extends CaveWorldCarver {
             bitset.set(i);
             pos.set(p_230358_11_, p_230358_14_, p_230358_12_);
             if (this.canReplaceBlock(level.getBlockState(pos))) {
-                BlockState blockstate;
+                BlockState blockstate = BPBlocks.ENDURION.get().defaultBlockState();
 
-                if (checkIfClear(level, pos)) {
-                    blockstate = WATER.createLegacyBlock();
-                } else {
-                    blockstate = BPBlocks.ENDURION.get().defaultBlockState();
+                if (!level.getBlockState(pos).isAir()) {
+                    level.setBlockState(pos, blockstate, false);
                 }
-
-                level.setBlockState(pos, blockstate, false);
                 return true;
             } else {
                 return false;
             }
         }
-    }
-
-    public boolean checkIfClear(IChunk pLevel, BlockPos pos) {
-        for (Direction direction : DIRECTIONS) {
-            boolean flag = pLevel.getBlockState(pos.relative(direction)).isAir();
-            if (flag && direction != Direction.UP) {
-                return false;
-            }
-        }
-        return true;
     }
 }

@@ -176,16 +176,16 @@ public class EntitySpawnManager {
 
         public static final Consumer<MobSpawnInfoBuilder> END_ENTITIES = (builder) -> {
             //Voidjaw
-            createSpawn(builder, monster, BPEntities.VOIDJAW, 6, 1, 1, BPConfig.COMMON.spawnVoidjaw);
+            createSpawn(builder, monster, BPEntities.VOIDJAW, 60, 1, 1, BPConfig.COMMON.spawnVoidjaw);
 
             //Gaugalem
-            createSpawn(builder, monster, BPEntities.GAUGALEM, 5, 1, 1, BPConfig.COMMON.spawnGaugalem);
+            createSpawn(builder, monster, BPEntities.GAUGALEM, 50, 1, 1, BPConfig.COMMON.spawnGaugalem);
 
             //Onofish
-            createSpawn(builder, monster, BPEntities.ONOFISH, 8, 2, 2, BPConfig.COMMON.spawnOnofish);
+            createSpawn(builder, monster, BPEntities.ONOFISH, 80, 2, 2, BPConfig.COMMON.spawnOnofish);
 
             //Triggerfish
-            createSpawn(builder, monster, BPEntities.TRIGGERFISH, 5, 1, 5, BPConfig.COMMON.spawnTriggerfish);
+            createSpawn(builder, monster, BPEntities.TRIGGERFISH, 5, 3, 5, BPConfig.COMMON.spawnTriggerfish);
         };
 
         public static void acceptMobSpawns(BiomeLoadingEvent event) {

@@ -213,11 +213,16 @@ public class BPConfiguredFeatures {
                     FeatureSpread.of(5, 11), FeatureSpread.of(0, 2)))
             .decorated(Placement.COUNT_MULTILAYER.configured(new FeatureSpreadConfig(50))
             ));
-    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_HL = register("end_land_sponge_patch_ml", BPFeatures.END_LAND_SPONGE.get()
+    public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_HL = register("end_land_sponge_patch_hl", BPFeatures.END_LAND_SPONGE.get()
             .configured(new BasaltDeltasFeature(Blocks.WATER.defaultBlockState(), BPBlocks.ENDURION.get().defaultBlockState(),
                     FeatureSpread.of(7, 15), FeatureSpread.of(0, 2)))
             .decorated(Placement.COUNT_MULTILAYER.configured(new FeatureSpreadConfig(40))
             ));
+
+    public static final ConfiguredFeature<?, ?> END_LAND_ROCK = register("end_land_rock", BPFeatures.END_LAND_ROCK.get()
+            .configured(new NoFeatureConfig())
+            .range(135).squared().count(1)
+    );
 
     public static final ConfiguredFeature<?, ?> END_LANDS_CAVERN = register("end_lands_cavern",
             BPFeatures.END_LANDS_CAVERN.get().configured(new NoFeatureConfig()).range(5).squared().count(1)
