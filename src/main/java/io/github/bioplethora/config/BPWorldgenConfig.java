@@ -70,13 +70,13 @@ public class BPWorldgenConfig {
         endSpongeMidlandsAmount = builder.define(genAmount("End Sponges", "End Midlands"), 275);
 
         endSpikeHighlands = builder.define(shouldGen("End Spikes", "End Highlands"), true);
-        endSpikeHighlandsAmount = builder.define(genAmount("End Spikes", "End Highlands"), 135);
+        endSpikeHighlandsAmount = builder.define(genAmount("End Spikes", "End Highlands"), 85);
 
         endSpikeMidlands = builder.define(shouldGen("End Spikes", "End Midlands"), true);
-        endSpikeMidlandsAmount = builder.define(genAmount("End Spikes", "End Midlands"), 115);
+        endSpikeMidlandsAmount = builder.define(genAmount("End Spikes", "End Midlands"), 62);
 
         endIcicleIslands = builder.define(shouldGen("End Icicles", "Small End Islands"), true);
-        endIcicleIslandsAmount = builder.define(genAmount("End Icicles", "Small End Islands"), 10);
+        endIcicleIslandsAmount = builder.define(genAmount("End Icicles", "Small End Islands"), 50);
 
         endFrozenIslands = builder.define(shouldGen("Frozen End Islands", "Small End Islands"), true);
         endFrozenIslandsAmount = builder.define(genAmount("Frozen End Islands", "Small End Islands"), 5);

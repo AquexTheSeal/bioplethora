@@ -32,6 +32,9 @@ public class CelestiaBudFeature extends Feature<NoFeatureConfig> {
             }
         }
 
+        this.placeStrand(world, rand, pos);
+
+        /*
         int radius = 8 + rand.nextInt(12);
         for (int sy = -radius; sy <= radius; sy++) {
             for (int sx = -radius; sx <= radius; sx++) {
@@ -44,7 +47,7 @@ public class CelestiaBudFeature extends Feature<NoFeatureConfig> {
                     }
                 }
             }
-        }
+        }*/
 
         return true;
     }

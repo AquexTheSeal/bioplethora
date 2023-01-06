@@ -28,8 +28,7 @@ public class BPFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> END_FROZEN_ISLAND = FEATURES.register("end_frozen_island", () -> new EndFrozenIslandFeature(NoFeatureConfig.CODEC.stable()));
     public static final RegistryObject<Feature<BasaltDeltasFeature>> END_LAND_SPONGE = FEATURES.register("end_land_sponge", () -> new EndLandsSpongeFeature(BasaltDeltasFeature.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_ROCK = FEATURES.register("end_land_rock", () -> new EndLandsRockFeature(NoFeatureConfig.CODEC));
-    public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPIKE_HL = FEATURES.register("end_land_spike_hl", () -> new EndLandsSpikeFeature(NoFeatureConfig.CODEC));
-    public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPIKE_ML = FEATURES.register("end_land_spike_ml", () -> new EndLandsSpikeFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> END_LAND_SPIKE = FEATURES.register("end_land_spike", () -> new EndLandsSpikeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> END_LANDS_CAVERN = FEATURES.register("end_lands_cavern", () -> new EndLandsCavernFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> CAERI_CAVERN = FEATURES.register("caeri_cavern", () -> new CaeriCavernFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<BlockStateFeatureConfig>> WATER_PLANT = FEATURES.register("water_plant", () -> new WaterPlantFeature(BlockStateFeatureConfig.CODEC));

@@ -234,22 +234,22 @@ public class BPConfiguredFeatures {
                     .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.015F, 1))
                     ));
 
-    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_HL = register("end_land_spike_hl", BPFeatures.END_LAND_SPIKE_HL.get()
+    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_HL = register("end_land_spike_hl", BPFeatures.END_LAND_SPIKE.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             ));
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_PATCH_HL = register("end_land_spike_patch_hl", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPIKE_HL.weighted(0.4446667F)), END_LAND_SPIKE_HL))
-            .range(BPConfig.WORLDGEN.endSpikeHighlandsAmount.get()).squared().count(1)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(3, 0.15F, 1))
+            .range(BPConfig.WORLDGEN.endSpikeHighlandsAmount.get()).squared().count(5)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.15F, 1))
             ));
 
-    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_ML = register("end_land_spike_ml", BPFeatures.END_LAND_SPIKE_ML.get()
+    public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_ML = register("end_land_spike_ml", BPFeatures.END_LAND_SPIKE.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             ));
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_PATCH_ML = register("end_land_spike_patch_ml", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_LAND_SPIKE_ML.weighted(0.4446667F)), END_LAND_SPIKE_ML))
-            .range(BPConfig.WORLDGEN.endSpikeMidlandsAmount.get()).squared().count(11)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.45F, 3))
+            .range(BPConfig.WORLDGEN.endSpikeMidlandsAmount.get()).squared().count(1)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.45F, 0))
             ));
 
     public static final ConfiguredFeature<?, ?> CHORUS_LANTERN_PLANT = register("chorus_lantern_plant", BPFeatures.SINGULAR_BLOCK.get()
@@ -297,8 +297,8 @@ public class BPConfiguredFeatures {
             ));
     public static final ConfiguredFeature<?, ?> END_ISLANDS_ICICLE_PATCH = register("end_islands_icicle_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_ISLANDS_ICICLE.weighted(0.2224447F)), END_ISLANDS_ICICLE))
-            .range(BPConfig.WORLDGEN.endIcicleIslandsAmount.get()).squared().count(1)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.035F, 1))
+            .range(BPConfig.WORLDGEN.endIcicleIslandsAmount.get()).squared().count(4)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.035F, 2))
             ));
 
     public static final ConfiguredFeature<?, ?> END_FROZEN_ISLAND = register("end_frozen_island", BPFeatures.END_FROZEN_ISLAND.get()

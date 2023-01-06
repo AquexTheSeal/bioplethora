@@ -47,7 +47,7 @@ public class BPCustomBiomeFeatureGeneration {
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_PLAINS)) {
             undergroundDeco.add(() -> BPConfiguredFeatures.CAERI_CAVERN);
 
-            vegDeco.add(() -> BPConfiguredFeatures.CELESTIA_BUD);
+            //vegDeco.add(() -> BPConfiguredFeatures.CELESTIA_BUD);
 
             vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS);
             vegDeco.add(() -> BPConfiguredFeatures.IRION_TALL_GRASS);
@@ -55,10 +55,10 @@ public class BPCustomBiomeFeatureGeneration {
             vegDeco.add(() -> BPConfiguredFeatures.BYRSS_LANTERN_PLANT_PATCH);
         }
         if (BiomeDictionary.hasType(key, BPBiomes.Type.CAERI_FOREST)) {
-            //airCarver.add(() -> BPConfiguredWorldCarvers.CAERI_FORMERS);
+            airCarver.add(() -> BPConfiguredWorldCarvers.CAERI_FORMERS);
             undergroundDeco.add(() -> BPConfiguredFeatures.CAERI_CAVERN);
 
-            vegDeco.add(() -> BPConfiguredFeatures.CELESTIA_BUD);
+            //vegDeco.add(() -> BPConfiguredFeatures.CELESTIA_BUD);
 
             vegDeco.add(() -> BPTreeConfiguredFeatures.CAERI_FOREST_TREES);
             vegDeco.add(() -> BPConfiguredFeatures.IRION_GRASS);

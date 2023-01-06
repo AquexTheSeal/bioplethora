@@ -92,8 +92,8 @@ public class BPVanillaBiomeFeatureGeneration {
             if (!BPConfig.WORLDGEN.createNewSpongeBiome.get()) {
                 if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_HIGHLANDS)) {
 
-                    if (BPConfig.WORLDGEN.endSpongeHighlands.get()) liqCarver.add(() -> BPConfiguredWorldCarvers.END_SPRINGS_CARVER);
-                    if (BPConfig.WORLDGEN.endSpongeHighlands.get()) undergroundDeco.add(() -> BPConfiguredFeatures.END_LAND_ROCK);
+                    //if (BPConfig.WORLDGEN.endSpongeHighlands.get()) liqCarver.add(() -> BPConfiguredWorldCarvers.END_SPRINGS_CARVER);
+                    //if (BPConfig.WORLDGEN.endSpongeHighlands.get()) undergroundDeco.add(() -> BPConfiguredFeatures.END_LAND_ROCK);
 
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
 
@@ -107,12 +107,12 @@ public class BPVanillaBiomeFeatureGeneration {
 
                     if (BPConfig.WORLDGEN.endSpikeHighlands.get()) localDeco.add(() -> BPConfiguredFeatures.END_LAND_SPIKE_PATCH_HL);
                     if (BPConfig.WORLDGEN.endSpongeHighlands.get()) localDeco.add(() -> BPConfiguredFeatures.END_LAND_SPONGE_PATCH_HL);
-                    if (BPConfig.WORLDGEN.endSpongeHighlands.get()) localDeco.add(() -> BPConfiguredFeatures.END_LANDS_CAVERN);
+                    //if (BPConfig.WORLDGEN.endSpongeHighlands.get()) localDeco.add(() -> BPConfiguredFeatures.END_LANDS_CAVERN);
                 }
 
                 if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS) || WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_BARRENS)) {
 
-                    if (BPConfig.WORLDGEN.endSpongeMidlands.get()) liqCarver.add(() -> BPConfiguredWorldCarvers.END_SPRINGS_CARVER);
+                    //if (BPConfig.WORLDGEN.endSpongeMidlands.get()) liqCarver.add(() -> BPConfiguredWorldCarvers.END_SPRINGS_CARVER);
 
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
 

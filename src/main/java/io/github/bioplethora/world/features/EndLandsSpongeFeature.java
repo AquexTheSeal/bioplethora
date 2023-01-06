@@ -16,6 +16,7 @@ import net.minecraft.world.gen.feature.BasaltDeltasFeature;
 import net.minecraft.world.gen.feature.structure.BasaltDeltasStructure;
 
 import java.util.Random;
+import java.util.function.BiFunction;
 
 public class EndLandsSpongeFeature extends BasaltDeltasStructure {
     private static final ImmutableList<Block> CANNOT_REPLACE = ImmutableList.of(Blocks.BEDROCK);
@@ -28,15 +29,13 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
     @Override
     public boolean place(ISeedReader level, ChunkGenerator chunkGen, Random rand, BlockPos pos, BasaltDeltasFeature config) {
         boolean flag = false;
-        boolean flag1 = rand.nextDouble() < 0.9D;
-        int i = flag1 ? config.rimSize().sample(rand) : 0;
-        int j = flag1 ? config.rimSize().sample(rand) : 0;
-        boolean flag2 = flag1 && i != 0 && j != 0;
+        int i = config.rimSize().sample(rand);
+        int j = config.rimSize().sample(rand);
+        boolean flag2 = i != 0 && j != 0;
         int k = config.size().sample(rand);
         int l = config.size().sample(rand);
-        int m = config.size().sample(rand);
         int i1 = Math.max(k, l);
-        for (BlockPos blockpos : BlockPos.withinManhattan(pos, k, l, m)) {
+        for (BlockPos blockpos : BlockPos.withinManhattan(pos, k, 0, l)) {
             if (blockpos.distManhattan(pos) > i1) {
                 break;
             }
@@ -45,12 +44,13 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
                 if (flag2) {
                     flag = true;
                     this.setBlock(level, blockpos, config.rim());
-                    this.carveOpenings(level, blockpos, config);
                 }
+                this.carveOpenings(level, blockpos, config);
 
                 BlockPos blockpos1 = blockpos.offset(i, 0, j);
-                if (isClearer(level, blockpos1, config)) {
+                if (isClearOptimized(level, blockpos1)) {
                     flag = true;
+                    this.carveGap(level, blockpos1, config, false);
                     this.carveOpenings(level, blockpos1, config);
                 }
             }
@@ -59,16 +59,26 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
         return flag;
     }
 
-    public void carveOpenings(IWorld pLevel, BlockPos pPos, BasaltDeltasFeature config) {
-        if (isClearOptimized(pLevel, pPos)) {
+    public void carveGap(IWorld pLevel, BlockPos pPos, BasaltDeltasFeature config, boolean checkOpt) {
+        if (checkOpt) {
+            if (isClearOptimized(pLevel, pPos)) {
+                if (pLevel.getBlockState(pPos.above()).is(BPBlocks.ENREDE_KELP.get()) || pLevel.getBlockState(pPos.above()).is(BPBlocks.ENREDE_KELP_PLANT.get())) {
+                    this.setBlock(pLevel, pPos, BPBlocks.ENREDE_KELP_PLANT.get().defaultBlockState());
+                } else {
+                    this.setBlock(pLevel, pPos, config.contents());
+                }
+            }
+        } else {
             if (pLevel.getBlockState(pPos.above()).is(BPBlocks.ENREDE_KELP.get()) || pLevel.getBlockState(pPos.above()).is(BPBlocks.ENREDE_KELP_PLANT.get())) {
                 this.setBlock(pLevel, pPos, BPBlocks.ENREDE_KELP_PLANT.get().defaultBlockState());
             } else {
                 this.setBlock(pLevel, pPos, config.contents());
             }
         }
-        /*
-        for (int sy = -15; sy <= -1; sy++) {
+    }
+
+    public void carveOpenings(IWorld pLevel, BlockPos pPos, BasaltDeltasFeature config) {
+        for (int sy = -7; sy <= -1; sy++) {
             BlockPos.Mutable tPos = pPos.offset(0, sy, 0).mutable();
             if (isClearOptimized(pLevel, tPos)) {
                 if (pLevel.getBlockState(tPos.above()).is(BPBlocks.ENREDE_KELP.get()) || pLevel.getBlockState(tPos.above()).is(BPBlocks.ENREDE_KELP_PLANT.get())) {
@@ -78,7 +88,6 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
                 }
             }
         }
-        */
     }
 
     private static boolean isClearer(IWorld pLevel, BlockPos pPos, BasaltDeltasFeature pConfig) {

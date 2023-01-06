@@ -1,21 +1,19 @@
 package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
-import io.github.bioplethora.registry.BPBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.client.renderer.BlockModelRenderer;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.ChorusPlantFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class EndLandsSpikeFeature extends Feature<NoFeatureConfig> {
 
@@ -26,66 +24,50 @@ public class EndLandsSpikeFeature extends Feature<NoFeatureConfig> {
     @Override
     public boolean place(ISeedReader world, ChunkGenerator chunkGen, Random rand, BlockPos pos, NoFeatureConfig config) {
 
-        this.placeSponge(3, world, rand, pos);
-        this.placeSponge(1, world, rand, pos.offset(-6 + rand.nextInt(5), -(4 - rand.nextInt(3)), -4 + rand.nextInt(4)));
-        this.placeSponge(2, world, rand, pos.offset(6 - rand.nextInt(6), -(3 - rand.nextInt(2)), 2 - rand.nextInt(5)));
-        this.placeSponge(1, world, rand, pos.offset(6 + rand.nextInt(4), -(2 - rand.nextInt(3)), 3 + rand.nextInt(4)));
-        this.placeSponge(2, world, rand, pos.offset(-6 - rand.nextInt(3), -(3 - rand.nextInt(3)), -3 - rand.nextInt(3)));
+        boolean large = world.getRandom().nextInt(5) == 0;
+        int tipMin = (int) ((large ? 25 : 10) * 0.7);
+        int tipRand = (int) ((large ? 35 : 20) * 0.6);
+        int radiusMin = large ? 4 : 2;
+        int radiusRand = large ? 6 : 3;
+
+        pos = new BlockPos(pos.getX(), 2, pos.getZ());
+        while (world.isEmptyBlock(pos) && pos.getY() < 100) {
+            pos = pos.above();
+        }
+
+        if (!world.getBlockState(pos.above()).is(Blocks.END_STONE)) {
+            return false;
+        }
+
+        int tip = tipMin + world.getRandom().nextInt(tipRand);
+        int topX = world.getRandom().nextInt(tip) - tip / 2;
+        int topZ = world.getRandom().nextInt(tip) - tip / 2;
+
+        int radius = radiusMin + world.getRandom().nextInt(radiusRand);
+        Vector3d to = new Vector3d(pos.getX() + topX, pos.getY() - tip, pos.getZ() + topZ);
+
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                double fromCenter = Math.sqrt(Math.pow(x, 2) + Math.pow(z, 2));
+                if(fromCenter <= radius) {
+                    Vector3d from = new Vector3d(pos.getX() + x, pos.getY(), pos.getZ() + z);
+
+                    if(world.getBlockState(new BlockPos(from).below()).isAir()) {
+                        continue;
+                    }
+
+                    Vector3d per = to.subtract(from).normalize();
+                    Vector3d current = from.add(0, 0, 0);
+                    double distance = from.distanceTo(to);
+
+                    for (double i = 0; i < distance; i++) {
+                        BlockPos targetPos = new BlockPos(current);
+                        world.setBlock(targetPos, Blocks.END_STONE.defaultBlockState(), 3);
+                        current = current.add(per);
+                    }
+                }
+            }
+        }
         return true;
-    }
-
-    public void placeSponge(int radius, ISeedReader world, Random rand, BlockPos pos) {
-        if (checkPlacement(world, pos)) {
-            int yRand = 24;
-            double radHelper = radius;
-            for (int sy = 0; sy >= -yRand; sy--) {
-                radHelper -= 0.25D;
-                radius = (int) radHelper;
-                addCircle(radius, world, rand, pos, sy);
-            }
-        }
-    }
-
-    public void addCircle(int radius, ISeedReader world, Random rand, BlockPos pos, int sy) {
-        for (int sx = -radius; sx <= radius; sx++) {
-            for (int sz = -radius; sz <= radius; sz++) {
-                if (sx * sx + sz * sz <= radius * radius) {
-                    BlockPos.Mutable newPos = pos.offset(sx, sy, sz).mutable();
-                    if (world.isEmptyBlock(newPos) || world.getBlockState(newPos).getBlock() instanceof LeavesBlock) {
-                        Block p0 = world.getBlockState(pos).getBlock(), p1 = world.getBlockState(pos.offset(0, 1, 0)).getBlock();
-
-                        if (p0 == BPBlocks.ENDURION.get() || p1 == BPBlocks.ENDURION.get() || p0 == Blocks.WATER || p1 == Blocks.WATER) {
-                            setBlock(world, newPos, BPBlocks.ENDURION.get().defaultBlockState());
-                        } else {
-                            setBlock(world, newPos, Blocks.END_STONE.defaultBlockState());
-                        }
-                    }
-                }
-            }
-        }
-        int rad2 = (radius - 1);
-        for (int sx = -rad2; sx <= rad2; sx++) {
-            for (int sz = -rad2; sz <= rad2; sz++) {
-                if (sx * sx + sz * sz <= rad2 * rad2) {
-                    BlockPos.Mutable newPos2 = pos.offset(sx, sy, sz).mutable();
-                    if (world.isEmptyBlock(newPos2) || world.getBlockState(newPos2).getBlock() instanceof LeavesBlock) {
-                        setBlock(world, newPos2, BPBlocks.ENDURION.get().defaultBlockState());
-                    }
-                }
-            }
-        }
-    }
-
-    public boolean checkPlacement(ISeedReader world, BlockPos pos) {
-        int checkRad = 2;
-        for (int x = -checkRad; x < checkRad; x++) {
-            for (int z = -checkRad; z < checkRad; z++) {
-                BlockPos.Mutable checkPos = pos.mutable().move(x, 1, z);
-                if (world.isEmptyBlock(checkPos) || world.getBlockState(checkPos).getBlock() instanceof LeavesBlock) {
-                    return false;
-                }
-            }
-        }
-        return !world.isEmptyBlock(pos) && world.isEmptyBlock(pos.offset(0, -3, 0));
     }
 }

@@ -55,27 +55,8 @@ public class EndFrozenIslandFeature extends Feature<NoFeatureConfig> {
         }
 
         if (placeIcicle) {
-            placeIcicleOnIsland(world, rand, pos.mutable());
-            placeIcicleOnIsland(world, rand, pos.offset(3 + rand.nextInt(6), 0, 3 + rand.nextInt(6)).mutable());
-            placeIcicleOnIsland(world, rand, pos.offset(5 + rand.nextInt(7), 0, 4 + rand.nextInt(5)).mutable());
-            placeIcicleOnIsland(world, rand, pos.offset(2 + rand.nextInt(3), 0, 1 + rand.nextInt(4)).mutable());
-            placeIcicleOnIsland(world, rand, pos.offset(5 + rand.nextInt(7), 0, 4 + rand.nextInt(5)).mutable());
+            EndIcicleFeature.createSpike(world, pos);
         }
-    }
-
-    public void placeIcicleOnIsland(ISeedReader world, Random rand, BlockPos.Mutable mutablePos) {
-
-        BlockPos.Mutable mutablePos1 = mutablePos.move(1, 0, 0);
-        BlockPos.Mutable mutablePos2 = mutablePos.move(0, 0, 1);
-        BlockPos.Mutable mutablePos3 = mutablePos.move(-1, 0, 0);
-        BlockPos.Mutable mutablePos4 = mutablePos.move(0, 0, -1);
-
-        placeIcicleLength(world, rand, false, mutablePos);
-
-        placeIcicleLength(world, rand, true, mutablePos1);
-        placeIcicleLength(world, rand, true, mutablePos2);
-        placeIcicleLength(world, rand, true, mutablePos3);
-        placeIcicleLength(world, rand, true, mutablePos4);
     }
 
     public void placeIcicleLength(ISeedReader world, Random rand, boolean onSides, BlockPos.Mutable mutable) {
