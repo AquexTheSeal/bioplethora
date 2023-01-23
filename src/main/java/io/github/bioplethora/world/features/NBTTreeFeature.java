@@ -72,7 +72,7 @@ public abstract class NBTTreeFeature extends Feature<NoFeatureConfig> {
         for (int x = -checkRad; x < checkRad; x++) {
             for (int z = -checkRad; z < checkRad; z++) {
                 BlockPos.Mutable checkPos = pos.mutable().move(x, move, z);
-                if (world.isEmptyBlock(checkPos) || world.getBlockState(checkPos).getBlock() instanceof LeavesBlock) {
+                if (world.isEmptyBlock(checkPos) || world.isWaterAt(checkPos) || world.getBlockState(checkPos).getBlock() instanceof LeavesBlock) {
                     return false;
                 }
             }

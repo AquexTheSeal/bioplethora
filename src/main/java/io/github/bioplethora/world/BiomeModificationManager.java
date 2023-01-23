@@ -5,6 +5,7 @@ import io.github.bioplethora.api.world.WorldgenUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.registry.BPParticles;
 import io.github.bioplethora.registry.worldgen.BPConfiguredSurfaceBuilders;
+import net.minecraft.block.ChorusPlantBlock;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundEvents;
@@ -41,7 +42,7 @@ public class BiomeModificationManager {
                     .waterFogColor(-13158998)
                     .fogColor(-12378263)
                     .skyColor(-12378263)
-                    .ambientParticle(new ParticleEffectAmbience(BPParticles.NIGHT_GAZE.get(), 0.14F))
+                    .ambientParticle(new ParticleEffectAmbience(BPParticles.NIGHT_GAZE.get(), 0.04F))
                     .ambientLoopSound(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD)
                     .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0D))
                     .build());
@@ -52,7 +53,7 @@ public class BiomeModificationManager {
                     .waterFogColor(-13158998)
                     .fogColor(-12378263)
                     .skyColor(-12378263)
-                    .ambientParticle(new ParticleEffectAmbience(BPParticles.NIGHT_GAZE.get(), 0.12F))
+                    .ambientParticle(new ParticleEffectAmbience(BPParticles.NIGHT_GAZE.get(), 0.03F))
                     .ambientLoopSound(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD)
                     .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0D))
                     .build());

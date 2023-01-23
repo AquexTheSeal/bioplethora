@@ -210,12 +210,12 @@ public class BPConfiguredFeatures {
 
     public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_ML = register("end_land_sponge_patch_ml", BPFeatures.END_LAND_SPONGE.get()
             .configured(new BasaltDeltasFeature(Blocks.WATER.defaultBlockState(), BPBlocks.ENDURION.get().defaultBlockState(),
-                    FeatureSpread.of(5, 11), FeatureSpread.of(0, 2)))
+                    FeatureSpread.of(5, 15), FeatureSpread.of(2, 4)))
             .decorated(Placement.COUNT_MULTILAYER.configured(new FeatureSpreadConfig(50))
             ));
     public static final ConfiguredFeature<?, ?> END_LAND_SPONGE_PATCH_HL = register("end_land_sponge_patch_hl", BPFeatures.END_LAND_SPONGE.get()
             .configured(new BasaltDeltasFeature(Blocks.WATER.defaultBlockState(), BPBlocks.ENDURION.get().defaultBlockState(),
-                    FeatureSpread.of(7, 15), FeatureSpread.of(0, 2)))
+                    FeatureSpread.of(7, 19), FeatureSpread.of(3, 6)))
             .decorated(Placement.COUNT_MULTILAYER.configured(new FeatureSpreadConfig(40))
             ));
 
@@ -297,8 +297,8 @@ public class BPConfiguredFeatures {
             ));
     public static final ConfiguredFeature<?, ?> END_ISLANDS_ICICLE_PATCH = register("end_islands_icicle_patch", Feature.RANDOM_SELECTOR
             .configured(new MultipleRandomFeatureConfig(ImmutableList.of(END_ISLANDS_ICICLE.weighted(0.2224447F)), END_ISLANDS_ICICLE))
-            .range(BPConfig.WORLDGEN.endIcicleIslandsAmount.get()).squared().count(4)
-            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.035F, 2))
+            .range(BPConfig.WORLDGEN.endIcicleIslandsAmount.get()).squared().count(2)
+            .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.035F, 1))
             ));
 
     public static final ConfiguredFeature<?, ?> END_FROZEN_ISLAND = register("end_frozen_island", BPFeatures.END_FROZEN_ISLAND.get()

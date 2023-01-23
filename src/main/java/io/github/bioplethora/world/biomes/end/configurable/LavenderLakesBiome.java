@@ -30,7 +30,7 @@ public class LavenderLakesBiome {
                                 .waterFogColor(-13158998)
                                 .fogColor(-12378263)
                                 .skyColor(-12378263)
-                                .ambientParticle(new ParticleEffectAmbience(BPParticles.NIGHT_GAZE.get(), 0.14F))
+                                .ambientParticle(new ParticleEffectAmbience(BPParticles.NIGHT_GAZE.get(), 0.04F))
                                 .ambientLoopSound(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD)
                                 .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0D))
                                 .build())

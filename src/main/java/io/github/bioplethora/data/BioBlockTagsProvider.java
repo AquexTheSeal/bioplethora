@@ -50,6 +50,7 @@ public class BioBlockTagsProvider extends BlockTagsProvider {
 
         tag(BPTags.Blocks.CHORUS_GROWABLE)
                 .add(BPBlocks.ENDURION.get())
+                .add(BPBlocks.CHORUS_MYCHRODEGIA.get())
                 .add(Blocks.END_STONE)
         ;
 

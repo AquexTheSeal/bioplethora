@@ -2,6 +2,7 @@ package io.github.bioplethora.network;
 
 import io.github.bioplethora.Bioplethora;
 import io.github.bioplethora.blocks.tile_entities.AlphanumNucleusBlock;
+import io.github.bioplethora.network.functions.BPSpawnParticlePacket;
 import io.github.bioplethora.network.functions.LeftSwingPacket;
 import io.github.bioplethora.network.functions.NucleusActivatePacket;
 import io.github.bioplethora.network.functions.RightSwingPacket;
@@ -27,6 +28,7 @@ public class BPNetwork {
         CHANNEL.registerMessage(packetIndex++, RightSwingPacket.class, RightSwingPacket::encode, RightSwingPacket::decode, RightSwingPacket::rightClickTrigger);
 
         CHANNEL.registerMessage(packetIndex++, NucleusActivatePacket.class, NucleusActivatePacket::encode, NucleusActivatePacket::decode, NucleusActivatePacket::setState);
+        CHANNEL.registerMessage(packetIndex++, BPSpawnParticlePacket.class, BPSpawnParticlePacket::encode, BPSpawnParticlePacket::decode, BPSpawnParticlePacket::spawnParticles);
     }
 
     public static <MSG> void sendPacketToPlayer(ServerPlayerEntity player, MSG packet) {

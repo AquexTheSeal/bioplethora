@@ -24,13 +24,15 @@ public class CaerulwoodTreeFeature extends NBTTreeFeature {
                 "caerulwood_tree_medium_1",
                 "caerulwood_tree_medium_2",
                 "caerulwood_tree_large_1",
-                "caerulwood_tree_large_2"
+                "caerulwood_tree_large_2",
+                "caerulwood_tree_large_3",
+                "caerulwood_tree_large_4"
         );
     }
 
     @Override
     public boolean lowerYLevel(Random rand) {
-        return getRandomNBTTree(rand).equals("caerulwood_tree_large_1") || getRandomNBTTree(rand).equals("caerulwood_tree_large_2");
+        return getRandomNBTTree(rand).equals("caerulwood_tree_large_1") || getRandomNBTTree(rand).equals("caerulwood_tree_large_2") || getRandomNBTTree(rand).equals("caerulwood_tree_large_3") || getRandomNBTTree(rand).equals("caerulwood_tree_large_4");
     }
 
     @Override

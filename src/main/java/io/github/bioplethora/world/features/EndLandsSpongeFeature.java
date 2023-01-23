@@ -1,27 +1,38 @@
 package io.github.bioplethora.world.features;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
+import io.github.bioplethora.api.world.OpenSimplexNoise;
 import io.github.bioplethora.registry.BPBlocks;
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.Direction;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.PerlinNoiseGenerator;
 import net.minecraft.world.gen.carver.UnderwaterCaveWorldCarver;
 import net.minecraft.world.gen.feature.BasaltDeltasFeature;
 import net.minecraft.world.gen.feature.structure.BasaltDeltasStructure;
+import net.minecraft.world.gen.surfacebuilders.NetherSurfaceBuilder;
 
 import java.util.Random;
+import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.stream.IntStream;
 
 public class EndLandsSpongeFeature extends BasaltDeltasStructure {
     private static final ImmutableList<Block> CANNOT_REPLACE = ImmutableList.of(Blocks.BEDROCK);
     private static final Direction[] DIRECTIONS = Direction.values();
-
+    
     public EndLandsSpongeFeature(Codec<BasaltDeltasFeature> pCodec) {
         super(pCodec);
     }
@@ -35,7 +46,7 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
         int k = config.size().sample(rand);
         int l = config.size().sample(rand);
         int i1 = Math.max(k, l);
-        for (BlockPos blockpos : BlockPos.withinManhattan(pos, k, 0, l)) {
+        for (BlockPos blockpos : BlockPos.withinManhattan(pos, k, 3, l)) {
             if (blockpos.distManhattan(pos) > i1) {
                 break;
             }

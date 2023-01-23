@@ -40,6 +40,9 @@ public enum BioPlantType {
     END_ISLANDS_ICE(() -> ImmutableList.of(
             Blocks.ICE,  Blocks.BLUE_ICE,  Blocks.PACKED_ICE,  Blocks.FROSTED_ICE
     )),
+    MYCHRODEGIA(() -> ImmutableList.of(
+            BPBlocks.CHORUS_MYCHRODEGIA.get()
+    )),
     CAERULWOOD_TREE(() -> ImmutableList.of(
             BPBlocks.CAERULWOOD_LEAVES.get(), BPBlocks.CAERULWOOD_LOG.get(), BPBlocks.CAERULWOOD_WOOD.get(), BPBlocks.STRIPPED_CAERULWOOD_LOG.get(),
             BPBlocks.CAERULWOOD_WOOD.get(), Blocks.END_STONE

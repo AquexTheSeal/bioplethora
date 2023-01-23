@@ -91,6 +91,7 @@ public class BPBlockLootTables extends BlockLootTables {
         dropSelf(BPBlocks.ENDURION.get());
         dropSelf(BPBlocks.TENEDEBRIS.get());
         dropSelf(BPBlocks.CRYOSOIL.get());
+        add(BPBlocks.CHORUS_MYCHRODEGIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CHORUS_MYCHRODEGIA.get()));
         add(BPBlocks.IRION.get(), (sTouch) -> createSingleItemTableWithSilkTouch(sTouch, BPBlocks.CRYOSOIL.get()));
 
         add(BPBlocks.IRION_GRASS.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.IRION_GRASS.get()));
@@ -102,6 +103,7 @@ public class BPBlockLootTables extends BlockLootTables {
         add(BPBlocks.CYRA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CYRA.get()));
 
         add(BPBlocks.AZURLIA.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.AZURLIA.get()));
+        add(BPBlocks.CHORUS_MYCHRODEGIA_PART.get(), (sTouch) -> createShearsOnlyDrop(BPBlocks.CHORUS_MYCHRODEGIA_PART.get()));
         dropSelf(BPBlocks.ARTAIRIUS.get());
 
         dropSelf(BPBlocks.BYRSS_FRUIT_BLOCK.get());

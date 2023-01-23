@@ -108,11 +108,13 @@ public class BioBlockModelProvider extends BlockModelProvider {
         this.cubeAll("cryosoil", bioResLoc("cryosoil"));
 
         this.cubeAll("cyra", bioResLoc("cyra"));
+        this.cubeAll("chorus_mychrodegia", bioResLoc("chorus_mychrodegia"));
 
         this.cross("irion_grass", bioResLoc("irion_grass"));
         this.doubleCrossPlant("irion_tall_grass", bioResLoc("irion_tall_grass_bottom"), bioResLoc("irion_tall_grass_top"));
 
         this.cross("azurlia", bioResLoc("azurlia"));
+        this.cross("chorus_mychrodegia_part", bioResLoc("chorus_mychrodegia_part"));
         this.doubleCrossPlant("artairius", bioResLoc("artairius_bottom"), bioResLoc("artairius_top"));
 
         this.cubeAll("byrss_fruit_block", bioResLoc("byrss_fruit_block"));

@@ -7,6 +7,8 @@ import io.github.bioplethora.enums.BPEffectTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
@@ -76,7 +78,11 @@ public class AlphemKingRangedAttackGoal extends Goal {
             this.king.level.playSound(null, this.king.getX(), this.king.getY(), this.king.getZ(), SoundEvents.SHULKER_SHOOT, this.king.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
         }
 
-        BPEffectEntity.createInstance(king, BPEffectTypes.ALPHEM_KING_BREATH);
+        double angX = -MathHelper.sin(king.yBodyRot * ((float)Math.PI / 180F)) * 2;
+        double angZ = MathHelper.cos(king.yBodyRot * ((float)Math.PI / 180F)) * 2;
+        BPEffectEntity slash = BPEffectEntity.getEffectInstance(king, BPEffectTypes.ALPHEM_KING_BREATH);
+        slash.moveTo(king.getX() + angX, king.getY() - 0.25, king.getZ() + angZ);
+        world.addFreshEntity(slash);
 
         CryoblazeEntity cryo = new CryoblazeEntity(world, this.king, d1, d2, d3);
         cryo.setOwner(this.king);

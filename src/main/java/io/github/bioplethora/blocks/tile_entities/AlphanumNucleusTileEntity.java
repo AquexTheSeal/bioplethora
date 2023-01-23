@@ -24,6 +24,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.server.ServerWorld;
 
 public class AlphanumNucleusTileEntity extends TileEntity implements ITickableTileEntity {
@@ -52,6 +53,16 @@ public class AlphanumNucleusTileEntity extends TileEntity implements ITickableTi
 
             if (!getLevel().isClientSide()) {
                 ((ServerWorld) getLevel()).sendParticles(ParticleTypes.SOUL_FIRE_FLAME, getBlockPos().getX(), getBlockPos().getY() + 0.5D, getBlockPos().getZ(), 7, 3.5, 3.5, 3.5, 0.1);
+
+                Vector3d from = new Vector3d(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ());
+                Vector3d to = new Vector3d(getBlockPos().getX() + (-40 + getLevel().getRandom().nextInt(80)), 255, getBlockPos().getZ() + (-40 + getLevel().getRandom().nextInt(80)));
+                Vector3d per = to.subtract(from).normalize();
+                Vector3d current = from.add(0, 0, 0);
+                double distance = from.distanceTo(to);
+                for (double i = 0; i < distance; i++) {
+                    ((ServerWorld) getLevel()).sendParticles(ParticleTypes.POOF, current.x(), current.y(), current.z(), 1, 0, 0, 0, 0);
+                    current = current.add(per);
+                }
             }
 
             if (activeTicks >= 20) {

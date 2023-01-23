@@ -1,0 +1,16 @@
+{
+  "name": "Myuthine",
+  "icon": "bioplethora:myuthine_spawn_egg",
+  "category": "dangerum_mobs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)INFORMATION: $(br)$()Myuthines are blood-lusty ghoul-like creatures roaming around the calm-looking pink paradise, they like to camouflage with the area and come out once they spot their prey."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity":"bioplethora:myuthine",
+      "text": "Myuthines spawn in the Nether's Cryeanum Plains biome."
+    }
+  ]
+}

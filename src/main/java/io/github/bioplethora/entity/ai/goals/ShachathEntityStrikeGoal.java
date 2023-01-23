@@ -18,12 +18,15 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class ShachathEntityStrikeGoal extends Goal {
@@ -57,6 +60,10 @@ public class ShachathEntityStrikeGoal extends Goal {
 
             this.shachath.getLookControl().setLookAt(shachath.getTarget(), 10.0F, 10.0F);
             ++this.chargeTime;
+
+            if (chargeTime > chargeCap) {
+                shachath.particleCharge(0);
+            }
 
             if (this.chargeTime == chargeCap) {
                 // First Target
@@ -113,7 +120,6 @@ public class ShachathEntityStrikeGoal extends Goal {
         double d0 = -MathHelper.sin(shachath.yRot * ((float)Math.PI / 180F)) * 6;
         double d1 = MathHelper.cos(shachath.yRot * ((float)Math.PI / 180F)) * 6;
 
-        shachath.createFirePowerup();
         this.ballParticleOnTarget(world, target);
         if (target.getUseItem().getItem() instanceof ShieldItem) {
             target.playSound(SoundEvents.SHIELD_BLOCK, 1.0F, 1.0F);
@@ -126,6 +132,7 @@ public class ShachathEntityStrikeGoal extends Goal {
         shachath.moveTo(target.getX(), target.getY(), target.getZ());
         shachath.playSound(SoundEvents.BLAZE_SHOOT, 1.0F, 1.0F);
         target.hurt(DamageSource.mobAttack(shachath), 7);
+        shachath.particleCharge(phase + 1);
         if (phase == 0) {
             BPEffectEntity.createInstance(shachath, BPEffectTypes.SHACHATH_SLASH_FLAT);
             shachath.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);
@@ -150,7 +157,7 @@ public class ShachathEntityStrikeGoal extends Goal {
                     world.addParticle(BPParticles.SHACHATH_CLASH_OUTER.get(), xa, ya, za, 0, 0, 0);
                 }
             }
-        } else if (phase == 3) {
+        } else if (phase == 2) {
             BPEffectEntity.createInstance(shachath, BPEffectTypes.SHACHATH_SLASH_FLAT);
             BPEffectEntity.createInstance(shachath, BPEffectTypes.SHACHATH_SLASH_FRONT);
             shachath.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);

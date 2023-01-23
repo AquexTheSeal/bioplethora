@@ -27,10 +27,10 @@ public class EndIcicleFeature extends Feature<NoFeatureConfig> {
     }
 
     public static void createSpike(ISeedReader world, BlockPos pos) {
-        boolean large = world.getRandom().nextInt(4) == 0;
+        boolean large = world.getRandom().nextInt(2) == 0;
         int tipMin = large ? 25 : 10;
         int tipRand = large ? 35 : 20;
-        int radiusMin = large ? 6 : 4;
+        int radiusMin = large ? 8 : 4;
         int radiusRand = large ? 6 : 4;
 
         int tip = tipMin + world.getRandom().nextInt(tipRand);

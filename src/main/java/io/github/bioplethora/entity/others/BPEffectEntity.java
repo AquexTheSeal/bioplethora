@@ -6,6 +6,8 @@ import io.github.bioplethora.registry.BPEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
@@ -75,16 +77,25 @@ public class BPEffectEntity extends Entity implements IAnimatable {
         lifespan = value;
     }
 
-    public static void createInstance(Entity owner, BPEffectTypes effectTypes) {
+    public static BPEffectEntity getEffectInstance(Entity owner, BPEffectTypes effectTypes) {
         BPEffectEntity slash = BPEntities.BP_EFFECT.get().create(owner.level);
         slash.setEffectType(effectTypes);
         if (owner instanceof LivingEntity) {
             slash.setOwner((LivingEntity) owner);
         }
         slash.moveTo(owner.getX(), owner.getY() - 0.25, owner.getZ());
-        slash.yRot = owner.yRot;
-        slash.yRotO = owner.yRotO;
-        owner.level.addFreshEntity(slash);
+        if (owner instanceof MobEntity) {
+            slash.yRot = ((MobEntity) owner).yBodyRot;
+            slash.yRotO = ((MobEntity) owner).yBodyRot;
+        } else {
+            slash.yRot = owner.yRot;
+            slash.yRotO = owner.yRotO;
+        }
+        return slash;
+    }
+
+    public static void createInstance(Entity owner, BPEffectTypes effectTypes) {
+        owner.level.addFreshEntity(getEffectInstance(owner, effectTypes));
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
