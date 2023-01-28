@@ -379,11 +379,11 @@
   "item.bioplethora.test_item.desc": "This is just an experimental item. Mainly used for development only. Only accessible in creative mode.",
 
   "item.bioplethora.crephoxl_hammer.dysfunction.skill": "Dysfunction",
-  "item.bioplethora.crephoxl_hammer.dysfunction.desc": "Increased damage for enemies with 50 or more health. Enemies attacked with this weapon gets debuffs for a very short duration.",
+  "item.bioplethora.crephoxl_hammer.dysfunction.desc": "Increased damage against enemies with 50 or more health. Enemies attacked with this weapon get debuffs for a very short duration.",
   "item.bioplethora.crephoxl_hammer.deathsweep.skill": "Deathsweep",
   "item.bioplethora.crephoxl_hammer.deathsweep.desc": "Hitting an entity while crouching will deal 80% of this tool's base damage to nearby entities within a 2-block radius. 1.5 second cooldown.",
   "item.bioplethora.crephoxl_hammer.aerial_shockwave.skill": "Aerial Shockwave",
-  "item.bioplethora.crephoxl_hammer.aerial_shockwave.desc": "On right click on the ground, this weapon creates a damaging shockwave on block right-click position, dealing 9 damage to nearby entities & sending them flying into the air. 3-second cooldown.",
+  "item.bioplethora.crephoxl_hammer.aerial_shockwave.desc": "Right-click on the ground to create a damaging shockwave, dealing 9 damage to nearby entities & sending them flying into the air. 3 second cooldown.",
 
   "item.bioplethora.frostbite_metal_arrow.sharper_tip.skill": "Sharper Tip",
   "item.bioplethora.frostbite_metal_arrow.sharper_tip.desc": "The Frostbite Golem arrow deals more damage than the regular arrow.",
@@ -391,12 +391,12 @@
   "item.bioplethora.frostbite_metal_arrow.core_energy.desc": "On hit (block or entity), the arrow deals magic damages and debuffs all nearby mobs.",
 
   "item.bioplethora.frostbite_metal_shield.recovery_bulwark.skill": "Recovery Bulwark",
-  "item.bioplethora.frostbite_metal_shield.recovery_bulwark.desc": "The Frostbite Metal shield has more durability than the regular shield, and it gives a resistance and regeneration effect on using.",
+  "item.bioplethora.frostbite_metal_shield.recovery_bulwark.desc": "The Frostbite Metal shield has more durability than the regular shield, and it gives a resistance and regeneration effect while being used.",
   "item.bioplethora.frostbite_metal_shield.core_impulse.skill": "Core Impulse",
-  "item.bioplethora.frostbite_metal_shield.core_impulse.desc": "This shield stacks core points every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.",
+  "item.bioplethora.frostbite_metal_shield.core_impulse.desc": "This shield stacks core points in every attack this shield blocks. Once the core points stacks up to 4, this shield releases a shockwave, damaging all nearby entities, then resets the core points back to 0. Letting go of the shield resets all the core points.",
 
   "item.bioplethora.arbitrary_ballista.heavy_duty_ballista.skill": "Heavy-Duty Ballista",
-  "item.bioplethora.arbitrary_ballista.heavy_duty_ballista.desc": "This giant crossbow greatly enhances the shooting projectile's speed and power. When shooting, the crossbow causes a small explosion that recoils the user backwards.",
+  "item.bioplethora.arbitrary_ballista.heavy_duty_ballista.desc": "This giant crossbow greatly enhances the shot projectile's speed and power. When shooting, the crossbow creates a small explosion that recoils the user backwards.",
 
   "item.bioplethora.nandbric_shortsword.fast_strike.skill": "Fast Strike",
   "item.bioplethora.nandbric_shortsword.fast_strike.desc": "Being a lightweight shortsword, this weapon allows for a convenient and hasty barrage of attacks.",
@@ -405,25 +405,25 @@
   "item.bioplethora.nandbric_shortsword.toxin_rush.desc": "Upon right-clicking at a mob that the crosshair is pointing at, the shortsword takes control over the player's mind, causing the player to rush toward the target and strike with force upon impact. Best used by holding down right-click.",
 
   "item.bioplethora.stellar_scythe.radius_slash.skill": "Radius Slash",
-  "item.bioplethora.stellar_scythe.radius_slash.desc": "This weapon could slash through an large area of enemies, the wide slashing ability cools down for 1 second only.",
+  "item.bioplethora.stellar_scythe.radius_slash.desc": "This weapon could slash through an large area of enemies. 1 second cooldown.",
 
   "item.bioplethora.vermilion_blade.blade_master.skill": "Blade Master",
-  "item.bioplethora.vermilion_blade.blade_master.desc": "On hit with sword, this sword damages mobs surrounding the target mob. The Sweeping Edge enchantment can increase the attack radius.",
+  "item.bioplethora.vermilion_blade.blade_master.desc": "On hit, this sword damages mobs surrounding the target mob. The Sweeping Edge enchantment increases the attack radius.",
 
   "item.bioplethora.vermilion_blade.pure_energy_concentration.skill": "Pure Energy Concentration",
-  "item.bioplethora.vermilion_blade.pure_energy_concentration.desc": "On using, this sword shoots Vermilion Blade Projectiles endlessly. The blade's explosion size and damage increases every shot, then resets to default eventually. The fire rate can be faster when enchanted with the Quick Charge enchantment.",
+  "item.bioplethora.vermilion_blade.pure_energy_concentration.desc": "On using, this sword shoots Vermilion Blade Projectiles indefinitely. The blade's explosion size and damage increases in every shot, then resets to default eventually. The fire rate can be faster when enchanted with Quick Charge.",
 
   "item.bioplethora.abyssal_blade.tridented_blade.skill": "Tridented Blade",
-  "item.bioplethora.abyssal_blade.tridented_blade.desc": "Like a trident, this blade propels you forward, but with this item, you don't need to be in rain nor in water, but this item has a 1 second cooldown.",
+  "item.bioplethora.abyssal_blade.tridented_blade.desc": "Like a trident, this blade propels you forward, but with this item, you don't need to be in rain nor in water. This item has a 1 second cooldown.",
 
   "item.bioplethora.primordial_staff.cores_aid.skill": "Core's Aid",
   "item.bioplethora.primordial_staff.cores_aid.desc": "Summons 2 floating Primordial Rings to fight alongside you.",
 
   "item.bioplethora.totem_of_swerving.blessed_instinct.skill": "Blessed Instinct",
-  "item.bioplethora.totem_of_swerving.blessed_instinct.desc": "When on offhand or mainhand. The user has a 1/3 chance of dodging any projectile.",
+  "item.bioplethora.totem_of_swerving.blessed_instinct.desc": "When in offhand or mainhand, the user has a 1/3 chance of dodging any projectile.",
 
   "item.bioplethora.infernal_quarterstaff.fierce_slashing.skill": "Fierce Slashing",
-  "item.bioplethora.infernal_quarterstaff.fierce_slashing.desc": "When this double-sided blade hurts it's targets, this weapon ignites the target, then switches it's blade to deals extra damage to all the entities on the target's surroundings and knock them back.",
+  "item.bioplethora.infernal_quarterstaff.fierce_slashing.desc": "When this double-sided blade hurts its targets, the targets are ignited and the blade switches to deals extra damage to all the entities on the target's surroundings and knock them back.",
   "item.bioplethora.infernal_quarterstaff.flaming_art.skill": "Flaming Art",
   "item.bioplethora.infernal_quarterstaff.flaming_art.desc": "Swinging the weapon on air can hurt surrounding enemies. Right-clicking on a block while shifting launches the player upwards.",
   "item.bioplethora.infernal_quarterstaff.snipe_afar.skill": "Snipe Afar",
@@ -433,19 +433,19 @@
   "item.bioplethora.wind_arrow.windy_essence.desc": "This arrow homes on to the nearest entity, and it slows all nearby entities on impact.",
 
   "item.bioplethora.spirit_fission_charm.spirit_fission.skill": "Spirit Fission",
-  "item.bioplethora.spirit_fission_charm.spirit_fission.desc": "This charm gives the Spirit Fission effect while it's in the player's inventory. Grylynens don't spawn when the player who destroyed the block has the Spirit Fission effect, because their souls would be torn apart before they could even awaken.",
+  "item.bioplethora.spirit_fission_charm.spirit_fission.desc": "This charm gives the Spirit Fission effect while it's in the player's inventory. Grylynens don't spawn when the player who destroyed the block has the Spirit Fission effect; their souls would be torn apart before they could even awaken.",
 
   "item.bioplethora.spirit_manipulation_charm.spirit_manipulation.skill": "Spirit Manipulation",
-  "item.bioplethora.spirit_manipulation_charm.spirit_manipulation.desc": "This charm gives the Spirit manipulation effect while it's in the player's inventory. Cavern Fleignars do not aggravate to the player when the player has the Spirit Manipulation effect, because the effect conceals the player from these creatures by controlling their mind and senses.",
+  "item.bioplethora.spirit_manipulation_charm.spirit_manipulation.desc": "This charm gives the Spirit Manipulation effect while it's in the player's inventory. Cavern Fleignars do not aggravate to the player when the player has Spirit Manipulation; the effect conceals the player from these creatures by controlling their mind and senses.",
 
   "item.bioplethora.spirit_strengthening_charm.spirit_strengthening.skill": "Spirit Strengthening",
-  "item.bioplethora.spirit_strengthening_charm.spirit_strengthening.desc": "All attacks you deal does 10% more damage, in addition to extra damage that scales with the target's current health.",
+  "item.bioplethora.spirit_strengthening_charm.spirit_strengthening.desc": "All attacks you deal do 10% more damage, in addition to extra damage that scales with the target's current health.",
 
   "item.bioplethora.peaguin_scale_armor.grace_embrace.skill":"Grace Embrace",
-  "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect to the user.",
+  "item.bioplethora.peaguin_scale_armor.grace_embrace.desc": "When user is underwater, this helmet gives the Dolphin's Grace effect.",
 
   "item.bioplethora.phantom_chime.flapping_up.skill": "Flapping Up",
-  "item.bioplethora.phantom_chime.flapping_up.desc": "On right click on the ground, this chime casts a spell that slows down enemies for 3 seconds and knocks them up. Cools down for 6 seconds.",
+  "item.bioplethora.phantom_chime.flapping_up.desc": "On right click on the ground, this chime casts a spell that slows down enemies for 3 seconds and knocks them up. 6 seconds cooldown.",
 
   "item.bioplethora.magma_bomb.bombardment.skill": "Bombardment",
   "item.bioplethora.magma_bomb.bombardment.desc": "Throws a projectile that explodes on impact.",
@@ -454,28 +454,28 @@
   "item.bioplethora.green_grylynen_shield.green_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to 3 seconds. Everytime this shield gets damaged, it slowly repairs your armor if you have any on you.",
 
   "item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.skill": "Yellow Crystal Energy",
-  "item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to 2 seconds. Everytime this shield gets damaged, it slowly repairs your armor if you have any on you, there is also a chance for this shield to restore its user's health.",
+  "item.bioplethora.yellow_grylynen_shield.yellow_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to 2 seconds. Everytime this shield gets damaged, it slowly repairs your armor if you have any on you. There is also a chance for this shield to restore its user's health.",
 
   "item.bioplethora.red_grylynen_shield.red_crystal_energy.skill": "Red Crystal Energy",
-  "item.bioplethora.red_grylynen_shield.red_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to only 1 second. Everytime this shield gets damaged, the shield knocks back the attacker and it slowly repairs your armor if you are wearing any, there is also a chance for this shield to restore its user's health by either 2 or 3.",
+  "item.bioplethora.red_grylynen_shield.red_crystal_energy.desc": "When this shield gets disabled from an axe, the shield cooldown changes from 5 seconds to only 1 second. Everytime this shield gets damaged, the shield knocks the attacker back and slowly repairs your armor if you are wearing any. There is also a chance for this shield to restore its user's health by either 2 or 3.",
   
   "item.bioplethora.alphanum_obliterator.skullbreaker.skill": "Skullbreaker",
-  "item.bioplethora.alphanum_obliterator.skullbreaker.desc": "This weapon is a very heavy item, that it can cause a great amount of knockback to the target in melee.",
+  "item.bioplethora.alphanum_obliterator.skullbreaker.desc": "This weapon is so heavy that it can deal a great amount of knockback to the target in melee.",
   "item.bioplethora.alphanum_obliterator.blasting_spears.skill": "Blasting Spears",
-  "item.bioplethora.alphanum_obliterator.blasting_spears.desc": "This weapon shoots 3 missiles that can cause explosions that deal an amount of damage that scales with the Devastating Blast enchantment every time it is used. This weapon reloads for a maximum of 2 seconds before being able to shoot again, the reloading time can be decreased with the Quick Charge Enchantment. If the same weapon are loaded in both hand slots, the mainhand shoot action can trigger the offhand shoot action.",
+  "item.bioplethora.alphanum_obliterator.blasting_spears.desc": "This weapon shoots 3 missiles that can cause explosions, dealing an amount of damage that scales with the Devastating Blast enchantment every time it is used. This weapon reloads for a maximum of 2 seconds before being able to shoot again. The reloading time can be decreased with Quick Charge. If the same weapon is loaded in both hand slots, the mainhand shoot action can trigger the offhand shoot action.",
 
   "effect.bioplethora.spirit_fission": "Spirit Fission",
   "effect.bioplethora.spirit_manipulation": "Spirit Manipulation",
   "effect.bioplethora.spirit_strengthening": "Spirit Strengthening",
 
-  "item.bioplethora.fleignarite_weapon.gooey_stun.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability when the item is not used in any hand. When the target is hurt using this item, the fleignarite scales used for this item causes a quick stun that gives nausea and slowness for a short duration.",
+  "item.bioplethora.fleignarite_weapon.gooey_stun.desc": "The fleignarite scales allow this weapon to slowly regenerate its durability when the item is not used in any hand. When the target is hurt using this item, the fleignarite scales used for this item causes a quick stun that gives nausea and slowness for a short duration.",
   "item.bioplethora.fleignarite_weapon.gooey_stun.skill": "Gooey Stun",
-  "item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability when the item is not used in any hand. This weapon can cause a very damaging blow that gives large amounts of debuffs every now and then thanks to it's frostbite_metal attachment.",
+  "item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.desc": "The fleignarite scales allow this weapon to slowly regenerate its durability when the item is not used in any hand. This weapon can cause a very damaging blow that gives large amounts of debuffs every now and then thanks to its frostbite_metal attachment.",
   "item.bioplethora.reinforced_fleignarite_weapon.deadly_blow.skill": "Deadly Blow",
 
-  "item.bioplethora.fleignarite_armor.sticky_piece.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability. When the user of the armor is hurt, the remaining little sticky goo that was left in the armor lessens the attacker's attack speed.",
+  "item.bioplethora.fleignarite_armor.sticky_piece.desc": "The fleignarite scales allow this weapon to slowly regenerate its durability. When the wearer is hurt, the remaining little sticky goo that was left in the armor lessens the attacker's attack speed.",
   "item.bioplethora.fleignarite_armor.gooey_piece.skill": "Gooey Piece",
-  "item.bioplethora.reinforced_fleignarite_armor.heavy_retaliation.desc": "The fleignarite scales allows this weapon to slowly regenerate it's durability. When the user of the armor is hurt, the core energy of the armor releases an impulse that can damage the attacker and debuff them for a short period.",
+  "item.bioplethora.reinforced_fleignarite_armor.heavy_retaliation.desc": "The fleignarite scales allow this weapon to slowly regenerate its durability. When the user of the armor is hurt, the core energy of the armor releases an impulse that can damage the attacker and debuff them for a short period of time.",
   "item.bioplethora.reinforced_fleignarite_armor.heavy_retaliation.skill": "Gooey Piece",
 
   "patchouli.bioplethora.bioplethora_guide.name": "The Biopedia",
@@ -485,7 +485,7 @@
   "message.bioplethora.alphem_king.summon": "An instance of the Alphem King is summoned by %s at coordinates %s, %s, and %s",
   "message.bioplethora.shachath_curse_1": "No matter how kind you are, there will always be fools in this unruly world.",
   "message.bioplethora.shachath_curse_2": "Chaos is the law of nature; Order is the dream of man.",
-  "message.bioplethora.shachath_curse_3": "In this cruel world, goodwill is certainly an perilous virtue.",
+  "message.bioplethora.shachath_curse_3": "In this cruel world, goodwill is certainly a perilous virtue.",
   "message.bioplethora.shachath_curse_4": "Despite all, what you're doing is dangerous. Cut it.",
   "message.bioplethora.shachath_curse_5": "Why? What is your motive in all of this?",
   "message.bioplethora.shachath_curse_6": "What makes you want to make countless lives suffer?",
