@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bioplethora:block/chorus_mychrodegia_part"
+  }
+}
