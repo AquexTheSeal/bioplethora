@@ -35,14 +35,14 @@ public abstract class ChorusPlantBlockMixin extends SixWayBlock {
         BlockPos pos = ctx.getClickedPos();
         World world = ctx.getLevel();
         BlockState plant = info.getReturnValue();
+
         if (ctx.canPlace() && plant.is(Blocks.CHORUS_PLANT) && world.getBlockState(pos.below()).is(BPTags.Blocks.CHORUS_GROWABLE)) {
             info.setReturnValue(plant.setValue(BlockStateProperties.DOWN, true));
         }
     }
 
     @Inject(method = "getStateForPlacement(Lnet/minecraft/world/IBlockReader;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;", at = @At("RETURN"), cancellable = true)
-    private void getStateForPlacementX(IBlockReader world, BlockPos pos, CallbackInfoReturnable<BlockState> info)
-    {
+    private void getStateForPlacementX(IBlockReader world, BlockPos pos, CallbackInfoReturnable<BlockState> info) {
         BlockState plant = info.getReturnValue();
         if (plant.is(Blocks.CHORUS_PLANT) && world.getBlockState(pos.below()).is(BPTags.Blocks.CHORUS_GROWABLE)) {
             info.setReturnValue(plant.setValue(BlockStateProperties.DOWN, true));

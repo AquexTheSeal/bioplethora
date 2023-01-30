@@ -38,7 +38,7 @@ public class BiomeModificationManager {
     public static void changeOthers(final BiomeLoadingEvent event) {
         if (WorldgenUtils.getBiomeFromEvent(event, "end_highlands")) {
             event.setEffects(new BiomeAmbience.Builder()
-                    .waterColor(-13817728)
+                    .waterColor(-6599759)
                     .waterFogColor(-13158998)
                     .fogColor(-12378263)
                     .skyColor(-12378263)
@@ -49,7 +49,7 @@ public class BiomeModificationManager {
         }
         if (WorldgenUtils.getBiomeFromEvent(event, "end_midlands") || WorldgenUtils.getBiomeFromEvent(event, "end_barrens")) {
             event.setEffects(new BiomeAmbience.Builder()
-                    .waterColor(-13817728)
+                    .waterColor(-6599759)
                     .waterFogColor(-13158998)
                     .fogColor(-12378263)
                     .skyColor(-12378263)

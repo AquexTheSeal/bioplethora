@@ -95,6 +95,8 @@ public class BPVanillaBiomeFeatureGeneration {
                     //if (BPConfig.WORLDGEN.endSpongeHighlands.get()) liqCarver.add(() -> BPConfiguredWorldCarvers.END_SPRINGS_CARVER);
                     //if (BPConfig.WORLDGEN.endSpongeHighlands.get()) undergroundDeco.add(() -> BPConfiguredFeatures.END_LAND_ROCK);
 
+                    vegDeco.add(() -> BPConfiguredFeatures.CHORUS_MYCHRODEGIA);
+
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
 
                     if (BPConfig.WORLDGEN.chorusLanternHighlands.get()) vegDeco.add(() -> BPConfiguredFeatures.CHORUS_LANTERN_HIGHLANDS_PATCH);
@@ -113,6 +115,8 @@ public class BPVanillaBiomeFeatureGeneration {
                 if (WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_MIDLANDS) || WorldgenUtils.getBiomeFromEvent(event, WorldgenUtils.END_BARRENS)) {
 
                     //if (BPConfig.WORLDGEN.endSpongeMidlands.get()) liqCarver.add(() -> BPConfiguredWorldCarvers.END_SPRINGS_CARVER);
+
+                    vegDeco.add(() -> BPConfiguredFeatures.CHORUS_MYCHRODEGIA);
 
                     if (BPConfig.WORLDGEN.chorusVegetationHighlands.get()) topLayerDeco.add(() -> BPConfiguredFeatures.ENREDE_KELP);
 

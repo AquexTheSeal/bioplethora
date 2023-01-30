@@ -234,6 +234,8 @@ public class BPConfiguredFeatures {
                     .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.015F, 1))
                     ));
 
+    public static final ConfiguredFeature<?, ?> CHORUS_MYCHRODEGIA = register("chorus_plant", BPFeatures.CHORUS_MYCHRODEGIA.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_SQUARE).countRandom(2));
+
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_HL = register("end_land_spike_hl", BPFeatures.END_LAND_SPIKE.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)
             ));

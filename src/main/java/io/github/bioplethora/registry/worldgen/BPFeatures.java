@@ -35,6 +35,7 @@ public class BPFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> ENREDE_KELP = FEATURES.register("enrede_kelp", () -> new EnredeKelpFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> CELESTIA_BUD = FEATURES.register("celestia_bud", () -> new CelestiaBudFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<Feature<ProbabilityConfig>> CORSASCILE = FEATURES.register("corsascile", () -> new CorsascileFeature(ProbabilityConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> CHORUS_MYCHRODEGIA = FEATURES.register("chorus_mychrodegia", () -> new ChorusMychrodegiaFeature(NoFeatureConfig.CODEC));
 
     // Trees
     public static final RegistryObject<Feature<NoFeatureConfig>> ENIVILE_TREE = FEATURES.register("enivile_tree", () -> new EnivileTreeFeature(NoFeatureConfig.CODEC));

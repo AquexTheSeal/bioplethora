@@ -219,8 +219,8 @@ public class BPBlocks {
     public static final RegistryObject<Block> AZURLIA = registerBlock("azurlia", () -> new BPReversePlantBlock(BioPlantType.CAERULWOOD_TREE, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 12).noCollission().emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 
-    public static final RegistryObject<Block> CHORUS_MYCHRODEGIA_PART = registerBlock("chorus_mychrodegia_part", () -> new BPReversePlantBlock(BioPlantType.CAERULWOOD_TREE, BioPlantShape.SIMPLE_PLANT,
-            AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 9).noCollission().emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+    public static final RegistryObject<Block> CHORUS_MYCHRODEGIA_PART = registerBlock("chorus_mychrodegia_part", () -> new BPReversePlantBlock(BioPlantType.MYCHRODEGIA, BioPlantShape.SIMPLE_PLANT,
+            AbstractBlock.Properties.copy(BPBlocks.CAERULWOOD_LEAVES.get()).lightLevel((block) -> 7).noCollission().emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> ARTAIRIUS = registerBlock("artairius", () -> new BPDoublePlantBlock(BioPlantType.CAERI, BioPlantShape.SIMPLE_PLANT,
             AbstractBlock.Properties.copy(BPBlocks.IRION_GRASS.get()).lightLevel((block) -> block.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER ? 13 : 5).noCollission()), BPItemGroup.BioplethoraItemItemGroup);
@@ -257,7 +257,7 @@ public class BPBlocks {
             .strength(1.0F).harvestTool(ToolType.SHOVEL).sound(SoundType.NETHER_SPROUTS)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> CHORUS_MYCHRODEGIA = registerBlock("chorus_mychrodegia", () -> new Block(AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_PINK)
-            .strength(1.0F).lightLevel((block) -> 12).harvestTool(ToolType.HOE).sound(SoundType.NETHER_SPROUTS).emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);
+            .strength(1.0F).lightLevel((block) -> 5).harvestTool(ToolType.HOE).sound(SoundType.NETHER_SPROUTS).emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);
 
     public static final RegistryObject<Block> BYRSS_FRUIT_BLOCK = registerBlock("byrss_fruit_block", () -> new Block(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.COLOR_LIGHT_BLUE)
             .strength(1.8F).harvestTool(ToolType.AXE).sound(SoundType.WOOD).noOcclusion().lightLevel((block) -> 10).emissiveRendering((n, e, d) -> true)), BPItemGroup.BioplethoraItemItemGroup);

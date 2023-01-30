@@ -1,5 +1,6 @@
 package io.github.bioplethora.world.biomes.end.configurable;
 
+import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPParticles;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.biome.*;
@@ -26,7 +27,7 @@ public class LavenderLakesBiome {
                 .precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.THEEND).depth(0.1F).scale(0.2F)
                 .temperature(0.5F).downfall(0.5F)
                 .specialEffects(new BiomeAmbience.Builder()
-                                .waterColor(-13817728)
+                                .waterColor(-6599759)
                                 .waterFogColor(-13158998)
                                 .fogColor(-12378263)
                                 .skyColor(-12378263)
