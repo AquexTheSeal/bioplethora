@@ -4,7 +4,7 @@
 - Huge thanks to Minecraft's Development Team for giving us this wonderful and really fun game.
 - Huge thanks to Minecraft Forge for giving us the possibility to create our own modifications.
 - Thanks to GeckoLib for giving us the opportunity to animate the project's mobs feasibly. 
-- Thanks to Abnormal's Core for giving us the ability to add End Biomes to our modification!
+- Thanks to Abnormals Core for giving us the ability to add End Biomes to our modification!
 
 #Personal Thanks
 - Thanks to Invalid2/WeirdNerd for permitting me (Aqu.#3320 on discord) to use his code for making attack animations work with GeckoLib!
