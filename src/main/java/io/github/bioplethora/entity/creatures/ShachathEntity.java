@@ -1,6 +1,8 @@
 package io.github.bioplethora.entity.creatures;
 
+import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.api.world.EffectUtils;
+import io.github.bioplethora.api.world.WorldgenUtils;
 import io.github.bioplethora.config.BPConfig;
 import io.github.bioplethora.entity.IBioClassification;
 import io.github.bioplethora.entity.IMobCappedEntity;
@@ -224,8 +226,10 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
                 Vector3d current = from.add(0, 0, 0);
                 double distance = from.distanceTo(to);
                 for (double i = 0; i < distance; i++) {
-                    EffectUtils.sendParticles((ServerWorld) level, ParticleTypes.POOF, current.x(), current.y(), current.z(), 1, 0, 0, 0, 0.01, 0.1, 0.01);
-                    current = current.add(per);
+                    if (distance < 64) {
+                        EffectUtils.sendParticles((ServerWorld) level, ParticleTypes.POOF, current.x(), current.y(), current.z(), 1, 0, 0, 0, 0.01, 0.1, 0.01);
+                        current = current.add(per);
+                    }
                 }
             } else if (index == 1 || index == 2 || index == 3) {
                 for (int i = 0; i < 180; i++) {
@@ -234,9 +238,11 @@ public class ShachathEntity extends SummonableMonsterEntity implements IAnimatab
                     Vector3d current = from.add(0, 0, 0);
                     double distance = from.distanceTo(to);
                     for (double j = 0; j < distance; j++) {
-                        IParticleData particle = index == 3 ? ParticleTypes.SOUL_FIRE_FLAME : ParticleTypes.FLAME;
-                        EffectUtils.sendParticles((ServerWorld) level, particle, current.x(), current.y(), current.z(), 1, 0, 0, 0, Math.sin(i) / 4, 0.1, Math.cos(i) / 4);
-                        current = current.add(per);
+                        if (distance < 64) {
+                            IParticleData particle = index == 3 ? ParticleTypes.SOUL_FIRE_FLAME : ParticleTypes.FLAME;
+                            EffectUtils.sendParticles((ServerWorld) level, particle, current.x(), current.y(), current.z(), 1, 0, 0, 0, Math.sin(i) / 4, 0.1, Math.cos(i) / 4);
+                            current = current.add(per);
+                        }
                     }
                 }
             }

@@ -5,6 +5,7 @@ import io.github.bioplethora.registry.BPTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.particles.BlockParticleData;
@@ -30,22 +31,11 @@ public class BlockUtils {
         return checkBlockstate(world, pos, requiredBlock.defaultBlockState());
     }
 
-    public static Iterable<BlockPos> positionsWithinCircle(BlockPos point, int radius) {
-        return () -> new AbstractIterator<BlockPos>() {
-            protected BlockPos computeNext() {
-                BlockPos blockpos = point;
-                for (int sx = -radius; sx <= radius; sx++) {
-                    for (int sy = -radius; sy <= radius; sy++) {
-                        for (int sz = -radius; sz <= radius; sz++) {
-                            if (sx * sx + sy * sy + sz * sz <= radius * radius) {
-                                blockpos = point.offset(sx, sy, sz);
-                            }
-                        }
-                    }
-                }
-                return blockpos;
-            }
-        };
+    public static double blockDistance(BlockPos pos1, BlockPos pos2) {
+        double d0 = pos2.getX() - pos1.getX();
+        double d1 = pos2.getY() - pos1.getY();
+        double d2 = pos2.getZ() - pos1.getZ();
+        return MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
     }
 
     public static boolean checkNearestTaggedFluid(AxisAlignedBB pBb, IWorldReader level, ITag<Fluid> tag) {

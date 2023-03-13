@@ -1,6 +1,7 @@
 package io.github.bioplethora.world.biomes.end;
 
 import io.github.bioplethora.api.BPBiomeSettings;
+import net.fabricmc.fabric.mixin.biome.MixinTheEndBiomeSource;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.gen.GenerationStage;
@@ -18,7 +19,7 @@ public class CaeriForestBiome {
 
         biomeGenSettings.addStructureStart(StructureFeatures.END_CITY);
         biomeGenSettings.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Features.END_GATEWAY);
-        
+
         return BPBiomeSettings.caeriEndBiome(biomeGenSettings);
     }
 }

@@ -219,22 +219,12 @@ public class BPConfiguredFeatures {
             .decorated(Placement.COUNT_MULTILAYER.configured(new FeatureSpreadConfig(40))
             ));
 
-    public static final ConfiguredFeature<?, ?> END_LAND_ROCK = register("end_land_rock", BPFeatures.END_LAND_ROCK.get()
-            .configured(new NoFeatureConfig())
-            .range(135).squared().count(1)
-    );
-
-    public static final ConfiguredFeature<?, ?> END_LANDS_CAVERN = register("end_lands_cavern",
-            BPFeatures.END_LANDS_CAVERN.get().configured(new NoFeatureConfig()).range(5).squared().count(1)
-                    .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.015F, 1))
-                    ));
-
     public static final ConfiguredFeature<?, ?> CAERI_CAVERN = register("caeri_cavern",
             BPFeatures.CAERI_CAVERN.get().configured(new NoFeatureConfig()).range(7).squared().count(1)
                     .decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.015F, 1))
                     ));
 
-    public static final ConfiguredFeature<?, ?> CHORUS_MYCHRODEGIA = register("chorus_plant", BPFeatures.CHORUS_MYCHRODEGIA.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_SQUARE).countRandom(2));
+    public static final ConfiguredFeature<?, ?> CHORUS_MYCHRODEGIA = register("chorus_plant", BPFeatures.CHORUS_MYCHRODEGIA.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_SQUARE).countRandom(1));
 
     public static final ConfiguredFeature<?, ?> END_LAND_SPIKE_HL = register("end_land_spike_hl", BPFeatures.END_LAND_SPIKE.get()
             .configured(new NoFeatureConfig()).decorated(Placement.NOPE.configured(IPlacementConfig.NONE)

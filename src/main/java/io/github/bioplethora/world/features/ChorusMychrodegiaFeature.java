@@ -1,6 +1,7 @@
 package io.github.bioplethora.world.features;
 
 import com.mojang.serialization.Codec;
+import io.github.bioplethora.api.world.BlockUtils;
 import io.github.bioplethora.registry.BPBlocks;
 import io.github.bioplethora.registry.BPTags;
 import net.minecraft.block.Blocks;
@@ -82,33 +83,54 @@ public class ChorusMychrodegiaFeature extends ChorusPlantFeature {
     }
 
     public static void createPetals(IWorld world, BlockPos pos, Random pRand, BlockPos pOriginalBranchPos, int pIterations) {
-        int size = 1 + world.getRandom().nextInt(3);
+        int size = 6 + pRand.nextInt(10);
+        if (world.isAreaLoaded(pos, size)) {
+            for (int x = -size; x < size; x++) {
+                for (int z = -size; z < size; z++) {
+                    if (x * x + z * z <= size * size) {
+                        BlockPos.Mutable mutPos = pos.mutable().move(x, 0, z);
+                        mutPos = mutPos.move(0, (int) -(BlockUtils.blockDistance(pos, mutPos) / 3), 0);
+                        world.setBlock(mutPos, BPBlocks.CHORUS_MYCHRODEGIA.get().defaultBlockState(), 2);
+                        if (pRand.nextInt(2) == 0) {
+                            if (world.isEmptyBlock(mutPos.below())) {
+                                world.setBlock(mutPos.below(), BPBlocks.CHORUS_MYCHRODEGIA_PART.get().defaultBlockState(), 2);
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            world.setBlock(pos, Blocks.CHORUS_FLOWER.defaultBlockState().setValue(ChorusFlowerBlock.AGE, 5), 2);
+        }
+
+        /*
+        int size = 1 + pRand.nextInt(3);
         for (int x = -size; x < size; x++) {
             for (int z = -size; z < size; z++) {
                 BlockPos.Mutable squarePos = pos.mutable().move(x, 0, z);
                 world.setBlock(squarePos, BPBlocks.CHORUS_MYCHRODEGIA.get().defaultBlockState(), 2);
-                if (world.getRandom().nextInt(2) == 0) {
+                if (pRand.nextInt(2) == 0) {
                     if (world.isEmptyBlock(squarePos.below())) {
                         world.setBlock(squarePos.below(), BPBlocks.CHORUS_MYCHRODEGIA_PART.get().defaultBlockState(), 2);
                     }
                 }
             }
         }
-        int petalLength = 5 + world.getRandom().nextInt(5) * (size / 2);
+        int petalLength = 5 + pRand.nextInt(5) * (size / 2);
         for (int l = 0; l < petalLength; l++) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockPos.Mutable petalPos = pos.relative(direction, size + l).mutable();
                 int petalDeg = l == petalLength / 2 ? 0 : 1;
                 for (int t = -size; t < size; t++) {
                     world.setBlock(petalPos.offset(t, petalDeg, t), BPBlocks.CHORUS_MYCHRODEGIA.get().defaultBlockState(), 2);
-                    if (world.getRandom().nextInt(2) == 0) {
+                    if (pRand.nextInt(2) == 0) {
                         if (world.isEmptyBlock(petalPos.offset(t, petalDeg - 1, t))) {
                             world.setBlock(petalPos.offset(t, petalDeg - 1, t), BPBlocks.CHORUS_MYCHRODEGIA_PART.get().defaultBlockState(), 2);
                         }
                     }
                 }
             }
-        }
+        }*/
     }
 
     private static boolean allNeighborsEmpty(IWorldReader pLevel, BlockPos pPos, @Nullable Direction pExcludingSide) {

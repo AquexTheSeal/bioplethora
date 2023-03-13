@@ -73,7 +73,7 @@ public class VoidjawEntity extends TrapjawEntity {
     }
 
     public static boolean checkVoidjawSpawnRules(EntityType<VoidjawEntity> voidjaw, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
-        return pPos.getY() > 40;
+        return pPos.getY() > 30;
     }
 
     @Override

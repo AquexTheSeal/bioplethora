@@ -54,7 +54,9 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
             if (isClearer(level, blockpos, config)) {
                 if (flag2) {
                     flag = true;
-                    this.setBlock(level, blockpos, config.rim());
+                    if (!level.getBlockState(blockpos).is(BPBlocks.CHORUS_MYCHRODEGIA.get()) && !level.getBlockState(blockpos).is(BPBlocks.CHORUS_MYCHRODEGIA_PART.get())) {
+                        this.setBlock(level, blockpos, config.rim());
+                    }
                 }
                 this.carveOpenings(level, blockpos, config);
 
@@ -71,6 +73,10 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
     }
 
     public void carveGap(IWorld pLevel, BlockPos pPos, BasaltDeltasFeature config, boolean checkOpt) {
+        if (pLevel.getBlockState(pPos).is(BPBlocks.CHORUS_MYCHRODEGIA.get()) || pLevel.getBlockState(pPos).is(BPBlocks.CHORUS_MYCHRODEGIA_PART.get())) {
+            return;
+        }
+
         if (checkOpt) {
             if (isClearOptimized(pLevel, pPos)) {
                 if (pLevel.getBlockState(pPos.above()).is(BPBlocks.ENREDE_KELP.get()) || pLevel.getBlockState(pPos.above()).is(BPBlocks.ENREDE_KELP_PLANT.get())) {
@@ -89,6 +95,10 @@ public class EndLandsSpongeFeature extends BasaltDeltasStructure {
     }
 
     public void carveOpenings(IWorld pLevel, BlockPos pPos, BasaltDeltasFeature config) {
+        if (pLevel.getBlockState(pPos).is(BPBlocks.CHORUS_MYCHRODEGIA.get()) || pLevel.getBlockState(pPos).is(BPBlocks.CHORUS_MYCHRODEGIA_PART.get())) {
+            return;
+        }
+
         for (int sy = -7; sy <= -1; sy++) {
             BlockPos.Mutable tPos = pPos.offset(0, sy, 0).mutable();
             if (isClearOptimized(pLevel, tPos)) {

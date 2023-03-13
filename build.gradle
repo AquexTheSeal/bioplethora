@@ -171,12 +171,12 @@ dependencies {
     implementation fg.deobf("curse.maven:forge-criticalib-560696:3644558")
 
     // Player Animations Library
-    implementation fg.deobf("curse.maven:playeranimator-658587:4111516")
+    //implementation fg.deobf("curse.maven:playeranimator-658587:4111516")
 
     //Rubidium
-    implementation fg.deobf("curse.maven:rubidium-574856:3769736")
+    //implementation fg.deobf("curse.maven:rubidium-574856:3769736")
     //Oculus
-    implementation fg.deobf("curse.maven:oculus-581495:3821219")
+    //implementation fg.deobf("curse.maven:oculus-581495:3821219")
 
     //Just Enough Resources (JER)
     //implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
