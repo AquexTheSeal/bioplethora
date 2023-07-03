@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+  <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="bioplethora"/>
+  <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="net.minecraftforge.userdev.LaunchTesting"/>
+  <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dforge.logging.console.level=debug -Dforge.logging.markers=REGISTRIES -Dmixin.env.remapRefMap=true -Dmixin.env.refMapRemappingFile=E:\Desktop2\Mods\Forge\1165\Bioplethora\bioplethora/build/createSrgToMcp/output.srg -Dnet.minecraftforge.gradle.GradleStart.srg.srg-mcp=E:\Desktop2\Mods\Forge\1165\Bioplethora\bioplethora\build\createSrgToMcp\output.srg -Dmixin.debug.verbose=true -Dmixin.debug.export=true -XX:+IgnoreUnrecognizedVMOptions --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=jdk.naming.dns/com.sun.jndi.dns=java.naming --add-opens=java.base/java.util.jar=ALL-UNNAMED -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump &quot;-Dos.name=Windows 10&quot; -Dos.version=10.0"/>
+  <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-mixin.config=bioplethora.mixins.json --mixin.config bioplethora.mixins.json"/>
+  <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="E:\Desktop2\Mods\Forge\1165\Bioplethora\bioplethora\run"/>
+  <mapAttribute key="org.eclipse.debug.core.environmentVariables">
+    <mapEntry key="MOD_CLASSES" value="bioplethora%%E:\Desktop2\Mods\Forge\1165\Bioplethora\bioplethora\bin\main;bioplethora%%E:\Desktop2\Mods\Forge\1165\Bioplethora\bioplethora\bin\main"/>
+    <mapEntry key="MCP_MAPPINGS" value="parchment_2022.03.06-1.16.5"/>
+    <mapEntry key="MCP_VERSION" value="20210115.111550"/>
+    <mapEntry key="FORGE_VERSION" value="36.2.39"/>
+    <mapEntry key="assetIndex" value="1.16"/>
+    <mapEntry key="assetDirectory" value="C:\Users\dell\.gradle\caches\forge_gradle\assets"/>
+    <mapEntry key="nativesDirectory" value="E:\Desktop2\Mods\Forge\1165\Bioplethora\bioplethora\build\natives"/>
+    <mapEntry key="FORGE_GROUP" value="net.minecraftforge"/>
+    <mapEntry key="target" value="fmluserdevclient"/>
+    <mapEntry key="MC_VERSION" value="1.16.5"/>
+  </mapAttribute>
+</launchConfiguration>

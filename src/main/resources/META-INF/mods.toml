@@ -7,43 +7,139 @@ license="MIT"
 modId="bioplethora"
 version="${file.jarVersion}"
 displayName="Bioplethora"
-authors="AquTheSeal, Sajevius, SeagullBoi, Sonic-3xn40s"
+authors="AquTheSeal, Sajevius, Meme Man, SeagullBoi, Sonic-3xn40s"
 logoFile="bplogo.png"
 description='''
 A minecraft mod that adds plenty of new content which mainly focuses on new creatures and terrifying beasts! Varying from small tamable partners, to colossal eldritch demons. All balanced and wonderful!
 '''
 
+# Base
 [[dependencies.bioplethora]]
-modId="forge"
-mandatory=true
-versionRange="[36,)"
-ordering="NONE"
-side="BOTH"
+	modId="forge"
+	mandatory=true
+	versionRange="[36,)"
+	ordering="NONE"
+	side="BOTH"
 
 [[dependencies.bioplethora]]
-modId="minecraft"
-mandatory=true
-versionRange="[1.16.5,1.17)"
-ordering="NONE"
-side="BOTH"
+	modId="minecraft"
+	mandatory=true
+	versionRange="[1.16.5,1.17)"
+	ordering="NONE"
+	side="BOTH"
+
+# Dependencies
+[[dependencies.bioplethora]]
+	modId="geckolib3"
+	mandatory=true
+	versionRange="[3.0,)"
+	ordering="NONE"
+	side="BOTH"
 
 [[dependencies.bioplethora]]
-modId="geckolib3"
-mandatory=true
-versionRange="[3.0,)"
-ordering="NONE"
-side="BOTH"
+	modId="fabric-biome-api"
+	mandatory=true
+	versionRange="[1.0,)"
+	ordering="AFTER"
+	side="BOTH"
+
+# Extras
+	# COMMON
+[[dependencies.bioplethora]]
+	modId="patchouli"
+	mandatory=false
+	versionRange="[1.16-42,)"
+	ordering="NONE"
+	side="BOTH"
 
 [[dependencies.bioplethora]]
-modId="patchouli"
-mandatory=false
-versionRange="[1.16-42,)"
-ordering="NONE"
-side="BOTH"
+	modId="jei"
+	mandatory=false
+	versionRange="[7.7.1.152,]"
+	ordering="AFTER"
+	side="BOTH"
 
 [[dependencies.bioplethora]]
-modId="fabric-biome-api"
-mandatory=true
-versionRange="[1.0,)"
-ordering="AFTER"
-side="BOTH"
+	modId="jeresources"
+	mandatory=false
+	versionRange="[0.12,]"
+	ordering="AFTER"
+	side="BOTH"
+	
+[[dependencies.bioplethora]]
+	modId="jeed"
+	mandatory=false
+	versionRange="[1.16.5-1.6,]"
+	ordering="AFTER"
+	side="BOTH"
+	
+[[dependencies.bioplethora]]
+	modId="theoneprobe"
+	mandatory=false
+	versionRange="[1.16-3.1.7,]"
+	ordering="AFTER"
+	side="BOTH"
+
+[[dependencies.bioplethora]]
+	modId="jade"
+	mandatory=false
+	versionRange="[2.8.3,]"
+	ordering="AFTER"
+	side="BOTH"
+
+[[dependencies.bioplethora]]
+	modId="curios"
+	mandatory=false
+	versionRange="[1.16.5-4.1.0.0,]"
+	ordering="AFTER"
+	side="BOTH"
+
+[[dependencies.bioplethora]]
+	modId="datafixerslayer"
+	mandatory=false
+	versionRange="[1.0-3,]"
+	ordering="AFTER"
+	side="BOTH"
+
+[[dependencies.bioplethora]]
+	modId="damageindicator"
+	mandatory=false
+	versionRange="[1.16.5-2.0.1,]"
+	ordering="AFTER"
+	side="BOTH"
+
+[[dependencies.bioplethora]]
+	modId="criticallib"
+	mandatory=false
+	versionRange="[1.16.5-1.0.0,]"
+	ordering="AFTER"
+	side="BOTH"
+
+	# CLIENT
+[[dependencies.bioplethora]]
+	modId="appleskin"
+	mandatory=false
+	versionRange="[mc1.16.5-2.4.0,]"
+	ordering="AFTER"
+	side="CLIENT"
+
+[[dependencies.bioplethora]]
+	modId="configured"
+	mandatory=false
+	versionRange="[1.5.3,]"
+	ordering="AFTER"
+	side="CLIENT"
+
+[[dependencies.bioplethora]]
+	modId="catalogue"
+	mandatory=false
+	versionRange="[1.6.1,]"
+	ordering="AFTER"
+	side="CLIENT"
+
+[[dependencies.bioplethora]]
+	modId="gamemenumodoption"
+	mandatory=false
+	versionRange="[1.8.2,]"
+	ordering="AFTER"
+	side="CLIENT"
